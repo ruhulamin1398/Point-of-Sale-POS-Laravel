@@ -10,6 +10,23 @@
     <link rel="stylesheet" href="{{asset('css/admin/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/sb-admin-2.min.css')}}">
 
+<style>
+        .bg-abasas-dark{
+   
+   background-color:#2a3f5c;
+   color: #fff;
+
+}
+</style>
+
+    
+<script src="{{asset('js/admin/jquery.min.js')}}"></script>
+<script src="{{asset('js/admin/bootstrapbundle.js')}}"></script>
+<script src="{{asset('js/admin/easing.min.js')}}"></script>
+<script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('js/admin/Chart.min.js')}}"></script>
+
+
 </head>
 <body>
     
@@ -17,11 +34,6 @@
 
 
 
-<script src="{{asset('js/admin/jquery.min.js')}}"></script>
-<script src="{{asset('js/admin/bootstrapbundle.js')}}"></script>
-<script src="{{asset('js/admin/easing.min.js')}}"></script>
-<script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
-<script src="{{asset('js/admin/Chart.min.js')}}"></script>
 
 </body>
 </html>
