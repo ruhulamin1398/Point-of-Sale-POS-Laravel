@@ -17,25 +17,32 @@ class CategoryController extends Controller
         //
 
         $routes = [
-               'update'=> 'categories.update',
-                'delete'=> 'categories.destroy',
+            'update' => [
+                'name' => 'categories.update',
+                'link' => 'categories',
+            ],
+            'delete' => [
                 
+                'name' => 'categories.destroy',
+                'link' => 'categories',
+            ]
+
         ];
-        $fieldList=[
+        $fieldList = [
             'name',
             'description',
-          
+
         ];
-        $fieldTitleList=[
+        $fieldTitleList = [
             '#',
             'Name',
             'Description',
             'Action'
         ];
-        $items= category::all();
+        $items = category::all();
 
-       
-        return view('index',compact('items','fieldList','fieldTitleList','routes'));
+
+        return view('index', compact('items', 'fieldList', 'fieldTitleList', 'routes'));
     }
 
     /**
@@ -91,6 +98,7 @@ class CategoryController extends Controller
     public function update(Request $request, category $category)
     {
         //
+        return $request;
     }
 
     /**
@@ -102,6 +110,6 @@ class CategoryController extends Controller
     public function destroy(category $category)
     {
         $category->delete();
-       return back();
+        return back();
     }
 }

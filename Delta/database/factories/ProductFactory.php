@@ -24,6 +24,8 @@ class ProductFactory extends Factory
     {
         return [
             'name'=> $this->faker->name,
+            
+            'category_id'=> 2,
             'description'=> $this->faker->sentence(15),
         ];
     }
