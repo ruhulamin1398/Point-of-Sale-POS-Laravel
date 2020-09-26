@@ -16,6 +16,9 @@ class CategoryController extends Controller
     {
         //
 
+
+        
+
         $routes = [
             'update' => [
                 'name' => 'categories.update',
@@ -28,11 +31,29 @@ class CategoryController extends Controller
             ]
 
         ];
-        $fieldList = [
-            'name',
-            'description',
+     
+        
 
+        $fieldList=[
+         
+            'name'=>[
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=> 'name',
+    
+            ],
+            'description'=>[
+    
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+            ],
+          
         ];
+
+
+
+
         $fieldTitleList = [
             '#',
             'Name',
@@ -98,7 +119,9 @@ class CategoryController extends Controller
     public function update(Request $request, category $category)
     {
         //
-        return $request;
+        $category->name= $request->name;
+        $category->save();
+        return back();
     }
 
     /**
