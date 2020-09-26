@@ -18,7 +18,11 @@
                 </thead>
                 <tfoot class="bg-abasas-dark">
                     <tr>
-                        @for( $i = 0 ; $i < sizeof($fieldTitleList) ; $i++) <th>{{$fieldTitleList[$i]}}</th> @endfor
+                        @for( $i = 0 ; $i < sizeof($fieldTitleList) ; $i++) 
+
+                        <th>{{$fieldTitleList[$i]}}</th>
+
+                         @endfor
                     </tr>
 
                 </tfoot>
@@ -30,6 +34,7 @@
 
                     <tr class="data-row">
                         <td class="iteration">{{$itr++}}</td>
+
                         @foreach( $fieldList as $field)
                        
 
@@ -124,23 +129,12 @@
 
 
 
-                  {{--  
-                    @foreach( $fieldList as $field)
-                    
-                    <div class="form-group">
-                        <label class="col-form-label" for="modal-edit-{{$field['name']}}">{{$fieldTitleList[$j++]}}</label>
-
-                       <input type="text" name="{{$field['database_name']}}" class="form-control" id="modal-edit-{{$field['name']}}" required>
-                     </div>
-                    @endforeach
-                    --}}
-
+          
 
             <div class="form-group">
 
                 <input type="submit" id="submit-button" value=" সাবমিট" class="form-control btn btn-success">
             </div>
-            <!-- /description -->
 
 
 
@@ -178,7 +172,6 @@
 
         // get the data
         var itemId = el.data('item-id');
-        var description = row.children(".description").text();
         $("#modal-update-hidden-id").val(itemId);
 
 
@@ -205,12 +198,6 @@
                             var dropDownId = row.children("."+databaseName).data(databaseName);
                           
                             var dataArray = @json($field['data']);
-                         console.log(dataArray);
-
-
-
-
-                            var text = row.children(".{{$field['database_name']}}").text();
        
         html="";
         html+= '<div class="form-group">';
@@ -238,11 +225,6 @@ $("#editOptions").append(html);
 
                 
                             @else
-                            @php
-                            $name= $field['name'];
-                            @endphp
-                    
-                    
                             var text = row.children(".{{$field['database_name']}}").text();
     
         html="";

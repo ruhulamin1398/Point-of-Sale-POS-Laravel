@@ -25,7 +25,6 @@ class ProductController extends Controller
                 'link' => 'products',
             ],
             'delete' => [
-                
                 'name' => 'products.destroy',
                 'link' => 'products',
             ]
