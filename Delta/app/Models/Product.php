@@ -10,6 +10,6 @@ class Product extends Model
     use HasFactory;
 
     public function category(){
-        return $this->belongsTo('App\Models\category');
+        return $this->belongsTo('App\Models\category','category_id','id');
     }
 }

@@ -26,18 +26,36 @@
 
                     <?php $itr = 1; ?>
                     @foreach ($items as $item)
-                    <?php $id = $item->id; ?>
+                    <?php $itemId = $item->id; ?>
 
                     <tr class="data-row">
                         <td class="iteration">{{$itr++}}</td>
-                        @for( $i = 0 ; $i < sizeof($fieldList) ; $i++) <td class="  word-break {{$fieldList[$i]}}">
+                        @foreach( $fieldList as $field)
+                       
 
+                            @if( $field['type'] == 'dropDown')
+                            @php
+                            $name= $field['name'];
+                            $id= $field['field'];
+                            $databaseName= $field['database_name'];
+                            @endphp
+                            <td class="  word-break  {{$field['database_name']}} " data-{{$field['database_name']}}-id="{{$item->$databaseName}}"  >
 
-                            {{$item[$fieldList[$i]]}}
-
-
+                            {{ $item->$name->$id}} 
                             </td>
-                            @endfor
+
+                            @else
+                            @php
+                            $name= $field['name'];
+                            @endphp
+                            <td class="  word-break  {{$field['database_name']}} ">
+
+                            {{ $item->$name}} 
+                            </td>
+                            @endif
+
+
+                        @endforeach
 
 
 
@@ -45,33 +63,33 @@
 
 
 
-                            <td class="align-middle">
-                                <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$id}}> <i class="fa fa-edit" aria-hidden="false"> </i></button>
+                        <td class="align-middle">
+                            <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   > <i class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
-                                <form method="POST" action="{{route($routes['delete']['name'],$id)}}" id="delete-form-{{ $item->id }}" style="display:none; ">
-                                    {{csrf_field() }}
-                                    {{ method_field("delete") }}
-                                </form>
+                            <form method="POST" action="{{route($routes['delete']['name'],$itemId)}}" id="delete-form-{{ $item->id }}" style="display:none; ">
+                                {{csrf_field() }}
+                                {{ method_field("delete") }}
+                            </form>
 
 
 
 
-                                <button onclick="if(confirm('are you sure to delete this')){
+                            <button onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $item->id }}').submit();
 			}
 			else{
 				event.preventDefault();
 			}
 			" class="btn btn-danger btn-sm btn-raised">
-                                    <i class="fa fa-trash" aria-hidden="false">
+                                <i class="fa fa-trash" aria-hidden="false">
 
-                                    </i>
-                                </button>
+                                </i>
+                            </button>
 
 
 
-                            </td>
+                        </td>
 
                     </tr>
                     @endforeach
@@ -98,21 +116,20 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label class="col-form-label" for="modal-update-id">আইডি </label>
-                        <input type="text" name="id" class="form-control" id="modal-update-id" required readonly>
+                        <label class="col-form-label" for="modal-update-hidden-id">আইডি </label>
+                        <input type="text" name="id" class="form-control" id="modal-update-hidden-id" required readonly>
                     </div>
-                    
-@php $j=0;@endphp
-       
+
+                    @php $j=1;@endphp
 
 
-                    @for( $i = 1 ; $i < sizeof($fieldTitleList)-1 ; $i++) 
-                    <div class="form-group">
-                        <label class="col-form-label" for="modal-edit-{{$fieldTitleList[$i]}}">{{$fieldTitleList[$i]}}</label>
 
-                        <input type="text" name={{$fieldList[$j++]}} class="form-control" id="modal-edit-{{$fieldTitleList[$i]}}"  required>
+                    @foreach( $fieldList as $field) <div class="form-group">
+                        <label class="col-form-label" for="modal-edit-{{$field['name']}}">{{$fieldTitleList[$j++]}}</label>
+
+                       <input type="text" name="{{$field['database_name']}}" class="form-control" id="modal-edit-{{$field['name']}}" required>
             </div>
-            @endfor
+            @endforeach
 
 
             <div class="form-group">
@@ -156,24 +173,55 @@
         var row = el.closest(".data-row");
 
         // get the data
-        var id = el.data('item-id');
+        var itemId = el.data('item-id');
         var name = row.children(".name").text();
         var description = row.children(".description").text();
-        $("#modal-update-id").val(id);
-    
-    
-        var home= "{{route('home')}}";
-        var link = "{{$routes['update']['link']}}"
-        var action= home.trim()+'/'+link.trim()+'/'+id;
-       
-$("#data-edit-form").attr('action',action);
+        $("#modal-update-hidden-id").val(itemId);
 
-@php $j=1 ;@endphp
-        @for( $i = 0 ; $i < sizeof($fieldList) ; $i++ ) 
+
+        var home = "{{route('home')}}";
+        var link = "{{$routes['update']['link']}}"
+        var action = home.trim() + '/' + link.trim() + '/' + itemId;
+
+        $("#data-edit-form").attr('action', action);
+
+
+        
+      
+        @foreach($fieldList as $field)
+        @if( $field['type'] == 'dropDown')
+                            @php
+                            $name= $field['name'];
+                            $id= $field['field'];
+                            @endphp
+                            var dataArray = @json($field['data']);
+                         console.log(dataArray);
+
+                        //  var tid=el.data({{$field['database_name']}}-id);
+                        //  console.log(tid);
+                            $.each( dataArray, function( key) {
+                                if(dataArray[key].id == itemId){
+                                    console.log(dataArray[key].id+"ashjkl");
+                                }
+                                else{
+                                    console.log(dataArray[key].id+"  "+itemId);
+                                }
+                                
+                            });
+        $("#modal-edit-{{$field['name']}}").val(text.trim());
+                
+                            @else
+                            @php
+                            $name= $field['name'];
+                            @endphp
+                    
+                    
+                            var text = row.children(".{{$field['database_name']}}").text();
+        $("#modal-edit-{{$field['name']}}").val(text.trim());
+                            @endif
+   
+        @endforeach
        
-       var text = {{$fieldList[$i]}}
-       $("#modal-edit-{{$fieldTitleList[$j++]}}").val(text.trim());
-        @endfor
 
 
     });
@@ -184,3 +232,4 @@ $("#data-edit-form").attr('action',action);
         $("#edit-form").trigger("reset");
     });
 </script>
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,21 +16,46 @@ class ProductController extends Controller
     public function index()
     {
         $routes = [
-            'update'=> 'products.update',
-             'delete'=> 'products.destroy',
-             
-     ];
+            'update' => [
+                'name' => 'products.update',
+                'link' => 'products',
+            ],
+            'delete' => [
+                
+                'name' => 'products.destroy',
+                'link' => 'products',
+            ]
+
+        ];
+
+
+
 
      $fieldList=[
-         'name',
-         'description',
-       
-     ];
+         
+        'name'=>[
+            'type'=>'normal',
+            'name'=>'name',
+            'database_name'=> 'name',
+
+        ],
+        'category'=>[
+
+           'type'=>'dropDown',
+           'name'=>'category',
+           'database_name'=>'category_id',
+           
+           'field'=>'name',
+           'data'=>category::all(),
+        ],
+      
+    ];
+
 
      $fieldTitleList=[
          '#',
          'Name',
-         'Description',
+         'Category',
          'Action'
      ];
 
