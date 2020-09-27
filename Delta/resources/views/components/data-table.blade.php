@@ -18,7 +18,11 @@
                 </thead>
                 <tfoot class="bg-abasas-dark">
                     <tr>
-                        @for( $i = 0 ; $i < sizeof($fieldTitleList) ; $i++) <th>{{$fieldTitleList[$i]}}</th> @endfor
+                        @for( $i = 0 ; $i < sizeof($fieldTitleList) ; $i++) 
+
+                        <th>{{$fieldTitleList[$i]}}</th>
+
+                         @endfor
                     </tr>
 
                 </tfoot>
@@ -30,6 +34,7 @@
 
                     <tr class="data-row">
                         <td class="iteration">{{$itr++}}</td>
+
                         @foreach( $fieldList as $field)
                        
 
@@ -39,7 +44,7 @@
                             $id= $field['field'];
                             $databaseName= $field['database_name'];
                             @endphp
-                            <td class="  word-break  {{$field['database_name']}} " data-{{$field['database_name']}}-id="{{$item->$databaseName}}"  >
+                            <td class="  word-break  {{$field['database_name']}} " data-{{$field['database_name']}}="{{$item->$databaseName}}"  >
 
                             {{ $item->$name->$id}} 
                             </td>
@@ -120,23 +125,16 @@
                         <input type="text" name="id" class="form-control" id="modal-update-hidden-id" required readonly>
                     </div>
 
-                    @php $j=1;@endphp
+                   <div id="editOptions"></div>
 
 
 
-                    @foreach( $fieldList as $field) <div class="form-group">
-                        <label class="col-form-label" for="modal-edit-{{$field['name']}}">{{$fieldTitleList[$j++]}}</label>
-
-                       <input type="text" name="{{$field['database_name']}}" class="form-control" id="modal-edit-{{$field['name']}}" required>
-            </div>
-            @endforeach
-
+          
 
             <div class="form-group">
 
                 <input type="submit" id="submit-button" value=" সাবমিট" class="form-control btn btn-success">
             </div>
-            <!-- /description -->
 
 
 
@@ -174,8 +172,6 @@
 
         // get the data
         var itemId = el.data('item-id');
-        var name = row.children(".name").text();
-        var description = row.children(".description").text();
         $("#modal-update-hidden-id").val(itemId);
 
 
@@ -184,41 +180,63 @@
         var action = home.trim() + '/' + link.trim() + '/' + itemId;
 
         $("#data-edit-form").attr('action', action);
+        $("#editOptions").html('');
 
 
         
-      
+        @php $j=1;@endphp
         @foreach($fieldList as $field)
         @if( $field['type'] == 'dropDown')
                             @php
                             $name= $field['name'];
                             $id= $field['field'];
+                            $tid= $field['database_name'];
                             @endphp
-                            var dataArray = @json($field['data']);
-                         console.log(dataArray);
 
-                        //  var tid=el.data({{$field['database_name']}}-id);
-                        //  console.log(tid);
-                            $.each( dataArray, function( key) {
-                                if(dataArray[key].id == itemId){
-                                    console.log(dataArray[key].id+"ashjkl");
+
+                            var databaseName = "{{$field['database_name']}}";
+                            var dropDownId = row.children("."+databaseName).data(databaseName);
+                          
+                            var dataArray = @json($field['data']);
+       
+        html="";
+        html+= '<div class="form-group">';
+        html+= '<label class="col-form-label" >{{$fieldTitleList[$j++]}}</label>';
+        html+=  '<select class="form-control form-control" name="'+databaseName+'"  required>';
+
+
+        $.each( dataArray, function( key) {
+                                if(dataArray[key].id == dropDownId){
+                                    html+= '<option value="'+dataArray[key].id+' "  selected="selected"   >'+dataArray[key].name +'</option>';
                                 }
                                 else{
-                                    console.log(dataArray[key].id+"  "+itemId);
+                                    html+= '<option value="'+dataArray[key].id+'" >'+dataArray[key].name +'</option>';
                                 }
                                 
                             });
-        $("#modal-edit-{{$field['name']}}").val(text.trim());
+
+
+
+        html+= '</select>';
+        html+= '</div>';
+
+$("#editOptions").append(html);
+
+
                 
                             @else
-                            @php
-                            $name= $field['name'];
-                            @endphp
-                    
-                    
                             var text = row.children(".{{$field['database_name']}}").text();
-        $("#modal-edit-{{$field['name']}}").val(text.trim());
-                            @endif
+    
+        html="";
+        html+= '<div class="form-group">';
+        html+= '<label class="col-form-label" >{{$fieldTitleList[$j++]}}</label>';
+        var databaseName = "{{$field['database_name']}}";
+        html+= '<input type="text" name="'+databaseName+'" value="'+ text.trim()+'" class="form-control" required>';
+        html+= '</div>';
+
+$("#editOptions").append(html);
+
+  @endif
    
         @endforeach
        

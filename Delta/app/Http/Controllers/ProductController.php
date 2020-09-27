@@ -16,12 +16,15 @@ class ProductController extends Controller
     public function index()
     {
         $routes = [
+            'create' => [
+                'name' => 'products.store',
+                'link' => 'products',
+            ],
             'update' => [
                 'name' => 'products.update',
                 'link' => 'products',
             ],
             'delete' => [
-                
                 'name' => 'products.destroy',
                 'link' => 'products',
             ]
@@ -118,7 +121,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->category_id= $request->category_id;
+        $product->save();
+        return back();
     }
 
     /**
