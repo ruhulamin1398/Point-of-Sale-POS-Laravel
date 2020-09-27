@@ -195,14 +195,17 @@ class RoleTableSeeder extends Seeder
             [
                 'star_count' => 5,
                 'name' => 'name 1',
+                'description' => 'description 1',
             ],
             [
                 'star_count' => 5,
                 'name' => 'name 2',
+                'description' => 'description 2',
             ],
             [
                 'star_count' => 5,
                 'name' => 'name 3',
+                'description' => 'description 3',
             ],
         ]);
         DB::table('payment_systems')->insert([

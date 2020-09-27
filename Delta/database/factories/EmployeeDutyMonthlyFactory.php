@@ -23,7 +23,9 @@ class employeeDutyMonthlyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => $this->faker->randomDigit ,
+            'employee_id' => $this->faker->randomDigit,
+            'month' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
         ];
     }
 }

@@ -23,7 +23,14 @@ class employeePaymentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => $this->faker->randomDigit,
+            'employee_id' => $this->faker->randomDigit,
+            'employee_payment_type_id' => $this->faker->randomDigit,
+            'status' => 'completed',
+            'date' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'Comment' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+       
+            
         ];
     }
 }

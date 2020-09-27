@@ -23,7 +23,7 @@ class paymentSystemFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'payment_system' => $this->faker->randomElement($array = array ('cash','rocket','bkash')),
         ];
     }
 }
