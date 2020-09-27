@@ -19,6 +19,7 @@ class CreateDutyStatusesTable extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

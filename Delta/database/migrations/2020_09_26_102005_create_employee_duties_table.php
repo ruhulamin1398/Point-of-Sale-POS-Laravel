@@ -26,6 +26,7 @@ class CreateEmployeeDutiesTable extends Migration
             $table->date('date');
             $table->longText('comment')->nullable();
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->json('serial')->default(new Expression('(JSON_ARRAY())'));
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
             $table->json('discount')->default(new Expression('(JSON_ARRAY())'));
+             $table->softDeletes();
             $table->timestamps();
             
         });

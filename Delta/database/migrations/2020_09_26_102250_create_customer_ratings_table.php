@@ -19,6 +19,7 @@ class CreateCustomerRatingsTable extends Migration
             $table->integer('star_count');
             $table->string('name');
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

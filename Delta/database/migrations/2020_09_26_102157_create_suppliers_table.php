@@ -22,6 +22,7 @@ class CreateSuppliersTable extends Migration
             $table->string('company')->nullable();
             $table->double('due', 8, 2)->default(0.00);
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

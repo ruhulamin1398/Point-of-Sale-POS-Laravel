@@ -18,6 +18,7 @@ class CreatePaymentSystemsTable extends Migration
             $table->id();
             $table->string('payment_system');
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }
