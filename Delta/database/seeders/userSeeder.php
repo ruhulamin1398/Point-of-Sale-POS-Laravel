@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class userSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,10 +13,12 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
+        DB::table('users')->insert([
             'name' => 'ruhul',
             'email' => 'ruhul@gmail.com',
             'password' => Hash::make('password'),
+            'password' => Hash::make('password'),
         ]);
     }
-}
+    }
+

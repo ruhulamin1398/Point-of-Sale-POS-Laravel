@@ -23,7 +23,11 @@ class customerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name ,
+            'phone' => $this->faker->numberBetween($min = 11111111111, $max = 99999999999),
+            'address' => $this->faker->address,
+            'company' => $this->faker->company,
+
         ];
     }
 }

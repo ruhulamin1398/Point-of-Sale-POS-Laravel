@@ -23,7 +23,9 @@ class employeePaymentTypeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            
+            'name' => $this->faker->name,
+            'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
         ];
     }
 }

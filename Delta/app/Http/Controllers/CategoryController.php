@@ -16,8 +16,10 @@ class CategoryController extends Controller
     {
         //
 
-
-        
+        $componentDetails= [
+            'title' => 'ক্যাটাগরি লিস্ট',
+            'editTitle' =>'ক্যাটাগরি সংশোধন',
+        ];
 
         $routes = [
             'update' => [
@@ -56,14 +58,14 @@ class CategoryController extends Controller
 
         $fieldTitleList = [
             '#',
-            'Name',
-            'Description',
-            'Action'
+            'নাম',
+            'বিবরণ',
+            'একশন'
         ];
         $items = category::all();
 
 
-        return view('index', compact('items', 'fieldList', 'fieldTitleList', 'routes'));
+        return view('index', compact('items', 'fieldList', 'fieldTitleList', 'routes','componentDetails'));
     }
 
     /**

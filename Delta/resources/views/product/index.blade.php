@@ -11,6 +11,7 @@
 :fieldTitleList="$fieldTitleList"
 :items="$items"
 :routes="$routes"
+:componentDetails="$componentDetails"
 
 />
 
