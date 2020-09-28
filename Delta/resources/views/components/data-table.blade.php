@@ -2,7 +2,7 @@
 
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar navbar-dark ">
-            <a class="navbar-brand"> {{ $componentDetails['title']}}</a>
+            <a class="navbar-brand"> {{   __('translate.'.$componentDetails['title'])  }}</a>
 
         </nav>
     </div>
@@ -17,11 +17,13 @@
                         @foreach( $fieldList as $field)
 
                         @if($field['read'])
-                        <th>{{$field['title'] }}</th>
+
+                        <th>   {{   __('translate.'.$field['title'])  }}</th>
+                      
                         @endif
                         @endforeach
 
-                        <th> Action</th>
+                        <th>{{__('translate.Action')}}</th>
 
                     </tr>
                 </thead>
@@ -33,11 +35,11 @@
                         @foreach( $fieldList as $field)
 
                         @if($field['read'])
-                        <th>{{$field['title'] }}</th>
+                        <th>  {{   __('translate.'.$field['title'])  }}</th>
                         @endif
                         @endforeach
 
-                        <th> Action</th>
+                        <th>{{__('translate.Action')}}</th>
 
                     </tr>
 
@@ -140,7 +142,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-modal-label ">{{ $componentDetails['editTitle']}}</h5>
+                <h5 class="modal-title text-dark" id="edit-modal-label ">{{ __('translate.'.$componentDetails['editTitle'])}}  </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -149,7 +151,7 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label class="col-form-label" for="modal-update-hidden-id">আইডি </label>
+                        <label class="col-form-label" for="modal-update-hidden-id">{{__('translate.Id')}} </label>
                         <input type="text" name="id" class="form-control" id="modal-update-hidden-id" required readonly>
                     </div>
 
@@ -161,7 +163,7 @@
 
                     <div class="form-group">
 
-                        <input type="submit" id="submit-button" value=" সাবমিট" class="form-control btn btn-success">
+                        <input type="submit" id="submit-button" value=" {{__('translate.Submit')}}" class="form-control btn btn-success">
                     </div>
 
 
