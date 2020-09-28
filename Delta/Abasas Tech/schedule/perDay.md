@@ -39,7 +39,7 @@ Distribution
 
 ```
 1. Database 
-   - migration, seeder, with out analytics
+   - migration, seeder, without analytics
 1. component
    - complete dataTableComponenet
    - customer and supplier Component

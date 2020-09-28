@@ -8,7 +8,6 @@
 
 <x-data-table
 :fieldList="$fieldList"
-:fieldTitleList="$fieldTitleList"
 :items="$items"
 :routes="$routes"
 :componentDetails="$componentDetails"

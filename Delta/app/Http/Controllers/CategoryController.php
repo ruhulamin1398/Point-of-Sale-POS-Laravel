@@ -17,8 +17,8 @@ class CategoryController extends Controller
         //
 
         $componentDetails= [
-            'title' => 'ক্যাটাগরি লিস্ট',
-            'editTitle' =>'ক্যাটাগরি সংশোধন',
+            'title' => 'Catefory List',
+            'editTitle' =>'Modify Category',
         ];
 
         $routes = [
@@ -39,16 +39,31 @@ class CategoryController extends Controller
         $fieldList=[
          
             'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
                 'type'=>'normal',
                 'name'=>'name',
                 'database_name'=> 'name',
+                
+               'title'=> "Name",
     
             ],
             'description'=>[
-    
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
                'type'=>'normal',
                'name'=>'description',
                'database_name'=>'description',
+
+               'title'=> "Description",
             ],
           
         ];
@@ -56,16 +71,12 @@ class CategoryController extends Controller
 
 
 
-        $fieldTitleList = [
-            '#',
-            'নাম',
-            'বিবরণ',
-            'একশন'
-        ];
+
+
         $items = category::all();
 
 
-        return view('index', compact('items', 'fieldList', 'fieldTitleList', 'routes','componentDetails'));
+        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
