@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\employeeDutyMonthly;
+use App\Models\User;
+use App\Models\employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -23,8 +25,8 @@ class employeeDutyMonthlyFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->randomDigit ,
-            'employee_id' => $this->faker->randomDigit,
+            'user_id' => User::all()->random()->id ,
+            'employee_id' => employee::all()->random()->id,
             'month' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
         ];
     }

@@ -315,15 +315,15 @@ class RoleTableSeeder extends Seeder
     
         DB::table('employee_payment_types')->insert([
             [
-                'name' => 'name 1',
+                'name' => 'Salary',
                 'description' => 'description 1',
             ],
             [
-                'name' => 'name 2',
+                'name' => 'Bonus',
                 'description' => 'description 2',
             ],
             [
-                'name' => 'name 3',
+                'name' => 'Extraa',
                 'description' => 'description 3',
             ],
         ]);

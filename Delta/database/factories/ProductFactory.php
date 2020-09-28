@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\productType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -31,7 +32,7 @@ class ProductFactory extends Factory
         return [
             'name'=> $this->faker->name,
             'category_id'=>category::all()->random()->id,
-            'product_type_id'=> $this->faker->randomDigit,
+            'product_type_id'=> productType::all()->random()->id,
             'cost'=> $totalCost,
             'weight'=> $totalWeight,
             'price_per_unit'=> $pricePerUnit,
