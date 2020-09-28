@@ -17,8 +17,8 @@ class CategoryController extends Controller
         //
 
         $componentDetails= [
-            'title' => 'Catefory List',
-            'editTitle' =>'Modify Category',
+            'title' => 'Category List',
+            'editTitle' =>'Edit Category',
         ];
 
         $routes = [
