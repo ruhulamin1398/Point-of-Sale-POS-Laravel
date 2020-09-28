@@ -19,6 +19,7 @@ class CreateEmployeePaymentTypesTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

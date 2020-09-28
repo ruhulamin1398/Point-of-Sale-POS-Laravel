@@ -23,7 +23,10 @@ class dutyStatusFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->randomElement($array = array ('present','absent','day off')),
+            'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+          
+       
         ];
     }
 }

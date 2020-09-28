@@ -22,9 +22,10 @@ class CreateEmployeesTable extends Migration
             $table->date('joining_date')->nullable();
             $table->string('reference')->nullable();
             $table->date('term_of_contract')->nullable();
-            $table->double('salary', 8, 2)->default(0.00);
+            $table->double('salary', 8, 2)->default(20000.00);
             $table->string('designation')->nullable();
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

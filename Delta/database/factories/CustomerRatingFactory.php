@@ -23,7 +23,10 @@ class customerRatingFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'star_count' => $this->faker->numberBetween($min = 1, $max = 5) ,
+            'name' => $this->faker->name,
+            'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+          
         ];
     }
 }

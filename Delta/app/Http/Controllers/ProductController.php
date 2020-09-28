@@ -15,6 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $componentDetails= [
+            'title' =>'পণ্যের লিস্ট',
+            'editTitle' =>'পণ্য সংশোধন',
+        ];
         $routes = [
             'create' => [
                 'name' => 'products.store',
@@ -57,15 +61,15 @@ class ProductController extends Controller
 
      $fieldTitleList=[
          '#',
-         'Name',
-         'Category',
-         'Action'
-     ];
+         'নাম',
+         'ক্যাটাগরি',
+         'একশন'
+     ]; 
 
      $items= Product::all();
 
     
-     return view('product.index',compact('items','fieldList','fieldTitleList','routes'));
+     return view('product.index',compact('items','fieldList','fieldTitleList','routes','componentDetails'));
  }
     
 

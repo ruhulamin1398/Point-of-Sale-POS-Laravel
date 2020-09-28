@@ -2,7 +2,7 @@
 
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar navbar-dark ">
-            <a class="navbar-brand"> ক্যাটাগরি লিস্ট</a>
+            <a class="navbar-brand"> {{ $componentDetails['title']}}</a>
 
         </nav>
     </div>
@@ -112,7 +112,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-modal-label ">তথ্য সংশোধন</h5>
+                <h5 class="modal-title text-dark" id="edit-modal-label ">{{ $componentDetails['editTitle']}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
