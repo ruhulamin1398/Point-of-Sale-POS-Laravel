@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Query\Expression;
 
-class CreateCustomersTable extends Migration
+class CreatePaymentSystemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,11 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('payment_systems', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->unique();
-            $table->string('address')->nullable();
-            $table->string('company')->nullable();
-            $table->double('due', 8, 2)->default(0.00);
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->string('payment_system');
+            $table->string('description');
+            $table->json('data')->default(json_encode([''])); /// here payment method details like bkash bank account etc
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +31,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('payment_systems');
     }
 }
