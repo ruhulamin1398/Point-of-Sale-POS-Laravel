@@ -23,11 +23,11 @@ class CreateProductsTable extends Migration
             $table->double('weight',8,3)->nullable();
             $table->double('price_per_unit',8,2)->nullable();
             $table->double('cost_per_unit',8,2)->nullable();
-            $table->unsignedBigInteger('price')->nullable();;
+            $table->double('price',8,2)->nullable();;
             $table->string('description')->nullable();
-            $table->bigInteger('stock')->default(0)->nullable();
-            $table->bigInteger('stock_alert')->default(0)->nullable();
-            $table->double('sell',8,2)->default(0)->nullable();
+            $table->bigInteger('stock')->default(0);
+            $table->bigInteger('stock_alert')->default(1);
+            $table->double('sell',8,2)->nullable();
             $table->json('serial')->default(new Expression('(JSON_ARRAY())'));
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
             $table->json('discount')->default(new Expression('(JSON_ARRAY())'));

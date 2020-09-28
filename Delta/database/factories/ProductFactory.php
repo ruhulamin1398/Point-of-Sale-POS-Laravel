@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\productType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -22,11 +24,22 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $totalCost = $this->faker->randomFloat($nbMaxDecimals = 2, $min = 100, $max = 200);
+        $totalWeight = $this->faker->randomFloat($nbMaxDecimals = 3, $min = 1, $max = 10);
+        $costPerUnit = $totalCost/$totalWeight;
+        $pricePerUnit = $costPerUnit+20;
+        $price = $totalCost+100;
         return [
             'name'=> $this->faker->name,
-            
-            'category_id'=> 2,
-            'description'=> $this->faker->sentence(15),
+            'category_id'=>category::all()->random()->id,
+            'product_type_id'=> productType::all()->random()->id,
+            'cost'=> $totalCost,
+            'weight'=> $totalWeight,
+            'price_per_unit'=> $pricePerUnit,
+            'cost_per_unit'=> $costPerUnit,
+            'price'=> $price,
+            'description'=> $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+            'sell'=> $price,
         ];
     }
 }
