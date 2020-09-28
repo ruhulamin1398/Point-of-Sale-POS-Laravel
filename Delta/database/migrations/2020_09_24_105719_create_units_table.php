@@ -21,7 +21,7 @@ class CreateUnitsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        // all are editable nad showable
+        // all are editable and showable
     }
 
     /**

@@ -18,6 +18,7 @@ class CreateImagesTable extends Migration
             $table->string('url');
             $table->timestamps();
         });
+         //don't need table
     }
 
     /**

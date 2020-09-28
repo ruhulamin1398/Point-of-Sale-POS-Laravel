@@ -14,6 +14,7 @@ class CreateProductTypesTable extends Migration
      */
     public function up()
     {
+                // Piece/Weight 
         Schema::create('product_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -22,7 +23,7 @@ class CreateProductTypesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        // Piece/Weight 
+
         // show all but only description updateable
 
     }
