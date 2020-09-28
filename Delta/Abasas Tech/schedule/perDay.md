@@ -40,6 +40,9 @@ Distribution
 ```
 1. Database 
    - migration, seeder, without analytics
+        - product type 
+        - category
+        - product
 1. component
    - complete dataTableComponenet
    - customer and supplier Component
