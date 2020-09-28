@@ -232,6 +232,7 @@
 
 
         var databaseName = "{{$field['database_name']}}";
+
         var dropDownId = row.children("." + databaseName).data(databaseName);
 
         var dataArray = @json($field['data']);
