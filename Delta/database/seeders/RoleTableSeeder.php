@@ -48,11 +48,26 @@ class RoleTableSeeder extends Seeder
                     'description' => 'description_3',
                 ],
         ]);
+        DB::table('units')->insert([
+            [
+                'name' => 'Unit 1',
+                'description' => 'unit description 1',
+            ],
+            [
+                'name' => 'unit 2',
+                'description' => 'unit description 2',
+            ],
+            [
+                'name' => 'unit 3',
+                'description' => 'unit description 3',
+            ],
+    ]);
 
         DB::table('products')->insert([
             [
                 'name' => 'product 1',
                 'category_id' => 2,
+                'image_id'=>'1',
                 'product_type_id' => 1,
                 'cost' => 2,
                 'weight' => 2,
@@ -338,6 +353,26 @@ class RoleTableSeeder extends Seeder
                 'description' => 'By Wight in measures',
             ],
         ]);
+        DB::table('images')->insert([
+            [
+                'url' => 'this is image description ',
+            ],
+        ]);
+        DB::table('brands')->insert([
+            [ 
+                 'name' => 'Brand 1',
+                'description' => 'Brand Descripton 1',
+            ],
+            [ 
+                'name' => 'Brand 2',
+               'description' => 'Brand Descripton 2',
+            ],
+            [ 
+            'name' => 'Brand 3',
+           'description' => 'Brand Descripton 3',
+       ],
+        ]);
+
 
 
     }
