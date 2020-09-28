@@ -26,7 +26,7 @@ Distribution
 
 
 
-- 27 
+- 28 
 ```
         ## Completed -  38% +7
 
@@ -38,7 +38,18 @@ Distribution
         ------------------------------------------
 
 ```
-- 28
+1. Database 
+   - migration, seeder, with out analytics
+1. component
+   - complete dataTableComponenet
+   - customer and supplier Component
+1. frontend 
+   - product  related pages
+1. backend 
+   - Requests 
+   - product  related controllers
+
+- 29
 
 ```
         ## Completed -  45%+7.5 
@@ -51,12 +62,10 @@ Distribution
         ------------------------------------------
 ```
 
-- 29
+- 30
 
 
 
-
-- 30 
 
 
 ### October
