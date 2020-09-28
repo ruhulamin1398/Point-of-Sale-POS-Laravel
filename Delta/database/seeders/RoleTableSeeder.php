@@ -328,6 +328,17 @@ class RoleTableSeeder extends Seeder
             ],
         ]);
 
+        DB::table('product_types')->insert([
+            [
+                'name' => 'Piece',
+                'description' => 'By piece bt piece',
+            ],
+            [
+                'name' => 'Weight',
+                'description' => 'By Wight in measures',
+            ],
+        ]);
+
 
     }
 }
