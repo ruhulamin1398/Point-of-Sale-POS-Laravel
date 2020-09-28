@@ -16,8 +16,8 @@ class ProductController extends Controller
     public function index()
     {
         $componentDetails= [
-            'title' =>'পণ্যের লিস্ট',
-            'editTitle' =>'পণ্য সংশোধন',
+            'title' =>'Product List',
+            'editTitle' =>'Modify Product',
         ];
         $routes = [
             'create' => [
@@ -41,12 +41,25 @@ class ProductController extends Controller
      $fieldList=[
          
         'name'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>true,
+            
             'type'=>'normal',
             'name'=>'name',
             'database_name'=> 'name',
 
+            'title'=>'Name',
+
         ],
         'category'=>[
+
+            'create'=>true,
+            'read'=>false,
+            'update'=>true,
+            'delete'=>true,
+
 
            'type'=>'dropDown',
            'name'=>'category',
@@ -54,22 +67,18 @@ class ProductController extends Controller
            
            'field'=>'name',
            'data'=>category::all(),
+
+           'title'=>'Category',
         ],
       
     ];
 
 
-     $fieldTitleList=[
-         '#',
-         'নাম',
-         'ক্যাটাগরি',
-         'একশন'
-     ]; 
 
      $items= Product::all();
 
     
-     return view('product.index',compact('items','fieldList','fieldTitleList','routes','componentDetails'));
+     return view('product.index',compact('items','fieldList','routes','componentDetails'));
  }
     
 

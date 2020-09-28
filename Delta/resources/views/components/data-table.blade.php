@@ -8,21 +8,37 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="dataTable1" width="100%" cellspacing="0">
+            <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-abasas-dark">
 
                     <tr>
 
-                        @for( $i = 0 ; $i < sizeof($fieldTitleList) ; $i++) <th>{{$fieldTitleList[$i]}}</th> @endfor
+                    <th> #</th>
+                        @foreach( $fieldList as $field)
+
+                        @if($field['read'])
+                        <th>{{$field['title'] }}</th>
+                        @endif
+                        @endforeach
+
+                        <th> Action</th>
+
                     </tr>
                 </thead>
                 <tfoot class="bg-abasas-dark">
                     <tr>
-                        @for( $i = 0 ; $i < sizeof($fieldTitleList) ; $i++) 
+                 
+                    
+                    <th> #</th>
+                        @foreach( $fieldList as $field)
 
-                        <th>{{$fieldTitleList[$i]}}</th>
+                        @if($field['read'])
+                        <th>{{$field['title'] }}</th>
+                        @endif
+                        @endforeach
 
-                         @endfor
+                        <th> Action</th>
+
                     </tr>
 
                 </tfoot>
@@ -36,29 +52,30 @@
                         <td class="iteration">{{$itr++}}</td>
 
                         @foreach( $fieldList as $field)
-                       
 
-                            @if( $field['type'] == 'dropDown')
-                            @php
-                            $name= $field['name'];
-                            $id= $field['field'];
-                            $databaseName= $field['database_name'];
-                            @endphp
-                            <td class="  word-break  {{$field['database_name']}} " data-{{$field['database_name']}}="{{$item->$databaseName}}"  >
+                        @if($field['read'])
 
-                            {{ $item->$name->$id}} 
-                            </td>
+                        @if( $field['type'] == 'dropDown')
+                        @php
+                        $name= $field['name'];
+                        $id= $field['field'];
+                        $databaseName= $field['database_name'];
+                        @endphp
+                        <td class="  word-break  {{$field['database_name']}} " data-{{$field['database_name']}}="{{$item->$databaseName}}">
 
-                            @else
-                            @php
-                            $name= $field['name'];
-                            @endphp
-                            <td class="  word-break  {{$field['database_name']}} ">
+                            {{ $item->$name->$id}}
+                        </td>
 
-                            {{ $item->$name}} 
-                            </td>
-                            @endif
+                        @else
+                        @php
+                        $name= $field['name'];
+                        @endphp
+                        <td class="  word-break  {{$field['database_name']}} ">
 
+                            {{ $item->$name}}
+                        </td>
+                        @endif
+                        @endif
 
                         @endforeach
 
@@ -69,7 +86,7 @@
 
 
                         <td class="align-middle">
-                            <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   > <i class="fa fa-edit" aria-hidden="false"> </i></button>
+                            <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}> <i class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
                             <form method="POST" action="{{route($routes['delete']['name'],$itemId)}}" id="delete-form-{{ $item->id }}" style="display:none; ">
@@ -107,6 +124,17 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 <!-- Attachment Modal -->
 <div class="modal fade" id="data-edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -125,25 +153,25 @@
                         <input type="text" name="id" class="form-control" id="modal-update-hidden-id" required readonly>
                     </div>
 
-                   <div id="editOptions"></div>
+                    <div id="editOptions"></div>
 
 
 
-          
 
-            <div class="form-group">
 
-                <input type="submit" id="submit-button" value=" সাবমিট" class="form-control btn btn-success">
+                    <div class="form-group">
+
+                        <input type="submit" id="submit-button" value=" সাবমিট" class="form-control btn btn-success">
+                    </div>
+
+
+
+
+                </form>
             </div>
 
-
-
-
-            </form>
         </div>
-
     </div>
-</div>
 </div>
 </div>
 <!-- /Attachment Modal -->
@@ -153,6 +181,8 @@
     /**
      * for showing edit item popup
      */
+
+    $(document).ready(function() {
 
     $(document).on('click', "#data-edit-button", function() {
 
@@ -183,63 +213,68 @@
         $("#editOptions").html('');
 
 
-        
-        @php $j=1;@endphp
+
+        @php $j = 1;
+        @endphp
         @foreach($fieldList as $field)
-        @if( $field['type'] == 'dropDown')
-                            @php
-                            $name= $field['name'];
-                            $id= $field['field'];
-                            $tid= $field['database_name'];
-                            @endphp
+
+        @if($field['update'])
 
 
-                            var databaseName = "{{$field['database_name']}}";
-                            var dropDownId = row.children("."+databaseName).data(databaseName);
-                          
-                            var dataArray = @json($field['data']);
-       
-        html="";
-        html+= '<div class="form-group">';
-        html+= '<label class="col-form-label" >{{$fieldTitleList[$j++]}}</label>';
-        html+=  '<select class="form-control form-control" name="'+databaseName+'"  required>';
+        @if($field['type'] == 'dropDown')
+        @php
+        $name = $field['name'];
+        $id = $field['field'];
+        $tid = $field['database_name'];
+        @endphp
 
 
-        $.each( dataArray, function( key) {
-                                if(dataArray[key].id == dropDownId){
-                                    html+= '<option value="'+dataArray[key].id+' "  selected="selected"   >'+dataArray[key].name +'</option>';
-                                }
-                                else{
-                                    html+= '<option value="'+dataArray[key].id+'" >'+dataArray[key].name +'</option>';
-                                }
-                                
-                            });
-
-
-
-        html+= '</select>';
-        html+= '</div>';
-
-$("#editOptions").append(html);
-
-
-                
-                            @else
-                            var text = row.children(".{{$field['database_name']}}").text();
-    
-        html="";
-        html+= '<div class="form-group">';
-        html+= '<label class="col-form-label" >{{$fieldTitleList[$j++]}}</label>';
         var databaseName = "{{$field['database_name']}}";
-        html+= '<input type="text" name="'+databaseName+'" value="'+ text.trim()+'" class="form-control" required>';
-        html+= '</div>';
+        var dropDownId = row.children("." + databaseName).data(databaseName);
 
-$("#editOptions").append(html);
+        var dataArray = @json($field['data']);
 
-  @endif
-   
+        html = "";
+        html += '<div class="form-group">';
+        html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+        html += '<select class="form-control form-control" name="' + databaseName + '"  required>';
+
+
+        $.each(dataArray, function(key) {
+            if (dataArray[key].id == dropDownId) {
+                html += '<option value="' + dataArray[key].id + ' "  selected="selected"   >' + dataArray[key].name + '</option>';
+            } else {
+                html += '<option value="' + dataArray[key].id + '" >' + dataArray[key].name + '</option>';
+            }
+
+        });
+
+
+
+        html += '</select>';
+        html += '</div>';
+
+        $("#editOptions").append(html);
+
+
+
+        @else
+        var text = row.children(".{{$field['database_name']}}").text();
+
+        html = "";
+        html += '<div class="form-group">';
+        html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+        var databaseName = "{{$field['database_name']}}";
+        html += '<input type="text" name="' + databaseName + '" value="' + text.trim() + '" class="form-control" required>';
+        html += '</div>';
+
+        $("#editOptions").append(html);
+
+        @endif
+        @endif
+
         @endforeach
-       
+
 
 
     });
@@ -249,5 +284,15 @@ $("#editOptions").append(html);
         $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
         $("#edit-form").trigger("reset");
     });
+
+
+
+  $('#dataTable').DataTable();
+});
+
+
+
+
+
 </script>
 

@@ -9,6 +9,7 @@
     
     <link rel="stylesheet" href="{{asset('css/admin/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/sb-admin-2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/dataTables.bootstrap4.min.css')}}">
 
 <style>
         .bg-abasas-dark{
@@ -25,6 +26,8 @@
 <script src="{{asset('js/admin/easing.min.js')}}"></script>
 <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
 <script src="{{asset('js/admin/Chart.min.js')}}"></script>
+<script src="{{asset('js/admin/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('js/admin/dataTables.bootstrap4.min.js')}}"></script>
 
 
 </head>
