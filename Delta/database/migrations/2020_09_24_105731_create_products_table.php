@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
 
 class CreateProductsTable extends Migration
 {
@@ -14,24 +13,47 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
+
+        // weight->kg  
+        //piece->piece  
+        // warrenty->day
+        // always store data in this table with only those units
+
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('product_type_id')->default(2);
-            $table->double('cost',8,2)->nullable();
-            $table->double('weight',8,3)->nullable();
+            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('brand_id');
+            
+
             $table->double('price_per_unit',8,2)->nullable();
             $table->double('cost_per_unit',8,2)->nullable();
-            $table->double('price',8,2)->nullable();;
-            $table->string('description')->nullable();
-            $table->bigInteger('stock')->default(0);
+            
+            $table->double('stock',8,6)->nullable();
             $table->bigInteger('stock_alert')->default(1);
+
             $table->double('sell',8,2)->nullable();
-            $table->json('serial')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('discount')->default(new Expression('(JSON_ARRAY())'));
-             $table->softDeletes();
+
+            
+            $table->string('description')->nullable();
+            
+            $table->bigInteger('warrenty')->nullable(); //save in day 
+            $serial= [
+                'status'=>false,
+                'data'=>[
+                    'a3bc'=> '2020:10:10',   //serial: 'date'
+                ]
+            ];
+            $discount= [
+                'status'=>false,
+                'type'=>'% / amount',
+                'value'=>'0',
+            ];
+            $table->json('serial')->default(json_encode($serial)); 
+            $table->json('discount')->default(json_encode($discount));
+            $table->json('data')->default(json_encode(['']));
+            $table->softDeletes();
             $table->timestamps();
             
         });
