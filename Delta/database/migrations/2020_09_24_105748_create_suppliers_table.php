@@ -25,6 +25,7 @@ class CreateSuppliersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+       //  all are showable name phone address company editable 
     }
 
     /**

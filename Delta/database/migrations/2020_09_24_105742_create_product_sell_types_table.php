@@ -21,6 +21,8 @@ class CreateProductSellTypesTable extends Migration
             $table->unsignedBigInteger('purchased_type'); // from unit table
             $table->timestamps();
         });
+
+        // no need anything
     }
 
     /**

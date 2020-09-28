@@ -57,6 +57,13 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             
         });
+
+
+        // category image brand dropdown view and update
+        // price_per_unit , cost_per_unit , stock_alert , description , show and editable 
+        // stock only showable 
+        // warrenty only updateable
+
     }
 
     /**
