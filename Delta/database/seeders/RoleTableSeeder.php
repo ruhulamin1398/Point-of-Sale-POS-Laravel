@@ -36,66 +36,81 @@ class RoleTableSeeder extends Seeder
     
         DB::table('categories')->insert([
                 [
-                    'name' => 'category_1',
+                    'name' => 'Electronics',
                     'description' => 'description_1',
                 ],
                 [
-                    'name' => 'category_2',
+                    'name' => 'Cloth',
                     'description' => 'description_2',
                 ],
                 [
-                    'name' => 'category_3',
+                    'name' => 'Food',
                     'description' => 'description_3',
                 ],
         ]);
+        DB::table('units')->insert([
+            [
+                'name' => 'K.G.',
+                'description' => 'unit description 1',
+            ],
+            [
+                'name' => 'Gram',
+                'description' => 'unit description 2',
+            ],
+            [
+                'name' => 'pcs',
+                'description' => 'unit description 3',
+            ],
+            [
+                'name' => 'Dozon',
+                'description' => 'unit description 4',
+            ],
+    ]);
 
         DB::table('products')->insert([
             [
-                'name' => 'product 1',
-                'category_id' => 2,
-                'product_type_id' => 1,
-                'cost' => 2,
-                'weight' => 2,
-                'price_per_unit' => 2,
-                'cost_per_unit' => 2,
-                'price' => 2,
-                'description' => 'description 1',
-                'stock' => 2,
-                'stock_alert' => 2,
-                'sell' => 2,
-                'stock' => 2,
+                'name' => 'Polo Shirt',
+                'category_id' => 1,
+                'image_id'=> 1,
+                'brand_id'=> 1,
+                'price_per_unit'=>100,
+                'cost_per_unit'=>50,
+                'stock'=>'50',
+                'stock_alert'=>20,
+                'sell'=>10,
+                'description'=>'plo make you comfortable',
+                'warrenty'=>360,
+
             ],
             [
-                'name' => 'product 2',
+                'name' => 'HP Laptop',
                 'category_id' => 2,
-                'product_type_id' => 2,
-                'cost' => 2,
-                'weight' => 2,
-                'price_per_unit' => 2,
-                'cost_per_unit' =>2,
-                'price' => 2,
-                'description' => 'description 2',
-                'stock' => 2,
-                'stock_alert' => 2,
-                'sell' => 2,
-                'stock' => 2,
-            ],
+                'image_id'=> 2,
+                'brand_id'=> 2,
+                'price_per_unit'=>100,
+                'cost_per_unit'=>50,
+                'stock'=>'50',
+                'stock_alert'=>20,
+                'sell'=>10,
+                'description'=>'Dont Buy HP,its really bad',
+                'warrenty'=>360,
+
+            ],  
+             
             [
-                'name' => 'product 3',
+                'name' => 'Polo jeans',
                 'category_id' => 3,
-                'product_type_id' => 3,
-                'cost' => 3,
-                'weight' => 3,
-                'price_per_unit' => 3,
-                'cost_per_unit' => 3,
-                'price' => 3,
-                'description' => 'description 3',
-                'stock' => 3,
-                'stock_alert' => 3,
-                'sell' => 3,
-                'stock' => 3,
+                'image_id'=> 3,
+                'brand_id'=> 3,
+                'price_per_unit'=>100,
+                'cost_per_unit'=>50,
+                'stock'=>'50',
+                'stock_alert'=>20,
+                'sell'=>10,
+                'description'=>'plo make you comfortable',
+                'warrenty'=>360,
+
             ],
-            
 
         ]);
 
@@ -211,12 +226,15 @@ class RoleTableSeeder extends Seeder
         DB::table('payment_systems')->insert([
             [
                 'payment_system' => 'cash',
+                'description'=>'bkash is most popular way',
             ],
             [
                 'payment_system' => 'rocket',
+                'description'=>'rocket is most popular way',
             ],
             [
-                'payment_system' => 'bkash',
+                'payment_system' => 'card',
+                'description'=>'you can also use card',
             ],
         ]);
     
@@ -338,6 +356,22 @@ class RoleTableSeeder extends Seeder
                 'description' => 'By Wight in measures',
             ],
         ]);
+
+        DB::table('brands')->insert([
+            [ 
+                 'name' => 'walton',
+                'description' => 'walton products',
+            ],
+            [ 
+                'name' => 'HP',
+               'description' => 'HP is very bad',
+            ],
+            [ 
+            'name' => 'mabrics',
+           'description' => 'your style mabrics products',
+       ],
+        ]);
+
 
 
     }
