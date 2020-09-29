@@ -1,7 +1,15 @@
 # Delta
 -----------------------
 
+
+<mark>
+within 15th October  all work need to be done. <br>
+we start sell on 15th October in habiganj. <br>
+25th october we will realease on over country <br>
+</mark>
+
 ## Project 
+
 ```
 Distribution
 
@@ -43,9 +51,6 @@ Distribution
         - product type 
         - category
         - product
-1. component
-   - complete dataTableComponenet
-   - customer and supplier Component
 1. frontend 
    - product  related pages
 1. backend 
@@ -77,4 +82,6 @@ Distribution
 - 3
 - 4
 - 5
+
+
 
