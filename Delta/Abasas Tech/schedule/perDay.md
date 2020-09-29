@@ -47,17 +47,32 @@ Distribution
 
 ```
 1. Database 
-   - migration, seeder, without analytics
-        - product type 
-        - category
-        - product
+   - ~~migration, seeder, without analytics~~
+        - ~~product type~~ 
+        - ~~category~~
+        - ~~product~~
+      
+
 1. frontend 
    - product  related pages
+     - brand
+     - categories
+     - unit
+     - type
+     - product
+     - drop product
+     - return product
+     - product sell type
+     - payment system
+     - supplier
+     - customer
 1. backend 
    - Requests 
    - product  related controllers
 
+
 - 29
+- 30
 
 ```
         ## Completed -  45%+7.5 
@@ -70,7 +85,7 @@ Distribution
         ------------------------------------------
 ```
 
-- 30
+- 
 
 
 
