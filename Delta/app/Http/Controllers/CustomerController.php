@@ -14,7 +14,107 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+         
+        $componentDetails= [
+            'title' => 'customers List',
+            'editTitle' =>'Edit customers',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'customers.update',
+                'link' => 'customers',
+            ],
+            'delete' => [
+                
+                'name' => 'customers.destroy',
+                'link' => 'customers',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=> 'name',
+                
+               'title'=> "Name",
+    
+            ],
+            'phone'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'phone',
+               'database_name'=>'phone',
+
+               'title'=> "phone",
+            ],
+            'address'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'address',
+               'database_name'=>'address',
+
+               'title'=> "address",
+            ],
+            'company'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'company',
+               'database_name'=>'company',
+
+               'title'=> "company",
+            ],
+            'due'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'due',
+               'database_name'=>'due',
+
+               'title'=> "due",
+            ],
+          
+        ];
+
+
+
+
+
+
+        $items = customer::all();
+
+
+        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
@@ -69,7 +169,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request, customer $customer)
     {
-        //
+        $customer->name= $request->name;
+        $customer->phone= $request->phone;
+        $customer->address= $request->address;
+        $customer->company= $request->company;
+        $customer->save();
+        return back();
     }
 
     /**
@@ -80,6 +185,7 @@ class CustomerController extends Controller
      */
     public function destroy(customer $customer)
     {
-        //
+        $customer->delete();
+        return back();
     }
 }

@@ -13,9 +13,66 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {    
+        $componentDetails= [
+            'title' => 'Brand List',
+            'editTitle' =>'Edit Brand',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'brands.update',
+                'link' => 'brands',
+            ],
+            'delete' => [
+                
+                'name' => 'brands.destroy',
+                'link' => 'brands',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=> 'name',
+                
+                'title'=> "Name",
+    
+            ],
+            'description'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+
+               'title'=> "Description",
+            ],
+          
+        ];
+
+
+        $items = brand::all();
+
+
+        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +126,10 @@ class BrandController extends Controller
      */
     public function update(Request $request, brand $brand)
     {
-        //
+        $brand->name= $request->name;
+        $brand->description= $request->description;
+        $brand->save();
+        return back();
     }
 
     /**
@@ -80,6 +140,7 @@ class BrandController extends Controller
      */
     public function destroy(brand $brand)
     {
-        //
+        $brand->delete();
+        return back();
     }
 }
