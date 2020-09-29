@@ -14,7 +14,68 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        
+        $componentDetails= [
+            'title' => 'unit List',
+            'editTitle' =>'Edit Unit',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'units.update',
+                'link' => 'units',
+            ],
+            'delete' => [
+                
+                'name' => 'units.destroy',
+                'link' => 'units',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=> 'name',
+                
+               'title'=> "Name",
+    
+            ],
+            'description'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+
+               'title'=> "Description",
+            ],
+          
+        ];
+
+
+
+
+
+
+        $items = Unit::all();
+
+
+        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
@@ -69,7 +130,11 @@ class UnitController extends Controller
      */
     public function update(Request $request, unit $unit)
     {
-        //
+        $unit->name= $request->name;
+        $unit->description= $request->description;
+        $unit->save();
+        return back();
+
     }
 
     /**
@@ -80,6 +145,8 @@ class UnitController extends Controller
      */
     public function destroy(unit $unit)
     {
-        //
+        $unit->delete();
+        return back();
+
     }
 }

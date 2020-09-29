@@ -14,7 +14,94 @@ class ProductSellTypeController extends Controller
      */
     public function index()
     {
-        //
+        
+        $componentDetails= [
+            'title' => 'Product Sell Types ',
+            'editTitle' =>'Edit Sell Types',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'sell_type.update',
+                'link' => 'sell_type',
+            ],
+            'delete' => [
+                
+                'name' => 'sell_type.destroy',
+                'link' => 'sell_type',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'product_id'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>false,
+
+
+                'type'=>'normal',
+                'name'=>'product_id',
+                'database_name'=> 'product_id',
+                
+               'title'=> "product_id",
+    
+            ],
+            'product_type_id'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>false,
+
+
+               'type'=>'normal',
+               'name'=>'product_type_id',
+               'database_name'=>'product_type_id',
+
+               'title'=> "product_type_id",
+            ],
+            'sell_type'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>false,
+
+
+               'type'=>'normal',
+               'name'=>'sell_type',
+               'database_name'=>'sell_type',
+
+               'title'=> "sell_type",
+            ],
+            'purchased_type'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>false,
+
+
+               'type'=>'normal',
+               'name'=>'purchased_type',
+               'database_name'=>'purchased_type',
+
+               'title'=> "purchased_type",
+            ],
+          
+        ];
+
+
+
+
+
+
+        $items = productSellType::all();
+
+
+        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
@@ -69,7 +156,8 @@ class ProductSellTypeController extends Controller
      */
     public function update(Request $request, productSellType $productSellType)
     {
-        //
+
+        return back();
     }
 
     /**
@@ -80,6 +168,6 @@ class ProductSellTypeController extends Controller
      */
     public function destroy(productSellType $productSellType)
     {
-        //
+        return back();
     }
 }
