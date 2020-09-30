@@ -34,6 +34,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('stock_alert')->default(1);
 
             $table->double('sell',8,2)->nullable();
+            $table->double('tax',8,2)->nullable();
 
             
             $table->string('description')->nullable();

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\brand;
 use App\Models\category;
 use App\Models\Product;
+use App\Models\productType;
+use App\Models\unit;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -89,7 +92,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view ('product.create');
+        $types = productType::all();
+        $brands= brand::all();
+        $categories= category::all();
+        $units = unit::all();
+
+        return view ('product.create',compact('types','brands','categories','units'));
         //
     }
 
