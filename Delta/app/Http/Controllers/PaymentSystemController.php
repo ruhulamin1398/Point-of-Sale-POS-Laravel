@@ -14,7 +14,67 @@ class PaymentSystemController extends Controller
      */
     public function index()
     {
-        //
+                
+        $componentDetails= [
+            'title' => 'Payment System',
+            'editTitle' =>'Edit Payment System',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'payment_systems.update',
+                'link' => 'payment_systems',
+            ],
+            'delete' => [
+                
+                'name' => 'payment_systems.destroy',
+                'link' => 'payment_systems',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'payment_system'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>false,
+
+
+                'type'=>'normal',
+                'name'=>'payment_system',
+                'database_name'=> 'payment_system',
+               'title'=> "payment_system",
+    
+            ],
+            'description'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>false,
+
+
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+
+               'title'=> "description",
+            ],
+
+        ];
+
+
+
+
+
+
+        $items = paymentSystem::all();
+
+
+        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
@@ -69,7 +129,7 @@ class PaymentSystemController extends Controller
      */
     public function update(Request $request, paymentSystem $paymentSystem)
     {
-        //
+        return back();
     }
 
     /**
@@ -80,6 +140,6 @@ class PaymentSystemController extends Controller
      */
     public function destroy(paymentSystem $paymentSystem)
     {
-        //
+        return back();
     }
 }

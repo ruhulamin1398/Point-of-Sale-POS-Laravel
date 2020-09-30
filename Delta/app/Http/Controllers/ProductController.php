@@ -56,7 +56,7 @@ class ProductController extends Controller
         'category'=>[
 
             'create'=>true,
-            'read'=>false,
+            'read'=>true,
             'update'=>true,
             'delete'=>true,
 

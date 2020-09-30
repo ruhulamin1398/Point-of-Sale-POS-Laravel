@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductSellTypeController;
+use App\Http\Controllers\PaymentSystemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +40,5 @@ Route::resource('product_types',ProductTypeController::class);
 Route::resource('suppliers',SupplierController::class);
 Route::resource('customers',CustomerController::class);
 Route::resource('sell_type',ProductSellTypeController::class);
+Route::resource('payment_systems',PaymentSystemController::class);
 
