@@ -37,4 +37,32 @@ return[
  'Yearly'=>'বার্ষিক খরচ',
  'Goal'=>'লক্ষ্যমাত্রা',
 
+//   End sidebar
+
+'Brand List'=>'ব্র্যান্ড লিস্ট',
+'unit List'=>'ইউনিট লিস্ট',
+'Edit Unit'=>'ইউনিট সংশোধন',
+'Product Type'=>'পণ্যের ধরন',
+'Edit Product Type'=>'পণ্যের ধরন সংশোধন',
+'suppliers List'=>'সাপ্লাইয়ার লিস্ট',
+'Edit suppliers'=>'সাপ্লাইয়ার সংশোধন',
+'phone'=>'নাম্বার',
+'address'=>'ঠিকানা',
+'company'=>'কোম্পানি',
+'due'=>'বকেয়া',
+'customers List'=>'কাস্টমার লিস্ট',
+'Edit customers'=>'কাস্টমার সংশোধন',
+'Product Sell Types'=>'বিক্রয়ের ধরন',
+'Payment System'=>'পেমেন্ট সিস্টেম',
+'Edit Payment System'=>'ভূল সংশোধন',
+'product_id'=>'পণ্যের আইডি',
+'product_type_id'=>'পণ্যের ধরন',
+'sell_type'=>'বিক্রয়ের ধরন',
+'purchased_type'=>'পণ্য ক্রয়ের ধরন',
+'Edit Sell Types'=>'ভূল সংশোধন',
+
+
+
+
+
 ];

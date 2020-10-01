@@ -10,6 +10,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductSellTypeController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PaymentSystemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,12 +42,8 @@ Route::resource('product_types',ProductTypeController::class);
 Route::resource('suppliers',SupplierController::class);
 Route::resource('customers',CustomerController::class);
 Route::resource('sell_type',ProductSellTypeController::class);
+Route::resource('payment_systems',PaymentSystemController::class);
 
 
-
-// api route
-
-Route::get('apiproduct', [ProductController::class,'ApiShow'])->name('product_view_api');
-Route::get('apiproduct_check', [ProductController::class,'apiProducutCheck'])->name("product_check_api");
 
 

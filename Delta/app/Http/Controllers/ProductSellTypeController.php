@@ -16,7 +16,7 @@ class ProductSellTypeController extends Controller
     {
         
         $componentDetails= [
-            'title' => 'Product Sell Types ',
+            'title' => 'Product Sell Types',
             'editTitle' =>'Edit Sell Types',
         ];
 
@@ -47,7 +47,6 @@ class ProductSellTypeController extends Controller
                 'type'=>'normal',
                 'name'=>'product_id',
                 'database_name'=> 'product_id',
-                
                'title'=> "product_id",
     
             ],

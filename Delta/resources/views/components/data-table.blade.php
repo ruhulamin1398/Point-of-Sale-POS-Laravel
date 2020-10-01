@@ -239,7 +239,7 @@
 
         html = "";
         html += '<div class="form-group">';
-        html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+        html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
         html += '<select class="form-control form-control" name="' + databaseName + '"  required>';
 
 

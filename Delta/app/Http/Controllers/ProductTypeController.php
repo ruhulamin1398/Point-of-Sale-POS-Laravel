@@ -16,8 +16,8 @@ class ProductTypeController extends Controller
     {
         
         $componentDetails= [
-            'title' => 'product_types',
-            'editTitle' =>'Edit product_types',
+            'title' => 'Product Type',
+            'editTitle' =>'Edit Product Type',
         ];
 
         $routes = [
