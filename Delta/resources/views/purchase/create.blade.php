@@ -1,3 +1,16 @@
-<x-supplier-phone>
-    
-</x-supplier-phone>
+
+
+
+
+@extends('includes.app')
+
+
+@section('content')
+
+<div class="row"></div>
+
+<x-supplier-phone/>
+
+
+ 
+@endsection

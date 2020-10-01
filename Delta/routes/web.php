@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductSellTypeController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resource('categories',CategoryController::class);
 Route::resource('products',ProductController::class);
 Route::resource('orders',OrderController::class);
+Route::resource('purchases',PurchaseController::class);
 Route::resource('brands',BrandController::class);
 Route::resource('units',UnitController::class);
 Route::resource('product_types',ProductTypeController::class);
