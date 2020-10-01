@@ -17,7 +17,10 @@ class CreateUnitsTable extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('product_type_id');
+            $table->double('value',8,6); /// equvalent value of base unit
             $table->string('description')->nullable();
+            $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();
         });

@@ -95,8 +95,14 @@ class ProductController extends Controller
         $types = productType::all();
         $brands= brand::all();
         $categories= category::all();
-        $units = unit::all();
-
+        $pics = unit::where('product_type_id','1')->get();
+        $kg = unit::where('product_type_id','2')->get();
+      $units=[
+          '',
+          $pics,
+          $kg,
+      ];
+     
         return view ('product.create',compact('types','brands','categories','units'));
         //
     }
@@ -108,8 +114,22 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  
+       
+       $product = new product;
+       $product->name=$request->name;
+       $product->stock_alert=$request->stock_alert;
+       $product->category_id=$request->category_id;
+       $product->type_id=$request->type_id;
+       $product->brand_id=$request->brand_id;
+       $product->sell=$request->sell;
+       $product->unit_id=$request->unit_id;
+       $product->tax=$request->tax;
+       $product->price_per_unit= $this->calPricePerUnit($request->sell,$request->unit_id,$request->type_id);
+       $product->save();
+       return $product;
+       return back();
+
     }
 
     /**
@@ -121,6 +141,26 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+    }
+    public function apiShow(Product $product,Request $request)
+    {
+
+        $product = Product::find($request->id);
+        return $product;
+    }
+
+    
+    public function apiProducutCheck(Request $request)
+    {
+
+
+        $product = Product::find($request->id);
+        // return $supplier;
+
+        if (is_null($product)) {
+            return 0;
+        } else
+            return 1;
     }
 
     /**
@@ -159,4 +199,15 @@ class ProductController extends Controller
        $product->delete();
        return back();
     }
+
+
+
+
+
+
+
+
+
+
+  
 }
