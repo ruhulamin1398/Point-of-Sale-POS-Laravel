@@ -142,27 +142,8 @@ class ProductController extends Controller
     {
         //
     }
-    public function apiShow(Product $product,Request $request)
-    {
-
-        $product = Product::find($request->id);
-        return $product;
-    }
 
     
-    public function apiProducutCheck(Request $request)
-    {
-
-
-        $product = Product::find($request->id);
-        // return $supplier;
-
-        if (is_null($product)) {
-            return 0;
-        } else
-            return 1;
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

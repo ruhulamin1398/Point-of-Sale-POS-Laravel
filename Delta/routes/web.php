@@ -44,9 +44,4 @@ Route::resource('payment_systems',PaymentSystemController::class);
 
 
 
-// api route
-
-Route::get('apiproduct', [ProductController::class,'ApiShow'])->name('product_view_api');
-Route::get('apiproduct_check', [ProductController::class,'apiProducutCheck'])->name("product_check_api");
-
 
