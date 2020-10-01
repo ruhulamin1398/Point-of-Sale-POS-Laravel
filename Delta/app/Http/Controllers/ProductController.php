@@ -127,7 +127,7 @@ class ProductController extends Controller
        $product->tax=$request->tax;
        $product->price_per_unit= $this->calPricePerUnit($request->sell,$request->unit_id,$request->type_id);
        $product->save();
-       return $product;
+     
        return back();
 
     }

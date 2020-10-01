@@ -188,4 +188,28 @@ class SupplierController extends Controller
         $supplier->delete();
         return back();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function supplierCheck(Request $request){
+       
+
+        $supplier = supplier::where('phone',$request->phone)->first();
+        if (is_null($supplier)) {
+            return 0;
+        } else
+            return $supplier;
+        return $supplier;
+    }
 }
