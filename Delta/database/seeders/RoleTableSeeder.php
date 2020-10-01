@@ -48,21 +48,48 @@ class RoleTableSeeder extends Seeder
                     'description' => 'description_3',
                 ],
         ]);
+
+
+        DB::table('brands')->insert([
+            [ 
+                 'name' => 'walton',
+                'description' => 'walton products',
+            ],
+            [ 
+                'name' => 'HP',
+               'description' => 'HP is very bad',
+            ],
+            [ 
+            'name' => 'mabrics',
+           'description' => 'your style mabrics products',
+       ],
+        ]);
+
+
         DB::table('units')->insert([
             [
                 'name' => 'K.G.',
-                'description' => 'unit description 1',
+                'product_type_id'=>2,
+                'value'=>1,
+                'description'=> 'unit description 1',
             ],
             [
                 'name' => 'Gram',
+                'product_type_id'=>2,
+                'value'=>0.001,
                 'description' => 'unit description 2',
+                
             ],
             [
                 'name' => 'pcs',
+                'product_type_id'=>1,
+                'value'=>1,
                 'description' => 'unit description 3',
             ],
             [
                 'name' => 'Dozon',
+                'product_type_id'=>1,
+                'value'=>12,
                 'description' => 'unit description 4',
             ],
     ]);
@@ -357,20 +384,7 @@ class RoleTableSeeder extends Seeder
             ],
         ]);
 
-        DB::table('brands')->insert([
-            [ 
-                 'name' => 'walton',
-                'description' => 'walton products',
-            ],
-            [ 
-                'name' => 'HP',
-               'description' => 'HP is very bad',
-            ],
-            [ 
-            'name' => 'mabrics',
-           'description' => 'your style mabrics products',
-       ],
-        ]);
+
 
 
 

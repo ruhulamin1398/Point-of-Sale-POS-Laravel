@@ -22,18 +22,21 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('image_id');
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('image_id')->nullable();
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('type_id')->default(1);
+            $table->unsignedBigInteger('unit_id')->nullable();
             
 
-            $table->double('price_per_unit',8,2)->nullable();
-            $table->double('cost_per_unit',8,2)->nullable();
+            $table->double('price_per_unit',18,2)->nullable();
+            $table->double('cost_per_unit',18,2)->nullable();
             
-            $table->double('stock',8,6)->nullable();
+            $table->double('stock',18,6)->nullable();
             $table->bigInteger('stock_alert')->default(1);
 
-            $table->double('sell',8,2)->nullable();
+            $table->double('sell',18,2)->nullable();
+            $table->double('tax',8,2)->nullable();
 
             
             $table->string('description')->nullable();
