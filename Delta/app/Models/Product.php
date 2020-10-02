@@ -10,7 +10,26 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function __construct(){
+    
+
+
+    }
+
     public function category(){
         return $this->belongsTo('App\Models\category','category_id','id');
     }
+    
+    
+    public function category_name(){
+
+  $this->category_name =  $this->category->name;
+    }
+
+
+//   protected  $name =  $this->category_name();
+   
+   
+
 }

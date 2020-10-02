@@ -11,6 +11,8 @@ return[
     'Id' => 'আইডি',
     'Submit' => 'সাবমিট',
 
+
+    
 //    Sidebar start
  'Home'=> 'হোম পেইজ',
  'Product'=> 'পণ্য',
@@ -39,6 +41,10 @@ return[
 
 //   End sidebar
 
+
+    
+// Table Are Start from here
+
 'Brand List'=>'ব্র্যান্ড লিস্ট',
 'unit List'=>'ইউনিট লিস্ট',
 'Edit Unit'=>'ইউনিট সংশোধন',
@@ -60,6 +66,17 @@ return[
 'sell_type'=>'বিক্রয়ের ধরন',
 'purchased_type'=>'পণ্য ক্রয়ের ধরন',
 'Edit Sell Types'=>'ভূল সংশোধন',
+
+
+'type'=>'ধরণ',
+'unit'=>'ইউনিট', 
+'price Per Unit'=>'মূল্য',
+'Cost Per Unit'=>'খরচ', 
+'warrenty'=>'ওয়ারেন্টি',
+'tax'=>'টেক্স',
+'stock'=>'স্টক', 
+'stock alert'=>'স্টক এলারট',
+
 
 
 
