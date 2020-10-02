@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\paymentSystem;
 use App\Models\purchase;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class PurchaseController extends Controller
     public function create()
     {
         //
-        return view('purchase.create');
+        $paymentSystems = paymentSystem::all();
+        return view('purchase.create',compact('paymentSystems'));
     }
 
     /**

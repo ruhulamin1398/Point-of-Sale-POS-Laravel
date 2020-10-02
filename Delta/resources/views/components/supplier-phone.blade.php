@@ -1,5 +1,5 @@
-<div class="col-xl-12 col-md-12 mb-4  text-center  bg-abasas-dark p-2 ">
-    <div class="card border-none bg-abasas-dark p-2">
+
+    <div class="card border-light bg-abasas-dark  text-center w-100 p-2"  >
         <h3 class="text-white">Supplier</h3>
 
         <div class="card-body">
@@ -14,9 +14,9 @@
 
 
 
-                                <div class=" col-auto">
-                                    <label class="text-light" for="supplierPhoneField">Supplier Number</label>
-                                    <input type="number" name="phone" id="supplierPhoneField" class="form-control mb-2">
+                                <div class=" col-auto ">
+                                    <label class="text-light w-100" for="supplierPhoneField">Supplier Number</label>
+                                    <input type="number" name="phone" id="supplierPhoneField" class="form-control mb-2 " >
                                 </div>
                                 <div class=" text-light font-weight-bold " id="supplierPhoneArea"></div>
                                 <input type="number" name="supplier_id" id='supplier_input_id' value="1"  hidden>
@@ -46,12 +46,15 @@
                         <div class="col-auto">
                             <button type="button" id="addsupplierButton" class="btn btn-primary mt-3">সম্পন্ন</button>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
-    </div>
-</div>
 
+
+        </div>
+
+     
 
 
 

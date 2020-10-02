@@ -20,16 +20,21 @@
     <link rel="stylesheet" href="{{asset('css/admin/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/sb-admin-2.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/dataTables.bootstrap4.min.css')}}">
-    <link src="{{asset('bootstrap-select/css/bootstrap-select.min.css')}}">
-
+    <link rel="stylesheet" src="{{asset('bootstrap-select/css/bootstrap-select.min.css')}}">
     <style>
-        .bg-abasas-dark {
+        .border-dotted{
+    border-style: dotted;
+    border-width: 3px;
+   }
+   
+.bg-abasas-dark {
 
-            background-color: #2a3f5c;
-            color: #fff;
+    background-color: #2a3f5c;
+    color: #fff;
 
-        }
+}
     </style>
+
 
 
     <script src="{{asset('js/admin/jquery.min.js')}}"></script>
