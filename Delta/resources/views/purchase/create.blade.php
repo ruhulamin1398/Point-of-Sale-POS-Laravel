@@ -147,14 +147,103 @@
 
         <x-supplier-phone />
 
-        <div class="row">
-            <div class="col-12">
+      
 
             
+        <div class="col-xl-12 col-md-12 mb-4  text-center  bg-abasas-dark p-2 ">
+          <div class="card border-none   bg-abasas-dark  p-1">
 
+            <div class="card-body">
+              
+            <input type="number" name="" value="0" id="totalPricehidden" hidden >
+              <div class="font-weight-blod h3 text-light">Total : <span id="totalPrice">0</span> </div>
+              <div class="col-auto">
+                <label class="text-light" for="orderPaymentField">পেমেন্ট :</label>
+                <input type="text" id="orderPaymentField" class="form-control mb-2" value="0" required>
+              </div>
 
+              <hr class="sidebar-divider bg-light m-1 p-0 ">
+
+              <input type="number" name="" value="0" id="totalProductPriceDiscount" hidden >
+              <input type="number" name="" value="0" id="orderMoreDiscount" hidden >
+              
+              <div class="font-weight-blod  text-light">ছাড়: <span id="totalPriceDiscount">0</span> </div>
+
+              <div class="col-auto">
+                <label class="text-light" for="orderMoreDiscountField">অতিরিক্ত ছাড়  : </label>
+                <input type="text" id="orderMoreDiscountField" value="0" min="0" class="form-control mb-2" required>
+              </div>
+
+              <!-- Divider -->
+              <hr class="sidebar-divider bg-light m-1 p-0 ">
+              <div class="text-light font-weight-bold">ফেরত : <span id="exchange">0</span> </div>
+              <div class="form-group">
+                    <label for="paymentMethod">পেমেন্ট মেথড</label>
+                    <select class="form-control form-control" name="method" id="paymentMethod" value="Cash" required>     
+                        <option value="Cash"> Cash</option>
+                        <option value="Bkash">Bkash </option>
+                        <option value="Rocket">Rocket</option>
+                        <option value="Card"> Card</option>
+                       
+                    </select>
+                </div>
+              <!-- Divider --> 
+              <hr class="sidebar-divider bg-light m-1 p-0 ">
+              <button id="orderCompleteButton" class="btn btn-success"> সাবমিট </button>
             </div>
+
+            <!-- submit form start  -->
+            <form action="" id="orderSubmitForm" method="POST">
+              @csrf
+
+              <input type=" text" name="user_id" id="orderSubmitFormUserId" hidden ">
+            <input type=" text" name="customer_id" id="orderSubmitFormCustomerId" hidden ">
+            <input type=" text" name="pay" id="orderSubmitFormPayment" hidden ">
+            <!-- <input type=" text" name="due" id="orderSubmitFormDue" hidden "> -->
+            <!-- <input type=" text" name="pre_due" id="orderSubmitFormPreDue" hidden "> -->
+            
+            <input type=" text" name="discount" id="orderSubmitFormDiscount" hidden ">
+            <input type=" text" name="total" id="orderSubmitFormTotal" hidden ">
+            <input type=" text" name="method" id="orderSubmitMethod" value="Cash" hidden ">
+            </form>
+            <!-- product add database link  -->
+            {{--
+            <!-- submit form start  -->
+            <!-- <form action=" {{route('orders_details.store')}}" id=" orderProd-uctAddForm" method="POST">
+              @csrf
+
+              <input type=" text" name="order_id" id="orderProductAddOrderId" hidden ">
+            <input type=" text" name="product_id" id="orderProductAddProductId" hidden ">
+            <input type=" text" name="price" id="orderProductAddPrice" hidden ">
+            <input type=" text" name="quantity" id="orderProductAddQuantity" hidden ">
+            <input type=" text" name="total" id="orderProductAddTotal" hidden ">
+            </form>
+            --}}
+
+                      <!-- submit form start  -->
+            <form action="" id="orderProductAddForm" method="POST">
+            
+              @csrf
+
+              <input type=" text" name="order_id" id="orderProductAddOrderId" hidden ">
+            <input type=" text" name="product_id" id="orderProductAddProductId" hidden ">
+            <input type=" text" name="price" id="orderProductAddPrice" hidden ">
+            <input type=" text" name="quantity" id="orderProductAddQuantity" hidden ">
+            <input type=" text" name="total" id="orderProductAddTotal" hidden ">
+              
+
+
+            </form>
+
+
+
+
+
+          </div>
         </div>
+
+
+            
 
     </div>
 </div>
