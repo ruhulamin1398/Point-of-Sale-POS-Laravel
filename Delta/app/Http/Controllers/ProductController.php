@@ -207,6 +207,24 @@ class ProductController extends Controller
 
 
 
+    public function getProductById(Request $request){
+
+        $product = Product::where('id',$request->id)->first();
+        if (is_null($product)) {
+            return 0;
+        } else{
+
+            return $product;
+        }
+    }
+
+
+
+
+
+
+
+
 
 
   

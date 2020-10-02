@@ -208,8 +208,29 @@ class SupplierController extends Controller
         $supplier = supplier::where('phone',$request->phone)->first();
         if (is_null($supplier)) {
             return 0;
-        } else
+        } else{
+
             return $supplier;
+        }
+      
+    }
+
+
+
+    public function supplierStore(Request $request){
+       
+
+        $supplier= new supplier;
+        $supplier->name = $request->name;
+        $supplier->phone = $request->phone;
+        $supplier->address = $request->address;
+        $supplier->company = $request->company;
+        $supplier->due = 0;
+
+        $supplier->save();
+
         return $supplier;
     }
+
+    
 }

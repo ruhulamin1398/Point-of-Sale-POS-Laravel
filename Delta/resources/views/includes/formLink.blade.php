@@ -1,0 +1,1 @@
+<input type="text" name="" id="homeRoute" value="{{route('home')}}" hidden>

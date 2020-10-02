@@ -1,3 +1,12 @@
+
+@include('includes.formLink')
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +20,7 @@
     <link rel="stylesheet" href="{{asset('css/admin/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/sb-admin-2.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/dataTables.bootstrap4.min.css')}}">
-    <script src="{{asset('bootstrap-select/css/bootstrap-select.min.css')}}"></script>
+    <link src="{{asset('bootstrap-select/css/bootstrap-select.min.css')}}">
 
     <style>
         .bg-abasas-dark {
@@ -31,6 +40,11 @@
     <script src="{{asset('js/admin/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/admin/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('bootstrap-select/js/bootstrap-select.min.js')}}"></script>
+
+
+
+    
+    <script src="{{asset('js/abasas/app.js')}}"></script>
     
 
 
