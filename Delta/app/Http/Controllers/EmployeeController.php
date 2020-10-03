@@ -147,10 +147,10 @@ class EmployeeController extends Controller
 
 
                'type'=>'normal',
-               'name'=>'designation',
-               'database_name'=>'designation',
+               'name'=>'designation_id',
+               'database_name'=>'designation_id',
 
-               'title'=> "designation",
+               'title'=> "Designation",
             ],
           
           
@@ -228,7 +228,17 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, employee $employee)
     {
-        //
+ 
+        $employee->name = $request->name;
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->joining_date = $request->joining_date;
+        $employee->reference = $request->reference;
+        $employee->term_of_contract = $request->term_of_contract;
+        $employee->salary = $request->salary;
+        $employee->designation_id = $request->designation_id;
+        $employee->save();
+        return back();
     }
 
     /**

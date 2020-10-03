@@ -6,7 +6,7 @@
 
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="collapse" id="NewEmployorm">
     <div class="card mb-4 shadow">
 
         <div class="card-header py-3  bg-abasas-dark ">
@@ -18,9 +18,9 @@
             <form method="POST" action="{{route('employees.store')}}">
                 @csrf
                 <div class="form-row align-items-center">
-                    <div class="col-auto" >
+                    <div class="col-auto">
                         <span class="text-dark pl-4"> কর্মচারীর নাম</span>
-                        <input type="text" name="name" class="form-control mb-2" >
+                        <input type="text" name="name" class="form-control mb-2">
                     </div>
                     <div class="col-auto">
 
@@ -53,9 +53,9 @@
                     </div>
 
 
-                 
+
                     <div class="col-auto">
-                    <select class="form-control form-control" value="" name="designation_id" id="designation" required>
+                        <select class="form-control form-control" value="" name="designation_id" id="designation" required>
                             <option selected="selected">Select designation </option>
                             @foreach ($designation as $designation)
                             <option value="{{$designation->id}}"> {{$designation->role}}</option>
@@ -66,7 +66,7 @@
 
 
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mt-3">সাবমিট</button>
+                        <button type="submit" class="btn bg-abasas-dark mt-3">সাবমিট</button>
                     </div>
 
                 </div>
@@ -74,6 +74,7 @@
             </form>
         </div>
     </div>
+</div>
 
 
 
@@ -88,8 +89,33 @@
 
 
 
-    <x-data-table :fieldList="$fieldList" :items="$items" :routes="$routes" :componentDetails="$componentDetails" />
+<x-data-table :fieldList="$fieldList" :items="$items" :routes="$routes" :componentDetails="$componentDetails" />
+
+<script>
+    $(document).ready(function() {
+
+        $('body').on('click', '#PlusButton', function() {
 
 
 
-    @endsection
+            if ($(this).hasClass('fa-plus')) {
+                $(this).removeClass('fa-plus');
+                $(this).addClass('fa-minus');
+
+
+            } else {
+                $(this).removeClass('fa-minus');
+                $(this).addClass('fa-plus');
+
+            }
+
+
+
+        });
+
+    });
+</script>
+
+
+
+@endsection
