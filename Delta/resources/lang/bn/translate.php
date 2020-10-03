@@ -87,8 +87,8 @@ return[
  'Contract'=>'কন্ট্রাক্ট',
  'Salary'=>'বেতন',
  'Designation'=>'পদবি',
-
-
+'Duty statues'=>'ডিউটি',
+'Edit Duty statues'=> 'ডিউটি ভূল সংশোধন',
 
 
 

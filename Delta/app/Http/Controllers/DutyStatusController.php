@@ -14,7 +14,9 @@ class DutyStatusController extends Controller
      */
     public function index()
     {
-        //
+       
+        $dutyStatus = dutyStatus::all();
+        return view('dutystatus.index',compact('dutyStatus'));
     }
 
     /**
@@ -35,7 +37,7 @@ class DutyStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
