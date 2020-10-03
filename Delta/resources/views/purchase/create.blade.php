@@ -11,7 +11,7 @@
 
       <div class="card-header py-3 bg-abasas-dark  text-light ">
         <nav class="navbar ">
-          <a class="navbar-brand">Purchase</a>
+          <span><a class="navbar-brand">Purchase</a><i class="fas fa-tools pl-2" id="taxCountSetting"></i></span>
 
         </nav>
 
@@ -157,30 +157,33 @@
 
           <div class="row border-bottom border-dark mb-2">
             <div class="col-6 ">
-              <div class="text-left  "> Total</div>
+              <div class="text-left  "> Prodcut Discount</div>
             </div>
             <div class="col-6">
-              <div class="text-right ">1200</div>
+              <div class="text-right " id="ProductDiscountTotal">0</div>
             </div>
           </div>
 
-
+<input type="text" name="" id="productPurchaseTotal" value='0' class="inputMinZero" >
 
           <div class="row border-bottom border-dark mb-2">
-            <div class="col-6 ">
-              <div class="text-left  "> Discount More <i class="fas fa-tools pl-2" id="taxCountSetting"></i></div>
+            <div class="col-8 ">
+              <div class="text-left  "> Discount More <span id="moreDiscountPercentageIcon"> ( % ) </span>  <i class="fas fa-tools pl-2" id="purchasePageMoreDiscountSetting"></i></div>
             </div>
-            <div class="col-6">
-              <input type="text" class="form-control form-control-sm">
+            <div class="col-4">
+              <input type="text" id="moreDiscountInput" class="form-control form-control-sm inputMinZero" value="0"    >
             </div>
           </div>
 
+          <input type="text"  id="productPurchaseMoreDiscountType" value='1' class="inputMinZero" >
+
+          <input type="text" name="" id="discountTotal" value="0" class="inputMinZero" >
           <div class="row border-bottom border-dark mb-2">
             <div class="col-6 ">
               <div class="text-left  "> Total Dioscount</div>
             </div>
             <div class="col-6">
-              <div class="text-right ">1900</div>
+              <div class="text-right " id="totalDiscountInText">0 + 0</div>
             </div>
           </div>
 
@@ -190,62 +193,64 @@
               <div class="text-left  "> Sub Total</div>
             </div>
             <div class="col-6">
-              <div class="text-right ">22300</div>
+              <div class="text-right" id="purchaseSubtotal">0</div>
             </div>
           </div>
 
 
           <div class="row border-bottom border-dark mb-2">
             <div class="col-6 ">
-              <div class="text-left  "> Tax <i class="fas fa-tools pl-2" id="taxCountSetting"></i></span></div>
+              <div class="text-left  "> Tax ( 15 %) <i class="fas fa-tools pl-2" id="taxCountSetting"></i></span></div>
             </div>
             <div class="col-6">
-              <div class="text-right ">1200</div>
+              <div class="text-right ">0</div>
             </div>
           </div>
 
 
+
           <div class="row mb-2">
-            <div class="col-12 col-md-6 pt-3 pb-3 border-dark bg-dark border-dotted ">
-              <div class="text-center h3 "> Total</div>
-              <div class="text-center h2  ">24000</div>
+            <div class="col-12 col-md-6 pt-1 pb-1 border-dark bg-dark border-dotted ">
+              <div class="text-center h5 "> Total</div>
+          <input type="text" name="" id="totalWithDue" value=4100 class="inputMinZero" >
+              <div class="text-center h5 text-success ">0</div>
             </div>
 
-            <div class="col-12 col-md-6  border-dark pt-3 pb-3  border-dotted">
-              <div class="text-center h3"> Due</div>
-              <div class="text-center h2 text-danger">100</div>
+            <div class="col-12 col-md-6  border-dark pt-1 pb-1  border-dotted">
+              <div class="text-center h5"> Due</div>
+              <div class="text-center h5 text-danger">0 </div>
             </div>
           </div>
 
 
 
           <div class="row   mb-2">
-          
-              <div class="text-center  border-top border-dark  mb-2 col-12 "> Add Payment</div>
-{{--
+
+            <div class="text-center  border-top border-dark  mb-2 col-12 "> Add Payment</div>
+            {{--
               <form>
               @foreach($paymentSystems as $paymentSystem)
   <div class="custom-control custom-radio custom-control-inline">
     <input type="radio" class="custom-control-input" id="customRadio{{$paymentSystem->id}}" name="example" value="{{$paymentSystem->id}}">
-    <label class="custom-control-label" for="customRadio{{$paymentSystem->id}}">{{$paymentSystem->payment_system}}</label>
-  </div>
-  @endforeach
-</form> 
---}}
+            <label class="custom-control-label" for="customRadio{{$paymentSystem->id}}">{{$paymentSystem->payment_system}}</label>
+          </div>
+          @endforeach
+          </form>
+          --}}
 
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-@foreach($paymentSystems as $paymentSystem)
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            @foreach($paymentSystems as $paymentSystem)
 
-   <label class="btn btn-dark p-2 m-1 ">
-   <input type="radio" name="options" id="Radio{{$paymentSystem->id}}" autocomplete="off"  > {{$paymentSystem->payment_system}}
-   </label>
-
-
-     @endforeach
-     </div>
+            <label class="btn btn-dark p-2 m-1 ">
+              <input type="radio" name="paymentSystem" id="Radio{{$paymentSystem->id}}" autocomplete="off"> {{$paymentSystem->payment_system}}
+            </label>
 
 
-     <!-- <div class="bs-example">
+            @endforeach
+          </div>
+
+
+          <!-- <div class="bs-example">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-primary">
             <input type="radio" name="options" autocomplete="off"> Option A
@@ -260,89 +265,94 @@
 </div> -->
 
 
-{{---
+          {{---
               @foreach($paymentSystems as $paymentSystem)
               <input type="button" value="{{$paymentSystem->payment_system}}" class="btn btn-dark p-2 m-1">
-              @endforeach
-              
-                    
+          @endforeach
 
-              </div>
 
-          --}}  
-          
-          
 
-          <div class="row mb-2 mt-4">
-        
-         
+        </div>
+
+        --}}
+
+
+
+        <div class="row mb-2 mt-4">
+
+
           <div class="input-group col-12">
-        <div class="input-group-prepend">
-        <input type="text" class="form-control" id="validationCustomUsername" placeholder="0.00" aria-describedby="inputGroupPrepend" required>
-        </div>
-          <span class="btn btn-success" id="inputGroupPrepend">Complete</span>
-        <div class="invalid-feedback">
-          Please choose a username.
-        </div>
-      
-           
+            <input type="text" class="form-control" id="Pay" placeholder="0.00" aria-describedby="inputGroupAppend" inputMinZero  required>
+            <div class="input-group-append">
+              <span class="btn btn-success" id="inputGroupPrepend">Complete</span>
             </div>
           </div>
-
-
-
-
-
-
         </div>
-      </div>
-    </div>
-
-
-  </div>
 
 
 
 
 
 
-
-  <!-- Select Discount Type Modal -->
-
-  <div class="modal fade   " id="discountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered  border-none " role="document">
-      <div class="modal-content bg-abasas-dark">
-        <!-- <div class="modal-header bg-abasas-dark ">
-                <h5 class="modal-title " id="exampleModalCenterTitle">Select Discount Type</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="text-light">&times;</span>
-                </button>
-            </div> -->
-        <div class="modal-body p-4 border border-light m-2">
-
-
-          <div class="form-check form-inline justify-content-center p-4 m-4">
-            <label class="form-check-label pl-4 pr-4">
-              <input type="radio" class="form-check-input purchasePagePercentageSelect" name="optradio" value="1" id="purchaseModalDiscountTypePercentage"> Percentage ( % )
-            </label>
-
-
-            <label class="form-check-label pl-4 pr-4">
-              <input type="radio" class="form-check-input purchasePagePercentageSelect" name="optradio" value="2" id="purchaseModalDiscountTypeFixed">Fixed Price
-            </label>
-          </div>
-
-
-        </div>
-        <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
       </div>
     </div>
   </div>
 
-  <!-- /Select Discount Type Modal-->
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- Select Discount Type Modal -->
+
+<div class="modal fade   " id="discountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered  border-none " role="document">
+    <div class="modal-content bg-abasas-dark">
+      <div class="modal-body p-4 border border-light m-2">
+        <div class="form-check form-inline justify-content-center p-4 m-4">
+          <label class="form-check-label pl-4 pr-4">
+            <input type="radio" class="form-check-input purchasePagePercentageSelect" name="optradio" value="1" id="purchaseModalDiscountTypePercentage"> Percentage ( % )
+          </label>
+          <label class="form-check-label pl-4 pr-4">
+            <input type="radio" class="form-check-input purchasePagePercentageSelect" name="optradio" value="2" id="purchaseModalDiscountTypeFixed">Fixed Price
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- /Select Discount Type Modal-->
+
+
+
+
+
+<!-- More Discount Type Modal -->
+
+<div class="modal fade   " id="moreDiscountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered  border-none " role="document">
+    <div class="modal-content bg-abasas-dark">
+      <div class="modal-body p-4 border border-light m-2">
+        <div class="form-check form-inline justify-content-center p-4 m-4">
+          <label class="form-check-label pl-4 pr-4">
+            <input type="radio" class="form-check-input purchasePageMoreDiscountSelect" name="more-discount" value="1" id="purchaseMoreModalDiscountTypePercentage"> Percentage ( % )
+          </label>
+          <label class="form-check-label pl-4 pr-4">
+            <input type="radio" class="form-check-input purchasePageMoreDiscountSelect" name="more-discount" value="2" id="purchaseMoreModalDiscountTypeFixed">Fixed Price
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{--   More  Discount Type Modal --}}
 
 
 
@@ -350,7 +360,8 @@
 
 
 
-  <script src="{{asset('js/abasas/purchase.js')}}"></script>
+
+<script src="{{asset('js/abasas/purchase.js')}}"></script>
 
 
-  @endsection
+@endsection

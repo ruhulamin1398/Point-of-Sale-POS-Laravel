@@ -16,7 +16,7 @@
 
                                 <div class=" col-auto ">
                                     <label class="text-light w-100" for="supplierPhoneField">Supplier Number</label>
-                                    <input type="number" name="phone" id="supplierPhoneField" class="form-control mb-2 " >
+                                    <input type="text" name="phone" id="supplierPhoneField" class="form-control mb-2 " >
                                 </div>
                                 <div class=" text-light font-weight-bold " id="supplierPhoneArea"></div>
                                 <input type="number" name="supplier_id" id='supplier_input_id' value="1"  hidden>
