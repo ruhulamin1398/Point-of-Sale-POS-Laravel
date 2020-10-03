@@ -79,6 +79,13 @@ return[
 
 
 
+ 'Joining'=>'জয়েন',
+ 'Reference'=>'রেফারেন্স',
+ 'Contract'=>'কন্ট্রাক্ট',
+ 'Salary'=>'বেতন',
+ 'designation'=>'পদবি',
+
+
 
 
 

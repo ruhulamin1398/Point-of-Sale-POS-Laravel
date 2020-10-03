@@ -91,7 +91,7 @@ class EmployeeController extends Controller
                'name'=>'joining_date',
                'database_name'=>'joining_date',
 
-               'title'=> "joining",
+               'title'=> "Joining",
             ],
 
             'reference'=>
@@ -136,7 +136,7 @@ class EmployeeController extends Controller
                'name'=>'salary',
                'database_name'=>'salary',
 
-               'title'=> "salary",
+               'title'=> "Salary",
             ],
             'designation'=>
             [

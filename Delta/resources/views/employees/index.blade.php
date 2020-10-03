@@ -40,11 +40,11 @@
                     </div>
 
                     <div class="col-auto">
-                        <span class="text-dark pl-2"> join</span>
+                        <span class="text-dark pl-2"> Join</span>
                         <input type="date" name="joining_date" class="form-control mb-2">
                     </div>
                     <div class="col-auto">
-                        <span class="text-dark pl-2"> contract</span>
+                        <span class="text-dark pl-2"> Contract</span>
                         <input type="date" name="term_of_contract" class="form-control mb-2">
                     </div>
                     <div class="col-auto">
