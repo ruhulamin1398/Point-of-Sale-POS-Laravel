@@ -188,4 +188,58 @@ class CustomerController extends Controller
         $customer->delete();
         return back();
     }
+
+//   Api Area Start
+
+public function apiIndex()
+{
+    $customers = Customer::all();
+    return ($customers);
+}
+
+public function ApiShow(Request $request)
+{
+    ///   return $request->phone;
+    $customer = Customer::where('phone', $request->phone)->first();
+    if($customer->id ==1)
+    {   
+
+        $customer->due=0;
+        $customer->save();
+    }
+    return $customer;
+}
+
+ public function apiCustomerCheck(Request $request,customer $customer)
+{
+    $phone = $request->phone;
+   $customer = customer::where('phone',$phone)->first();
+      
+//    return $customer;
+    
+ if (is_null($customer))
+ {
+   return 0;
+
+ }else{
+     return 1;
+ }
+
+}
+
+public function customersDue(Request $request)
+{
+    // return $request;
+    $customer = Customer::find($request->id);
+    return $customer;
+    $customer->due = $request->due;
+    $customer->save();
+    return $customer->due;
+}
+
+
+
+
+
+
 }

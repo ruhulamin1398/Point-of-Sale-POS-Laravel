@@ -9,8 +9,13 @@ use App\Models\productType;
 use App\Models\unit;
 use Illuminate\Http\Request;
 
+
+
+
 class ProductController extends Controller
 {
+
+   
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +23,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+
+
+
         $componentDetails= [
             'title' =>'Product List',
             'editTitle' =>'Edit Product',
@@ -73,6 +81,123 @@ class ProductController extends Controller
 
            'title'=>'Category',
         ],
+        'type_id'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>$data,
+
+            'database_name'=>'type_id',
+
+            'title'=>'type',
+
+        ],
+
+        'unit_id'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'unit_id',
+            'database_name'=> 'unit_id',
+
+            'title'=>'unit',
+
+        ],
+
+        'price_per_unit'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>true,
+            
+            'type'=>'normal',
+            'name'=>'price_per_unit',
+            'database_name'=> 'price_per_unit',
+
+            'title'=>'price Per Unit',
+
+        ],
+
+        
+        'cost_per_unit'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>true,
+            
+            'type'=>'normal',
+            'name'=>'cost_per_unit`',
+            'database_name'=> 'cost_per_unit',
+
+            'title'=>'Cost Per Unit',
+
+        ],
+
+        'stock'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>false,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'stock',
+            'database_name'=> 'stock',
+
+            'title'=>'stock',
+
+        ],
+
+        'warrenty'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'warrenty',
+            'database_name'=> 'warrenty',
+
+            'title'=>'warrenty',
+
+        ],
+
+        'tax'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>false,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'tax',
+            'database_name'=>'tax',
+
+            'title'=>'tax',
+
+        ],
+
+
+        'stock_alert'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'stock_alert',
+            'database_name'=> 'stock_alert',
+
+            'title'=>'stock alert',
+
+        ],
+
+
+
       
     ];
 
@@ -181,11 +306,42 @@ class ProductController extends Controller
        return back();
     }
 
+        //Api Area start
+
+    public function apiShow(Request $request)
+    { 
+
+        $product = Product::find($request->id);
+        return $product;
+    }
+
+ public function apiProducutCheck(Request $request, category $category,Product $product)
+    {  
+    
+        $product = product::find(2);
+        // return $productss;
+
+        $product->category_name();   
+
+        //  return $product;
+      
+
+         
+       return view('welcome',compact('product'));
 
 
 
+    }
+
+      
+    public function category_name(Request $request, category $category)
+    {
 
 
+    }
+
+
+   
 
 
     public function getProductById(Request $request){
