@@ -384,6 +384,18 @@ function calSubTotal(){
             
         calculatePurchaseFinal();
         }
+
+        
+        var data=  $(this).val().trim();
+       
+         if(data.length<1){
+             $(this).val(0);
+             calculatePurchaseFinal();
+         }
+         if(data<0){
+            $(this).val(0);
+            calculatePurchaseFinal();
+        }
     });
     $("#moreDiscountInput").on('change',function(){
         calculatePurchaseFinal();
