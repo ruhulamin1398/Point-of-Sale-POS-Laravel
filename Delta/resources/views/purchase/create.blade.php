@@ -164,7 +164,7 @@
             </div>
           </div>
 
-<input type="text" name="" id="productPurchaseTotal" value='0' class="inputMinZero" >
+<input type="text" name="" id="productPurchaseTotal" value='0' class="inputMinZero" hidden >
 
           <div class="row border-bottom border-dark mb-2">
             <div class="col-8 ">
@@ -175,9 +175,9 @@
             </div>
           </div>
 
-          <input type="text"  id="productPurchaseMoreDiscountType" value='1' class="inputMinZero" >
+          <input type="text"  id="productPurchaseMoreDiscountType" value='1' class="inputMinZero" hidden >
 
-          <input type="text" name="" id="discountTotal" value="0" class="inputMinZero" >
+          <input type="text" name="" id="discountTotal" value="0" class="inputMinZero" hidden>
           <div class="row border-bottom border-dark mb-2">
             <div class="col-6 ">
               <div class="text-left  "> Total Dioscount</div>
@@ -200,25 +200,36 @@
 
           <div class="row border-bottom border-dark mb-2">
             <div class="col-6 ">
-              <div class="text-left  "> Tax ( 15 %) <i class="fas fa-tools pl-2" id="taxCountSetting"></i></span></div>
+              <div class="text-left  "> Tax ( <span id="taxView">15</span>%)  <i class="fas fa-tools pl-2" id="TaxSetting"></i></span></div>
             </div>
             <div class="col-6">
-              <div class="text-right ">0</div>
+              <div class="text-right " id="taxValue">0</div>
             </div>
           </div>
-
-
+          <div class="row border-bottom border-dark  mb-2">
+            <div class="col-6 ">
+              <div class="text-left  "> Previous Due</div>
+            </div>
+            <div class="col-6">
+              
+<!-- //////////////////////************************* *////////////
+**************************  This property updated from supplier Component 
+                               when fatch customer data
+//////////////////////************************* *//////////// -->
+              <div class="text-right" id="purchasePreviousDue">0</div>
+            </div>
+          </div>
 
           <div class="row mb-2">
             <div class="col-12 col-md-6 pt-1 pb-1 border-dark bg-dark border-dotted ">
               <div class="text-center h5 "> Total</div>
-          <input type="text" name="" id="totalWithDue" value=4100 class="inputMinZero" >
-              <div class="text-center h5 text-success ">0</div>
+          <input type="text" name="" id="totalWithOutDue" value=0 class="inputMinZero" hidden >
+              <div class="text-center h5 text-success " id="finalTotal" >0</div>
             </div>
 
             <div class="col-12 col-md-6  border-dark pt-1 pb-1  border-dotted">
               <div class="text-center h5"> Due</div>
-              <div class="text-center h5 text-danger">0 </div>
+              <div class="text-center h5 text-danger" id="totalDue">0 </div>
             </div>
           </div>
 
@@ -249,45 +260,15 @@
             @endforeach
           </div>
 
-
-          <!-- <div class="bs-example">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary">
-            <input type="radio" name="options" autocomplete="off"> Option A
-        </label>
-        <label class="btn btn-primary active">
-            <input type="radio" name="options" autocomplete="off" checked> Option B
-        </label>
-        <label class="btn btn-primary">
-            <input type="radio" name="options" autocomplete="off"> Option C
-        </label>
-    </div>
-</div> -->
-
-
-          {{---
-              @foreach($paymentSystems as $paymentSystem)
-              <input type="button" value="{{$paymentSystem->payment_system}}" class="btn btn-dark p-2 m-1">
-          @endforeach
-
-
-
-        </div>
-
-        --}}
-
-
-
         <div class="row mb-2 mt-4">
-
-
           <div class="input-group col-12">
-            <input type="text" class="form-control" id="Pay" placeholder="0.00" aria-describedby="inputGroupAppend" inputMinZero  required>
+            <input type="text" class="form-control inputMinZero " id="PayAmount"  aria-describedby="inputGroupAppend" value="0"  required>
             <div class="input-group-append">
               <span class="btn btn-success" id="inputGroupPrepend">Complete</span>
             </div>
           </div>
         </div>
+        <div class="text-success" id="changeAmount"></div>
 
 
 
@@ -352,7 +333,33 @@
   </div>
 </div>
 
-{{--   More  Discount Type Modal --}}
+
+
+
+
+<!-- Tax Discount Type Modal -->
+
+<div class="modal fade   " id="taxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered  border-none " role="document">
+    <div class="modal-content bg-abasas-dark">
+   
+      <div class="modal-body p-4 border border-light m-2">
+        <div class="text-center h3 p-4">
+          Tax Setting
+        </div>
+        <div class="input-group ">
+            <input type="text" class="form-control 
+             " id="taxInput" aria-describedby="inputGroupAppend" value="15" >
+            <div class="input-group-append">
+              <span class="btn btn-success" id="inputGroupPrepend">%</span>
+            </div>
+          </div>
+    
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
