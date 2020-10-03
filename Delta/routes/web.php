@@ -11,6 +11,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductSellTypeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PaymentSystemController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +45,7 @@ Route::resource('customers',CustomerController::class);
 Route::resource('sell_type',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 
-Route::resource('payment_systems',PaymentSystemController::class);
+Route::resource('employees',EmployeeController::class);
 
 
 
