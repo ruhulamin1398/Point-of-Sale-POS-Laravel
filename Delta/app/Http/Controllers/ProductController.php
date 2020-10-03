@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\brand;
 use App\Models\category;
 use App\Models\Product;
+use App\Models\productType;
+use App\Models\unit;
 use Illuminate\Http\Request;
+
+
+
 
 class ProductController extends Controller
 {
+
+   
     /**
      * Display a listing of the resource.
      *
@@ -15,13 +23,23 @@ class ProductController extends Controller
      */
     public function index()
     {
+
+
+
+        $componentDetails= [
+            'title' =>'Product List',
+            'editTitle' =>'Edit Product',
+        ];
         $routes = [
+            'create' => [
+                'name' => 'products.store',
+                'link' => 'products',
+            ],
             'update' => [
                 'name' => 'products.update',
                 'link' => 'products',
             ],
             'delete' => [
-                
                 'name' => 'products.destroy',
                 'link' => 'products',
             ]
@@ -34,12 +52,25 @@ class ProductController extends Controller
      $fieldList=[
          
         'name'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>true,
+            
             'type'=>'normal',
             'name'=>'name',
             'database_name'=> 'name',
 
+            'title'=>'Name',
+
         ],
         'category'=>[
+
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>true,
+
 
            'type'=>'dropDown',
            'name'=>'category',
@@ -47,22 +78,135 @@ class ProductController extends Controller
            
            'field'=>'name',
            'data'=>category::all(),
+
+           'title'=>'Category',
         ],
+        'type_id'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>$data,
+
+            'database_name'=>'type_id',
+
+            'title'=>'type',
+
+        ],
+
+        'unit_id'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'unit_id',
+            'database_name'=> 'unit_id',
+
+            'title'=>'unit',
+
+        ],
+
+        'price_per_unit'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>true,
+            
+            'type'=>'normal',
+            'name'=>'price_per_unit',
+            'database_name'=> 'price_per_unit',
+
+            'title'=>'price Per Unit',
+
+        ],
+
+        
+        'cost_per_unit'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>true,
+            
+            'type'=>'normal',
+            'name'=>'cost_per_unit`',
+            'database_name'=> 'cost_per_unit',
+
+            'title'=>'Cost Per Unit',
+
+        ],
+
+        'stock'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>false,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'stock',
+            'database_name'=> 'stock',
+
+            'title'=>'stock',
+
+        ],
+
+        'warrenty'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'warrenty',
+            'database_name'=> 'warrenty',
+
+            'title'=>'warrenty',
+
+        ],
+
+        'tax'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>false,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'tax',
+            'database_name'=>'tax',
+
+            'title'=>'tax',
+
+        ],
+
+
+        'stock_alert'=>[
+            'create'=>true,
+            'read'=>true,
+            'update'=>true,
+            'delete'=>false,
+            
+            'type'=>'normal',
+            'name'=>'stock_alert',
+            'database_name'=> 'stock_alert',
+
+            'title'=>'stock alert',
+
+        ],
+
+
+
       
     ];
 
 
-     $fieldTitleList=[
-         '#',
-         'Name',
-         'Category',
-         'Action'
-     ];
 
      $items= Product::all();
 
     
-     return view('product.index',compact('items','fieldList','fieldTitleList','routes'));
+     return view('product.index',compact('items','fieldList','routes','componentDetails'));
  }
     
 
@@ -73,6 +217,18 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $types = productType::all();
+        $brands= brand::all();
+        $categories= category::all();
+        $pics = unit::where('product_type_id','1')->get();
+        $kg = unit::where('product_type_id','2')->get();
+      $units=[
+          '',
+          $pics,
+          $kg,
+      ];
+     
+        return view ('product.create',compact('types','brands','categories','units'));
         //
     }
 
@@ -83,8 +239,22 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  
+       
+       $product = new product;
+       $product->name=$request->name;
+       $product->stock_alert=$request->stock_alert;
+       $product->category_id=$request->category_id;
+       $product->type_id=$request->type_id;
+       $product->brand_id=$request->brand_id;
+       $product->sell=$request->sell;
+       $product->unit_id=$request->unit_id;
+       $product->tax=$request->tax;
+       $product->price_per_unit= $this->calPricePerUnit($request->sell,$request->unit_id,$request->type_id);
+       $product->save();
+     
+       return back();
+
     }
 
     /**
@@ -98,6 +268,7 @@ class ProductController extends Controller
         //
     }
 
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -118,7 +289,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->category_id= $request->category_id;
+        $product->save();
+        return back();
     }
 
     /**
@@ -132,4 +305,64 @@ class ProductController extends Controller
        $product->delete();
        return back();
     }
+
+        //Api Area start
+
+    public function apiShow(Request $request)
+    { 
+
+        $product = Product::find($request->id);
+        return $product;
+    }
+
+ public function apiProducutCheck(Request $request, category $category,Product $product)
+    {  
+    
+        $product = product::find(2);
+        // return $productss;
+
+        $product->category_name();   
+
+        //  return $product;
+      
+
+         
+       return view('welcome',compact('product'));
+
+
+
+    }
+
+      
+    public function category_name(Request $request, category $category)
+    {
+
+
+    }
+
+
+   
+
+
+    public function getProductById(Request $request){
+
+        $product = Product::where('id',$request->id)->first();
+        if (is_null($product)) {
+            return 0;
+        } else{
+
+            return $product;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+  
 }

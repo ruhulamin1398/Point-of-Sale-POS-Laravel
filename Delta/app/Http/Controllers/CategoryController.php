@@ -16,6 +16,11 @@ class CategoryController extends Controller
     {
         //
 
+        $componentDetails= [
+            'title' => 'Category List',
+            'editTitle' =>'Edit Category',
+        ];
+
         $routes = [
             'update' => [
                 'name' => 'categories.update',
@@ -28,21 +33,50 @@ class CategoryController extends Controller
             ]
 
         ];
-        $fieldList = [
-            'name',
-            'description',
+     
+        
 
+        $fieldList=[
+         
+            'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=> 'name',
+                
+               'title'=> "Name",
+    
+            ],
+            'description'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+
+               'title'=> "Description",
+            ],
+          
         ];
-        $fieldTitleList = [
-            '#',
-            'Name',
-            'Description',
-            'Action'
-        ];
+
+
+
+
+
+
         $items = category::all();
 
 
-        return view('index', compact('items', 'fieldList', 'fieldTitleList', 'routes'));
+        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
@@ -98,7 +132,9 @@ class CategoryController extends Controller
     public function update(Request $request, category $category)
     {
         //
-        return $request;
+        $category->name= $request->name;
+        $category->save();
+        return back();
     }
 
     /**

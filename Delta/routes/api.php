@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('supplier-check',[SupplierController::class,'supplierCheck']);
+Route::post('supplier-create',[SupplierController::class,'supplierStore'])->name("SupplierStore");
+Route::get('get-product-by-id',[ProductController::class,'getProductById'])->name("getProductById");
