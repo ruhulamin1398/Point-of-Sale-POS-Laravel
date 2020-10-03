@@ -14,9 +14,68 @@ class DutyStatusController extends Controller
      */
     public function index()
     {
-       
-        $dutyStatus = dutyStatus::all();
-        return view('dutystatus.index',compact('dutyStatus'));
+
+        $componentDetails= [
+            'title' => 'Duty statues',
+            'editTitle' =>'Edit Duty statues',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'duty_status.update',
+                'link' => 'duty_status',
+            ],
+            'delete' => [
+                
+                'name' => 'duty_status.destroy',
+                'link' => 'duty_status',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=>'name',
+                
+                'title'=> "Name",
+    
+            ],
+            'description'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+
+               'title'=> "Description",
+            ],
+
+        
+          
+        ];
+
+
+        $items = dutyStatus::all();
+  
+
+
+        return view('dutystatus.index', compact('items', 'fieldList', 'routes','componentDetails',));
+
     }
 
     /**
@@ -37,7 +96,7 @@ class DutyStatusController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //
     }
 
     /**
