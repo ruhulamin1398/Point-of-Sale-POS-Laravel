@@ -282,31 +282,31 @@ class RoleTableSeeder extends Seeder
     
         DB::table('employees')->insert([
             [
-                'name' => 'employee 1',
+                'name' => 'masum',
                 'phone' => '01718988564',
                 'address' => 'address 1',
                 'joining_date' => '2020-09-16',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
-                'designation' => 'manager',
+                'designation_id' =>2,
             ],
             [
-                'name' => 'employee 2',
+                'name' => 'ruhul',
                 'phone' => '01840000408',
                 'address' => 'address 2',
                 'joining_date' => '2020-09-16',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
-                'designation' => 'staff',
+                'designation_id' => 1,
             ],
             [
-                'name' => 'employee 3',
+                'name' => 'sourov',
                 'phone' => '01729867026',
                 'address' => 'address 3',
                 'joining_date' => '2020-09-16',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
-                'designation' => 'manager',
+                'designation_id' => 1,
             ],
         ]);
     
@@ -383,6 +383,23 @@ class RoleTableSeeder extends Seeder
                 'description' => 'By Wight in measures',
             ],
         ]);
+
+        DB::table('designations')->insert([
+            [
+                'role' => 'manager',
+                'description' => ' manager can do anything',
+            ],
+            [
+                'role' => 'staf',
+                'description' =>'will help to sell',
+            ],
+            [
+                'role' => 'cleaner',
+                'description' => 'nargis is cleaner',
+            ],
+        ]);
+
+
 
 
 
