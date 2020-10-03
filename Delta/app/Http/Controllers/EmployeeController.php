@@ -103,8 +103,8 @@ class EmployeeController extends Controller
 
 
                'type'=>'normal',
-               'name'=>'joining_date',
-               'database_name'=>'joining_date',
+               'name'=>'reference',
+               'database_name'=>'reference',
 
                'title'=> "Reference",
             ],
