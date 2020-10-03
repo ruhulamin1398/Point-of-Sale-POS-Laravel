@@ -89,9 +89,6 @@ $(document).ready(function () {
     });
 
 
-
-
-
     $("#purchaseProductInputPrice").on('keyup', function () {
 
         data = calIndivitualTotal();
