@@ -18,8 +18,8 @@ class CreateEmployeePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('employee_payment_type_id');
+            $table->unsignedBigInteger('salary_status_id');
             $table->double('amount', 8, 2);
-            $table->string('status')->nullable();
             $table->date('date');
             $table->longText('Comment')->nullable();
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
