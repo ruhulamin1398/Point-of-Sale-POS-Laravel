@@ -296,6 +296,12 @@
 
         $('#dataTable').DataTable();
     });
+
+
+
+
+
+    
 </script>
 
 {{ $slot }}

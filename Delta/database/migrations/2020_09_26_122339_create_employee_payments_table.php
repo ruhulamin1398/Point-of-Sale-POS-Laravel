@@ -16,10 +16,9 @@ class CreateEmployeePaymentsTable extends Migration
     {
         Schema::create('employee_payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('employee_payment_type_id');
-            $table->double('amount', 8, 2)->default(20000.00);
+            $table->double('amount', 8, 2);
             $table->string('status')->nullable();
             $table->date('date');
             $table->longText('Comment')->nullable();

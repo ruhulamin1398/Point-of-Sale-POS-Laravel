@@ -6,7 +6,7 @@ return[
     'Edit Category'=>'ক্যাটাগরি সংশোধন', 
 
     'Name' => 'নাম',
-    'Description' => 'বিবরন',
+    'Description' => 'বিবরণ',
     'Action' => 'একশন',
     'Id' => 'আইডি',
     'Submit' => 'সাবমিট',
@@ -78,8 +78,8 @@ return[
 'warrenty'=>'ওয়ারেন্টি',
 'tax'=>'টেক্স',
 'stock'=>'স্টক', 
-'stock alert'=>'স্টক এলারট',
-
+'stock alert'=>'স্টক এলার্ট',
+ 
 
 
  'Joining'=>'জয়েন',
@@ -88,7 +88,7 @@ return[
  'Salary'=>'বেতন',
  'Designation'=>'পদবি',
 'Duty statues'=>'ডিউটি',
-'Edit Duty statues'=> 'ডিউটি ভূল সংশোধন',
+'Edit Duty statues'=> 'ডিউটি সংশোধন',
 
 
 

@@ -17,7 +17,9 @@ class CreateDesignationsTable extends Migration
             $table->id();
             $table->string('role');
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
+           
         });
     }
 

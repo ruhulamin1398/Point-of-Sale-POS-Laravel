@@ -9,4 +9,13 @@ class employeePayment extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function employees(){
+        return $this->belongsTo('App\Models\employee','employee_id','id');
+    }
+    
+
+
+
+
 }

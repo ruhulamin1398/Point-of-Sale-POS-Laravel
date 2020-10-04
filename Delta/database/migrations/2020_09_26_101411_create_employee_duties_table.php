@@ -16,7 +16,6 @@ class CreateEmployeeDutiesTable extends Migration
     {
         Schema::create('employee_duties', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('duty_status_id');
             $table->time('enter_time');
