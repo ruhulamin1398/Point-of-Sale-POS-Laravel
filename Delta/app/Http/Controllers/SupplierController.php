@@ -192,56 +192,40 @@ class SupplierController extends Controller
  
 
 
-    //  Api Area Start
 
-    public function apiIndex()
-    {
-        $suppliers = Supplier::all();
-        return ($suppliers);
+    public function supplierCheck(Request $request){
 
-    }
 
-    public function ApiShow(Request $request)
-    {
-        ///   return $request->phone;
-        $supplier = Supplier::where('phone', $request->phone)->first();
-        return $supplier;
-    }
 
-    public function supplierCheck(Request $request)
-    {
-
-        $phone = $request->phone;
-        $supplier = Supplier::where('phone', $phone)->first();
-
+        $supplier = supplier::where('phone',$request->phone)->first();
         if (is_null($supplier)) {
             return 0;
-        } else
-            return 1;
+        } else{
+
+
+            return $supplier;
+        }
 
     }
 
 
-    public function suppliersDue(Request $request)
-    {
-        $supplier = Supplier::find($request->id);
-        $supplier->due = $request->due;
+
+
+
+
+    public function supplierStore(Request $request){
+
+        $supplier= new supplier;
+        $supplier->name = $request->name;
+        $supplier->phone = $request->phone;
+        $supplier->address = $request->address;
+        $supplier->company = $request->company;
+        $supplier->due = 0;
         $supplier->save();
-        return $supplier->due;
+        return $supplier;
+        
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

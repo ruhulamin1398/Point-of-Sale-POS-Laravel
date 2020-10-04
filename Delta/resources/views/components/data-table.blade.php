@@ -2,8 +2,11 @@
 
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar navbar-dark ">
+
             <a class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }}</a>
             <button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse" data-target="#NewEmployorm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus" id="PlusButton"></i></button>
+
+           
         </nav>
     </div>
     <div class="card-body">
