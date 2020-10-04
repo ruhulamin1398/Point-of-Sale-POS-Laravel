@@ -88,7 +88,7 @@ class ProductController extends Controller
             'delete'=>false,
             
             'type'=>'normal',
-            'name'=>$data,
+            'name'=>'type_id',
 
             'database_name'=>'type_id',
 
@@ -301,7 +301,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
-    {
+    {  
+      
        $product->delete();
        return back();
     }

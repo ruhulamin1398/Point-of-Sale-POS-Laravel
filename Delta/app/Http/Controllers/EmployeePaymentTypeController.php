@@ -14,7 +14,67 @@ class EmployeePaymentTypeController extends Controller
      */
     public function index()
     {
-        //
+        
+        $componentDetails= [
+            'title' => 'Employee Payment Types',
+            'editTitle' =>'Edit Employee Payment Types',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'employee_payment_types.update',
+                'link' => 'employee_payment_types',
+            ],
+            'delete' => [
+                
+                'name' => 'employee_payment_types.destroy',
+                'link' => 'employee_payment_types',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=>'name',
+                
+                'title'=> "Name",
+    
+            ],
+            'description'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+
+               'title'=> "Description",
+            ],
+
+        
+          
+        ];
+
+
+        $items = employeePaymentType::all();
+  
+
+
+        return view('employees.payment-type', compact('items', 'fieldList', 'routes','componentDetails',));
     }
 
     /**
@@ -35,7 +95,12 @@ class EmployeePaymentTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employeePaymentType = new employeePaymentType;
+        $employeePaymentType->name = $request->name;
+        $employeePaymentType->description = $request->description;
+        $employeePaymentType->save();
+        return back();
+
     }
 
     /**
@@ -69,7 +134,10 @@ class EmployeePaymentTypeController extends Controller
      */
     public function update(Request $request, employeePaymentType $employeePaymentType)
     {
-        //
+        $employeePaymentType->name = $request->name;
+        $employeePaymentType->description = $request->description;
+        $employeePaymentType->save();
+        return back();
     }
 
     /**
@@ -80,6 +148,7 @@ class EmployeePaymentTypeController extends Controller
      */
     public function destroy(employeePaymentType $employeePaymentType)
     {
-        //
+        $employeePaymentType->delete();
+        return back();
     }
 }

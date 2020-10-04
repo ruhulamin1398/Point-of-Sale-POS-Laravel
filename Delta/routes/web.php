@@ -13,6 +13,8 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PaymentSystemController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DutyStatusController;
+use App\Http\Controllers\EmployeePaymentTypeController;
+use App\Http\Controllers\EmployeePaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +50,16 @@ Route::resource('payment_systems',PaymentSystemController::class);
 
 Route::resource('employees',EmployeeController::class);
 Route::resource('duty_status',DutyStatusController::class);
+Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
+Route::resource('employee_payments',EmployeePaymentController::class);
+
+
+
+
+
+
+
+
 
 
 
