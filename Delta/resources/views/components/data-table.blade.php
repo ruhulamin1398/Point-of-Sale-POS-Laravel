@@ -2,7 +2,10 @@
 
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar navbar-dark ">
-            <a class="navbar-brand"> {{   __('translate.'.$componentDetails['title'])  }}</a>
+           <span>
+                <a class="navbar-brand"> {{   __('translate.'.$componentDetails['title'])  }}</a>
+                <i class="fas fa-tools pl-2" id="taxCountSetting"></i>
+           </span>
 
         </nav>
     </div>
