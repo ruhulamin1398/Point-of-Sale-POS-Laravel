@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\dutyStatus;
 use Illuminate\Http\Request;
 
+use function Symfony\Component\String\b;
+
 class DutyStatusController extends Controller
 {
     /**
@@ -14,7 +16,68 @@ class DutyStatusController extends Controller
      */
     public function index()
     {
-        //
+
+        $componentDetails= [
+            'title' => 'Duty statues',
+            'editTitle' =>'Edit Duty statues',
+        ];
+
+        $routes = [
+            'update' => [
+                'name' => 'duty_status.update',
+                'link' => 'duty_status',
+            ],
+            'delete' => [
+                
+                'name' => 'duty_status.destroy',
+                'link' => 'duty_status',
+            ]
+
+        ];
+     
+        
+
+        $fieldList=[
+         
+            'name'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+                'type'=>'normal',
+                'name'=>'name',
+                'database_name'=>'name',
+                
+                'title'=> "Name",
+    
+            ],
+            'description'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>true,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'description',
+               'database_name'=>'description',
+
+               'title'=> "Description",
+            ],
+
+        
+          
+        ];
+
+
+        $items = dutyStatus::all();
+  
+
+
+        return view('dutystatus.index', compact('items', 'fieldList', 'routes','componentDetails',));
+
     }
 
     /**
@@ -35,7 +98,11 @@ class DutyStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dutyStatus = new dutyStatus;
+        $dutyStatus->name = $request->name;
+        $dutyStatus->description = $request->description;
+        $dutyStatus->save();
+        return back();
     }
 
     /**
@@ -69,7 +136,10 @@ class DutyStatusController extends Controller
      */
     public function update(Request $request, dutyStatus $dutyStatus)
     {
-        //
+        $dutyStatus->name = $request->name;
+        $dutyStatus->description = $request->description;
+        $dutyStatus->save();
+        return back();
     }
 
     /**
@@ -80,6 +150,7 @@ class DutyStatusController extends Controller
      */
     public function destroy(dutyStatus $dutyStatus)
     {
-        //
+        $dutyStatus->delete();
+        return back();
     }
 }

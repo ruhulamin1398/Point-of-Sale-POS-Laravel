@@ -30,6 +30,8 @@ return[
  'Customer'=> 'কাস্টমার',
  'Supplier'=> 'সাপ্লাইয়ার',
  'Employee'=> 'কর্মচারী',
+ 'Employees List'=> 'কর্মচারী লিস্ট',
+
  'All Employee'=> 'কর্মচারী লিস্ট',
  'Salary'=> 'বেতন',
  'Code Print'=> 'কোড প্রিন্ট',
@@ -65,7 +67,8 @@ return[
 'product_type_id'=>'পণ্যের ধরন',
 'sell_type'=>'বিক্রয়ের ধরন',
 'purchased_type'=>'পণ্য ক্রয়ের ধরন',
-'Edit Sell Types'=>'ভূল সংশোধন',
+'Edit Sell Types'=>'ভূল সংশোধন',   
+'Edit Employees'=>'ভূল সংশোধন', 
 
 
 'type'=>'ধরণ',
@@ -79,6 +82,13 @@ return[
 
 
 
+ 'Joining'=>'জয়েন',
+ 'Reference'=>'রেফারেন্স',
+ 'Contract'=>'কন্ট্রাক্ট',
+ 'Salary'=>'বেতন',
+ 'Designation'=>'পদবি',
+'Duty statues'=>'ডিউটি',
+'Edit Duty statues'=> 'ডিউটি ভূল সংশোধন',
 
 
 

@@ -15,5 +15,6 @@ class employee extends Model
     return $this->belongsTo('App\Models\designation','designation_id','id');
 
     }
+
     
 }
