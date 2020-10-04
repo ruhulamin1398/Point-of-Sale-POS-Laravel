@@ -15,6 +15,12 @@ class employeePayment extends Model
     }
     
 
+    public function salary_status(){
+        return $this->belongsTo('App\Models\salaryStatus','salary_status_id','id');
+    }
+    
+
+
 
 
 

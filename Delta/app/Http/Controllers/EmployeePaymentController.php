@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\employee;
 use App\Models\employeePayment;
 use App\Models\employeePaymentType;
+use App\Models\salaryStatus;
 use Illuminate\Http\Request;
 
 class EmployeePaymentController extends Controller
@@ -15,7 +16,8 @@ class EmployeePaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+
         
         $componentDetails= [
             'title' => 'Employee Payments',
@@ -39,21 +41,6 @@ class EmployeePaymentController extends Controller
 
         $fieldList=[
          
-            'user_id'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'user_id',
-                'database_name'=> 'user_id',
-                
-               'title'=> "User ID",
-    
-            ],
-
             'employee_id'=>[
                 'create'=>true,
                 'read'=>true,
@@ -94,6 +81,7 @@ class EmployeePaymentController extends Controller
 
                'title'=> "Amount",
             ],
+
             'status'=>[
                 'create'=>true,
                 'read'=>true,
@@ -102,11 +90,14 @@ class EmployeePaymentController extends Controller
 
 
                'type'=>'normal',
-               'name'=>'status',
-               'database_name'=>'status',
+               'name'=>'salary_status_id',
+               'database_name'=>'salary_status_id',
 
-               'title'=> "Status",
+               'title'=> "status",
             ],
+
+
+            
             'date'=>[
                 'create'=>true,
                 'read'=>true,
@@ -146,10 +137,10 @@ class EmployeePaymentController extends Controller
 
         $items = employeePayment::all();
         $employees = employee::all();
-        $paymentTypes = employeePaymentType::all();
+        $payment_types = employeePaymentType::all();
+        $salary_status = salaryStatus::all();
 
-
-        return view('employees.payment', compact('items', 'fieldList', 'routes','componentDetails','employees','paymentTypes'));
+        return view('employees.payment', compact('items', 'fieldList', 'routes','componentDetails','employees','payment_types','salary_status'));
     }
 
     /**
@@ -170,7 +161,22 @@ class EmployeePaymentController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+
+        date_default_timezone_set("Asia/Dhaka");
+        $timezone =date("Y-m-d");
+
+        $employeePayment = new employeePayment;
+        $employeePayment->employee_id = $request->employee_id;
+        $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
+        $employeePayment->salary_status_id = $request->salary_status_id;
+        $employeePayment->amount = $request->amount;
+        $employeePayment->date =$timezone;
+        $employeePayment->Comment = $request->Comment;
+
+         $employeePayment->save();
+         return back();
+
+         //salary table calculation 
     }
 
     /**
@@ -204,7 +210,16 @@ class EmployeePaymentController extends Controller
      */
     public function update(Request $request, employeePayment $employeePayment)
     {
-        //
+
+        return $request;
+        // $employeePayment->employee_id = $request->employee_id;
+        // $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
+        // $employeePayment->amount = $request->amount;
+        // $employeePayment->date =$timezone;
+        // $employeePayment->Comment = $request->Comment;
+
+        //  $employeePayment->save();
+        //  return back();
     }
 
     /**
