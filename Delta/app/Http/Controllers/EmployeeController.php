@@ -161,7 +161,7 @@ class EmployeeController extends Controller
         $designation = designation::all();
 
 
-        return view('employees.index', compact('items', 'fieldList', 'routes','componentDetails','designation'));
+        return view('employees.employee', compact('items', 'fieldList', 'routes','componentDetails','designation'));
 
     }
 
