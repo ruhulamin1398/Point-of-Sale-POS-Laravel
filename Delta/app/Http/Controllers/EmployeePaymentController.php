@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\employee;
 use App\Models\employeePayment;
 use App\Models\employeePaymentType;
+use App\Models\employeeSalary;
 use App\Models\salaryStatus;
 use Illuminate\Http\Request;
 
@@ -45,7 +46,7 @@ class EmployeePaymentController extends Controller
                 'create'=>true,
                 'read'=>true,
                 'update'=>true,
-                'delete'=>true,
+                'delete'=>false,
 
 
                'type'=>'normal',
@@ -65,8 +66,7 @@ class EmployeePaymentController extends Controller
                'name'=>'employee_payment_type_id',
                'database_name'=>'employee_payment_type_id',
 
-               'title'=> "Payment type ID
-               ",
+               'title'=> "Payment type ID",
             ],
             'amount'=>[
                 'create'=>true,
@@ -98,7 +98,7 @@ class EmployeePaymentController extends Controller
 
 
             
-            'date'=>[
+            'month'=>[
                 'create'=>true,
                 'read'=>true,
                 'update'=>true,
@@ -106,10 +106,10 @@ class EmployeePaymentController extends Controller
 
 
                'type'=>'normal',
-               'name'=>'date',
-               'database_name'=>'date',
+               'name'=>'month',
+               'database_name'=>'month',
 
-               'title'=> "Date",
+               'title'=> "Month",
             ],
             'Comment'=>[
                 'create'=>true,
@@ -161,18 +161,43 @@ class EmployeePaymentController extends Controller
      */
     public function store(Request $request)
     {
-
-        date_default_timezone_set("Asia/Dhaka");
-        $timezone =date("Y-m-d");
-
+        //payment Table 
         $employeePayment = new employeePayment;
         $employeePayment->employee_id = $request->employee_id;
         $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
         $employeePayment->salary_status_id = $request->salary_status_id;
         $employeePayment->amount = $request->amount;
-        $employeePayment->date =$timezone;
+        $employeePayment->month =$request->month.'-01';
         $employeePayment->Comment = $request->Comment;
 
+       
+         // Salary Table
+
+         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
+         $employee = employee::find($employeePayment->employee_id);
+         if(is_null($salaries)){
+             $salaries= new employeeSalary;
+             $salaries->fixed_salary = $employee->salary;
+         }
+         
+         if($salaries->salary_status_id != 1){
+            $salaries->salary_status_id= $employeePayment->salary_status_id;
+         }
+         if(  $employeePayment->employee_payment_type_id == 1)
+         {
+             $salaries->amount_salary += $employeePayment->amount;
+         }
+         else
+         {
+            $salaries->amount_other += $employeePayment->amount;
+         }
+
+         $salaries->employee_id= $employeePayment->employee_id;
+         $salaries->month= $employeePayment->month;
+
+
+
+         $salaries->save();
          $employeePayment->save();
          return back();
 
@@ -211,15 +236,15 @@ class EmployeePaymentController extends Controller
     public function update(Request $request, employeePayment $employeePayment)
     {
 
-        return $request;
-        // $employeePayment->employee_id = $request->employee_id;
-        // $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
-        // $employeePayment->amount = $request->amount;
-        // $employeePayment->date =$timezone;
-        // $employeePayment->Comment = $request->Comment;
+        $employeePayment->employee_id = $request->employee_id;
+        $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
+        $employeePayment->salary_status_id = $request->salary_status_id;
+        $employeePayment->amount = $request->amount;
+        $employeePayment->month =$request->month.'-01';
+        $employeePayment->Comment = $request->Comment;
 
-        //  $employeePayment->save();
-        //  return back();
+         $employeePayment->save();
+         return back();
     }
 
     /**
@@ -230,6 +255,7 @@ class EmployeePaymentController extends Controller
      */
     public function destroy(employeePayment $employeePayment)
     {
-        //
+        $employeePayment->delete();
+        return back();
     }
 }

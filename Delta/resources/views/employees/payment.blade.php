@@ -56,6 +56,11 @@
                     <label for="amount">Amount</label>
                         <input type="number" step="any" name="amount" class="form-control mb-2">
                     </div>
+                    
+                    <div class="col-auto pr-4">
+                    <label for="month">Month</label>
+                        <input type="month" name="month" class="form-control mb-2">
+                    </div>
 
 
                     <div class="col-auto pr-4">
@@ -84,26 +89,11 @@
 <x-data-table :fieldList="$fieldList" :items="$items" :routes="$routes" :componentDetails="$componentDetails" />
 
 
-
 <script>
     $(document).ready(function() {
 
-        $('body').on('click', '#PlusButton', function() {
-
-
-
-            if ($(this).hasClass('fa-plus')) {
-                $(this).removeClass('fa-plus');
-                $(this).addClass('fa-minus');
-
-
-            } else {
-                $(this).removeClass('fa-minus');
-                $(this).addClass('fa-plus');
-
-            }
-
-
+        $('body').on('click', '#AddNewFormButton', function() {
+            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
 
         });
 

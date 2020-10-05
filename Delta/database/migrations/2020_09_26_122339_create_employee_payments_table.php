@@ -20,7 +20,7 @@ class CreateEmployeePaymentsTable extends Migration
             $table->unsignedBigInteger('employee_payment_type_id');
             $table->unsignedBigInteger('salary_status_id');
             $table->double('amount', 8, 2);
-            $table->date('date');
+            $table->date('month');
             $table->longText('Comment')->nullable();
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
             $table->softDeletes();
