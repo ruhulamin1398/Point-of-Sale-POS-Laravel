@@ -56,7 +56,7 @@
                         <select class="form-control form-control" value="" name="salary_status_id" required>
                             <option selected="selected">Select Payment Status </option>
                             @foreach ($salary_status as $status)
-                            @if($loop->first)
+                            @if($loop->last)
                             <option value="{{$status->id}}"  selected="selected" > {{$status->name}}</option>
                             @else
                             <option value="{{$status->id}}"> {{$status->name}}</option>
