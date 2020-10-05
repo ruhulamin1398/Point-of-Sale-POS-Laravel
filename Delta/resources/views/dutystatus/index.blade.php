@@ -58,22 +58,8 @@
 <script>
     $(document).ready(function() {
 
-        $('body').on('click', '#PlusButton', function() {
-
-
-
-            if ($(this).hasClass('fa-plus')) {
-                $(this).removeClass('fa-plus');
-                $(this).addClass('fa-minus');
-
-
-            } else {
-                $(this).removeClass('fa-minus');
-                $(this).addClass('fa-plus');
-
-            }
-
-
+        $('body').on('click', '#AddNewFormButton', function() {
+            $('#PlusButton').toggleClass('fa-plus fa-minus');
 
         });
 

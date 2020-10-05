@@ -85,13 +85,8 @@
 <script>
     $(document).ready(function() {
 
-        $('body').on('click', '#PlusButton', function() {
-            $('#PlusButton').toggleClass('fa-minus').toggleClass('fa-plus');
-
-            
-
-
-
+        $('body').on('click', '#AddNewFormButton', function() {
+            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
 
         });
 
