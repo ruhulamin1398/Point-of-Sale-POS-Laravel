@@ -45,7 +45,7 @@ class EmployeePaymentController extends Controller
             'employee_id'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>false,
 
 
@@ -58,7 +58,7 @@ class EmployeePaymentController extends Controller
             'employee_payment_type_id'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>true,
 
 
@@ -101,7 +101,7 @@ class EmployeePaymentController extends Controller
             'month'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>true,
 
 
@@ -161,6 +161,7 @@ class EmployeePaymentController extends Controller
      */
     public function store(Request $request)
     {
+        
         //payment Table 
         $employeePayment = new employeePayment;
         $employeePayment->employee_id = $request->employee_id;
@@ -235,7 +236,11 @@ class EmployeePaymentController extends Controller
      */
     public function update(Request $request, employeePayment $employeePayment)
     {
-
+        $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
+        if($salaries->salary_status_id != 1){
+            $salaries->salary_status_id= $request->salary_status_id;
+         }
+        
         $employeePayment->employee_id = $request->employee_id;
         $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
         $employeePayment->salary_status_id = $request->salary_status_id;
