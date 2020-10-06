@@ -1,0 +1,52 @@
+{
+    "componentDetails":{
+        "title":"Catefory:list",
+        "editTitle":"Edit Category"
+    },
+    "routes":{
+        "update":{
+            "name":"categories.update",
+            "link":"categories"
+        },
+        "delete":{
+            "name":"categories.destroy",
+            "link":"categories"
+        }
+    },
+    "fieldList":{
+        "name":{
+            "create":true,
+            "read":true,
+            "update":true,
+
+
+            "type":"normal",
+            "name":"name",
+            "database_name":"name",  
+            "title":"Name",
+            "position":1
+        },
+
+        "products":{
+            "create":"disabled",
+            "read":true,
+            "update":"disabled",
+            "type":"normal",
+           "name":"products_count",
+           "title":"Products",
+           "position":1
+        },
+        
+        "description":{
+            "create":true,
+            "read":true,
+            "update":true,
+
+           "type":"normal",
+           "name":"description",
+           "database_name":"description",
+           "title": "Description",
+           "position":1
+        }
+    }
+}
