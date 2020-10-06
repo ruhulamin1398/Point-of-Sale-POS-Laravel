@@ -23,7 +23,7 @@
                     <div class="col-auto pr-4">
                     <label for="employee_id">Select Employee</label>
                         <select class="form-control form-control" value="1" name="employee_id" id="employee_id" required>
-                            <option selected="selected">Select Employee </option>
+                            
                             @foreach ($employees as $employee)
                             @if($loop->first)
                                 
@@ -39,7 +39,6 @@
                     <div class="col-auto pr-4">
                     <label for="employee_payment_type_id">Select Payment Type</label>
                         <select class="form-control form-control" value="" name="employee_payment_type_id" id="employeePaymentTypeId" required>
-                            <option selected="selected">Select Payment Type </option>
                             @foreach ($payment_types as $paymentType)
                             @if($loop->first)
                             <option value="{{$paymentType->id}}"  selected="selected"   > {{$paymentType->name}}</option>
@@ -54,8 +53,7 @@
                     <div class="col-auto pr-4"  id="employeePaymentStatus">
                     <label for="employee_payment_type_id"> Payment Status</label>
                         <select class="form-control form-control" value="" name="salary_status_id" required>
-                            <option selected="selected">Select Payment Status </option>
-                            @foreach ($salary_status as $status)
+                                @foreach ($salary_status as $status)
                             @if($loop->last)
                             <option value="{{$status->id}}"  selected="selected" > {{$status->name}}</option>
                             @else
