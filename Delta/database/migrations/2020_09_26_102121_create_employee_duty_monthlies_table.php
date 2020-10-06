@@ -16,7 +16,6 @@ class CreateEmployeeDutyMonthliesTable extends Migration
     {
         Schema::create('employee_duty_monthlies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('employee_id');
             $table->date('month');
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));

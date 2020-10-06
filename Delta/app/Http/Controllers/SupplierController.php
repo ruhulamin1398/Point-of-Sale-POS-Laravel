@@ -201,8 +201,7 @@ class SupplierController extends Controller
         if (is_null($supplier)) {
             return 0;
         } else{
-
-
+           
             return $supplier;
         }
 

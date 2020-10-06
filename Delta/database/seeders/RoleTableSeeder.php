@@ -143,7 +143,6 @@ class RoleTableSeeder extends Seeder
 
         DB::table('employee_duties')->insert([
             [
-                'user_id' => 1,
                 'employee_id' => 1,
                 'duty_status_id' => 1,
                 'enter_time' => '14:22:51',
@@ -154,7 +153,6 @@ class RoleTableSeeder extends Seeder
                 'comment' => 'comment 1',
             ],
             [
-                'user_id' => 2,
                 'employee_id' => 2,
                 'duty_status_id' => 2,
                 'enter_time' => '14:22:51',
@@ -165,7 +163,7 @@ class RoleTableSeeder extends Seeder
                 'comment' => 'comment 2',
             ],
             [
-                'user_id' => 3,
+
                 'employee_id' => 3,
                 'duty_status_id' => 3,
                 'enter_time' => '14:22:51',
@@ -178,17 +176,17 @@ class RoleTableSeeder extends Seeder
         ]);
         DB::table('employee_duty_monthlies')->insert([
             [
-                'user_id' => 1,
+
                 'employee_id' => 1,
                 'month' => '2020-09-16',
             ],
             [
-                'user_id' => 2,
+
                 'employee_id' => 2,
                 'month' => '2020-09-16',
             ],
             [
-                'user_id' => 3,
+
                 'employee_id' => 3,
                 'month' => '2020-09-16',
             ]
@@ -281,7 +279,8 @@ class RoleTableSeeder extends Seeder
         ]);
     
         DB::table('employees')->insert([
-            [
+            [   
+                'user_id' => 1,
                 'name' => 'masum',
                 'phone' => '01718988564',
                 'address' => 'address 1',
@@ -291,6 +290,7 @@ class RoleTableSeeder extends Seeder
                 'designation_id' =>2,
             ],
             [
+                'user_id' => 2,
                 'name' => 'ruhul',
                 'phone' => '01840000408',
                 'address' => 'address 2',
@@ -300,6 +300,7 @@ class RoleTableSeeder extends Seeder
                 'designation_id' => 1,
             ],
             [
+                'user_id' => 3,
                 'name' => 'sourov',
                 'phone' => '01729867026',
                 'address' => 'address 3',
@@ -312,49 +313,59 @@ class RoleTableSeeder extends Seeder
     
         DB::table('employee_payments')->insert([
             [
-                'user_id' => 1,
                 'employee_id' => 1,
                 'employee_payment_type_id' => 1,
-                'status' => 'completed',
-                'date' => '2020-09-16',
+                'salary_status_id' => 1,
+                'amount'=>1200.00,
+                'month' => '2020-09-16',
                 'Comment' => 'comment 1',
             ],
             [
-                'user_id' => 2,
+
                 'employee_id' => 2,
-                'employee_payment_type_id' => 2,
-                'status' => 'completed',
-                'date' => '2020-09-16',
+                'employee_payment_type_id' => 1,
+                'salary_status_id' => 2,
+                'amount'=>1200.00,
+                'month' => '2020-09-16',
                 'Comment' => 'comment 2',
             ],
             [
-                'user_id' => 3,
+
                 'employee_id' => 3,
                 'employee_payment_type_id' => 1,
-                'status' => 'completed',
-                'date' => '2020-09-16',
+                'salary_status_id' => 1,
+                'amount'=>1200.00,
+                'month' => '2020-09-16',
                 'Comment' => 'comment 3',
             ],
         ]);
     
         DB::table('employee_salaries')->insert([
             [
-                'user_id' => 1,
                 'employee_id' => 1,
-                'status' => 'completed',
-                'month' => '2020-09-16',
+                'salary_status_id' => 1,
+                'fixed_salary'=>1200.00,
+                'amount_salary'=>1200.00,
+                'amount_other'=>500.00,
+                'month' => '2020-09-01',
             ],
             [
-                'user_id' => 2,
+
                 'employee_id' => 2,
-                'status' => 'completed',
-                'month' => '2020-09-16',
+                'salary_status_id' => 1,
+                'fixed_salary'=>1200.00,
+                'amount_salary'=>1200.00,
+                'amount_other'=>500.00,
+                'month' => '2020-09-01',
             ],
             [
-                'user_id' => 3,
+  
                 'employee_id' => 3,
-                'status' => 'completed',
-                'month' => '2020-09-16',
+                'salary_status_id' => 1,
+                'fixed_salary'=>1200.00,
+                'amount_salary'=>1200.00,
+                'amount_other'=>500.00,
+                'month' => '2020-09-01',
             ],
         ]);
     
@@ -399,7 +410,23 @@ class RoleTableSeeder extends Seeder
             ],
         ]);
 
+        DB::table('salary_statuses')->insert([
+            [
+                'name' => 'Completed',
+                'description' => 'Completed',
+            ],
+            [
+                'name' => 'Incomplete',
+                'description' =>'Incomplete',
+            ],
+            [
+                'name' => 'Extra',
+                'description' => 'nargis is cleaner',
+            ],
+        ]);
 
+
+        
 
 
 

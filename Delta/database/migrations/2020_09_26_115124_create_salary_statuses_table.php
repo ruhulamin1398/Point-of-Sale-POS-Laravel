@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
 
-class CreateEmployeePaymentTypesTable extends Migration
+class CreateSalaryStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +13,10 @@ class CreateEmployeePaymentTypesTable extends Migration
      */
     public function up()
     {
-        // bonus / salary / extraa
-        Schema::create('employee_payment_types', function (Blueprint $table) {
+        Schema::create('salary_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description');
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->softDeletes();
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateEmployeePaymentTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_payment_types');
+        Schema::dropIfExists('salary_statuses');
     }
 }
