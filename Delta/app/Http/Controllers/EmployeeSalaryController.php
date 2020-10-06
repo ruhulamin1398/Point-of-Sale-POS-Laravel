@@ -134,7 +134,7 @@ class EmployeeSalaryController extends Controller
 
         $items = employeeSalary::all();
 
-
+         // view system must be changed
         return view('employees.salary', compact('items', 'fieldList', 'routes','componentDetails'));
     
     }

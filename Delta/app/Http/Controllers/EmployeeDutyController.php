@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\dutyStatus;
+use App\Models\employee;
 use App\Models\employeeDuty;
 use Illuminate\Http\Request;
 
@@ -13,8 +15,11 @@ class EmployeeDutyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    { 
+
+        $employees = employee::all();
+        $dutyStatuses = dutyStatus::all();
+        return view('employees.duty',compact('employees','dutyStatuses'));
     }
 
     /**
@@ -35,7 +40,7 @@ class EmployeeDutyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

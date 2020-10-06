@@ -159,8 +159,9 @@ class EmployeeController extends Controller
 
         $items = employee::all();
         $designation = designation::all();
-
-
+       
+        // fixed duty work needed
+        
         return view('employees.employee', compact('items', 'fieldList', 'routes','componentDetails','designation'));
 
     }

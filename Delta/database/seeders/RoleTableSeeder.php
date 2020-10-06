@@ -265,16 +265,20 @@ class RoleTableSeeder extends Seeder
     
         DB::table('duty_statuses')->insert([
                 [
-                    'name' => 'present',
-                    'description' => 'he is present',
+                    'name' => 'Present',
+                    'description' => 'Employee is present',
                 ],
                 [
-                    'name' => 'absent',
-                    'description' => 'he is absent',
+                    'name' => 'Absent',
+                    'description' => 'Employee is absent',
                 ],
                 [
-                    'name' => 'day off',
-                    'description' => 'this is day off',
+                    'name' => 'Day off',
+                    'description' => 'This is day off',
+                ],
+                [
+                    'name' => 'Vacation',
+                    'description' => 'Employee on Vacation',
                 ],
         ]);
     
@@ -285,6 +289,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01718988564',
                 'address' => 'address 1',
                 'joining_date' => '2020-09-16',
+                'fixed_duty_hour'=>'8:00:00',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' =>2,
@@ -295,6 +300,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01840000408',
                 'address' => 'address 2',
                 'joining_date' => '2020-09-16',
+                'fixed_duty_hour'=>'8:00:00',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' => 1,
@@ -305,6 +311,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01729867026',
                 'address' => 'address 3',
                 'joining_date' => '2020-09-16',
+                'fixed_duty_hour'=>'8:00:00',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' => 1,

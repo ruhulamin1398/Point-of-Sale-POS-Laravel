@@ -141,7 +141,8 @@ class EmployeePaymentController extends Controller
         $payment_types = employeePaymentType::all();
         $salary_status = salaryStatus::all();
 
-  
+         
+         // view system must be changed
 
         return view('employees.payment', compact('items', 'fieldList', 'routes','componentDetails','employees','payment_types','salary_status'));
     }
@@ -270,7 +271,7 @@ class EmployeePaymentController extends Controller
         {
             $salaries->amount_other -= $employeePayment->amount;
         }
-
+                    
         
         $salaries->save();
         $employeePayment->delete();
