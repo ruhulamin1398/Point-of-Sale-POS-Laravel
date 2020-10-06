@@ -17,8 +17,8 @@
     $(document).ready(function() {
 
         $('body').on('click', '#AddNewFormButton', function() {
-            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
-
+            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');    
+                
         });
 
     });

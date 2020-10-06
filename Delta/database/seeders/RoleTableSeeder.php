@@ -378,10 +378,6 @@ class RoleTableSeeder extends Seeder
                 'name' => 'Bonus',
                 'description' => 'description 2',
             ],
-            [
-                'name' => 'Extraa',
-                'description' => 'description 3',
-            ],
         ]);
 
         DB::table('product_types')->insert([
@@ -418,10 +414,6 @@ class RoleTableSeeder extends Seeder
             [
                 'name' => 'Incomplete',
                 'description' =>'Incomplete',
-            ],
-            [
-                'name' => 'Extra',
-                'description' => 'nargis is cleaner',
             ],
         ]);
 

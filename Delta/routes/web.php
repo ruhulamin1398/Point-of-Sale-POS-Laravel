@@ -38,7 +38,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('categories',CategoryController::class);
-Route::resource('products',ProductController::class);
+Route::resource('products',ProductController::class); 
 Route::resource('orders',OrderController::class);
 Route::resource('purchases',PurchaseController::class);
 Route::resource('brands',BrandController::class);

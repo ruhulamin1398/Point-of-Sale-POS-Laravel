@@ -76,7 +76,7 @@ class DutyStatusController extends Controller
   
 
 
-        return view('dutystatus.index', compact('items', 'fieldList', 'routes','componentDetails',));
+        return view('employees.dutystatus', compact('items', 'fieldList', 'routes','componentDetails',));
 
     }
 
