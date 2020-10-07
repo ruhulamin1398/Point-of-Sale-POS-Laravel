@@ -13,6 +13,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PaymentSystemController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DutyStatusController;
+use App\Http\Controllers\EmployeeDutyController;
 use App\Http\Controllers\EmployeePaymentTypeController;
 use App\Http\Controllers\EmployeePaymentController;
 use App\Http\Controllers\EmployeeSalaryController;
@@ -38,7 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('categories',CategoryController::class);
-Route::resource('products',ProductController::class);
+Route::resource('products',ProductController::class); 
 Route::resource('orders',OrderController::class);
 Route::resource('purchases',PurchaseController::class);
 Route::resource('brands',BrandController::class);
@@ -50,10 +51,12 @@ Route::resource('sell_type',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 
 Route::resource('employees',EmployeeController::class);
-Route::resource('duty_status',DutyStatusController::class);
 Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
 Route::resource('employee_payments',EmployeePaymentController::class);
 Route::resource('employee_salaries',EmployeeSalaryController::class);
+
+Route::resource('duty_status',DutyStatusController::class);
+Route::resource('employee_duties',EmployeeDutyController::class);
 
 
 

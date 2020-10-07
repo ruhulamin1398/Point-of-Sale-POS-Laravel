@@ -76,7 +76,7 @@ class DutyStatusController extends Controller
   
 
 
-        return view('dutystatus.index', compact('items', 'fieldList', 'routes','componentDetails',));
+        return view('employees.dutystatus', compact('items', 'fieldList', 'routes','componentDetails',));
 
     }
 
@@ -98,10 +98,7 @@ class DutyStatusController extends Controller
      */
     public function store(Request $request)
     {
-        $dutyStatus = new dutyStatus;
-        $dutyStatus->name = $request->name;
-        $dutyStatus->description = $request->description;
-        $dutyStatus->save();
+         // this section is fixed
         return back();
     }
 
@@ -136,9 +133,7 @@ class DutyStatusController extends Controller
      */
     public function update(Request $request, dutyStatus $dutyStatus)
     {
-        $dutyStatus->name = $request->name;
-        $dutyStatus->description = $request->description;
-        $dutyStatus->save();
+        // this section is fixed
         return back();
     }
 
@@ -150,7 +145,7 @@ class DutyStatusController extends Controller
      */
     public function destroy(dutyStatus $dutyStatus)
     {
-        $dutyStatus->delete();
+       // this section is fixed
         return back();
     }
 }

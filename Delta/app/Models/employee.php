@@ -11,8 +11,10 @@ class employee extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function designation(){
-    return $this->belongsTo('App\Models\designation','designation_id','id');
+    public function designation()
+    {
+        
+     return $this->belongsTo('App\Models\designation','designation_id','id');
 
     }
 

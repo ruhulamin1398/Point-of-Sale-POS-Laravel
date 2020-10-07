@@ -8,6 +8,7 @@ use App\Models\employeePaymentType;
 use App\Models\employeeSalary;
 use App\Models\salaryStatus;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class EmployeePaymentController extends Controller
 {
@@ -81,11 +82,24 @@ class EmployeePaymentController extends Controller
 
                'title'=> "Amount",
             ],
+            'changed_amount'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'changed_amount',
+               'database_name'=>'changed_amount',
+
+               'title'=> "Edited Amount",
+            ],
 
             'status'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>true,
 
 
@@ -140,6 +154,9 @@ class EmployeePaymentController extends Controller
         $payment_types = employeePaymentType::all();
         $salary_status = salaryStatus::all();
 
+         
+         // view system must be changed
+
         return view('employees.payment', compact('items', 'fieldList', 'routes','componentDetails','employees','payment_types','salary_status'));
     }
 
@@ -176,14 +193,12 @@ class EmployeePaymentController extends Controller
 
          $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
          $employee = employee::find($employeePayment->employee_id);
+
          if(is_null($salaries)){
              $salaries= new employeeSalary;
              $salaries->fixed_salary = $employee->salary;
          }
-         
-         if($salaries->salary_status_id != 1){
-            $salaries->salary_status_id= $employeePayment->salary_status_id;
-         }
+        $salaries->salary_status_id= $employeePayment->salary_status_id;
          if(  $employeePayment->employee_payment_type_id == 1)
          {
              $salaries->amount_salary += $employeePayment->amount;
@@ -236,19 +251,26 @@ class EmployeePaymentController extends Controller
      */
     public function update(Request $request, employeePayment $employeePayment)
     {
+         // only amount and comment editable
         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
-        if($salaries->salary_status_id != 1){
-            $salaries->salary_status_id= $request->salary_status_id;
-         }
-        
-        $employeePayment->employee_id = $request->employee_id;
-        $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
-        $employeePayment->salary_status_id = $request->salary_status_id;
-        $employeePayment->amount = $request->amount;
-        $employeePayment->month =$request->month.'-01';
-        $employeePayment->Comment = $request->Comment;
+        $different =$request->amount-$employeePayment->amount;
+        if(  $employeePayment->employee_payment_type_id == 1)
+        {
+            $salaries->amount_salary += $different;
+        }
+        else
+        {
+           $salaries->amount_other += $different;
+        }
 
-         $employeePayment->save();
+        $employeePayment->amount = $request->amount;
+        $employeePayment->Comment = $request->Comment;
+        $employeePayment->changed_amount +=$different;
+        // cahnged data json work needed
+
+
+        $salaries->save();
+        $employeePayment->save();
          return back();
     }
 
@@ -260,6 +282,20 @@ class EmployeePaymentController extends Controller
      */
     public function destroy(employeePayment $employeePayment)
     {
+        
+         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
+        if($employeePayment->employee_payment_type_id==1)
+        {
+            $salaries->amount_salary -= $employeePayment->amount;
+            $salaries->salary_status_id=2;
+        }
+        else
+        {
+            $salaries->amount_other -= $employeePayment->amount;
+        }
+                    
+        
+        $salaries->save();
         $employeePayment->delete();
         return back();
     }
