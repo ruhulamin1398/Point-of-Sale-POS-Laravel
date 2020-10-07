@@ -18,13 +18,13 @@ class CreateEmployeeDutiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('duty_status_id');
-            $table->time('enter_time')->nullable();
-            $table->time('exit_time')->nullable();
+            $table->dateTime('enter_time')->nullable();
+            $table->dateTime('exit_time')->nullable();
             $table->time('fixed_duty_hour');
             $table->time('worked_hour')->nullable();
             $table->date('date');
             $table->longText('comment')->nullable();
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();
         });

@@ -26,7 +26,7 @@ class CreateEmployeesTable extends Migration
             $table->time('fixed_duty_hour')->nullable();
             $table->double('salary', 8, 2)->default(20000.00);
             $table->string('designation_id')->nullable();
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();
         });

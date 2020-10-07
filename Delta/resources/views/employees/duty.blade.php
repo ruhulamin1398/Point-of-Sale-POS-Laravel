@@ -71,7 +71,7 @@
                         <label for="catagory_id">Enter Time</label>
 
 
-                        <input type="time" name="enter_time" id="enterTime" class="form-control" min='0'
+                        <input type="datetime-local" name="enter_time" id="enterTime" class="form-control" min='0'
                             placeholder="Enter Time">
 
                     </div>
@@ -80,7 +80,7 @@
                         <label for="catagory_id">Exit Time</label>
 
 
-                        <input type="time" name="exit_time" id="exitTime" class="form-control" min='0'
+                        <input type="datetime-local" name="exit_time" id="exitTime" class="form-control" min='0'
                             placeholder="Exit Time">
 
                     </div>

@@ -20,23 +20,28 @@
                 <div class="form-row align-items-center">
                     <div class="col-auto">
                         <span class="text-dark pl-4"> কর্মচারীর নাম</span>
-                        <input type="text" name="name" class="form-control mb-2">
+                        <input type="text" name="name" class="form-control mb-2" required>
                     </div>
                     <div class="col-auto">
 
                         <span class="text-dark pl-4">নাম্বার</span>
-                        <input type="number" name="phone" class="form-control mb-2">
+                        <input type="number" name="phone" class="form-control mb-2" required>
                     </div>
                     <div class="col-auto">
 
                         <span class="text-dark pl-2"> ঠিকানা</span>
-                        <input type="text" name="address" class="form-control mb-2">
+                        <input type="text" name="address" class="form-control mb-2" required>
                     </div>
 
                     <div class="col-auto">
 
                         <span class="text-dark pl-2"> বেতন</span>
-                        <input type="number" name="salary" class="form-control mb-2">
+                        <input type="number" name="salary" class="form-control mb-2" required>
+                    </div>
+
+                    <div class="col-auto">
+                        <span class="text-dark pl-2"> Duty Time (daily)</span>
+                        <input type="time" name="fixed_duty_hour" class="form-control mb-2" required>
                     </div>
 
                     <div class="col-auto">

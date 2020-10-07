@@ -82,11 +82,24 @@ class EmployeePaymentController extends Controller
 
                'title'=> "Amount",
             ],
+            'changed_amount'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'changed_amount',
+               'database_name'=>'changed_amount',
+
+               'title'=> "Edited Amount",
+            ],
 
             'status'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>true,
 
 
@@ -238,17 +251,26 @@ class EmployeePaymentController extends Controller
      */
     public function update(Request $request, employeePayment $employeePayment)
     {
+         // only amount and comment editable
         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
-     
-        $employeePayment->employee_id = $request->employee_id;
-        $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
-        $employeePayment->salary_status_id = $request->salary_status_id;
+        $different =$request->amount-$employeePayment->amount;
+        if(  $employeePayment->employee_payment_type_id == 1)
+        {
+            $salaries->amount_salary += $different;
+        }
+        else
+        {
+           $salaries->amount_other += $different;
+        }
+
         $employeePayment->amount = $request->amount;
-        $employeePayment->month =$request->month.'-01';
         $employeePayment->Comment = $request->Comment;
-                
-        // A lot of Work is waiting here
-         $employeePayment->save();
+        $employeePayment->changed_amount +=$different;
+        // cahnged data json work needed
+
+
+        $salaries->save();
+        $employeePayment->save();
          return back();
     }
 

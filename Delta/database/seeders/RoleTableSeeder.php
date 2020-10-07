@@ -145,8 +145,8 @@ class RoleTableSeeder extends Seeder
             [
                 'employee_id' => 1,
                 'duty_status_id' => 1,
-                'enter_time' => '14:22:51',
-                'exit_time' => '22:22:51',
+                'enter_time' => '2020-10-13 22:27:06',
+                'exit_time' => '2020-10-13 22:27:06',
                 'fixed_duty_hour' => '8:00:00',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
@@ -155,8 +155,8 @@ class RoleTableSeeder extends Seeder
             [
                 'employee_id' => 2,
                 'duty_status_id' => 2,
-                'enter_time' => '14:22:51',
-                'exit_time' => '22:22:51',
+                'enter_time' => '2020-10-13 22:27:06',
+                'exit_time' => '2020-10-13 22:27:06',
                 'fixed_duty_hour' => '8:00:00',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
@@ -166,8 +166,8 @@ class RoleTableSeeder extends Seeder
 
                 'employee_id' => 3,
                 'duty_status_id' => 3,
-                'enter_time' => '14:22:51',
-                'exit_time' => '22:22:51',
+                'enter_time' => '2020-10-13 22:27:06',
+                'exit_time' => '2020-10-13 22:27:06',
                 'fixed_duty_hour' => '8:00:00',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',

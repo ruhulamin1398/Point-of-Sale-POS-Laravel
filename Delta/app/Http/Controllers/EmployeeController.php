@@ -192,6 +192,7 @@ class EmployeeController extends Controller
        $employee->joining_date = $request->joining_date;
        $employee->reference = $request->reference;
        $employee->term_of_contract = $request->term_of_contract;
+       $employee->fixed_duty_hour = $request->fixed_duty_hour;
        $employee->salary = $request->salary;
        $employee->designation_id = $request->designation_id;
        $employee->save();
@@ -236,6 +237,7 @@ class EmployeeController extends Controller
         $employee->joining_date = $request->joining_date;
         $employee->reference = $request->reference;
         $employee->term_of_contract = $request->term_of_contract;
+        $employee->fixed_duty_hour = $request->fixed_duty_hour;
         $employee->salary = $request->salary;
         $employee->designation_id = $request->designation_id;
         $employee->save();
