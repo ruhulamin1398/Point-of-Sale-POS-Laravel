@@ -26,14 +26,13 @@ class employeeDutyFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id ,
             'employee_id' => employee::all()->random()->id,
             'duty_status_id' => dutyStatus::all()->random()->id,
-            'enter_time' => $this->faker->time($format = 'H:i:s', $max = 'now'),
-            'exit_time' => $this->faker->time($format = 'H:i:s', $max = 'now'),
+            'enter_time' => $this->faker->dateTimeBetween('this week', '+12 days'),
+            'exit_time' => $this->faker->dateTimeBetween('this week', '+12 days'),
             'fixed_duty_hour' => $this->faker->time($format = 'H:i:s', $max = 'now'),
             'worked_hour' => $this->faker->time($format = 'H:i:s', $max = 'now'),
-            'date' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'date' => '2020-10-17',
             'comment' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
         ];
     }

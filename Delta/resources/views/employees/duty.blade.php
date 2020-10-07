@@ -71,8 +71,7 @@
                         <label for="catagory_id">Enter Time</label>
 
 
-                        <input type="datetime-local" name="enter_time" id="enterTime" class="form-control" min='0'
-                            placeholder="Enter Time">
+                        <input type="datetime-local" name="enter_time" id="enterTime" class="form-control" min='0' placeholder="Enter Time">
 
                     </div>
 
@@ -80,8 +79,7 @@
                         <label for="catagory_id">Exit Time</label>
 
 
-                        <input type="datetime-local" name="exit_time" id="exitTime" class="form-control" min='0'
-                            placeholder="Exit Time">
+                        <input type="datetime-local" name="exit_time" id="exitTime" class="form-control" min='0' placeholder="Exit Time">
 
                     </div>
 
@@ -89,13 +87,12 @@
                         <label for="comment">Comment</label>
 
 
-                        <input type="text" name="comment" id="comment" class="form-control" min='0'
-                            placeholder="comment">
+                        <input type="text" name="comment" id="comment" class="form-control" min='0' placeholder="comment">
 
                     </div>
 
-                          
-               
+
+
 
 
 
@@ -103,7 +100,7 @@
 
 
                 </div>
-                <button type="submit" id="product-create-submit-button" class="btn bg-abasas-dark"> সাবমিট</button>
+                <button type="submit" id="inputDutyButton" class="btn bg-abasas-dark"> সাবমিট</button>
 
             </form>
 
@@ -119,11 +116,62 @@
 
 
 
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="card mb-4 shadow">
+
+
+        <div class="card-header py-3 bg-abasas-dark">
+            <nav class="navbar navbar-dark ">
+                <a class="navbar-brand"> Duty Lists</a>
+
+            </nav>
+        </div>
+        <div class="card-body">
+
+
+
+            <form method="POST" id="week-select-form" action="{{ route('duty_get') }}">
+                @csrf
+
+                <div class="row">
+
+                    <div class="form-group col-md-4 col-sm-12  p-4" id="divSelectWeek">
+
+                        <label for="week">Select A Week</label>
+
+
+                        <input type="week" name="week" id="week" class="form-control" placeholder="Select A Week">
+
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12  p-4" id="divButton">
+                        <button type="submit" id="selectWeekButton" class="btn bg-abasas-dark"> সাবমিট</button>
+                    </div>
+
+
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
 
-        $('#dutyStatusId').on('input', function () {
+        $('#dutyStatusId').on('input', function() {
             if ($(this).val() == 1) {
                 $('#divEnterTime').show();
                 $('#divExitTime').show();
@@ -134,7 +182,6 @@
         });
 
     });
-
 </script>
 
 

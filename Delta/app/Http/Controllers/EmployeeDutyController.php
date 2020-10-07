@@ -41,7 +41,8 @@ class EmployeeDutyController extends Controller
      */
     public function store(Request $request)
     {
-        
+
+      
 
        $employee=employee::find($request->employee_id);
         $employeeDuty = employeeDuty::where('employee_id',$request->employee_id)->where('date',$request->date)->first();
@@ -70,8 +71,6 @@ class EmployeeDutyController extends Controller
         }
         $employeeDuty->save();
         return back();
-
-        
 
     }
 
@@ -119,4 +118,22 @@ class EmployeeDutyController extends Controller
     {
         //
     }
+
+
+
+    public function getData(Request $request)
+    {
+        $dates= [];
+        $items =[];
+        $dateFirst = carbon::parse($request->week)->format('Y-m-d');
+        $dates[0]=$dateFirst;
+        $items[0]= employeeDuty::where('date',$dates[0])->orderBy('employee_id')->get();
+        for($i=1;$i<7;$i++){
+            $dates[$i]=  Carbon::createFromFormat('Y-m-d', $dateFirst)->addDays($i)->format('Y-m-d');
+            $items[$i]= employeeDuty::where('date',$dates[$i])->orderBy('employee_id')->get();
+        }
+        return $items;
+
+    }
+
 }
