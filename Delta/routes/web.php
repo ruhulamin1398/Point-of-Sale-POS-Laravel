@@ -57,7 +57,6 @@ Route::resource('employee_salaries',EmployeeSalaryController::class);
 
 Route::resource('duty_status',DutyStatusController::class);
 Route::resource('employee_duties',EmployeeDutyController::class);
-Route::post('duty_get', [EmployeeDutyController::class, 'getData'])->name('duty_get');
 
 
 

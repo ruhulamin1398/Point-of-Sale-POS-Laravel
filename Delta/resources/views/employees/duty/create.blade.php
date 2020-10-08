@@ -112,56 +112,60 @@
 
 
 
+
+
+    <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="dataTableDuty" width="100%" cellspacing="0">
+            <thead class="bg-abasas-dark">
+                        <tr>
+                            <th >#</th>
+                            <th > Name</th>
+                            <th > Status</th>
+                            <th> Enter Time</th>
+                            <th > Exit Time</th>
+                            <th > Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot class="bg-abasas-dark">
+                        <tr>
+                            <th >#</th>
+                            <th > Name</th>
+                            <th > Status</th>
+                            <th> Enter Time</th>
+                            <th > Exit Time</th>
+                            <th > Action</th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @php
+                        $i=1;
+                        @endphp
+                        @foreach($todayEmployeeDuties as $todayEmployeeDuty)
+                        <tr>
+                            <th scope="row">{{$i++}}</th>
+                            <th scope="row">{{$todayEmployeeDuty->employee->name}}</th>
+                            <th scope="row">{{$todayEmployeeDuty->dutyStatus->name}}</th>
+                            <th scope="row">{{ Carbon\Carbon::parse( $todayEmployeeDuty->enter_time)->format('h : i A')}}</th>
+                            <th scope="row">{{ Carbon\Carbon::parse( $todayEmployeeDuty->exit_time)->format('h : i A')}}</th>
+           
+                        
+
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+
+
+
+
 </div>
 
-
-
-
-<!-- Begin Page Content -->
-<div class="container-fluid">
-    <div class="card mb-4 shadow">
-
-
-        <div class="card-header py-3 bg-abasas-dark">
-            <nav class="navbar navbar-dark ">
-                <a class="navbar-brand"> Duty Lists</a>
-
-            </nav>
-        </div>
-        <div class="card-body">
-
-
-
-            <form method="POST" id="week-select-form" action="{{ route('duty_get') }}">
-                @csrf
-
-                <div class="row">
-
-                    <div class="form-group col-md-4 col-sm-12  p-4" id="divSelectWeek">
-
-                        <label for="week">Select A Week</label>
-
-
-                        <input type="week" name="week" id="week" class="form-control" placeholder="Select A Week">
-
-                    </div>
-                    <div class="form-group col-md-4 col-sm-12  p-4" id="divButton">
-                        <button type="submit" id="selectWeekButton" class="btn bg-abasas-dark"> সাবমিট</button>
-                    </div>
-
-
-                </div>
-            </form>
-
-
-
-        </div>
-    </div>
-
-
-
-
-</div>
 
 
 
