@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -71,12 +72,13 @@ class CategoryController extends Controller
 
 
 
-
+$settings = setting::where('table_name','categories')->first();
+$settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
         $items = category::all();
 
 
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
+        return view('product.category.index', compact('items', 'fieldList', 'routes','componentDetails','settings'));
     }
 
     /**

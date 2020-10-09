@@ -17,6 +17,9 @@ use App\Http\Controllers\EmployeeDutyController;
 use App\Http\Controllers\EmployeePaymentTypeController;
 use App\Http\Controllers\EmployeePaymentController;
 use App\Http\Controllers\EmployeeSalaryController;
+use App\Http\Controllers\SettingController;
+use App\Models\category;
+use App\Models\setting;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +34,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+
+$a = '[{ "componentDetails":{ "title":"Category list", "editTitle":"Edit Category" }, "routes":{ "create":{ "name":"categories.create", "link":"categories" }, "update":{ "name":"categories.update", "link":"categories" }, "delete":{ "name":"categories.destroy", "link":"categories" } }, "fieldList":{ "name":{ "create":true, "read":true, "update":true, "name":"name", "input_type" : "text", "database_name":"name", "title":"Name", "position":1 }, "products":{ "create":"disabled", "read":true, "update":"disabled", "input_type":"text", "name":"products_count", "title":"Products", "position":3 }, "description":{ "create":true, "read":true, "update":true, "input_type":"text", "name":"description", "database_name":"description", "title": "Description", "position":2 } } }]';
+$category= setting::find(1);
+$category->setting= json_encode( $a);
+$category->save();
+
+
+
+    return view('welcome',compact('category'));
+ })->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -65,6 +76,7 @@ Route::resource('employee_duties',EmployeeDutyController::class);
 
 
 
+Route::resource('settings',SettingController::class);
 
 
 
