@@ -197,34 +197,91 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-dark" id="setting-modal-label "> Category Page Settings </h5>
+            <div class="modal-header bg-abasas-dark">
+                <h5 class="modal-title " id="setting-modal-label "> Category Page Settings </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span>
+                        aria-hidden="true" class="text-light"   >&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="attachment-body-content">
-            <pre>
+      
                  @php
                   $data = $settings->setting;
-                  $fieldList= $data['0']['fieldList'];
-                  
-                 print_r($data['0'] );
-                  @endphp
-              </pre>  
-           
-         
-                    
-                @foreach( $data['0']['fieldList'] as $key=>$value)
-                <>
-            
-                print_r($key);
-                @endphp
-                {{ $key }}
+                  $fieldList=$data[0]['fieldList'];
                 
+
+                  @endphp
+         
+           
+        
+                    
+       
+           
+          
+
+          <table class="table table-striped">
+
+  <tbody id="sortable">
+    @for( $i=0 ; $i<count($fieldList) ; $i++)
             
-                @endforeach
+                 
+                <tr data-position="{{ $fieldList[$i]['position'] }}" data-name="{{ $fieldList[$i]['name'] }}">
+                    <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> {{ $fieldList[$i]['name'] }} </th>
+                    <td>
+                    <div class="form-check-inline">
+                <label class="form-check-label">  
+                    @if( $fieldList[$i]['create']==1 )
+                  <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked > 
+               
+                  @else
+
+                  <input type="checkbox" class="form-check-input  create abasasCheckBox  " value="0"  > 
+                  
+                  @endif
+                  Create</label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                    @if( $fieldList[$i]['read'] == 1 )
+                    <input type="checkbox" class="form-check-input read abasasCheckBox " value="1" checked> 
+                    @else
+  
+                    <input type="checkbox" class="form-check-input read abasasCheckBox " value="0" > 
+                  @endif
+                    Read
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                    @if( $fieldList[$i]['update'] ==1  )
+                    <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
+                    @else
+  
+                    <input type="checkbox" class="form-check-input update abasasCheckBox " value="0" > 
+                     @endif
+Update
+                </label>
+              </div>
+    
+                    
+                    </td>
+                    
+                  </tr>
+
+
+                @endfor
+
+
+
+  </tbody>
+</table>
+
+
             </div>
+
+    <div class="modal-footer">
+        <div class="btn bg-abasas-dark" id="settingsSaveButton">Save</div>
+    </div>
 
         </div>
     </div>
@@ -359,8 +416,75 @@
             };
             $('#setting-modal').modal(options)
         })
+
+
+        $( "#sortable" ).sortable({
+
+update:function(event, ui){
+    $(this).children().each(function (index){
+      
+      if($(this).attr('data-position') != index+1){
+        $(this).attr('data-position', index+1)
+      }
     });
 
+}
+        });
+
+});
+
+
+
+$("#settingsSaveButton").on('click',function(){
+    var positionArray= {
+        "_token" : $("#csrfToken").val().trim()
+      
+    };
+
+    $("#sortable").children().each(function (index){
+        var name =$(this).attr('data-name').trim()
+        var position =$(this).attr('data-position').trim();
+        var create = $(this).find('.create').val().trim();
+        var read = $(this).find('.read').val().trim();
+        var update = $(this).find('.update').val().trim();
+
+      
+
+        positionArray[name] = {
+            position: position,
+            create: create,
+            read: read,
+            update: update
+
+        };
+       
+         console.log(positionArray);
+    });
+    saveSettings(positionArray);
+
+});
+function saveSettings(positionArray){
+    var url = $("#homeRoute").val().trim()+"/settings/"+"{{ $settings->id }}";
+    // console.log(url);
+                $.ajax({
+                        url: url,
+                        data:positionArray,
+                        type: 'put',
+                    success: function (data) {
+                        location.reload(true);
+                        console.log(data);
+                    },
+                    error:function (data) {
+                        console.log(data);
+                    }
+                    });
+}
+
+
+
+// $(document).one('click dblclick keypress',function(){
+//     alert("hahah");
+// })
 </script>
 
 {{ $slot }}

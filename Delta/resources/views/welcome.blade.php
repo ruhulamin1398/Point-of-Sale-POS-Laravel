@@ -1,8 +1,9 @@
 
 @php
  $a = json_decode( json_decode(  $category->setting,true),true);
-
+echo "<pre>";
 print_r($a);
+echo "</pre>";
 @endphp
 
 <script>

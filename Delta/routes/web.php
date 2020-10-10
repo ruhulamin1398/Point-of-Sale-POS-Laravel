@@ -35,13 +35,75 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-$a = '[{ "componentDetails":{ "title":"Category list", "editTitle":"Edit Category" }, "routes":{ "create":{ "name":"categories.create", "link":"categories" }, "update":{ "name":"categories.update", "link":"categories" }, "delete":{ "name":"categories.destroy", "link":"categories" } }, "fieldList":{ "name":{ "create":true, "read":true, "update":true, "name":"name", "input_type" : "text", "database_name":"name", "title":"Name", "position":1 }, "products":{ "create":"disabled", "read":true, "update":"disabled", "input_type":"text", "name":"products_count", "title":"Products", "position":3 }, "description":{ "create":true, "read":true, "update":true, "input_type":"text", "name":"description", "database_name":"description", "title": "Description", "position":2 } } }]';
+$a = '[{
+    "componentDetails":{
+        "title":"Category list",
+        "editTitle":"Edit Category"
+    },
+    "routes":{
+        "create":{
+            "name":"categories.create",
+            "link":"categories"
+        },
+        "update":{
+            "name":"categories.update",
+            "link":"categories"
+        },
+        "delete":{
+            "name":"categories.destroy",
+            "link":"categories"
+        }
+    },
+    "fieldList":[{
+        
+            "position":11,
+
+            "create":true,
+            "read":false,
+            "update":true,
+
+            "name":"name",
+            "input_type" : "text",
+            "database_name":"name",  
+            "title":"Name"
+        },{
+            
+            "position":111,
+
+            "create":true,
+            "read":false,
+            "update":false,
+
+           "input_type":"text",
+           "name":"products_count",
+           "title":"Products"
+        },{
+            
+            "position":1,
+
+            "create":false,
+            "read":true,
+            "update":true,
+
+           "input_type":"text",
+           "name":"description",
+           "database_name":"description",
+           "title": "Description"
+        }
+    ]
+}]' ;
+
+
+
+
 $category= setting::find(1);
 $category->setting= json_encode( $a);
 $category->save();
-
-
-
+$data = '{"data":{"_token":"vTnMdXuSbA2phDBY0vZWDzz4qgrbX1kpmoQkxm5S","description":{"position":"1","create":"0","read":"1","update":"1"},"name":{"position":"11","create":"1","read":"0","update":"1"},"products_count":{"position":"111","create":"1","read":"0","update":"0"}}}';
+return json_decode($data,true);
+$category= setting::find(1);
+$setting = json_decode( json_decode($category->setting,true),true);
+return $setting['0']['fieldList'];
     return view('welcome',compact('category'));
  })->name('home');
 

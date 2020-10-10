@@ -35,7 +35,7 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
     }
 
     /**
@@ -69,7 +69,38 @@ class SettingController extends Controller
      */
     public function update(Request $request, setting $setting)
     {
-        //
+        // echo "--------------";
+         
+    
+       $data=  json_decode( json_decode($setting->setting,true),true);
+       $fieldList = $data[0]['fieldList'];
+ 
+       for($i=0 ; $i<count($fieldList) ; $i++){
+           $fieldName= $fieldList[$i]['name'];
+           
+         $fieldList[$i]['create'] = $request[$fieldName]['create']; 
+         $fieldList[$i]['read'] = $request[$fieldName]['read']; 
+         $fieldList[$i]['update'] = $request[$fieldName]['update']; 
+         $fieldList[$i]['position'] = $request[$fieldName]['position']; 
+           
+  
+         
+       }
+       
+   usort($fieldList, function($a, $b)
+   {
+       if ($a['position'] == $b['position']) {
+           return 0;
+       }
+       return ($a['position'] < $b['position']) ? -1 : 1;
+   });
+
+       $data[0]['fieldList'] = $fieldList;
+       $setting->setting = json_encode(json_encode($data));
+       $setting->save();
+       return;
+       return $setting->setting;
+      
     }
 
     /**
