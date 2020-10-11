@@ -16,89 +16,77 @@ class SettingController extends Controller
     {
         $a = '[{
             "componentDetails":{
-                "title":"Customers List",
-                "editTitle":"Edit Customers"
+                "title":"Designation List",
+                "editTitle":"Edit Designation"
             },
             "routes":{
                 "create":{
-                    "name":"customers.create",
-                    "link":"customers"
+                    "name":"drop_products.create",
+                    "link":"drop_products"
                 },
                 "update":{
-                    "name":"customers.update",
-                    "link":"customers"
+                    "name":"drop_products.update",
+                    "link":"drop_products"
                 },
                 "delete":{
-                    "name":"customers.destroy",
-                    "link":"customers"
+                    "name":"drop_products.destroy",
+                    "link":"drop_products"
                 }
             },
             "fieldList":[{
                 
-                    "position":11,
-        
-                    "create":"1",
-                    "read":"1",
-                    "update":"1",
-                    "require":"1",
-        
-                    "name":"name",
-                    "input_type" : "text",
-                    "database_name":"name",  
-                    "title":"Name"
-                },{
-                    
-                    "position":111,
-        
-                    "create":"1",
-                    "read":"1",
-                    "update":"1",
-                    "require":"1",
-        
-                    "name":"phone",
-                    "input_type" : "number",
-                    "database_name":"phone",  
-                    "title":"Phone"
-                },{
-                    
-                    "position":1111,
-        
-                    "create":"1",
-                    "read":"1",
-                    "update":"1",
-                    "require":"0",
-        
-                    "name":"address",
-                    "input_type" : "text",
-                    "database_name":"address",  
-                    "title":"Address"
-                },{
-                    
-                    "position":12,
-        
-                    "create":"1",
-                    "read":"1",
-                    "update":"1",
-                    "require":"0",
-        
-                    "name":"company",
-                    "input_type" : "text",
-                    "database_name":"company",  
-                    "title":"Company"
-                },{
-                    
-                    "position":111,
-        
-                    "create":"2",
-                    "read":"1",
-                    "update":"2",
-                    "require":"0",
-        
-                    "name":"due",
-                    "input_type" : "number",
-                    "database_name":"due",  
-                    "title":"Due"
-                }
+                "position":11,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+                "name":"user",
+                "input_type" : "text",
+                "database_name":"user_id",  
+                "title":"Employee Name"
+             },{
+                
+                "position":11,
+    
+                "create":"2",
+                "read":"1",
+                "update":"2",
+                "require":"1",
+    
+                "name":"product",
+                "input_type" : "dropDown",
+                "database_name":"product_id",  
+                "title":"Product",
+                "data" : "products"
+            },{
+                
+                "position":11,
+    
+                "create":"2",
+                "read":"1",
+                "update":"2",
+                "require":"1",
+    
+                "name":"quantity",
+                "input_type" : "text",
+                "database_name":"quantity",  
+                "title":"Quantity"
+            },{
+                
+                "position":11,
+    
+                "create":"1",
+                "read":"1",
+                "update":"1",
+                "require":"0",
+    
+                "name":"comment",
+                "input_type" : "text",
+                "database_name":"comment",  
+                "title":"Comment"
+            }
             ]
         }]' ;
 
@@ -106,10 +94,10 @@ class SettingController extends Controller
 
         //  $setting = new setting; 
         $setting->setting = json_encode( $a);
-        $setting->table_name = 'customers';
-        $setting->model = 'App\Models\customer.php';
+        $setting->table_name = 'drop_products';
+        $setting->model = 'App\Models\dropProduct.php';
         $setting->save();
-        return  $setting->table_name;
+        return  "Success";
 
 
 
