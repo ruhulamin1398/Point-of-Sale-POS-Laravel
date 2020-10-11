@@ -379,7 +379,24 @@ Update
 
 
 
-                    @else 
+                    @elseif($field['input_type'] == 'datetime-local' )
+                  
+                    var database_name= "{{$field['database_name']}}";
+                    var value = selectedItem[database_name];
+                   
+                    var inputType = "{{ $field['input_type'] }}";
+alert(value);
+                    html = "";
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+                  
+                    html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
+                        '" class="form-control" required>';
+                    html += '</div>';
+
+                    $("#editOptions").append(html);
+
+                    @else
                     
                     var database_name= "{{$field['database_name']}}";
                     var value = selectedItem[database_name];

@@ -67,6 +67,7 @@ $a = '[{
             "create":"1",
             "read":"1",
             "update":"1",
+            "require":"1",
 
             "name":"name",
             "input_type" : "text",
@@ -79,6 +80,7 @@ $a = '[{
             "create":"1",
             "read":"0",
             "update":"2",
+            "require":"1",
 
            "input_type":"text",
            "name":"products_count",
@@ -93,6 +95,7 @@ $a = '[{
             "create":"1",
             "read":"1",
             "update":"1",
+            "require":"1",
 
            "input_type":"text",
            "name":"description",
@@ -105,6 +108,7 @@ $a = '[{
             "create":"0",
             "read":"0",
             "update":"0",
+            "require":"1",
 
            "input_type":"date",
            "name":"date",
@@ -117,10 +121,11 @@ $a = '[{
             "create":"0",
             "read":"0",
             "update":"0",
+            "require":"1",
 
            "input_type":"datetime-local",
-           "name":"date-time",
-           "database_name":"date-time",
+           "name":"date_time",
+           "database_name":"date_time",
            "title": "Date time"
         },{
             
@@ -129,6 +134,7 @@ $a = '[{
             "create":"0",
             "read":"0",
             "update":"0",
+            "require":"1",
 
            "input_type":"time",
            "name":"time",
@@ -141,6 +147,7 @@ $a = '[{
             "create":"0",
             "read":"0",
             "update":"0",
+            "require":"1",
 
            "input_type":"month",
            "name":"month",
@@ -153,6 +160,7 @@ $a = '[{
             "create":"0",
             "read":"0",
             "update":"0",
+            "require":"1",
 
            "input_type":"dropDown",
            "name":"product_type_name",

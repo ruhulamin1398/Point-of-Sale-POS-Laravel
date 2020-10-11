@@ -84,10 +84,12 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
     public function update(Request $request, category $category)
     {
         //
+        $category->date_time= $request->date_time;
         $category->name= $request->name;
         $category->description= $request->description;
         $category->created_at= $request->created_at;
         $category->save();
+        return $category;
         return back();
     }
 
