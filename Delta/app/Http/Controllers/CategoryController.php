@@ -24,12 +24,13 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
         
         $dataArray=[
+            'settings'=>$settings,
             'items' => category::all(),
             'product_types'=> productType::all(),
         ];
 
 
-        return view('product.category.index', compact('dataArray','settings'));
+        return view('product.category.index', compact('dataArray'));
     }
 
     /**
@@ -88,6 +89,8 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function update(CategoryRequest $request, category $category)
     {
+        $category->update($request->all());
+        return $category;
         //
         $category->date_time= $request->date_time;
         $category->name= $request->name;
