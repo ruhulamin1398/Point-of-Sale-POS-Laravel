@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandRequest;
 use App\Models\brand;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -15,7 +16,14 @@ class BrandController extends Controller
      */
     public function index()
     {    
-        ///
+                
+        $settings = setting::where('table_name','brands')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        
+        $dataArray=[
+            'items' => brand::all(),
+        ];
+        return view('product.brand.index', compact('dataArray','settings'));
     }
 
 
