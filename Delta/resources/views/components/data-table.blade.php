@@ -1,131 +1,149 @@
-<div class="card shadow mb-4">
+ 
+
+                 @php
+
+
+                 $fieldList=$settings->setting[0]['fieldList'];
+                 $routes=$settings->setting[0]['routes'];
+                 $componentDetails=$settings->setting[0]['componentDetails'];
+                 $items= $dataArray['items'];
+                 @endphp
+                 <script>
+                     var dataArray= @json($dataArray);
+                 </script>
+
+ 
+ <div class="card shadow mb-4">
 
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar navbar-dark ">
 
-            <a class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }}</a>
-            <button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse" data-target="#NewEmployorm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus" id="PlusButton"></i></button>
-
-           
-        </nav>
-    </div>
-    <div class="card-body">
-
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead class="bg-abasas-dark">
-
-                    <tr>
-
-                        <th> #</th>
-                        @foreach( $fieldList as $field)
-
-                        @if($field['read'])
-
-                        <th> {{ __('translate.'.$field['title'])  }}</th>
-
-                        @endif
-                        @endforeach
-
-                        <th>{{__('translate.Action')}}</th>
-
-                    </tr>
-                </thead>
-                <tfoot class="bg-abasas-dark">
-                    <tr>
+            <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
+                id="pageSetting"></i></div>
+<button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
+    data-target="#NewEmployorm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
+        id="PlusButton"></i></button>
 
 
-                        <th> #</th>
-                        @foreach( $fieldList as $field)
+</nav>
+</div>
+<div class="card-body">
 
-                        @if($field['read'])
-                        <th> {{ __('translate.'.$field['title'])  }}</th>
-                        @endif
-                        @endforeach
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead class="bg-abasas-dark">
 
-                        <th>{{__('translate.Action')}}</th>
+                <tr>
 
-                    </tr>
+                    <th> #</th>
+                    @foreach( $fieldList as $field)
 
-                </tfoot>
-                <tbody>
 
-                    <?php $itr = 1; ?>
-                    @foreach ($items as $item)
-                    <?php $itemId = $item->id; ?>
+                    @if($field['read']==1)
+                  
+                    <th> {{ __('translate.'.$field['title'])  }}</th>
 
-                    <tr class="data-row">
-                        <td class="iteration">{{$itr++}}</td>
+                    @endif 
+                    @endforeach 
 
-                        @foreach( $fieldList as $field)
+                    <th>{{__('translate.Action')}}</th>
 
-                        @if($field['read'])
+                </tr>
+            </thead>
+            <tfoot class="bg-abasas-dark">
+                <tr>
 
-                        @if( $field['type'] == 'dropDown')
-                        @php
-                        $name= $field['name'];
-                        $id= $field['field'];
-                        $databaseName= $field['database_name'];
-                        @endphp
-                        <td class="  word-break  {{$field['database_name']}} " data-{{$field['database_name']}}="{{$item->$databaseName}}">
+                    <th> #</th>
+                    @foreach( $fieldList as $field)
 
-                            {{ $item->$name->$id}}
-                        </td>
 
-                        @else
-                        @php
-                        $name= $field['name'];
-                        @endphp
-                        <td class="  word-break  {{$field['database_name']}} ">
+                    @if($field['read']==1)
 
-                            {{ $item->$name}}
-                        </td>
-                        @endif
-                        @endif
+                    <th> {{ __('translate.'.$field['title'])  }}</th>
 
-                        @endforeach
+                    @endif 
+                    @endforeach 
 
+                    <th>{{__('translate.Action')}}</th>
+
+                </tr>
+
+            </tfoot>
+            
+            <tbody>
+
+                <?php $itr = 1; ?>
+                @foreach ($items as $item)
+               
+                @php 
+                        $item->abasas();
+                         $itemId = $item->id;
+                 @endphp
+
+                <tr class="data-row">
+                    <td class="iteration">{{$itr++}}</td>
+
+                    @foreach( $fieldList as $field)
+
+                    @if($field['read']==1)
+                    @php
+                    $name= $field['name'];
+                    @endphp
+                       
+                
+                         
+                         <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+    
+
+                    @endif
+
+                    @endforeach
 
 
 
 
 
 
-                        <td class="align-middle">
-                            <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}> <i class="fa fa-edit" aria-hidden="false"> </i></button>
+
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
+                                class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
-                            <form method="POST" action="{{route($routes['delete']['name'],$itemId)}}" id="delete-form-{{ $item->id }}" style="display:none; ">
-                                {{csrf_field() }}
-                                {{ method_field("delete") }}
-                            </form>
+                        <form method="POST" action="{{route($routes['delete']['name'],$itemId)}}"
+                            id="delete-form-{{ $item->id }}" style="display:none; ">
+                            {{csrf_field() }}
+                            {{ method_field("delete") }}
+                        </form>
 
 
 
 
-                            <button onclick="if(confirm('are you sure to delete this')){
+                        <button onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $item->id }}').submit();
 			}
 			else{
 				event.preventDefault();
 			}
 			" class="btn btn-danger btn-sm btn-raised">
-                                <i class="fa fa-trash" aria-hidden="false">
+                            <i class="fa fa-trash" aria-hidden="false">
 
-                                </i>
-                            </button>
+                            </i>
+                        </button>
 
 
 
-                        </td>
+                    </td>
 
-                    </tr>
-                    @endforeach
+                </tr>
+                @endforeach
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+
+           
+        </table>
     </div>
+</div>
 </div>
 
 
@@ -136,18 +154,16 @@
 
 
 
-
-
-
-
-
 <!-- Attachment Modal -->
-<div class="modal fade" id="data-edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+<div class="modal fade" id="data-edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-modal-label ">{{ __('translate.'.$componentDetails['editTitle'])}} </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <h5 class="modal-title text-dark" id="edit-modal-label ">
+                    {{ __('translate.'.$componentDetails['editTitle'])}} </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="attachment-body-content">
@@ -167,7 +183,8 @@
 
                     <div class="form-group">
 
-                        <input type="submit" id="submit-button" value=" {{__('translate.Submit')}}" class="form-control btn btn-success">
+                        <input type="submit" id="submit-button" value=" {{__('translate.Submit')}}"
+                            class="form-control btn btn-success">
                     </div>
 
 
@@ -179,128 +196,321 @@
         </div>
     </div>
 </div>
-<!-- /Attachment Modal -->
+<!-- /Attachment Modal --> 
 
+
+
+<!-- Attachment Modal -->
+<div class="modal fade" id="setting-modal" tabindex="-1" role="dialog" aria-labelledby="setting-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-abasas-dark">
+                <h5 class="modal-title " id="setting-modal-label "> {{ __('translate.'.$componentDetails['title'])  }}  </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true" class="text-light"   >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="attachment-body-content">
+      
+         
+          
+
+          <table class="table table-striped">
+
+  <tbody id="sortable">
+    @for( $i=0 ; $i<count($fieldList) ; $i++)
+            
+                 
+                <tr data-position="{{ $fieldList[$i]['position'] }}" data-name="{{ $fieldList[$i]['name'] }}">
+                    <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> {{ $fieldList[$i]['name'] }} </th>
+                    <td>
+                    <div class="form-check-inline">
+                <label class="form-check-label">  
+                    @if( $fieldList[$i]['create']==1 )
+                  <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  > 
+               
+                  @elseif($fieldList[$i]['create']==0)
+
+                  <input type="checkbox" class="form-check-input  create abasasCheckBox  " value="0"  > 
+                  @else
+                  
+                  <input type="checkbox" class="form-check-input create" disabled value="2" > 
+                  @endif
+                  Create</label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                    @if( $fieldList[$i]['read'] == 1 )
+                    <input type="checkbox" class="form-check-input read abasasCheckBox " value="1" checked> 
+                    @elseif( $fieldList[$i]['read'] == 0 )
+  
+                    <input type="checkbox" class="form-check-input read abasasCheckBox " value="0" > 
+                    @else
+  
+                    <input type="checkbox" class="form-check-input read" disabled value="2" > 
+                  @endif
+                    Read
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                    @if( $fieldList[$i]['update'] ==1  )
+                    <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
+                    @elseif( $fieldList[$i]['update'] ==0  )
+                    <input type="checkbox" class="form-check-input update abasasCheckBox " value="0" > 
+                    @else 
+                    <input type="checkbox" class="form-check-input update" disabled value="2" > 
+                     @endif
+Update
+                </label>
+              </div>
+    
+                    
+                    </td>
+                    
+                  </tr>
+
+
+                @endfor
+
+
+
+  </tbody>
+</table>
+
+
+            </div>
+
+    <div class="modal-footer">
+        <div class="btn bg-abasas-dark" id="settingsSaveButton">Save</div>
+    </div>
+
+        </div>
+    </div>
+</div>
+<!-- /Attachment Modal -->
 
 <script>
     /**
      * for showing edit item popup
      */
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $(document).on('click', "#data-edit-button", function() {
+         $(document).on('click', "#data-edit-button", function () {
 
 
-            $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+                    $(this).addClass(
+                    'edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
 
+                    var options = {
+                        'backdrop': 'static'
+                    };
+                    $('#data-edit-modal').modal(options)
+                });
+
+                // on modal show
+                $('#data-edit-modal').on('show.bs.modal', function () {
+                    var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
+                    var row = el.closest(".data-row");
+
+                    // get the data
+                    var itemId = el.data('item-id');
+                    var itemIndex = el.data('item-index');
+                    $("#modal-update-hidden-id").val(itemId);
+
+
+                    var home = "{{route('home')}}";
+                    var link = "{{$routes['update']['link']}}"
+                    var action = home.trim() + '/' + link.trim() + '/' + itemId;
+
+                    $("#data-edit-form").attr('action', action);
+                    $("#editOptions").html('');
+
+                    var itemArray= @json($items);
+                    var selectedItem = itemArray[itemIndex];
+//                  console.log(selectedItem.name)
+
+                    @foreach($fieldList as $field)
+                    
+
+                    @if($field['update']==1)
+
+                    @if($field['input_type'] == 'dropDown')
+                     
+                        
+                    
+
+                     var databaseName = "{{$field['database_name']}}";
+                     var dropDownDataArray = dataArray["{{$field['data']}}"];
+                     console.log(dropDownDataArray);
+
+                 var dropDownId = selectedItem["{{$field['database_name']}}"];
+
+                    //  var dataArray = @json($field['data']);
+
+                    html = "";
+
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
+                    html += '<select class="form-control form-control" name="' + databaseName +
+                        '"  required>';
+
+
+                    $.each(dropDownDataArray, function (key) {
+                        if (dropDownDataArray[key].id == dropDownId) {
+                            html += '<option value="' + dropDownDataArray[key].id +
+                                ' "  selected="selected"   >' + dropDownDataArray[key].name +
+                                '</option>';
+                        } else {
+                            html += '<option value="' + dropDownDataArray[key].id + '" >' + dropDownDataArray[
+                                key].name + '</option>';
+                        }
+
+                    });
+
+
+
+                    html += '</select>';
+                    html += '</div>';
+
+                    $("#editOptions").append(html);
+
+
+
+                    @elseif($field['input_type'] == 'datetime-local' )
+                  
+                    var database_name= "{{$field['database_name']}}";
+                    var value = selectedItem[database_name];
+                   
+                    var inputType = "{{ $field['input_type'] }}";
+alert(value);
+                    html = "";
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+                  
+                    html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
+                        '" class="form-control" required>';
+                    html += '</div>';
+
+                    $("#editOptions").append(html);
+
+                    @else
+                    
+                    var database_name= "{{$field['database_name']}}";
+                    var value = selectedItem[database_name];
+                    var inputType = "{{ $field['input_type'] }}";
+
+                    html = "";
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+                  
+                    html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
+                        '" class="form-control" required>';
+                    html += '</div>';
+
+                    $("#editOptions").append(html);
+
+
+
+                    @endif
+                    @endif
+
+                    @endforeach
+
+
+
+                });
+
+                // on modal hide
+                $('#data-edit-modal').on('hide.bs.modal', function () {
+                    $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
+                    $("#edit-form").trigger("reset");
+                });
+
+
+
+                $('#dataTable').DataTable();
+     
+
+
+        $(document).on('click',"#pageSetting", function () {
             var options = {
                 'backdrop': 'static'
             };
-            $('#data-edit-modal').modal(options)
-        });
-
-        // on modal show
-        $('#data-edit-modal').on('show.bs.modal', function() {
-            var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
-            var row = el.closest(".data-row");
-
-            // get the data
-            var itemId = el.data('item-id');
-            $("#modal-update-hidden-id").val(itemId);
+            $('#setting-modal').modal(options)
+        })
 
 
-            var home = "{{route('home')}}";
-            var link = "{{$routes['update']['link']}}"
-            var action = home.trim() + '/' + link.trim() + '/' + itemId;
+        $( "#sortable" ).sortable({
 
-            $("#data-edit-form").attr('action', action);
-            $("#editOptions").html('');
-
-
-
-            @php $j = 1;
-            @endphp
-            @foreach($fieldList as $field)
-
-            @if($field['update'])
-
-
-            @if($field['type'] == 'dropDown')
-            @php
-            $name = $field['name'];
-            $id = $field['field'];
-            $tid = $field['database_name'];
-            @endphp
-
-
-            var databaseName = "{{$field['database_name']}}";
-
-            var dropDownId = row.children("." + databaseName).data(databaseName);
-
-            var dataArray = @json($field['data']);
-
-            html = "";
-            html += '<div class="form-group">';
-            html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
-            html += '<select class="form-control form-control" name="' + databaseName + '"  required>';
-
-
-            $.each(dataArray, function(key) {
-                if (dataArray[key].id == dropDownId) {
-                    html += '<option value="' + dataArray[key].id + ' "  selected="selected"   >' + dataArray[key].name + '</option>';
-                } else {
-                    html += '<option value="' + dataArray[key].id + '" >' + dataArray[key].name + '</option>';
-                }
-
-            });
-
-
-
-            html += '</select>';
-            html += '</div>';
-
-            $("#editOptions").append(html);
-
-
-
-            @else
-            var text = row.children(".{{$field['database_name']}}").text();
-
-            html = "";
-            html += '<div class="form-group">';
-            html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
-            var databaseName = "{{$field['database_name']}}";
-            html += '<input type="text" name="' + databaseName + '" value="' + text.trim() + '" class="form-control" required>';
-            html += '</div>';
-
-            $("#editOptions").append(html);
-
-            @endif
-            @endif
-
-            @endforeach
-
-
-
-        });
-
-        // on modal hide
-        $('#data-edit-modal').on('hide.bs.modal', function() {
-            $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
-            $("#edit-form").trigger("reset");
-        });
-
-
-
-        $('#dataTable').DataTable();
+update:function(event, ui){
+    $(this).children().each(function (index){
+      
+      if($(this).attr('data-position') != index+1){
+        $(this).attr('data-position', index+1)
+      }
     });
 
+}
+        });
+
+});
 
 
 
+$("#settingsSaveButton").on('click',function(){
+    var positionArray= {
+        "_token" : $("#csrfToken").val().trim()
+      
+    };
 
-    
+    $("#sortable").children().each(function (index){
+        var name =$(this).attr('data-name').trim()
+        var position =$(this).attr('data-position').trim();
+        var create = $(this).find('.create').val().trim();
+        var read = $(this).find('.read').val().trim();
+        var update = $(this).find('.update').val().trim();
+
+      
+
+        positionArray[name] = {
+            position: position,
+            create: create,
+            read: read,
+            update: update
+
+        };
+       
+         console.log(positionArray);
+    });
+    saveSettings(positionArray);
+
+});
+function saveSettings(positionArray){
+    var url = $("#homeRoute").val().trim()+"/settings/"+"{{ $settings->id }}";
+    // console.log(url);
+                $.ajax({
+                        url: url,
+                        data:positionArray,
+                        type: 'put',
+                    success: function (data) {
+                        location.reload(true);
+                        console.log(data);
+                    },
+                    error:function (data) {
+                        console.log(data);
+                    }
+                    });
+}
+
+
+
+// $(document).one('click dblclick keypress',function(){
+//     alert("hahah");
+// })
 </script>
 
 {{ $slot }}
+

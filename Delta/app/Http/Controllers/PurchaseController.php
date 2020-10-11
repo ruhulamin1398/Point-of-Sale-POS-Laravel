@@ -27,7 +27,7 @@ class PurchaseController extends Controller
     {
         //
         $paymentSystems = paymentSystem::all();
-        return view('purchase.create',compact('paymentSystems'));
+        return view('product.purchase.create',compact('paymentSystems'));
     }
 
     /**
