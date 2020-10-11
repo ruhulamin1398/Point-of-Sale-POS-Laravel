@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\category;
 use App\Models\productType;
 use App\Models\setting;
@@ -47,9 +48,13 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CategoryRequest $request)
+    { 
+       // return $request;
+        $category = new category;
+        $category->name= $request->name;
+        $category->save();
+        return back();
     }
 
     /**
@@ -81,7 +86,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(CategoryRequest $request, category $category)
     {
         //
         $category->date_time= $request->date_time;
@@ -89,7 +94,6 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         $category->description= $request->description;
         $category->created_at= $request->created_at;
         $category->save();
-        return $category;
         return back();
     }
 

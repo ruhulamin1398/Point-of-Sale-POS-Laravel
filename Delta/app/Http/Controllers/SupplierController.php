@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SupplierRequest;
 use App\Models\supplier;
 use Illuminate\Http\Request;
 
@@ -133,9 +134,9 @@ class SupplierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SupplierRequest $request)
     {
-        //
+      //  return $request;
     }
 
     /**
@@ -167,7 +168,7 @@ class SupplierController extends Controller
      * @param  \App\Models\supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, supplier $supplier)
+    public function update(SupplierRequest $request, supplier $supplier)
     {
         $supplier->name= $request->name;
         $supplier->phone= $request->phone;

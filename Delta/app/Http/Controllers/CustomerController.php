@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
 use App\Models\customer;
 use Illuminate\Http\Request;
 
@@ -133,9 +134,9 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+       // return $request;
     }
 
     /**
@@ -167,7 +168,7 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customer $customer)
+    public function update(CustomerRequest $request, customer $customer)
     {
         $customer->name= $request->name;
         $customer->phone= $request->phone;

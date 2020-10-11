@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BrandRequest;
 use App\Models\brand;
 use Illuminate\Http\Request;
 
@@ -14,63 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {    
-        $componentDetails= [
-            'title' => 'Brand List',
-            'editTitle' =>'Edit Brand',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'brands.update',
-                'link' => 'brands',
-            ],
-            'delete' => [
-                
-                'name' => 'brands.destroy',
-                'link' => 'brands',
-            ]
-
-        ];
-     
-        
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=> 'name',
-                
-                'title'=> "Name",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "Description",
-            ],
-          
-        ];
-
-
-        $items = brand::all();
-
-
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
+        ///
     }
 
 
@@ -90,9 +35,10 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
+
     {
-        //
+         //return $request;
     }
 
     /**
@@ -124,7 +70,7 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, brand $brand)
+    public function update(BrandRequest $request, brand $brand)
     {
         $brand->name= $request->name;
         $brand->description= $request->description;

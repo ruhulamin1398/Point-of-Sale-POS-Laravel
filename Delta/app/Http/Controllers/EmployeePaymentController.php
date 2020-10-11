@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeePaymentRequest;
 use App\Models\employee;
 use App\Models\employeePayment;
 use App\Models\employeePaymentType;
@@ -176,9 +177,9 @@ class EmployeePaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeePaymentRequest $request)
     {
-        
+       // return $request;
         //payment Table 
         $employeePayment = new employeePayment;
         $employeePayment->employee_id = $request->employee_id;
@@ -249,8 +250,9 @@ class EmployeePaymentController extends Controller
      * @param  \App\Models\employeePayment  $employeePayment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, employeePayment $employeePayment)
+    public function update(EmployeePaymentRequest $request, employeePayment $employeePayment)
     {
+        
          // only amount and comment editable
         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
         $different =$request->amount-$employeePayment->amount;
