@@ -51,10 +51,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function store(CategoryRequest $request)
     { 
-       // return $request;
-        $category = new category;
-        $category->name= $request->name;
-        $category->save();
+        category::create($request->all());
         return back();
     }
 

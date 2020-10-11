@@ -1,19 +1,73 @@
  
 
                  @php
-
+                 $dataArray['items'] = $dataArray['items']->sortByDesc('id');
                  $settings= $dataArray['settings'];
                  $fieldList=$settings->setting[0]['fieldList'];
                  $routes=$settings->setting[0]['routes'];
                  $componentDetails=$settings->setting[0]['componentDetails'];
                  $items= $dataArray['items'];
-        
+                 
                  @endphp
                  <script>
-                     var dataArray= @json($dataArray);
+                     var dataArray= @json($items);
+                     var dataArrayLength= "{{ sizeof($items) }}"
+                     console.log(dataArray)
+
                  </script>
 
- 
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
+<!-- Begin Page Content -->
+<div class="collapse" id="createNewForm">
+    <div class="card mb-4 shadow">
+
+        <div class="card-header py-3  bg-abasas-dark ">
+            <nav class="navbar navbar-dark">
+                <a class="navbar-brand text-light">নতুন কর্মচারী</a>
+            </nav>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="">
+                @csrf
+                <div class="form-row align-items-center" id="createFormFieldList">
+                  
+                
+
+
+                    
+
+                   
+
+
+
+                   
+
+                </div>
+                <div class="col-12">
+                        <button type="submit" class="btn bg-abasas-dark mt-3">সাবমিট</button>
+                    </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
  <div class="card shadow mb-4">
 
     <div class="card-header py-3 bg-abasas-dark">
@@ -22,7 +76,7 @@
             <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
                 id="pageSetting"></i></div>
 <button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
-    data-target="#NewEmployorm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
+    data-target="#createNewForm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
         id="PlusButton"></i></button>
 
 
@@ -230,6 +284,8 @@
                 <label class="form-check-label">  
                     @if( $fieldList[$i]['create']==1 )
                   <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  > 
+                    @elseif( $fieldList[$i]['create']==2 )
+                  <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  disabled > 
                
                   @elseif($fieldList[$i]['create']==0)
 
@@ -247,6 +303,9 @@
                     @elseif( $fieldList[$i]['read'] == 0 )
   
                     <input type="checkbox" class="form-check-input read abasasCheckBox " value="0" > 
+                    @elseif( $fieldList[$i]['read'] == 2 )
+  
+                    <input type="checkbox" class="form-check-input read abasasCheckBox " value="1" checked disabled > 
                     @else
   
                     <input type="checkbox" class="form-check-input read" disabled value="2" > 
@@ -258,6 +317,8 @@
                 <label class="form-check-label">
                     @if( $fieldList[$i]['update'] ==1  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
+                    @elseif( $fieldList[$i]['update'] ==2  )
+                    <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked disabled>  
                     @elseif( $fieldList[$i]['update'] ==0  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="0" > 
                     @else 
@@ -313,12 +374,15 @@ Update
 
                 // on modal show
                 $('#data-edit-modal').on('show.bs.modal', function () {
+
+
                     var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
                     var row = el.closest(".data-row");
 
                     // get the data
                     var itemId = el.data('item-id');
-                    var itemIndex = el.data('item-index');
+                    var itemIndex =dataArrayLength-1- el.data('item-index');
+                    dataArrayLength
                     $("#modal-update-hidden-id").val(itemId);
 
 
@@ -339,7 +403,7 @@ Update
                     $require= $field['require']
                     @endphp
 
-                    @if($field['update']==1)
+                    @if($field['update']==1 || $field['update']==2 )
 
                     @if($field['input_type'] == 'dropDown')
                      
@@ -351,7 +415,7 @@ Update
                      console.log(dropDownDataArray);
 
                  var dropDownId = selectedItem["{{$field['database_name']}}"];
-
+                
                     //  var dataArray = @json($field['data']);
 
                     html = "";
@@ -380,7 +444,7 @@ Update
                     html += '</div>';
 
                     $("#editOptions").append(html);
-
+                    
 
 
 
@@ -492,6 +556,106 @@ function saveSettings(positionArray){
                     }
                     });
 }
+
+
+
+
+
+ insertInputFormData();
+
+function insertInputFormData(){
+
+
+                    var home = "{{route('home')}}";
+                    var link = "{{$routes['create']['link']}}"
+                    var action = home.trim() + '/' + link.trim() ;
+
+                    $("#createNewForm").attr('action', action);
+                    $("#createFormFieldList").html('');
+
+                    var itemArray= @json($items);
+//                  console.log(selectedItem.name)
+
+                    @foreach($fieldList as $field)
+                    
+                    @php 
+                    $require= $field['require']
+                    @endphp
+
+                    @if($field['create']==1 || $field['create']==2 )
+
+                    @if($field['input_type'] == 'dropDown')
+                     
+                        
+                    
+
+                     var databaseName = "{{$field['database_name']}}";
+                     var dropDownDataArray = dataArray["{{$field['data']}}"];
+
+                
+
+                    html = "";
+
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
+                    html += '<select class="form-control form-control" name="' + databaseName +
+                        '"  required >';
+
+
+                    $.each(dropDownDataArray, function (key) {
+                    
+                            html += '<option value="' + dropDownDataArray[key].id + '" >' + dropDownDataArray[
+                                key].name + '</option>';
+                        
+
+                    });
+
+
+
+                    html += '</select>';
+                    html += '</div>';
+
+                    $("#createFormFieldList").append(html);
+                    
+
+
+
+                    @else
+                    
+                    var database_name= "{{$field['database_name']}}";
+                    
+                    var inputType = "{{ $field['input_type'] }}";
+
+//                     <div class="col-auto">
+
+// // <span class="text-dark pl-4">নাম্বার</span>
+// // <input type="number" name="phone" class="form-control mb-2"  >
+// // </div>
+
+                    html = "";
+                    html += '<div class="col-auto">';
+                    html += '<span class="text-dark pl-4"> {{$field["title"] }}  </span>';
+                  
+                    html += '<input type="'+ inputType+'" name="' + database_name + '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
+                    html += '</div>';
+
+                    $("#createFormFieldList").append(html);
+
+
+
+                    @endif
+                    @endif
+
+                    @endforeach
+
+
+}
+
+
+
+
+
+
 
 
 
