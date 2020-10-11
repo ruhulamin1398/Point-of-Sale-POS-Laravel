@@ -9,7 +9,6 @@
 
 <x-data-table
 :dataArray="$dataArray"
-:settings="$settings"
 
 />
 

@@ -2,11 +2,12 @@
 
                  @php
 
-
+                 $settings= $dataArray['settings'];
                  $fieldList=$settings->setting[0]['fieldList'];
                  $routes=$settings->setting[0]['routes'];
                  $componentDetails=$settings->setting[0]['componentDetails'];
                  $items= $dataArray['items'];
+        
                  @endphp
                  <script>
                      var dataArray= @json($dataArray);
