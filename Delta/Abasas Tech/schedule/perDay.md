@@ -2,10 +2,11 @@
 -----------------------
 
 
-<mark>
-within 15th October  all work need to be done. <br>
+<mark> <s>
+within 15th October  all work need to be done<br>
 we start sell on 15th October in habiganj. <br>
 25th october we will realease on over country <br>
+</s>
 </mark>
 
 ## Project 
@@ -85,18 +86,39 @@ Distribution
         ------------------------------------------
 ```
 
-- 
+ 
 
 
 
 
 
 ### October
-- 1
-- 2 
-- 3
-- 4
-- 5
+- 11 
+
+```
+        ## Completed -  52.5+10.5 
+
+        Database  - 90%
+        Component - 70+25%
+        Frontend  - 40+20%
+        testing   - 10+16%
+        backend   - 25+15%
+        ------------------------------------------
+```
+- 12 
+
+```
+        ## Completed -  63+4.5
+
+        Database  - 90%
+        Component - 70+25%
+        Frontend  - 40+20%
+        testing   - 10+16%
+        backend   - 25+15%
+        ------------------------------------------
+```
+
+ 
 
 
 
