@@ -10,4 +10,8 @@ class customer extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function abasas(){
+        //
+    }   
 }
