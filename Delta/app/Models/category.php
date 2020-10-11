@@ -14,4 +14,9 @@ class category extends Model
 
     public function products(){
         return $this->hasMany('App\Models\product');
-    }}
+    }
+    
+    public function abasas(){
+        $this->products_count = $this->products->count();
+    }
+}

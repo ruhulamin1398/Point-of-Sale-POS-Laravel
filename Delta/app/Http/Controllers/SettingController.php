@@ -83,7 +83,6 @@ class SettingController extends Controller
          $fieldList[$i]['update'] = $request[$fieldName]['update']; 
          $fieldList[$i]['position'] = $request[$fieldName]['position']; 
            
-  
          
        }
        

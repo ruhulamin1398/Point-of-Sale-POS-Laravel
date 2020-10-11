@@ -1,9 +1,22 @@
-{{-- <div class="card shadow mb-4">
+ 
+
+                 @php
+
+
+                 $fieldList=$settings->setting[0]['fieldList'];
+
+
+                 @endphp
+ 
+ 
+ 
+ <div class="card shadow mb-4">
 
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar navbar-dark ">
 
-            <a class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }}</a>
+            <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
+                id="pageSetting"></i></div>
 <button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
     data-target="#NewEmployorm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
         id="PlusButton"></i></button>
@@ -22,12 +35,13 @@
                     <th> #</th>
                     @foreach( $fieldList as $field)
 
-                    @if($field['read'])
 
+                    @if($field['read']==1)
+                  
                     <th> {{ __('translate.'.$field['title'])  }}</th>
 
-                    @endif
-                    @endforeach
+                    @endif 
+                    @endforeach 
 
                     <th>{{__('translate.Action')}}</th>
 
@@ -36,54 +50,48 @@
             <tfoot class="bg-abasas-dark">
                 <tr>
 
-
                     <th> #</th>
                     @foreach( $fieldList as $field)
 
-                    @if($field['read'])
+
+                    @if($field['read']==1)
+
                     <th> {{ __('translate.'.$field['title'])  }}</th>
-                    @endif
-                    @endforeach
+
+                    @endif 
+                    @endforeach 
 
                     <th>{{__('translate.Action')}}</th>
 
                 </tr>
 
             </tfoot>
+            
             <tbody>
 
                 <?php $itr = 1; ?>
                 @foreach ($items as $item)
-                <?php $itemId = $item->id; ?>
+               
+                @php 
+                        $item->abasas();
+                         $itemId = $item->id;
+                 @endphp
 
                 <tr class="data-row">
                     <td class="iteration">{{$itr++}}</td>
 
                     @foreach( $fieldList as $field)
 
-                    @if($field['read'])
-
-                    @if( $field['type'] == 'dropDown')
-                    @php
-                    $name= $field['name'];
-                    $id= $field['field'];
-                    $databaseName= $field['database_name'];
-                    @endphp
-                    <td class="  word-break  {{$field['database_name']}} "
-                        data-{{$field['database_name']}}="{{$item->$databaseName}}">
-
-                        {{ $item->$name->$id}}
-                    </td>
-
-                    @else
+                    @if($field['read']==1)
                     @php
                     $name= $field['name'];
                     @endphp
-                    <td class="  word-break  {{$field['database_name']}} ">
+                       
+                
+                         
+                         <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+    
 
-                        {{ $item->$name}}
-                    </td>
-                    @endif
                     @endif
 
                     @endforeach
@@ -95,7 +103,7 @@
 
 
                     <td class="align-middle">
-                        <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}> <i
+                        <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
                                 class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
@@ -128,15 +136,12 @@
                 @endforeach
 
             </tbody>
+
+           
         </table>
     </div>
 </div>
 </div>
-
-
-
-
-
 
 
 
@@ -188,7 +193,7 @@
         </div>
     </div>
 </div>
-<!-- /Attachment Modal --> --}}
+<!-- /Attachment Modal --> 
 
 
 
@@ -198,25 +203,14 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-abasas-dark">
-                <h5 class="modal-title " id="setting-modal-label "> Category Page Settings </h5>
+                <h5 class="modal-title " id="setting-modal-label "> {{ __('translate.'.$componentDetails['title'])  }}  </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true" class="text-light"   >&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="attachment-body-content">
       
-                 @php
-                  $data = $settings->setting;
-                  $fieldList=$data[0]['fieldList'];
-                
-
-                  @endphp
          
-           
-        
-                    
-       
-           
           
 
           <table class="table table-striped">
@@ -231,12 +225,14 @@
                     <div class="form-check-inline">
                 <label class="form-check-label">  
                     @if( $fieldList[$i]['create']==1 )
-                  <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked > 
+                  <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  > 
                
-                  @else
+                  @elseif($fieldList[$i]['create']==0)
 
                   <input type="checkbox" class="form-check-input  create abasasCheckBox  " value="0"  > 
+                  @else
                   
+                  <input type="checkbox" class="form-check-input create" disabled value="2" > 
                   @endif
                   Create</label>
               </div>
@@ -244,9 +240,12 @@
                 <label class="form-check-label">
                     @if( $fieldList[$i]['read'] == 1 )
                     <input type="checkbox" class="form-check-input read abasasCheckBox " value="1" checked> 
-                    @else
+                    @elseif( $fieldList[$i]['read'] == 0 )
   
                     <input type="checkbox" class="form-check-input read abasasCheckBox " value="0" > 
+                    @else
+  
+                    <input type="checkbox" class="form-check-input read" disabled value="2" > 
                   @endif
                     Read
                 </label>
@@ -255,9 +254,10 @@
                 <label class="form-check-label">
                     @if( $fieldList[$i]['update'] ==1  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
-                    @else
-  
+                    @elseif( $fieldList[$i]['update'] ==0  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="0" > 
+                    @else 
+                    <input type="checkbox" class="form-check-input update" disabled value="2" > 
                      @endif
 Update
                 </label>
@@ -295,7 +295,6 @@ Update
 
     $(document).ready(function () {
 
-        {{--
          $(document).on('click', "#data-edit-button", function () {
 
 
@@ -315,6 +314,7 @@ Update
 
                     // get the data
                     var itemId = el.data('item-id');
+                    var itemIndex = el.data('item-index');
                     $("#modal-update-hidden-id").val(itemId);
 
 
@@ -325,19 +325,19 @@ Update
                     $("#data-edit-form").attr('action', action);
                     $("#editOptions").html('');
 
-
+   var itemArray= @json($items);
+   var selectedItem = itemArray[itemIndex];
+//    console.log(selectedItem.name)
 
                     @php $j = 1;
                     @endphp
                     @foreach($fieldList as $field)
 
-                    @if($field['update'])
+                    @if($field['update']==1)
 
-
-                    @if($field['type'] == 'dropDown')
+                    @if($field['input_type'] == 'dropDown')
                     @php
                     $name = $field['name'];
-                    $id = $field['field'];
                     $tid = $field['database_name'];
                     @endphp
 
@@ -376,18 +376,69 @@ Update
 
 
 
-                    @else
-                    var text = row.children(".{{$field['database_name']}}").text();
+                    @elseif($field['input_type'] == 'text')
+                    var database_name= "{{$field['database_name']}}";
+                    var value = selectedItem[database_name];
 
                     html = "";
                     html += '<div class="form-group">';
                     html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
-                    var databaseName = "{{$field['database_name']}}";
-                    html += '<input type="text" name="' + databaseName + '" value="' + text.trim() +
+                  
+                    html += '<input type="text" name="' + database_name + '" value="' + value +
                         '" class="form-control" required>';
                     html += '</div>';
 
                     $("#editOptions").append(html);
+
+                    @elseif($field['input_type'] == 'date')
+
+                    var database_name= "{{$field['database_name']}}";
+                    var value = selectedItem[database_name].substr(0, 10);
+
+                    html = "";
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+                  
+                    html += '<input type="date" name="' + database_name + '" value="' + value +
+                        '" class="form-control" required>';
+                    html += '</div>';
+
+                    $("#editOptions").append(html);
+
+                    
+
+                    @elseif($field['input_type'] == 'datetime-local')
+
+                    var database_name= "{{$field['database_name']}}";
+                    var value = selectedItem[database_name].substr(0, 10);
+
+                    html = "";
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+                  
+                    html += '<input type="datetime-local" name="' + database_name + '" value="' + value +
+                        '" class="form-control" required>';
+                    html += '</div>';
+
+                    $("#editOptions").append(html);
+
+                    @else 
+                    
+                    var database_name= "{{$field['database_name']}}";
+                    var value = selectedItem[database_name];
+                    var inputType = "{{ $field['input_type'] }}";
+
+                    html = "";
+                    html += '<div class="form-group">';
+                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+                  
+                    html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
+                        '" class="form-control" required>';
+                    html += '</div>';
+
+                    $("#editOptions").append(html);
+
+
 
                     @endif
                     @endif
@@ -407,10 +458,10 @@ Update
 
 
                 $('#dataTable').DataTable();
-                --}}
+     
 
 
-        $(document).on('click', function () {
+        $(document).on('click',"#pageSetting", function () {
             var options = {
                 'backdrop': 'static'
             };

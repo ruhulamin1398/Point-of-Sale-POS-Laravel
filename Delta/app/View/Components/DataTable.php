@@ -6,17 +6,16 @@ use Illuminate\View\Component;
 
 class DataTable extends Component
 {
-    public $items,$fieldList,$routes,$componentDetails,$settings;
+    public $items,$routes,$componentDetails,$settings;
     /**
      * Create a new component instance.
      *
      * @return void
      * @param array $fieldList
      */
-    public function __construct($items,$fieldList,$routes,$componentDetails,$settings)
+    public function __construct($items,$routes,$componentDetails,$settings)
     {
         $this->items= $items;
-        $this->fieldList= $fieldList;
         $this->routes= $routes;
         $this->componentDetails= $componentDetails;
         $this->settings= $settings;

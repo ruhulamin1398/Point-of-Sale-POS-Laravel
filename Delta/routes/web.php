@@ -58,9 +58,9 @@ $a = '[{
         
             "position":11,
 
-            "create":true,
-            "read":false,
-            "update":true,
+            "create":"1",
+            "read":"1",
+            "update":"1",
 
             "name":"name",
             "input_type" : "text",
@@ -70,25 +70,52 @@ $a = '[{
             
             "position":111,
 
-            "create":true,
-            "read":false,
-            "update":false,
+            "create":"1",
+            "read":"0",
+            "update":"2",
 
            "input_type":"text",
            "name":"products_count",
-           "title":"Products"
+           "title":"Products",
+
+
+           "database_name":"products_count"
         },{
             
             "position":1,
 
-            "create":false,
-            "read":true,
-            "update":true,
+            "create":"1",
+            "read":"1",
+            "update":"1",
 
            "input_type":"text",
            "name":"description",
            "database_name":"description",
            "title": "Description"
+        },{
+            
+            "position":12,
+
+            "create":"0",
+            "read":"0",
+            "update":"0",
+
+           "input_type":"date",
+           "name":"date",
+           "database_name":"date",
+           "title": "Date"
+        },{
+            
+            "position":12,
+
+            "create":"0",
+            "read":"0",
+            "update":"0",
+
+           "input_type":"datetime-local",
+           "name":"date-time",
+           "database_name":"date-time",
+           "title": "Date time"
         }
     ]
 }]' ;
@@ -100,7 +127,7 @@ $category= setting::find(1);
 $category->setting= json_encode( $a);
 $category->save();
 $data = '{"data":{"_token":"vTnMdXuSbA2phDBY0vZWDzz4qgrbX1kpmoQkxm5S","description":{"position":"1","create":"0","read":"1","update":"1"},"name":{"position":"11","create":"1","read":"0","update":"1"},"products_count":{"position":"111","create":"1","read":"0","update":"0"}}}';
-return json_decode($data,true);
+// return json_decode($data,true);
 $category= setting::find(1);
 $setting = json_decode( json_decode($category->setting,true),true);
 return $setting['0']['fieldList'];

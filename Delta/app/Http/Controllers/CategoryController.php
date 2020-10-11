@@ -135,8 +135,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
     {
         //
         $category->name= $request->name;
+        $category->description= $request->description;
+        $category->created_at= $request->created_at;
         $category->save();
-        return $category;
+        return back();
     }
 
     /**
