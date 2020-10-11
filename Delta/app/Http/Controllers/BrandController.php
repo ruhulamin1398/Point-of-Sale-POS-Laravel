@@ -21,9 +21,10 @@ class BrandController extends Controller
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
         $dataArray=[
+            'settings'=>$settings,
             'items' => brand::all(),
         ];
-        return view('product.brand.index', compact('dataArray','settings'));
+        return view('product.brand.index', compact('dataArray'));
     }
 
 
