@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReturnProductRequest;
 use App\Models\returnProduct;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,9 @@ class ReturnProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReturnProductRequest $request)
     {
-        //
+       // return $request;
     }
 
     /**
@@ -67,7 +68,7 @@ class ReturnProductController extends Controller
      * @param  \App\Models\returnProduct  $returnProduct
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, returnProduct $returnProduct)
+    public function update(ReturnProductRequest $request, returnProduct $returnProduct)
     {
         //
     }

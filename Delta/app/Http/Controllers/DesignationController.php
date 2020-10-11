@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DesignationRequest;
 use App\Models\designation;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,13 @@ class DesignationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DesignationRequest $request)
     {
-        //
+         $designation = new designation;
+         $designation->role = $request->role;
+         $designation->description = $request->description;
+         $designation->save();
+        return back();
     }
 
     /**
@@ -67,9 +72,12 @@ class DesignationController extends Controller
      * @param  \App\Models\designation  $designation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, designation $designation)
+    public function update(DesignationRequest $request, designation $designation)
     {
-        //
+        $designation->role = $request->role;
+        $designation->description = $request->description;
+        $designation->save();
+       return back();
     }
 
     /**

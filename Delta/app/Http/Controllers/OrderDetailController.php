@@ -35,7 +35,7 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validation later
     }
 
     /**

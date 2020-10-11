@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeDutyRequest;
 use App\Models\dutyStatus;
 use App\Models\employee;
 use App\Models\employeeDuty;
@@ -39,9 +40,9 @@ class EmployeeDutyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeDutyRequest $request)
     {
-        
+        //return $request;
 
        $employee=employee::find($request->employee_id);
         $employeeDuty = employeeDuty::where('employee_id',$request->employee_id)->where('date',$request->date)->first();
@@ -104,7 +105,7 @@ class EmployeeDutyController extends Controller
      * @param  \App\Models\employeeDuty  $employeeDuty
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, employeeDuty $employeeDuty)
+    public function update(EmployeeDutyRequest $request, employeeDuty $employeeDuty)
     {
         //
     }

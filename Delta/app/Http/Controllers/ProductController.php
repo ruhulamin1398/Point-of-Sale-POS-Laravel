@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\brand;
 use App\Models\category;
 use App\Models\Product;
@@ -238,9 +239,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {  
-       
+ 
+     //  return $request;
        $product = new product;
        $product->name=$request->name;
        $product->stock_alert=$request->stock_alert;
@@ -287,7 +289,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
         $product->category_id= $request->category_id;
         $product->save();
