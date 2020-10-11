@@ -14,7 +14,106 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $a = '[{
+            "componentDetails":{
+                "title":"Customers List",
+                "editTitle":"Edit Customers"
+            },
+            "routes":{
+                "create":{
+                    "name":"customers.create",
+                    "link":"customers"
+                },
+                "update":{
+                    "name":"customers.update",
+                    "link":"customers"
+                },
+                "delete":{
+                    "name":"customers.destroy",
+                    "link":"customers"
+                }
+            },
+            "fieldList":[{
+                
+                    "position":11,
+        
+                    "create":"1",
+                    "read":"1",
+                    "update":"1",
+                    "require":"1",
+        
+                    "name":"name",
+                    "input_type" : "text",
+                    "database_name":"name",  
+                    "title":"Name"
+                },{
+                    
+                    "position":111,
+        
+                    "create":"1",
+                    "read":"1",
+                    "update":"1",
+                    "require":"1",
+        
+                    "name":"phone",
+                    "input_type" : "number",
+                    "database_name":"phone",  
+                    "title":"Phone"
+                },{
+                    
+                    "position":1111,
+        
+                    "create":"1",
+                    "read":"1",
+                    "update":"1",
+                    "require":"0",
+        
+                    "name":"address",
+                    "input_type" : "text",
+                    "database_name":"address",  
+                    "title":"Address"
+                },{
+                    
+                    "position":12,
+        
+                    "create":"1",
+                    "read":"1",
+                    "update":"1",
+                    "require":"0",
+        
+                    "name":"company",
+                    "input_type" : "text",
+                    "database_name":"company",  
+                    "title":"Company"
+                },{
+                    
+                    "position":111,
+        
+                    "create":"2",
+                    "read":"1",
+                    "update":"2",
+                    "require":"0",
+        
+                    "name":"due",
+                    "input_type" : "number",
+                    "database_name":"due",  
+                    "title":"Due"
+                }
+            ]
+        }]' ;
+
+           
+
+        //  $setting = new setting; 
+        $setting->setting = json_encode( $a);
+        $setting->table_name = 'customers';
+        $setting->model = 'App\Models\customer.php';
+        $setting->save();
+        return  $setting->table_name;
+
+
+
+        
     }
 
     /**
