@@ -71,7 +71,7 @@ $a = '[{
             "create":"1",
             "read":"1",
             "update":"1",
-            "require":"1",
+            "require":"0",
 
             "name":"name",
             "input_type" : "text",

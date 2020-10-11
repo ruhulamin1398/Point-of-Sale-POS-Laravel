@@ -222,8 +222,8 @@
     @for( $i=0 ; $i<count($fieldList) ; $i++)
             
                  
-                <tr data-position="{{ $fieldList[$i]['position'] }}" data-name="{{ $fieldList[$i]['name'] }}">
-                    <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> {{ $fieldList[$i]['name'] }} </th>
+                <tr data-position="{{ $fieldList[$i]['position'] }}" data-name="{{ $fieldList[$i]['name'] }}" >
+                    <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> {{ $fieldList[$i]['title'] }} </th>
                     <td>
                     <div class="form-check-inline">
                 <label class="form-check-label">  
@@ -334,6 +334,9 @@ Update
 
                     @foreach($fieldList as $field)
                     
+                    @php 
+                    $require= $field['require']
+                    @endphp
 
                     @if($field['update']==1)
 
@@ -355,7 +358,7 @@ Update
                     html += '<div class="form-group">';
                     html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
-                        '"  required>';
+                        '"  required >';
 
 
                     $.each(dropDownDataArray, function (key) {
@@ -379,22 +382,6 @@ Update
 
 
 
-                    @elseif($field['input_type'] == 'datetime-local' )
-                  
-                    var database_name= "{{$field['database_name']}}";
-                    var value = selectedItem[database_name];
-                   
-                    var inputType = "{{ $field['input_type'] }}";
-alert(value);
-                    html = "";
-                    html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
-                  
-                    html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
-                        '" class="form-control" required>';
-                    html += '</div>';
-
-                    $("#editOptions").append(html);
 
                     @else
                     
@@ -407,7 +394,7 @@ alert(value);
                     html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
                   
                     html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
-                        '" class="form-control" required>';
+                        '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
                     html += '</div>';
 
                     $("#editOptions").append(html);
