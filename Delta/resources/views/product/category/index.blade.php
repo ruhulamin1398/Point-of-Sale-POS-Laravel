@@ -8,9 +8,7 @@
 
 
 <x-data-table
-:items="$items"
-:routes="$routes"
-:componentDetails="$componentDetails"
+:dataArray="$dataArray"
 :settings="$settings"
 
 />

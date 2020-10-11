@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\productType;
 use App\Models\setting;
 use Illuminate\Http\Request;
 
@@ -15,70 +16,19 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-
-        $componentDetails= [
-            'title' => 'Category List',
-            'editTitle' =>'Edit Category',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'categories.update',
-                'link' => 'categories',
-            ],
-            'delete' => [
-                
-                'name' => 'categories.destroy',
-                'link' => 'categories',
-            ]
-
-        ];
-     
-        
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=> 'name',
-                
-               'title'=> "Name",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "Description",
-            ],
-          
-        ];
-
-
-
+       
 
 $settings = setting::where('table_name','categories')->first();
 $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
-        $items = category::all();
+        
+        $dataArray=[
+            'items' => category::all(),
+            'product_types'=> productType::all(),
+        ];
 
 
-        return view('product.category.index', compact('items', 'fieldList', 'routes','componentDetails','settings'));
+        return view('product.category.index', compact('dataArray','settings'));
     }
 
     /**

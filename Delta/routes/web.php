@@ -20,6 +20,7 @@ use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\SettingController;
 use App\Models\category;
 use App\Models\setting;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,11 +34,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('test-submit',function(Request $request){
+    return $request;
+})->name('testSubmit');
+
+Route::view('/test-form','testForm');
 Route::get('/', function () {
 
 $a = '[{
     "componentDetails":{
-        "title":"Category list",
+        "title":"Category List",
         "editTitle":"Edit Category"
     },
     "routes":{
@@ -116,6 +122,43 @@ $a = '[{
            "name":"date-time",
            "database_name":"date-time",
            "title": "Date time"
+        },{
+            
+            "position":120,
+
+            "create":"0",
+            "read":"0",
+            "update":"0",
+
+           "input_type":"time",
+           "name":"time",
+           "database_name":"time",
+           "title": "Time"
+        },{
+            
+            "position":2,
+
+            "create":"0",
+            "read":"0",
+            "update":"0",
+
+           "input_type":"month",
+           "name":"month",
+           "database_name":"month",
+           "title": "Month"
+        },{
+            
+            "position":3,
+
+            "create":"0",
+            "read":"0",
+            "update":"0",
+
+           "input_type":"dropDown",
+           "name":"product_type_name",
+           "database_name":"product_type_id",
+           "title": "Type",
+           "data" : "product_types"
         }
     ]
 }]' ;
@@ -130,7 +173,7 @@ $data = '{"data":{"_token":"vTnMdXuSbA2phDBY0vZWDzz4qgrbX1kpmoQkxm5S","descripti
 // return json_decode($data,true);
 $category= setting::find(1);
 $setting = json_decode( json_decode($category->setting,true),true);
-return $setting['0']['fieldList'];
+return $setting['0'];
     return view('welcome',compact('category'));
  })->name('home');
 

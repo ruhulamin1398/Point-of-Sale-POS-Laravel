@@ -4,11 +4,14 @@
 
 
                  $fieldList=$settings->setting[0]['fieldList'];
-
-
+                 $routes=$settings->setting[0]['routes'];
+                 $componentDetails=$settings->setting[0]['componentDetails'];
+                 $items= $dataArray['items'];
                  @endphp
- 
- 
+                 <script>
+                     var dataArray= @json($dataArray);
+                 </script>
+
  
  <div class="card shadow mb-4">
 
@@ -325,43 +328,43 @@ Update
                     $("#data-edit-form").attr('action', action);
                     $("#editOptions").html('');
 
-   var itemArray= @json($items);
-   var selectedItem = itemArray[itemIndex];
-//    console.log(selectedItem.name)
+                    var itemArray= @json($items);
+                    var selectedItem = itemArray[itemIndex];
+//                  console.log(selectedItem.name)
 
-                    @php $j = 1;
-                    @endphp
                     @foreach($fieldList as $field)
+                    
 
                     @if($field['update']==1)
 
                     @if($field['input_type'] == 'dropDown')
-                    @php
-                    $name = $field['name'];
-                    $tid = $field['database_name'];
-                    @endphp
+                     
+                        
+                    
 
+                     var databaseName = "{{$field['database_name']}}";
+                     var dropDownDataArray = dataArray["{{$field['data']}}"];
+                     console.log(dropDownDataArray);
 
-                    var databaseName = "{{$field['database_name']}}";
+                 var dropDownId = selectedItem["{{$field['database_name']}}"];
 
-                    var dropDownId = row.children("." + databaseName).data(databaseName);
-
-                    var dataArray = @json($field['data']);
+                    //  var dataArray = @json($field['data']);
 
                     html = "";
+
                     html += '<div class="form-group">';
                     html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
                         '"  required>';
 
 
-                    $.each(dataArray, function (key) {
-                        if (dataArray[key].id == dropDownId) {
-                            html += '<option value="' + dataArray[key].id +
-                                ' "  selected="selected"   >' + dataArray[key].name +
+                    $.each(dropDownDataArray, function (key) {
+                        if (dropDownDataArray[key].id == dropDownId) {
+                            html += '<option value="' + dropDownDataArray[key].id +
+                                ' "  selected="selected"   >' + dropDownDataArray[key].name +
                                 '</option>';
                         } else {
-                            html += '<option value="' + dataArray[key].id + '" >' + dataArray[
+                            html += '<option value="' + dropDownDataArray[key].id + '" >' + dropDownDataArray[
                                 key].name + '</option>';
                         }
 
@@ -375,52 +378,6 @@ Update
                     $("#editOptions").append(html);
 
 
-
-                    @elseif($field['input_type'] == 'text')
-                    var database_name= "{{$field['database_name']}}";
-                    var value = selectedItem[database_name];
-
-                    html = "";
-                    html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
-                  
-                    html += '<input type="text" name="' + database_name + '" value="' + value +
-                        '" class="form-control" required>';
-                    html += '</div>';
-
-                    $("#editOptions").append(html);
-
-                    @elseif($field['input_type'] == 'date')
-
-                    var database_name= "{{$field['database_name']}}";
-                    var value = selectedItem[database_name].substr(0, 10);
-
-                    html = "";
-                    html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
-                  
-                    html += '<input type="date" name="' + database_name + '" value="' + value +
-                        '" class="form-control" required>';
-                    html += '</div>';
-
-                    $("#editOptions").append(html);
-
-                    
-
-                    @elseif($field['input_type'] == 'datetime-local')
-
-                    var database_name= "{{$field['database_name']}}";
-                    var value = selectedItem[database_name].substr(0, 10);
-
-                    html = "";
-                    html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
-                  
-                    html += '<input type="datetime-local" name="' + database_name + '" value="' + value +
-                        '" class="form-control" required>';
-                    html += '</div>';
-
-                    $("#editOptions").append(html);
 
                     @else 
                     
@@ -539,3 +496,4 @@ function saveSettings(positionArray){
 </script>
 
 {{ $slot }}
+

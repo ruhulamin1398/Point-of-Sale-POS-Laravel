@@ -6,18 +6,15 @@ use Illuminate\View\Component;
 
 class DataTable extends Component
 {
-    public $items,$routes,$componentDetails,$settings;
+    public $dataArray,$settings;
     /**
      * Create a new component instance.
      *
      * @return void
-     * @param array $fieldList
      */
-    public function __construct($items,$routes,$componentDetails,$settings)
+    public function __construct($dataArray,$settings)
     {
-        $this->items= $items;
-        $this->routes= $routes;
-        $this->componentDetails= $componentDetails;
+        $this->dataArray= $dataArray;
         $this->settings= $settings;
  
     }
@@ -29,6 +26,7 @@ class DataTable extends Component
      */
     public function render()
     {
+       
         return view('components.data-table');
     }
 }
