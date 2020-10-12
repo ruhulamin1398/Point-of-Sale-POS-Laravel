@@ -15,7 +15,7 @@ class CreateDesignationsTable extends Migration
     {
         Schema::create('designations', function (Blueprint $table) {
             $table->id();
-            $table->string('role');
+            $table->string('name');
             $table->string('description')->nullable();
             $table->softDeletes();
             $table->timestamps();

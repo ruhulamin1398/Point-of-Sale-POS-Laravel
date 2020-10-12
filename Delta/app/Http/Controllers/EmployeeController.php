@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
+use App\Models\User;
 use App\Models\designation;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -17,153 +19,20 @@ class EmployeeController extends Controller
     public function index()
     {
     
-        $componentDetails= [
-            'title' => 'Employees List',
-            'editTitle' =>'Edit Employees',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'employees.update',
-                'link' => 'employees',
-            ],
-            'delete' => [
-                
-                'name' => 'employees.destroy',
-                'link' => 'employees',
-            ]
-
-        ];
-     
+        $settings = setting::where('table_name','employees')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=>'name',
                 
-                'title'=> "Name",
-    
-            ],
-            'phone'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'phone',
-               'database_name'=>'phone',
-
-               'title'=> "phone",
-            ],
-
-            'address'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'address',
-               'database_name'=>'address',
-
-               'title'=> "address",
-            ],
-            'joining_date'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'joining_date',
-               'database_name'=>'joining_date',
-
-               'title'=> "Joining",
-            ],
-
-            'reference'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'reference',
-               'database_name'=>'reference',
-
-               'title'=> "Reference",
-            ],
-
-            'term_of_contract'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'term_of_contract',
-               'database_name'=>'term_of_contract',
-
-               'title'=> "Contract",
-            ],
-
-            'salary'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'salary',
-               'database_name'=>'salary',
-
-               'title'=> "Salary",
-            ],
-            'designation'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'designation_id',
-               'database_name'=>'designation_id',
-
-               'title'=> "Designation",
-            ],
-          
-          
-        ];
-
-
-        $items = employee::all();
-        $designation = designation::all();
-       
-        // fixed duty work needed
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => employee::all(),
+                    'users'=> User::all(),
+                    'designations'=> designation::all(),
+                ];
         
-        return view('employees.employee', compact('items', 'fieldList', 'routes','componentDetails','designation'));
+        
+                return view('employees.index', compact('dataArray'));
+        
 
     }
 
