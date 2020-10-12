@@ -10,7 +10,7 @@
                  
                  @endphp
                  <script>
-                     var dataArray= @json($items);
+                     var dataArray= @json($dataArray);
                      var dataArrayLength= "{{ sizeof($items) }}"
                      console.log(dataArray)
 
@@ -71,7 +71,7 @@
  <div class="card shadow mb-4">
 
     <div class="card-header py-3 bg-abasas-dark">
-        <nav class="navbar navbar-dark ">
+        <nav class="navbar  ">
 
             <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
                 id="pageSetting"></i></div>
@@ -214,8 +214,8 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-modal-label ">
+            <div class="modal-header bg-abasas-dark">
+                <h5 class="modal-title " id="edit-modal-label ">
                     {{ __('translate.'.$componentDetails['editTitle'])}} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span>
