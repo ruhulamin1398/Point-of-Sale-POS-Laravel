@@ -14,82 +14,81 @@ class SettingController extends Controller
      */
     public function index()
     {
-       
+
+        
 $a = '[{
     "componentDetails":{
-        "title":"Employee Salary List",
-        "editTitle":"Edit Employee Salary"
+        "title":"Suppliers List",
+        "editTitle":"Edit Supplier"
     },
     "routes":{
         "create":{
-            "name":"employee_salaries.create",
-            "link":"employee_salaries"
+            "name":"suppliers.create",
+            "link":"suppliers"
         },
         "update":{
-            "name":"employee_salaries.update",
-            "link":"employee_salaries"
+            "name":"suppliers.update",
+            "link":"suppliers"
         },
         "delete":{
-            "name":"employee_salaries.destroy",
-            "link":"employee_salaries"
+            "name":"suppliers.destroy",
+            "link":"suppliers"
         }
     },
     "fieldList":[{
-            
-        "position":3,
+        
+            "position":11,
 
-        "create":"3",
-        "read":"1",
-        "update":"3",
-        "require":"0",
+            "create":"2",
+            "read":"1",
+            "update":"1",
+            "require":"1",
 
-       "input_type":"dropDown",
-       "name":"employee",
-       "database_name":"employee_id",
-       "title": "Employee",
-       "data" : "employees"
-    },{
-            
-        "position":3,
-
-        "create":"3",
-        "read":"1",
-        "update":"3",
-        "require":"0",
-
-       "input_type":"dropDown",
-       "name":"salary_status",
-       "database_name":"salary_status_id",
-       "title": "Salary Status",
-       "data" : "salaryStatuses"
-    },{
+            "name":"name",
+            "input_type" : "text",
+            "database_name":"name",  
+            "title":"Name"
+        },{
             
             "position":111,
 
-            "create":"3",
+            "create":"2",
             "read":"1",
-            "update":"3",
-            "require":"0",
+            "update":"1",
+            "require":"1",
 
-           "input_type":"number",
-           "name":"fixed_salary",
-           "title":"Fixed Salary",
+           "input_type":"text",
+           "name":"phone",
+           "title":"Phone",
 
 
-           "database_name":"fixed_salary"
+           "database_name":"phone"
         },{
             
             "position":1,
 
-            "create":"3",
+            "create":"1",
             "read":"1",
-            "update":"3",
+            "update":"1",
             "require":"0",
 
-           "input_type":"number",
-           "name":"amount_salary",
-           "database_name":"amount_salary",
-           "title": "Amount Salary"
+           "input_type":"text",
+           "name":"address",
+           "database_name":"address",
+           "title": "Address"
+        },{
+            
+            "position":1,
+
+            "create":"1",
+            "read":"1",
+            "update":"1",
+            "require":"0",
+
+           "input_type":"text",
+           "name":"company",
+           "database_name":"company",
+           "title": "Company"
         },{
             
             "position":12,
@@ -100,33 +99,18 @@ $a = '[{
             "require":"0",
 
            "input_type":"number",
-           "name":"amount_other",
-           "database_name":"amount_other",
-           "title": "Amount Other"
-        },{
-            
-            "position":12,
-
-            "create":"3",
-            "read":"1",
-            "update":"3",
-            "require":"0",
-
-           "input_type":"month",
-           "name":"month",
-           "database_name":"month",
-           "title": "Month"
+           "name":"due",
+           "database_name":"due",
+           "title": "Due"
         }
     ]
 }]' ;
 
-       
-
-        // $setting =  setting::find(9);
-        // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'employee_salaries';
-        // $setting->model = 'App\Models\employeeSalary.php';
-        // $setting->save();
+        $setting =  setting::find(12);
+        $setting->setting = json_encode( $a);
+        $setting->table_name = 'suppliers';
+        $setting->model = 'App\Models\supplier.php';
+        $setting->save();
         return  "Success";
 
 
