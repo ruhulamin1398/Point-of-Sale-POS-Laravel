@@ -10,7 +10,7 @@
                  
                  @endphp
                  <script>
-                     var dataArray= @json($items);
+                     var dataArray= @json($dataArray);
                      var dataArrayLength= "{{ sizeof($items) }}"
                      console.log(dataArray)
 

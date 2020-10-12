@@ -8,19 +8,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class employeePayment extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes;  
+    protected $guarded = [];
 
     public function employees(){
         return $this->belongsTo('App\Models\employee','employee_id','id');
     }
     
+    public function paymentType(){
+        return $this->belongsTo('App\Models\employeePaymentType','employee_payment_type_id','id');
+    }
+    
 
-    public function salary_status(){
+    public function salaryStatus(){
         return $this->belongsTo('App\Models\salaryStatus','salary_status_id','id');
     }
     
 
-
+    public function abasas(){
+        $this->employee = $this->employees->name;
+        $this->payment_type = $this->paymentType->name;
+        $this->salary_status = $this->salaryStatus->name;
+    }  
 
 
 

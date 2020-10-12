@@ -14,89 +14,119 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $a = '[{
-            "componentDetails":{
-                "title":"Designation List",
-                "editTitle":"Edit Designation"
-            },
-            "routes":{
-                "create":{
-                    "name":"drop_products.create",
-                    "link":"drop_products"
-                },
-                "update":{
-                    "name":"drop_products.update",
-                    "link":"drop_products"
-                },
-                "delete":{
-                    "name":"drop_products.destroy",
-                    "link":"drop_products"
-                }
-            },
-            "fieldList":[{
-                
-                "position":11,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-                "name":"user",
-                "input_type" : "text",
-                "database_name":"user_id",  
-                "title":"Employee Name"
-             },{
-                
-                "position":11,
-    
-                "create":"2",
-                "read":"1",
-                "update":"2",
-                "require":"1",
-    
-                "name":"products",
-                "input_type" : "dropDown",
-                "database_name":"product_id",  
-                "title":"Product",
-                "data" : "products"
-            },{
-                
-                "position":11,
-    
-                "create":"2",
-                "read":"1",
-                "update":"2",
-                "require":"1",
-    
-                "name":"quantity",
-                "input_type" : "text",
-                "database_name":"quantity",  
-                "title":"Quantity"
-            },{
-                
-                "position":11,
-    
-                "create":"1",
-                "read":"1",
-                "update":"1",
-                "require":"0",
-    
-                "name":"comment",
-                "input_type" : "text",
-                "database_name":"comment",  
-                "title":"Comment"
-            }
-            ]
-        }]' ;
+       
+$a = '[{
+    "componentDetails":{
+        "title":"Employee Salary List",
+        "editTitle":"Edit Employee Salary"
+    },
+    "routes":{
+        "create":{
+            "name":"employee_salaries.create",
+            "link":"employee_salaries"
+        },
+        "update":{
+            "name":"employee_salaries.update",
+            "link":"employee_salaries"
+        },
+        "delete":{
+            "name":"employee_salaries.destroy",
+            "link":"employee_salaries"
+        }
+    },
+    "fieldList":[{
+            
+        "position":3,
 
-           
+        "create":"3",
+        "read":"1",
+        "update":"3",
+        "require":"0",
 
-        //  $setting = new setting; 
-        $setting->setting = json_encode( $a);
-        $setting->table_name = 'drop_products';
-        $setting->model = 'App\Models\dropProduct.php';
-        $setting->save();
+       "input_type":"dropDown",
+       "name":"employee",
+       "database_name":"employee_id",
+       "title": "Employee",
+       "data" : "employees"
+    },{
+            
+        "position":3,
+
+        "create":"3",
+        "read":"1",
+        "update":"3",
+        "require":"0",
+
+       "input_type":"dropDown",
+       "name":"salary_status",
+       "database_name":"salary_status_id",
+       "title": "Salary Status",
+       "data" : "salaryStatuses"
+    },{
+            
+            "position":111,
+
+            "create":"3",
+            "read":"1",
+            "update":"3",
+            "require":"0",
+
+           "input_type":"number",
+           "name":"fixed_salary",
+           "title":"Fixed Salary",
+
+
+           "database_name":"fixed_salary"
+        },{
+            
+            "position":1,
+
+            "create":"3",
+            "read":"1",
+            "update":"3",
+            "require":"0",
+
+           "input_type":"number",
+           "name":"amount_salary",
+           "database_name":"amount_salary",
+           "title": "Amount Salary"
+        },{
+            
+            "position":12,
+
+            "create":"3",
+            "read":"1",
+            "update":"3",
+            "require":"0",
+
+           "input_type":"number",
+           "name":"amount_other",
+           "database_name":"amount_other",
+           "title": "Amount Other"
+        },{
+            
+            "position":12,
+
+            "create":"3",
+            "read":"1",
+            "update":"3",
+            "require":"0",
+
+           "input_type":"month",
+           "name":"month",
+           "database_name":"month",
+           "title": "Month"
+        }
+    ]
+}]' ;
+
+       
+
+        // $setting =  setting::find(9);
+        // $setting->setting = json_encode( $a);
+        // $setting->table_name = 'employee_salaries';
+        // $setting->model = 'App\Models\employeeSalary.php';
+        // $setting->save();
         return  "Success";
 
 

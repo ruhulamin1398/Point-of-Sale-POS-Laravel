@@ -22,7 +22,7 @@ class CreateEmployeePaymentsTable extends Migration
             $table->double('amount', 8, 2);
             $table->double('changed_amount', 8, 2)->default(0.00);
             $table->date('month');
-            $table->longText('Comment')->nullable();
+            $table->longText('comment')->nullable();
             $changedData= [
                 'status'=>false,
                 'data'=>[]
