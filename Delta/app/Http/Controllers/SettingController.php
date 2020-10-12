@@ -55,7 +55,7 @@ class SettingController extends Controller
                 "update":"2",
                 "require":"1",
     
-                "name":"product",
+                "name":"products",
                 "input_type" : "dropDown",
                 "database_name":"product_id",  
                 "title":"Product",

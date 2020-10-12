@@ -416,7 +416,7 @@ Update
 
                  var dropDownId = selectedItem["{{$field['database_name']}}"];
                 
-                    //  var dataArray = @json($field['data']);
+                   console.log(@json($field['data']));
 
                     html = "";
 
