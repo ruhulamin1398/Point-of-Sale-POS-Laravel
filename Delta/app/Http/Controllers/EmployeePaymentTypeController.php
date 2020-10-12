@@ -71,6 +71,7 @@ class EmployeePaymentTypeController extends Controller
 
 
         $items = employeePaymentType::all();
+        
   
 
 
@@ -95,10 +96,8 @@ class EmployeePaymentTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $employeePaymentType = new employeePaymentType;
-        $employeePaymentType->name = $request->name;
-        $employeePaymentType->description = $request->description;
-        $employeePaymentType->save();
+          
+        // this database is fiexed
         return back();
 
     }
@@ -134,9 +133,7 @@ class EmployeePaymentTypeController extends Controller
      */
     public function update(Request $request, employeePaymentType $employeePaymentType)
     {
-        $employeePaymentType->name = $request->name;
-        $employeePaymentType->description = $request->description;
-        $employeePaymentType->save();
+ // this database is fiexed
         return back();
     }
 
@@ -148,7 +145,7 @@ class EmployeePaymentTypeController extends Controller
      */
     public function destroy(employeePaymentType $employeePaymentType)
     {
-        $employeePaymentType->delete();
+         // this database is fiexed
         return back();
     }
 }

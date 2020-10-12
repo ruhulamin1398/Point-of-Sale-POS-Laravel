@@ -1,0 +1,51 @@
+[{
+    "componentDetails":{
+        "title":"Category list",
+        "editTitle":"Edit Category"
+    },
+    "routes":{
+        "create":{
+            "name":"categories.create",
+            "link":"categories"
+        },
+        "update":{
+            "name":"categories.update",
+            "link":"categories"
+        },
+        "delete":{
+            "name":"categories.destroy",
+            "link":"categories"
+        }
+    },
+    "fieldList":{
+        "name":{
+            "create":true,
+            "read":true,
+            "update":true,
+            "name":"name",
+            "input_type" : "text",
+            "database_name":"name",  
+            "title":"Name",
+            "position":1
+        },
+        "products":{
+            "create":"disabled",
+            "read":true,
+            "update":"disabled",
+           "input_type":"text",
+           "name":"products_count",
+           "title":"Products",
+           "position":3
+        },
+        "description":{
+            "create":true,
+            "read":true,
+            "update":true,
+           "input_type":"text",
+           "name":"description",
+           "database_name":"description",
+           "title": "Description",
+           "position":2
+        }
+    }
+}]

@@ -582,4 +582,22 @@ $(document).ready(function () {
     });
 
 
+
+
+///// order complete button 
+$("#orderCompleteButton").on('click',function(){
+  
+    $("#PrintPurchaseModal").modal(
+        {
+            backdrop: 'static',
+            keyboard: false
+        }
+    );
+})
+   // on modal hide
+   $('#PrintPurchaseModal').on('hide.bs.modal', function() {
+    alert()
+});
+
+
 });

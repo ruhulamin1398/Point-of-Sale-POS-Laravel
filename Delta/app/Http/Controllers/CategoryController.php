@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\category;
+use App\Models\productType;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,69 +17,20 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       
 
-        $componentDetails= [
-            'title' => 'Category List',
-            'editTitle' =>'Edit Category',
-        ];
+$settings = setting::where('table_name','categories')->first();
+$settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
-        $routes = [
-            'update' => [
-                'name' => 'categories.update',
-                'link' => 'categories',
-            ],
-            'delete' => [
-                
-                'name' => 'categories.destroy',
-                'link' => 'categories',
-            ]
-
-        ];
-     
         
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=> 'name',
-                
-               'title'=> "Name",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "Description",
-            ],
-          
+        $dataArray=[
+            'settings'=>$settings,
+            'items' => category::all(),
+            'product_types'=> productType::all(),
         ];
 
 
-
-
-
-
-        $items = category::all();
-
-
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
+        return view('product.category.index', compact('dataArray'));
     }
 
     /**
@@ -95,9 +49,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CategoryRequest $request)
+    { 
+        category::create($request->all());
+        return back();
     }
 
     /**
@@ -129,10 +84,15 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(CategoryRequest $request, category $category)
     {
+        $category->update($request->all());
+        return $category;
         //
+        $category->date_time= $request->date_time;
         $category->name= $request->name;
+        $category->description= $request->description;
+        $category->created_at= $request->created_at;
         $category->save();
         return back();
     }

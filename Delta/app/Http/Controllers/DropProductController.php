@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DropProductRequest;
 use App\Models\dropProduct;
+use App\Models\Product;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class DropProductController extends Controller
@@ -14,7 +17,19 @@ class DropProductController extends Controller
      */
     public function index()
     {
-        //
+        $settings = setting::where('table_name','drop_products')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+
+        
+        $dataArray=[
+            'settings'=>$settings,
+            'items' => dropProduct::all(),
+            'products'=> product::all(),
+        ];
+
+
+        return view('product.dropProduct.index', compact('dataArray'));
+
     }
 
     /**
@@ -33,9 +48,9 @@ class DropProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DropProductRequest $request)
     {
-        //
+        //return $request;
     }
 
     /**
@@ -67,7 +82,7 @@ class DropProductController extends Controller
      * @param  \App\Models\dropProduct  $dropProduct
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, dropProduct $dropProduct)
+    public function update(DropProductRequest $request, dropProduct $dropProduct)
     {
         //
     }

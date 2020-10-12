@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeePaymentRequest;
 use App\Models\employee;
 use App\Models\employeePayment;
 use App\Models\employeePaymentType;
+use App\Models\employeeSalary;
+use App\Models\salaryStatus;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class EmployeePaymentController extends Controller
 {
@@ -15,7 +19,8 @@ class EmployeePaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+
         
         $componentDetails= [
             'title' => 'Employee Payments',
@@ -39,26 +44,11 @@ class EmployeePaymentController extends Controller
 
         $fieldList=[
          
-            'user_id'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'user_id',
-                'database_name'=> 'user_id',
-                
-               'title'=> "User ID",
-    
-            ],
-
             'employee_id'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
-                'delete'=>true,
+                'update'=>false,
+                'delete'=>false,
 
 
                'type'=>'normal',
@@ -70,7 +60,7 @@ class EmployeePaymentController extends Controller
             'employee_payment_type_id'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>true,
 
 
@@ -78,8 +68,7 @@ class EmployeePaymentController extends Controller
                'name'=>'employee_payment_type_id',
                'database_name'=>'employee_payment_type_id',
 
-               'title'=> "Payment type ID
-               ",
+               'title'=> "Payment type ID",
             ],
             'amount'=>[
                 'create'=>true,
@@ -94,31 +83,48 @@ class EmployeePaymentController extends Controller
 
                'title'=> "Amount",
             ],
+            'changed_amount'=>[
+                'create'=>true,
+                'read'=>true,
+                'update'=>false,
+                'delete'=>true,
+
+
+               'type'=>'normal',
+               'name'=>'changed_amount',
+               'database_name'=>'changed_amount',
+
+               'title'=> "Edited Amount",
+            ],
+
             'status'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>true,
 
 
                'type'=>'normal',
-               'name'=>'status',
-               'database_name'=>'status',
+               'name'=>'salary_status_id',
+               'database_name'=>'salary_status_id',
 
-               'title'=> "Status",
+               'title'=> "status",
             ],
-            'date'=>[
+
+
+            
+            'month'=>[
                 'create'=>true,
                 'read'=>true,
-                'update'=>true,
+                'update'=>false,
                 'delete'=>true,
 
 
                'type'=>'normal',
-               'name'=>'date',
-               'database_name'=>'date',
+               'name'=>'month',
+               'database_name'=>'month',
 
-               'title'=> "Date",
+               'title'=> "Month",
             ],
             'Comment'=>[
                 'create'=>true,
@@ -146,10 +152,13 @@ class EmployeePaymentController extends Controller
 
         $items = employeePayment::all();
         $employees = employee::all();
-        $paymentTypes = employeePaymentType::all();
+        $payment_types = employeePaymentType::all();
+        $salary_status = salaryStatus::all();
 
+         
+         // view system must be changed
 
-        return view('employees.payment', compact('items', 'fieldList', 'routes','componentDetails','employees','paymentTypes'));
+        return view('employees.payment', compact('items', 'fieldList', 'routes','componentDetails','employees','payment_types','salary_status'));
     }
 
     /**
@@ -168,9 +177,48 @@ class EmployeePaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeePaymentRequest $request)
     {
-        return $request;
+       // return $request;
+        //payment Table 
+        $employeePayment = new employeePayment;
+        $employeePayment->employee_id = $request->employee_id;
+        $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
+        $employeePayment->salary_status_id = $request->salary_status_id;
+        $employeePayment->amount = $request->amount;
+        $employeePayment->month =$request->month.'-01';
+        $employeePayment->Comment = $request->Comment;
+
+       
+         // Salary Table
+
+         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
+         $employee = employee::find($employeePayment->employee_id);
+
+         if(is_null($salaries)){
+             $salaries= new employeeSalary;
+             $salaries->fixed_salary = $employee->salary;
+         }
+        $salaries->salary_status_id= $employeePayment->salary_status_id;
+         if(  $employeePayment->employee_payment_type_id == 1)
+         {
+             $salaries->amount_salary += $employeePayment->amount;
+         }
+         else
+         {
+            $salaries->amount_other += $employeePayment->amount;
+         }
+
+         $salaries->employee_id= $employeePayment->employee_id;
+         $salaries->month= $employeePayment->month;
+
+
+
+         $salaries->save();
+         $employeePayment->save();
+         return back();
+
+         //salary table calculation 
     }
 
     /**
@@ -202,9 +250,30 @@ class EmployeePaymentController extends Controller
      * @param  \App\Models\employeePayment  $employeePayment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, employeePayment $employeePayment)
+    public function update(EmployeePaymentRequest $request, employeePayment $employeePayment)
     {
-        //
+        
+         // only amount and comment editable
+        $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
+        $different =$request->amount-$employeePayment->amount;
+        if(  $employeePayment->employee_payment_type_id == 1)
+        {
+            $salaries->amount_salary += $different;
+        }
+        else
+        {
+           $salaries->amount_other += $different;
+        }
+
+        $employeePayment->amount = $request->amount;
+        $employeePayment->Comment = $request->Comment;
+        $employeePayment->changed_amount +=$different;
+        // cahnged data json work needed
+
+
+        $salaries->save();
+        $employeePayment->save();
+         return back();
     }
 
     /**
@@ -215,6 +284,21 @@ class EmployeePaymentController extends Controller
      */
     public function destroy(employeePayment $employeePayment)
     {
-        //
+        
+         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
+        if($employeePayment->employee_payment_type_id==1)
+        {
+            $salaries->amount_salary -= $employeePayment->amount;
+            $salaries->salary_status_id=2;
+        }
+        else
+        {
+            $salaries->amount_other -= $employeePayment->amount;
+        }
+                    
+        
+        $salaries->save();
+        $employeePayment->delete();
+        return back();
     }
 }

@@ -145,8 +145,8 @@ class RoleTableSeeder extends Seeder
             [
                 'employee_id' => 1,
                 'duty_status_id' => 1,
-                'enter_time' => '14:22:51',
-                'exit_time' => '22:22:51',
+                'enter_time' => '2020-10-13 22:27:06',
+                'exit_time' => '2020-10-13 22:27:06',
                 'fixed_duty_hour' => '8:00:00',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
@@ -155,8 +155,8 @@ class RoleTableSeeder extends Seeder
             [
                 'employee_id' => 2,
                 'duty_status_id' => 2,
-                'enter_time' => '14:22:51',
-                'exit_time' => '22:22:51',
+                'enter_time' => '2020-10-13 22:27:06',
+                'exit_time' => '2020-10-13 22:27:06',
                 'fixed_duty_hour' => '8:00:00',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
@@ -166,8 +166,8 @@ class RoleTableSeeder extends Seeder
 
                 'employee_id' => 3,
                 'duty_status_id' => 3,
-                'enter_time' => '14:22:51',
-                'exit_time' => '22:22:51',
+                'enter_time' => '2020-10-13 22:27:06',
+                'exit_time' => '2020-10-13 22:27:06',
                 'fixed_duty_hour' => '8:00:00',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
@@ -265,16 +265,20 @@ class RoleTableSeeder extends Seeder
     
         DB::table('duty_statuses')->insert([
                 [
-                    'name' => 'present',
-                    'description' => 'he is present',
+                    'name' => 'Present',
+                    'description' => 'Employee is present',
                 ],
                 [
-                    'name' => 'absent',
-                    'description' => 'he is absent',
+                    'name' => 'Absent',
+                    'description' => 'Employee is absent',
                 ],
                 [
-                    'name' => 'day off',
-                    'description' => 'this is day off',
+                    'name' => 'Day off',
+                    'description' => 'This is day off',
+                ],
+                [
+                    'name' => 'Vacation',
+                    'description' => 'Employee on Vacation',
                 ],
         ]);
     
@@ -285,6 +289,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01718988564',
                 'address' => 'address 1',
                 'joining_date' => '2020-09-16',
+                'fixed_duty_hour'=>'8:00:00',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' =>2,
@@ -295,6 +300,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01840000408',
                 'address' => 'address 2',
                 'joining_date' => '2020-09-16',
+                'fixed_duty_hour'=>'8:00:00',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' => 1,
@@ -305,6 +311,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01729867026',
                 'address' => 'address 3',
                 'joining_date' => '2020-09-16',
+                'fixed_duty_hour'=>'8:00:00',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' => 1,
@@ -315,27 +322,27 @@ class RoleTableSeeder extends Seeder
             [
                 'employee_id' => 1,
                 'employee_payment_type_id' => 1,
+                'salary_status_id' => 1,
                 'amount'=>1200.00,
-                'status' => 'completed',
-                'date' => '2020-09-16',
+                'month' => '2020-09-16',
                 'Comment' => 'comment 1',
             ],
             [
 
                 'employee_id' => 2,
-                'employee_payment_type_id' => 2,
+                'employee_payment_type_id' => 1,
+                'salary_status_id' => 2,
                 'amount'=>1200.00,
-                'status' => 'completed',
-                'date' => '2020-09-16',
+                'month' => '2020-09-16',
                 'Comment' => 'comment 2',
             ],
             [
 
                 'employee_id' => 3,
                 'employee_payment_type_id' => 1,
+                'salary_status_id' => 1,
                 'amount'=>1200.00,
-                'status' => 'completed',
-                'date' => '2020-09-16',
+                'month' => '2020-09-16',
                 'Comment' => 'comment 3',
             ],
         ]);
@@ -343,29 +350,29 @@ class RoleTableSeeder extends Seeder
         DB::table('employee_salaries')->insert([
             [
                 'employee_id' => 1,
+                'salary_status_id' => 1,
                 'fixed_salary'=>1200.00,
                 'amount_salary'=>1200.00,
                 'amount_other'=>500.00,
-                'status' => 'completed',
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
             ],
             [
 
                 'employee_id' => 2,
+                'salary_status_id' => 1,
                 'fixed_salary'=>1200.00,
                 'amount_salary'=>1200.00,
                 'amount_other'=>500.00,
-                'status' => 'completed',
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
             ],
             [
   
                 'employee_id' => 3,
+                'salary_status_id' => 1,
                 'fixed_salary'=>1200.00,
                 'amount_salary'=>1200.00,
                 'amount_other'=>500.00,
-                'status' => 'completed',
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
             ],
         ]);
     
@@ -377,10 +384,6 @@ class RoleTableSeeder extends Seeder
             [
                 'name' => 'Bonus',
                 'description' => 'description 2',
-            ],
-            [
-                'name' => 'Extraa',
-                'description' => 'description 3',
             ],
         ]);
 
@@ -410,7 +413,19 @@ class RoleTableSeeder extends Seeder
             ],
         ]);
 
+        DB::table('salary_statuses')->insert([
+            [
+                'name' => 'Completed',
+                'description' => 'Completed',
+            ],
+            [
+                'name' => 'Incomplete',
+                'description' =>'Incomplete',
+            ],
+        ]);
 
+
+        
 
 
 

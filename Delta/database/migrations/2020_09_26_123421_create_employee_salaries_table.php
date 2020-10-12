@@ -17,12 +17,12 @@ class CreateEmployeeSalariesTable extends Migration
         Schema::create('employee_salaries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('salary_status_id')->default(2);
             $table->double('fixed_salary', 8, 2);
-            $table->double('amount_salary', 8, 2);
-            $table->double('amount_other', 8, 2);
-            $table->string('status')->nullable();
+            $table->double('amount_salary', 8, 2)->default(0.00);
+            $table->double('amount_other', 8, 2)->default(0.00);
             $table->date('month');
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();
         });

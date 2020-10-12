@@ -95,7 +95,7 @@ class PaymentSystemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // only crateable non editable or delatable 
     }
 
     /**

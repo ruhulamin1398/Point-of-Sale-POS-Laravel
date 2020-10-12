@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BrandRequest;
 use App\Models\brand;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -14,63 +16,15 @@ class BrandController extends Controller
      */
     public function index()
     {    
-        $componentDetails= [
-            'title' => 'Brand List',
-            'editTitle' =>'Edit Brand',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'brands.update',
-                'link' => 'brands',
-            ],
-            'delete' => [
                 
-                'name' => 'brands.destroy',
-                'link' => 'brands',
-            ]
-
-        ];
-     
+        $settings = setting::where('table_name','brands')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=> 'name',
-                
-                'title'=> "Name",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "Description",
-            ],
-          
+        $dataArray=[
+            'settings'=>$settings,
+            'items' => brand::all(),
         ];
-
-
-        $items = brand::all();
-
-
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
+        return view('product.brand.index', compact('dataArray'));
     }
 
 
@@ -90,9 +44,10 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
+
     {
-        //
+         //return $request;
     }
 
     /**
@@ -124,7 +79,7 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, brand $brand)
+    public function update(BrandRequest $request, brand $brand)
     {
         $brand->name= $request->name;
         $brand->description= $request->description;

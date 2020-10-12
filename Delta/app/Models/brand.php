@@ -11,4 +11,8 @@ class brand extends Model
     use HasFactory;
 
     use SoftDeletes;
+    protected $guarded = [];
+    public function abasas(){
+        //
+    }   
 }

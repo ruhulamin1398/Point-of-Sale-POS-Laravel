@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
 use App\Models\designation;
 use Illuminate\Http\Request;
@@ -159,8 +160,9 @@ class EmployeeController extends Controller
 
         $items = employee::all();
         $designation = designation::all();
-
-
+       
+        // fixed duty work needed
+        
         return view('employees.employee', compact('items', 'fieldList', 'routes','componentDetails','designation'));
 
     }
@@ -181,7 +183,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
          
        $employee = new employee;
@@ -191,10 +193,16 @@ class EmployeeController extends Controller
        $employee->joining_date = $request->joining_date;
        $employee->reference = $request->reference;
        $employee->term_of_contract = $request->term_of_contract;
+       $employee->fixed_duty_hour = $request->fixed_duty_hour;
        $employee->salary = $request->salary;
        $employee->designation_id = $request->designation_id;
+
+       
+
+
        $employee->save();
        return back();
+
     }
 
     /**
@@ -226,7 +234,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, employee $employee)
+    public function update(EmployeeRequest $request, employee $employee)
     {
  
         $employee->name = $request->name;
@@ -235,6 +243,7 @@ class EmployeeController extends Controller
         $employee->joining_date = $request->joining_date;
         $employee->reference = $request->reference;
         $employee->term_of_contract = $request->term_of_contract;
+        $employee->fixed_duty_hour = $request->fixed_duty_hour;
         $employee->salary = $request->salary;
         $employee->designation_id = $request->designation_id;
         $employee->save();

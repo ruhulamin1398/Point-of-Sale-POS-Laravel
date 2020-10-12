@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
 use App\Models\customer;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -15,106 +17,19 @@ class CustomerController extends Controller
     public function index()
     {
          
-        $componentDetails= [
-            'title' => 'customers List',
-            'editTitle' =>'Edit customers',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'customers.update',
-                'link' => 'customers',
-            ],
-            'delete' => [
-                
-                'name' => 'customers.destroy',
-                'link' => 'customers',
-            ]
-
-        ];
-     
+        $settings = setting::where('table_name','customers')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=> 'name',
                 
-               'title'=> "Name",
-    
-            ],
-            'phone'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => customer::all(),
+                ];
+        
+        
+                return view('customers.index', compact('dataArray'));
 
 
-               'type'=>'normal',
-               'name'=>'phone',
-               'database_name'=>'phone',
-
-               'title'=> "phone",
-            ],
-            'address'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'address',
-               'database_name'=>'address',
-
-               'title'=> "address",
-            ],
-            'company'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'company',
-               'database_name'=>'company',
-
-               'title'=> "company",
-            ],
-            'due'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'due',
-               'database_name'=>'due',
-
-               'title'=> "due",
-            ],
-          
-        ];
-
-
-
-
-
-
-        $items = customer::all();
-
-
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
@@ -133,9 +48,9 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+       // return $request;
     }
 
     /**
@@ -167,7 +82,7 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customer $customer)
+    public function update(CustomerRequest $request, customer $customer)
     {
         $customer->name= $request->name;
         $customer->phone= $request->phone;

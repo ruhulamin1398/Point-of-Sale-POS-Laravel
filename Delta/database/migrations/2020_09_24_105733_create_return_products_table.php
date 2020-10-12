@@ -22,7 +22,7 @@ class CreateReturnProductsTable extends Migration
             $table->double('quantity',8,3);
             $table->double('price',8,3);
             $table->double('profit',8,3);
-            $table->string('comment');
+            $table->string('comment')->nullable();
             
             $table->softDeletes();
             $table->timestamps();

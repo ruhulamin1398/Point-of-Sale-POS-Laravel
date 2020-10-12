@@ -17,14 +17,14 @@ class CreateEmployeeDutiesTable extends Migration
         Schema::create('employee_duties', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('duty_status_id');
-            $table->time('enter_time');
-            $table->time('exit_time');
+            $table->unsignedBigInteger('duty_status_id')->default(3);
+            $table->dateTime('enter_time')->nullable();
+            $table->dateTime('exit_time')->nullable();
             $table->time('fixed_duty_hour');
-            $table->time('worked_hour');
+            $table->time('worked_hour')->nullable();
             $table->date('date');
             $table->longText('comment')->nullable();
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();
         });

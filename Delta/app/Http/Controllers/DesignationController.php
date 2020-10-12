@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DesignationRequest;
 use App\Models\designation;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class DesignationController extends Controller
@@ -14,7 +16,20 @@ class DesignationController extends Controller
      */
     public function index()
     {
-        //
+         
+        $settings = setting::where('table_name','designations')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        
+                
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => designation::all(),
+                ];
+        
+        
+                return view('employees.designation.index', compact('dataArray'));
+
+
     }
 
     /**
@@ -33,9 +48,13 @@ class DesignationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DesignationRequest $request)
     {
-        //
+         $designation = new designation;
+         $designation->role = $request->role;
+         $designation->description = $request->description;
+         $designation->save();
+        return back();
     }
 
     /**
@@ -67,9 +86,12 @@ class DesignationController extends Controller
      * @param  \App\Models\designation  $designation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, designation $designation)
+    public function update(DesignationRequest $request, designation $designation)
     {
-        //
+        $designation->role = $request->role;
+        $designation->description = $request->description;
+        $designation->save();
+       return back();
     }
 
     /**

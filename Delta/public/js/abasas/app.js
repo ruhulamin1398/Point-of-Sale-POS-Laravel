@@ -80,5 +80,17 @@ $(document).ready(function(){
       })(jQuery); // End of use strict
 
       
+
+
+
+
+
+      // check box 
+      $(".abasasCheckBox").on('input',function(){
+        if ($(this).is(':checked'))
+        $(this).val(1)
+      else
+      $(this).val(0)
+      });
       
 });

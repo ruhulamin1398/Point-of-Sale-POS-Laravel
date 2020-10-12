@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRatingRequest;
 use App\Models\customerRating;
 use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\StartSession;
 
 class CustomerRatingController extends Controller
 {
@@ -33,9 +35,14 @@ class CustomerRatingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CustomerRatingRequest $request)
+    { 
+        $customerRating = new customerRating;
+        $customerRating->star_count = $request->star_count;
+        $customerRating->name = $request->name;
+        $customerRating->description = $request->description;
+        $customerRating->save();
+        return back();
     }
 
     /**
@@ -67,9 +74,13 @@ class CustomerRatingController extends Controller
      * @param  \App\Models\customerRating  $customerRating
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customerRating $customerRating)
+    public function update(CustomerRatingRequest $request, customerRating $customerRating)
     {
-        //
+        $customerRating->star_count = $request->star_count;
+        $customerRating->name = $request->name;
+        $customerRating->description = $request->description;
+        $customerRating->save();
+        return back();
     }
 
     /**

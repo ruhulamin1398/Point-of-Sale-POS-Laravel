@@ -3,6 +3,15 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 
 <!-- Begin Page Content -->
@@ -20,28 +29,33 @@
                 <div class="form-row align-items-center">
                     <div class="col-auto">
                         <span class="text-dark pl-4"> কর্মচারীর নাম</span>
-                        <input type="text" name="name" class="form-control mb-2">
+                        <input type="text" name="name" class="form-control mb-2"  >
                     </div>
                     <div class="col-auto">
 
                         <span class="text-dark pl-4">নাম্বার</span>
-                        <input type="number" name="phone" class="form-control mb-2">
+                        <input type="number" name="phone" class="form-control mb-2"  >
                     </div>
                     <div class="col-auto">
 
                         <span class="text-dark pl-2"> ঠিকানা</span>
-                        <input type="text" name="address" class="form-control mb-2">
+                        <input type="text" name="address" class="form-control mb-2"  >
                     </div>
 
                     <div class="col-auto">
 
                         <span class="text-dark pl-2"> বেতন</span>
-                        <input type="number" name="salary" class="form-control mb-2">
+                        <input type="number" name="salary" class="form-control mb-2"  >
+                    </div>
+
+                    <div class="col-auto">
+                        <span class="text-dark pl-2"> Duty Time (daily)</span>
+                        <input type="time" name="fixed_duty_hour" class="form-control mb-2">
                     </div>
 
                     <div class="col-auto">
                         <span class="text-dark pl-2"> Join</span>
-                        <input type="date" name="joining_date" class="form-control mb-2">
+                        <input type="date" name="joining_date" class="form-control mb-2" >
                     </div>
                     <div class="col-auto">
                         <span class="text-dark pl-2"> Contract</span>
@@ -56,7 +70,7 @@
                     
 
                     <div class="col-auto">
-                        <select class="form-control form-control" value="" name="designation_id" id="designation" required>
+                        <select class="form-control form-control" value="" name="designation_id" id="designation" >
                             <option selected="selected">Select designation </option>
                             @foreach ($designation as $designation)
                             <option value="{{$designation->id}}"> {{$designation->role}}</option>
@@ -85,13 +99,8 @@
 <script>
     $(document).ready(function() {
 
-        $('body').on('click', '#PlusButton', function() {
-            $('#PlusButton').toggleClass('fa-minus').toggleClass('fa-plus');
-
-            
-
-
-
+        $('body').on('click', '#AddNewFormButton', function() {
+            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
 
         });
 
