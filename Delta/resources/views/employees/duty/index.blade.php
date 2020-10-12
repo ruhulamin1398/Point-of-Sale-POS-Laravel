@@ -133,6 +133,14 @@
 </div>
 
 
+<script> 
+$(document).ready(function(){
 
+$('#dataTableDuty').DataTable();
+
+
+});
+
+</script>
 
 @endsection

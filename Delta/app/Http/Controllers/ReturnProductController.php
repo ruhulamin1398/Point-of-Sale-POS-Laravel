@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReturnProductRequest;
+use App\Models\customer;
+use App\Models\Product;
 use App\Models\returnProduct;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class ReturnProductController extends Controller
@@ -15,7 +18,20 @@ class ReturnProductController extends Controller
      */
     public function index()
     {
-        //
+
+        $settings = setting::where('table_name', 'return_products')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => returnProduct::all(),
+            'products' => Product::all(),
+            'customers' => customer::all(),
+        ];
+
+
+        return view('product.return-product.index', compact('dataArray'));
     }
 
     /**
@@ -36,7 +52,7 @@ class ReturnProductController extends Controller
      */
     public function store(ReturnProductRequest $request)
     {
-       // return $request;
+        // return $request;
     }
 
     /**
