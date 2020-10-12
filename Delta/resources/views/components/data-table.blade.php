@@ -285,14 +285,14 @@
                     @if( $fieldList[$i]['create']==1 )
                   <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  > 
                     @elseif( $fieldList[$i]['create']==2 )
-                  <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  disabled > 
+                  <input type="checkbox" class="form-check-input create abasasCheckBox " value="2" checked  disabled > 
                
                   @elseif($fieldList[$i]['create']==0)
 
                   <input type="checkbox" class="form-check-input  create abasasCheckBox  " value="0"  > 
                   @else
                   
-                  <input type="checkbox" class="form-check-input create" disabled value="2" > 
+                  <input type="checkbox" class="form-check-input create" disabled value="3" > 
                   @endif
                   Create</label>
               </div>
@@ -305,10 +305,10 @@
                     <input type="checkbox" class="form-check-input read abasasCheckBox " value="0" > 
                     @elseif( $fieldList[$i]['read'] == 2 )
   
-                    <input type="checkbox" class="form-check-input read abasasCheckBox " value="1" checked disabled > 
+                    <input type="checkbox" class="form-check-input read abasasCheckBox " value="2" checked disabled > 
                     @else
   
-                    <input type="checkbox" class="form-check-input read" disabled value="2" > 
+                    <input type="checkbox" class="form-check-input read" disabled value="3" > 
                   @endif
                     Read
                 </label>
@@ -318,11 +318,11 @@
                     @if( $fieldList[$i]['update'] ==1  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
                     @elseif( $fieldList[$i]['update'] ==2  )
-                    <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked disabled>  
+                    <input type="checkbox" class="form-check-input update abasasCheckBox " value="2" checked disabled>  
                     @elseif( $fieldList[$i]['update'] ==0  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="0" > 
                     @else 
-                    <input type="checkbox" class="form-check-input update" disabled value="2" > 
+                    <input type="checkbox" class="form-check-input update" disabled value="3" > 
                      @endif
 Update
                 </label>

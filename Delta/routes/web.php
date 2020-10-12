@@ -25,6 +25,7 @@ use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('getjson',function(){
+    return Product::all();
+})->name('getJson');
 Route::post('test-submit',function(Request $request){
     return $request;
 })->name('testSubmit');
