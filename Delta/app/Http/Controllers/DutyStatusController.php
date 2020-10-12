@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\dutyStatus;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 use function Symfony\Component\String\b;
@@ -17,67 +18,19 @@ class DutyStatusController extends Controller
     public function index()
     {
 
-        $componentDetails= [
-            'title' => 'Duty statues',
-            'editTitle' =>'Edit Duty statues',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'duty_status.update',
-                'link' => 'duty_status',
-            ],
-            'delete' => [
-                
-                'name' => 'duty_status.destroy',
-                'link' => 'duty_status',
-            ]
-
-        ];
-     
+        $settings = setting::where('table_name','duty_statuses')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=>'name',
                 
-                'title'=> "Name",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "Description",
-            ],
-
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => dutyStatus::all()
+                    
+                ];
+              
         
-          
-        ];
-
-
-        $items = dutyStatus::all();
-  
-
-
-        return view('employees.dutystatus', compact('items', 'fieldList', 'routes','componentDetails',));
-
+                return view('employees.duty.dutyStatus', compact('dataArray'));
+        
     }
 
     /**

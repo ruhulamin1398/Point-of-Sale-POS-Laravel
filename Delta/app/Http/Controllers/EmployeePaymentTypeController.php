@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\employeePaymentType;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class EmployeePaymentTypeController extends Controller
@@ -15,67 +16,22 @@ class EmployeePaymentTypeController extends Controller
     public function index()
     {
         
-        $componentDetails= [
-            'title' => 'Employee Payment Types',
-            'editTitle' =>'Edit Employee Payment Types',
-        ];
 
-        $routes = [
-            'update' => [
-                'name' => 'employee_payment_types.update',
-                'link' => 'employee_payment_types',
-            ],
-            'delete' => [
+        $settings = setting::where('table_name','employee_payment_types')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        
                 
-                'name' => 'employee_payment_types.destroy',
-                'link' => 'employee_payment_types',
-            ]
-
-        ];
-     
-        
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=>'name',
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => employeePaymentType::all(),
                 
-                'title'=> "Name",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
+                ];
 
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "Description",
-            ],
-
+                // return $dataArray;
         
-          
-        ];
-
-
-        $items = employeePaymentType::all();
         
-  
-
-
-        return view('employees.payment-type', compact('items', 'fieldList', 'routes','componentDetails',));
+                return view('employees.payments.payment-type', compact('dataArray'));
+        
     }
 
     /**

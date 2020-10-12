@@ -400,15 +400,15 @@ class RoleTableSeeder extends Seeder
 
         DB::table('designations')->insert([
             [
-                'role' => 'manager',
+                'name' => 'manager',
                 'description' => ' manager can do anything',
             ],
             [
-                'role' => 'staf',
+                'name' => 'staf',
                 'description' =>'will help to sell',
             ],
             [
-                'role' => 'cleaner',
+                'name' => 'cleaner',
                 'description' => 'nargis is cleaner',
             ],
         ]);

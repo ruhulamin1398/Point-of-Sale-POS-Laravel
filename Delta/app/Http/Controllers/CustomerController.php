@@ -22,11 +22,12 @@ class CustomerController extends Controller
         
                 
                 $dataArray=[
+                    'settings'=>$settings,
                     'items' => customer::all(),
                 ];
         
         
-                return view('customers.index', compact('dataArray','settings'));
+                return view('customers.index', compact('dataArray'));
 
 
     }

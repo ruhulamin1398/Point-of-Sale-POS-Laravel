@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DesignationRequest;
 use App\Models\designation;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class DesignationController extends Controller
@@ -15,7 +16,20 @@ class DesignationController extends Controller
      */
     public function index()
     {
-        //
+         
+        $settings = setting::where('table_name','designations')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        
+                
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => designation::all(),
+                ];
+        
+        
+                return view('employees.designation.index', compact('dataArray'));
+
+
     }
 
     /**
