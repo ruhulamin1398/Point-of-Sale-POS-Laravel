@@ -7,7 +7,7 @@
 
 
 <!-- Begin Page Content -->
-<div class="" id="NewEmployorm">
+<div class="collapse" id="NewEmployorm">
     <div class="card mb-4 shadow">
 
         <div class="card-header py-3  bg-abasas-dark ">
@@ -21,27 +21,29 @@
                 <div class="form-row align-items-center">
 
                     <div class="col-auto pr-4">
-                    <label for="employee_id">Select Employee</label>
-                        <select class="form-control form-control" value="1" name="employee_id" id="employee_id" required>
-                            
+                        <label for="employee_id">Select Employee</label>
+                        <select class="form-control form-control" value="1" name="employee_id" id="employee_id"
+                            required>
+
                             @foreach ($employees as $employee)
                             @if($loop->first)
-                                
+
                             <option value="{{$employee->id}}" selected="selected"> {{$employee->name}}</option>
                             @else
-                            
-                            <option value="{{$employee->id}}" > {{$employee->name}}</option>
+
+                            <option value="{{$employee->id}}"> {{$employee->name}}</option>
                             @endif
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-auto pr-4">
-                    <label for="employee_payment_type_id">Select Payment Type</label>
-                        <select class="form-control form-control" value="" name="employee_payment_type_id" id="employeePaymentTypeId" required>
+                        <label for="employee_payment_type_id">Select Payment Type</label>
+                        <select class="form-control form-control" value="" name="employee_payment_type_id"
+                            id="employeePaymentTypeId" required>
                             @foreach ($payment_types as $paymentType)
                             @if($loop->first)
-                            <option value="{{$paymentType->id}}"  selected="selected"   > {{$paymentType->name}}</option>
+                            <option value="{{$paymentType->id}}" selected="selected"> {{$paymentType->name}}</option>
                             @else
                             <option value="{{$paymentType->id}}"> {{$paymentType->name}}</option>
                             @endif
@@ -50,12 +52,12 @@
                     </div>
 
 
-                    <div class="col-auto pr-4"  id="employeePaymentStatus">
-                    <label for="employee_payment_type_id"> Payment Status</label>
+                    <div class="col-auto pr-4" id="employeePaymentStatus">
+                        <label for="employee_payment_type_id"> Payment Status</label>
                         <select class="form-control form-control" value="" name="salary_status_id" required>
-                                @foreach ($salary_status as $status)
+                            @foreach ($salary_status as $status)
                             @if($loop->last)
-                            <option value="{{$status->id}}"  selected="selected" > {{$status->name}}</option>
+                            <option value="{{$status->id}}" selected="selected"> {{$status->name}}</option>
                             @else
                             <option value="{{$status->id}}"> {{$status->name}}</option>
                             @endif
@@ -65,19 +67,19 @@
 
 
                     <div class="col-auto pr-4">
-                    <label for="amount">Amount</label>
+                        <label for="amount">Amount</label>
                         <input type="number" step="any" name="amount" class="form-control mb-2" required>
                     </div>
-                    
+
                     <div class="col-auto pr-4">
-                    <label for="month">Select Month</label>
+                        <label for="month">Select Month</label>
                         <input type="month" name="month" class="form-control mb-2" required>
                     </div>
 
 
                     <div class="col-auto pr-4">
 
-                    <label for="Comment">Comment</label>
+                        <label for="Comment">Comment</label>
                         <textarea class="form-control mb-2" name="Comment" rows="2"></textarea>
                     </div>
 
@@ -94,6 +96,29 @@
     </div>
 </div>
 
+<div id="employeePaymentData">
+    <div class="card mb-4 shadow">
+
+        <div class="card-header py-3 bg-abasas-dark">
+            <nav class="navbar  ">
+
+                <div class="navbar-brand">List <i class="fas fa-tools pl-2" id="pageSetting"></i></div>
+                <button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
+                    data-target="#NewEmployorm" aria-expanded="false" aria-controls="collapseExample"><i
+                        class="fas fa-plus" id="PlusButton"></i></button>
+
+
+            </nav>
+        </div>
+
+
+        {{-- data table add here --}}
+
+    </div>
+
+
+</div>
+
 
 
 
@@ -102,24 +127,24 @@
 
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $('body').on('click', '#AddNewFormButton', function() {
+        $('body').on('click', '#AddNewFormButton', function () {
             $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
 
         });
-        
 
-        $('#employeePaymentTypeId').on('input',function(){
-            if($(this).val()==1){
+
+        $('#employeePaymentTypeId').on('input', function () {
+            if ($(this).val() == 1) {
                 $('#employeePaymentStatus').show();
-            }
-            else{
+            } else {
                 $('#employeePaymentStatus').hide();
             }
         });
 
     });
+
 </script>
 
 

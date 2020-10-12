@@ -6,6 +6,7 @@ use App\Models\employee;
 use App\Models\employeeSalary;
 use App\Models\salaryStatus;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EmployeeSalaryController extends Controller
@@ -17,21 +18,23 @@ class EmployeeSalaryController extends Controller
      */
     public function index()
     {
-    
-$settings = setting::where('table_name','employee_salaries')->first();
-$settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        $salaries= employeeSalary::all();
 
-        
-        $dataArray=[
-            'settings'=>$settings,
-            'items' => employeeSalary::all(),
-            
+        foreach($salaries as $salary){
+            $salary->month=Carbon::parse($salary->month)->format('F, Y');
+        }
+        $settings = setting::where('table_name', 'employee_salaries')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $salaries,
+
         ];
 
 
         return view('product.category.index', compact('dataArray'));
-
-    
     }
 
     /**
