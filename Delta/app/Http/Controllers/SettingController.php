@@ -106,11 +106,11 @@ $a = '[{
     ]
 }]' ;
 
-        $setting =  setting::find(12);
-        $setting->setting = json_encode( $a);
-        $setting->table_name = 'suppliers';
-        $setting->model = 'App\Models\supplier.php';
-        $setting->save();
+        // $setting =  setting::find(12);
+        // $setting->setting = json_encode( $a);
+        // $setting->table_name = 'suppliers';
+        // $setting->model = 'App\Models\supplier.php';
+        // $setting->save();
         return  "Success";
 
 
