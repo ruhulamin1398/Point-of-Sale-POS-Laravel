@@ -17,62 +17,94 @@ class SettingController extends Controller
 
 
         $a = '[{
-    "componentDetails":{
-        "title":"Employee List",
-        "editTitle":"Edit Employee"
-    },
-    "routes":{
-        "create":{
-            "name":"employees.create",
-            "link":"employees"
-        },
-        "update":{
-            "name":"employees.update",
-            "link":"employees"
-        },
-        "delete":{
-            "name":"employees.destroy",
-            "link":"employees"
-        }
-    },
-    "fieldList":[{
-            
-            "position":111,
+            "componentDetails":{
+                "title":"Expenses List",
+                "editTitle":"Edit Expenses"
+            },
+            "routes":{
+                "create":{
+                    "name":"expense.create",
+                    "link":"expense"
+                },
+                "update":{
+                    "name":"expense.update",
+                    "link":"expense"
+                },
+                "delete":{
+                    "name":"expense.destroy",
+                    "link":"expense"
+                }
+            },
+            "fieldList":[{
+                    
+                "position":3,
+    
+                "create":"2",
+                "read":"1",
+                "update":"1",
+                "require":"1",
+    
+               "input_type":"dropDown",
+               "name":"employee",
+               "database_name":"employee_id",
+               "title": "Employee",
+               "data" : "employees"
+            },{
+                    
+                "position":3,
+    
+                "create":"2",
+                "read":"1",
+                "update":"1",
+                "require":"1",
+    
+               "input_type":"dropDown",
+               "name":"expense_type",
+               "database_name":"expense_type_id",
+               "title": "Expense Type",
+               "data" : "expense_types"
+            },{
+                    
+                "position":111,
+    
+                "create":"2",
+                "read":"1",
+                "update":"1",
+                "require":"1",
+    
+               "input_type":"number",
+               "name":"amount",
+               "title":"Amount",
+    
+    
+               "database_name":"amount"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"date",
+               "name":"date",
+               "title":"Date",
+    
+    
+               "database_name":"created_at"
+            }
+            ]
+        }]' ;
 
-            "create":"2",
-            "read":"1",
-            "update":"1",
-            "require":"1",
 
-           "input_type":"text",
-           "name":"name",
-           "title":"Name",
-
-
-           "database_name":"name"
-        },{
-            
-            "position":1,
-
-            "create":"1",
-            "read":"1",
-            "update":"1",
-            "require":"0",
-
-           "input_type":"text",
-           "name":"description",
-           "database_name":"description",
-           "title": "Description"
-        }
-    ]
-}]';
-
-        // $setting =  setting::find(300);
+        
+        // $setting =  setting::find(13);
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'designations';
-        // $setting->model = 'App\Models\designation.php';
+        // $setting->table_name = 'expenses';
+        // $setting->model = 'App\Models\expense.php';
         // $setting->save();
-        return  "Success";
+        // return  "Success";
     }
 
     /**

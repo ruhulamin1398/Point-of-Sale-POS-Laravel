@@ -15,67 +15,7 @@ class ProductTypeController extends Controller
     public function index()
     {
         
-        $componentDetails= [
-            'title' => 'Product Type',
-            'editTitle' =>'Edit Product Type',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'product_types.update',
-                'link' => 'product_types',
-            ],
-            'delete' => [
-                
-                'name' => 'product_types.destroy',
-                'link' => 'product_types',
-            ]
-
-        ];
-     
-        
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>false,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=> 'name',
-                
-               'title'=> "Name",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "Description",
-            ],
-          
-        ];
-
-
-
-
-
-
-        $items = productType::all();
-
-
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
+      //
     }
 
     /**

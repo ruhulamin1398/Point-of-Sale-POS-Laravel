@@ -424,6 +424,30 @@ class RoleTableSeeder extends Seeder
             ],
         ]);
 
+        DB::table('expense_types')->insert([
+            [
+                'name' => 'Breakfast',
+                'description' => 'This goes to breakfast',
+            ],
+            [
+                'name' => 'Internet bill',
+                'description' =>'This goes to internet bill',
+            ],
+        ]);
+
+        DB::table('expenses')->insert([
+            [
+                'employee_id' => 1,
+                'expense_type_id' => 1,
+                'amount' => 400.5,
+            ],
+            [
+                'employee_id' => 2,
+                'expense_type_id' =>2,
+                'amount' =>2,
+            ],
+        ]);
+
 
         
 
