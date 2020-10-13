@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
+use App\Models\User;
 use App\Models\designation;
+use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EmployeeController extends Controller
 {
@@ -17,153 +20,20 @@ class EmployeeController extends Controller
     public function index()
     {
     
-        $componentDetails= [
-            'title' => 'Employees List',
-            'editTitle' =>'Edit Employees',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'employees.update',
-                'link' => 'employees',
-            ],
-            'delete' => [
-                
-                'name' => 'employees.destroy',
-                'link' => 'employees',
-            ]
-
-        ];
-     
+        $settings = setting::where('table_name','employees')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=>'name',
                 
-                'title'=> "Name",
-    
-            ],
-            'phone'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'phone',
-               'database_name'=>'phone',
-
-               'title'=> "phone",
-            ],
-
-            'address'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'address',
-               'database_name'=>'address',
-
-               'title'=> "address",
-            ],
-            'joining_date'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'joining_date',
-               'database_name'=>'joining_date',
-
-               'title'=> "Joining",
-            ],
-
-            'reference'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'reference',
-               'database_name'=>'reference',
-
-               'title'=> "Reference",
-            ],
-
-            'term_of_contract'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'term_of_contract',
-               'database_name'=>'term_of_contract',
-
-               'title'=> "Contract",
-            ],
-
-            'salary'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'salary',
-               'database_name'=>'salary',
-
-               'title'=> "Salary",
-            ],
-            'designation'=>
-            [
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'designation_id',
-               'database_name'=>'designation_id',
-
-               'title'=> "Designation",
-            ],
-          
-          
-        ];
-
-
-        $items = employee::all();
-        $designation = designation::all();
-       
-        // fixed duty work needed
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => employee::all(),
+                    'users'=> User::all(),
+                    'designations'=> designation::all(),
+                ];
         
-        return view('employees.employee', compact('items', 'fieldList', 'routes','componentDetails','designation'));
+        
+                return view('employees.index', compact('dataArray'));
+        
 
     }
 
@@ -186,22 +56,27 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request)
     {
          
-       $employee = new employee;
-       $employee->name = $request->name;
-       $employee->phone = $request->phone;
-       $employee->address = $request->address;
-       $employee->joining_date = $request->joining_date;
-       $employee->reference = $request->reference;
-       $employee->term_of_contract = $request->term_of_contract;
-       $employee->fixed_duty_hour = $request->fixed_duty_hour;
-       $employee->salary = $request->salary;
-       $employee->designation_id = $request->designation_id;
+        employee::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
+
+
+    //    $employee = new employee;
+    //    $employee->name = $request->name;
+    //    $employee->phone = $request->phone;
+    //    $employee->address = $request->address;
+    //    $employee->joining_date = $request->joining_date;
+    //    $employee->reference = $request->reference;
+    //    $employee->term_of_contract = $request->term_of_contract;
+    //    $employee->fixed_duty_hour = $request->fixed_duty_hour;
+    //    $employee->salary = $request->salary;
+    //    $employee->designation_id = $request->designation_id;
 
        
 
 
-       $employee->save();
-       return back();
+    //    $employee->save();
+    //    return back();
 
     }
 
@@ -235,19 +110,23 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(EmployeeRequest $request, employee $employee)
-    {
+    {    
+        
+        $employee->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
  
-        $employee->name = $request->name;
-        $employee->phone = $request->phone;
-        $employee->address = $request->address;
-        $employee->joining_date = $request->joining_date;
-        $employee->reference = $request->reference;
-        $employee->term_of_contract = $request->term_of_contract;
-        $employee->fixed_duty_hour = $request->fixed_duty_hour;
-        $employee->salary = $request->salary;
-        $employee->designation_id = $request->designation_id;
-        $employee->save();
-        return back();
+        // $employee->name = $request->name;
+        // $employee->phone = $request->phone;
+        // $employee->address = $request->address;
+        // $employee->joining_date = $request->joining_date;
+        // $employee->reference = $request->reference;
+        // $employee->term_of_contract = $request->term_of_contract;
+        // $employee->fixed_duty_hour = $request->fixed_duty_hour;
+        // $employee->salary = $request->salary;
+        // $employee->designation_id = $request->designation_id;
+        // $employee->save();
+        // return back();
     }
 
     /**
@@ -258,7 +137,7 @@ class EmployeeController extends Controller
      */
     public function destroy(employee $employee)
     {
-            $employee->delete();
-            return back();
+        $employee->delete();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
     }
 }

@@ -11,7 +11,7 @@
         <div class="card-header py-3 bg-abasas-dark">
 
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light"> Duty Lists </a>
+                <a class="navbar-brand text-light"> Weekly Duties</a>
                 <div>
                    
                 
@@ -101,7 +101,7 @@
                                 <div class=" text-center font-weight-bold " title=" Fixed Duty : {{$duty->first()['fixed_duty_hour']}}   @if($status == 1 )|  Worked hour : {{$duty->first()['worked_hour']}} @endif         "> {{$duty->first()['duty_status_name']}}
 
                                     @if($status == 1 )
-                                    <div class="text-xs text-center"> {{ Carbon\Carbon::parse ($duty->first()['enter_time'])->format('H:i')}} - {{ Carbon\Carbon::parse ($duty->first()['exit_time'])->format('H:i')}} </div>
+                                    <div class="text-xs text-center"> @if( ! is_null( $duty->first()['enter_time'] )) {{ Carbon\Carbon::parse ($duty->first()['enter_time'])->format('H:i')}} @endif -@if( ! is_null( $duty->first()['exit_time'] )) {{ Carbon\Carbon::parse ($duty->first()['exit_time'])->format('H:i')}} @endif </div>
 
                                     @endif
 
@@ -133,6 +133,14 @@
 </div>
 
 
+<script> 
+$(document).ready(function(){
 
+$('#dataTableDuty').DataTable();
+
+
+});
+
+</script>
 
 @endsection

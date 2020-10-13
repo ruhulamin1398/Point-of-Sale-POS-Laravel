@@ -14,94 +14,97 @@ class SettingController extends Controller
      */
     public function index()
     {
+
+
         $a = '[{
             "componentDetails":{
-                "title":"Designation List",
-                "editTitle":"Edit Designation"
+                "title":"Expenses List",
+                "editTitle":"Edit Expenses"
             },
             "routes":{
                 "create":{
-                    "name":"drop_products.create",
-                    "link":"drop_products"
+                    "name":"expense.create",
+                    "link":"expense"
                 },
                 "update":{
-                    "name":"drop_products.update",
-                    "link":"drop_products"
+                    "name":"expense.update",
+                    "link":"expense"
                 },
                 "delete":{
-                    "name":"drop_products.destroy",
-                    "link":"drop_products"
+                    "name":"expense.destroy",
+                    "link":"expense"
                 }
             },
             "fieldList":[{
-                
-                "position":11,
+                    
+                "position":3,
+    
+                "create":"2",
+                "read":"1",
+                "update":"1",
+                "require":"1",
+    
+               "input_type":"dropDown",
+               "name":"employee",
+               "database_name":"employee_id",
+               "title": "Employee",
+               "data" : "employees"
+            },{
+                    
+                "position":3,
+    
+                "create":"2",
+                "read":"1",
+                "update":"1",
+                "require":"1",
+    
+               "input_type":"dropDown",
+               "name":"expense_type",
+               "database_name":"expense_type_id",
+               "title": "Expense Type",
+               "data" : "expense_types"
+            },{
+                    
+                "position":111,
+    
+                "create":"2",
+                "read":"1",
+                "update":"1",
+                "require":"1",
+    
+               "input_type":"number",
+               "name":"amount",
+               "title":"Amount",
+    
+    
+               "database_name":"amount"
+            },{
+                    
+                "position":111,
     
                 "create":"3",
                 "read":"1",
                 "update":"3",
                 "require":"0",
     
-                "name":"user",
-                "input_type" : "text",
-                "database_name":"user_id",  
-                "title":"Employee Name"
-             },{
-                
-                "position":11,
+               "input_type":"date",
+               "name":"date",
+               "title":"Date",
     
-                "create":"2",
-                "read":"1",
-                "update":"2",
-                "require":"1",
     
-                "name":"products",
-                "input_type" : "dropDown",
-                "database_name":"product_id",  
-                "title":"Product",
-                "data" : "products"
-            },{
-                
-                "position":11,
-    
-                "create":"2",
-                "read":"1",
-                "update":"2",
-                "require":"1",
-    
-                "name":"quantity",
-                "input_type" : "text",
-                "database_name":"quantity",  
-                "title":"Quantity"
-            },{
-                
-                "position":11,
-    
-                "create":"1",
-                "read":"1",
-                "update":"1",
-                "require":"0",
-    
-                "name":"comment",
-                "input_type" : "text",
-                "database_name":"comment",  
-                "title":"Comment"
+               "database_name":"created_at"
             }
             ]
         }]' ;
 
-           
-
-        //  $setting = new setting; 
-        $setting->setting = json_encode( $a);
-        $setting->table_name = 'drop_products';
-        $setting->model = 'App\Models\dropProduct.php';
-        $setting->save();
-        return  "Success";
-
-
 
         
+        // $setting =  setting::find(13);
+        // $setting->setting = json_encode( $a);
+        // $setting->table_name = 'expenses';
+        // $setting->model = 'App\Models\expense.php';
+        // $setting->save();
+        // return  "Success";
     }
 
     /**
@@ -122,7 +125,6 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-    
     }
 
     /**
@@ -157,36 +159,32 @@ class SettingController extends Controller
     public function update(Request $request, setting $setting)
     {
         // echo "--------------";
-         
-    
-       $data=  json_decode( json_decode($setting->setting,true),true);
-       $fieldList = $data[0]['fieldList'];
- 
-       for($i=0 ; $i<count($fieldList) ; $i++){
-           $fieldName= $fieldList[$i]['name'];
-           
-         $fieldList[$i]['create'] = $request[$fieldName]['create']; 
-         $fieldList[$i]['read'] = $request[$fieldName]['read']; 
-         $fieldList[$i]['update'] = $request[$fieldName]['update']; 
-         $fieldList[$i]['position'] = $request[$fieldName]['position']; 
-           
-         
-       }
-       
-   usort($fieldList, function($a, $b)
-   {
-       if ($a['position'] == $b['position']) {
-           return 0;
-       }
-       return ($a['position'] < $b['position']) ? -1 : 1;
-   });
 
-       $data[0]['fieldList'] = $fieldList;
-       $setting->setting = json_encode(json_encode($data));
-       $setting->save();
-       return;
-       return $setting->setting;
-      
+
+        $data =  json_decode(json_decode($setting->setting, true), true);
+        $fieldList = $data[0]['fieldList'];
+
+        for ($i = 0; $i < count($fieldList); $i++) {
+            $fieldName = $fieldList[$i]['name'];
+
+            $fieldList[$i]['create'] = $request[$fieldName]['create'];
+            $fieldList[$i]['read'] = $request[$fieldName]['read'];
+            $fieldList[$i]['update'] = $request[$fieldName]['update'];
+            $fieldList[$i]['position'] = $request[$fieldName]['position'];
+        }
+
+        usort($fieldList, function ($a, $b) {
+            if ($a['position'] == $b['position']) {
+                return 0;
+            }
+            return ($a['position'] < $b['position']) ? -1 : 1;
+        });
+
+        $data[0]['fieldList'] = $fieldList;
+        $setting->setting = json_encode(json_encode($data));
+        $setting->save();
+        return;
+        return $setting->setting;
     }
 
     /**

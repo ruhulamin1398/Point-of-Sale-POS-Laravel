@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SupplierRequest;
+use App\Models\Product;
+use App\Models\setting;
 use App\Models\supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class SupplierController extends Controller
 {
@@ -15,107 +18,21 @@ class SupplierController extends Controller
      */
     public function index()
     {
+       
+$settings = setting::where('table_name','suppliers')->first();
+$settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+
         
-        $componentDetails= [
-            'title' => 'suppliers List',
-            'editTitle' =>'Edit suppliers',
+        $dataArray=[
+            'settings'=>$settings,
+            'items' => supplier::all(),
         ];
+ 
+        // return $dataArray;
 
-        $routes = [
-            'update' => [
-                'name' => 'suppliers.update',
-                'link' => 'suppliers',
-            ],
-            'delete' => [
-                
-                'name' => 'suppliers.destroy',
-                'link' => 'suppliers',
-            ]
-
-        ];
-     
-        
-
-        $fieldList=[
-         
-            'name'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
+        return view('suppliers.index', compact('dataArray'));
 
 
-                'type'=>'normal',
-                'name'=>'name',
-                'database_name'=> 'name',
-                
-               'title'=> "Name",
-    
-            ],
-            'phone'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'phone',
-               'database_name'=>'phone',
-
-               'title'=> "phone",
-            ],
-            'address'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'address',
-               'database_name'=>'address',
-
-               'title'=> "address",
-            ],
-            'company'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'company',
-               'database_name'=>'company',
-
-               'title'=> "company",
-            ],
-            'due'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'due',
-               'database_name'=>'due',
-
-               'title'=> "due",
-            ],
-          
-        ];
-
-
-
-
-
-
-        $items = supplier::all();
-
-
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
     }
 
     /**
@@ -136,7 +53,9 @@ class SupplierController extends Controller
      */
     public function store(SupplierRequest $request)
     {
-      //  return $request;
+        supplier::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -170,12 +89,17 @@ class SupplierController extends Controller
      */
     public function update(SupplierRequest $request, supplier $supplier)
     {
-        $supplier->name= $request->name;
-        $supplier->phone= $request->phone;
-        $supplier->address= $request->address;
-        $supplier->company= $request->company;
-        $supplier->save();
-        return back();
+
+         
+        $supplier->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
+        // $supplier->name= $request->name;
+        // $supplier->phone= $request->phone;
+        // $supplier->address= $request->address;
+        // $supplier->company= $request->company;
+        // $supplier->save();
+        // return back();
     }
 
     /**
@@ -186,8 +110,11 @@ class SupplierController extends Controller
      */
     public function destroy(supplier $supplier)
     {
+
         $supplier->delete();
-        return back();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
+
+
     }
 
  

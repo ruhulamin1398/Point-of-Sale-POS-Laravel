@@ -20,11 +20,14 @@ use App\Http\Controllers\EmployeeDutyController;
 use App\Http\Controllers\EmployeePaymentTypeController;
 use App\Http\Controllers\EmployeePaymentController;
 use App\Http\Controllers\EmployeeSalaryController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\SettingController;
 use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +40,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('getjson',function(){
+    return Product::all();
+})->name('getJson');
 Route::post('test-submit',function(Request $request){
     return $request;
 })->name('testSubmit');
@@ -216,6 +221,10 @@ Route::resource('employee_salaries',EmployeeSalaryController::class);
 Route::resource('duty_status',DutyStatusController::class);
 Route::resource('employee_duties',EmployeeDutyController::class);
 Route::resource('drop_products',DropProductController::class);
+
+
+Route::resource('expense',ExpenseController::class);
+Route::resource('expense_type',ExpenseTypeController::class);
 
 
 

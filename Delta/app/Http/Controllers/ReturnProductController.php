@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReturnProductRequest;
+use App\Models\customer;
+use App\Models\Product;
 use App\Models\returnProduct;
+use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ReturnProductController extends Controller
 {
@@ -15,7 +19,20 @@ class ReturnProductController extends Controller
      */
     public function index()
     {
-        //
+
+        $settings = setting::where('table_name', 'return_products')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => returnProduct::all(),
+            'products' => Product::all(),
+            'customers' => customer::all(),
+        ];
+
+
+        return view('product.return-product.index', compact('dataArray'));
     }
 
     /**
@@ -36,7 +53,11 @@ class ReturnProductController extends Controller
      */
     public function store(ReturnProductRequest $request)
     {
-       // return $request;
+        // return $request;
+        returnProduct::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
+
     }
 
     /**
@@ -70,7 +91,10 @@ class ReturnProductController extends Controller
      */
     public function update(ReturnProductRequest $request, returnProduct $returnProduct)
     {
-        //
+        
+        $returnProduct->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -81,6 +105,10 @@ class ReturnProductController extends Controller
      */
     public function destroy(returnProduct $returnProduct)
     {
-        //
+       
+        $returnProduct->delete();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
+
+
     }
 }

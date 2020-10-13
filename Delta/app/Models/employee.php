@@ -10,6 +10,7 @@ class employee extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 
     public function designation()
     {
@@ -17,6 +18,20 @@ class employee extends Model
      return $this->belongsTo('App\Models\designation','designation_id','id');
 
     }
+
+    public function userName()
+    {
+        
+     return $this->belongsTo('App\Models\user','user_id','id');
+
+    }
+    
+
+
+    public function abasas(){
+         $this->user = $this->userName->name;
+        $this->designation = $this->designation->name;
+    }   
 
     
 }

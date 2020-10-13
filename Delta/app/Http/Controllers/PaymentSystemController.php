@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\paymentSystem;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class PaymentSystemController extends Controller
@@ -14,68 +15,21 @@ class PaymentSystemController extends Controller
      */
     public function index()
     {
-                
-        $componentDetails= [
-            'title' => 'Payment System',
-            'editTitle' =>'Edit Payment System',
-        ];
+       
 
-        $routes = [
-            'update' => [
-                'name' => 'payment_systems.update',
-                'link' => 'payment_systems',
-            ],
-            'delete' => [
-                
-                'name' => 'payment_systems.destroy',
-                'link' => 'payment_systems',
-            ]
-
-        ];
-     
+        $settings = setting::where('table_name','payment_systems')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
-
-        $fieldList=[
-         
-            'payment_system'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>false,
-
-
-                'type'=>'normal',
-                'name'=>'payment_system',
-                'database_name'=> 'payment_system',
-               'title'=> "payment_system",
-    
-            ],
-            'description'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>false,
-
-
-               'type'=>'normal',
-               'name'=>'description',
-               'database_name'=>'description',
-
-               'title'=> "description",
-            ],
-
-        ];
-
-
-
-
-
-
-        $items = paymentSystem::all();
-
-
-        return view('index', compact('items', 'fieldList', 'routes','componentDetails'));
-    }
+                
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => paymentSystem::all(),
+                ];
+        
+        
+                return view('payment-system.index', compact('dataArray'));
+        
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -96,6 +50,11 @@ class PaymentSystemController extends Controller
     public function store(Request $request)
     {
         // only crateable non editable or delatable 
+
+
+        // paymentSystem::create($request->all());
+        // return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -130,6 +89,11 @@ class PaymentSystemController extends Controller
     public function update(Request $request, paymentSystem $paymentSystem)
     {
         return back();
+
+        
+        // $paymentSystem->update($request->all());
+        // return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -141,5 +105,10 @@ class PaymentSystemController extends Controller
     public function destroy(paymentSystem $paymentSystem)
     {
         return back();
+
+
+        // $dropProduct->delete();
+        // return Redirect::back()->withSuccess(["Item Deleted" ]);
+
     }
 }

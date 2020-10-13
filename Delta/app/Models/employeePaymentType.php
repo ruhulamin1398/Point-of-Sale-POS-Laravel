@@ -9,5 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class employeePaymentType extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes;  
+    protected $guarded = [];
+
+
+    public function abasas(){
+
+        // 
+
+    }   
 }

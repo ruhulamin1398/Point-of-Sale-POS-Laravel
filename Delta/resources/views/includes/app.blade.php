@@ -25,8 +25,8 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         .border-dotted{
-    border-style: dotted;
-    border-width: 3px;
+        border-style: dotted;
+        border-width: 3px;
    }
    
 .bg-abasas-dark {

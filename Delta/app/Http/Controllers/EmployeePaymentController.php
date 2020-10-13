@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeePaymentRequest;
+use App\Models\designation;
 use App\Models\employee;
 use App\Models\employeePayment;
 use App\Models\employeePaymentType;
 use App\Models\employeeSalary;
 use App\Models\salaryStatus;
+use App\Models\setting;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -20,145 +22,13 @@ class EmployeePaymentController extends Controller
      */
     public function index()
     { 
-
-        
-        $componentDetails= [
-            'title' => 'Employee Payments',
-            'editTitle' =>'Edit Employee Payments',
-        ];
-
-        $routes = [
-            'update' => [
-                'name' => 'employee_payments.update',
-                'link' => 'employee_payments',
-            ],
-            'delete' => [
-                
-                'name' => 'employee_payments.destroy',
-                'link' => 'employee_payments',
-            ]
-
-        ];
-     
-        
-
-        $fieldList=[
-         
-            'employee_id'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>false,
-
-
-               'type'=>'normal',
-               'name'=>'employee_id',
-               'database_name'=>'employee_id',
-
-               'title'=> "Employee ID",
-            ],
-            'employee_payment_type_id'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'employee_payment_type_id',
-               'database_name'=>'employee_payment_type_id',
-
-               'title'=> "Payment type ID",
-            ],
-            'amount'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'amount',
-               'database_name'=>'amount',
-
-               'title'=> "Amount",
-            ],
-            'changed_amount'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'changed_amount',
-               'database_name'=>'changed_amount',
-
-               'title'=> "Edited Amount",
-            ],
-
-            'status'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'salary_status_id',
-               'database_name'=>'salary_status_id',
-
-               'title'=> "status",
-            ],
-
-
-            
-            'month'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>false,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'month',
-               'database_name'=>'month',
-
-               'title'=> "Month",
-            ],
-            'Comment'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'Comment',
-               'database_name'=>'Comment',
-
-               'title'=> "Comment",
-            ],
-          
-          
-          
-          
-        ];
-
-
-
-
-
-
-        $items = employeePayment::all();
         $employees = employee::all();
-        $payment_types = employeePaymentType::all();
+        $payment_types = employeePaymentType :: all();
         $salary_status = salaryStatus::all();
 
-         
-         // view system must be changed
 
-        return view('employees.payment', compact('items', 'fieldList', 'routes','componentDetails','employees','payment_types','salary_status'));
+        return view('employees.payments.index',compact('employees','payment_types','salary_status'));
+        
     }
 
     /**

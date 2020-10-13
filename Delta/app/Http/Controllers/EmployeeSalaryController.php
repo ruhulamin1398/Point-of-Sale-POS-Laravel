@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\employee;
 use App\Models\employeeSalary;
 use App\Models\salaryStatus;
+use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EmployeeSalaryController extends Controller
 {
@@ -16,127 +19,23 @@ class EmployeeSalaryController extends Controller
      */
     public function index()
     {
-        
-        $componentDetails= [
-            'title' => 'Employee Salary',
-            'editTitle' =>'Edit Employee Salary',
-        ];
+        $salaries= employeeSalary::all();
 
-        $routes = [
-            'update' => [
-                'name' => 'employee_salaries.update',
-                'link' => 'employee_salaries',
-            ],
-            'delete' => [
-                
-                'name' => 'employee_salaries.destroy',
-                'link' => 'employee_salaries',
-            ]
+        foreach($salaries as $salary){
+            $salary->month=Carbon::parse($salary->month)->format('F, Y');
+        }
+        $settings = setting::where('table_name', 'employee_salaries')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $salaries,
 
         ];
-     
-        
-
-        $fieldList=[
-         
-            'employee_id'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>false,
 
 
-               'type'=>'normal',
-               'name'=>'employee_id',
-               'database_name'=>'employee_id',
-
-               'title'=> "Employee ID",
-            ],
-            'salary_status_id'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'salary_status_id',
-               'database_name'=>'salary_status_id',
-
-               'title'=> "Salary Status ID",
-            ],
-            'fixed_salary'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'fixed_salary',
-               'database_name'=>'fixed_salary',
-
-               'title'=> "Fixed Salary",
-            ],
-
-            'amount_salary'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'amount_salary',
-               'database_name'=>'amount_salary',
-
-               'title'=> "Amount (salary)",
-            ],
-
-
-            
-            'amount_other'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'amount_other',
-               'database_name'=>'amount_other',
-
-               'title'=> "Amount (Other)",
-            ],
-            'month'=>[
-                'create'=>true,
-                'read'=>true,
-                'update'=>true,
-                'delete'=>true,
-
-
-               'type'=>'normal',
-               'name'=>'month',
-               'database_name'=>'month',
-
-               'title'=> "Month",
-            ],
-          
-          
-          
-          
-        ];
-
-
-
-
-
-
-        $items = employeeSalary::all();
-
-         // view system must be changed
-        return view('employees.salary', compact('items', 'fieldList', 'routes','componentDetails'));
-    
+        return view('product.category.index', compact('dataArray'));
     }
 
     /**
@@ -157,7 +56,10 @@ class EmployeeSalaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        employeeSalary::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -191,7 +93,10 @@ class EmployeeSalaryController extends Controller
      */
     public function update(Request $request, employeeSalary $employeeSalary)
     {
-        //
+        
+        $employeeSalary->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -202,6 +107,9 @@ class EmployeeSalaryController extends Controller
      */
     public function destroy(employeeSalary $employeeSalary)
     {
-        //
+        $employeeSalary->delete();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
+
+
     }
 }
