@@ -112,7 +112,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
     {
 
         $supplier->delete();
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        return Redirect::back()->withErrors(["Item Deleted" ]);
 
 
     }

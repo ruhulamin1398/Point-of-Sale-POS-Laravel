@@ -51,7 +51,22 @@ class DropProductController extends Controller
      */
     public function store(DropProductRequest $request)
     {
-        dropProduct::create($request->all());
+
+
+
+        $dropProduct= new dropProduct;
+        //dropProduct::create($request->all());
+        $dropProduct->user_id=1;
+        $dropProduct->product_id=$request->product_id;
+        $dropProduct->quantity=$request->quantity;
+        $dropProduct->comment=$request->comment;
+        $dropProduct->save();
+
+        $product = product::find($dropProduct->product_id);
+        return $product;
+
+        return $dropProduct;
+
         return redirect()->back()->withSuccess(['Successfully Created']);
 
     }
@@ -102,6 +117,6 @@ class DropProductController extends Controller
     public function destroy(dropProduct $dropProduct)
     {
         $dropProduct->delete();
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        return Redirect::back()->withErrors(["Item Deleted" ]);
     }
 }

@@ -96,7 +96,7 @@ class ExpenseTypeController extends Controller
     {
         $counts = $expenseType->expense->count();
         if( $counts != 0 ){
-            return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses." ]);
+            return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses. To delete it please change Expense type in Expense. " ]);
         }
         else{
             $expenseType->delete();

@@ -1,0 +1,6 @@
+- Data tables insert point must be beautify. like product create
+- step="any"  must be add in datatables input type number. its for decimal input .
+- drop product search by barcode or id.
+- return product search by barcode or id.
+- drop product and return product will be custom make.
+- number validation , number must be greatr than or equal to zero.

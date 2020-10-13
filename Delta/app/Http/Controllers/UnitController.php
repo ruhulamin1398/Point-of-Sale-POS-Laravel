@@ -85,7 +85,7 @@ class UnitController extends Controller
      */
     public function destroy(unit $unit)
     {
-        $unit->delete();
+       // $unit->delete();
         return back();
 
     }

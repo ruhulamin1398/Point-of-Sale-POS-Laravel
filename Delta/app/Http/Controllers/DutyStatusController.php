@@ -112,6 +112,6 @@ class DutyStatusController extends Controller
 
 
         // $dutyStatus->delete();
-        // return Redirect::back()->withSuccess(["Item Deleted" ]);
+        // return Redirect::back()->withErrors(["Item Deleted" ]);
     }
 }

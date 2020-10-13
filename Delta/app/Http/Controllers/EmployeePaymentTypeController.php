@@ -116,6 +116,6 @@ class EmployeePaymentTypeController extends Controller
 
 
         // $employeePaymentType->delete();
-        // return Redirect::back()->withSuccess(["Item Deleted" ]);
+        // return Redirect::back()->withErrors(["Item Deleted" ]);
     }
 }
