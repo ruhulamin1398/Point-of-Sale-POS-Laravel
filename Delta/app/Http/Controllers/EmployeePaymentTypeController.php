@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\employeePaymentType;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EmployeePaymentTypeController extends Controller
 {
@@ -56,6 +57,10 @@ class EmployeePaymentTypeController extends Controller
         // this database is fiexed
         return back();
 
+        // employeePaymentType::create($request->all());
+        // return redirect()->back()->withSuccess(['Successfully Created']);
+
+
     }
 
     /**
@@ -91,6 +96,11 @@ class EmployeePaymentTypeController extends Controller
     {
  // this database is fiexed
         return back();
+
+        
+        // $employeePaymentType->update($request->all());
+        // return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -102,6 +112,10 @@ class EmployeePaymentTypeController extends Controller
     public function destroy(employeePaymentType $employeePaymentType)
     {
          // this database is fiexed
-        return back();
+       return back();
+
+
+        // $employeePaymentType->delete();
+        // return Redirect::back()->withSuccess(["Item Deleted" ]);
     }
 }

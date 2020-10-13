@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BrandRequest;
-use App\Models\brand;
+use App\Models\expenseType;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class BrandController extends Controller
+class ExpenseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,18 +15,19 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
-                
-        $settings = setting::where('table_name','brands')->first();
-        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
-        
-        $dataArray=[
-            'settings'=>$settings,
-            'items' => brand::all(),
-        ];
-        return view('product.brand.index', compact('dataArray'));
-    }
+    {
 
+        $settings = setting::where('table_name', 'expense_type')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => expenseType::all(),
+        ];
+
+        return view('expenses.expense-type', compact('dataArray'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -45,21 +45,19 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BrandRequest $request)
-
+    public function store(Request $request)
     {
-        brand::create($request->all());
+        expenseType::create($request->all());
         return redirect()->back()->withSuccess(['Successfully Created']);
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function show(brand $brand)
+    public function show(expenseType $expenseType)
     {
         //
     }
@@ -67,10 +65,10 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function edit(brand $brand)
+    public function edit(expenseType $expenseType)
     {
         //
     }
@@ -79,24 +77,30 @@ class BrandController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function update(BrandRequest $request, brand $brand)
+    public function update(Request $request, expenseType $expenseType)
     {
-        $brand->update($request->all());
+        $expenseType->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(brand $brand)
+    public function destroy(expenseType $expenseType)
     {
-        $brand->delete();
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        $counts = $expenseType->expense->count();
+        if( $counts != 0 ){
+            return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses." ]);
+        }
+        else{
+            $expenseType->delete();
+            return Redirect::back()->withErrors(["Item Deleted" ]);
+        }
     }
 }

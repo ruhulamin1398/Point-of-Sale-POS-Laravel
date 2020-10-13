@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BrandRequest;
-use App\Models\brand;
+use App\Http\Requests\ExpenseRequest;
+use App\Models\employee;
+use App\Models\expense;
+use App\Models\expenseType;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class BrandController extends Controller
+use function GuzzleHttp\json_decode;
+
+class ExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,18 +21,25 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
-                
-        $settings = setting::where('table_name','brands')->first();
-        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
-        
-        $dataArray=[
-            'settings'=>$settings,
-            'items' => brand::all(),
-        ];
-        return view('product.brand.index', compact('dataArray'));
-    }
+    {
 
+        
+
+        $settings = setting::where('table_name', 'expenses')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => expense::all(),
+            'employees' => employee::all(),
+            'expense_types' => expenseType::all(),
+        ];
+
+
+        return view('expenses.index', compact('dataArray'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -45,21 +57,19 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BrandRequest $request)
-
+    public function store(ExpenseRequest $request)
     {
-        brand::create($request->all());
+        expense::create($request->all());
         return redirect()->back()->withSuccess(['Successfully Created']);
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function show(brand $brand)
+    public function show(expense $expense)
     {
         //
     }
@@ -67,10 +77,10 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function edit(brand $brand)
+    public function edit(expense $expense)
     {
         //
     }
@@ -79,24 +89,23 @@ class BrandController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(BrandRequest $request, brand $brand)
+    public function update(ExpenseRequest $request, expense $expense)
     {
-        $brand->update($request->all());
+        $expense->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\brand  $brand
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(brand $brand)
+    public function destroy(expense $expense)
     {
-        $brand->delete();
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        return Redirect::back()->withErrors(["Can't Delete" ]);
     }
 }

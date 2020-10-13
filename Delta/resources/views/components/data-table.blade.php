@@ -27,6 +27,19 @@
     </div>
 @endif
 
+@if (session()->has('success'))
+<div class="alert alert-success">
+    @if(is_array(session('success')))
+        <ul>
+            @foreach (session('success') as $message)
+                <li>{{ $message }}</li>
+            @endforeach
+        </ul>
+    @else
+        {{ session('success') }}
+    @endif
+</div>
+@endif
 
 <!-- Begin Page Content -->
 <div class="collapse" id="createNewForm">
@@ -34,7 +47,7 @@
 
         <div class="card-header py-3  bg-abasas-dark ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">নতুন কর্মচারী</a>
+                <a class="navbar-brand text-light">Add new</a>
             </nav>
         </div>
         <div class="card-body">
@@ -55,7 +68,7 @@
 
                 </div>
                 <div class="col-12">
-                        <button type="submit" class="btn bg-abasas-dark mt-3">সাবমিট</button>
+                        <button type="submit" class="btn bg-abasas-dark mt-3">Submit</button>
                     </div>
 
             </form>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeePaymentRequest;
+use App\Models\designation;
 use App\Models\employee;
 use App\Models\employeePayment;
 use App\Models\employeePaymentType;
@@ -21,24 +22,12 @@ class EmployeePaymentController extends Controller
      */
     public function index()
     { 
+        $employees = employee::all();
+        $payment_types = employeePaymentType :: all();
+        $salary_status = salaryStatus::all();
 
-        $settings = setting::where('table_name','employee_payments')->first();
-        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
-        
-                
-                $dataArray=[
-                    'settings'=>$settings,
-                    'items' => employeePayment::all(),
-                    'employees'=> employee::all(),
-                    'employeePaymentTypes'=> employeePaymentType::all(),
-                    'salaryStatuses'=> salaryStatus::all(),
-                ];
-        
-            // return $dataArray;
-                return view('employees.payments.index', compact('dataArray'));
 
-                
-        // setting must be edited
+        return view('employees.payments.index',compact('employees','payment_types','salary_status'));
         
     }
 

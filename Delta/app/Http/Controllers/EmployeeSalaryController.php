@@ -6,7 +6,9 @@ use App\Models\employee;
 use App\Models\employeeSalary;
 use App\Models\salaryStatus;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EmployeeSalaryController extends Controller
 {
@@ -17,21 +19,23 @@ class EmployeeSalaryController extends Controller
      */
     public function index()
     {
-    
-$settings = setting::where('table_name','employee_salaries')->first();
-$settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        $salaries= employeeSalary::all();
 
-        
-        $dataArray=[
-            'settings'=>$settings,
-            'items' => employeeSalary::all(),
-            
+        foreach($salaries as $salary){
+            $salary->month=Carbon::parse($salary->month)->format('F, Y');
+        }
+        $settings = setting::where('table_name', 'employee_salaries')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $salaries,
+
         ];
 
 
         return view('product.category.index', compact('dataArray'));
-
-    
     }
 
     /**
@@ -52,7 +56,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function store(Request $request)
     {
-        //
+        
+        employeeSalary::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -86,7 +93,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function update(Request $request, employeeSalary $employeeSalary)
     {
-        //
+        
+        $employeeSalary->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -97,6 +107,9 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function destroy(employeeSalary $employeeSalary)
     {
-        //
+        $employeeSalary->delete();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
+
+
     }
 }

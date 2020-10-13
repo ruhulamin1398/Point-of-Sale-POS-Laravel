@@ -7,6 +7,7 @@ use App\Models\dropProduct;
 use App\Models\Product;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class DropProductController extends Controller
 {
@@ -50,7 +51,9 @@ class DropProductController extends Controller
      */
     public function store(DropProductRequest $request)
     {
-        //return $request;
+        dropProduct::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -84,7 +87,10 @@ class DropProductController extends Controller
      */
     public function update(DropProductRequest $request, dropProduct $dropProduct)
     {
-        //
+        
+        $dropProduct->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -95,6 +101,7 @@ class DropProductController extends Controller
      */
     public function destroy(dropProduct $dropProduct)
     {
-        //
+        $dropProduct->delete();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
     }
 }

@@ -16,7 +16,7 @@
 
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
-                <a class="navbar-brand"> Duty</a>
+                <a class="navbar-brand">Add Duty</a>
 
             </nav>
         </div>
@@ -47,7 +47,8 @@
                         <label for="date">Date</label>
 
 
-                        <input type="date" name="date" id="date" class="form-control" min='0' placeholder="date" required>
+                        <input type="date" name="date" id="date" class="form-control" min='0' placeholder="date"
+                            required>
 
                     </div>
 
@@ -71,7 +72,8 @@
                         <label for="catagory_id">Enter Time</label>
 
 
-                        <input type="datetime-local" name="enter_time" id="enterTime" class="form-control" min='0' placeholder="Enter Time">
+                        <input type="datetime-local" name="enter_time" id="enterTime" class="form-control" min='0'
+                            placeholder="Enter Time">
 
                     </div>
 
@@ -79,7 +81,8 @@
                         <label for="catagory_id">Exit Time</label>
 
 
-                        <input type="datetime-local" name="exit_time" id="exitTime" class="form-control" min='0' placeholder="Exit Time">
+                        <input type="datetime-local" name="exit_time" id="exitTime" class="form-control" min='0'
+                            placeholder="Exit Time">
 
                     </div>
 
@@ -87,7 +90,8 @@
                         <label for="comment">Comment</label>
 
 
-                        <input type="text" name="comment" id="comment" class="form-control" min='0' placeholder="comment">
+                        <input type="text" name="comment" id="comment" class="form-control" min='0'
+                            placeholder="comment">
 
                     </div>
 
@@ -109,57 +113,66 @@
         </div>
     </div>
 
+    <div class="card-header py-3 bg-abasas-dark">
+        <nav class="navbar  ">
 
+            <div class="navbar-brand">Employee Duty (Today) </div>
+
+
+
+        </nav>
+    </div>
 
 
 
 
     <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="dataTableDuty" width="100%" cellspacing="0">
+        <table class="table table-striped table-bordered" id="dataTableDuty" width="100%" cellspacing="0">
             <thead class="bg-abasas-dark">
-                        <tr>
-                            <th >#</th>
-                            <th > Name</th>
-                            <th > Status</th>
-                            <th> Enter Time</th>
-                            <th > Exit Time</th>
-                            <th > Action</th>
-                        </tr>
-                    </thead>
-                    <tfoot class="bg-abasas-dark">
-                        <tr>
-                            <th >#</th>
-                            <th > Name</th>
-                            <th > Status</th>
-                            <th> Enter Time</th>
-                            <th > Exit Time</th>
-                            <th > Action</th>
-                        </tr>
-                    </tfoot>
+                <tr>
+                    <th>#</th>
+                    <th> Name</th>
+                    <th> Duty Status</th>
+                    <th> Enter Time</th>
+                    <th> Exit Time</th>
+                    {{-- <th> Action</th> --}}
+                </tr>
+            </thead>
+            <tfoot class="bg-abasas-dark">
+                <tr>
+                    <th>#</th>
+                    <th> Name</th>
+                    <th> Duty Status</th>
+                    <th> Enter Time</th>
+                    <th> Exit Time</th>
+                    {{-- <th> Action</th> --}}
+                </tr>
+            </tfoot>
 
-                    <tbody>
-                        @php
-                        $i=1;
-                        @endphp
-                        @foreach($todayEmployeeDuties as $todayEmployeeDuty)
-                        <tr>
-                            <th scope="row">{{$i++}}</th>
-                            <th scope="row">{{$todayEmployeeDuty->employee->name}}</th>
-                            <th scope="row">{{$todayEmployeeDuty->dutyStatus->name}}</th>
-                            <th scope="row">{{ Carbon\Carbon::parse( $todayEmployeeDuty->enter_time)->format('h : i A')}}</th>
-                            <th scope="row">{{ Carbon\Carbon::parse( $todayEmployeeDuty->exit_time)->format('h : i A')}}</th>
-           
-                        
-
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
+            <tbody>
+                @php
+                $i=1;
+                @endphp
+                @foreach($todayEmployeeDuties as $todayEmployeeDuty)
+                <tr>
+                    <td scope="col">{{$i++}}</td>
+                    <td scope="col">{{$todayEmployeeDuty->employee->name}}</td>
+                    <td scope="col">{{$todayEmployeeDuty->dutyStatus->name}}</td>
+                    <td scope="col">{{ $todayEmployeeDuty->enter_time }}</td>
+                    <td scope="col">{{  $todayEmployeeDuty->exit_time }}</td>
+                    {{-- <td scope="col"><button type="button" editId={{$todayEmployeeDuty->id }} id="dutyEdit" class="btn btn-success"> <i class="fa   fa-edit" aria-hidden="false"> </i></button></td> --}}
 
 
 
-            </div>
+                </tr>
+                @endforeach
+
+            </tbody>
+        </table>
+
+
+
+    </div>
 
 
 
@@ -172,10 +185,18 @@
 
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-
-        $('#dutyStatusId').on('input', function() {
+        $('body').on('click','#dutyEdit',function(){
+            var id = $('#dutyEdit').attr('editId');
+            $tr = $(this).closest('tr') ;
+            var data = $tr.children('td').map(function(){
+                 return $(this).text();
+            });
+            console.log(data);
+        });
+        $('#dataTableDuty').DataTable();
+        $('#dutyStatusId').on('input', function () {
             if ($(this).val() == 1) {
                 $('#divEnterTime').show();
                 $('#divExitTime').show();
@@ -186,6 +207,7 @@
         });
 
     });
+
 </script>
 
 

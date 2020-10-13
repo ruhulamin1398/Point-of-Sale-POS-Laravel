@@ -26,9 +26,7 @@ class employeePayment extends Model
     
 
     public function abasas(){
-        $this->employee = $this->employees->name;
-        $this->payment_type = $this->paymentType->name;
-        $this->salary_status = $this->salaryStatus->name;
+        //
     }  
 
 
