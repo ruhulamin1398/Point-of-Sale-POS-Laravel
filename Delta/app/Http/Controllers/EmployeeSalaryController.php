@@ -8,6 +8,7 @@ use App\Models\salaryStatus;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EmployeeSalaryController extends Controller
 {
@@ -55,7 +56,10 @@ class EmployeeSalaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        employeeSalary::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -89,7 +93,10 @@ class EmployeeSalaryController extends Controller
      */
     public function update(Request $request, employeeSalary $employeeSalary)
     {
-        //
+        
+        $employeeSalary->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -100,6 +107,9 @@ class EmployeeSalaryController extends Controller
      */
     public function destroy(employeeSalary $employeeSalary)
     {
-        //
+        $employeeSalary->delete();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
+
+
     }
 }

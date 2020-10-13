@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\returnProduct;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ReturnProductController extends Controller
 {
@@ -53,6 +54,10 @@ class ReturnProductController extends Controller
     public function store(ReturnProductRequest $request)
     {
         // return $request;
+        returnProduct::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
+
     }
 
     /**
@@ -86,7 +91,10 @@ class ReturnProductController extends Controller
      */
     public function update(ReturnProductRequest $request, returnProduct $returnProduct)
     {
-        //
+        
+        $returnProduct->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -97,6 +105,10 @@ class ReturnProductController extends Controller
      */
     public function destroy(returnProduct $returnProduct)
     {
-        //
+       
+        $returnProduct->delete();
+        return Redirect::back()->withSuccess(["Item Deleted" ]);
+
+
     }
 }

@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
+use function GuzzleHttp\json_decode;
+
 class ExpenseController extends Controller
 {
     /**
@@ -20,6 +22,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
+
+        
 
         $settings = setting::where('table_name', 'expenses')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
@@ -102,7 +106,6 @@ class ExpenseController extends Controller
      */
     public function destroy(expense $expense)
     {
-        $expense->delete();
-        return Redirect::back()->withErrors(["Item Deleted" ]);
+        return Redirect::back()->withErrors(["Can't Delete" ]);
     }
 }
