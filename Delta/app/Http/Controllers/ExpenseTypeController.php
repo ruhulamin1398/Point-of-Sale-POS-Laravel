@@ -48,7 +48,7 @@ class ExpenseTypeController extends Controller
     public function store(Request $request)
     {
         expenseType::create($request->all());
-        return redirect()->back()->withSuccess('Successfully Created');
+        return redirect()->back()->withSuccess(['Successfully Created']);
     }
 
     /**
@@ -83,7 +83,7 @@ class ExpenseTypeController extends Controller
     public function update(Request $request, expenseType $expenseType)
     {
         $expenseType->update($request->all());
-        return redirect()->back()->withSuccess('Successfully Updated');
+        return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**
@@ -94,6 +94,13 @@ class ExpenseTypeController extends Controller
      */
     public function destroy(expenseType $expenseType)
     {
-        return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses." ]);
+        $counts = $expenseType->expense->count();
+        if( $counts != 0 ){
+            return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses." ]);
+        }
+        else{
+            $expenseType->delete();
+            return Redirect::back()->withErrors(["Item Deleted" ]);
+        }
     }
 }

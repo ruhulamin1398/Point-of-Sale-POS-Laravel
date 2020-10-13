@@ -56,7 +56,7 @@ class ExpenseController extends Controller
     public function store(ExpenseRequest $request)
     {
         expense::create($request->all());
-        return redirect()->back()->withSuccess('Successfully Created');
+        return redirect()->back()->withSuccess(['Successfully Created']);
     }
 
     /**
@@ -91,7 +91,7 @@ class ExpenseController extends Controller
     public function update(ExpenseRequest $request, expense $expense)
     {
         $expense->update($request->all());
-        return redirect()->back()->withSuccess('Successfully Updated');
+        return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**

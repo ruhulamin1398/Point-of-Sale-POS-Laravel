@@ -11,7 +11,13 @@ class expenseType extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
+
+    public function expense(){
+        return $this->hasMany('App\Models\expense');
+    }
+
     public function abasas(){
-//
+        $this->expense_count = $this->expense->count();
     }   
 }
