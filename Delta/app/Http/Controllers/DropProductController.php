@@ -52,7 +52,7 @@ class DropProductController extends Controller
     public function store(DropProductRequest $request)
     {
 
-
+        // auth must be added here
 
         $dropProduct= new dropProduct;
         //dropProduct::create($request->all());

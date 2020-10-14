@@ -19,7 +19,7 @@ class expense extends Model
     }
     public function expenseType()
     {
-        return $this->belongsTo('App\Models\expenseType','expense_type_id','id');
+        return $this->belongsTo('App\Models\expenseType','expense_type_id','id')->withTrashed();
     }
 
 

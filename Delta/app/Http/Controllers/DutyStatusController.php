@@ -93,10 +93,10 @@ class DutyStatusController extends Controller
     public function update(Request $request, dutyStatus $dutyStatus)
     {
         // this section is fixed
-        return back();
+        // return back();
         
-        // $dutyStatus->update($request->all());
-        // return redirect()->back()->withSuccess(['Successfully Updated'])
+        $dutyStatus->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**
@@ -108,10 +108,10 @@ class DutyStatusController extends Controller
     public function destroy(dutyStatus $dutyStatus)
     {
        // this section is fixed
-        return back();
+       // return back();
 
 
         // $dutyStatus->delete();
-        // return Redirect::back()->withErrors(["Item Deleted" ]);
+         return Redirect::back()->withErrors(["Can't Delete" ]);
     }
 }
