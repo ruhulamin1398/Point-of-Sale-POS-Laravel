@@ -6,6 +6,7 @@ use App\Http\Requests\BrandRequest;
 use App\Models\brand;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BrandController extends Controller
 {
@@ -47,7 +48,9 @@ class BrandController extends Controller
     public function store(BrandRequest $request)
 
     {
-         //return $request;
+        brand::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -81,10 +84,8 @@ class BrandController extends Controller
      */
     public function update(BrandRequest $request, brand $brand)
     {
-        $brand->name= $request->name;
-        $brand->description= $request->description;
-        $brand->save();
-        return back();
+        $brand->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**
@@ -95,7 +96,15 @@ class BrandController extends Controller
      */
     public function destroy(brand $brand)
     {
-        $brand->delete();
-        return back();
+        $counts = $brand->product->count();
+        if( $counts != 0 ){
+            return Redirect::back()->withErrors(["Can't delete.","This Brand has Products. To delete it please change Brand in Product. " ]);
+        }
+        else{
+            $brand->delete();
+            return Redirect::back()->withErrors(["Item Deleted" ]);
+        }
+
+
     }
 }

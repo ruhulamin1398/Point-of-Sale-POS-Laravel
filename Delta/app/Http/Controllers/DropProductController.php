@@ -7,6 +7,7 @@ use App\Models\dropProduct;
 use App\Models\Product;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class DropProductController extends Controller
 {
@@ -50,7 +51,24 @@ class DropProductController extends Controller
      */
     public function store(DropProductRequest $request)
     {
-        //return $request;
+
+        // auth must be added here
+
+        $dropProduct= new dropProduct;
+        //dropProduct::create($request->all());
+        $dropProduct->user_id=1;
+        $dropProduct->product_id=$request->product_id;
+        $dropProduct->quantity=$request->quantity;
+        $dropProduct->comment=$request->comment;
+        $dropProduct->save();
+
+        $product = product::find($dropProduct->product_id);
+        return $product;
+
+        return $dropProduct;
+
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -84,7 +102,10 @@ class DropProductController extends Controller
      */
     public function update(DropProductRequest $request, dropProduct $dropProduct)
     {
-        //
+        
+        $dropProduct->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -95,6 +116,7 @@ class DropProductController extends Controller
      */
     public function destroy(dropProduct $dropProduct)
     {
-        //
+        $dropProduct->delete();
+        return Redirect::back()->withErrors(["Item Deleted" ]);
     }
 }

@@ -80,6 +80,16 @@ class EmployeeDutyController extends Controller
     public function create()
     {
         $todayEmployeeDuties = employeeDuty::whereDate('date', Carbon::today())->get();
+        foreach($todayEmployeeDuties as $duty){
+            if(!is_null($duty->enter_time))
+            {
+                $duty->enter_time=  Carbon::parse( $duty->exit_time)->format('h : i A');
+            }
+            if(!is_null($duty->exit_time))
+            {
+                $duty->exit_time=  Carbon::parse( $duty->exit_time)->format('h : i A');
+            }
+        }
 // return $todayEmployeeDuties;
         $employees = employee::all();
         $dutyStatuses = dutyStatus::all();

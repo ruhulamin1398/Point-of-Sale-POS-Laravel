@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\dutyStatus;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 use function Symfony\Component\String\b;
 
@@ -40,7 +41,7 @@ class DutyStatusController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -53,6 +54,11 @@ class DutyStatusController extends Controller
     {
          // this section is fixed
         return back();
+
+        // dutyStatus::create($request->all());
+        // return redirect()->back()->withSuccess(['Successfully Created']);
+
+
     }
 
     /**
@@ -87,7 +93,10 @@ class DutyStatusController extends Controller
     public function update(Request $request, dutyStatus $dutyStatus)
     {
         // this section is fixed
-        return back();
+        // return back();
+        
+        $dutyStatus->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**
@@ -99,6 +108,10 @@ class DutyStatusController extends Controller
     public function destroy(dutyStatus $dutyStatus)
     {
        // this section is fixed
-        return back();
+       // return back();
+
+
+        // $dutyStatus->delete();
+         return Redirect::back()->withErrors(["Can't Delete" ]);
     }
 }

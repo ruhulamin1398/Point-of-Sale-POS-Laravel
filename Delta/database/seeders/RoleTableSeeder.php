@@ -193,10 +193,10 @@ class RoleTableSeeder extends Seeder
         ]);
         DB::table('suppliers')->insert([
             [
-                'name' => 'supplier 1',
-                'phone' => '01840000408',
-                'address' => 'address 1',
-                'company' => 'company 1',
+                'name' => 'Walk in Supplier',
+                'phone' => '01234567890',
+                'address' => 'Abasas.tech',
+                'company' => 'Abasas.tech',
             ],
             [
                 'name' => 'supplier 2',
@@ -213,10 +213,10 @@ class RoleTableSeeder extends Seeder
         ]);
         DB::table('customers')->insert([
             [
-                'name' => 'customer 1',
-                'phone' => '01840000408',
-                'address' => 'address 1',
-                'company' => 'company 1',
+                'name' => 'Walk in Customer',
+                'phone' => '01234567890',
+                'address' => 'Abasas.tech',
+                'company' => 'Abasas.tech',
             ],
             [
                 'name' => 'customer 2',
@@ -421,6 +421,30 @@ class RoleTableSeeder extends Seeder
             [
                 'name' => 'Incomplete',
                 'description' =>'Incomplete',
+            ],
+        ]);
+
+        DB::table('expense_types')->insert([
+            [
+                'name' => 'Breakfast',
+                'description' => 'This goes to breakfast',
+            ],
+            [
+                'name' => 'Internet bill',
+                'description' =>'This goes to internet bill',
+            ],
+        ]);
+
+        DB::table('expenses')->insert([
+            [
+                'employee_id' => 1,
+                'expense_type_id' => 1,
+                'amount' => 400.5,
+            ],
+            [
+                'employee_id' => 2,
+                'expense_type_id' =>2,
+                'amount' =>2,
             ],
         ]);
 

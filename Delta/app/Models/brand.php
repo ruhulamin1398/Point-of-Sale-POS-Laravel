@@ -12,6 +12,13 @@ class brand extends Model
 
     use SoftDeletes;
     protected $guarded = [];
+
+    
+    public function product(){
+        return $this->hasMany('App\Models\product');
+    }
+
+
     public function abasas(){
         //
     }   

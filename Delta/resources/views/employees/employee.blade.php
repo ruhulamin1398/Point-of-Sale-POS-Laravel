@@ -93,8 +93,8 @@
 
 
 
-
-<x-data-table :fieldList="$fieldList" :items="$items" :routes="$routes" :componentDetails="$componentDetails" />
+{{-- 
+<x-data-table :fieldList="$fieldList" :items="$items" :routes="$routes" :componentDetails="$componentDetails" /> --}}
 
 <script>
     $(document).ready(function() {

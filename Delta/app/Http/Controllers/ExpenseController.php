@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ReturnProductRequest;
-use App\Models\customer;
-use App\Models\Product;
-use App\Models\returnProduct;
+use App\Http\Requests\ExpenseRequest;
+use App\Models\employee;
+use App\Models\expense;
+use App\Models\expenseType;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class ReturnProductController extends Controller
+use function GuzzleHttp\json_decode;
+
+class ExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,19 +23,22 @@ class ReturnProductController extends Controller
     public function index()
     {
 
-        $settings = setting::where('table_name', 'return_products')->first();
+        
+
+        $settings = setting::where('table_name', 'expenses')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
 
 
         $dataArray = [
             'settings' => $settings,
-            'items' => returnProduct::all(),
-            'products' => Product::all(),
-            'customers' => customer::all(),
+            'items' => expense::all(),
+            'employees' => employee::all(),
+            'expense_types' => expenseType::all(),
         ];
 
 
-        return view('product.return-product.index', compact('dataArray'));
+        return view('expenses.index', compact('dataArray'));
     }
 
     /**
@@ -51,22 +57,19 @@ class ReturnProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReturnProductRequest $request)
+    public function store(ExpenseRequest $request)
     {
-        // return $request;
-        returnProduct::create($request->all());
+        expense::create($request->all());
         return redirect()->back()->withSuccess(['Successfully Created']);
-
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function show(returnProduct $returnProduct)
+    public function show(expense $expense)
     {
         //
     }
@@ -74,10 +77,10 @@ class ReturnProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function edit(returnProduct $returnProduct)
+    public function edit(expense $expense)
     {
         //
     }
@@ -86,29 +89,23 @@ class ReturnProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(ReturnProductRequest $request, returnProduct $returnProduct)
+    public function update(ExpenseRequest $request, expense $expense)
     {
-        
-        $returnProduct->update($request->all());
+        $expense->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(returnProduct $returnProduct)
+    public function destroy(expense $expense)
     {
-       
-        $returnProduct->delete();
-        return Redirect::back()->withErrors(["Item Deleted" ]);
-
-
+        return Redirect::back()->withErrors(["Can't Delete" ]);
     }
 }

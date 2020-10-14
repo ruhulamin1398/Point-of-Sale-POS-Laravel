@@ -6,6 +6,7 @@ use App\Http\Requests\CustomerRequest;
 use App\Models\customer;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CustomerController extends Controller
 {
@@ -50,7 +51,9 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request)
     {
-       // return $request;
+        customer::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -84,12 +87,18 @@ class CustomerController extends Controller
      */
     public function update(CustomerRequest $request, customer $customer)
     {
-        $customer->name= $request->name;
-        $customer->phone= $request->phone;
-        $customer->address= $request->address;
-        $customer->company= $request->company;
-        $customer->save();
-        return back();
+        
+        
+        $customer->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
+    
+        // $customer->name= $request->name;
+        // $customer->phone= $request->phone;
+        // $customer->address= $request->address;
+        // $customer->company= $request->company;
+        // $customer->save();
+        // return back();
     }
 
     /**
@@ -100,9 +109,24 @@ class CustomerController extends Controller
      */
     public function destroy(customer $customer)
     {
-        $customer->delete();
-        return back();
+        // there some thinking is required 
+        if($customer->id ==1 )
+        {
+            return Redirect::back()->withErrors(['This Customer Can not be Deleted.' ]);
+
+        }
+        if($customer->due !=0 )
+        {
+            return Redirect::back()->withErrors(["Can not delete this customer. This customer has ".$customer->due .' Tk due' ]);
+        }
+        $customer->delete();    
+        return Redirect::back()->withErrors(["Item Deleted" ]);
     }
+
+
+
+
+
 
 //   Api Area Start
 

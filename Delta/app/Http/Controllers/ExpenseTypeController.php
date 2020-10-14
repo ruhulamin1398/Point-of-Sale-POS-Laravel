@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ReturnProductRequest;
-use App\Models\customer;
-use App\Models\Product;
-use App\Models\returnProduct;
+use App\Models\expenseType;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class ReturnProductController extends Controller
+class ExpenseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,19 +17,16 @@ class ReturnProductController extends Controller
     public function index()
     {
 
-        $settings = setting::where('table_name', 'return_products')->first();
+        $settings = setting::where('table_name', 'expense_type')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
 
 
         $dataArray = [
             'settings' => $settings,
-            'items' => returnProduct::all(),
-            'products' => Product::all(),
-            'customers' => customer::all(),
+            'items' => expenseType::all(),
         ];
 
-
-        return view('product.return-product.index', compact('dataArray'));
+        return view('expenses.expense-type', compact('dataArray'));
     }
 
     /**
@@ -51,22 +45,19 @@ class ReturnProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReturnProductRequest $request)
+    public function store(Request $request)
     {
-        // return $request;
-        returnProduct::create($request->all());
+        expenseType::create($request->all());
         return redirect()->back()->withSuccess(['Successfully Created']);
-
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function show(returnProduct $returnProduct)
+    public function show(expenseType $expenseType)
     {
         //
     }
@@ -74,10 +65,10 @@ class ReturnProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function edit(returnProduct $returnProduct)
+    public function edit(expenseType $expenseType)
     {
         //
     }
@@ -86,29 +77,34 @@ class ReturnProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function update(ReturnProductRequest $request, returnProduct $returnProduct)
+    public function update(Request $request, expenseType $expenseType)
     {
-        
-        $returnProduct->update($request->all());
+        $expenseType->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\returnProduct  $returnProduct
+     * @param  \App\Models\expenseType  $expenseType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(returnProduct $returnProduct)
+    public function destroy(expenseType $expenseType)
     {
-       
-        $returnProduct->delete();
+
+        $expenseType->delete();
         return Redirect::back()->withErrors(["Item Deleted" ]);
 
-
+        // $counts = $expenseType->expense->count();
+        // if( $counts != 0 ){
+        //     return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses. To delete it please change Expense type in Expense. " ]);
+        // }
+        // else{
+        //     $expenseType->delete();
+        //     return Redirect::back()->withErrors(["Item Deleted" ]);
+        // }
     }
 }

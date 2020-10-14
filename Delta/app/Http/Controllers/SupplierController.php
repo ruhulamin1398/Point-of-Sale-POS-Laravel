@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\setting;
 use App\Models\supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class SupplierController extends Controller
 {
@@ -52,7 +53,9 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function store(SupplierRequest $request)
     {
-      //  return $request;
+        supplier::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -86,12 +89,17 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function update(SupplierRequest $request, supplier $supplier)
     {
-        $supplier->name= $request->name;
-        $supplier->phone= $request->phone;
-        $supplier->address= $request->address;
-        $supplier->company= $request->company;
-        $supplier->save();
-        return back();
+
+         
+        $supplier->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
+        // $supplier->name= $request->name;
+        // $supplier->phone= $request->phone;
+        // $supplier->address= $request->address;
+        // $supplier->company= $request->company;
+        // $supplier->save();
+        // return back();
     }
 
     /**
@@ -102,8 +110,11 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function destroy(supplier $supplier)
     {
+
         $supplier->delete();
-        return back();
+        return Redirect::back()->withErrors(["Item Deleted" ]);
+
+
     }
 
  

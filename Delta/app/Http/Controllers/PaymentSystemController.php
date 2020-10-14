@@ -50,6 +50,11 @@ class PaymentSystemController extends Controller
     public function store(Request $request)
     {
         // only crateable non editable or delatable 
+
+
+        // paymentSystem::create($request->all());
+        // return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -84,6 +89,11 @@ class PaymentSystemController extends Controller
     public function update(Request $request, paymentSystem $paymentSystem)
     {
         return back();
+
+        
+        // $paymentSystem->update($request->all());
+        // return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -95,5 +105,10 @@ class PaymentSystemController extends Controller
     public function destroy(paymentSystem $paymentSystem)
     {
         return back();
+
+
+        // $dropProduct->delete();
+        // return Redirect::back()->withErrors(["Item Deleted" ]);
+
     }
 }

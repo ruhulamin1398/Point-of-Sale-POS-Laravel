@@ -24,7 +24,7 @@ class DesignationRequest extends FormRequest
     public function rules()
     {
         return [
-            "role" => "required",
+            "name" => "required",
         ];
     }
 
@@ -33,7 +33,7 @@ class DesignationRequest extends FormRequest
         $messages = new ValidationMessages;
 
         return [
-            'role.required' => $messages->require('Designation Name'),
+            'name.required' => $messages->require('Designation Name'),
         ];
     }
 

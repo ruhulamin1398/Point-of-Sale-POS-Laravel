@@ -6,6 +6,7 @@ use App\Http\Requests\DesignationRequest;
 use App\Models\designation;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class DesignationController extends Controller
 {
@@ -50,11 +51,17 @@ class DesignationController extends Controller
      */
     public function store(DesignationRequest $request)
     {
-         $designation = new designation;
-         $designation->role = $request->role;
-         $designation->description = $request->description;
-         $designation->save();
-        return back();
+      
+
+        designation::create($request->all());
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
+
+        //  $designation = new designation;
+        //  $designation->role = $request->role;
+        //  $designation->description = $request->description;
+        //  $designation->save();
+        // return back();
     }
 
     /**
@@ -88,10 +95,16 @@ class DesignationController extends Controller
      */
     public function update(DesignationRequest $request, designation $designation)
     {
-        $designation->role = $request->role;
-        $designation->description = $request->description;
-        $designation->save();
-       return back();
+
+        
+        $designation->update($request->all());
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
+
+    //     $designation->role = $request->role;
+    //     $designation->description = $request->description;
+    //     $designation->save();
+    //    return back();
     }
 
     /**
@@ -101,7 +114,15 @@ class DesignationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(designation $designation)
+
     {
-        //
+        $counts = $designation->employee->count();
+        if( $counts != 0 ){
+            return Redirect::back()->withErrors(["Can't delete.","Many Employee has this Designation. To delete it please change designation in Employee. " ]);
+        }
+        else{
+            $designation->delete();
+            return Redirect::back()->withErrors(["Item Deleted" ]);
+        }
     }
 }

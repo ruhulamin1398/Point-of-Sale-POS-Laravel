@@ -6,21 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class designation extends Model
+class expenseType extends Model
 {
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
-    
-    
-    public function employee(){
-        return $this->hasMany('App\Models\employee');
+
+
+    public function expense(){
+        return $this->hasMany('App\Models\expense');
     }
 
     public function abasas(){
-        //
+        $this->expense_count = $this->expense->count();
     }   
-   
-
-
 }
