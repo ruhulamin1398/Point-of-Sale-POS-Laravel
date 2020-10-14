@@ -19,6 +19,6 @@ class dropProduct extends Model
     public function abasas(){
         // $this->products_count = $this->products->count();
          $this->user = $this->user->name;
-         $this->products = $this->products->name;
+         $this->product = $this->products->name;
     }   
 }

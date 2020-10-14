@@ -94,13 +94,17 @@ class ExpenseTypeController extends Controller
      */
     public function destroy(expenseType $expenseType)
     {
-        $counts = $expenseType->expense->count();
-        if( $counts != 0 ){
-            return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses." ]);
-        }
-        else{
-            $expenseType->delete();
-            return Redirect::back()->withErrors(["Item Deleted" ]);
-        }
+
+        $expenseType->delete();
+        return Redirect::back()->withErrors(["Item Deleted" ]);
+
+        // $counts = $expenseType->expense->count();
+        // if( $counts != 0 ){
+        //     return Redirect::back()->withErrors(["Can't delete.","This Expense Type has Expenses. To delete it please change Expense type in Expense. " ]);
+        // }
+        // else{
+        //     $expenseType->delete();
+        //     return Redirect::back()->withErrors(["Item Deleted" ]);
+        // }
     }
 }

@@ -193,10 +193,10 @@ class RoleTableSeeder extends Seeder
         ]);
         DB::table('suppliers')->insert([
             [
-                'name' => 'supplier 1',
-                'phone' => '01840000408',
-                'address' => 'address 1',
-                'company' => 'company 1',
+                'name' => 'Walk in Supplier',
+                'phone' => '01234567890',
+                'address' => 'Abasas.tech',
+                'company' => 'Abasas.tech',
             ],
             [
                 'name' => 'supplier 2',
@@ -213,10 +213,10 @@ class RoleTableSeeder extends Seeder
         ]);
         DB::table('customers')->insert([
             [
-                'name' => 'customer 1',
-                'phone' => '01840000408',
-                'address' => 'address 1',
-                'company' => 'company 1',
+                'name' => 'Walk in Customer',
+                'phone' => '01234567890',
+                'address' => 'Abasas.tech',
+                'company' => 'Abasas.tech',
             ],
             [
                 'name' => 'customer 2',
