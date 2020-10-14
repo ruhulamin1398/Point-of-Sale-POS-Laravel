@@ -5,6 +5,29 @@
 
 
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (session()->has('success'))
+<div class="alert alert-success">
+    @if(is_array(session('success')))
+        <ul>
+            @foreach (session('success') as $message)
+                <li>{{ $message }}</li>
+            @endforeach
+        </ul>
+    @else
+        {{ session('success') }}
+    @endif
+</div>
+@endif
 
 
 
@@ -28,7 +51,7 @@
                 @csrf
 
                 <div class="row">
-                    <div class="form-group col-md-4 col-sm-12  p-4">
+                    <div class="form-group col-md-4 col-sm-12  p-2">
                         <label for="catagory_id">Select Employee Name</label>
                         <select class="form-control form-control" value="" name="employee_id" id="employeeId" required>
                             @foreach ($employees as $employee)
@@ -43,7 +66,7 @@
 
 
 
-                    <div class="form-group col-md-4 col-sm-12  p-4">
+                    <div class="form-group col-md-4 col-sm-12  p-2">
                         <label for="date">Date</label>
 
 
@@ -52,7 +75,7 @@
 
                     </div>
 
-                    <div class="form-group col-md-4 col-sm-12  p-4">
+                    <div class="form-group col-md-4 col-sm-12  p-2">
                         <label for="catagory_id">Select Duty Status</label>
                         <select class="form-control form-control" name="duty_status_id" id="dutyStatusId" required>
                             @foreach ($dutyStatuses as $dutyStatus)
@@ -67,9 +90,9 @@
 
 
 
-                    <div class="form-group col-md-4 col-sm-12  p-4" id="divEnterTime">
+                    <div class="form-group col-md-4 col-sm-12  p-2" id="divEnterTime">
 
-                        <label for="catagory_id">Enter Time</label>
+                        <label for="enter_time">Enter Time</label>
 
 
                         <input type="datetime-local" name="enter_time" id="enterTime" class="form-control" min='0'
@@ -77,8 +100,8 @@
 
                     </div>
 
-                    <div class="form-group col-md-4 col-sm-12  p-4" id="divExitTime">
-                        <label for="catagory_id">Exit Time</label>
+                    <div class="form-group col-md-4 col-sm-12  p-2" id="divExitTime">
+                        <label for="exit_time">Exit Time</label>
 
 
                         <input type="datetime-local" name="exit_time" id="exitTime" class="form-control" min='0'
@@ -86,7 +109,7 @@
 
                     </div>
 
-                    <div class="form-group col-md-4 col-sm-12  p-4">
+                    <div class="form-group col-md-4 col-sm-12  p-2">
                         <label for="comment">Comment</label>
 
 
@@ -104,14 +127,12 @@
 
 
                 </div>
-                <button type="submit" id="inputDutyButton" class="btn bg-abasas-dark"> সাবমিট</button>
+                <button type="submit" id="inputDutyButton" class="btn bg-abasas-dark"> Submit</button>
 
             </form>
 
 
 
-        </div>
-    </div>
 
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar  ">
@@ -159,8 +180,9 @@
                     <td scope="col">{{$todayEmployeeDuty->employee->name}}</td>
                     <td scope="col">{{$todayEmployeeDuty->dutyStatus->name}}</td>
                     <td scope="col">{{ $todayEmployeeDuty->enter_time }}</td>
-                    <td scope="col">{{  $todayEmployeeDuty->exit_time }}</td>
-                    {{-- <td scope="col"><button type="button" editId={{$todayEmployeeDuty->id }} id="dutyEdit" class="btn btn-success"> <i class="fa   fa-edit" aria-hidden="false"> </i></button></td> --}}
+                    <td scope="col">{{ $todayEmployeeDuty->exit_time }}</td>
+                    {{-- <td scope="col"><button type="button" editId={{$todayEmployeeDuty->id }} id="dutyEdit"
+                    class="btn btn-success"> <i class="fa   fa-edit" aria-hidden="false"> </i></button></td> --}}
 
 
 
@@ -173,6 +195,9 @@
 
 
     </div>
+    
+</div>
+</div>  
 
 
 
@@ -187,11 +212,11 @@
 <script>
     $(document).ready(function () {
 
-        $('body').on('click','#dutyEdit',function(){
+        $('body').on('click', '#dutyEdit', function () {
             var id = $('#dutyEdit').attr('editId');
-            $tr = $(this).closest('tr') ;
-            var data = $tr.children('td').map(function(){
-                 return $(this).text();
+            $tr = $(this).closest('tr');
+            var data = $tr.children('td').map(function () {
+                return $(this).text();
             });
             console.log(data);
         });

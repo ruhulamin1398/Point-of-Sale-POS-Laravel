@@ -1,5 +1,6 @@
-- Data tables insert point must be beautify. like product create
-- data table dropdown must have first option as 'select an Option' will null value.
+- Data tables create section must be beautify. like product create
+- translator in data table  
+- data table dropdown must have first option as 'select an Option' with null value.
 - step="any"  must be add in datatables input type number. its for decimal input .
 - drop product search by barcode or id.
 - return product search by barcode or id.
@@ -12,8 +13,10 @@
 - in setting every required items update must be 2.
 - in customer and suppliers view must be added. this view will be list of every puechase or order he made. 
 - in product barcode print button.
-- drop product or return product user_id title needs to be "reference"
 - low stock product list
 - bar code print page
 - monthly expene , yearly expense
+- drop product or return product user_id title needs to be "reference"
+- in setting every required items update must be 2.
 
+- salary purse month in model and salary query by month

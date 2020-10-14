@@ -220,6 +220,7 @@ Route::resource('employee_salaries',EmployeeSalaryController::class);
 
 Route::resource('duty_status',DutyStatusController::class);
 Route::resource('employee_duties',EmployeeDutyController::class);
+Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
 Route::resource('drop_products',DropProductController::class);
 
 
