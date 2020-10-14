@@ -30,8 +30,10 @@ return[
  'Customer'=> 'কাস্টমার',
  'Supplier'=> 'সাপ্লাইয়ার',
  'Employee'=> 'কর্মচারী',
- 'Employees List'=> 'কর্মচারী লিস্ট',
+ 'Employees List'=> 'কর্মচারীর লিস্ট', 
+ 'Employee List'=> 'কর্মচারীর লিস্ট',
  'Employee Name'=> 'কর্মচারীর নাম',
+ 'Edit Employee'=> 'কর্মচারী সংশোধন',
 
  'All Employee'=> 'কর্মচারী লিস্ট',
  'Salary'=> 'বেতন',
@@ -109,6 +111,11 @@ return[
 'Edit Drop Product' => 'পণ্য বাতিল এর সংশোধন',
 'Quantity' => 'পরিমান',
 'Comment' => 'মন্তব্য',
+'Joining Date'=>'জয়েন',
+'Term of Contract'=> 'চুক্তির মেয়াদ',
+'Fixed Duty Hour' => 'ডিউটি',
+'Employee Payment Type List' => 'কর্মচারীর পেমেন্ট ধরণ', 
+'Edit Employee Payment Type' => 'পেমেন্ট ধরণ সংশোধন',
 
 
 ];
