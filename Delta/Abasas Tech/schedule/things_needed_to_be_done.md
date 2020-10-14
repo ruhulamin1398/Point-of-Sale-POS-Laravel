@@ -20,3 +20,4 @@
 - in setting every required items update must be 2.
 
 - salary purse month in model and salary query by month
+- data table + - toggle

@@ -27,7 +27,22 @@ class EmployeePaymentController extends Controller
         $salary_status = salaryStatus::all();
 
 
-        return view('employees.payments.index',compact('employees','payment_types','salary_status'));
+        $settings = setting::where('table_name','employee_payments')->first();
+$settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+
+        
+        $dataArray=[
+            'settings'=>$settings,
+            'items' => employeePayment::all(),
+            'employees'=> $employees,
+            'payment_types'=> $payment_types,
+            'salary_statuses'=> $salary_status,
+        ];
+
+
+
+
+        return view('employees.payments.index',compact('employees','payment_types','salary_status','dataArray'));
         
     }
 
@@ -120,7 +135,7 @@ class EmployeePaymentController extends Controller
      * @param  \App\Models\employeePayment  $employeePayment
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeePaymentRequest $request, employeePayment $employeePayment)
+    public function update(Request $request, employeePayment $employeePayment)
     {
         
          // only amount and comment editable
@@ -139,7 +154,6 @@ class EmployeePaymentController extends Controller
         $employeePayment->Comment = $request->Comment;
         $employeePayment->changed_amount +=$different;
         // cahnged data json work needed
-
 
         $salaries->save();
         $employeePayment->save();

@@ -7,12 +7,12 @@
 
 
 <!-- Begin Page Content -->
-<div class="collapse" id="NewEmployorm">
+<div style="display: none;" id="employeePaymentInputForm">
     <div class="card mb-4 shadow">
 
         <div class="card-header py-3  bg-abasas-dark ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">নতুন পেমেন্ট </a>
+                <a class="navbar-brand text-light">New Payment </a>
             </nav>
         </div>
         <div class="card-body">
@@ -86,8 +86,8 @@
 
 
                     <div class="col-auto ">
-                        <button type="submit" class="btn bg-abasas-dark mt-3">সাবমিট</button>
-                    </div>
+                        <button type="submit" class="btn bg-abasas-dark mt-3">Submit</button>
+                </div>
 
                 </div>
 
@@ -95,7 +95,7 @@
         </div>
     </div>
 </div>
-
+{{-- 
 <div id="employeePaymentData">
     <div class="card mb-4 shadow">
 
@@ -112,25 +112,33 @@
         </div>
 
 
-        {{-- data table add here --}}
+     
 
     </div>
 
 
-</div>
+</div> --}}
 
 
 
 
-{{-- 
-<x-data-table :fieldList="$fieldList" :items="$items" :routes="$routes" :componentDetails="$componentDetails" /> --}}
 
+<x-data-table
+:dataArray="$dataArray"
+/>
 
 <script>
     $(document).ready(function () {
 
-        $('body').on('click', '#AddNewFormButton', function () {
-            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
+        $('#createNewForm').hide().removeClass( "collapse");
+
+        // $('body').on('click', '#AddNewFormButton', function () {
+        //     $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
+
+        // });
+
+        $('body').on('click','#AddNewFormButton',function(){
+            $('#employeePaymentInputForm').toggle();
 
         });
 
