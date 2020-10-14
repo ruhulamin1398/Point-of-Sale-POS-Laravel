@@ -11,6 +11,12 @@ class designation extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    
+    
+    public function employee(){
+        return $this->hasMany('App\Models\employee');
+    }
+
     public function abasas(){
         //
     }   

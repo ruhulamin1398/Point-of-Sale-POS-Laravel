@@ -107,7 +107,7 @@ class ReturnProductController extends Controller
     {
        
         $returnProduct->delete();
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        return Redirect::back()->withErrors(["Item Deleted" ]);
 
 
     }

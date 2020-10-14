@@ -108,7 +108,7 @@ class EmployeeSalaryController extends Controller
     public function destroy(employeeSalary $employeeSalary)
     {
         $employeeSalary->delete();
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        return Redirect::back()->withErrors(["Item Deleted" ]);
 
 
     }

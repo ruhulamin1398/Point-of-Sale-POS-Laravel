@@ -109,8 +109,18 @@ class CustomerController extends Controller
      */
     public function destroy(customer $customer)
     {
+        // there some thinking is required 
+        if($customer->id ==1 )
+        {
+            return Redirect::back()->withErrors(['This Customer Can not be Deleted.' ]);
+
+        }
+        if($customer->due !=0 )
+        {
+            return Redirect::back()->withErrors(["Can not delete this customer. This customer has ".$customer->due .' Tk due' ]);
+        }
         $customer->delete();    
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        return Redirect::back()->withErrors(["Item Deleted" ]);
     }
 
 

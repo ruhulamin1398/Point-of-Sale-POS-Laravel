@@ -116,7 +116,13 @@ class DesignationController extends Controller
     public function destroy(designation $designation)
 
     {
-        $designation->delete();
-        return Redirect::back()->withSuccess(["Item Deleted" ]);
+        $counts = $designation->employee->count();
+        if( $counts != 0 ){
+            return Redirect::back()->withErrors(["Can't delete.","Many Employee has this Designation. To delete it please change designation in Employee. " ]);
+        }
+        else{
+            $designation->delete();
+            return Redirect::back()->withErrors(["Item Deleted" ]);
+        }
     }
 }
