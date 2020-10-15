@@ -21,4 +21,7 @@
 
 - salary purse month in model and salary query by month
 - employee new employee input table custom
-- expense query will be large ...
+- expense link check
+- number validation for positive
+- 
+

@@ -23,26 +23,26 @@ class SettingController extends Controller
             },
             "routes":{
                 "create":{
-                    "name":"employee_payments.create",
-                    "link":"employee_payments"
+                    "name":"expense_monthly.create",
+                    "link":"expense_monthly"
                 },
                 "update":{
-                    "name":"employee_payments.update",
-                    "link":"employee_payments"
+                    "name":"expense_monthly.update",
+                    "link":"expense_monthly"
                 },
                 "delete":{
-                    "name":"employee_payments.destroy",
-                    "link":"employee_payments"
+                    "name":"expense_monthly.destroy",
+                    "link":"expense_monthly"
                 }
             },
             "fieldList":[{
                     
                 "position":3,
     
-                "create":"2",
+                "create":"3",
                 "read":"1",
                 "update":"3",
-                "require":"1",
+                "require":"0",
     
                "input_type":"dropDown",
                "name":"employee",
@@ -51,47 +51,19 @@ class SettingController extends Controller
                "data" : "employees"
             },{
                     
-                "position":3,
-    
-                "create":"2",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"dropDown",
-               "name":"payment_type",
-               "database_name":"employee_payment_type_id",
-               "title": "Payment Type",
-               "data" : "payment_types"
-            },{
-                    
-                "position":3,
-    
-                "create":"2",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"dropDown",
-               "name":"salary_status",
-               "database_name":"salary_status_id",
-               "title": "Salary Status",
-               "data" : "salary_statuses"
-            },{
-                    
                 "position":111,
     
-                "create":"2",
+                "create":"3",
                 "read":"1",
-                "update":"1",
-                "require":"1",
+                "update":"3",
+                "require":"0",
     
-               "input_type":"number",
-               "name":"amount",
-               "title":"Amount",
+               "input_type":"month",
+               "name":"month",
+               "title":"Month",
     
     
-               "database_name":"amount"
+               "database_name":"month"
             },{
                     
                 "position":111,
@@ -102,51 +74,21 @@ class SettingController extends Controller
                 "require":"0",
     
                "input_type":"number",
-               "name":"changed_amount",
-               "title":"Changed Amount",
+               "name":"amount",
+               "title":"Amount",
     
     
-               "database_name":"changed_amount"
-            },{
-                    
-                "position":111,
-    
-                "create":"2",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"month",
-               "name":"month_formated",
-               "title":"Month",
-    
-    
-               "database_name":"month"
-            },{
-                    
-                "position":111,
-    
-                "create":"1",
-                "read":"1",
-                "update":"1",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"comment",
-               "title":"Comment",
-    
-    
-               "database_name":"comment"
+               "database_name":"amount"
             }
             ]
         }]' ;
 
 
         
-        // $setting =  setting::find(14);
+        // $setting = new setting::find(14);
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'employee_payments';
-        // $setting->model = 'App\Models\employeePayment.php';
+        // $setting->table_name = 'expense_monthlies';
+        // $setting->model = 'App\Models\ExpenseMonthlyController.php';
         // $setting->save();
         // return  "Success";
     }

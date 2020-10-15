@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExpenseRequest;
 use App\Models\employee;
 use App\Models\expense;
+use App\Models\expenseMonthly;
 use App\Models\expenseType;
 use App\Models\setting;
 use Carbon\Carbon;
@@ -60,7 +61,17 @@ class ExpenseController extends Controller
      */
     public function store(ExpenseRequest $request)
     {
+      //  return $request;
         expense::create($request->all());
+        $month = Carbon::now()->format('Y-m-01');
+        $expenseMonthly= expenseMonthly::where('month',$month)->where('employee_id',$request->employee_id)->first();
+        if(is_null($expenseMonthly)){
+            $expenseMonthly= new expenseMonthly;
+            $expenseMonthly->month=$month;
+            $expenseMonthly->employee_id=$request->employee_id;
+        }
+        $expenseMonthly->amount += $request->amount;
+        $expenseMonthly->save();
         return redirect()->back()->withSuccess(['Successfully Created']);
     }
 
@@ -93,9 +104,21 @@ class ExpenseController extends Controller
      * @param  \App\Models\expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(ExpenseRequest $request, expense $expense)
+    public function update(Request $request, expense $expense)
     {
+        $previous = $expense->amount;
+        $month = Carbon::now()->format('Y-m-01');
         $expense->update($request->all());
+        if(!is_null( $request->amount)){ 
+            $expense->changed_amount -=$previous;
+            $expense->changed_amount +=$request->amount;
+            $expenseMonthly= expenseMonthly::where('month',$month)->where('employee_id',$expense->employee_id)->first();
+            $expenseMonthly->amount -=$previous;
+            $expenseMonthly->amount +=$request->amount;
+
+        }
+        $expense->save();
+        $expenseMonthly->save();
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 

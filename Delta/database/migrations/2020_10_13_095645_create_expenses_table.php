@@ -18,6 +18,7 @@ class CreateExpensesTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('expense_type_id');
             $table->double('amount',18,2);
+            $table->double('changed_amount',18,2)->default(0);
             $table->longText('comment')->nullable();
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();

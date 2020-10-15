@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\expenseMonthly;
+use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExpenseMonthlyController extends Controller
@@ -12,9 +14,25 @@ class ExpenseMonthlyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $month = Carbon::now()->format('Y-m-01');
+        if(!is_null($request->month)){
+            $month= $request->month.'-01';
+        }
+        $expenseMonthly= expenseMonthly::where('month',$month)->get();
+        $settings = setting::where('table_name','expense_monthlies')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+
+        
+        $dataArray=[
+            'settings'=>$settings,
+            'items' => $expenseMonthly,
+        ];
+
+
+
+        return view('expenses.expense-monthly',compact('dataArray'));
     }
 
     /**
