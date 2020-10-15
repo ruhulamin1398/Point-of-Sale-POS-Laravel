@@ -17,13 +17,13 @@ class EmployeeSalaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $salaries= employeeSalary::all();
-
-        foreach($salaries as $salary){
-            $salary->month=Carbon::parse($salary->month)->format('F, Y');
+        $month = Carbon::now()->format('Y-m-01');
+        if(!is_null($request->month)){
+            $month = $request->month.'-01';
         }
+        $salaries= employeeSalary::where('month',$month)->get();
         $settings = setting::where('table_name', 'employee_salaries')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
 
@@ -35,7 +35,7 @@ class EmployeeSalaryController extends Controller
         ];
 
 
-        return view('product.category.index', compact('dataArray'));
+        return view('employees.payments.salary', compact('dataArray'));
     }
 
     /**

@@ -101,7 +101,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
          $salaries->save();
          $employeePayment->save();
-         return back();
+         return redirect()->back()->withSuccess(['Successfully Created']);
 
          //salary table calculation 
     }
@@ -137,7 +137,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function update(Request $request, employeePayment $employeePayment)
     {
-        
+//return $request;
          // only amount and comment editable
         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
         $different =$request->amount-$employeePayment->amount;
@@ -157,7 +157,8 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
         $salaries->save();
         $employeePayment->save();
-         return back();
+        
+        return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
     /**
@@ -181,8 +182,8 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         }
                     
         
-        $salaries->save();
-        $employeePayment->delete();
-        return back();
+        // $salaries->save();
+        // $employeePayment->delete();
+        return redirect()->back()->withErrors(['Can not Delete']);
     }
 }
