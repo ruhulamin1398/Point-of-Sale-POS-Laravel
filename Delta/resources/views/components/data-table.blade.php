@@ -481,7 +481,7 @@
                     html += '<div class="form-group">';
                     html += '<label class="col-form-label" >   {{ __("translate.").$field["title"]  }} '+@if($require == 1)' * '@else "" @endif +'   </label>';
                   
-                    html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
+                    html += '<input type="'+ inputType+'" '+@if($field["input_type"]=="number")' step="any" '@else "" @endif +' name="' + database_name + '" value="' + value +
                         '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
                     html += '</div>';
 
@@ -659,7 +659,7 @@ function insertInputFormData(){
                     html += '<div class="col-auto">';
                     html += '<span class="text-dark pl-4"> {{ __("translate.").$field["title"]  }} '+@if($require == 1)' * '@else "" @endif +'   </span>';
                   
-                    html += '<input type="'+ inputType+'" name="' + database_name + '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
+                    html += '<input type="'+ inputType+'"  '+@if($field["input_type"]=="number")' step="any" '@else "" @endif +'  name="' + database_name + '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
                     html += '</div>';
 
                     $("#createFormFieldList").append(html);

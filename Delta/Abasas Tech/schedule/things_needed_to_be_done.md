@@ -1,13 +1,10 @@
 - Data tables create section must be beautify. like product create
-- translator in data table  
 - data table dropdown must have first option as 'select an Option' with null value.
-- step="any"  must be add in datatables input type number. its for decimal input .
 - drop product search by barcode or id.
 - return product search by barcode or id.
 - drop product and return product will be custom make.
 - number validation , number must be greatr than or equal to zero.
 - User table -> name must be unique
-- Data table  if(create==2) print * in name.
 - barcode of memo and search by scan
 - total due 
 - in setting every required items update must be 2.
@@ -18,10 +15,9 @@
 - monthly expene , yearly expense
 - drop product or return product user_id title needs to be "reference"
 - in setting every required items update must be 2.
-
-- salary purse month in model and salary query by month
 - employee new employee input table custom
 - expense link check
 - number validation for positive
-- 
+- setting phone type must be tel
+- employee phone validation error. 
 
