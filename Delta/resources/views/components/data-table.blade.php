@@ -88,9 +88,9 @@
 
             <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
                 id="pageSetting"></i></div>
-<button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
+<div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
     data-target="#createNewForm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
-        id="PlusButton"></i></button>
+        id="PlusButton"></i></button></div> 
 
 
 </nav>
@@ -187,7 +187,7 @@
 
 
 
-                        <button onclick="if(confirm('are you sure to delete this')){
+                        <button class="dataDeleteItemClass btn btn-danger" onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $item->id }}').submit();
 			}
 			else{
@@ -372,6 +372,16 @@ Update
      */
 
     $(document).ready(function () {
+
+
+        
+        $('body').on('click', '#AddNewFormButton', function () {
+            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
+
+        });
+
+
+
 
          $(document).on('click', "#data-edit-button", function () {
 

@@ -178,17 +178,23 @@ class RoleTableSeeder extends Seeder
             [
 
                 'employee_id' => 1,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
+                'present' => 20,
+                'absent' => 5,
             ],
             [
 
                 'employee_id' => 2,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
+                'present' => 21,
+                'absent' => 5,
             ],
             [
 
                 'employee_id' => 3,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
+                'present' => 10,
+                'absent' => 5,
             ]
         ]);
         DB::table('suppliers')->insert([

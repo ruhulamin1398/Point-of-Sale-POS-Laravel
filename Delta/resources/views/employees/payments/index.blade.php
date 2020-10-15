@@ -7,12 +7,12 @@
 
 
 <!-- Begin Page Content -->
-<div class="collapse" id="NewEmployorm">
+<div style="display: none;" id="employeePaymentInputForm">
     <div class="card mb-4 shadow">
 
         <div class="card-header py-3  bg-abasas-dark ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">নতুন পেমেন্ট </a>
+                <a class="navbar-brand text-light">New Payment </a>
             </nav>
         </div>
         <div class="card-body">
@@ -86,7 +86,7 @@
 
 
                     <div class="col-auto ">
-                        <button type="submit" class="btn bg-abasas-dark mt-3">সাবমিট</button>
+                        <button type="submit" class="btn bg-abasas-dark mt-3">Submit</button>
                     </div>
 
                 </div>
@@ -96,41 +96,27 @@
     </div>
 </div>
 
-<div id="employeePaymentData">
-    <div class="card mb-4 shadow">
-
-        <div class="card-header py-3 bg-abasas-dark">
-            <nav class="navbar  ">
-
-                <div class="navbar-brand">List <i class="fas fa-tools pl-2" id="pageSetting"></i></div>
-                <button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
-                    data-target="#NewEmployorm" aria-expanded="false" aria-controls="collapseExample"><i
-                        class="fas fa-plus" id="PlusButton"></i></button>
-
-
-            </nav>
-        </div>
-
-
-        {{-- data table add here --}}
-
-    </div>
-
-
-</div>
 
 
 
 
-{{-- 
-<x-data-table :fieldList="$fieldList" :items="$items" :routes="$routes" :componentDetails="$componentDetails" /> --}}
-
+<x-data-table :dataArray="$dataArray" />
 
 <script>
     $(document).ready(function () {
 
+
+        $('.dataDeleteItemClass').hide();
+
+        $('#createNewForm').hide().removeClass("collapse");
+
+        // $('body').on('click', '#AddNewFormButton', function () {
+        //     $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
+
+        // });
+
         $('body').on('click', '#AddNewFormButton', function () {
-            $('#PlusButton').toggleClass('fa-plus').toggleClass('fa-minus');
+            $('#employeePaymentInputForm').toggle();
 
         });
 
@@ -142,6 +128,15 @@
                 $('#employeePaymentStatus').hide();
             }
         });
+
+
+
+
+
+
+
+
+
 
     });
 

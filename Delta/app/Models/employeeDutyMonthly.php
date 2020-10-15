@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class employeeDutyMonthly extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes; 
+    
+    
+    
+    public function employee(){
+        return $this->belongsTo('App\Models\employee','employee_id','id');
+    }
+    
+    public function abasas(){
+        $this->employee = $this->employee->name;
+    } 
 }
