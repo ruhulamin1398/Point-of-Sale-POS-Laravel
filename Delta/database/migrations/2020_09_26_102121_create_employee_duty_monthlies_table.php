@@ -18,8 +18,8 @@ class CreateEmployeeDutyMonthliesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->date('month');
-            $table->integer('present')->default(0);
-            $table->integer('absent')->default(0);
+            $table->bigInteger('present')->default(0);
+            $table->bigInteger('absent')->default(0);
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();

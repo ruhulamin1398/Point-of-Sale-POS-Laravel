@@ -18,7 +18,7 @@ class CreateProductTypesTable extends Migration
         Schema::create('product_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable(); 
+            $table->longText('description')->nullable(); 
             $table->json('sell_types')->default(new Expression('(JSON_ARRAY())'));  //sell type id list . like as kg, gm / dozon , piece
             $table->softDeletes();
             $table->timestamps();

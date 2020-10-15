@@ -20,25 +20,26 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        // return $request;
         
 
         $settings = setting::where('table_name', 'expenses')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
 
-
-
+        $month= Carbon::now()->format('Y-m');
+        if(!is_null($request->month)){
+            $month=$request->month;
+        }
         $dataArray = [
             'settings' => $settings,
-            'items' => expense::all(),
+            'items' => expense::where('created_at','>=',$month.'-01 00:00:00')->where('created_at','<=',$month.'-31 23:59:59')->get(),
             'employees' => employee::all(),
             'expense_types' => expenseType::all(),
         ];
-
-
-        return view('expenses.index', compact('dataArray'));
+        $month= Carbon::parse($month)->format('F, Y');
+        return view('expenses.index', compact('dataArray','month'));
     }
 
     /**

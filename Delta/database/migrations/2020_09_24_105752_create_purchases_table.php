@@ -19,12 +19,12 @@ class CreatePurchasesTable extends Migration
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('payment_system_id');
 
-            $table->double('paid_amount',8,2)->default(0);
-            $table->double('pre_due',8,2)->default(0);  
-            $table->double('tax',8,2)->default(0);
-            $table->double('due',8,2)->default(0);
-            $table->double('discount',8,2)->default(0);
-            $table->double('total',8,2)->default(0);
+            $table->double('paid_amount',18,2)->default(0);
+            $table->double('pre_due',18,2)->default(0);  
+            $table->double('tax',18,2)->default(0);
+            $table->double('due',18,2)->default(0);
+            $table->double('discount',18,2)->default(0);
+            $table->double('total',18,2)->default(0);
 
             $table->json('payment_details')->default(json_encode(['']));// payment Details here
 
