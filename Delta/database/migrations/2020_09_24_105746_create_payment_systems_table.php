@@ -17,7 +17,7 @@ class CreatePaymentSystemsTable extends Migration
         Schema::create('payment_systems', function (Blueprint $table) {
             $table->id();
             $table->string('payment_system');
-            $table->string('description');
+            $table->longText('description');
             $table->json('data')->default(json_encode([''])); /// here payment method details like bkash bank account etc
             $table->softDeletes();
             $table->timestamps();

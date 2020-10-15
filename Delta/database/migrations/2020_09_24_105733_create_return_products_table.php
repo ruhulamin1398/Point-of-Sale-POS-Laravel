@@ -19,10 +19,10 @@ class CreateReturnProductsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('customer_id');
            
-            $table->double('quantity',8,3);
-            $table->double('price',8,3);
-            $table->double('profit',8,3);
-            $table->string('comment')->nullable();
+            $table->double('quantity',18,3);
+            $table->double('price',18,3);
+            $table->double('profit',18,3);
+            $table->longText('comment')->nullable();
             
             $table->softDeletes();
             $table->timestamps();

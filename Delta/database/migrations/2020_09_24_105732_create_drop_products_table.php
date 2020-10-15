@@ -17,8 +17,8 @@ class CreateDropProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
-            $table->double('quantity',8,3);
-            $table->string('comment')->nullable();
+            $table->double('quantity',18,3);
+            $table->longText('comment')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

@@ -16,7 +16,7 @@ class CreateSalaryStatusesTable extends Migration
         Schema::create('salary_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }

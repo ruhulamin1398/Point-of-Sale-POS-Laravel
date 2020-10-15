@@ -17,10 +17,10 @@ class CreatePurchaseDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('purchase_id');
             $table->unsignedBigInteger('product_id');
-            $table->double('price',8,2)->default(0);
-            $table->double('quantity',8,6)->default(1);
-            $table->double('discount',8,2)->default(0);
-            $table->double('total',8,2)->default(0);
+            $table->double('price',18,2)->default(0);
+            $table->double('quantity',18,6)->default(1);
+            $table->double('discount',18,2)->default(0);
+            $table->double('total',18,2)->default(0);
 
             $table->softDeletes();
             $table->timestamps();
