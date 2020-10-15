@@ -30,7 +30,10 @@ return[
  'Customer'=> 'কাস্টমার',
  'Supplier'=> 'সাপ্লাইয়ার',
  'Employee'=> 'কর্মচারী',
- 'Employees List'=> 'কর্মচারী লিস্ট',
+ 'Employees List'=> 'কর্মচারীর লিস্ট', 
+ 'Employee List'=> 'কর্মচারীর লিস্ট',
+ 'Employee Name'=> 'কর্মচারীর নাম',
+ 'Edit Employee'=> 'কর্মচারী সংশোধন',
 
  'All Employee'=> 'কর্মচারী লিস্ট',
  'Salary'=> 'বেতন',
@@ -55,11 +58,17 @@ return[
 'suppliers List'=>'সাপ্লাইয়ার লিস্ট',
 'Edit suppliers'=>'সাপ্লাইয়ার সংশোধন',
 'phone'=>'নাম্বার',
+'Phone'=>'নাম্বার',
 'address'=>'ঠিকানা',
+'Address'=>'ঠিকানা',
 'company'=>'কোম্পানি',
+'Company'=>'কোম্পানি',
 'due'=>'বকেয়া',
+'Due'=>'বকেয়া',
 'customers List'=>'কাস্টমার লিস্ট',
+'Customers List'=>'কাস্টমার লিস্ট',
 'Edit customers'=>'কাস্টমার সংশোধন',
+'Edit Customers'=>'কাস্টমার সংশোধন',
 'Product Sell Types'=>'বিক্রয়ের ধরন',
 'Payment System'=>'পেমেন্ট সিস্টেম',
 'Edit Payment System'=>'ভূল সংশোধন',
@@ -87,9 +96,26 @@ return[
  'Contract'=>'কন্ট্রাক্ট',
  'Salary'=>'বেতন',
  'Designation'=>'পদবি',
+ 'Designation List'=>'পদবি সমূহ',
+ 'Edit Designation'=>'পদবি সংশোধন',
 'Duty statues'=>'ডিউটি',
+'Duty Status List'=>'ডিউটি',
 'Edit Duty statues'=> 'ডিউটি সংশোধন',
+'Edit Duty Status'=> 'ডিউটি সংশোধন',
 
+
+
+
+'Edit Brand'=>'ব্র্যান্ড সংশোধন',
+'Drop Product List' => 'পণ্য বাতিল এর লিস্ট',
+'Edit Drop Product' => 'পণ্য বাতিল এর সংশোধন',
+'Quantity' => 'পরিমান',
+'Comment' => 'মন্তব্য',
+'Joining Date'=>'জয়েন',
+'Term of Contract'=> 'চুক্তির মেয়াদ',
+'Fixed Duty Hour' => 'ডিউটি',
+'Employee Payment Type List' => 'কর্মচারীর পেমেন্ট ধরণ', 
+'Edit Employee Payment Type' => 'পেমেন্ট ধরণ সংশোধন',
 
 
 ];

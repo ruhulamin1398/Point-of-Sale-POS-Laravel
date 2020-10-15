@@ -108,13 +108,26 @@ Distribution
 - 12 
 
 ```
-        ## Completed -  63+4.5
+        ## Completed -  63+3
 
         Database  - 90%
         Component - 70+25%
-        Frontend  - 40+20%
+        Frontend  - 40
         testing   - 10+16%
         backend   - 25+15%
+        ------------------------------------------
+```
+- 13
+    1. sell and purchase page
+    1. check and fix  controller functions 
+```
+        ## Completed -  66+7
+
+        Database  - 90%
+        Component - 95%
+        Frontend  - 40+20%
+        testing   - 26%
+        backend   - 40 +10%
         ------------------------------------------
 ```
 
