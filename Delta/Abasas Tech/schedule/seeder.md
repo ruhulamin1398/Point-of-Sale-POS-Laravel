@@ -1,20 +1,4 @@
-<?php
-
-namespace Database\Seeders;
-
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
-class SettingSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        DB::table('settings')->insert([
+ DB::table('settings')->insert([
             [
                 'table_name' => 'brands',
                 'model' => 'App\Models\brand.php',
@@ -51,11 +35,11 @@ class SettingSeeder extends Seeder
             ],
 
 
-            [
-                'table_name' => 'employee_payments',
-                'model' => 'App\Models\employeePayment.php',
-                'setting' => '"[{\"componentDetails\":{\"title\":\"Employee Payment List\",\"editTitle\":\"Edit Employee Payment\"},\"routes\":{\"create\":{\"name\":\"employee_payments.create\",\"link\":\"employee_payments\"},\"update\":{\"name\":\"employee_payments.update\",\"link\":\"employee_payments\"},\"delete\":{\"name\":\"employee_payments.destroy\",\"link\":\"employee_payments\"}},\"fieldList\":[{\"position\":\"3\",\"create\":\"2\",\"read\":\"1\",\"update\":\"3\",\"require\":\"1\",\"input_type\":\"dropDown\",\"name\":\"employee\",\"database_name\":\"employee_id\",\"title\":\"Employee\",\"data\":\"employees\"},{\"position\":\"3\",\"create\":\"2\",\"read\":\"1\",\"update\":\"3\",\"require\":\"1\",\"input_type\":\"dropDown\",\"name\":\"payment_type\",\"database_name\":\"employee_payment_type_id\",\"title\":\"Payment Type\",\"data\":\"payment_types\"},{\"position\":\"3\",\"create\":\"2\",\"read\":\"1\",\"update\":\"3\",\"require\":\"1\",\"input_type\":\"dropDown\",\"name\":\"salary_status\",\"database_name\":\"salary_status_id\",\"title\":\"Salary Status\",\"data\":\"salary_statuses\"},{\"position\":\"111\",\"create\":\"2\",\"read\":\"1\",\"update\":\"2\",\"require\":\"1\",\"input_type\":\"number\",\"name\":\"amount\",\"title\":\"Amount\",\"database_name\":\"amount\"},{\"position\":\"111\",\"create\":\"3\",\"read\":\"1\",\"update\":\"3\",\"require\":\"0\",\"input_type\":\"number\",\"name\":\"changed_amount\",\"title\":\"Changed Amount\",\"database_name\":\"changed_amount\"},{\"position\":\"111\",\"create\":\"2\",\"read\":\"1\",\"update\":\"3\",\"require\":\"1\",\"input_type\":\"month\",\"name\":\"month_formated\",\"title\":\"Month\",\"database_name\":\"month\"},{\"position\":\"111\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"comment\",\"title\":\"Comment\",\"database_name\":\"comment\"}]}]"',
-            ],
+            // [
+            //     'table_name' => 'employee_payments',
+            //     'model' => 'App\Models\employeePayment.php',
+            //     'setting' => '"[{\"componentDetails\":{\"title\":\"Employee Payment List\",\"editTitle\":\"Edit Employee Payment\"},\"routes\":{\"create\":{\"name\":\"employee_payments.create\",\"link\":\"employee_payments\"},\"update\":{\"name\":\"employee_payments.update\",\"link\":\"employee_payments\"},\"delete\":{\"name\":\"employee_payments.destroy\",\"link\":\"employee_payments\"}},\"fieldList\":[{\"position\":\"1\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"dropDown\",\"name\":\"employee\",\"database_name\":\"employee_id\",\"title\":\"Employee\",\"data\":\"employees\"},{\"position\":\"2\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"comment\",\"database_name\":\"comment\",\"title\":\"Comment\"},{\"position\":\"3\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"dropDown\",\"name\":\"payment_type\",\"database_name\":\"employee_payment_type_id\",\"title\":\"Payment Type\",\"data\":\"employeePaymentTypes\"},{\"position\":\"4\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"0\",\"input_type\":\"dropDown\",\"name\":\"salary_status\",\"database_name\":\"salary_status_id\",\"title\":\"Salary Status\",\"data\":\"salaryStatuses\"},{\"position\":\"5\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"0\",\"input_type\":\"number\",\"name\":\"amount\",\"database_name\":\"amount\",\"title\":\"Amount\"},{\"position\":\"6\",\"create\":\"2\",\"read\":\"1\",\"update\":\"2\",\"require\":\"0\",\"input_type\":\"number\",\"name\":\"changed_amount\",\"database_name\":\"changed_amount\",\"title\":\"Changed Amount\"},{\"position\":\"7\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"month\",\"name\":\"month\",\"database_name\":\"month\",\"title\":\"Month\"}]}]"',
+            // ],
 
 
             [
@@ -94,6 +78,3 @@ class SettingSeeder extends Seeder
                 'setting' => '"[{\n            \"componentDetails\":{\n                \"title\":\"Expenses List\",\n                \"editTitle\":\"Edit Expenses\"\n            },\n            \"routes\":{\n                \"create\":{\n                    \"name\":\"expense.create\",\n                    \"link\":\"expense\"\n                },\n                \"update\":{\n                    \"name\":\"expense.update\",\n                    \"link\":\"expense\"\n                },\n                \"delete\":{\n                    \"name\":\"expense.destroy\",\n                    \"link\":\"expense\"\n                }\n            },\n            \"fieldList\":[{\n                    \n                \"position\":3,\n    \n                \"create\":\"2\",\n                \"read\":\"1\",\n                \"update\":\"1\",\n                \"require\":\"1\",\n    \n               \"input_type\":\"dropDown\",\n               \"name\":\"employee\",\n               \"database_name\":\"employee_id\",\n               \"title\": \"Employee\",\n               \"data\" : \"employees\"\n            },{\n                    \n                \"position\":3,\n    \n                \"create\":\"2\",\n                \"read\":\"1\",\n                \"update\":\"1\",\n                \"require\":\"1\",\n    \n               \"input_type\":\"dropDown\",\n               \"name\":\"expense_type\",\n               \"database_name\":\"expense_type_id\",\n               \"title\": \"Expense Type\",\n               \"data\" : \"expense_types\"\n            },{\n                    \n                \"position\":111,\n    \n                \"create\":\"2\",\n                \"read\":\"1\",\n                \"update\":\"1\",\n                \"require\":\"1\",\n    \n               \"input_type\":\"number\",\n               \"name\":\"amount\",\n               \"title\":\"Amount\",\n    \n    \n               \"database_name\":\"amount\"\n            },{\n                    \n                \"position\":111,\n    \n                \"create\":\"3\",\n                \"read\":\"1\",\n                \"update\":\"3\",\n                \"require\":\"0\",\n    \n               \"input_type\":\"date\",\n               \"name\":\"date\",\n               \"title\":\"Date\",\n    \n    \n               \"database_name\":\"created_at\"\n            }\n            ]\n        }]"',
             ],
         ]);
-
-    }
-}

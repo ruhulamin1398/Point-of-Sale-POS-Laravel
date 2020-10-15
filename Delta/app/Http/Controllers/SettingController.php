@@ -18,21 +18,21 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Expenses List",
-                "editTitle":"Edit Expenses"
+                "title":"Employee Payment List",
+                "editTitle":"Edit Employee Payment"
             },
             "routes":{
                 "create":{
-                    "name":"expense.create",
-                    "link":"expense"
+                    "name":"employee_payments.create",
+                    "link":"employee_payments"
                 },
                 "update":{
-                    "name":"expense.update",
-                    "link":"expense"
+                    "name":"employee_payments.update",
+                    "link":"employee_payments"
                 },
                 "delete":{
-                    "name":"expense.destroy",
-                    "link":"expense"
+                    "name":"employee_payments.destroy",
+                    "link":"employee_payments"
                 }
             },
             "fieldList":[{
@@ -41,7 +41,7 @@ class SettingController extends Controller
     
                 "create":"2",
                 "read":"1",
-                "update":"1",
+                "update":"3",
                 "require":"1",
     
                "input_type":"dropDown",
@@ -55,14 +55,28 @@ class SettingController extends Controller
     
                 "create":"2",
                 "read":"1",
-                "update":"1",
+                "update":"3",
                 "require":"1",
     
                "input_type":"dropDown",
-               "name":"expense_type",
-               "database_name":"expense_type_id",
-               "title": "Expense Type",
-               "data" : "expense_types"
+               "name":"payment_type",
+               "database_name":"employee_payment_type_id",
+               "title": "Payment Type",
+               "data" : "payment_types"
+            },{
+                    
+                "position":3,
+    
+                "create":"2",
+                "read":"1",
+                "update":"3",
+                "require":"1",
+    
+               "input_type":"dropDown",
+               "name":"salary_status",
+               "database_name":"salary_status_id",
+               "title": "Salary Status",
+               "data" : "salary_statuses"
             },{
                     
                 "position":111,
@@ -87,22 +101,52 @@ class SettingController extends Controller
                 "update":"3",
                 "require":"0",
     
-               "input_type":"date",
-               "name":"date",
-               "title":"Date",
+               "input_type":"number",
+               "name":"changed_amount",
+               "title":"Changed Amount",
     
     
-               "database_name":"created_at"
+               "database_name":"changed_amount"
+            },{
+                    
+                "position":111,
+    
+                "create":"2",
+                "read":"1",
+                "update":"3",
+                "require":"1",
+    
+               "input_type":"month",
+               "name":"month_formated",
+               "title":"Month",
+    
+    
+               "database_name":"month"
+            },{
+                    
+                "position":111,
+    
+                "create":"1",
+                "read":"1",
+                "update":"1",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"comment",
+               "title":"Comment",
+    
+    
+               "database_name":"comment"
             }
             ]
         }]' ;
 
 
         
-        // $setting =  setting::find(13);
+        // $setting =  setting::find(14);
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'expenses';
-        // $setting->model = 'App\Models\expense.php';
+        // $setting->table_name = 'employee_payments';
+        // $setting->model = 'App\Models\employeePayment.php';
         // $setting->save();
         // return  "Success";
     }

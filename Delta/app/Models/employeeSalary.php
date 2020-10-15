@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,5 +25,6 @@ public  function salaryStatus()
     public function abasas(){
         $this->employee = $this->employee->name;
         $this->salary_status = $this->salaryStatus->name;
+        $this->month =Carbon::parse( $this->month)->format('F, Y');
     }   
 }

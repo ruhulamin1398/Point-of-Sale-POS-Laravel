@@ -32,7 +32,7 @@
 
 
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mt-3"  >সাবমিট</button>
+                                <button type="submit" class="btn btn-primary mt-3"  >Submit</button>
                             </div>
 
 
