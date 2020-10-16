@@ -18,37 +18,38 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Employee Payment List",
-                "editTitle":"Edit Employee Payment"
+                "title":"Low Stock Product List",
+                "editTitle":"Edit"
             },
             "routes":{
                 "create":{
-                    "name":"expense_monthly.create",
-                    "link":"expense_monthly"
+                    "name":"stock_alert.create",
+                    "link":"stock_alert"
                 },
                 "update":{
-                    "name":"expense_monthly.update",
-                    "link":"expense_monthly"
+                    "name":"stock_alert.update",
+                    "link":"stock_alert"
                 },
                 "delete":{
-                    "name":"expense_monthly.destroy",
-                    "link":"expense_monthly"
+                    "name":"products.destroy",
+                    "link":"products"
                 }
             },
             "fieldList":[{
                     
-                "position":3,
+                "position":111,
     
                 "create":"3",
                 "read":"1",
                 "update":"3",
                 "require":"0",
     
-               "input_type":"dropDown",
-               "name":"employee",
-               "database_name":"employee_id",
-               "title": "Employee",
-               "data" : "employees"
+               "input_type":"text",
+               "name":"id",
+               "title":"Product ID",
+    
+    
+               "database_name":"id"
             },{
                     
                 "position":111,
@@ -58,12 +59,12 @@ class SettingController extends Controller
                 "update":"3",
                 "require":"0",
     
-               "input_type":"month",
-               "name":"month",
-               "title":"Month",
+               "input_type":"text",
+               "name":"name",
+               "title":"Product Name",
     
     
-               "database_name":"month"
+               "database_name":"name"
             },{
                     
                 "position":111,
@@ -73,22 +74,67 @@ class SettingController extends Controller
                 "update":"3",
                 "require":"0",
     
-               "input_type":"number",
-               "name":"amount",
-               "title":"Amount",
+               "input_type":"text",
+               "name":"brand",
+               "title":"Product Brand",
     
     
-               "database_name":"amount"
+               "database_name":"brand_id"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"price_per_unit",
+               "title":"Unit Price",
+    
+    
+               "database_name":"price_per_unit"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"cost_per_unit",
+               "title":"Unit Cost",
+    
+    
+               "database_name":"cost_per_unit"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"stock",
+               "title":"Stock",
+    
+    
+               "database_name":"stock"
             }
             ]
         }]' ;
 
 
         
-        // $setting = new setting::find(14);
+        // $setting = new setting;//::find(14);
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'expense_monthlies';
-        // $setting->model = 'App\Models\ExpenseMonthlyController.php';
+        // $setting->table_name = 'stock_alert';
+        // $setting->model = 'App\Models\Product.php';
         // $setting->save();
         // return  "Success";
     }

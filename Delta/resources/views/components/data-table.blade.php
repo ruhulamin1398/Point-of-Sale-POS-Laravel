@@ -174,7 +174,7 @@
 
 
                     <td class="align-middle">
-                        <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
+                        <button type="button" class="dataEditItemClass btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
                                 class="fa fa-edit" aria-hidden="false"> </i></button>
 
 

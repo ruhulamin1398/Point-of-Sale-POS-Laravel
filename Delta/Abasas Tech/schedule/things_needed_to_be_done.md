@@ -9,7 +9,7 @@
 - total due 
 - in customer and suppliers view must be added. this view will be list of every puechase or order he made. 
 - in product barcode print button.
-- low stock product list
+
 - bar code print page
 - yearly expense 
 - number validation for positive
@@ -19,4 +19,5 @@
 - cursor grab and grabing 
 - phone is not updateable in customer 
 - Employee delete thinking needed . 
+- low stock product list
 
