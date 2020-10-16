@@ -51,7 +51,7 @@
             </nav>
         </div>
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route($routes['create']['name']) }}">
                 @csrf
                 <div class="form-row align-items-center" id="createFormFieldList">
                   
