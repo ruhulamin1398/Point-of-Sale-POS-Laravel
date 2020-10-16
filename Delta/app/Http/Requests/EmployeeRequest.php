@@ -27,12 +27,10 @@ class EmployeeRequest extends FormRequest
     {
         return [
             
-            "user_id"=>"required",
             "name"=>"required",
             "phone"=>["required","unique:employees"],
             "address"=>"required",
             "salary"=>"required",
-            "fixed_duty_hour"=>"required",
             "designation_id"=>"required",
            
         ];
@@ -44,13 +42,11 @@ class EmployeeRequest extends FormRequest
         $messages = new ValidationMessages;
 
         return [
-            'user_id.required' => $messages->require('User'),
             'name.required' => $messages->require('Name'),
             'phone.required' => $messages->require('Phone'),
             'phone.unique' => $messages->unique('Phone'),
             'address.required' => $messages->require('Address'),
             'salary.required' => $messages->require('Salary'),
-            'fixed_duty_hour.required' => $messages->require('Fixed Duty Hour'),
             'designation_id.required' => $messages->require('Designation'),
         ];
     }

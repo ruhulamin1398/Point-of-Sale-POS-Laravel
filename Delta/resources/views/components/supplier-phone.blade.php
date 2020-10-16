@@ -42,7 +42,7 @@
                             class="form-control mb-2">
                     </div>
                     <div class="col-auto">
-                        <button type="button" id="addsupplierButton" class="btn btn-primary mt-3">সম্পন্ন</button>
+                        <button type="button" id="addsupplierButton" class="btn btn-primary mt-3">Completed</button>
                     </div>
                 </div>
             </form>

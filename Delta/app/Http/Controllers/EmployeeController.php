@@ -7,7 +7,9 @@ use App\Models\employee;
 use App\Models\User;
 use App\Models\designation;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class EmployeeController extends Controller
@@ -23,16 +25,18 @@ class EmployeeController extends Controller
         $settings = setting::where('table_name','employees')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
-                
+        $designations   =designation::all();     
+        $users   = User::all();     
+        $employees =  employee::all();
                 $dataArray=[
                     'settings'=>$settings,
-                    'items' => employee::all(),
-                    'users'=> User::all(),
-                    'designations'=> designation::all(),
+                    'items' =>$employees,
+                    'users'=> $users,
+                    'designations'=> $designations,
                 ];
         
         
-                return view('employees.index', compact('dataArray'));
+                return view('employees.index', compact('dataArray','designations','users','employees'));
         
 
     }
@@ -55,28 +59,31 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-         
-        employee::create($request->all());
+        $employee= new employee;
+        $employee->designation_id= $request->designation_id; 
+        $employee->name= $request->name; 
+        $employee->phone= $request->phone; 
+        $employee->address= $request->address; 
+        $employee->joining_date= $request->joining_date; 
+        $employee->reference= $request->reference; 
+        $employee->term_of_contract= $request->term_of_contract; 
+        $employee->fixed_duty_hour= $request->fixed_duty_hour; 
+        $employee->salary= $request->salary; 
+        if(!is_null($request->userName)){  
+            $user= new User;
+            $user->name= $request->userName;
+            $user->email = $request->email;
+            $user->password= Hash::make($request->password);
+            $user->save();
+        }
+        $employee->user_id=$user->id;
+        $employee->save();
+
         return redirect()->back()->withSuccess(['Successfully Created']);
 
 
 
-    //    $employee = new employee;
-    //    $employee->name = $request->name;
-    //    $employee->phone = $request->phone;
-    //    $employee->address = $request->address;
-    //    $employee->joining_date = $request->joining_date;
-    //    $employee->reference = $request->reference;
-    //    $employee->term_of_contract = $request->term_of_contract;
-    //    $employee->fixed_duty_hour = $request->fixed_duty_hour;
-    //    $employee->salary = $request->salary;
-    //    $employee->designation_id = $request->designation_id;
-
-       
-
-
-    //    $employee->save();
-    //    return back();
+ 
 
     }
 
@@ -109,8 +116,24 @@ class EmployeeController extends Controller
      * @param  \App\Models\employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeRequest $request, employee $employee)
-    {    
+    public function update(Request $request, employee $employee)
+    {
+        $number=$request->phone;
+        $id =$employee->id;
+        if(!is_null($number)){
+            $length=strlen($number);
+            if($length!=11){
+                return Redirect::back()->withErrors(["Enter a Valid Phone"]);
+            }
+            else{
+                $employees= employee::where('phone',$number)->first();
+                if(!is_null( $employees)){
+                    if($id != $employees->id){
+                        return Redirect::back()->withErrors(["This Phone is Already taken"]);
+                    }
+                }
+            }
+        }    
         
         $employee->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
