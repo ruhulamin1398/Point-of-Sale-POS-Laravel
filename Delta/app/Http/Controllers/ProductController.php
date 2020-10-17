@@ -11,6 +11,7 @@ use App\Models\setting;
 use App\Models\unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -121,9 +122,14 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {  
-      
-       $product->delete();
-       return back();
+        if($product->stock <=0){
+            $product->delete();
+            return Redirect::back()->withErrors(["Item Deleted" ]);
+        }
+        else{
+            return Redirect::back()->withErrors(["This Products Stock is not Zero",'Please Sell or drop that product to delete this Product' ]);
+        }
+       
     }
 
 
