@@ -7,11 +7,10 @@ use App\Models\brand;
 use App\Models\category;
 use App\Models\Product;
 use App\Models\productType;
+use App\Models\setting;
 use App\Models\unit;
 use Illuminate\Http\Request;
-
-
-
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -126,6 +125,24 @@ class ProductController extends Controller
        $product->delete();
        return back();
     }
+
+
+    
+    public function lowStockProduct()
+    {  
+      $lowStockProducts =  Product::whereColumn('stock' ,'<' ,'stock_alert')->get();
+     
+      $settings = setting::where('table_name','stock_alert')->first();
+      $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+      
+              
+    $dataArray=[
+        'settings'=>$settings,
+        'items' => $lowStockProducts,
+    ];
+      return view('product.stock-alert.index',compact('dataArray'));     
+    }
+
 
         //Api Area start
 

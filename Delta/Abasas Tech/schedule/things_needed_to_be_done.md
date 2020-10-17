@@ -7,17 +7,17 @@
 - User table -> name must be unique
 - barcode of memo and search by scan
 - total due 
-- in setting every required items update must be 2.
 - in customer and suppliers view must be added. this view will be list of every puechase or order he made. 
 - in product barcode print button.
-- low stock product list
+
 - bar code print page
-- monthly expene , yearly expense
-- drop product or return product user_id title needs to be "reference"
-- in setting every required items update must be 2.
-- employee new employee input table custom
-- expense link check
+- yearly expense 
 - number validation for positive
-- setting phone type must be tel
+- in setting every required items update must be 2.
 - employee phone validation error. 
+- update validation needs to be updated.
+- cursor grab and grabing 
+- phone is not updateable in customer 
+- Employee delete thinking needed . 
+- low stock product list
 

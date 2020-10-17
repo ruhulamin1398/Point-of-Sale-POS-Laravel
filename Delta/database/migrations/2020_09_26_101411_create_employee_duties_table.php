@@ -20,7 +20,7 @@ class CreateEmployeeDutiesTable extends Migration
             $table->unsignedBigInteger('duty_status_id')->default(3);
             $table->dateTime('enter_time')->nullable();
             $table->dateTime('exit_time')->nullable();
-            $table->time('fixed_duty_hour');
+            $table->integer('fixed_duty_hour');
             $table->time('worked_hour')->nullable();
             $table->date('date');
             $table->longText('comment')->nullable();

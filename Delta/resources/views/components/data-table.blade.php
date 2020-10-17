@@ -51,7 +51,7 @@
             </nav>
         </div>
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route($routes['create']['name']) }}">
                 @csrf
                 <div class="form-row align-items-center" id="createFormFieldList">
                   
@@ -174,7 +174,7 @@
 
 
                     <td class="align-middle">
-                        <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
+                        <button type="button" class="dataEditItemClass btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
                                 class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
@@ -444,7 +444,7 @@
                     html = "";
 
                     html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{ __("translate.").$field["title"]  }} '+@if($require == 1)' * '@else "" @endif +'  </label>';
+                    html += '<label class="col-form-label" >  {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span> '@else "" @endif +'  </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
                         '"  required >';
 
@@ -479,7 +479,7 @@
 
                     html = "";
                     html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >   {{ __("translate.").$field["title"]  }} '+@if($require == 1)' * '@else "" @endif +'   </label>';
+                    html += '<label class="col-form-label" >   {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'   </label>';
                   
                     html += '<input type="'+ inputType+'" '+@if($field["input_type"]=="number")' step="any" '@else "" @endif +' name="' + database_name + '" value="' + value +
                         '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
@@ -619,8 +619,8 @@ function insertInputFormData(){
 
                     html = "";
 
-                    html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{ __("translate.").$field["title"]  }} '+@if($require == 1)' * '@else "" @endif +'  </label>';
+                    html += '<div class="form-group col-md-3 col-sm-12  p-4">';
+                    html += '<label class="col-form-label" >  {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'  </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
                         '"  required >';
 
@@ -656,8 +656,8 @@ function insertInputFormData(){
 // // </div>
 
                     html = "";
-                    html += '<div class="col-auto">';
-                    html += '<span class="text-dark pl-4"> {{ __("translate.").$field["title"]  }} '+@if($require == 1)' * '@else "" @endif +'   </span>';
+                    html += '<div class="col-md-3 col-sm-12  p-4">';
+                    html += '<span class="text-dark pl-4"> {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'   </span>';
                   
                     html += '<input type="'+ inputType+'"  '+@if($field["input_type"]=="number")' step="any" '@else "" @endif +'  name="' + database_name + '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
                     html += '</div>';

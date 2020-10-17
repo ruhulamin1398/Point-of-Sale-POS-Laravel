@@ -24,7 +24,7 @@ class CreateEmployeesTable extends Migration
             $table->date('joining_date')->nullable();
             $table->string('reference')->nullable();
             $table->date('term_of_contract')->nullable();
-            $table->time('fixed_duty_hour')->nullable();
+            $table->integer('fixed_duty_hour')->nullable();
             $table->double('salary', 18, 2)->default(20000.00);
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
