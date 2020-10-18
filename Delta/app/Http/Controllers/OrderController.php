@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Models\paymentSystem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,6 +18,7 @@ class OrderController extends Controller
     {
         return view('order.index');
     }
+  
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +27,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+            
+        $paymentSystems = paymentSystem::all();
+       
+        return view('product.order.create',compact('paymentSystems'));
     }
 
     /**

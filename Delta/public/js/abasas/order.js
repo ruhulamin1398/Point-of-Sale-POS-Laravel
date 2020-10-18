@@ -1,5 +1,18 @@
 $(document).ready(function () {
+var databaseProducts;
 
+    $(function () {
+
+
+        var link = $("#homeRoute").val().trim() + "/api/all-products";
+        console.log(link);
+
+        $.get(link, function (data) {
+            databaseProducts = data;
+
+        });
+
+    })
 
 
     var purchaseTableData = {};
@@ -34,13 +47,14 @@ $(document).ready(function () {
 
 
     }
-    
+
 
     function setIndivitualInputFieldDefault() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
 
         $("#purchaseProductInputId").val('');
+        $("#productIdHidden").val(0);
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val(0);
         $("#purchaseProductInputdiscount").val(0);
@@ -52,36 +66,39 @@ $(document).ready(function () {
     function setIndivitualInputDetailsDefault() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
+        
+        $("#productIdHidden").val(0);
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val(0);
         $("#purchaseProductInputdiscount").val(0);
         $("#purchaseProductInputQuantity").val(1);
         $("#purchaseProductInputTotal").val(0);
 
-        
+
         $("#purchaseProductError").show();
     }
 
-
-
     $("#purchaseProductError").hide();
-    $("#purchaseProductInputId").on('input', function () {
+    $("#purchaseProductInputId").on('input', function (e) {
+
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
 
-        var product_id = $("#purchaseProductInputId").val().trim();
+        var product_id = parseInt ($("#purchaseProductInputId").val().trim());
 
-        var link = $("#homeRoute").val().trim() + "/api/get-product-by-id?id=" + product_id;
+        // var link = $("#homeRoute").val().trim() + "/api/get-product-by-id?id=" + product_id;
 
-        $.get(link, function (product) {
-            if (product == 0) {
+        // $.get(link, function (product) {
+          var product = databaseProducts[product_id];
+            if ( typeof product == 'undefined') {
 
-              setIndivitualInputDetailsDefault();
+                setIndivitualInputDetailsDefault();
 
                 $("#purchaseProductInputSubmit").attr("disabled", true);
             } else {
                 $("#purchaseProductError").hide();
-
+                
+                $("#productIdHidden").val(product.id);
                 $("#purchaseProductInputName").val(product.name);
                 $("#purchaseProductInputPrice").val(product.price_per_unit);
                 $("#purchaseProductInputdiscount").val(0);
@@ -92,7 +109,7 @@ $(document).ready(function () {
 
             }
 
-        });
+        // });
 
     });
 
@@ -176,14 +193,33 @@ $(document).ready(function () {
 
 
     function AddNewProductOnPruchaseCart() {
+        
+// check if data is successfully loaded or not 
+         var existingProduct =  parseInt($("#productIdHidden").val().trim());   
         var id = parseInt($("#purchaseProductInputId").val().trim());
-        var name = $("#purchaseProductInputName").val().trim();
-        var price = $("#purchaseProductInputPrice").val().trim();
-        var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
-        var discountType = $("#purchaseProductInputDiscountType").val().trim();
-        var discount = $("#purchaseProductInputdiscount").val().trim();
-        var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
-        var total = $("#purchaseProductInputTotal").val().trim();
+if(existingProduct ==id )
+{
+    // if loaded or modified
+    var name = $("#purchaseProductInputName").val().trim();
+    var price = $("#purchaseProductInputPrice").val().trim();
+    var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+    var discountType = $("#purchaseProductInputDiscountType").val().trim();
+    var discount = $("#purchaseProductInputdiscount").val().trim();
+    var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
+    var total = $("#purchaseProductInputTotal").val().trim();
+
+
+}
+else{
+        // if not laoded 
+    var name = databaseProducts[id]['name'];
+    var price = databaseProducts[id]['price_per_unit'];
+    var quantity = 1
+    var discountType = $("#purchaseProductInputDiscountType").val().trim();
+    var discount = 0;
+    var discountValue = 0;
+    var total = price;
+}
 
 
 
@@ -216,16 +252,43 @@ $(document).ready(function () {
     function updateProductOnPruchaseCart() {
 
 
+// check if data is successfully loaded or not 
+var existingProduct =  parseInt($("#productIdHidden").val().trim());   
+var id = parseInt($("#purchaseProductInputId").val().trim());
+if(existingProduct ==id )
+{
+
+    // if loaded or modified
+var name = $("#purchaseProductInputName").val().trim();
+var price = $("#purchaseProductInputPrice").val().trim();
+var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+var discountType = $("#purchaseProductInputDiscountType").val().trim();
+var discount = $("#purchaseProductInputdiscount").val().trim();
+var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
+var total = $("#purchaseProductInputTotal").val().trim();
 
 
-        var id = parseInt($("#purchaseProductInputId").val().trim());
-        var name = $("#purchaseProductInputName").val().trim();
-        var price = $("#purchaseProductInputPrice").val().trim();
-        var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
-        var discountType = $("#purchaseProductInputDiscountType").val().trim();
-        var discount = $("#purchaseProductInputdiscount").val().trim();
-        var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
-        var total = $("#purchaseProductInputTotal").val().trim();
+}
+else{
+
+    // if not laoded 
+var name = databaseProducts[id]['name'];
+var price = databaseProducts[id]['price_per_unit'];
+var quantity = 1
+var discountType = $("#purchaseProductInputDiscountType").val().trim();
+var discount = 0;
+var discountValue = 0;
+var total = price;
+}
+
+        // var id = parseInt($("#purchaseProductInputId").val().trim());
+        // var name = $("#purchaseProductInputName").val().trim();
+        // var price = $("#purchaseProductInputPrice").val().trim();
+        // var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+        // var discountType = $("#purchaseProductInputDiscountType").val().trim();
+        // var discount = $("#purchaseProductInputdiscount").val().trim();
+        // var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
+        // var total = $("#purchaseProductInputTotal").val().trim();
 
 
 
@@ -250,32 +313,56 @@ $(document).ready(function () {
         $("#purchaseProductInputId").focus();
 
     };
-
-
-    $("#purchaseProductInputSubmit").on("click", function () {
-
-        var submitButtonType = $("#purchaseProductInputSubmit").data("submit-type");
-        var submitButtonProductId = $("#purchaseProductInputSubmit").data("item-id");
-        var id = parseInt($("#purchaseProductInputId").val().trim());
-        if (submitButtonType == 'update') {
-            console.log("submitButtonType == 'update'");
-            if (submitButtonProductId == id) {
-                console.log('update method Called');
-                updateProductOnPruchaseCart();
-            } else {
-                console.log('create method Called');
-                AddNewProductOnPruchaseCart();
-            }
+function purchaseInputSubmitFunction(){
+    var submitButtonType = $("#purchaseProductInputSubmit").data("submit-type");
+    var submitButtonProductId = $("#purchaseProductInputSubmit").data("item-id");
+    var id = parseInt($("#purchaseProductInputId").val().trim());
+    if (submitButtonType == 'update') {
+        console.log("submitButtonType == 'update'");
+        if (submitButtonProductId == id) {
+            console.log('update method Called');
+            updateProductOnPruchaseCart();
         } else {
             console.log('create method Called');
             AddNewProductOnPruchaseCart();
         }
+    } else {
+        console.log('create method Called');
+        AddNewProductOnPruchaseCart();
+    }
 
 
-        $("#purchaseProductInputSubmit").data("submit-type", 'create');
-        $("#purchaseProductInputSubmit").data("item-id", 0);
+    $("#purchaseProductInputSubmit").data("submit-type", 'create');
+    $("#purchaseProductInputSubmit").data("item-id", 0);
+}
+
+    $("#purchaseProductInputSubmit").on("click", function () {
+        purchaseInputSubmitFunction();
+
 
     });
+
+
+
+    
+//                               ****************************************
+//                               ########## On Enter start #############
+//                               ****************************************
+ 
+///// test 
+$("#purchaseProductInputId").keypress(function (e) {
+    if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+        console.log("enter is clicked")
+        purchaseInputSubmitFunction();
+    }
+
+});
+//                               *****************************************************************************
+//                               ##########  purchase product table delete button start here   #############
+//                               *******************************************************************************
+
+
+
 
 
 
@@ -286,6 +373,10 @@ $(document).ready(function () {
         printPurchaseTableData();
     });
 
+
+//                               *****************************************************************************
+//                               ##########  purchase product table delete button start here   #############
+//                               *******************************************************************************
 
     $("body").on("click", "#purchaseProductTableEdit", function () {
         var prooductId = $(this).attr('productId');
@@ -569,20 +660,18 @@ $(document).ready(function () {
 
 
 
-///// order complete button 
-$("#orderCompleteButton").on('click',function(){
-  
-    $("#PrintPurchaseModal").modal(
-        {
+    ///// order complete button 
+    $("#orderCompleteButton").on('click', function () {
+
+        $("#PrintPurchaseModal").modal({
             backdrop: 'static',
             keyboard: false
-        }
-    );
-})
-   // on modal hide
-   $('#PrintPurchaseModal').on('hide.bs.modal', function() {
-    alert()
-});
+        });
+    })
+    // on modal hide
+    $('#PrintPurchaseModal').on('hide.bs.modal', function () {
+        alert()
+    });
 
 
 });
