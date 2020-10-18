@@ -389,6 +389,7 @@ $("#purchaseProductInputId").keypress(function (e) {
         var product = purchaseTableData[prooductId];
 
         $("#purchaseProductInputId").val(product.id);
+        $("#productIdHidden").val(product.id);
         $("#purchaseProductInputName").val(product.name);
         $("#purchaseProductInputPrice").val(product.price);
         $("#purchaseProductInputdiscount").val(product.discount);
