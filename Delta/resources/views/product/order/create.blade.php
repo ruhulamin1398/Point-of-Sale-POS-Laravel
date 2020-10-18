@@ -25,18 +25,29 @@
 
     
 
-                        <div class="col-auto">
+                        {{-- <div >
+                            
+                            <input type="text" name="product_id" id="purchaseProductInputId" size="50" value=""
+                                class=" " autofocus autocomplete="off">
+                        </div> --}}
+
+                        <div class="col-12" style="position: relative;">
                             <span class="text-dark  pl-2"> Search</span>
-                            <input type="text" name="product_id" id="purchaseProductInputSearchId" size="10" value=""
-                                class="form-control  mb-2 inputMinZero " autofocus>
+                            <input type="text" name="" id="purchaseProductInputId" class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
+                                autocomplete="off" autofocus >
+                            <div id="productSuggession" class="list-group" id="show-list" style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
                         </div>
+
+                        
+                        
+                        
     
 
-                        <div class="col-auto">
+                        {{-- <div class="col-auto">
                             <span class="text-dark  pl-2"> পণ্যের আইডি</span>
                             <input type="text" name="product_id" id="purchaseProductInputId" size="10" value=""
                                 class="form-control  mb-2 inputMinZero " autofocus>
-                        </div>
+                        </div> --}}
 
                         <input type="text" name="" id="productIdHidden" hidden  >
 
