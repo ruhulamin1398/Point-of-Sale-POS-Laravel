@@ -23,16 +23,21 @@
                     <div class="form-row align-items-center">
 
 
-                        <!-- <div class="col-auto">
-        <span class="text-dark  pl-2"> cost</span>
-        <input type="text" name="productCost" id="orderProductInputCost" size="10" value="" class="form-control  mb-2">
-      </div> -->
+    
+
+                        <div class="col-auto">
+                            <span class="text-dark  pl-2"> Search</span>
+                            <input type="text" name="product_id" id="purchaseProductInputSearchId" size="10" value=""
+                                class="form-control  mb-2 inputMinZero " autofocus>
+                        </div>
+    
 
                         <div class="col-auto">
                             <span class="text-dark  pl-2"> পণ্যের আইডি</span>
                             <input type="text" name="product_id" id="purchaseProductInputId" size="10" value=""
                                 class="form-control  mb-2 inputMinZero " autofocus>
                         </div>
+
                         <input type="text" name="" id="productIdHidden" hidden  >
 
 

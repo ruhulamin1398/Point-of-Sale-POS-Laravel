@@ -19,6 +19,5 @@
 - cursor grab and grabing 
 - phone is not updateable in customer 
 - Employee delete thinking needed . 
-- low stock product list
-- employee payments page within month
+
 

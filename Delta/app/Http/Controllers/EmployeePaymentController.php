@@ -27,7 +27,7 @@ class EmployeePaymentController extends Controller
         if(!is_null( $request->month)){
             $month= Carbon:: parse($request->month)->format('Y-m-01');
         }
-        return $month;
+        $employeePayment= employeePayment:: where('month',$month)->get();
         $employees = employee::all();
         $payment_types = employeePaymentType :: all();
         $salary_status = salaryStatus::all();
@@ -39,16 +39,16 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
         $dataArray=[
             'settings'=>$settings,
-            'items' => employeePayment::all(),
+            'items' => $employeePayment,
             'employees'=> $employees,
             'payment_types'=> $payment_types,
             'salary_statuses'=> $salary_status,
         ];
 
 
+        $month= Carbon::parse($month)->format("F, Y");
 
-
-        return view('employees.payments.index',compact('employees','payment_types','salary_status','dataArray'));
+        return view('employees.payments.index',compact('employees','payment_types','salary_status','dataArray','month'));
         
     }
 
