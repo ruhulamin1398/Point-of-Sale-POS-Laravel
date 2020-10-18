@@ -10,6 +10,7 @@ use App\Models\employeePaymentType;
 use App\Models\employeeSalary;
 use App\Models\salaryStatus;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -20,8 +21,13 @@ class EmployeePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     { 
+        $month = Carbon::now()->format('Y-m-01');
+        if(!is_null( $request->month)){
+            $month= Carbon:: parse($request->month)->format('Y-m-01');
+        }
+        return $month;
         $employees = employee::all();
         $payment_types = employeePaymentType :: all();
         $salary_status = salaryStatus::all();
