@@ -55,3 +55,12 @@ For all employee view and create
 For all designation view and create
 ```
 
+# Drop Products
+- drop_products
+```
+for all dropped product view monthly
+```
+- /drop_products/create
+```
+for drop product input section
+``

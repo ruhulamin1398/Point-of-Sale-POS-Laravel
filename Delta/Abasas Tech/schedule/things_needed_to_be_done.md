@@ -21,4 +21,8 @@
 - Employee delete thinking needed . 
 - drop product and return product date in datatable;
 - notification on update and delete . 
+- non createable and non updateable page createLabe and updateLabel hide .
+- drop product create form in create.blade.php
+
+
 

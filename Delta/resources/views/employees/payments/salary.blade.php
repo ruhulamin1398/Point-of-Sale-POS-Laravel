@@ -24,9 +24,13 @@
 
         $('#createNewForm').hide().removeClass("collapse");
         $('#AddNewFormButtonDiv').html(html);
+        $('.createLabel').hide();
+        $('.updateLavel').hide();
+
 
         var table = $('#dataTable').DataTable();
         table.columns( [-1] ).visible( false );
+        
 
 
     })

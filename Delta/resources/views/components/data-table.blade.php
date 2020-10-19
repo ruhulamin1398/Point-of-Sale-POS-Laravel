@@ -86,7 +86,7 @@
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar  ">
 
-            <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
+            <div class="navbar-brand"><span id="componentDetailsTitle"> {{ __('translate.'.$componentDetails['title'])  }}</span> <i class="fas fa-tools pl-2"
                 id="pageSetting"></i></div>
 <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
     data-target="#createNewForm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
