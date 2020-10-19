@@ -63,4 +63,10 @@ for all dropped product view monthly
 - /drop_products/create
 ```
 for drop product input section
-``
+```
+# products
+-  products/create
+```
+for creating Products
+```
+- 

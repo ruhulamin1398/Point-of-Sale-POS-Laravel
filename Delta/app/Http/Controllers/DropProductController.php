@@ -57,7 +57,10 @@ class DropProductController extends Controller
             'settings' => $settings,
             'items' => $dropProducts,
         ];
-        return view('product.dropProduct.create',compact('dataArray'));
+
+
+        $products = Product::all();
+        return view('product.dropProduct.create',compact('dataArray','products'));
     }
 
     /**
@@ -68,7 +71,6 @@ class DropProductController extends Controller
      */
     public function store(DropProductRequest $request)
     {
-        
         if($request->quantity < 0 ){
             return redirect()->back()->withErrors(['Quantity must be greater than 0']);
         }

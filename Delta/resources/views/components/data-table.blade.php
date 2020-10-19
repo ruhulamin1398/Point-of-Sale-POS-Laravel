@@ -327,7 +327,7 @@
                 </label>
               </div>
               <div class="form-check-inline">
-                <label class="form-check-label updateLavel">
+                <label class="form-check-label updateLabel">
                     @if( $fieldList[$i]['update'] ==1  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
                     @elseif( $fieldList[$i]['update'] ==2  )

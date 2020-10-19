@@ -25,7 +25,7 @@
         $('#createNewForm').hide().removeClass("collapse");
         $('#AddNewFormButtonDiv').html(html);
         $('.createLabel').hide();
-        $('.updateLavel').hide();
+        $('.updateLabel').hide();
 
 
         var table = $('#dataTable').DataTable();
