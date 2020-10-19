@@ -20,5 +20,6 @@ class dropProduct extends Model
         // $this->products_count = $this->products->count();
          $this->user = $this->user->name;
          $this->product = $this->products->name;
+         $this->date = $this->created_at->format('d M, Y');
     }   
 }

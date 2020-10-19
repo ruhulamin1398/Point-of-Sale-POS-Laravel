@@ -6,6 +6,7 @@ use App\Http\Requests\DropProductRequest;
 use App\Models\dropProduct;
 use App\Models\Product;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -16,15 +17,25 @@ class DropProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if(is_null($request->month)){
+            $monthstart= Carbon::now()->format("Y-m-01 00:00:00");
+            $monthend= Carbon::now()->format("Y-m-31 23:59:59");
+            }
+        else{
+            $monthstart= $request->month."-01 00:00:00";
+            $monthend= $request->month."-31 23:59:59";
+
+        }
+        //return compact('monthstart','monthend');
         $settings = setting::where('table_name','drop_products')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
-
+        $dropProducts = dropProduct::where('created_at','>=',$monthstart)->where('created_at','<=',$monthend)->get();
         
         $dataArray=[
             'settings'=>$settings,
-            'items' => dropProduct::all(),
+            'items' => $dropProducts,
             'products'=> product::all(),
         ];
 
@@ -62,10 +73,10 @@ class DropProductController extends Controller
         $dropProduct->comment=$request->comment;
         $dropProduct->save();
 
-        $product = product::find($dropProduct->product_id);
-        return $product;
+      //  $product = product::find($dropProduct->product_id);
+     //   return $product;
 
-        return $dropProduct;
+     //   return $dropProduct;
 
         return redirect()->back()->withSuccess(['Successfully Created']);
 

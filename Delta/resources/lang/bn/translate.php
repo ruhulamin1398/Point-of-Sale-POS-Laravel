@@ -110,7 +110,7 @@ return[
 'Drop Product List' => 'পণ্য বাতিল এর লিস্ট',
 'Edit Drop Product' => 'পণ্য বাতিল এর সংশোধন',
 'Quantity' => 'পরিমান',
-'Comment' => 'মন্তব্য',
+'Comment' => 'কমেন্ট',
 'Joining Date'=>'জয়েন',
 'Term of Contract'=> 'চুক্তির মেয়াদ',
 'Fixed Duty Hour' => 'ডিউটি',

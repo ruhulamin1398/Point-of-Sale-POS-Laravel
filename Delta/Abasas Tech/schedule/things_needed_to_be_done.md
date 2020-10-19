@@ -19,5 +19,6 @@
 - cursor grab and grabing 
 - phone is not updateable in customer 
 - Employee delete thinking needed . 
-
+- drop product and return product date in datatable;
+- notification on update and delete . 
 
