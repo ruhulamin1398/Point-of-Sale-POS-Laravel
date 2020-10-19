@@ -1,5 +1,18 @@
 $(document).ready(function () {
+    var databaseProducts;
 
+    $(function () {
+
+
+        var link = $("#homeRoute").val().trim() + "/api/all-products";
+        console.log(link);
+
+        $.get(link, function (data) {
+            databaseProducts = data;
+
+        });
+
+    })
 
 
     var purchaseTableData = {};
@@ -34,13 +47,14 @@ $(document).ready(function () {
 
 
     }
-    
+
 
     function setIndivitualInputFieldDefault() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
 
         $("#purchaseProductInputId").val('');
+        $("#productIdHidden").val(0);
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val(0);
         $("#purchaseProductInputdiscount").val(0);
@@ -52,47 +66,53 @@ $(document).ready(function () {
     function setIndivitualInputDetailsDefault() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
+
+        $("#productIdHidden").val(0);
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val(0);
         $("#purchaseProductInputdiscount").val(0);
         $("#purchaseProductInputQuantity").val(1);
         $("#purchaseProductInputTotal").val(0);
 
-        
+
         $("#purchaseProductError").show();
     }
 
-
-
     $("#purchaseProductError").hide();
-    $("#purchaseProductInputId").on('input', function () {
+
+
+    function purchaseProductInputOnInput() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
 
-        var product_id = $("#purchaseProductInputId").val().trim();
+        var product_id = parseInt($("#purchaseProductInputId").val().trim());
 
-        var link = $("#homeRoute").val().trim() + "/api/get-product-by-id?id=" + product_id;
 
-        $.get(link, function (product) {
-            if (product == 0) {
+        var product = databaseProducts[product_id];
+        if (typeof product == 'undefined') {
 
-              setIndivitualInputDetailsDefault();
+            setIndivitualInputDetailsDefault();
 
-                $("#purchaseProductInputSubmit").attr("disabled", true);
-            } else {
-                $("#purchaseProductError").hide();
+            $("#purchaseProductInputSubmit").attr("disabled", true);
+        } else {
+            $("#purchaseProductError").hide();
 
-                $("#purchaseProductInputName").val(product.name);
-                $("#purchaseProductInputPrice").val(product.price_per_unit);
-                $("#purchaseProductInputdiscount").val(0);
-                $("#purchaseProductInputQuantity").val(1);
-                $("#purchaseProductInputTotal").val(product.price_per_unit);
+            $("#productIdHidden").val(product.id);
+            $("#purchaseProductInputName").val(product.name);
+            $("#purchaseProductInputPrice").val(product.price_per_unit);
+            $("#purchaseProductInputdiscount").val(0);
+            $("#purchaseProductInputQuantity").val(1);
+            $("#purchaseProductInputTotal").val(product.price_per_unit);
 
-                $("#purchaseProductInputSubmit").attr("disabled", false);
+            $("#purchaseProductInputSubmit").attr("disabled", false);
 
-            }
+        }
 
-        });
+    }
+    $("#purchaseProductInputId").on('input', function () {
+
+        purchaseProductInputOnInput()
+
 
     });
 
@@ -176,14 +196,31 @@ $(document).ready(function () {
 
 
     function AddNewProductOnPruchaseCart() {
+
+        // check if data is successfully loaded or not 
+        var existingProduct = parseInt($("#productIdHidden").val().trim());
         var id = parseInt($("#purchaseProductInputId").val().trim());
-        var name = $("#purchaseProductInputName").val().trim();
-        var price = $("#purchaseProductInputPrice").val().trim();
-        var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
-        var discountType = $("#purchaseProductInputDiscountType").val().trim();
-        var discount = $("#purchaseProductInputdiscount").val().trim();
-        var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
-        var total = $("#purchaseProductInputTotal").val().trim();
+        if (existingProduct == id) {
+            // if loaded or modified
+            var name = $("#purchaseProductInputName").val().trim();
+            var price = $("#purchaseProductInputPrice").val().trim();
+            var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+            var discountType = $("#purchaseProductInputDiscountType").val().trim();
+            var discount = $("#purchaseProductInputdiscount").val().trim();
+            var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
+            var total = $("#purchaseProductInputTotal").val().trim();
+
+
+        } else {
+            // if not laoded 
+            var name = databaseProducts[id]['name'];
+            var price = databaseProducts[id]['price_per_unit'];
+            var quantity = 1
+            var discountType = $("#purchaseProductInputDiscountType").val().trim();
+            var discount = 0;
+            var discountValue = 0;
+            var total = price;
+        }
 
 
 
@@ -216,16 +253,41 @@ $(document).ready(function () {
     function updateProductOnPruchaseCart() {
 
 
-
-
+        // check if data is successfully loaded or not 
+        var existingProduct = parseInt($("#productIdHidden").val().trim());
         var id = parseInt($("#purchaseProductInputId").val().trim());
-        var name = $("#purchaseProductInputName").val().trim();
-        var price = $("#purchaseProductInputPrice").val().trim();
-        var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
-        var discountType = $("#purchaseProductInputDiscountType").val().trim();
-        var discount = $("#purchaseProductInputdiscount").val().trim();
-        var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
-        var total = $("#purchaseProductInputTotal").val().trim();
+        if (existingProduct == id) {
+
+            // if loaded or modified
+            var name = $("#purchaseProductInputName").val().trim();
+            var price = $("#purchaseProductInputPrice").val().trim();
+            var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+            var discountType = $("#purchaseProductInputDiscountType").val().trim();
+            var discount = $("#purchaseProductInputdiscount").val().trim();
+            var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
+            var total = $("#purchaseProductInputTotal").val().trim();
+
+
+        } else {
+
+            // if not laoded 
+            var name = databaseProducts[id]['name'];
+            var price = databaseProducts[id]['price_per_unit'];
+            var quantity = 1
+            var discountType = $("#purchaseProductInputDiscountType").val().trim();
+            var discount = 0;
+            var discountValue = 0;
+            var total = price;
+        }
+
+        // var id = parseInt($("#purchaseProductInputId").val().trim());
+        // var name = $("#purchaseProductInputName").val().trim();
+        // var price = $("#purchaseProductInputPrice").val().trim();
+        // var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+        // var discountType = $("#purchaseProductInputDiscountType").val().trim();
+        // var discount = $("#purchaseProductInputdiscount").val().trim();
+        // var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
+        // var total = $("#purchaseProductInputTotal").val().trim();
 
 
 
@@ -251,9 +313,7 @@ $(document).ready(function () {
 
     };
 
-
-    $("#purchaseProductInputSubmit").on("click", function () {
-
+    function purchaseInputSubmitFunction() {
         var submitButtonType = $("#purchaseProductInputSubmit").data("submit-type");
         var submitButtonProductId = $("#purchaseProductInputSubmit").data("item-id");
         var id = parseInt($("#purchaseProductInputId").val().trim());
@@ -274,8 +334,37 @@ $(document).ready(function () {
 
         $("#purchaseProductInputSubmit").data("submit-type", 'create');
         $("#purchaseProductInputSubmit").data("item-id", 0);
+    }
+
+    $("#purchaseProductInputSubmit").on("click", function () {
+        purchaseInputSubmitFunction();
+
 
     });
+
+
+
+
+    //                               ****************************************
+    //                               ########## On Enter start #############
+    //                               ****************************************
+
+    ///// test 
+    $("#purchaseProductInputId").keypress(function (e) {
+        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+            console.log("enter is clicked")
+            $("#productSuggession").html("");
+            $("#productSuggession").hide();
+            purchaseInputSubmitFunction();
+        }
+
+    });
+    //                               *****************************************************************************
+    //                               ##########  purchase product table delete button start here   #############
+    //                               *******************************************************************************
+
+
+
 
 
 
@@ -286,6 +375,10 @@ $(document).ready(function () {
         printPurchaseTableData();
     });
 
+
+    //                               *****************************************************************************
+    //                               ##########  purchase product table delete button start here   #############
+    //                               *******************************************************************************
 
     $("body").on("click", "#purchaseProductTableEdit", function () {
         var prooductId = $(this).attr('productId');
@@ -298,6 +391,7 @@ $(document).ready(function () {
         var product = purchaseTableData[prooductId];
 
         $("#purchaseProductInputId").val(product.id);
+        $("#productIdHidden").val(product.id);
         $("#purchaseProductInputName").val(product.name);
         $("#purchaseProductInputPrice").val(product.price);
         $("#purchaseProductInputdiscount").val(product.discount);
@@ -569,20 +663,87 @@ $(document).ready(function () {
 
 
 
-///// order complete button 
-$("#orderCompleteButton").on('click',function(){
-  
-    $("#PrintPurchaseModal").modal(
-        {
+    ///// order complete button 
+    $("#orderCompleteButton").on('click', function () {
+
+        $("#PrintPurchaseModal").modal({
             backdrop: 'static',
             keyboard: false
+        });
+    })
+    // on modal hide
+    $('#PrintPurchaseModal').on('hide.bs.modal', function () {
+        alert()
+    });
+
+
+
+    //                               *****************************************************************************
+    //                                           ##########  Search product suggession    #############
+    //                               *******************************************************************************
+
+
+
+
+    $("#productSuggession").hide();
+
+    $("#purchaseProductInputId").on('keyup', function () {
+        $("#productSuggession").show();
+
+        var searchField = $("#purchaseProductInputId").val();
+        var expression = new RegExp(searchField, "i");
+        if (searchField.length == 0) {
+            return false;
         }
-    );
-})
-   // on modal hide
-   $('#PrintPurchaseModal').on('hide.bs.modal', function() {
-    alert()
-});
+        $("#productSuggession").html("");
+
+        var count = 0;
+        $.each(databaseProducts, function (key, value) {
+
+
+            if (value.name.search(expression) != -1 || value.id == searchField) {
+                if (count == 50) {
+                    return false;
+                }
+                count++;
+                $('#productSuggession').append(
+                    '<a herf="#" class="list-group-item list-group-item-action border-1 searchItem text-dark" data-item-id="' +
+                    value.id + '">' + +value.id + ' | ' + value.name + ' | ' + value
+                    .price_per_unit + ' </a>')
+            }
+
+        });
+        if (count == 0) {
+            $('#productSuggession').html(
+                '<div class="list-group-item list-group-item-action border-1 text-dark"> Not found any Data </div>'
+            )
+        }
+
+
+
+    });
+
+
+
+
+
+
+
+    $('body').click(function () {
+        $("#productSuggession").hide();
+        $("#productSuggession").html("");
+    });
+
+    $(document).on('click', '.searchItem', function () {
+        var id = $(this).attr('data-item-id');
+        $("#purchaseProductInputId").val(id)
+        // alert(id);//this one needs to be triggered
+        purchaseProductInputOnInput()
+        $("#productSuggession").hide();
+        $("#productSuggession").html("");
+    });
+
+
 
 
 });
