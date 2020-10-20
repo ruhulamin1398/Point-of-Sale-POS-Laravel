@@ -737,6 +737,7 @@ $("#orderCompleteButton").attr("disabled", false);
             return;
         }
 
+        $("#orderCompleteButton").attr("disabled", false); /// onlly for testing , after teasting remove this 
 
         var orderData={
             customer_id : 1,

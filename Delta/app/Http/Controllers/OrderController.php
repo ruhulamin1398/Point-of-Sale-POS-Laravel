@@ -50,16 +50,19 @@ class OrderController extends Controller
         $order->payment_system_id= $request->order['payment_system_id'];
         $order->paid_amount= $request->order['paid_amount'];
         $order->tax= $request->order['tax'];
-        $order->cost =$request->order['cost'];
+        $order->cost =0;
         $order->pre_due=$request->order['pre_due'];
         $order->due=$request->order['due'];
         $order->discount=$request->order['discount'];
-        $order->profit =$request->order['discount'];
-        $order->total=$request->order['profit'];
+        $order->profit =0;
+        $order->total=$request->order['total'];
         
         $order->save();
+        // return $order;
         
-   
+    $cost=0;
+    $profit=0;
+       
 
         foreach($request->order_details as $product){
 
@@ -69,14 +72,21 @@ class OrderController extends Controller
             $orderDetail->price = $product['price'];
             $orderDetail->quantity = $product['quantity'];
             $orderDetail->discount = $product['discount'];
-            $orderDetail->tax = $product['tax'];
+            // $orderDetail->tax = $product['tax'];
             
             $orderDetail->cost = $product['cost'];
             $orderDetail->total = $product['total'];
             $orderDetail->profit = $product['profit'];
 
-             $product->save();
+            $cost += $product['cost'];
+            $profit += $product['profit'];
+
+             $orderDetail->save();
         }
+
+        $order->cost =$cost;
+        $order->profit =$profit;
+        return $order;
     }
 
     /**
