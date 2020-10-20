@@ -408,7 +408,10 @@ $(document).ready(function () {
 
 
 
-    // Final caculation start 
+    //                               *****************************************************************************
+    //                                           ########## Final caculation start    #############
+    //                               *******************************************************************************
+    // 
     function calMoreDiscount() {
         var discountType = $("#productPurchaseMoreDiscountType").val().trim();
         var productPurchaseTotal = parseFloat($("#productPurchaseTotal").val().trim());
@@ -546,7 +549,10 @@ $(document).ready(function () {
     // discount Area Start Here 
 
 
-    // product discount start
+    //                               *****************************************************************************
+    //                                           ##########  product discount start    #############
+    //                               *******************************************************************************
+    // 
     $("#disCountSetting").on('click', function () {
 
         $("#discountModal").modal();
@@ -583,7 +589,11 @@ $(document).ready(function () {
     });
 
 
-    // more discount  start
+ 
+    //                               *****************************************************************************
+    //                                           ##########  more discount start    #############
+    //                               *******************************************************************************
+
 
     $("#purchasePageMoreDiscountSetting").on('click', function () {
 
@@ -621,7 +631,12 @@ $(document).ready(function () {
     });
 
 
-    // Tax Section start
+    //                               *****************************************************************************
+    //                                           ##########  Tax Section start    #############
+    //                               *******************************************************************************
+
+
+
 
     $("#TaxSetting").on('click', function () {
         $("#taxModal").modal();
@@ -663,18 +678,29 @@ $(document).ready(function () {
 
 
 
-    ///// order complete button 
+    //                               *****************************************************************************
+    //                                           ##########  order complete button start    #############
+    //                               *******************************************************************************
+
+function cartIsEmpty(){
+    var cardLegth =0;
+    jQuery.each(purchaseTableData, function (row) {
+        cardLegth++;
+    });
+    if(cardLegth !=0){
+        return true;
+    }
+    else{
+        return false
+    }
+}
+
     $("#orderCompleteButton").on('click', function () {
 
-        $("#PrintPurchaseModal").modal({
-            backdrop: 'static',
-            keyboard: false
-        });
-    })
-    // on modal hide
-    $('#PrintPurchaseModal').on('hide.bs.modal', function () {
-        alert()
+        console.log(cartIsEmpty());
     });
+
+
 
 
 

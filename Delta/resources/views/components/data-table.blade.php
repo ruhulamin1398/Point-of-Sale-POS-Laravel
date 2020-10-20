@@ -86,7 +86,7 @@
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar  ">
 
-            <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
+            <div class="navbar-brand"><span id="componentDetailsTitle"> {{ __('translate.'.$componentDetails['title'])  }}</span> <i class="fas fa-tools pl-2"
                 id="pageSetting"></i></div>
 <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
     data-target="#createNewForm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
@@ -294,8 +294,8 @@
                     <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>  {{ __('translate.'. $fieldList[$i]['title'] )  }}</th>
                     <td>
                     <div class="form-check-inline">
-                <label class="form-check-label">  
-                    @if( $fieldList[$i]['create']==1 )
+                <label class="form-check-label createLabel">  
+                    @if( $fieldList[$i]['create']==1 ) 
                   <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  > 
                     @elseif( $fieldList[$i]['create']==2 )
                   <input type="checkbox" class="form-check-input create abasasCheckBox " value="2" checked  disabled > 
@@ -310,7 +310,7 @@
                     {{ __('translate.Create')  }} </label>
               </div>
               <div class="form-check-inline">
-                <label class="form-check-label">
+                <label class="form-check-label readLabel">
                     @if( $fieldList[$i]['read'] == 1 )
                     <input type="checkbox" class="form-check-input read abasasCheckBox " value="1" checked> 
                     @elseif( $fieldList[$i]['read'] == 0 )
@@ -327,7 +327,7 @@
                 </label>
               </div>
               <div class="form-check-inline">
-                <label class="form-check-label">
+                <label class="form-check-label updateLabel">
                     @if( $fieldList[$i]['update'] ==1  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
                     @elseif( $fieldList[$i]['update'] ==2  )

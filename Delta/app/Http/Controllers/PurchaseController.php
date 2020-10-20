@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\paymentSystem;
+use App\Models\Product;
 use App\Models\purchase;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**

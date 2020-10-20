@@ -1,10 +1,6 @@
 @extends('includes.app')
 
-
 @section('content')
-
-
-
 
 
 

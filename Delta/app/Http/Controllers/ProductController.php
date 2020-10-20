@@ -28,7 +28,15 @@ class ProductController extends Controller
 //
     }
     
-
+    public function productAll(){
+        $p= Product::all();
+      
+        $products= array();
+        foreach($p as $product){
+            $products[$product->id]=$product;
+        }
+        return $products;
+    }
     /**
      * Show the form for creating a new resource.
      *

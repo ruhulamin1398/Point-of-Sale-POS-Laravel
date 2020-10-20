@@ -330,7 +330,7 @@ class RoleTableSeeder extends Seeder
                 'employee_payment_type_id' => 1,
                 'salary_status_id' => 1,
                 'amount'=>1200.00,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
                 'Comment' => 'comment 1',
             ],
             [
@@ -339,7 +339,7 @@ class RoleTableSeeder extends Seeder
                 'employee_payment_type_id' => 1,
                 'salary_status_id' => 2,
                 'amount'=>1200.00,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
                 'Comment' => 'comment 2',
             ],
             [
@@ -348,7 +348,7 @@ class RoleTableSeeder extends Seeder
                 'employee_payment_type_id' => 1,
                 'salary_status_id' => 1,
                 'amount'=>1200.00,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
                 'Comment' => 'comment 3',
             ],
         ]);

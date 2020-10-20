@@ -213,21 +213,27 @@ Route::resource('customer_ratings',CustomerRatingController::class);
 Route::resource('sell_type',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 
-Route::resource('employees',EmployeeController::class);
-Route::resource('designations',DesignationController::class);
-Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
-Route::resource('employee_payments',EmployeePaymentController::class);
-Route::resource('employee_salaries',EmployeeSalaryController::class);
 
-Route::resource('duty_status',DutyStatusController::class);
-Route::resource('employee_duties',EmployeeDutyController::class);
-Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
 
 Route::resource('drop_products',DropProductController::class);
 Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ]); 
 
+//Employees
+Route::resource('employees',EmployeeController::class);
+Route::resource('designations',DesignationController::class);
 
 
+// Payments
+Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
+Route::resource('employee_payments',EmployeePaymentController::class);
+Route::resource('employee_salaries',EmployeeSalaryController::class);
+
+// Duties
+Route::resource('duty_status',DutyStatusController::class);
+Route::resource('employee_duties',EmployeeDutyController::class);
+Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
+
+// Expenses
 Route::resource('expense',ExpenseController::class);
 Route::resource('expense_type',ExpenseTypeController::class);
 Route::resource('expense_monthly',ExpenseMonthlyController::class);

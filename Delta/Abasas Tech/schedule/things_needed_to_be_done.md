@@ -19,5 +19,9 @@
 - cursor grab and grabing 
 - phone is not updateable in customer 
 - Employee delete thinking needed . 
-- low stock product list
+- drop product and return product date in datatable;
+- notification on update and delete . 
+- non createable and non updateable page createLabe and updateLabel hide .
+- product create star in required .
+
 

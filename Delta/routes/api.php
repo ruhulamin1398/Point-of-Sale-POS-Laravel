@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('all-products',[ProductController::class,'productAll']);
 Route::get('supplier-check',[SupplierController::class,'supplierCheck']);
 Route::post('supplier-create',[SupplierController::class,'supplierStore'])->name("SupplierStore");
 Route::get('get-product-by-id',[ProductController::class,'getProductById'])->name("getProductById");

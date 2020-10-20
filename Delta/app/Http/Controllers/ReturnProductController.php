@@ -7,6 +7,7 @@ use App\Models\customer;
 use App\Models\Product;
 use App\Models\returnProduct;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -17,17 +18,23 @@ class ReturnProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        $monthStart=Carbon::now()->format('Y-m-01 00:00:00');
+        $monthEnd=Carbon::now()->format('Y-m-31 23:59:59');
+        if( ! is_null($request->month)){
+            $monthStart=Carbon::parse($request->month)->format('Y-m-01 00:00:00');
+            $monthEnd=Carbon::parse($request->month)->format('Y-m-31 23:59:59');
+        }
+       // return compact('monthStart','monthEnd');
         $settings = setting::where('table_name', 'return_products')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
-
-
+        $returnProducts =  returnProduct::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
+        $products = Product::all();
         $dataArray = [
             'settings' => $settings,
-            'items' => returnProduct::all(),
-            'products' => Product::all(),
+            'items' =>$returnProducts,
+            'products' =>$products,
             'customers' => customer::all(),
         ];
 
@@ -42,7 +49,7 @@ class ReturnProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.return-product.create');
     }
 
     /**

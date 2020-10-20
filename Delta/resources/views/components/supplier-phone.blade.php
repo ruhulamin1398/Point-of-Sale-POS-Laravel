@@ -27,7 +27,7 @@
                 @csrf
                 <div class="form-row ">
                     <div class="col-auto">
-                        <input type="number" name="name" placeholder="name" id="SupplierPhoneComponantInputName"
+                        <input type="text" name="name" placeholder="name" id="SupplierPhoneComponantInputName"
                             class="form-control mb-2">
                     </div>
                     <div class="col-auto">
@@ -147,8 +147,8 @@
 
 
             var OPfrm = $('#supplierPhoneAreaForm');
-            var act = OPfrm.attr('action');
-            console.log("---------- action " + act);
+            var act = OPfrm.attr('action');            console.log("---------- action " + act);
+         
             $.ajax({
                 type: OPfrm.attr('method'),
                 url: act,
