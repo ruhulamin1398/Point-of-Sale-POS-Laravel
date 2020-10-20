@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SupplierRequest;
 use App\Models\Product;
+use App\Models\purchase;
 use App\Models\setting;
 use App\Models\supplier;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -64,9 +66,17 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      * @param  \App\Models\supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function show(supplier $supplier)
+    public function show(supplier $supplier , Request $request)
     {
-        //
+        $monthStart= Carbon::now()->format('Y-m-01 00:00:00');
+        $monthEnd= Carbon:: now()->format('Y-m-31 23:59:59');
+        if(!is_null($request->month)){
+            $monthStart= Carbon:: parse($request->month)->format('Y-m-01 00:00:00');
+            $monthEnd= Carbon:: parse($request->month)->format('Y-m-31 23:59:59');
+        }
+       $month = Carbon:: parse($monthStart)->format('F');
+        $purchases= purchase::where('supplier_id', $supplier->id)->where('created_at','<=',$monthEnd)->where('created_at','>=',$monthStart)->get(); 
+        return view('suppliers.show',compact('supplier','purchases','month'));
     }
 
     /**
