@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomerRequest;
 use App\Models\customer;
+use App\Models\order;
 use App\Models\setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -62,9 +64,17 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(customer $customer)
+    public function show(customer $customer, Request $request)
     {
-        //
+        $monthStart= Carbon::now()->format('Y-m-01 00:00:00');
+        $monthEnd= Carbon:: now()->format('Y-m-31 23:59:59');
+        if(!is_null($request->month)){
+            $monthStart= Carbon:: parse($request->month)->format('Y-m-01 00:00:00');
+            $monthEnd= Carbon:: parse($request->month)->format('Y-m-31 23:59:59');
+        }
+       $month = Carbon:: parse($monthStart)->format('F');
+        $orders= order::where('customer_id', $customer->id)->where('created_at','<=',$monthEnd)->where('created_at','>=',$monthStart)->get(); 
+        return view('customers.show',compact('customer','orders','month'));
     }
 
     /**

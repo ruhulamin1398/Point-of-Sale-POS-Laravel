@@ -70,3 +70,23 @@ for drop product input section
 for creating Products
 ```
 - 
+# Customers
+- customers
+```
+for all customer view and create
+```
+- customers/{id}
+```
+for customer details and order lists
+```
+
+# Suppliers
+- suppliers
+``` 
+for all supplier view and create
+```
+- suppliers/{id}
+```
+for supplier details nad purchase list
+```
+

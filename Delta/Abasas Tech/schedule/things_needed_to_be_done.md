@@ -12,6 +12,7 @@
 
 - bar code print page
 - yearly expense 
+- every modal must have withTrashed
 - number validation for positive
 - in setting every required items update must be 2.
 - employee phone validation error. 
