@@ -190,6 +190,8 @@ $(document).ready(function () {
             discount: 0,
             discountValue: 0,
             total: 0,
+            cost: 0,
+            profit: 0,
         };
     }
 
@@ -209,6 +211,8 @@ $(document).ready(function () {
             var discount = $("#purchaseProductInputdiscount").val().trim();
             var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
             var total = $("#purchaseProductInputTotal").val().trim();
+            // var cost = databaseProducts[id]['cost_per_unit'] * quantity;
+            // var profit= total-cost;
 
 
         } else {
@@ -219,7 +223,9 @@ $(document).ready(function () {
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = 0;
             var discountValue = 0;
-            var total = price;
+            var total = price;  
+            // var cost = databaseProducts[id]['cost_per_unit'] * quantity;
+            // var profit= total-cost;
         }
 
 
@@ -241,6 +247,9 @@ $(document).ready(function () {
             discount: discount,
             discountValue: parseInt(purchaseTableData[id].discountValue) + parseInt(discountValue),
             total: parseInt(purchaseTableData[id].total) + parseInt(total),
+            
+            // cost = parseInt(purchaseTableData[id].cost) + parseInt(cost),
+            //  profit= parseInt(purchaseTableData[id].total)- parseInt(purchaseTableData[id].cost),
         };
 
 
@@ -704,6 +713,10 @@ $(document).ready(function () {
 function cartIsEmpty(){
     var cardLegth =0;
     jQuery.each(purchaseTableData, function (row) {
+        //////////////////////////////// adding cost and total
+        var id = purchaseTableData[row].id; 
+        purchaseTableData[row].cost = databaseProducts[id]['cost_per_unit'] * purchaseTableData[row].quantity;
+        purchaseTableData[row].profit= purchaseTableData[row].total-purchaseTableData[row].cost;
         cardLegth++;
     });
     if (cardLegth == 0) {
