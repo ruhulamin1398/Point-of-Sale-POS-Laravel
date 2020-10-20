@@ -15,6 +15,11 @@ class CreateEmployeeAnalysisMonthliesTable extends Migration
     {
         Schema::create('employee_analysis_monthlies', function (Blueprint $table) {
             $table->id();
+            $table->date('month');
+            $table->unsignedBigInteger('sell')->default(0);
+            $table->double('profit',18,2)->default(0);
+            $table->json('data')->default(json_encode(['']));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

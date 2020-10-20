@@ -15,6 +15,10 @@ class CreateExpenseAnalysisMonthliesTable extends Migration
     {
         Schema::create('expense_analysis_monthlies', function (Blueprint $table) {
             $table->id();
+            $table->date('month');
+            $table->double('expense',18,2)->default(0);
+            $table->json('data')->default(json_encode(['']));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

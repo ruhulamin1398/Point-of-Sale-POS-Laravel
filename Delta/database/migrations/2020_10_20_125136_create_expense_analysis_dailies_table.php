@@ -15,6 +15,10 @@ class CreateExpenseAnalysisDailiesTable extends Migration
     {
         Schema::create('expense_analysis_dailies', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->double('expense',18,2)->default(0);
+            $table->json('data')->default(json_encode(['']));
+            $table->softDeletes();
             $table->timestamps();
         });
     }
