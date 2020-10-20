@@ -280,7 +280,7 @@
                     @endforeach
                     </form>
                     --}}
-
+{{-- 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         @foreach($paymentSystems as $paymentSystem)
                             @if($loop->first)
@@ -300,7 +300,45 @@
 
 
                         @endforeach
-                    </div>
+                    </div> --}}
+
+
+
+
+
+                    @foreach($paymentSystems as $paymentSystem)
+                    @if($loop->first)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentSystem" id="Radio{{ $paymentSystem->id }}" value="{{ $paymentSystem->payment_system }}" checked>
+                        <label class="form-check-label" for="Radio{{ $paymentSystem->id }}">{{ $paymentSystem->payment_system }}</label>
+                      </div>
+                        @else
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="paymentSystem" id="Radio{{ $paymentSystem->id }}" value="{{ $paymentSystem->payment_system }}">
+                            <label class="form-check-label" for="Radio{{ $paymentSystem->id }}">{{ $paymentSystem->payment_system }}</label>
+                          </div>
+                   
+                    @endif
+
+
+
+
+                @endforeach
+
+
+                  
+             
+
+
+
+
+
+
+
+
+
+
+
 
                     <div class="row mb-2 mt-4">
                         <div class="input-group col-12">
