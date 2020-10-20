@@ -302,19 +302,18 @@
                         @endforeach
                     </div> --}}
 
-
-
+<input type="text" value="1" id="paymentSystemId" hidden>
 
 
                     @foreach($paymentSystems as $paymentSystem)
                     @if($loop->first)
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="paymentSystem" id="Radio{{ $paymentSystem->id }}" value="{{ $paymentSystem->payment_system }}" checked>
+                    <div class="form-check form-check-inline ">
+                        <input class="form-check-input paymentSystem" type="radio" name="paymentSystem" id="Radio{{ $paymentSystem->id }}" value="{{ $paymentSystem->id }}" checked>
                         <label class="form-check-label" for="Radio{{ $paymentSystem->id }}">{{ $paymentSystem->payment_system }}</label>
                       </div>
                         @else
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="paymentSystem" id="Radio{{ $paymentSystem->id }}" value="{{ $paymentSystem->payment_system }}">
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input paymentSystem" type="radio" name="paymentSystem" id="Radio{{ $paymentSystem->id }}" value="{{ $paymentSystem->id }}">
                             <label class="form-check-label" for="Radio{{ $paymentSystem->id }}">{{ $paymentSystem->payment_system }}</label>
                           </div>
                    
@@ -324,7 +323,7 @@
 
 
                 @endforeach
-
+      
 
                   
              
@@ -345,7 +344,7 @@
                             <input type="text" class="form-control inputMinZero " id="PayAmount"
                                 aria-describedby="inputGroupAppend" value="0" required>
                             <div class="input-group-append">
-                                <span class="btn btn-success" id="orderCompleteButton">Complete</span>
+                                <button type="button" class="btn btn-success" id="orderCompleteButton" disabled="false">Complete</button>
                             </div>
                         </div>
                     </div>

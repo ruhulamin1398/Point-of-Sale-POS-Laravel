@@ -190,6 +190,8 @@ $(document).ready(function () {
             discount: 0,
             discountValue: 0,
             total: 0,
+            cost: 0,
+            profit: 0,
         };
     }
 
@@ -209,6 +211,8 @@ $(document).ready(function () {
             var discount = $("#purchaseProductInputdiscount").val().trim();
             var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
             var total = $("#purchaseProductInputTotal").val().trim();
+            // var cost = databaseProducts[id]['cost_per_unit'] * quantity;
+            // var profit= total-cost;
 
 
         } else {
@@ -219,7 +223,9 @@ $(document).ready(function () {
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = 0;
             var discountValue = 0;
-            var total = price;
+            var total = price;  
+            // var cost = databaseProducts[id]['cost_per_unit'] * quantity;
+            // var profit= total-cost;
         }
 
 
@@ -241,6 +247,9 @@ $(document).ready(function () {
             discount: discount,
             discountValue: parseInt(purchaseTableData[id].discountValue) + parseInt(discountValue),
             total: parseInt(purchaseTableData[id].total) + parseInt(total),
+            
+            // cost = parseInt(purchaseTableData[id].cost) + parseInt(cost),
+            //  profit= parseInt(purchaseTableData[id].total)- parseInt(purchaseTableData[id].cost),
         };
 
 
@@ -676,6 +685,25 @@ $(document).ready(function () {
     });
 
 
+    //                               *****************************************************************************
+    //                                           ##########  payment system start    #############
+    //                               *******************************************************************************
+
+
+    // $('#paymentSystem input').on('change', function() {
+    //     alert($('input[name=paymentSystem]:checked', '#paymentSystem').val()); 
+    //  });
+    //  $( "#x" ).prop( "checked", false );
+    //  $(document).on('cha', function() {
+    //     alert($('input[name=radioName]:checked', '#myForm').val()); 
+    //  });
+
+    $('input[name="paymentSystem"]').change(function () {  
+     
+       
+        $("#paymentSystemId").val($(this).val())
+     
+    });
 
 
     //                               *****************************************************************************
@@ -685,17 +713,72 @@ $(document).ready(function () {
 function cartIsEmpty(){
     var cardLegth =0;
     jQuery.each(purchaseTableData, function (row) {
+        //////////////////////////////// adding cost and total
+        var id = purchaseTableData[row].id; 
+        purchaseTableData[row].cost = databaseProducts[id]['cost_per_unit'] * purchaseTableData[row].quantity;
+        purchaseTableData[row].profit= purchaseTableData[row].total-purchaseTableData[row].cost;
         cardLegth++;
     });
-    if(cardLegth !=0){
-        return true;
+    if (cardLegth == 0) {
+        return 1;
     }
     else{
-        return false
+        return 2
     }
 }
 
+$("#orderCompleteButton").attr("disabled", false);
     $("#orderCompleteButton").on('click', function () {
+        
+        $("#orderCompleteButton").attr("disabled", true);
+        if (cartIsEmpty()==1) {
+            alert('please add some Product');     
+        $("#orderCompleteButton").attr("disabled", false);
+            return;
+        }
+
+        $("#orderCompleteButton").attr("disabled", false); /// onlly for testing , after teasting remove this 
+
+        var orderData={
+            customer_id : 1,
+            payment_system_id : $("#paymentSystemId").val().trim(),
+            paid_amount : $("#PayAmount").val().trim(),
+            tax : $("#taxValue").text().trim(),
+            pre_due : $("#purchasePreviousDue").text().trim(),
+            due : $("#totalDue").text().trim(),
+            discount : $("#discountTotal").val().trim(),
+            total : $("#totalWithOutDue").val().trim(),
+
+        };
+        console.log(orderData)
+      
+
+      
+        var act = $("#homeRoute").val().trim()+'/orders'; 
+        var token = $("#csrfToken").val().trim();           
+        console.log("---------- action " + act);
+     
+        $.ajax({
+            type: 'post',
+            url: act,
+            data:{
+                "_token":token,
+                "order" :orderData,
+                "order_details":purchaseTableData
+            },
+            success: function (data) {
+                console.log(data);
+
+                // viewSupplierData(supplier);
+            },
+            error: function (data) {
+                alert("Failed order ..... Try Again !!!!!!!!!!!")
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+
+
 
         console.log(cartIsEmpty());
     });
