@@ -24,6 +24,7 @@ class CreateOrderDetailsTable extends Migration
             $table->double('tax',18,2)->default(0);
             $table->double('total',18,2)->default(0);
             $table->double('profit',18,2)->default(0);
+            $table->double('cost',18,2)->default(0);
 
             $table->softDeletes();
 
