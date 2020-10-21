@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExpenseRequest;
 use App\Models\employee;
 use App\Models\expense;
-use App\Models\expenseAnalysisDaily;
-use App\Models\expenseAnalysisMonthly;
-use App\Models\expenseAnalysisYearly;
+use App\Models\calculationAnalysisDaily;
+use App\Models\calculationAnalysisMonthly;
+use App\Models\calculationAnalysisYearly;
 use App\Models\expenseMonthly;
 use App\Models\expenseType;
 use App\Models\setting;
@@ -76,20 +76,20 @@ class ExpenseController extends Controller
             $expenseMonthly->employee_id=$request->employee_id;
         }
 
-        // Expense Analysis start
-        $analysysDate= expenseAnalysisDaily::where('date',$date)->first();
-        $analysysMonth= expenseAnalysisMonthly::where('month',$month)->first();
-        $analysysYear= expenseAnalysisYearly::where('year',$year)->first();
+        // calculation Analysis start
+        $analysysDate= calculationAnalysisDaily::where('date',$date)->first();
+        $analysysMonth= calculationAnalysisMonthly::where('month',$month)->first();
+        $analysysYear= calculationAnalysisYearly::where('year',$year)->first();
         if(is_null($analysysDate)){
-            $analysysDate= new expenseAnalysisDaily;
+            $analysysDate= new calculationAnalysisDaily;
             $analysysDate->date=$date;
         }
         if(is_null($analysysMonth)){
-            $analysysMonth= new expenseAnalysisMonthly;
+            $analysysMonth= new calculationAnalysisMonthly;
             $analysysMonth->month=$month;
         }
         if(is_null($analysysYear)){
-            $analysysYear= new expenseAnalysisYearly;
+            $analysysYear= new calculationAnalysisYearly;
             $analysysYear->year=$year;
         }
         $analysysDate->expense += $request->amount;
@@ -98,7 +98,7 @@ class ExpenseController extends Controller
         $analysysDate->save();
         $analysysMonth->save();
         $analysysYear->save();
-        // Expense Analysis end
+        // calculation Analysis end
 
 
         $expenseMonthly->amount += $request->amount;
@@ -153,19 +153,19 @@ class ExpenseController extends Controller
 
 
          // Expense Analysis start
-         $analysysDate= expenseAnalysisDaily::where('date',$date)->first();
-         $analysysMonth= expenseAnalysisMonthly::where('month',$month)->first();
-         $analysysYear= expenseAnalysisYearly::where('year',$year)->first();
+         $analysysDate= calculationAnalysisDaily::where('date',$date)->first();
+         $analysysMonth= calculationAnalysisMonthly::where('month',$month)->first();
+         $analysysYear= calculationAnalysisYearly::where('year',$year)->first();
          if(is_null($analysysDate)){
-             $analysysDate= new expenseAnalysisDaily;
+             $analysysDate= new calculationAnalysisDaily;
              $analysysDate->date=$date;
          }
          if(is_null($analysysMonth)){
-             $analysysMonth= new expenseAnalysisMonthly;
+             $analysysMonth= new calculationAnalysisMonthly;
              $analysysMonth->month=$month;
          }
          if(is_null($analysysYear)){
-             $analysysYear= new expenseAnalysisYearly;
+             $analysysYear= new calculationAnalysisYearly;
              $analysysYear->year=$year;
          }
          $analysysDate->expense += $request->amount - $previous;

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeePaymentRequest;
+use App\Models\calculationAnalysisDaily;
+use App\Models\calculationAnalysisMonthly;
+use App\Models\calculationAnalysisYearly;
 use App\Models\designation;
 use App\Models\employee;
 use App\Models\employeePayment;
@@ -102,14 +105,38 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
          $salaries->employee_id= $employeePayment->employee_id;
          $salaries->month= $employeePayment->month;
-
-
-
          $salaries->save();
          $employeePayment->save();
+
+        // calculation Analysis start
+        $month = Carbon::now()->format('Y-m-01') ;
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $analysysDate= calculationAnalysisDaily::where('date',$date)->first();
+        $analysysMonth= calculationAnalysisMonthly::where('month',$month)->first();
+        $analysysYear= calculationAnalysisYearly::where('year',$year)->first();
+        if(is_null($analysysDate)){
+            $analysysDate= new calculationAnalysisDaily;
+            $analysysDate->date=$date;
+        }
+        if(is_null($analysysMonth)){
+            $analysysMonth= new calculationAnalysisMonthly;
+            $analysysMonth->month=$month;
+        }
+        if(is_null($analysysYear)){
+            $analysysYear= new calculationAnalysisYearly;
+            $analysysYear->year=$year;
+        }
+        $analysysDate->payment += $request->amount;
+        $analysysMonth->payment += $request->amount;
+        $analysysYear->payment += $request->amount;
+        $analysysDate->save();
+        $analysysMonth->save();
+        $analysysYear->save();
+        // calculation Analysis end
+
          return redirect()->back()->withSuccess(['Successfully Created']);
 
-         //salary table calculation 
     }
 
     /**
@@ -163,6 +190,37 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
         $salaries->save();
         $employeePayment->save();
+
+
+
+        // calculation Analysis start
+        $month = Carbon::now()->format('Y-m-01') ;
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $analysysDate= calculationAnalysisDaily::where('date',$date)->first();
+        $analysysMonth= calculationAnalysisMonthly::where('month',$month)->first();
+        $analysysYear= calculationAnalysisYearly::where('year',$year)->first();
+        if(is_null($analysysDate)){
+            $analysysDate= new calculationAnalysisDaily;
+            $analysysDate->date=$date;
+        }
+        if(is_null($analysysMonth)){
+            $analysysMonth= new calculationAnalysisMonthly;
+            $analysysMonth->month=$month;
+        }
+        if(is_null($analysysYear)){
+            $analysysYear= new calculationAnalysisYearly;
+            $analysysYear->year=$year;
+        }
+        $analysysDate->payment += $different;
+        $analysysMonth->payment += $different;
+        $analysysYear->payment += $different;
+        $analysysDate->save();
+        $analysysMonth->save();
+        $analysysYear->save();
+        // calculation Analysis end
+
+
         
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
@@ -176,16 +234,16 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
     public function destroy(employeePayment $employeePayment)
     {
         
-         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
-        if($employeePayment->employee_payment_type_id==1)
-        {
-            $salaries->amount_salary -= $employeePayment->amount;
-            $salaries->salary_status_id=2;
-        }
-        else
-        {
-            $salaries->amount_other -= $employeePayment->amount;
-        }
+        //  $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
+        // if($employeePayment->employee_payment_type_id==1)
+        // {
+        //     $salaries->amount_salary -= $employeePayment->amount;
+        //     $salaries->salary_status_id=2;
+        // }
+        // else
+        // {
+        //     $salaries->amount_other -= $employeePayment->amount;
+        // }
                     
         
         // $salaries->save();

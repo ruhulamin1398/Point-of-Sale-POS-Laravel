@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\expenseAnalysisYearly;
+use App\Models\calculationAnalysisDaily;
 use Illuminate\Http\Request;
 
-class ExpenseAnalysisYearlyController extends Controller
+class CalculationAnalysisDailyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ExpenseAnalysisYearlyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\expenseAnalysisYearly  $expenseAnalysisYearly
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function show(expenseAnalysisYearly $expenseAnalysisYearly)
+    public function show(calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }
@@ -52,10 +52,10 @@ class ExpenseAnalysisYearlyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\expenseAnalysisYearly  $expenseAnalysisYearly
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function edit(expenseAnalysisYearly $expenseAnalysisYearly)
+    public function edit(calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }
@@ -64,10 +64,10 @@ class ExpenseAnalysisYearlyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\expenseAnalysisYearly  $expenseAnalysisYearly
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, expenseAnalysisYearly $expenseAnalysisYearly)
+    public function update(Request $request, calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }
@@ -75,10 +75,10 @@ class ExpenseAnalysisYearlyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\expenseAnalysisYearly  $expenseAnalysisYearly
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function destroy(expenseAnalysisYearly $expenseAnalysisYearly)
+    public function destroy(calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }
