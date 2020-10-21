@@ -16,7 +16,7 @@ class CreatePurchaseAnalysisYearliesTable extends Migration
         Schema::create('purchase_analysis_yearlies', function (Blueprint $table) {
             $table->id();
             $table->year('year');
-            $table->unsignedBigInteger('count')->default(0);
+            $table->double('count',18,2)->default(0);
             $table->double('cost',18,2)->default(0);
             $table->double('amount',18,2)->default(0);
             $table->double('discount',18,2)->default(0);

@@ -16,7 +16,7 @@ class CreateEmployeeAnalysisYearliesTable extends Migration
         Schema::create('employee_analysis_yearlies', function (Blueprint $table) {
             $table->id();
             $table->year('year');
-            $table->unsignedBigInteger('sell')->default(0);
+            $table->double('sell',18,2)->default(0);
             $table->double('profit',18,2)->default(0);
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();

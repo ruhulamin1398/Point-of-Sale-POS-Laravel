@@ -17,10 +17,10 @@ class CreateProductAnalysisMonthliesTable extends Migration
             $table->id();
             $table->date('month');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('purchase')->default(0);
-            $table->unsignedBigInteger('sell')->default(0);
-            $table->unsignedBigInteger('return')->default(0);
-            $table->unsignedBigInteger('drop')->default(0);
+            $table->double('purchase',18,2)->default(0);
+            $table->double('sell',18,2)->default(0);
+            $table->double('return',18,2)->default(0);
+            $table->double('drop',18,2)->default(0);
             $table->double('profit',18,2)->default(0);
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();

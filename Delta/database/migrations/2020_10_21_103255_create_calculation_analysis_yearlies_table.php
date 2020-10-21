@@ -20,6 +20,7 @@ class CreateCalculationAnalysisYearliesTable extends Migration
             $table->double('payment',18,2)->default(0);
             $table->double('buy',18,2)->default(0);
             $table->double('sell',18,2)->default(0);
+            $table->double('tax',18,2)->default(0);
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();
