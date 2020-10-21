@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DropProductRequest;
 use App\Models\dropProduct;
 use App\Models\Product;
+use App\Models\productAnalysisDaily;
+use App\Models\productAnalysisMonthly;
+use App\Models\productAnalysisYearly;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -85,6 +88,37 @@ class DropProductController extends Controller
             $product->stock -= $dropProduct->quantity;
             $product->save();
             $dropProduct->save();
+
+            // product analysis start
+            $month = Carbon::now()->format('Y-m-01');
+            $date = Carbon::now()->format('Y-m-d');
+            $year = Carbon::now()->format('Y');
+            $analysysDate= productAnalysisDaily::where('date',$date)->where('product_id',$request->product_id)->first();
+            $analysysMonth= productAnalysisMonthly::where('month',$month)->where('product_id',$request->product_id)->first();
+            $analysysYear= productAnalysisYearly::where('year',$year)->where('product_id',$request->product_id)->first();
+            if(is_null($analysysDate)){
+                $analysysDate= new productAnalysisDaily;
+                $analysysDate->date=$date;
+                $analysysDate->product_id=$request->product_id;
+            }
+            if(is_null($analysysMonth)){
+                $analysysMonth= new productAnalysisMonthly;
+                $analysysMonth->month=$month;
+                $analysysMonth->product_id=$request->product_id;
+            }
+            if(is_null($analysysYear)){
+                $analysysYear= new productAnalysisYearly;
+                $analysysYear->year=$year;
+                $analysysYear->product_id=$request->product_id;
+            }
+            $analysysDate->drop += $request->quantity;
+            $analysysMonth->drop += $request->quantity;
+            $analysysYear->drop += $request->quantity;
+            $analysysDate->save();
+            $analysysMonth->save();
+            $analysysYear->save();
+            // product analysis end
+
             return redirect()->back()->withSuccess(['Successfully Dropped']);
         }
         else{
@@ -140,6 +174,39 @@ class DropProductController extends Controller
         $product->stock -= $changedNow;
         $product->save();
         $dropProduct->save();
+
+
+        // product analysis start
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $analysysDate= productAnalysisDaily::where('date',$date)->where('product_id',$dropProduct->product_id)->first();
+        $analysysMonth= productAnalysisMonthly::where('month',$month)->where('product_id',$dropProduct->product_id)->first();
+        $analysysYear= productAnalysisYearly::where('year',$year)->where('product_id',$dropProduct->product_id)->first();
+        if(is_null($analysysDate)){
+            $analysysDate= new productAnalysisDaily;
+            $analysysDate->date=$date;
+            $analysysDate->product_id=$dropProduct->product_id;
+        }
+        if(is_null($analysysMonth)){
+            $analysysMonth= new productAnalysisMonthly;
+            $analysysMonth->month=$month;
+            $analysysMonth->product_id=$dropProduct->product_id;
+        }
+        if(is_null($analysysYear)){
+            $analysysYear= new productAnalysisYearly;
+            $analysysYear->year=$year;
+            $analysysYear->product_id=$dropProduct->product_id;
+        }
+        $analysysDate->drop += $changedNow;
+        $analysysMonth->drop += $changedNow;
+        $analysysYear->drop += $changedNow;
+        $analysysDate->save();
+        $analysysMonth->save();
+        $analysysYear->save();
+        // product analysis end
+
+
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
@@ -154,6 +221,39 @@ class DropProductController extends Controller
         $product = Product:: find($dropProduct->product_id);
         $product->stock += $dropProduct->quantity;
         $product->save();
+
+
+        // product analysis start
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $analysysDate= productAnalysisDaily::where('date',$date)->where('product_id',$dropProduct->product_id)->first();
+        $analysysMonth= productAnalysisMonthly::where('month',$month)->where('product_id',$dropProduct->product_id)->first();
+        $analysysYear= productAnalysisYearly::where('year',$year)->where('product_id',$dropProduct->product_id)->first();
+        if(is_null($analysysDate)){
+            $analysysDate= new productAnalysisDaily;
+            $analysysDate->date=$date;
+            $analysysDate->product_id=$dropProduct->product_id;
+        }
+        if(is_null($analysysMonth)){
+            $analysysMonth= new productAnalysisMonthly;
+            $analysysMonth->month=$month;
+            $analysysMonth->product_id=$dropProduct->product_id;
+        }
+        if(is_null($analysysYear)){
+            $analysysYear= new productAnalysisYearly;
+            $analysysYear->year=$year;
+            $analysysYear->product_id=$dropProduct->product_id;
+        }
+        $analysysDate->drop -= $dropProduct->quantity;
+        $analysysMonth->drop -= $dropProduct->quantity;
+        $analysysYear->drop -= $dropProduct->quantity;
+        $analysysDate->save();
+        $analysysMonth->save();
+        $analysysYear->save();
+        // product analysis end
+
+
         $dropProduct->delete();
         return Redirect::back()->withErrors(["Item Deleted"]);
     }

@@ -9,7 +9,7 @@
 - total due 
 - in customer and suppliers view must be added. this view will be list of every puechase or order he made. 
 - in product barcode print button.
-
+- drop product auth
 - bar code print page
 - yearly expense 
 - every modal must have withTrashed
