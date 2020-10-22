@@ -35,13 +35,13 @@ class CreateProductsTable extends Migration
             $table->double('stock',18,6)->default(0);
             $table->double('stock_alert',18,6)->default(1);
 
-            $table->double('sell',18,2)->nullable();
-            $table->double('tax',18,2)->nullable();
+            $table->double('sell',18,2)->default(0);
+            $table->double('tax',18,2)->default(0);
 
             
             $table->longText('description')->nullable();
             
-            $table->bigInteger('warrenty')->nullable(); //save in day 
+            $table->bigInteger('warrenty')->default(0); //save in day 
             $serial= [
                 'status'=>false,
                 'data'=>[

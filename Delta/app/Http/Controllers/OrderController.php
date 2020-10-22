@@ -78,7 +78,7 @@ class OrderController extends Controller
         $employee_id =$order->user->employee->id;
         $cost=0;
         $profit=0;
-        $tax = 0;
+        $totaltax = 0;
        
 
         foreach($request->order_details as $product){
@@ -93,147 +93,33 @@ class OrderController extends Controller
             $orderDetail->cost = $product['cost'];
             $orderDetail->total = $product['total'];
             $orderDetail->profit = $product['profit'];
-
             $cost += $product['cost'];
             $profit += $product['profit'];
-            $tax += $product['tax'];
+           // $totaltax += $product['tax'];
              $orderDetail->save();
-
-
             // product Analysis start
-            $productDaily= productAnalysisDaily::where('date',$date)->where('product_id',$orderDetail->product_id )->first();
-            $productMonthly= productAnalysisMonthly::where('month',$month)->where('product_id',$orderDetail->product_id)->first();
-            $productYearly= productAnalysisYearly::where('year',$year)->where('product_id',$orderDetail->product_id)->first();
-            if(is_null($productDaily)){
-                $productDaily= new productAnalysisDaily;
-                $productDaily->date=$date;
-                $productDaily->product_id=$orderDetail->product_id;
-            }
-            if(is_null($productMonthly)){
-                $productMonthly= new productAnalysisMonthly;
-                $productMonthly->month=$month;
-                $productMonthly->product_id=$orderDetail->product_id;
-            }
-            if(is_null($productYearly)){
-                $productYearly= new productAnalysisYearly;
-                $productYearly->year=$year;
-                $productYearly->product_id=$orderDetail->product_id;
-            }
-            $productDaily->sell += 1;
-            $productDaily->profit += $orderDetail->profit;
-            $productMonthly->sell += 1;
-            $productMonthly->profit += $orderDetail->profit;
-            $productYearly->sell += 1;
-            $productYearly->profit += $orderDetail->profit;
-            $productDaily->save();
-            $productMonthly->save();
-            $productYearly->save();
+            $this->productAnalysis($orderDetail->profit,$orderDetail->product_id,$orderDetail->quantity);
             // product Analysis end
-
-
-
         }
-
-
-        // calculation Analysis start
-        $calculationAnalysisDaily= calculationAnalysisDaily::where('date',$date)->first();
-        $calculationAnalysisMonthly= calculationAnalysisMonthly::where('month',$month)->first();
-        $calculationAnalysisYearly= calculationAnalysisYearly::where('year',$year)->first();
-        if(is_null($calculationAnalysisDaily)){
-            $calculationAnalysisDaily= new calculationAnalysisDaily;
-            $calculationAnalysisDaily->date=$date;
-        }
-        if(is_null($calculationAnalysisMonthly)){
-            $calculationAnalysisMonthly= new calculationAnalysisMonthly;
-            $calculationAnalysisMonthly->month=$month;
-        }
-        if(is_null($calculationAnalysisYearly)){
-            $calculationAnalysisYearly= new calculationAnalysisYearly;
-            $calculationAnalysisYearly->year=$year;
-        }
-        $calculationAnalysisDaily->sell_profit += $profit;
-        $calculationAnalysisMonthly->sell_profit += $profit;
-        $calculationAnalysisYearly->sell_profit += $profit;
-        $calculationAnalysisDaily->sell += $orderDetail->total;
-        $calculationAnalysisMonthly->sell += $orderDetail->total;
-        $calculationAnalysisYearly->sell += $orderDetail->total;
-        $calculationAnalysisDaily->save();
-        $calculationAnalysisMonthly->save();
-        $calculationAnalysisYearly->save();
-        // calculation Analysis end
-
-
-        // employee Analysis start
-        $employeeDaily= employeeAnalysisDaily::where('date',$date)->first();
-        $employeeMonthly= employeeAnalysisMonthly::where('month',$month)->first();
-        $employeeYearly= employeeAnalysisYearly::where('year',$year)->first();
-        if(is_null($employeeDaily)){
-            $employeeDaily= new employeeAnalysisDaily;
-            $employeeDaily->date=$date;
-        }
-        if(is_null($employeeMonthly)){
-            $employeeMonthly= new employeeAnalysisMonthly;
-            $employeeMonthly->month=$month;
-        }
-        if(is_null($employeeYearly)){
-            $employeeYearly= new employeeAnalysisYearly;
-            $employeeYearly->year=$year;
-        }
-        $employeeDaily->sell += 1;
-        $employeeDaily->profit += $profit;
-        $employeeMonthly->sell += 1;
-        $employeeMonthly->profit += $profit;
-        $employeeYearly->sell += 1;
-        $employeeYearly->profit += $profit;
-        $employeeDaily->save();
-        $employeeMonthly->save();
-        $employeeYearly->save();
-        // employee Analysis end
-
-        // sell Analysis start
-        $sellDaily= sellAnalysisDaily::where('date',$date)->first();
-        $sellMonthly= sellAnalysisMonthly::where('month',$month)->first();
-        $sellYearly= sellAnalysisYearly::where('year',$year)->first();
-        if(is_null($sellDaily)){
-            $sellDaily= new sellAnalysisDaily;
-            $sellDaily->date=$date;
-        }
-        if(is_null($sellMonthly)){
-            $sellMonthly= new sellAnalysisMonthly;
-            $sellMonthly->month=$month;
-        }
-        if(is_null($sellYearly)){
-            $sellYearly= new sellAnalysisYearly;
-            $sellYearly->year=$year;
-        }
-        $sellDaily->count += 1;
-        $sellDaily->cost += $orderDetail->cost;
-        $sellDaily->cash_recieved += $order->paid_amount;
-        $sellDaily->discount += $orderDetail->discount;
-        $sellDaily->amount += $orderDetail->total;
-        $sellDaily->due += $orderDetail->total - $order->paid_amount;
-        $sellMonthly->count += 1;
-        $sellMonthly->cost += $orderDetail->cost;
-        $sellMonthly->cash_recieved +=$order->paid_amount;
-        $sellMonthly->discount += $orderDetail->discount;
-        $sellMonthly->amount += $orderDetail->total;
-        $sellMonthly->due += $orderDetail->total - $order->paid_amount;
-        $sellYearly->count += 1;
-        $sellYearly->cost += $orderDetail->cost;
-        $sellYearly->cash_recieved += $order->paid_amount;
-        $sellYearly->discount += $orderDetail->discount;
-        $sellYearly->amount += $orderDetail->total;
-        $sellYearly->due += $orderDetail->total - $order->paid_amount;
-        $sellDaily->save();
-        $sellMonthly->save();
-        $sellYearly->save();
-        // sell Analysis end
-
-
 
         $order->cost =$cost;
         $order->profit =$profit;
         $order->save();
+
+        // calculation Analysis start
+        $this->calculationAnalysis($profit,$order->total,$totaltax);
+        // calculation Analysis end
+
+
+        // employee Analysis start
+        $this->employeeAnalysis($profit);
+        // employee Analysis end
+
+        // sell Analysis start
+        $this->sellAnalysis($order);
+        // sell Analysis end
+
+
         return $order;
     }
 
@@ -280,5 +166,142 @@ class OrderController extends Controller
     public function destroy(order $order)
     {
         //
+    }
+
+    public function sellAnalysis($order){
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $sellDaily= sellAnalysisDaily::where('date',$date)->first();
+        $sellMonthly= sellAnalysisMonthly::where('month',$month)->first();
+        $sellYearly= sellAnalysisYearly::where('year',$year)->first();
+        if(is_null($sellDaily)){
+            $sellDaily= new sellAnalysisDaily;
+            $sellDaily->date=$date;
+        }
+        if(is_null($sellMonthly)){
+            $sellMonthly= new sellAnalysisMonthly;
+            $sellMonthly->month=$month;
+        }
+        if(is_null($sellYearly)){
+            $sellYearly= new sellAnalysisYearly;
+            $sellYearly->year=$year;
+        }
+        $sellDaily->count += 1;
+        $sellDaily->cost += $order->cost;
+        $sellDaily->cash_recieved += $order->paid_amount;
+        $sellDaily->discount += $order->discount;
+        $sellDaily->amount += $order->total;
+        $sellDaily->due += $order->total - $order->paid_amount;
+        $sellMonthly->count += 1;
+        $sellMonthly->cost += $order->cost;
+        $sellMonthly->cash_recieved +=$order->paid_amount;
+        $sellMonthly->discount += $order->discount;
+        $sellMonthly->amount += $order->total;
+        $sellMonthly->due += $order->total - $order->paid_amount;
+        $sellYearly->count += 1;
+        $sellYearly->cost += $order->cost;
+        $sellYearly->cash_recieved += $order->paid_amount;
+        $sellYearly->discount += $order->discount;
+        $sellYearly->amount += $order->total;
+        $sellYearly->due += $order->total - $order->paid_amount;
+        $sellDaily->save();
+        $sellMonthly->save();
+        $sellYearly->save();
+    }
+    public function productAnalysis($profit,$id,$quantity){
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $productDaily= productAnalysisDaily::where('date',$date)->where('product_id',$id )->first();
+        $productMonthly= productAnalysisMonthly::where('month',$month)->where('product_id',$id)->first();
+        $productYearly= productAnalysisYearly::where('year',$year)->where('product_id',$id)->first();
+        if(is_null($productDaily)){
+            $productDaily= new productAnalysisDaily;
+            $productDaily->date=$date;
+            $productDaily->product_id=$id;
+        }
+        if(is_null($productMonthly)){
+            $productMonthly= new productAnalysisMonthly;
+            $productMonthly->month=$month;
+            $productMonthly->product_id=$id;
+        }
+        if(is_null($productYearly)){
+            $productYearly= new productAnalysisYearly;
+            $productYearly->year=$year;
+            $productYearly->product_id=$id;
+        }
+        $productDaily->sell += $quantity;
+        $productDaily->profit += $profit;
+        $productMonthly->sell += $quantity;
+        $productMonthly->profit += $profit;
+        $productYearly->sell += $quantity;
+        $productYearly->profit += $profit;
+        $productDaily->save();
+        $productMonthly->save();
+        $productYearly->save();
+
+    }
+    public function calculationAnalysis($profit,$sell,$tax){
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $calculationAnalysisDaily= calculationAnalysisDaily::where('date',$date)->first();
+        $calculationAnalysisMonthly= calculationAnalysisMonthly::where('month',$month)->first();
+        $calculationAnalysisYearly= calculationAnalysisYearly::where('year',$year)->first();
+        if(is_null($calculationAnalysisDaily)){
+            $calculationAnalysisDaily= new calculationAnalysisDaily;
+            $calculationAnalysisDaily->date=$date;
+        }
+        if(is_null($calculationAnalysisMonthly)){
+            $calculationAnalysisMonthly= new calculationAnalysisMonthly;
+            $calculationAnalysisMonthly->month=$month;
+        }
+        if(is_null($calculationAnalysisYearly)){
+            $calculationAnalysisYearly= new calculationAnalysisYearly;
+            $calculationAnalysisYearly->year=$year;
+        }
+        $calculationAnalysisDaily->sell_profit += $profit;
+        $calculationAnalysisMonthly->sell_profit += $profit;
+        $calculationAnalysisYearly->sell_profit += $profit;
+        $calculationAnalysisDaily->sell += $sell;
+        $calculationAnalysisMonthly->sell += $sell;
+        $calculationAnalysisYearly->sell += $sell;
+        $calculationAnalysisDaily->tax += $tax;
+        $calculationAnalysisMonthly->tax += $tax;
+        $calculationAnalysisYearly->tax += $tax;
+        $calculationAnalysisDaily->save();
+        $calculationAnalysisMonthly->save();
+        $calculationAnalysisYearly->save();
+
+    }
+    public function employeeAnalysis($profit){
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $employeeDaily= employeeAnalysisDaily::where('date',$date)->first();
+        $employeeMonthly= employeeAnalysisMonthly::where('month',$month)->first();
+        $employeeYearly= employeeAnalysisYearly::where('year',$year)->first();
+        if(is_null($employeeDaily)){
+            $employeeDaily= new employeeAnalysisDaily;
+            $employeeDaily->date=$date;
+        }
+        if(is_null($employeeMonthly)){
+            $employeeMonthly= new employeeAnalysisMonthly;
+            $employeeMonthly->month=$month;
+        }
+        if(is_null($employeeYearly)){
+            $employeeYearly= new employeeAnalysisYearly;
+            $employeeYearly->year=$year;
+        }
+        $employeeDaily->sell += 1;
+        $employeeDaily->profit += $profit;
+        $employeeMonthly->sell += 1;
+        $employeeMonthly->profit += $profit;
+        $employeeYearly->sell += 1;
+        $employeeYearly->profit += $profit;
+        $employeeDaily->save();
+        $employeeMonthly->save();
+        $employeeYearly->save();
     }
 }

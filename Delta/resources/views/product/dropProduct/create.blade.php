@@ -39,7 +39,7 @@
 
                         <span class="text-dark pl-1"> Quantity</span>
                         <input type="number" step="any" name="quantity" id="dropProductQuantity" size="6"  min="1"
-                            class="form-control  mb-2  inputMinZero" required>
+                            class="form-control  mb-2  inputMinZero" placeholder="Piece/K.G." required>
                     </div>
                     <div class="col-auto p-4">
 

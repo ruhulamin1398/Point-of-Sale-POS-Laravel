@@ -27,6 +27,12 @@
 - Tax in only products not in purchase
 - product add tax and warrenty
 - order page input types number and parse float
+- purchase page cost calculation on same product diffrent time
+- supplier ,custommer , user , employee delete -> permanent users
+- purchase page quantity in kg or piece
+- discount management page
+- purchase page product details tax + warrenty 
+- customer number check in submit order page
 
 
 
