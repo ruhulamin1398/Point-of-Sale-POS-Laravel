@@ -55,9 +55,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $month = Carbon::now()->format('Y-m-01');
-        $date = Carbon::now()->format('Y-m-d');
-        $year = Carbon::now()->format('Y');
         // return $request;
         // validation later
         $order = new order;

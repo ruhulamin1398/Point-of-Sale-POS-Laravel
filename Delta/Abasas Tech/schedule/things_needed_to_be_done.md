@@ -1,18 +1,12 @@
 - Data tables create section must be beautify. like product create
 - data table dropdown must have first option as 'select an Option' with null value.
-- drop product search by barcode or id.
-- return product search by barcode or id.
-- drop product and return product will be custom make.
+
 - number validation , number must be greatr than or equal to zero.
-- User table -> name must be unique
-- barcode of memo and search by scan
-- total due 
-- in customer and suppliers view must be added. this view will be list of every puechase or order he made. 
+- barcode of memo and search by scan 
 - in product barcode print button.
 - drop product auth
 - bar code print page
-- yearly expense 
-- every modal must have withTrashed
+- every modal must have withTrashed 
 - number validation for positive
 - in setting every required items update must be 2.
 - employee phone validation error. 
@@ -24,15 +18,17 @@
 - notification on update and delete . 
 - non createable and non updateable page createLabe and updateLabel hide .
 - product create star in required .
-- Tax in only products not in purchase
-- product add tax and warrenty
-- order page input types number and parse float
-- purchase page cost calculation on same product diffrent time
-- supplier ,custommer , user , employee delete -> permanent users
-- purchase page quantity in kg or piece
-- discount management page
-- purchase page product details tax + warrenty 
+- Tax in only products not in purchase 
+- product add tax and warrenty 
+- order page input types number and parse float 
+- purchase page cost calculation on same product diffrent time (average)
+- supplier ,custommer , user , employee delete -> permanent users .
+- purchase page quantity in kg or piece 
+- discount management page 
+- purchase page product details tax + warrenty  
 - customer number check in submit order page
+- default customer at customer
+- return product reference
 
 
 
