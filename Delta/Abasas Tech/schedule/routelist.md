@@ -69,7 +69,30 @@ for drop product input section
 ```
 for creating Products
 ```
-- 
+-  products
+```
+for show all Products
+```
+- categories
+```
+for View and create Categories
+```
+- brands
+```
+for create and view brands
+```
+- product_types
+```
+for view product types
+```
+- warrenty
+```
+for view and create warrenty
+```
+- stock_alert
+```
+for view stock alert
+```
 # Customers
 - customers
 ```
@@ -90,3 +113,18 @@ for all supplier view and create
 for supplier details nad purchase list
 ```
 
+# Orders
+-  orders/create
+```
+for creating order
+```
+-  orders
+```
+for view monthly orders
+```
+
+# Purchase 
+- purchases
+```
+for view monthly purchases
+```

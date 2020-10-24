@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarCodeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -52,148 +53,7 @@ Route::post('test-submit',function(Request $request){
 Route::view('/test-form','testForm');
 Route::get('/', function () {
 
-$a = '[{
-    "componentDetails":{
-        "title":"Category List",
-        "editTitle":"Edit Category"
-    },
-    "routes":{
-        "create":{
-            "name":"categories.create",
-            "link":"categories"
-        },
-        "update":{
-            "name":"categories.update",
-            "link":"categories"
-        },
-        "delete":{
-            "name":"categories.destroy",
-            "link":"categories"
-        }
-    },
-    "fieldList":[{
-        
-            "position":11,
-
-            "create":"1",
-            "read":"1",
-            "update":"1",
-            "require":"0",
-
-            "name":"name",
-            "input_type" : "text",
-            "database_name":"name",  
-            "title":"Name"
-        },{
-            
-            "position":111,
-
-            "create":"1",
-            "read":"0",
-            "update":"2",
-            "require":"1",
-
-           "input_type":"text",
-           "name":"products_count",
-           "title":"Products",
-
-
-           "database_name":"products_count"
-        },{
-            
-            "position":1,
-
-            "create":"1",
-            "read":"1",
-            "update":"1",
-            "require":"1",
-
-           "input_type":"text",
-           "name":"description",
-           "database_name":"description",
-           "title": "Description"
-        },{
-            
-            "position":12,
-
-            "create":"0",
-            "read":"0",
-            "update":"0",
-            "require":"1",
-
-           "input_type":"date",
-           "name":"date",
-           "database_name":"date",
-           "title": "Date"
-        },{
-            
-            "position":12,
-
-            "create":"0",
-            "read":"0",
-            "update":"0",
-            "require":"1",
-
-           "input_type":"datetime-local",
-           "name":"date_time",
-           "database_name":"date_time",
-           "title": "Date time"
-        },{
-            
-            "position":120,
-
-            "create":"0",
-            "read":"0",
-            "update":"0",
-            "require":"1",
-
-           "input_type":"time",
-           "name":"time",
-           "database_name":"time",
-           "title": "Time"
-        },{
-            
-            "position":2,
-
-            "create":"0",
-            "read":"0",
-            "update":"0",
-            "require":"1",
-
-           "input_type":"month",
-           "name":"month",
-           "database_name":"month",
-           "title": "Month"
-        },{
-            
-            "position":3,
-
-            "create":"0",
-            "read":"0",
-            "update":"0",
-            "require":"1",
-
-           "input_type":"dropDown",
-           "name":"product_type_name",
-           "database_name":"product_type_id",
-           "title": "Type",
-           "data" : "product_types"
-        }
-    ]
-}]' ;
-
-
-
-
-$category= setting::find(1);
-$category->setting= json_encode( $a);
-$category->save();
-$data = '{"data":{"_token":"vTnMdXuSbA2phDBY0vZWDzz4qgrbX1kpmoQkxm5S","description":{"position":"1","create":"0","read":"1","update":"1"},"name":{"position":"11","create":"1","read":"0","update":"1"},"products_count":{"position":"111","create":"1","read":"0","update":"0"}}}';
-// return json_decode($data,true);
-$category= setting::find(1);
-$setting = json_decode( json_decode($category->setting,true),true);
-return $setting['0'];
-    return view('welcome',compact('category'));
+return view('welcome');
  })->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -213,6 +73,7 @@ Route::resource('customers',CustomerController::class);
 Route::resource('customer_ratings',CustomerRatingController::class);
 Route::resource('sell_type',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
+Route::resource('bar_code',BarCodeController::class);
 
 
 
@@ -273,3 +134,11 @@ Route::get('customer_view_api', [CustomerController::class, 'ApiShow']);
 Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']); 
 Route::get('customers_due_api', [CustomerController::class, 'customersDue']); 
 
+
+
+
+///// testing 
+Route::get("chart",function(){
+    return view('test.chart');
+
+});
