@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\expenseAnalysisYearly;
+use App\Models\warrenty;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class expenseAnalysisYearlyFactory extends Factory
+class warrentyFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = expenseAnalysisYearly::class;
+    protected $model = warrenty::class;
 
     /**
      * Define the model's default state.

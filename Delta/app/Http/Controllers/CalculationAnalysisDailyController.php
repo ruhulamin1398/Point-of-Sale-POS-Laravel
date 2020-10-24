@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\expenseAnalysisDaily;
+use App\Models\calculationAnalysisDaily;
 use Illuminate\Http\Request;
 
-class ExpenseAnalysisDailyController extends Controller
+class CalculationAnalysisDailyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ExpenseAnalysisDailyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\expenseAnalysisDaily  $expenseAnalysisDaily
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function show(expenseAnalysisDaily $expenseAnalysisDaily)
+    public function show(calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }
@@ -52,10 +52,10 @@ class ExpenseAnalysisDailyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\expenseAnalysisDaily  $expenseAnalysisDaily
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function edit(expenseAnalysisDaily $expenseAnalysisDaily)
+    public function edit(calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }
@@ -64,10 +64,10 @@ class ExpenseAnalysisDailyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\expenseAnalysisDaily  $expenseAnalysisDaily
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, expenseAnalysisDaily $expenseAnalysisDaily)
+    public function update(Request $request, calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }
@@ -75,10 +75,10 @@ class ExpenseAnalysisDailyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\expenseAnalysisDaily  $expenseAnalysisDaily
+     * @param  \App\Models\calculationAnalysisDaily  $calculationAnalysisDaily
      * @return \Illuminate\Http\Response
      */
-    public function destroy(expenseAnalysisDaily $expenseAnalysisDaily)
+    public function destroy(calculationAnalysisDaily $calculationAnalysisDaily)
     {
         //
     }

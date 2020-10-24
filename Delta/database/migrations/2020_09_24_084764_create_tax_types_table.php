@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExpenseAnalysisYearliesTable extends Migration
+class CreateTaxTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateExpenseAnalysisYearliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('expense_analysis_yearlies', function (Blueprint $table) {
+        Schema::create('tax_types', function (Blueprint $table) {
             $table->id();
-            $table->year('year');
-            $table->double('expense',18,2)->default(0);
-            $table->json('data')->default(json_encode(['']));
+            $table->string('name');
+            $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreateExpenseAnalysisYearliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expense_analysis_yearlies');
+        Schema::dropIfExists('tax_types');
     }
 }

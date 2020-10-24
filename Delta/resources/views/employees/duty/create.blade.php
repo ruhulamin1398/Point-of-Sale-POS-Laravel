@@ -220,7 +220,12 @@
             });
             console.log(data);
         });
-        $('#dataTableDuty').DataTable();
+        $('#dataTableDuty').DataTable({   
+                    dom: 'lBfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                    ]
+                });
         $('#dutyStatusId').on('input', function () {
             if ($(this).val() == 1) {
                 $('#divEnterTime').show();

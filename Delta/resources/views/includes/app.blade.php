@@ -19,15 +19,21 @@
 
     <link rel="stylesheet" href="{{asset('css/admin/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/sb-admin-2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/admin/dataTables.bootstrap4.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/admin/dataTables.bootstrap4.min.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('css/admin/datatables.min.css')}}">
     <link rel="stylesheet" src="{{asset('bootstrap-select/css/bootstrap-select.min.css')}}">
     
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         .border-dotted{
-        border-style: dotted;
-        border-width: 3px;
-   }
+            border-style: dotted;
+            border-width: 3px;
+        }
+        .dataTables_wrapper .dt-buttons {
+            float:left;  
+            text-align:center;
+            margin-left: 20px;
+        }
    
 .bg-abasas-dark {
 
@@ -44,8 +50,9 @@
     <script src="{{asset('js/admin/easing.min.js')}}"></script>
     <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
     <script src="{{asset('js/admin/Chart.min.js')}}"></script>
-    <script src="{{asset('js/admin/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('js/admin/dataTables.bootstrap4.min.js')}}"></script>
+    {{-- <script src="{{asset('js/admin/jquery.dataTables.min.js')}}"></script> --}}
+    <script src="{{asset('js/admin/dataTables.min.js')}}"></script>
+    {{-- <script src="{{asset('js/admin/dataTables.bootstrap4.min.js')}}"></script> --}}
     <script src="{{asset('bootstrap-select/js/bootstrap-select.min.js')}}"></script>
 
    
