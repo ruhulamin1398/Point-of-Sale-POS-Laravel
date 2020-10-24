@@ -18,135 +18,61 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Employee Payment List",
-                "editTitle":"Edit Employee Payment"
+                "title":"Warrenty List",
+                "editTitle":"Edit Warrenty"
             },
             "routes":{
                 "create":{
-                    "name":"employee_payments.create",
-                    "link":"employee_payments"
+                    "name":"warrenty.store",
+                    "link":"warrenty"
                 },
                 "update":{
-                    "name":"employee_payments.update",
-                    "link":"employee_payments"
+                    "name":"warrenty.update",
+                    "link":"warrenty"
                 },
                 "delete":{
-                    "name":"employee_payments.destroy",
-                    "link":"employee_payments"
+                    "name":"warrenty.destroy",
+                    "link":"warrenty"
                 }
             },
             "fieldList":[{
                     
-                "position":3,
-    
-                "create":"2",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"dropDown",
-               "name":"employee",
-               "database_name":"employee_id",
-               "title": "Employee",
-               "data" : "employees"
-            },{
-                    
-                "position":3,
-    
-                "create":"2",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"dropDown",
-               "name":"payment_type",
-               "database_name":"employee_payment_type_id",
-               "title": "Payment Type",
-               "data" : "payment_types"
-            },{
-                    
-                "position":3,
-    
-                "create":"2",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"dropDown",
-               "name":"salary_status",
-               "database_name":"salary_status_id",
-               "title": "Salary Status",
-               "data" : "salary_statuses"
-            },{
-                    
                 "position":111,
     
                 "create":"2",
                 "read":"1",
-                "update":"1",
+                "update":"2",
                 "require":"1",
-    
-               "input_type":"number",
-               "name":"amount",
-               "title":"Amount",
-    
-    
-               "database_name":"amount"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"number",
-               "name":"changed_amount",
-               "title":"Changed Amount",
-    
-    
-               "database_name":"changed_amount"
-            },{
-                    
-                "position":111,
-    
-                "create":"2",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"month",
-               "name":"month_formated",
-               "title":"Month",
-    
-    
-               "database_name":"month"
-            },{
-                    
-                "position":111,
-    
-                "create":"1",
-                "read":"1",
-                "update":"1",
-                "require":"0",
     
                "input_type":"text",
-               "name":"comment",
-               "title":"Comment",
+               "name":"name",
+               "title":"Warrenty Name",
     
     
-               "database_name":"comment"
+               "database_name":"name"
+            },{
+                    
+                "position":111,
+    
+                "create":"2",
+                "read":"1",
+                "update":"2",
+                "require":"1",
+    
+               "input_type":"number",
+               "name":"total_days",
+               "title":"Warrenty in Days",
+               "database_name":"total_days"
             }
             ]
         }]' ;
 
 
         
-        // $setting =  setting::find(14);
+        // $setting = new setting;//::find(14);
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'employee_payments';
-        // $setting->model = 'App\Models\employeePayment.php';
+        // $setting->table_name = 'warrenties';
+        // $setting->model = 'App\Models\warrenty';
         // $setting->save();
         // return  "Success";
     }

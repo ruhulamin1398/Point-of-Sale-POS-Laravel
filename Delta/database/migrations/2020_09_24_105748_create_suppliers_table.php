@@ -16,11 +16,11 @@ class CreateSuppliersTable extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('phone')->unique();
             $table->string('address')->nullable();
             $table->string('company')->nullable();
-            $table->double('due', 8, 2)->default(0.00);
+            $table->double('due', 18, 2)->default(0.00);
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();

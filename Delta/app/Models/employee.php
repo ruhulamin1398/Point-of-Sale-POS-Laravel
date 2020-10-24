@@ -29,7 +29,6 @@ class employee extends Model
 
 
     public function abasas(){
-         $this->user = $this->userName->name;
         $this->designation = $this->designation->name;
     }   
 

@@ -21,12 +21,14 @@ use App\Http\Controllers\EmployeePaymentTypeController;
 use App\Http\Controllers\EmployeePaymentController;
 use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\SettingController;
 use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
+use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -212,20 +214,31 @@ Route::resource('customer_ratings',CustomerRatingController::class);
 Route::resource('sell_type',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 
+
+
+Route::resource('warrenty',WarrentyController::class);
+Route::resource('drop_products',DropProductController::class);
+Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ]); 
+
+//Employees
 Route::resource('employees',EmployeeController::class);
 Route::resource('designations',DesignationController::class);
+
+
+// Payments
 Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
 Route::resource('employee_payments',EmployeePaymentController::class);
 Route::resource('employee_salaries',EmployeeSalaryController::class);
 
+// Duties
 Route::resource('duty_status',DutyStatusController::class);
 Route::resource('employee_duties',EmployeeDutyController::class);
 Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
-Route::resource('drop_products',DropProductController::class);
 
-
+// Expenses
 Route::resource('expense',ExpenseController::class);
 Route::resource('expense_type',ExpenseTypeController::class);
+Route::resource('expense_monthly',ExpenseMonthlyController::class);
 
 
 

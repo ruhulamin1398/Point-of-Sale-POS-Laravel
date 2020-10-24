@@ -37,8 +37,8 @@ class ReturnProductRequest extends FormRequest
     
             return [
                 'product_id.required' => $messages->require('Product id'),
-                'customer_id.required' => $messages->require('Customer id'),
                 'quantity.required' => $messages->require('Quantity'),
+                'customer_id.required' => $messages->require('Customer'),
                 'price.required' => $messages->require('Price'),
 
             ];

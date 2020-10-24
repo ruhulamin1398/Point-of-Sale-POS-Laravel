@@ -47,11 +47,11 @@
 
         <div class="card-header py-3  bg-abasas-dark ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">Add new</a>
+                <a class="navbar-brand text-light"> {{ __('translate.Add new')  }}</a>
             </nav>
         </div>
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route($routes['create']['name']) }}">
                 @csrf
                 <div class="form-row align-items-center" id="createFormFieldList">
                   
@@ -68,7 +68,7 @@
 
                 </div>
                 <div class="col-12">
-                        <button type="submit" class="btn bg-abasas-dark mt-3">Submit</button>
+                        <button type="submit" class="btn bg-abasas-dark mt-3">{{ __('translate.Submit')  }}</button>
                     </div>
 
             </form>
@@ -86,7 +86,7 @@
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar  ">
 
-            <div class="navbar-brand"> {{ __('translate.'.$componentDetails['title'])  }} <i class="fas fa-tools pl-2"
+            <div class="navbar-brand"><span id="componentDetailsTitle"> {{ __('translate.'.$componentDetails['title'])  }}</span> <i class="fas fa-tools pl-2"
                 id="pageSetting"></i></div>
 <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" data-toggle="collapse"
     data-target="#createNewForm" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"
@@ -174,7 +174,7 @@
 
 
                     <td class="align-middle">
-                        <button type="button" class="btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
+                        <button type="button" class="dataEditItemClass btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
                                 class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
@@ -291,11 +291,11 @@
             
                  
                 <tr data-position="{{ $fieldList[$i]['position'] }}" data-name="{{ $fieldList[$i]['name'] }}" >
-                    <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> {{ $fieldList[$i]['title'] }} </th>
+                    <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>  {{ __('translate.'. $fieldList[$i]['title'] )  }}</th>
                     <td>
                     <div class="form-check-inline">
-                <label class="form-check-label">  
-                    @if( $fieldList[$i]['create']==1 )
+                <label class="form-check-label createLabel">  
+                    @if( $fieldList[$i]['create']==1 ) 
                   <input type="checkbox" class="form-check-input create abasasCheckBox " value="1" checked  > 
                     @elseif( $fieldList[$i]['create']==2 )
                   <input type="checkbox" class="form-check-input create abasasCheckBox " value="2" checked  disabled > 
@@ -307,10 +307,10 @@
                   
                   <input type="checkbox" class="form-check-input create" disabled value="3" > 
                   @endif
-                  Create</label>
+                    {{ __('translate.Create')  }} </label>
               </div>
               <div class="form-check-inline">
-                <label class="form-check-label">
+                <label class="form-check-label readLabel">
                     @if( $fieldList[$i]['read'] == 1 )
                     <input type="checkbox" class="form-check-input read abasasCheckBox " value="1" checked> 
                     @elseif( $fieldList[$i]['read'] == 0 )
@@ -323,11 +323,11 @@
   
                     <input type="checkbox" class="form-check-input read" disabled value="3" > 
                   @endif
-                    Read
+                     {{ __('translate.Read')  }}
                 </label>
               </div>
               <div class="form-check-inline">
-                <label class="form-check-label">
+                <label class="form-check-label updateLabel">
                     @if( $fieldList[$i]['update'] ==1  )
                     <input type="checkbox" class="form-check-input update abasasCheckBox " value="1" checked> 
                     @elseif( $fieldList[$i]['update'] ==2  )
@@ -337,7 +337,7 @@
                     @else 
                     <input type="checkbox" class="form-check-input update" disabled value="3" > 
                      @endif
-Update
+{{ __('translate.Update')  }}
                 </label>
               </div>
     
@@ -358,7 +358,7 @@ Update
             </div>
 
     <div class="modal-footer">
-        <div class="btn bg-abasas-dark" id="settingsSaveButton">Save</div>
+        <div class="btn bg-abasas-dark" id="settingsSaveButton"> {{ __('translate.Save')  }}</div>
     </div>
 
         </div>
@@ -444,7 +444,7 @@ Update
                     html = "";
 
                     html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
+                    html += '<label class="col-form-label" >  {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span> '@else "" @endif +'  </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
                         '"  required >';
 
@@ -479,9 +479,9 @@ Update
 
                     html = "";
                     html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{$field["title"] }}  </label>';
+                    html += '<label class="col-form-label" >   {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'   </label>';
                   
-                    html += '<input type="'+ inputType+'" name="' + database_name + '" value="' + value +
+                    html += '<input type="'+ inputType+'" '+@if($field["input_type"]=="number")' step="any" '@else "" @endif +' name="' + database_name + '" value="' + value +
                         '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
                     html += '</div>';
 
@@ -506,7 +506,12 @@ Update
 
 
 
-                $('#dataTable').DataTable();
+                $('#dataTable').DataTable({   
+                    dom: 'lBfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                    ]
+                });
      
 
 
@@ -619,8 +624,8 @@ function insertInputFormData(){
 
                     html = "";
 
-                    html += '<div class="form-group">';
-                    html += '<label class="col-form-label" >  {{$field["title"] }} </label>';
+                    html += '<div class="form-group col-md-3 col-sm-12  p-4">';
+                    html += '<label class="col-form-label" >  {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'  </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
                         '"  required >';
 
@@ -656,10 +661,10 @@ function insertInputFormData(){
 // // </div>
 
                     html = "";
-                    html += '<div class="col-auto">';
-                    html += '<span class="text-dark pl-4"> {{$field["title"] }}  </span>';
+                    html += '<div class="col-md-3 col-sm-12  p-4">';
+                    html += '<span class="text-dark pl-4"> {{ __("translate.").$field["title"]  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'   </span>';
                   
-                    html += '<input type="'+ inputType+'" name="' + database_name + '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
+                    html += '<input type="'+ inputType+'"  '+@if($field["input_type"]=="number")' step="any" '@else "" @endif +'  name="' + database_name + '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
                     html += '</div>';
 
                     $("#createFormFieldList").append(html);

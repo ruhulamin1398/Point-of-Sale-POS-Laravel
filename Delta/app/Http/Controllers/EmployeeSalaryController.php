@@ -57,8 +57,8 @@ class EmployeeSalaryController extends Controller
     public function store(Request $request)
     {
         
-        employeeSalary::create($request->all());
-        return redirect()->back()->withSuccess(['Successfully Created']);
+       // employeeSalary::create($request->all());
+        return redirect()->back()->withErrors(["Can't create"]);
 
     }
 
@@ -94,8 +94,8 @@ class EmployeeSalaryController extends Controller
     public function update(Request $request, employeeSalary $employeeSalary)
     {
         
-        $employeeSalary->update($request->all());
-        return redirect()->back()->withSuccess(['Successfully Updated']);
+       // $employeeSalary->update($request->all());
+        return redirect()->back()->withErrors(["Can't Update"]);
 
     }
 
@@ -107,8 +107,8 @@ class EmployeeSalaryController extends Controller
      */
     public function destroy(employeeSalary $employeeSalary)
     {
-        $employeeSalary->delete();
-        return Redirect::back()->withErrors(["Item Deleted" ]);
+      //  $employeeSalary->delete();
+        return Redirect::back()->withErrors(["Can't Delete" ]);
 
 
     }

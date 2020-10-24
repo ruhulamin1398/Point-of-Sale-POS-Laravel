@@ -19,8 +19,8 @@ class CreateEmployeePaymentsTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('employee_payment_type_id');
             $table->unsignedBigInteger('salary_status_id')->default(2);
-            $table->double('amount', 8, 2);
-            $table->double('changed_amount', 8, 2)->default(0.00);
+            $table->double('amount', 18, 2);
+            $table->double('changed_amount', 18, 2)->default(0.00);
             $table->date('month');
             $table->longText('comment')->nullable();
             $changedData= [

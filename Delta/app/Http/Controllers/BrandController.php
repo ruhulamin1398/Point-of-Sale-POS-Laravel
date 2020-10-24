@@ -96,15 +96,7 @@ class BrandController extends Controller
      */
     public function destroy(brand $brand)
     {
-        $counts = $brand->product->count();
-        if( $counts != 0 ){
-            return Redirect::back()->withErrors(["Can't delete.","This Brand has Products. To delete it please change Brand in Product. " ]);
-        }
-        else{
-            $brand->delete();
-            return Redirect::back()->withErrors(["Item Deleted" ]);
-        }
-
-
+        $brand->delete();
+        return Redirect::back()->withErrors(["Brand Deleted" ]);
     }
 }

@@ -136,7 +136,12 @@
 <script> 
 $(document).ready(function(){
 
-$('#dataTableDuty').DataTable();
+$('#dataTableDuty').DataTable({
+    dom: 'lBfrtip',
+    buttons: [
+        'copy', 'csv', 'excel' , 'pdf' , 'print'
+    ]
+});
 
 
 });

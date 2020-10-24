@@ -7,11 +7,11 @@ use App\Models\brand;
 use App\Models\category;
 use App\Models\Product;
 use App\Models\productType;
+use App\Models\setting;
 use App\Models\unit;
 use Illuminate\Http\Request;
-
-
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -24,11 +24,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-//
+        $products= Product::all();
+        return view('product.index',compact('products'));
     }
     
-
+    public function productAll(){
+        $p= Product::all();
+      
+        $products= array();
+        foreach($p as $product){
+            $products[$product->id]=$product;
+        }
+        return $products;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -122,10 +130,33 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {  
-      
-       $product->delete();
-       return back();
+        if($product->stock <=0){
+            $product->delete();
+            return Redirect::back()->withErrors(["Item Deleted" ]);
+        }
+        else{
+            return Redirect::back()->withErrors(["This Products Stock is not Zero",'Please Sell or drop that product to delete this Product' ]);
+        }
+       
     }
+
+
+    
+    public function lowStockProduct()
+    {  
+      $lowStockProducts =  Product::whereColumn('stock' ,'<' ,'stock_alert')->get();
+     
+      $settings = setting::where('table_name','stock_alert')->first();
+      $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+      
+              
+    $dataArray=[
+        'settings'=>$settings,
+        'items' => $lowStockProducts,
+    ];
+      return view('product.stock-alert.index',compact('dataArray'));     
+    }
+
 
         //Api Area start
 

@@ -106,7 +106,6 @@ class RoleTableSeeder extends Seeder
                 'stock_alert'=>20,
                 'sell'=>10,
                 'description'=>'plo make you comfortable',
-                'warrenty'=>360,
 
             ],
             [
@@ -120,7 +119,6 @@ class RoleTableSeeder extends Seeder
                 'stock_alert'=>20,
                 'sell'=>10,
                 'description'=>'Dont Buy HP,its really bad',
-                'warrenty'=>360,
 
             ],  
              
@@ -135,7 +133,6 @@ class RoleTableSeeder extends Seeder
                 'stock_alert'=>20,
                 'sell'=>10,
                 'description'=>'plo make you comfortable',
-                'warrenty'=>360,
 
             ],
 
@@ -147,7 +144,7 @@ class RoleTableSeeder extends Seeder
                 'duty_status_id' => 1,
                 'enter_time' => '2020-10-13 22:27:06',
                 'exit_time' => '2020-10-13 22:27:06',
-                'fixed_duty_hour' => '8:00:00',
+                'fixed_duty_hour' => '8',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
                 'comment' => 'comment 1',
@@ -157,7 +154,7 @@ class RoleTableSeeder extends Seeder
                 'duty_status_id' => 2,
                 'enter_time' => '2020-10-13 22:27:06',
                 'exit_time' => '2020-10-13 22:27:06',
-                'fixed_duty_hour' => '8:00:00',
+                'fixed_duty_hour' => '8',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
                 'comment' => 'comment 2',
@@ -168,7 +165,7 @@ class RoleTableSeeder extends Seeder
                 'duty_status_id' => 3,
                 'enter_time' => '2020-10-13 22:27:06',
                 'exit_time' => '2020-10-13 22:27:06',
-                'fixed_duty_hour' => '8:00:00',
+                'fixed_duty_hour' => '8',
                 'worked_hour' => '8:00:00',
                 'date' => '2020-09-16',
                 'comment' => 'comment 3',
@@ -295,7 +292,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01718988564',
                 'address' => 'address 1',
                 'joining_date' => '2020-09-16',
-                'fixed_duty_hour'=>'8:00:00',
+                'fixed_duty_hour'=>'8',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' =>2,
@@ -306,7 +303,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01840000408',
                 'address' => 'address 2',
                 'joining_date' => '2020-09-16',
-                'fixed_duty_hour'=>'8:00:00',
+                'fixed_duty_hour'=>'8',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' => 1,
@@ -317,7 +314,7 @@ class RoleTableSeeder extends Seeder
                 'phone' => '01729867026',
                 'address' => 'address 3',
                 'joining_date' => '2020-09-16',
-                'fixed_duty_hour'=>'8:00:00',
+                'fixed_duty_hour'=>'8',
                 'reference' => 'admin',
                 'term_of_contract' => '2020-09-16',
                 'designation_id' => 1,
@@ -330,7 +327,7 @@ class RoleTableSeeder extends Seeder
                 'employee_payment_type_id' => 1,
                 'salary_status_id' => 1,
                 'amount'=>1200.00,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
                 'Comment' => 'comment 1',
             ],
             [
@@ -339,7 +336,7 @@ class RoleTableSeeder extends Seeder
                 'employee_payment_type_id' => 1,
                 'salary_status_id' => 2,
                 'amount'=>1200.00,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
                 'Comment' => 'comment 2',
             ],
             [
@@ -348,7 +345,7 @@ class RoleTableSeeder extends Seeder
                 'employee_payment_type_id' => 1,
                 'salary_status_id' => 1,
                 'amount'=>1200.00,
-                'month' => '2020-09-16',
+                'month' => '2020-09-01',
                 'Comment' => 'comment 3',
             ],
         ]);
@@ -451,6 +448,24 @@ class RoleTableSeeder extends Seeder
                 'employee_id' => 2,
                 'expense_type_id' =>2,
                 'amount' =>2,
+            ],
+        ]);
+
+        DB::table('tax_types')->insert([
+            [
+                'name' => 'Included',
+                'description' => 'Price Includes Tax',
+            ],
+            [
+                'name' => 'Excluded',
+                'description' => 'Price Excludes Tax' ,
+            ],
+        ]);
+
+        DB::table('warrenties')->insert([
+            [
+                'name' => 'Null',
+                'total_days' => 0,
             ],
         ]);
 
