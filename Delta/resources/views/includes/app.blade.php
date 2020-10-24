@@ -48,13 +48,13 @@
     <script src="{{asset('js/admin/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('bootstrap-select/js/bootstrap-select.min.js')}}"></script>
 
-
+   
 
     
     <script src="{{asset('js/abasas/app.js')}}"></script>
     
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 </head>
 
