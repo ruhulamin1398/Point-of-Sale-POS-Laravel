@@ -246,7 +246,7 @@
 
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('barcode_print') }}">
+                                <form method="POST" action="{{ route('bar_code.store') }}">
                                     @csrf
                                     <div id="barcodePrintData">
 

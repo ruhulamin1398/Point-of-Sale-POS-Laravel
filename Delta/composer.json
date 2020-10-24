@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.0",
+        "milon/barcode": "^8.0",
         "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {

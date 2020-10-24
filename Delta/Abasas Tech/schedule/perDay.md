@@ -144,4 +144,18 @@ Distribution
 ```
 
 
+- 24
+
+```
+        ## Completed -  87.5+2.5
+
+        Database  - 100%
+        Component - 100%
+        Frontend  - 70+5%
+        testing   - 26%
+        backend   - 80+5%
+        ------------------------------------------
+```
+
+
 

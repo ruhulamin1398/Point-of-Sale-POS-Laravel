@@ -130,6 +130,7 @@ $('body').click(function () {
     $(document).on('click', '.searchItem', function () {
         var id = $(this).attr('data-item-id');
         $("#barcodeInputId").val(id)
+        $("#barcodeName").val(databaseProducts[id].name)
         // alert(id);//this one needs to be triggered
         purchaseProductInputOnInput()
         $("#productSuggession").hide();
