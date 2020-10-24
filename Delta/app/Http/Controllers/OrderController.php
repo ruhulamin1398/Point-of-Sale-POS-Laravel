@@ -28,9 +28,18 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('order.index');
+        $monthStart = Carbon:: now()->format('Y-m-01 00:00:00');
+        $monthEnd = Carbon:: now()->format('Y-m-31 23:59:59');
+        if(! is_null($request->month)){
+            $monthStart = Carbon:: parse($request->month)->format('Y-m-01 00:00:00');
+            $monthEnd = Carbon:: parse($request->month)->format('Y-m-31 23:59:59');
+        }
+        $month = Carbon:: parse($monthStart)->format('F, Y');
+
+        $orders= order::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
+        return view('product.order.index',compact('orders','month'));
     }
   
 

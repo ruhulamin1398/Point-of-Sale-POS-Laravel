@@ -13,4 +13,7 @@ class purchase extends Model
     public function user(){
         return $this->belongsTo('App\Models\User','user_id','id');
     }
+    public function supplier(){
+        return $this->belongsTo('App\Models\supplier','supplier_id','id');
+    }
 }
