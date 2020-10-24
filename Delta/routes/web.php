@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarCodeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -72,6 +73,7 @@ Route::resource('customers',CustomerController::class);
 Route::resource('customer_ratings',CustomerRatingController::class);
 Route::resource('sell_type',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
+Route::resource('bar_code',BarCodeController::class);
 
 
 
