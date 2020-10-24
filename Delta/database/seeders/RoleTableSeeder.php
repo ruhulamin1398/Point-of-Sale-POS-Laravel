@@ -106,7 +106,6 @@ class RoleTableSeeder extends Seeder
                 'stock_alert'=>20,
                 'sell'=>10,
                 'description'=>'plo make you comfortable',
-                'warrenty'=>360,
 
             ],
             [
@@ -120,7 +119,6 @@ class RoleTableSeeder extends Seeder
                 'stock_alert'=>20,
                 'sell'=>10,
                 'description'=>'Dont Buy HP,its really bad',
-                'warrenty'=>360,
 
             ],  
              
@@ -135,7 +133,6 @@ class RoleTableSeeder extends Seeder
                 'stock_alert'=>20,
                 'sell'=>10,
                 'description'=>'plo make you comfortable',
-                'warrenty'=>360,
 
             ],
 
@@ -451,6 +448,24 @@ class RoleTableSeeder extends Seeder
                 'employee_id' => 2,
                 'expense_type_id' =>2,
                 'amount' =>2,
+            ],
+        ]);
+
+        DB::table('tax_types')->insert([
+            [
+                'name' => 'Included',
+                'description' => 'Price Includes Tax',
+            ],
+            [
+                'name' => 'Excluded',
+                'description' => 'Price Excludes Tax' ,
+            ],
+        ]);
+
+        DB::table('warrenties')->insert([
+            [
+                'name' => 'Null',
+                'total_days' => 0,
             ],
         ]);
 

@@ -28,7 +28,12 @@
         $('.updateLabel').hide();
 
 
-        var table = $('#dataTable').DataTable();
+        var table = $('#dataTable').DataTable({   
+                    dom: 'lBfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                    ]
+                });
         table.columns( [-1] ).visible( false );
         
 

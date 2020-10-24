@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\brand;
+use App\Models\warrenty;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class brandFactory extends Factory
+class warrentyFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = brand::class;
+    protected $model = warrenty::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +23,7 @@ class brandFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'description'=> $this->faker->sentence(3),
+            //
         ];
     }
 }

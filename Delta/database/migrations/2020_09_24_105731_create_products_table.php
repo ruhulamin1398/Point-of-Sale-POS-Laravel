@@ -27,6 +27,8 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->unsignedBigInteger('type_id')->default(1);
             $table->unsignedBigInteger('unit_id')->nullable();
+            $table->unsignedBigInteger('tax_type_id')->default(1);
+            $table->unsignedBigInteger('warrenty_id')->default(1);
             
 
             $table->double('price_per_unit',18,2)->nullable();
@@ -40,8 +42,7 @@ class CreateProductsTable extends Migration
 
             
             $table->longText('description')->nullable();
-            
-            $table->bigInteger('warrenty')->default(0); //save in day 
+             //save in day 
             $serial= [
                 'status'=>false,
                 'data'=>[

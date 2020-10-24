@@ -138,7 +138,12 @@
 
 <script>
     $(document).ready(function(){
-        $('#dataTableOrder').DataTable();
+        $('#dataTableOrder').DataTable({   
+                    dom: 'lBfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                    ]
+                });
     });
 </script>
 

@@ -18,50 +18,35 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Low Stock Product List",
-                "editTitle":"Edit"
+                "title":"Warrenty List",
+                "editTitle":"Edit Warrenty"
             },
             "routes":{
                 "create":{
-                    "name":"stock_alert.create",
-                    "link":"stock_alert"
+                    "name":"warrenty.store",
+                    "link":"warrenty"
                 },
                 "update":{
-                    "name":"stock_alert.update",
-                    "link":"stock_alert"
+                    "name":"warrenty.update",
+                    "link":"warrenty"
                 },
                 "delete":{
-                    "name":"products.destroy",
-                    "link":"products"
+                    "name":"warrenty.destroy",
+                    "link":"warrenty"
                 }
             },
             "fieldList":[{
                     
                 "position":111,
     
-                "create":"3",
+                "create":"2",
                 "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"id",
-               "title":"Product ID",
-    
-    
-               "database_name":"id"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
+                "update":"2",
+                "require":"1",
     
                "input_type":"text",
                "name":"name",
-               "title":"Product Name",
+               "title":"Warrenty Name",
     
     
                "database_name":"name"
@@ -69,62 +54,15 @@ class SettingController extends Controller
                     
                 "position":111,
     
-                "create":"3",
+                "create":"2",
                 "read":"1",
-                "update":"3",
-                "require":"0",
+                "update":"2",
+                "require":"1",
     
-               "input_type":"text",
-               "name":"brand",
-               "title":"Product Brand",
-    
-    
-               "database_name":"brand_id"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"price_per_unit",
-               "title":"Unit Price",
-    
-    
-               "database_name":"price_per_unit"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"cost_per_unit",
-               "title":"Unit Cost",
-    
-    
-               "database_name":"cost_per_unit"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"stock",
-               "title":"Stock",
-    
-    
-               "database_name":"stock"
+               "input_type":"number",
+               "name":"total_days",
+               "title":"Warrenty in Days",
+               "database_name":"total_days"
             }
             ]
         }]' ;
@@ -133,8 +71,8 @@ class SettingController extends Controller
         
         // $setting = new setting;//::find(14);
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'stock_alert';
-        // $setting->model = 'App\Models\Product.php';
+        // $setting->table_name = 'warrenties';
+        // $setting->model = 'App\Models\warrenty';
         // $setting->save();
         // return  "Success";
     }
