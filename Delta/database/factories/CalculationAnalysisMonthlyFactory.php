@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\expenseAnalysisDaily;
+use App\Models\calculationAnalysisMonthly;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class expenseAnalysisDailyFactory extends Factory
+class calculationAnalysisMonthlyFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = expenseAnalysisDaily::class;
+    protected $model = calculationAnalysisMonthly::class;
 
     /**
      * Define the model's default state.

@@ -113,7 +113,12 @@
 <script> 
 $(document).ready(function(){
 
-$('#dataTableDutyMonthly').DataTable();
+$('#dataTableDutyMonthly').DataTable({   
+                    dom: 'lBfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                    ]
+                });
 
 
 });

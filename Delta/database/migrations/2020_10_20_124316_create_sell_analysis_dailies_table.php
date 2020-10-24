@@ -16,7 +16,7 @@ class CreateSellAnalysisDailiesTable extends Migration
         Schema::create('sell_analysis_dailies', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->unsignedBigInteger('count')->default(0);
+            $table->double('count',18,2)->default(0);
             $table->double('cost',18,2)->default(0);
             $table->double('amount',18,2)->default(0);
             $table->double('discount',18,2)->default(0);

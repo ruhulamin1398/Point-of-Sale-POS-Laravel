@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeeAnalysisMonthliesTable extends Migration
+class CreateWarrentiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateEmployeeAnalysisMonthliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_analysis_monthlies', function (Blueprint $table) {
+        Schema::create('warrenties', function (Blueprint $table) {
             $table->id();
-            $table->date('month');
-            $table->double('sell',18,2)->default(0);
-            $table->double('profit',18,2)->default(0);
-            $table->json('data')->default(json_encode(['']));
+            $table->string('name');
+            $table->bigInteger('total_days')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ class CreateEmployeeAnalysisMonthliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_analysis_monthlies');
+        Schema::dropIfExists('warrenties');
     }
 }

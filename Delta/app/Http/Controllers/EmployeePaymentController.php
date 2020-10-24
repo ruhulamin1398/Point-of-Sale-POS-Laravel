@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeePaymentRequest;
+use App\Models\calculationAnalysisDaily;
+use App\Models\calculationAnalysisMonthly;
+use App\Models\calculationAnalysisYearly;
 use App\Models\designation;
 use App\Models\employee;
 use App\Models\employeePayment;
@@ -102,14 +105,15 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
          $salaries->employee_id= $employeePayment->employee_id;
          $salaries->month= $employeePayment->month;
-
-
-
          $salaries->save();
          $employeePayment->save();
+
+        // calculation Analysis start
+        $this->calculationAnalysis($request->amount);
+        // calculation Analysis end
+
          return redirect()->back()->withSuccess(['Successfully Created']);
 
-         //salary table calculation 
     }
 
     /**
@@ -155,7 +159,6 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         {
            $salaries->amount_other += $different;
         }
-
         $employeePayment->amount = $request->amount;
         $employeePayment->Comment = $request->Comment;
         $employeePayment->changed_amount +=$different;
@@ -163,6 +166,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
         $salaries->save();
         $employeePayment->save();
+
+        // calculation Analysis start
+        $this->calculationAnalysis($different);
+        // calculation Analysis end
         
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
@@ -175,7 +182,6 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function destroy(employeePayment $employeePayment)
     {
-        
          $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
         if($employeePayment->employee_payment_type_id==1)
         {
@@ -186,10 +192,47 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         {
             $salaries->amount_other -= $employeePayment->amount;
         }
-                    
         
-        // $salaries->save();
-        // $employeePayment->delete();
-        return redirect()->back()->withErrors(['Can not Delete']);
+        // calculation Analysis start
+        $this->calculationAnalysis(0- $employeePayment->amount);
+        // calculation Analysis end          
+        
+        $salaries->save();
+        $employeePayment->delete();
+
+
+        return redirect()->back()->withErrors(['Payment Deleted']);
+    }
+
+
+    public function calculationAnalysis($amount){
+        // calculation Analysis start
+        $month = Carbon::now()->format('Y-m-01') ;
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $analysysDate= calculationAnalysisDaily::where('date',$date)->first();
+        $analysysMonth= calculationAnalysisMonthly::where('month',$month)->first();
+        $analysysYear= calculationAnalysisYearly::where('year',$year)->first();
+        if(is_null($analysysDate)){
+            $analysysDate= new calculationAnalysisDaily;
+            $analysysDate->date=$date;
+        }
+        if(is_null($analysysMonth)){
+            $analysysMonth= new calculationAnalysisMonthly;
+            $analysysMonth->month=$month;
+        }
+        if(is_null($analysysYear)){
+            $analysysYear= new calculationAnalysisYearly;
+            $analysysYear->year=$year;
+        }
+        $analysysDate->payment += $amount;
+        $analysysMonth->payment += $amount;
+        $analysysYear->payment += $amount;
+        $analysysDate->save();
+        $analysysMonth->save();
+        $analysysYear->save();
+        // calculation Analysis end
+
+
     }
 }

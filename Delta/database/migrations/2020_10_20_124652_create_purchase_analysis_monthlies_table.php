@@ -16,7 +16,7 @@ class CreatePurchaseAnalysisMonthliesTable extends Migration
         Schema::create('purchase_analysis_monthlies', function (Blueprint $table) {
             $table->id();
             $table->date('month');
-            $table->unsignedBigInteger('count')->default(0);
+            $table->double('count',18,2)->default(0);
             $table->double('cost',18,2)->default(0);
             $table->double('amount',18,2)->default(0);
             $table->double('discount',18,2)->default(0);

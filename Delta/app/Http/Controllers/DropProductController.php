@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DropProductRequest;
+use App\Models\calculationAnalysisDaily;
+use App\Models\calculationAnalysisMonthly;
+use App\Models\calculationAnalysisYearly;
 use App\Models\dropProduct;
 use App\Models\Product;
+use App\Models\productAnalysisDaily;
+use App\Models\productAnalysisMonthly;
+use App\Models\productAnalysisYearly;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -85,6 +91,15 @@ class DropProductController extends Controller
             $product->stock -= $dropProduct->quantity;
             $product->save();
             $dropProduct->save();
+
+            //calculation analysis start
+            $this->calculationAnalysis($product->cost_per_unit*$request->quantity);
+            //calculation analysis end
+
+            // product analysis start  
+            $this->productAnalysis($request->product_id,$request->quantity,$product->cost_per_unit*$request->quantity);
+            // product analysis end
+
             return redirect()->back()->withSuccess(['Successfully Dropped']);
         }
         else{
@@ -140,6 +155,16 @@ class DropProductController extends Controller
         $product->stock -= $changedNow;
         $product->save();
         $dropProduct->save();
+
+
+        //calculation analysis start
+        $this->calculationAnalysis($product->cost_per_unit*$changedNow);
+        //calculation analysis end
+        // product analysis start
+        $this->productAnalysis($dropProduct->product_id,$changedNow,$product->cost_per_unit*$changedNow);
+        // product analysis end
+
+
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
@@ -154,7 +179,79 @@ class DropProductController extends Controller
         $product = Product:: find($dropProduct->product_id);
         $product->stock += $dropProduct->quantity;
         $product->save();
+
+
+        //calculation analysis start
+        $this->calculationAnalysis(0-$product->cost_per_unit*$dropProduct->quantity);
+        //calculation analysis end
+
+        // product analysis start
+        $this->productAnalysis($dropProduct->product_id,0-$dropProduct->quantity,0-$product->cost_per_unit*$dropProduct->quantity);
+        // product analysis end
+
+
         $dropProduct->delete();
         return Redirect::back()->withErrors(["Item Deleted"]);
+    }
+
+    public function calculationAnalysis($amount){
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $analysysDate = calculationAnalysisDaily::where('date', $date)->first();
+        $analysysMonth = calculationAnalysisMonthly::where('month', $month)->first();
+        $analysysYear = calculationAnalysisYearly::where('year', $year)->first();
+        if (is_null($analysysDate)) {
+            $analysysDate = new calculationAnalysisDaily;
+            $analysysDate->date = $date;
+        }
+        if (is_null($analysysMonth)) {
+            $analysysMonth = new calculationAnalysisMonthly;
+            $analysysMonth->month = $month;
+        }
+        if (is_null($analysysYear)) {
+            $analysysYear = new calculationAnalysisYearly;
+            $analysysYear->year = $year;
+        }
+        $analysysDate->drop_loss += $amount;
+        $analysysMonth->drop_loss += $amount;
+        $analysysYear->drop_loss += $amount;
+        $analysysDate->save();
+        $analysysMonth->save();
+        $analysysYear->save();
+    }
+
+    public function productAnalysis($id,$quantity,$loss){
+        
+        $month = Carbon::now()->format('Y-m-01');
+        $date = Carbon::now()->format('Y-m-d');
+        $year = Carbon::now()->format('Y');
+        $analysysDate= productAnalysisDaily::where('date',$date)->where('product_id',$id)->first();
+        $analysysMonth= productAnalysisMonthly::where('month',$month)->where('product_id',$id)->first();
+        $analysysYear= productAnalysisYearly::where('year',$year)->where('product_id',$id)->first();
+        if(is_null($analysysDate)){
+            $analysysDate= new productAnalysisDaily;
+            $analysysDate->date=$date;
+            $analysysDate->product_id=$id;
+        }
+        if(is_null($analysysMonth)){
+            $analysysMonth= new productAnalysisMonthly;
+            $analysysMonth->month=$month;
+            $analysysMonth->product_id=$id;
+        }
+        if(is_null($analysysYear)){
+            $analysysYear= new productAnalysisYearly;
+            $analysysYear->year=$year;
+            $analysysYear->product_id=$id;
+        }
+        $analysysDate->drop += $quantity;
+        $analysysMonth->drop += $quantity;
+        $analysysYear->drop += $quantity;
+        $analysysDate->profit -= $loss;
+        $analysysMonth->profit -= $loss;
+        $analysysYear->profit -= $loss;
+        $analysysDate->save();
+        $analysysMonth->save();
+        $analysysYear->save();
     }
 }

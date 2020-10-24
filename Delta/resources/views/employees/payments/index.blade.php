@@ -106,7 +106,7 @@
     $(document).ready(function () {
 
 
-        $('.dataDeleteItemClass').hide();
+      //  $('.dataDeleteItemClass').hide();
 
         $('#createNewForm').hide().removeClass("collapse");
 

@@ -30,7 +30,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-8 col-sm-12 ">
-                        <!-- <label for="productName"> পণ্যের নাম</label> -->
+                        <label for="productName"> পণ্যের নাম</label>
                         <textarea type="text" name="name" class="form-control" id="name" placeholder="পণ্যের নাম"></textarea>
                     </div>
                     <div class="form-group col-md-4 col-sm-12 ">
@@ -43,7 +43,7 @@
 
 
                     <div class="form-group col-md-4 col-sm-12  p-4">
-                        <!-- <label for="catagory_id">পণ্যের ক্যাটাগরি</label> -->
+                         <label for="catagory_id">পণ্যের ক্যাটাগরি</label> 
                         <select class="form-control form-control" value="" name="category_id" id="catagory_id" required>
                             <option selected="selected">Select Category </option>
                             @foreach ($categories as $category)
@@ -52,7 +52,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4 col-sm-12  p-4">
-                        <!-- <label for="catagory_id">পণ্যের ক্যাটাগরি</label> -->
+                      <label for="catagory_id">পণ্যের ক্যাটাগরি</label> 
                         <select class="form-control form-control" name="type_id" id="type_id" required>
                             <option>Select Product Types </option>
                             @foreach ($types as $type)
@@ -61,7 +61,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4 col-sm-12  p-4">
-                        <!-- <label for="catagory_id">পণ্যের ক্যাটাগরি</label> -->
+                        <label for="catagory_id">পণ্যের ক্যাটাগরি</label>
                         <select class="form-control form-control" name="brand_id" required>
                             <option>Select brands </option>
                             @foreach ($brands as $brand)
@@ -77,11 +77,13 @@
 
                     <div class="form-group col-md-4 col-sm-12 p-4">
 
+                        <label for="catagory_id">পণ্যের ক্যাটাগরি</label>
                         <input type="number" name="sell" id="" class="form-control" min='0' placeholder="Price">
                     </div>
 
 
                     <div class="form-group col-md-4 col-sm-12  p-4">
+                        <label for="catagory_id">পণ্যের ক্যাটাগরি</label>
                         <select class="form-control form-control" name="unit_id" id="unit_id" required>
                             <option> Select Unit </option>
                             {{---
@@ -93,7 +95,7 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12  p-4">
-                        <!-- <label for="catagory_id">পণ্যের ক্যাটাগরি</label> -->
+                        <label for="catagory_id">পণ্যের ক্যাটাগরি</label> 
 
                         <input type="number" name="tax" id="" class="form-control" min=0 placeholder="Tax %">
                     </div>

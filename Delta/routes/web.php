@@ -28,6 +28,7 @@ use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
+use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -215,6 +216,7 @@ Route::resource('payment_systems',PaymentSystemController::class);
 
 
 
+Route::resource('warrenty',WarrentyController::class);
 Route::resource('drop_products',DropProductController::class);
 Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ]); 
 
