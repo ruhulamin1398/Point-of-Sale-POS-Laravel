@@ -18,21 +18,21 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Warrenty List",
-                "editTitle":"Edit Warrenty"
+                "title":"Category List",
+                "editTitle":"Edit Category"
             },
             "routes":{
                 "create":{
-                    "name":"warrenty.store",
-                    "link":"warrenty"
+                    "name":"categories.store",
+                    "link":"categories"
                 },
                 "update":{
-                    "name":"warrenty.update",
-                    "link":"warrenty"
+                    "name":"categories.update",
+                    "link":"categories"
                 },
                 "delete":{
-                    "name":"warrenty.destroy",
-                    "link":"warrenty"
+                    "name":"categories.destroy",
+                    "link":"categories"
                 }
             },
             "fieldList":[{
@@ -46,7 +46,7 @@ class SettingController extends Controller
     
                "input_type":"text",
                "name":"name",
-               "title":"Warrenty Name",
+               "title":"Name",
     
     
                "database_name":"name"
@@ -54,25 +54,36 @@ class SettingController extends Controller
                     
                 "position":111,
     
-                "create":"2",
+                "create":"1",
                 "read":"1",
-                "update":"2",
-                "require":"1",
+                "update":"1",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"description",
+               "title":"Description",
+               "database_name":"description"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
     
                "input_type":"number",
-               "name":"total_days",
-               "title":"Warrenty in Days",
-               "database_name":"total_days"
+               "name":"products_count",
+               "title":"No of Product",
+               "database_name":"products_count"
             }
             ]
         }]' ;
 
-
-        
-        // $setting = new setting;//::find(14);
+        // $setting =  setting::find(18);
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'warrenties';
-        // $setting->model = 'App\Models\warrenty';
+        // $setting->table_name = 'categories';
+        // $setting->model = 'App\Models\category';
         // $setting->save();
         // return  "Success";
     }
