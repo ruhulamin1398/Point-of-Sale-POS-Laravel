@@ -118,4 +118,21 @@ return[
 'Edit Employee Payment Type' => 'পেমেন্ট ধরণ সংশোধন',
 
 
+
+'Designation ' => 'পদবি', 
+'Duty (Hour)' => 'ডিউটি (ঘন্টা)', 
+'Warrenty Name'=>'ওয়ারেন্টি নাম',
+'Warrenty List'=>'ওয়ারেন্টি লিস্ট',
+'Edit Warrenty'=>'ওয়ারেন্টি ভূল সংশোধন',
+'Warrenty in Days'=>'ওয়ারেন্টি (দিন)', 
+'Date'=>'তারিখ',
+'Changed Quantity'=>'পরিবর্তন করা হয়েছে',
+'Product ID'=>'পণ্যের আইডি', 
+'Product Name'=>'পণ্যের নাম',
+'Product Brand'=>'পণ্যের ব্র্যান্ড',
+'Stock'=>'স্টক', 
+'Payment Type'=>'পেমেন্ট ধরণ', 
+'Salary Status'=>'', 
+
+
 ];
