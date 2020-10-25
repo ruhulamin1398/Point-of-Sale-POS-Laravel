@@ -132,7 +132,42 @@ return[
 'Product Brand'=>'পণ্যের ব্র্যান্ড',
 'Stock'=>'স্টক', 
 'Payment Type'=>'পেমেন্ট ধরণ', 
-'Salary Status'=>'', 
+'Salary Status'=>'স্টেটাস', 
+'Fixed Salary'=> 'নিদ্রারিত বেতন', 
+'Month'=> 'মাস', 
+'Amount Salary'=> 'বেতন', 
+'Employee Salary List'=> 'কর্মচারীর বেতন',
+'Save'=> 'সেইভ', 
+
+
+
+'Expenses List'=> 'খরচের লিস্ট',
+'Edit Expenses List'=> 'খরচের ভূল সংশোধন',
+'Expense Type'=> 'খরচের ধরণ', 
+'Amount'=> 'টাকা', 
+'Changed Amount'=> 'টাকা (পরিবর্তিত)',
+'Expense Type List'=> 'খরচের ধরণ', 
+'Expense Monthly List'=> 'খরচ (মাসিক)',  
+'Edit Expense Monthly List'=> 'খরচ (মাসিক) ভূল সংশোধন',  
+'Price'=> 'দাম',  
+'Profit'=> 'লাভ', 
+'Returned Product List'=> 'পণ্য ফেরতের লিস্ট', 
+'Edit Returned Product List'=> 'পণ্য ফেরতের ভূল সংশোধন', 
+'Payment System List'=> 'পেমেন্ট সিস্টেম লিস্ট', 
+'Print Barcode'=> 'বারকোড প্রিন্ট', 
+'Profit'=> 'লাভ', 
+'Low Stock Product List'=> 'লো স্টক প্রোডাক্ট', 
+'Unit Price'=> 'দাম (একক)', 
+'Unit Cost'=> 'খরচ (একক)', 
+'Suppliers List'=> 'সাপ্লাইয়ার লিস্ট', 
+'Edit Suppliers List'=> 'সাপ্লাইয়ার ভূল সংশোধন', 
+'Add new'=> 'নতুন যোগ করুন', 
+'Profit'=> 'লাভ',  
+'Duty'=> 'ডিউটি', 
+'Expense Type'=> 'খরচের ধরন',
+'Search'=> 'সার্চ', 
+
+
 
 
 ];
