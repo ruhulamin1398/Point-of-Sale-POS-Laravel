@@ -131,8 +131,8 @@ return[
 'Product Name'=>'পণ্যের নাম',
 'Product Brand'=>'পণ্যের ব্র্যান্ড',
 'Stock'=>'স্টক', 
-''=>'',
-''=>'',
+'Payment Type'=>'পেমেন্ট ধরণ', 
+'Salary Status'=>'', 
 
 
 ];

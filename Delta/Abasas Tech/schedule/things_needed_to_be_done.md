@@ -31,4 +31,7 @@
 - return product reference
 
 - serial in page
+------------------------------
+- translator not working in datatables
+------------------------------------
 
