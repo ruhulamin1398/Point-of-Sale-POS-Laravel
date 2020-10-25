@@ -1,5 +1,5 @@
 <div class="card border-light bg-abasas-dark  text-center w-100 p-2">
-    <h3 class="text-white">Supplier</h3>
+    <h3 class="text-white">Customer</h3>
 
     <div class="card-body">
         <div class="row no-gutters ">
@@ -10,7 +10,7 @@
                
 
                     <div class=" col-auto ">
-                        <label class="text-light w-100" for="supplierPhoneField">Supplier Number</label>
+                        <label class="text-light w-100" for="supplierPhoneField">Customer Number</label>
                         <input type="text" name="phone" id="supplierPhoneField" class="form-control mb-2 ">
                     </div>
                     <div class=" text-light font-weight-bold " id="supplierPhoneArea"></div>
@@ -23,7 +23,7 @@
 
 
 
-            <form method="POST" action="{{ route('SupplierStore') }}" id="supplierPhoneAreaForm">
+            <form method="POST" action="{{ route('CustomerStore') }}" id="supplierPhoneAreaForm">
                 @csrf
                 <div class="form-row ">
                     <div class="col-auto">
@@ -110,7 +110,7 @@
                 $("#supplierPhoneAreaForm").hide();
                 $("#supplierPhoneArea").html('');
 
-                var link = "{{ route('home') }}/api/supplier-check?phone=" + $(
+                var link = "{{ route('home') }}/api/customer-check?phone=" + $(
                     "#supplierPhoneField").val().trim();
                 console.log(link);
 
