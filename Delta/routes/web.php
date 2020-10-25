@@ -139,6 +139,23 @@ Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
 
 ///// testing 
 Route::get("chart",function(){
-    return view('test.chart');
+    
+    // $a = '[{
+    //     "label": " TK " ,
+    //     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    //     data: [-12, 19, 3, 5, 2, 3]
+    // }]' ;
+
+    $labels= ['Jeans', 'Shirt', 'T-shirt1', 'Polo-shirt', 'Pant', 'Shoe',];
+    $data= [67, 12,43, 25, 44, 55];
+    $dataArray= [
+        'label'=>"asdfasfas",
+        "lebels" =>$labels,
+        'data' =>$data,
+
+    ];
+    $dataArray= json_encode($dataArray);
+    
+    return view('test.chart',compact('dataArray'));
 
 });
