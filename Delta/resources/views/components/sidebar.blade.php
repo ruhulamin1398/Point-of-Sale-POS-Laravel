@@ -26,12 +26,12 @@
 
 
 
-                <a class="collapse-item" href="#">{{__('translate.All Products')}}</a>
-                <a class="collapse-item" href="#">{{__('translate.Add New')}}</a>
-                <a class="collapse-item" href="#">{{__('translate.Category')}}</a>
+                <a class="collapse-item" href="{{ route('products.index') }}">{{__('translate.All Products')}}</a>
+                <a class="collapse-item" href="{{ route('products.create') }}">{{__('translate.Add New')}}</a>
+                <a class="collapse-item" href="{{ route('categories.index') }}">{{__('translate.Category')}}</a>
                 <a class="collapse-item" href="#">{{__('translate.Analysis')}}</a>
-                <a class="collapse-item" href="#">{{__('translate.Return Product')}}</a>
-                <a class="collapse-item" href="#">{{__('translate.Low Stock Products')}}</a>
+                <a class="collapse-item" href="{{ route('return_products.index') }}">{{__('translate.Return Product')}}</a>
+                <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
             </div>
         </div>
     </li>
@@ -48,8 +48,8 @@
         <div id="collapseSell" class="collapse" aria-labelledby="headingSell" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="#">{{__('translate.Sell')}} </a></a>
-                <a class="collapse-item" href="#">{{__('translate.Sell List')}} </a>
+                <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Sell')}} </a></a>
+                <a class="collapse-item" href="{{ route('orders.index') }}">{{__('translate.Sell List')}} </a>
 
             </div>
         </div>
@@ -70,8 +70,8 @@
         <div id="collapsePurchase" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="#">{{__('translate.Buy')}} </a>
-                <a class="collapse-item" href="#">{{__('translate.Perchase List')}}  </a>
+                <a class="collapse-item" href="{{ route('purchases.create') }}">{{__('translate.Buy')}} </a>
+                <a class="collapse-item" href="{{ route('purchases.index') }}">{{__('translate.Perchase List')}}  </a>
 
             </div>
         </div>
@@ -86,7 +86,7 @@
     <hr class="sidebar-divider m-1 p-0 ">
     <!-- Nav Item - Dashboard -->
     <li class="nav-item  ">
-        <a class="nav-link p-3 " href="#">
+        <a class="nav-link p-3 " href="{{ route('customers.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{{__('translate.Customer')}}</span></a>
     </li>
@@ -96,7 +96,7 @@
 
     <!--supplier  Collapse Menu -->
     <li class="nav-item  ">
-        <a class="nav-link p-3 " href="#">
+        <a class="nav-link p-3 " href="{{ route('suppliers.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span> {{__('translate.Supplier')}}</span></a>
     </li>
@@ -114,8 +114,9 @@
         </a>
         <div id="collapseStaff" class="collapse" aria-labelledby="headingStaff" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#"> {{__('translate.All Employee')}}</a>
-                <a class="collapse-item" href="#">{{__('translate.Salary')}}</a>
+                <a class="collapse-item" href="{{ route('employees.index') }}"> {{__('translate.All Employee')}}</a>
+                <a class="collapse-item" href="{{ route('employee_salaries.index') }}">{{__('translate.Salary')}}</a>
+                <a class="collapse-item" href="{{ route('employee_duties.index') }}">{{__('translate.Duty')}}</a>
 
             </div>
         </div>
@@ -127,7 +128,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item  ">
-        <a class="nav-link p-3 " href="#">
+        <a class="nav-link p-3 " href="{{ route('bar_code.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{{__('translate.Code Print')}}</span></a>
     </li>
@@ -148,9 +149,10 @@
         <div id="collapseExpenses" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="#">{{__('translate.Daily')}}</a>
-                <a class="collapse-item" href="#">{{__('translate.Monthly')}}</a>
-                <a class="collapse-item" href="#">{{__('translate.Yearly')}}</a>
+
+                <a class="collapse-item" href="{{ route('expense.index') }}">{{__('translate.Daily')}}</a>
+                <a class="collapse-item" href="{{ route('expense_monthly.index') }}">{{__('translate.Monthly')}}</a>
+                <a class="collapse-item" href="{{ route('expense_type.index') }}">{{__('translate.Expense Type')}}</a>
 
             </div>
         </div>
