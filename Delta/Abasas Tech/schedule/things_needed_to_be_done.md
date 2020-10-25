@@ -28,7 +28,6 @@
 - purchase page product details tax + warrenty  
 - customer number check in submit order page
 - default customer at customer
-- return product reference
 
-- serial in page
+- serial in page of products
 
