@@ -32,13 +32,7 @@
 - serial in page of products
 
 ---------------------------------------
-- Data Table Error {
-    - duty_status
-    - expense_monthly
-    - return_product
-    -
-    
- }
+
 - Not Showing Edit and Delete button in Duty_status table
 
 -  page  not showing {

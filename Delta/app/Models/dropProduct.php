@@ -11,10 +11,10 @@ class dropProduct extends Model
     use SoftDeletes;
     protected $guarded = [];
     public function user(){
-        return $this->hasOne('App\Models\employee','user_id','user_id');
+        return $this->hasOne('App\Models\employee','user_id','user_id')->withTrashed();
     }
     public function products(){
-        return $this->belongsTo('App\Models\product','product_id','id');
+        return $this->belongsTo('App\Models\product','product_id','id')->withTrashed();
     }
     public function abasas(){
         // $this->products_count = $this->products->count();

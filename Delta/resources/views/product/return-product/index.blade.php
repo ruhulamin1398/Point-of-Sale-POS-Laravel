@@ -17,12 +17,7 @@ $(document).ready(function(){
         $('#AddNewFormButtonDiv').html(html);
         $('.createLabel').hide();
         $('.updateLabel').hide();
-        var table = $('#dataTable').DataTable({   
-                    dom: 'lBfrtip',
-                    buttons: [
-                        'copy', 'csv', 'excel' , 'pdf' , 'print'
-                    ]
-                });
+        var table = $('#dataTable').DataTable();
         table.columns( [-1] ).visible( false );
 });
 

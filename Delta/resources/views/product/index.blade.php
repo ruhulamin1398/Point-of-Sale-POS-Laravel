@@ -89,7 +89,7 @@
 
 
 
-                                <button title="Delete Product" class="btn btn-danger " onclick="if(confirm('are you sure to delete this')){
+                                <button title="Delete Product" class="btn btn-danger m-1 " onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $product->id }}').submit();
 			}
 			else{

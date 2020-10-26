@@ -14,13 +14,13 @@ class returnProduct extends Model
     protected $guarded = [];
 
     public function products(){
-        return $this->belongsTo('App\Models\product','product_id','id');
+        return $this->belongsTo('App\Models\product','product_id','id')->withTrashed();
     }
     public function customer(){
-        return $this->belongsTo('App\Models\customer','customer_id','id');
+        return $this->belongsTo('App\Models\customer','customer_id','id')->withTrashed();
     }
     public function user(){
-        return $this->belongsTo('App\Models\User','user_id','id');
+        return $this->belongsTo('App\Models\User','user_id','id')->withTrashed();
     }
     public function abasas(){
         $this->product = $this->products->name;

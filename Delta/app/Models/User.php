@@ -61,7 +61,7 @@ class User extends Authenticatable
     ];
 
     public function employee(){
-        return $this->hasOne('App\Models\employee','user_id','id');
+        return $this->hasOne('App\Models\employee','user_id','id')->withTrashed();
     }
 
 
