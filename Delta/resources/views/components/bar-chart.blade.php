@@ -1,14 +1,14 @@
 <div>
 
 
-    <canvas id="doughnutChart"></canvas>
+    <canvas id="barChart"></canvas>
     <script>
         var dataArray= @json(json_decode ( $dataArray , true));
 
         console.log(dataArray.lebels);
-    var ctx = document.getElementById('doughnutChart');
+    var ctx = document.getElementById('barChart');
     var myChart = new Chart(ctx, {
-        type: 'pie',
+        type: 'bar',
         data: {
             labels: dataArray.lebels,
             datasets: [{
@@ -32,16 +32,16 @@
                 ],
                 borderWidth: 1
             }]
-        }//,
-        // options: {
-        //     scales: {
-        //         yAxes: [{
-        //             ticks: {
-        //                 beginAtZero: true
-        //             }
-        //         }]
-        //     }
-        // }
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
     });
     </script>
 

@@ -1,14 +1,14 @@
 <div>
 
 
-    <canvas id="doughnutChart"></canvas>
+    <canvas id="polarAreaChart"></canvas>
     <script>
         var dataArray= @json(json_decode ( $dataArray , true));
 
         console.log(dataArray.lebels);
-    var ctx = document.getElementById('doughnutChart');
+    var ctx = document.getElementById('polarAreaChart');
     var myChart = new Chart(ctx, {
-        type: 'pie',
+        type: 'polarArea',
         data: {
             labels: dataArray.lebels,
             datasets: [{
@@ -32,16 +32,7 @@
                 ],
                 borderWidth: 1
             }]
-        }//,
-        // options: {
-        //     scales: {
-        //         yAxes: [{
-        //             ticks: {
-        //                 beginAtZero: true
-        //             }
-        //         }]
-        //     }
-        // }
+        }
     });
     </script>
 

@@ -1,14 +1,14 @@
 <div>
 
 
-    <canvas id="doughnutChart"></canvas>
+    <canvas id="pieChart"></canvas>
     <script>
         var dataArray= @json(json_decode ( $dataArray , true));
 
         console.log(dataArray.lebels);
-    var ctx = document.getElementById('doughnutChart');
+    var ctx = document.getElementById('pieChart');
     var myChart = new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
             labels: dataArray.lebels,
             datasets: [{
