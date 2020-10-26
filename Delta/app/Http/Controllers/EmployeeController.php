@@ -6,6 +6,7 @@ use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
 use App\Models\User;
 use App\Models\designation;
+use App\Models\order;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -93,9 +94,17 @@ class EmployeeController extends Controller
      * @param  \App\Models\employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(employee $employee)
+    public function show(employee $employee , Request $request)
     {
-        //
+        $monthStart= Carbon::now()->format('Y-m-01 00:00:00');
+        $monthEnd= Carbon:: now()->format('Y-m-31 23:59:59');
+        if(!is_null($request->month)){
+            $monthStart= Carbon:: parse($request->month)->format('Y-m-01 00:00:00');
+            $monthEnd= Carbon:: parse($request->month)->format('Y-m-31 23:59:59');
+        }
+       $month = Carbon:: parse($monthStart)->format('F');
+        $orders= order::where('user_id', $employee->user_id )->where('created_at','<=',$monthEnd)->where('created_at','>=',$monthStart)->get(); 
+        return view('employees.show',compact('employee','orders','month'));
     }
 
     /**
