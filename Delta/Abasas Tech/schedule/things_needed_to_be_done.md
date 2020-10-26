@@ -1,8 +1,4 @@
-
-- data table dropdown must have first option as 'select an Option' with null value.
-
 - number validation , number must be greatr than or equal to zero.
-- barcode of memo and search by scan 
 - in product barcode print button.
 - drop product auth
 - bar code print page

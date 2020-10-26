@@ -30,11 +30,9 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Brand</th>
-                            <th>Sell Type</th>
                             <th>Cost</th>
                             <th> Price</th>
                             <th> Stock</th>
-                            <th> Stock Alert</th>
                             <th> tax (%)</th>
                             <th> warrenty</th>
                             <th>Action</th>
@@ -46,11 +44,9 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Brand</th>
-                            <th>Sell Type</th>
                             <th>Cost</th>
                             <th> Price</th>
                             <th> Stock</th>
-                            <th> Stock Alert</th>
                             <th> tax (%)</th>
                             <th> warrenty</th>
                             <th>Action</th>
@@ -66,18 +62,16 @@
                             <td id="viewName">{{$product->name}}</td>
                             <td id="viewSell">{{$product->category->name}}</td>
                             <td id="viewProductTypeId">{{$product->brand->name}}</td>
-                            <td id="viewProductTypeId">{{$product->type->name}}</td>
                             <td id="viewCost">{{$product->cost_per_unit}}</td>
                             <td id="viewCost">{{$product->price_per_unit}}</td>
                             <td id="viewLowLimit">{{$product->stock}}</td>
-                            <td id="viewLowLimit">{{$product->stock_alert}}</td>
                             <td id="viewLowLimit">{{$product->tax}} ({{ $product->taxType->name }})</td>
                             <td id="viewLowLimit">{{$product->warrenty->name}}</td>
 
 
 
                             <td class="align-middle">
-                                <button type="button" title="Edit Product" class="btn btn-success m-1" id="edit-product-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-edit" aria-hidden="false"> </i></button>
+                                <button type="button" title="Edit Product" class="btn btn-success btn-sm" id="edit-product-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
                                 <form method="POST" action="{{ route('products.destroy',  $product->id )}} " id="delete-form-{{ $product->id }}" style="display:none; ">
@@ -89,7 +83,7 @@
 
 
 
-                                <button title="Delete Product" class="btn btn-danger m-1 " onclick="if(confirm('are you sure to delete this')){
+                                <button title="Delete Product" class="btn btn-danger  btn-sm" onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $product->id }}').submit();
 			}
 			else{
@@ -101,7 +95,8 @@
                                     </i>
                                 </button>
 
-                                <button type="button" class="btn btn-info m-1" title="Print Barcode" id="barcode-print-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-print" aria-hidden="false"> </i></button>
+                                <button type="button" class="btn btn-info btn-sm" title="Print Barcode" id="barcode-print-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-print" aria-hidden="false"> </i></button>
+                                <a href="{{ route('products.show',$id) }}"><button type="button" class="btn btn-primary btn-sm" title="View product" id="product-view-button" > <i class="fa fa-eye" aria-hidden="false"> </i></button></a>
 
 
                             </td>

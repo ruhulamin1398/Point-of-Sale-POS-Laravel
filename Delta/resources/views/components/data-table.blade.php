@@ -174,7 +174,7 @@
 
 
                     <td class="align-middle">
-                        <button title="Edit" type="button" class="dataEditItemClass btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
+                        <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
                                 class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
@@ -187,7 +187,7 @@
 
 
 
-                        <button title="Delete" class="dataDeleteItemClass btn btn-danger" onclick="if(confirm('are you sure to delete this')){
+                        <button title="Delete" class="dataDeleteItemClass btn btn-danger btn-sm" onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $item->id }}').submit();
 			}
 			else{
@@ -203,7 +203,7 @@
                          $allowedTables = array("categories", "brands", "employees", "customers", "suppliers");   
                         @endphp
                         @if (in_array($routes['create']['link'], $allowedTables))
-                        <a href="{{ route($routes['create']['link'].'.show',$itemId) }}"> <button title="View" type="button" class="dataEditItemClass btn btn-info" id="data-show-button" > <i
+                        <a href="{{ route($routes['create']['link'].'.show',$itemId) }}"> <button title="View" type="button" class="dataEditItemClass btn btn-info btn-sm" id="data-show-button" > <i
                             class="fa fa-eye text-white" aria-hidden="false"> </i></button></a>
                             
                         @endif
