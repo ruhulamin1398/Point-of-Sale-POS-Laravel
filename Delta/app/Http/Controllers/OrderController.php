@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\calculationAnalysisDaily;
 use App\Models\calculationAnalysisMonthly;
 use App\Models\calculationAnalysisYearly;
+use App\Models\customer;
 use App\Models\employeeAnalysisDaily;
 use App\Models\employeeAnalysisMonthly;
 use App\Models\employeeAnalysisYearly;
@@ -80,8 +81,10 @@ class OrderController extends Controller
         $order->total=$request->order['total'];
         
         $order->save();
-        // return $order;
-        $employee_id =$order->user->employee->id;
+        $customer = customer::find($order->customer_id);
+        $customer->due += $order->due;
+        $customer->save();
+        
         $cost=0;
         $profit=0;
         $totaltax = 0;

@@ -4,16 +4,17 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class chart.lineChart extends Component
+class lineChart extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public $dataArray;
+    public function __construct($dataArray)
     {
-        //
+        $this->dataArray= $dataArray;
     }
 
     /**
@@ -23,6 +24,6 @@ class chart.lineChart extends Component
      */
     public function render()
     {
-        return view('components.chart.line-chart');
+        return view('components.line-chart');
     }
 }

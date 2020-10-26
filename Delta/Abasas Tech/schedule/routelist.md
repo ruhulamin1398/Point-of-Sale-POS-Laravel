@@ -50,6 +50,10 @@ for all monthly salary view
 ```
 For all employee view and create
 ```
+- employees/{id}
+```
+For employee details and sell lists
+```
 - designations
 ```
 For all designation view and create
