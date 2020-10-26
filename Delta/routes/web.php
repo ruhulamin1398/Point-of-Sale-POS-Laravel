@@ -79,7 +79,7 @@ Route::resource('bar_code',BarCodeController::class);
 
 Route::resource('warrenty',WarrentyController::class);
 Route::resource('drop_products',DropProductController::class);
-Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ]); 
+Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ])->name('stock_alert');
 
 //Employees
 Route::resource('employees',EmployeeController::class);
@@ -91,7 +91,7 @@ Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
 Route::resource('employee_payments',EmployeePaymentController::class);
 Route::resource('employee_salaries',EmployeeSalaryController::class);
 
-// Duties
+// Duties  
 Route::resource('duty_status',DutyStatusController::class);
 Route::resource('employee_duties',EmployeeDutyController::class);
 Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);

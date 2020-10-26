@@ -31,3 +31,28 @@
 
 - serial in page of products
 
+---------------------------------------
+- Data Table Error {
+    - duty_status
+    - expense_monthly
+    - return_product
+    -
+    
+ }
+- Not Showing Edit and Delete button in Duty_status table
+
+-  page  not showing {
+    - categories
+    - product_type
+    - units
+    - customer-rating
+    - sell_type
+}
+
+- sidebar {
+
+    - product-> (product Analaysis)
+    - পণ্য বিক্রয় 
+    - পণ্য ক্রয়
+    
+}
