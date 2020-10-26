@@ -81,9 +81,17 @@ for show all Products
 ```
 for View and create Categories
 ```
+- categories/{id}
+```
+for View all products of that Category
+```
 - brands
 ```
 for create and view brands
+```
+- brands/{id}
+```
+for view all product of that brand
 ```
 - product_types
 ```
