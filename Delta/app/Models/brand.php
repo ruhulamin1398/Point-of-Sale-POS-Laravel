@@ -20,6 +20,6 @@ class brand extends Model
 
 
     public function abasas(){
-        //
+        $this->products_count = $this->product->count();
     }   
 }

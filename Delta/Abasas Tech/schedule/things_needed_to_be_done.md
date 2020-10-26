@@ -6,7 +6,7 @@
 - in product barcode print button.
 - drop product auth
 - bar code print page
-- every modal must have withTrashed 
+- every modal must have withTrashed <!-- primarly done -->
 - number validation for positive
 - in setting every required items update must be 2.
 - employee phone validation error. 
@@ -50,3 +50,6 @@
     - পণ্য ক্রয়
     
 }
+
+
+- view button (employee, customer , supplier, category , brand ,designation)
