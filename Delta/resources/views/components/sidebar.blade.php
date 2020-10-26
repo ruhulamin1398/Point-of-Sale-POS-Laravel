@@ -31,6 +31,7 @@
                 <a class="collapse-item" href="{{ route('categories.index') }}">{{__('translate.Category')}}</a>
                 <a class="collapse-item" href="{{ route('product_types.index') }}">{{__('translate.Product Types')}}</a>
                 <a class="collapse-item" href="{{ route('return_products.index') }}">{{__('translate.Return Product')}}</a>
+                <a class="collapse-item" href="{{ route('return_products.index') }}">{{__('translate.Warrenty')}}</a>
                 <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
                 <a class="collapse-item" href="{{ route('units.index') }}">{{__('translate.Units')}}</a>
             </div>
@@ -118,10 +119,25 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('employees.index') }}"> {{__('translate.All Employee')}}</a>
                 <a class="collapse-item" href="{{ route('employee_salaries.index') }}">{{__('translate.Salary')}}</a>
+                <a class="collapse-item" href="{{ route('employee_payments.index') }}">{{__('translate.Payments')}}</a>
+                <a class="collapse-item" href="{{ route('employee_payment_types.index') }}">{{__('translate.Payment Type')}}</a>
                 <a class="collapse-item" href="{{ route('employee_duties.index') }}">{{__('translate.Duty')}}</a>
+                <a class="collapse-item" href="{{ route('designations.index') }}">{{__('translate.Designations')}}</a>
 
             </div>
         </div>
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider m-1 p-0 ">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed  p-3 " href="{{ route('payment_systems.index') }}"   aria-expanded="true" aria-controls="collapseStaff">
+            <i class="fas fa-dollar-sign"></i>
+            <span> {{__('translate.Payement Systems')}} </span>
+        </a>
+
     </li>
 
 
