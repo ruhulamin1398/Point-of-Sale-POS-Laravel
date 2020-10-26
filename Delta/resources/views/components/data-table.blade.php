@@ -636,7 +636,7 @@ function insertInputFormData(){
                     html += '<div class="form-group col-md-4 col-sm-12  p-4">';
                     html += '<label class="col-form-label" >  {{ __("translate.".$field["title"] ) }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'  </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
-                        '"  required >';
+                        '"  required > <option disabled selected value> -- select an option -- </option>';
 
 
                     $.each(dropDownDataArray, function (key) {

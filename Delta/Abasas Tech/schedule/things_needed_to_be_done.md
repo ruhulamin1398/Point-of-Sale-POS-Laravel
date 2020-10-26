@@ -1,4 +1,4 @@
-- Data tables create section must be beautify. like product create
+
 - data table dropdown must have first option as 'select an Option' with null value.
 
 - number validation , number must be greatr than or equal to zero.
@@ -12,9 +12,7 @@
 - employee phone validation error. 
 - update validation needs to be updated.
 - cursor grab and grabing 
-- phone is not updateable in customer 
 - Employee delete thinking needed . 
-- drop product and return product date in datatable;
 - notification on update and delete . 
 - non createable and non updateable page createLabe and updateLabel hide .
 - product create star in required .
@@ -30,6 +28,7 @@
 - default customer at customer
 
 - serial in page of products
+- price -> মূল্য 
 
 ---------------------------------------
 

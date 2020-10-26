@@ -26,5 +26,6 @@ class returnProduct extends Model
         $this->product = $this->products->name;
         $this->customer = $this->customer->name;
         $this->user = $this->user->name;
+        $this->time = $this->created_at->format('d M, Y h:i:a');
     }   
 }

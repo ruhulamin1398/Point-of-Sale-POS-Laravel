@@ -68,7 +68,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {  
  
-     //  return $request;
+       return $request;
        $product = new product;
        $product->name=$request->name;
        $product->stock_alert=$request->stock_alert;
