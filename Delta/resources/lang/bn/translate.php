@@ -166,6 +166,7 @@ return[
 'Duty'=> 'ডিউটি', 
 'Expense Type'=> 'খরচের ধরন',
 'Search'=> 'সার্চ', 
+'Employee Payment List'=>'কর্মচারীর পেমেন্ট লিস্ট', 
 
 
 
