@@ -86,7 +86,7 @@ Route::resource('employees',EmployeeController::class);
 Route::resource('designations',DesignationController::class);
 
 
-// Payments
+// Payments     
 Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
 Route::resource('employee_payments',EmployeePaymentController::class);
 Route::resource('employee_salaries',EmployeeSalaryController::class);
