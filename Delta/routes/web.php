@@ -154,6 +154,7 @@ Route::get("chart",function(){
         'data' =>$data,
 
     ];
+    
     $dataArray= json_encode($dataArray);
     
     return view('test.chart',compact('dataArray'));

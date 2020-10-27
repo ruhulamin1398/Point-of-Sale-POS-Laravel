@@ -51,6 +51,7 @@ return[
 // Table Are Start from here
 
 'Brand List'=>'ব্র্যান্ড লিস্ট',
+'Brands'=>'ব্র্যান্ড',
 'unit List'=>'ইউনিট লিস্ট',
 'Edit Unit'=>'ইউনিট সংশোধন',
 'Product Type'=>'পণ্যের ধরন',
@@ -150,7 +151,7 @@ return[
 'Expense Type List'=> 'খরচের ধরণ', 
 'Expense Monthly List'=> 'খরচ (মাসিক)',  
 'Edit Expense Monthly List'=> 'খরচ (মাসিক) ভূল সংশোধন',  
-'Price'=> 'দাম',  
+'Price'=> 'মুল্য',   
 'Profit'=> 'লাভ', 
 'Returned Product List'=> 'পণ্য ফেরতের লিস্ট', 
 'Edit Returned Product List'=> 'পণ্য ফেরতের ভূল সংশোধন', 
@@ -180,6 +181,7 @@ return[
 'Payment Type'=>'পেমেন্টের ধরন',
 ''=>'',
 ''=>'',
+''=>'',  
 ''=>'',
 ''=>'',
 ''=>'',
@@ -194,6 +196,6 @@ return[
 ''=>'',
 ''=>'',
 ''=>'',
-''=>'',
-
+ 
 ];
+
