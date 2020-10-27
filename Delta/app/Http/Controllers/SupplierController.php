@@ -97,10 +97,20 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      * @param  \App\Models\supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(SupplierRequest $request, supplier $supplier)
+    public function update(Request $request, supplier $supplier)
     {
+        if(!is_null($request->phone))
+        {
+            $length= strlen($request->phone);
+            if($length != 11){
+                return Redirect::back()->withErrors(['Enter a valid phone' ]);
+            }
+            $supplierTest = supplier::where('phone',$request->phone)->first();
+            if(!is_null($supplierTest) && $supplierTest->id != $request->id){
+                return Redirect::back()->withErrors(['Phone is already Taken']);
+            }
+        } 
 
-         
         $supplier->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
 

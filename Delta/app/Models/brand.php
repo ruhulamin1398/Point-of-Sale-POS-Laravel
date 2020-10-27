@@ -14,12 +14,12 @@ class brand extends Model
     protected $guarded = [];
 
     
-    public function product(){
+    public function products(){
         return $this->hasMany('App\Models\product');
     }
 
 
     public function abasas(){
-        //
+        $this->products_count = $this->products->count();
     }   
 }

@@ -13,16 +13,16 @@ class employeePayment extends Model
     protected $guarded = [];
 
     public function employees(){
-        return $this->belongsTo('App\Models\employee','employee_id','id');
+        return $this->belongsTo('App\Models\employee','employee_id','id')->withTrashed();
     }
     
     public function paymentType(){
-        return $this->belongsTo('App\Models\employeePaymentType','employee_payment_type_id','id');
+        return $this->belongsTo('App\Models\employeePaymentType','employee_payment_type_id','id')->withTrashed();
     }
     
 
     public function salaryStatus(){
-        return $this->belongsTo('App\Models\salaryStatus','salary_status_id','id');
+        return $this->belongsTo('App\Models\salaryStatus','salary_status_id','id')->withTrashed();
     }
     
 

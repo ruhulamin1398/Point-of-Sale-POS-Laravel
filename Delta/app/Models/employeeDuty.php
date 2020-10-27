@@ -11,12 +11,12 @@ class employeeDuty extends Model
     use SoftDeletes;
 
     public function dutyStatus(){
-        return $this->belongsTo('App\Models\dutyStatus','duty_status_id','id');
+        return $this->belongsTo('App\Models\dutyStatus','duty_status_id','id')->withTrashed();
     }
 
     
       public function employee(){
-        return $this->belongsTo('App\Models\employee');
+        return $this->belongsTo('App\Models\employee')->withTrashed();
     }
 
 

@@ -11,7 +11,7 @@ class expenseMonthly extends Model
     protected $guarded = [];
 
     public function employee(){
-        return $this->belongsTo('App\Models\employee','employee_id','id');
+        return $this->belongsTo('App\Models\employee','employee_id','id')->withTrashed();
     }
 
 

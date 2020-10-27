@@ -9,6 +9,7 @@ use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use LengthException;
 
 class CustomerController extends Controller
 {
@@ -95,10 +96,19 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, customer $customer)
+    public function update(Request $request, customer $customer)
     {
-        
-        
+        if(!is_null($request->phone))
+        {
+            $length= strlen($request->phone);
+            if($length != 11){
+                return Redirect::back()->withErrors(['Enter a valid phone' ]);
+            }
+            $customers = customer::where('phone',$request->phone)->first();
+            if(!is_null($customers) && $customers->id != $request->id){
+                return Redirect::back()->withErrors(['Phone is already Taken']);
+            }
+        }   
         $customer->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
 

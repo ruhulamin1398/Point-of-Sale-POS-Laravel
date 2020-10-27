@@ -11,9 +11,9 @@ class purchase extends Model
     use HasFactory;
     use SoftDeletes;
     public function user(){
-        return $this->belongsTo('App\Models\User','user_id','id');
+        return $this->belongsTo('App\Models\User','user_id','id')->withTrashed();
     }
     public function supplier(){
-        return $this->belongsTo('App\Models\supplier','supplier_id','id');
+        return $this->belongsTo('App\Models\supplier','supplier_id','id')->withTrashed();
     }
 }
