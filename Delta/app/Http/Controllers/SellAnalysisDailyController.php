@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\sellAnalysisDaily;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SellAnalysisDailyController extends Controller
@@ -14,7 +15,26 @@ class SellAnalysisDailyController extends Controller
      */
     public function index()
     {
-        //
+    $labels = array();
+    $data= array();
+    $monthStart = Carbon:: now()->format('Y-m-01');
+    $monthEnd = Carbon:: now()->format('Y-m-31');
+    $sellDailys = sellAnalysisDaily::where('date','>=',$monthStart)->where('date','<=',$monthEnd)->get();
+    foreach($sellDailys as $sellDaily){
+        array_push($labels,$sellDaily->date);
+        array_push($data,$sellDaily->count);
+    }
+   // array_push($labels,'Jeans');
+    $dataArray= [
+        'label'=>"Sell Count",
+        "lebels" =>$labels,
+        'data' =>$data,
+
+    ];
+    $dataArray= json_encode($dataArray);
+    
+
+        return view('analysis.sell',compact('dataArray'));
     }
 
     /**

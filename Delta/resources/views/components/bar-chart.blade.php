@@ -3,9 +3,13 @@
 
     <canvas id="barChart"></canvas>
     <script>
-        var dataArray= @json(json_decode ( $dataArray , true));
-
-        console.log(dataArray.lebels);
+    var dataArray= @json(json_decode ( $dataArray , true));
+    var bgColor=  new Array();
+    var bdColor=  new Array();
+    for(var i=0;i<dataArray.lebels.length;i++){
+        bgColor.push("#" + Math.floor(Math.random()*16777215).toString(16));
+        bdColor.push("#" + Math.floor(Math.random()*16777215).toString(16));
+    }
     var ctx = document.getElementById('barChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -14,24 +18,11 @@
             datasets: [{
                 label: dataArray.label,
                 data: dataArray.data,
-                backgroundColor: [
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16)
-                ],
-                borderColor: [
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16)
-                ],
+                backgroundColor: bgColor,
+                borderColor: bdColor,
                 borderWidth: 1
-            }]
+            }
+            ]
         },
         options: {
             scales: {
