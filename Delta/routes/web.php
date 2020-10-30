@@ -29,6 +29,7 @@ use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
+use App\Http\Controllers\SellAnalysisDailyController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -100,6 +101,9 @@ Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonth
 Route::resource('expense',ExpenseController::class);
 Route::resource('expense_type',ExpenseTypeController::class);
 Route::resource('expense_monthly',ExpenseMonthlyController::class);
+
+// analysis
+Route::resource('sell_analysis',SellAnalysisDailyController::class);
 
 
 

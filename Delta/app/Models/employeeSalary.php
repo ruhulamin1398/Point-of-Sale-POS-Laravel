@@ -15,11 +15,11 @@ class employeeSalary extends Model
 
 public  function employee()
 {
-   return  $this->belongsTo('App\Models\employee','employee_id','id');
+   return  $this->belongsTo('App\Models\employee','employee_id','id')->withTrashed();
 }
 public  function salaryStatus()
 {
-   return  $this->belongsTo('App\Models\salaryStatus','salary_status_id','id');
+   return  $this->belongsTo('App\Models\salaryStatus','salary_status_id','id')->withTrashed();
 }
  
     public function abasas(){

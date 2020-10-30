@@ -15,14 +15,14 @@ class employee extends Model
     public function designation()
     {
         
-     return $this->belongsTo('App\Models\designation','designation_id','id');
+     return $this->belongsTo('App\Models\designation','designation_id','id')->withTrashed();
 
     }
 
     public function userName()
     {
         
-     return $this->belongsTo('App\Models\user','user_id','id');
+     return $this->belongsTo('App\Models\user','user_id','id')->withTrashed();
 
     }
     

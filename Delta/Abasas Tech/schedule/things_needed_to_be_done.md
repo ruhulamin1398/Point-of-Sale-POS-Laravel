@@ -1,20 +1,14 @@
-- Data tables create section must be beautify. like product create
-- data table dropdown must have first option as 'select an Option' with null value.
-
 - number validation , number must be greatr than or equal to zero.
-- barcode of memo and search by scan 
 - in product barcode print button.
 - drop product auth
 - bar code print page
-- every modal must have withTrashed 
+- every modal must have withTrashed <!-- primarly done -->
 - number validation for positive
 - in setting every required items update must be 2.
 - employee phone validation error. 
 - update validation needs to be updated.
 - cursor grab and grabing 
-- phone is not updateable in customer 
 - Employee delete thinking needed . 
-- drop product and return product date in datatable;
 - notification on update and delete . 
 - non createable and non updateable page createLabe and updateLabel hide .
 - product create star in required .
@@ -27,18 +21,14 @@
 - discount management page 
 - purchase page product details tax + warrenty  
 - customer number check in submit order page
-- default customer at customer
-
 - serial in page of products
+- price -> মূল্য 
+- notifications can be de by dataTable
+- cash management system 
+- 
 
 ---------------------------------------
-- Data Table Error {
-    - duty_status
-    - expense_monthly
-    - return_product
-    -
-    
- }
+
 - Not Showing Edit and Delete button in Duty_status table
 
 -  page  not showing {

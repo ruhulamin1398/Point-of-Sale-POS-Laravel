@@ -21,7 +21,7 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li>{{ __('translate.'.$error) }}</li>
             @endforeach
         </ul>
     </div>
@@ -32,7 +32,7 @@
     @if(is_array(session('success')))
         <ul>
             @foreach (session('success') as $message)
-                <li>{{ $message }}</li>
+                <li>{{  __('translate.'.$message) }}</li>
             @endforeach
         </ul>
     @else
@@ -174,7 +174,7 @@
 
 
                     <td class="align-middle">
-                        <button type="button" class="dataEditItemClass btn btn-success" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
+                        <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm" id="data-edit-button" data-item-id={{$itemId}}   data-item-index={{$itr-2}}> <i
                                 class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
@@ -187,7 +187,7 @@
 
 
 
-                        <button class="dataDeleteItemClass btn btn-danger" onclick="if(confirm('are you sure to delete this')){
+                        <button title="Delete" class="dataDeleteItemClass btn btn-danger btn-sm" onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $item->id }}').submit();
 			}
 			else{
@@ -198,6 +198,15 @@
 
                             </i>
                         </button>
+
+                        @php
+                         $allowedTables = array("categories", "brands", "employees", "customers", "suppliers");   
+                        @endphp
+                        @if (in_array($routes['create']['link'], $allowedTables))
+                        <a href="{{ route($routes['create']['link'].'.show',$itemId) }}"> <button title="View" type="button" class="dataEditItemClass btn btn-info btn-sm" id="data-show-button" > <i
+                            class="fa fa-eye text-white" aria-hidden="false"> </i></button></a>
+                            
+                        @endif
 
 
 
@@ -624,10 +633,10 @@ function insertInputFormData(){
 
                     html = "";
 
-                    html += '<div class="form-group col-md-3 col-sm-12  p-4">';
+                    html += '<div class="form-group col-md-4 col-sm-12  p-4">';
                     html += '<label class="col-form-label" >  {{ __("translate.".$field["title"] ) }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'  </label>';
                     html += '<select class="form-control form-control" name="' + databaseName +
-                        '"  required >';
+                        '"  required > <option disabled selected value> -- select an option -- </option>';
 
 
                     $.each(dropDownDataArray, function (key) {
@@ -661,8 +670,8 @@ function insertInputFormData(){
 // // </div>
 
                     html = "";
-                    html += '<div class="col-md-3 col-sm-12  p-4">';
-                    html += '<span class="text-dark pl-4"> {{ __("translate.".$field["title"])  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'   </span>';
+                    html += '<div class="col-md-4 col-sm-12  p-4">';
+                    html += '<label class="text-dark pl-4"> {{ __("translate.".$field["title"])  }} '+@if($require == 1)'<span style="color: red"> *</span>'@else "" @endif +'   </label>';
                   
                     html += '<input type="'+ inputType+'"  '+@if($field["input_type"]=="number")' step="any" '@else "" @endif +'  name="' + database_name + '" class="form-control" '+@if($require == 1) 'required' @endif +'>';
                     html += '</div>';

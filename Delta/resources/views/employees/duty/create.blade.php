@@ -9,7 +9,7 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li>{{ __('translate.'.$error) }}</li>
             @endforeach
         </ul>
     </div>
@@ -20,7 +20,7 @@
     @if(is_array(session('success')))
         <ul>
             @foreach (session('success') as $message)
-                <li>{{ $message }}</li>
+                <li>{{ __('translate.'.$message) }}</li>
             @endforeach
         </ul>
     @else
@@ -39,7 +39,7 @@
 
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
-                <a class="navbar-brand">Add Duty</a>
+                <a class="navbar-brand">{{ __('translate.Add Duty') }}</a>
 
             </nav>
         </div>
@@ -52,7 +52,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-4 col-sm-12  p-2">
-                        <label for="catagory_id">Select Employee Name</label>
+                        <label for="catagory_id">{{ __('translate.Select Employee Nam') }}e</label>
                         <select class="form-control form-control" value="" name="employee_id" id="employeeId" required>
                             @foreach ($employees as $employee)
                             @if($loop->first)
@@ -67,7 +67,7 @@
 
 
                     <div class="form-group col-md-4 col-sm-12  p-2">
-                        <label for="date">Date</label>
+                        <label for="date">{{ __('translate.Date') }}</label>
 
 
                         <input type="date" name="date" id="date" class="form-control" min='0' placeholder="date"
@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12  p-2">
-                        <label for="catagory_id">Select Duty Status</label>
+                        <label for="catagory_id">{{ __('translate.Select Duty Status') }}</label>
                         <select class="form-control form-control" name="duty_status_id" id="dutyStatusId" required>
                             @foreach ($dutyStatuses as $dutyStatus)
                             @if($loop->first)
@@ -92,7 +92,7 @@
 
                     <div class="form-group col-md-4 col-sm-12  p-2" id="divEnterTime">
 
-                        <label for="enter_time">Enter Time</label>
+                        <label for="enter_time">{{ __('translate.Enter Time') }}</label>
 
 
                         <input type="datetime-local" name="enter_time" id="enterTime" class="form-control" min='0'
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12  p-2" id="divExitTime">
-                        <label for="exit_time">Exit Time</label>
+                        <label for="exit_time">{{ __('translate.Exit Time') }}</label>
 
 
                         <input type="datetime-local" name="exit_time" id="exitTime" class="form-control" min='0'
@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12  p-2">
-                        <label for="comment">Comment</label>
+                        <label for="comment">{{ __('translate.Comment') }}</label>
 
 
                         <input type="text" name="comment" id="comment" class="form-control" min='0'
@@ -127,7 +127,7 @@
 
 
                 </div>
-                <button type="submit" id="inputDutyButton" class="btn bg-abasas-dark"> Submit</button>
+                <button type="submit" id="inputDutyButton" class="btn bg-abasas-dark">{{ __('translate.Submit') }} </button>
 
             </form>
 
@@ -137,7 +137,7 @@
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar  ">
 
-            <div class="navbar-brand">Employee Duty (Today) </div>
+            <div class="navbar-brand">{{ __('translate.Employee Duty') }} ({{ __('translate.Today') }}) </div>
 
 
 
@@ -152,20 +152,20 @@
             <thead class="bg-abasas-dark">
                 <tr>
                     <th>#</th>
-                    <th> Name</th>
-                    <th> Duty Status</th>
-                    <th> Enter Time</th>
-                    <th> Exit Time</th>
+                    <th> {{ __('translate.Name') }}</th>
+                    <th> {{ __('translate.Duty Status') }}</th>
+                    <th> {{ __('translate.Enter Time') }}</th>
+                    <th> {{ __('translate.Exit Time') }}</th>
                     {{-- <th> Action</th> --}}
                 </tr>
             </thead>
             <tfoot class="bg-abasas-dark">
                 <tr>
                     <th>#</th>
-                    <th> Name</th>
-                    <th> Duty Status</th>
-                    <th> Enter Time</th>
-                    <th> Exit Time</th>
+                    <th> {{ __('translate.Name') }}</th>
+                    <th> {{ __('translate.Duty Status') }}</th>
+                    <th> {{ __('translate.Enter Time') }}</th>
+                    <th> {{ __('translate.Exit Time') }}</th>
                     {{-- <th> Action</th> --}}
                 </tr>
             </tfoot>

@@ -11,9 +11,9 @@ class order extends Model
     use HasFactory;
     use SoftDeletes;
     public function user(){
-        return $this->belongsTo('App\Models\User','user_id','id');
+        return $this->belongsTo('App\Models\User','user_id','id')->withTrashed();
     }
     public function customer(){
-        return $this->belongsTo('App\Models\customer','customer_id','id');
+        return $this->belongsTo('App\Models\customer','customer_id','id')->withTrashed();
     }
 }

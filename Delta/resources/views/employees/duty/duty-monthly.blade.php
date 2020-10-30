@@ -11,7 +11,7 @@
         <div class="card-header py-3 bg-abasas-dark">
 
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light"> Monthly Duties</a>
+                <a class="navbar-brand text-light"> {{ __('translate.Monthly Duties') }} </a>
                 <div>
                    
                 
@@ -23,7 +23,7 @@
 
                             <div class="col-auto">
                         
-                            Select A Month
+                                {{ __('translate.Select A Month') }} 
                             </div>
                             <div class="col-auto">
                                 <input type="month" name="month"  class="form-control mb-2" id="monthFormInput" required>
@@ -32,7 +32,7 @@
 
 
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mt-3"  >Submit</button>
+                                <button type="submit" class="btn btn-primary mt-3"  >{{ __('translate.Submit') }}</button>
                             </div>
 
 
@@ -56,10 +56,10 @@
                     <thead class="bg-abasas-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">Month </th>
-                            <th scope="col"> Present</th>
-                            <th scope="col"> Absent</th>
+                            <th scope="col">{{ __('translate.Employee Name') }}</th>
+                            <th scope="col">{{ __('translate.Month') }} </th>
+                            <th scope="col">{{ __('translate.Present') }}</th>
+                            <th scope="col">{{ __('translate.Absent') }}</th>
 
 
                         </tr>
@@ -67,10 +67,10 @@
                     <tfoot class="bg-abasas-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">Month</th>
-                            <th scope="col"> Present</th>
-                            <th scope="col"> Absent</th>
+                            <th scope="col">{{ __('translate.Employee Name') }}</th>
+                            <th scope="col">{{ __('translate.Month') }} </th>
+                            <th scope="col">{{ __('translate.Present') }}</th>
+                            <th scope="col">{{ __('translate.Absent') }}</th>
 
 
                         </tr>
