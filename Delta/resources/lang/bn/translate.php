@@ -181,11 +181,11 @@ return[
 'Payment Type'=>'পেমেন্টের ধরন',
 
 
-        // Error Message Section
+        // Message Section
 
 'Successfully Created'=>'সফলভাবে তৈরি হয়েছে',
-''=>'',
-''=>'',  
+'Successfully Updated'=>'সফলভাবে আপডেট হয়েছে',
+'Brand Deleted'=>'ব্র্যান্ড ডিলিট হয়েছে',   
 ''=>'',
 ''=>'',
 ''=>'',
