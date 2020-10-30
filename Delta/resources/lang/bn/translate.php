@@ -179,7 +179,11 @@ return[
 'Designations'=>'পদবি',
 'Payments'=>'পেমেন্ট',
 'Payment Type'=>'পেমেন্টের ধরন',
-''=>'',
+
+
+        // Error Message Section
+
+'Successfully Created'=>'সফলভাবে তৈরি হয়েছে',
 ''=>'',
 ''=>'',  
 ''=>'',
