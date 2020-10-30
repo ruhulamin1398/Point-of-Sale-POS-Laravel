@@ -11,7 +11,7 @@
         <div class="card-header py-3 bg-abasas-dark">
 
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light"> Weekly Duties</a>
+                <a class="navbar-brand text-light">{{ __('translate.Weekly Duties') }} </a>
                 <div>
                    
                 
@@ -23,7 +23,7 @@
 
                             <div class="col-auto">
                         
-                            Select A Week
+                                {{ __('translate.Select A Week') }}
                             </div>
                             <div class="col-auto">
                                 <input type="week" name="week"  class="form-control mb-2" id="inlineFormInput" required>
@@ -32,7 +32,7 @@
 
 
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mt-3"  >Submit</button>
+                                <button type="submit" class="btn btn-primary mt-3"  >{{ __('translate.Submit') }}</button>
                             </div>
 
 
@@ -56,7 +56,7 @@
                     <thead class="bg-abasas-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col"> Name</th>
+                            <th scope="col"> {{ __('translate.Name') }}</th>
                             @foreach($weekDaysArray as $day)
 
                             <th scope="col">
@@ -71,7 +71,7 @@
                     <tfoot class="bg-abasas-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col"> Name</th>
+                            <th scope="col"> {{ __('translate.Name') }}</th>
                             @foreach($weekDaysArray as $day)
 
                             <th scope="col">

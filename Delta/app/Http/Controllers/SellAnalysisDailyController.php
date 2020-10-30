@@ -21,7 +21,8 @@ class SellAnalysisDailyController extends Controller
     $monthEnd = Carbon:: now()->format('Y-m-31');
     $sellDailys = sellAnalysisDaily::where('date','>=',$monthStart)->where('date','<=',$monthEnd)->get();
     foreach($sellDailys as $sellDaily){
-        array_push($labels,$sellDaily->date);
+        $date = Carbon::parse($sellDaily->date)->format('d M,Y');
+        array_push($labels,$date);
         array_push($data,$sellDaily->count);
     }
    // array_push($labels,'Jeans');
