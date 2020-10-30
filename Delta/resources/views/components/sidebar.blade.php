@@ -86,6 +86,7 @@
     <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
 
+
     <hr class="sidebar-divider m-1 p-0 ">
     <!-- Nav Item - Dashboard -->
     <li class="nav-item  ">
@@ -102,6 +103,12 @@
         <a class="nav-link p-3 " href="{{ route('suppliers.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span> {{__('translate.Supplier')}}</span></a>
+    </li>
+
+    <li class="nav-item  ">
+        <a class="nav-link p-3 " href="{{ route('brands.index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span> {{__('translate.Brands')}}</span></a>
     </li>
 
 
