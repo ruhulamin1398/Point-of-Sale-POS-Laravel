@@ -21,10 +21,11 @@
 - discount management page 
 - purchase page product details tax + warrenty  
 - customer number check in submit order page
-- default customer at customer
-
 - serial in page of products
 - price -> মূল্য 
+- notifications can be de by dataTable
+- cash management system 
+- 
 
 ---------------------------------------
 
@@ -45,6 +46,3 @@
     - পণ্য ক্রয়
     
 }
-
-
-- view button (employee, customer , supplier, category , brand ,designation)

@@ -21,7 +21,7 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li>{{ __('translate.'.$error) }}</li>
             @endforeach
         </ul>
     </div>
@@ -32,7 +32,7 @@
     @if(is_array(session('success')))
         <ul>
             @foreach (session('success') as $message)
-                <li>{{ $message }}</li>
+                <li>{{  __('translate.'.$message) }}</li>
             @endforeach
         </ul>
     @else
