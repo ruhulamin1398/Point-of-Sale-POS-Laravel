@@ -16,16 +16,16 @@
 
                 <div class="card-header py-3 bg-abasas-dark text-light">
                     <nav class="navbar navbar-light">
-                        <a class="navbar-brand">Employee Details</a>
+                        <a class="navbar-brand">{{ __("translate.Employee Details") }}</a>
 
                     </nav>
                 </div>
                 <div class="card-body">
 
-                    <h1> Name : {{$employee->name}}</h1>
-                    <b> Phone : {{$employee->phone}}</b><br>
-                    <b> Designation : {{$employee->designation->name}}</b><br>
-                    <b> Address : {{$employee->address}}</b><br>
+                    <h1> {{ __("translate.Name") }} : {{$employee->name}}</h1>
+                    <b> {{ __("translate.Phone") }} : {{$employee->phone}}</b><br>
+                    <b> {{ __("translate.Designation") }} : {{$employee->designation->name}}</b><br>
+                    <b> {{ __("translate.Address") }} : {{$employee->address}}</b><br>
 
                 </div>
 
@@ -40,19 +40,19 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 bg-abasas-dark text-light">
                     <nav class="navbar navbar-light">
-                      <a class="navbar-brand"> Employee Sell List ( {{ $month }} ) </a>    {{--  {{ $month }} --}}
+                      <a class="navbar-brand"> {{ __("translate.Employee Sell List") }} ( {{ $month }} ) </a>    {{--  {{ $month }} --}}
                         <div>
                             <form method="get">
                                 <div class="form-row align-items-center">
                                     <div class="col-auto">
-                                        Select A Month
+                                        {{ __("translate.Select A Month") }}
                                     </div>
                                     <div class="col-auto">
                                         <input type="month" name="month" class="form-control mb-2" id="inlineFormInput"
                                             required>
                                     </div>
                                     <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                                        <button type="submit" class="btn btn-primary mt-3">{{ __("translate.Submit") }}</button>
                                     </div>
                                 </div>
                             </form>
@@ -67,27 +67,27 @@
 
                                 <tr>
                                     <th>#</th>
-                                    <th>Order ID</th>
-                                    <th>Cuetomer</th>
-                                    <th>Total</th>
-                                    <th>Discount</th>
-                                    <th>Paid Amount</th>
-                                    <th>Due</th>
-                                    <th>Time</th>
-                                    <th> Action</th>
+                                    <th>{{ __("translate.Order ID") }}</th>
+                                    <th>{{ __("translate.Cuetomer") }}</th>
+                                    <th>{{ __("translate.Total") }}</th>
+                                    <th>{{ __("translate.Discount") }}</th>
+                                    <th>{{ __("translate.Paid Amount") }}</th>
+                                    <th>{{ __("translate.Due") }}</th>
+                                    <th>{{ __("translate.Time") }}</th>
+                                    <th>{{ __("translate.Action") }} </th>
                                 </tr>
                             </thead>
                             <tfoot class="bg-abasas-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>Order ID</th>
-                                    <th>Cuetomer</th>
-                                    <th>Total</th>
-                                    <th>Discount</th>
-                                    <th>Paid Amount</th>
-                                    <th>Due</th>
-                                    <th>Time</th>
-                                    <th> Action</th>
+                                    <th>{{ __("translate.Order ID") }}</th>
+                                    <th>{{ __("translate.Cuetomer") }}</th>
+                                    <th>{{ __("translate.Total") }}</th>
+                                    <th>{{ __("translate.Discount") }}</th>
+                                    <th>{{ __("translate.Paid Amount") }}</th>
+                                    <th>{{ __("translate.Due") }}</th>
+                                    <th>{{ __("translate.Time") }}</th>
+                                    <th>{{ __("translate.Action") }} </th>
                                 </tr>
 
                             </tfoot>
