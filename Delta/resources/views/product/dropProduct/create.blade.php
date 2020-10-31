@@ -24,26 +24,26 @@
                     
 
                     <div class="col-12 pl-4 pr-4" style="position: relative;">
-                        <span class="text-dark  pl-2 "> Search</span>
+                        <span class="text-dark  pl-2 ">{{ __("translate.Search") }} </span>
                         <input type="text" name="product_id" id="dropProductInputId" class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
                             autocomplete="off" placeholder="Search by id or name or you can barcode" autofocus required>
                         <div id="productSuggession" class="list-group" id="show-list" style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
                     </div>
 
                     <div class="col-auto p-4">
-                        <span class="text-dark  pl-2"> Product Name</span>
+                        <span class="text-dark  pl-2">{{ __("translate.Product Name") }} </span>
                         <input type="text" name="name" id="dropProductName" size="30" value=""
                             class="form-control  mb-2" readonly required>
                     </div>
                     <div class="col-auto p-4">
 
-                        <span class="text-dark pl-1"> Quantity</span>
+                        <span class="text-dark pl-1"> {{ __("translate.Quantity") }}</span>
                         <input type="number" step="any" name="quantity" id="dropProductQuantity" size="6"  min="1"
                             class="form-control  mb-2  inputMinZero" placeholder="Piece/K.G." required>
                     </div>
                     <div class="col-auto p-4">
 
-                        <span class="text-dark pl-1"> Comment </span>
+                        <span class="text-dark pl-1"> {{ __("translate.Comment") }} </span>
                         <input type="text" name="comment" id="dropProductComment" size="30"  min="0"
                             class="form-control  mb-2 ">
                     </div>
