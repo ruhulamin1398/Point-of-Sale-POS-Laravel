@@ -11,7 +11,7 @@
 
         <div class="card-header py-3  bg-abasas-dark ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">New Employee</a>
+                <a class="navbar-brand text-light">{{ __("translate.New Employee") }}</a>
             </nav>
         </div>
         <div class="card-body">
@@ -21,12 +21,12 @@
 
 
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="name">Name<span style="color: red"> *</span></label>
+                        <label for="name">{{ __("translate.Name") }}<span style="color: red"> *</span></label>
                         <input type="text" name="name" class="form-control mb-2" placeholder="Name" required>
                     </div>
 
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="designation_id">Select Designation<span style="color: red"> *</span></label>
+                        <label for="designation_id">{{ __("translate.Select Designation") }}<span style="color: red"> *</span></label>
                         <select class="form-control form-control" value="1" name="designation_id" id="designation_id" required>
                             <option disabled selected value> -- select an option -- </option>
                             @foreach ($designations as $designation)
@@ -36,45 +36,45 @@
                     </div>
 
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="phone">Phone<span style="color: red"> *</span></label>
+                        <label for="phone">{{ __("translate.Phone") }}<span style="color: red"> *</span></label>
                         <input type="tel" id="phoneInput" name="phone" class="form-control mb-2"  placeholder="Phone"required>
                         <span style="color: red"  id="phoneFieldWarning"> </span>
 
                     </div>
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="address">Address<span style="color: red"> *</span></label>
+                        <label for="address">{{ __("translate.Address") }}<span style="color: red"> *</span></label>
                         <input type="text" name="address" class="form-control mb-2"  placeholder="Address" required>
                     </div>
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="fixed_duty_hour">Fixed Duty (Hour)<span style="color: red"> *</span></label>
+                        <label for="fixed_duty_hour">{{ __("translate.Fixed Duty") }} ({{ __("translate.Hour") }})<span style="color: red"> *</span></label>
                         <input type="number" name="fixed_duty_hour" class="form-control mb-2"  placeholder="Fixed Duty(Hour)" required>
                     </div>
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="salary ">Salary<span style="color: red"> *</span> </label>
+                        <label for="salary ">{{ __("translate.Salary") }}<span style="color: red"> *</span> </label>
                         <input type="number" step="any" name="salary" class="form-control mb-2"placeholder="Salary" required>
                     </div>
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="joining_date">Joining Date</label>
+                        <label for="joining_date">{{ __("translate.Joining Date") }}</label>
                         <input type="date" name="joining_date" class="form-control mb-2">
                     </div>
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="term_of_contract">Term of Contract</label>
+                        <label for="term_of_contract">{{ __("translate.Term of Contract") }}</label>
                         <input type="date" name="term_of_contract" class="form-control mb-2">
                     </div>
                     <div class="col-md-4 col-sm-12  p-4">
-                        <label for="reference ">Reference </label>
+                        <label for="reference ">{{ __("translate.Reference") }} </label>
                         <input type="text" name="reference" class="form-control mb-2"placeholder="Reference">
                     </div>
                     <div class="col-12  p-4 ml-4" id="checkBoxDiv">
                         <input class="form-check-input " name="add_user" type="checkbox" id="userAddCheck" value="1">
-                        <label class="form-check-label" for="userAddCheck">Add User data</label>
+                        <label class="form-check-label" for="userAddCheck">{{ __("translate.Add User data") }}</label>
                     </div>
                     <div id="emptySpace1"class="col-md-4 col-sm-12  p-4" ></div>
                     <div id="emptySpace2"class="col-md-4 col-sm-12  p-4"></div>
                     <div id="emptySpace3"class="col-md-4 col-sm-12  p-4"></div>
 
                     <div class="col-auto ">
-                        <button type="submit" id="employeeSubmit" class="form-control btn bg-abasas-dark ml-4">Submit</button>
+                        <button type="submit" id="employeeSubmit" class="form-control btn bg-abasas-dark ml-4">{{ __("translate.Submit") }}</button>
                     </div>
                    
 
@@ -103,17 +103,17 @@
         var html1 = '', html2= '', html3= '';
         
         html1+='<div class="col-12">';
-        html1+='        <label for="userName">Username<span style="color: red"> *</span></label>';
+        html1+='        <label for="userName">{{ __("translate.Username") }}<span style="color: red"> *</span></label>';
         html1+='        <input type="text" onkeypress="return event.charCode != 32"  id="userNameInput" name="userName" class="form-control mb-2"placeholder="Username" required>';
         html1+=' <span  style="color: red;" id="userNameFieldWarning"></span> </div>';
 
         html2+='<div class="col-12">';
-        html2+='    <label for="email">Email<span style="color: red"> *</span></label>';
+        html2+='    <label for="email">{{ __("translate.Email") }}<span style="color: red"> *</span></label>';
         html2+='    <input type="email" name="email"  id="emailInput" class="form-control mb-2"placeholder="Email" required>';
         html2+='  <span  style="color: red;" id="emailFieldWarning"></span>  </div>';
 
         html3+='<div class="col-12">';
-        html3+='    <label for="password">Password<span style="color: red"> *</span></label><div class="input-group">';
+        html3+='    <label for="password">{{ __("translate.Password") }}<span style="color: red"> *</span></label><div class="input-group">';
         html3+='    <input type="Password" name="password" id="password"class="form-control mb-2 "minlength="6" placeholder="Password"required>';
         html3+='    <div class="p-3"><i class="fa fa-eye" id="togglePassword"></i></div>';
         html3+='</div></div>';
