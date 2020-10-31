@@ -12,7 +12,7 @@
 
         <div class="card-header py-3  bg-abasas-dark ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">New Payment </a>
+                <a class="navbar-brand text-light">{{ __('translate.New Payment') }} </a>
             </nav>
         </div>
         <div class="card-body">
@@ -21,7 +21,7 @@
                 <div class="form-row align-items-center">
 
                     <div class="col-auto pr-4">
-                        <label for="employee_id">Select Employee</label>
+                        <label for="employee_id">{{ __('translate.Select Employee') }}</label>
                         <select class="form-control form-control" value="1" name="employee_id" id="employee_id"
                             required>
 
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="col-auto pr-4">
-                        <label for="employee_payment_type_id">Select Payment Type</label>
+                        <label for="employee_payment_type_id">{{ __('translate.Select Payment Type') }}Select Payment Type</label>
                         <select class="form-control form-control" value="" name="employee_payment_type_id"
                             id="employeePaymentTypeId" required>
                             @foreach ($payment_types as $paymentType)
@@ -53,7 +53,7 @@
 
 
                     <div class="col-auto pr-4" id="employeePaymentStatus">
-                        <label for="employee_payment_type_id"> Payment Status</label>
+                        <label for="employee_payment_type_id">{{ __('translate.Payment Status') }} </label>
                         <select class="form-control form-control" value="" name="salary_status_id" required>
                             @foreach ($salary_status as $status)
                             @if($loop->last)
@@ -67,26 +67,26 @@
 
 
                     <div class="col-auto pr-4">
-                        <label for="amount">Amount</label>
+                        <label for="amount">{{ __('translate.Amount') }}</label>
                         <input type="number" step="any" name="amount" class="form-control mb-2" required>
                     </div>
 
                     <div class="col-auto pr-4">
-                        <label for="month">Select Month</label>
+                        <label for="month">{{ __('translate.Select Month') }}</label>
                         <input type="month" name="month" class="form-control mb-2" required>
                     </div>
 
 
                     <div class="col-auto pr-4">
 
-                        <label for="Comment">Comment</label>
+                        <label for="Comment">{{ __('translate.Comment') }}</label>
                         <textarea class="form-control mb-2" name="Comment" rows="2"></textarea>
                     </div>
 
 
 
                     <div class="col-auto ">
-                        <button type="submit" class="btn bg-abasas-dark mt-3">Submit</button>
+                        <button type="submit" class="btn bg-abasas-dark mt-3">{{ __('translate.Submit') }}</button>
                     </div>
 
                 </div>
@@ -128,7 +128,7 @@
 
 
         //search bar 
-       var html= '<div> <nav class="navbar  "><div class="navbar-brand"> Month : {{ $month }}</div>  <div ><form method="get" ><div class="form-row align-items-center"><div class="col-auto">Select A Month</div> <div class="col-auto"> <input type="month" name="month"  class="form-control mb-2" id="monthFormInput" required>  </div> <div class="col-auto">  <button type="submit" class="btn btn-primary mt-3"  >Submit</button>   </div> </div></form></div></nav></div>';
+       var html= '<div> <nav class="navbar  "><div class="navbar-brand"> {{ __("translate.Month") }} : {{ $month }}</div>  <div ><form method="get" ><div class="form-row align-items-center"><div class="col-auto">{{ __("translate.Select A Month") }}</div> <div class="col-auto"> <input type="month" name="month"  class="form-control mb-2" id="monthFormInput" required>  </div> <div class="col-auto">  <button type="submit" class="btn btn-primary mt-3"  >{{ __("translate.Submit") }}</button>   </div> </div></form></div></nav></div>';
         $('#AddNewFormButtonDiv').parent().parent().append(html);
 
 

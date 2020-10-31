@@ -19,13 +19,13 @@
 
                 <div class="card-header py-3 bg-abasas-dark text-light">
                     <nav class="navbar navbar-light">
-                        <a class="navbar-brand">Category Details</a>
+                        <a class="navbar-brand">{{ __("translate.Category Details") }}</a>
 
                     </nav>
                 </div>
                 <div class="card-body">
-                    <h1> Name : {{$category->name}}</h1>
-                    <b> Description : {{$category->description}}</b><br>
+                    <h1> {{ __("translate.Name") }} : {{$category->name}}</h1>
+                    <b> {{ __("translate.Description") }} : {{$category->description}}</b><br>
                 </div>
 
 
@@ -37,9 +37,9 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 bg-abasas-dark">
                     <nav class="navbar navbar-dark ">
-                        <a class="navbar-brand">Products List</a>
+                        <a class="navbar-brand">{{ __("translate.Products List") }}</a>
                         <a href="{{ route("products.create") }}"> <button class="btn btn-success "
-                                id="create-button">Add Product</button></a>
+                                id="create-button">{{ __("translate.Add Product") }}</button></a>
                     </nav>
                 </div>
                 <div class="card-body">
@@ -50,32 +50,32 @@
 
 
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Sell Type</th>
-                                    <th>Cost</th>
-                                    <th> Price</th>
-                                    <th> Stock</th>
-                                    <th> Stock Alert</th>
-                                    <th> tax (%)</th>
-                                    <th> warrenty</th>
-                                    <th>Action</th>
+                                    <th>{{ __("translate.Id") }}</th>
+                                    <th>{{ __("translate.Name") }}</th>
+                                    <th>{{ __("translate.Brand") }}</th>
+                                    <th>{{ __("translate.Sell Type") }}</th>
+                                    <th>{{ __("translate.Cost") }}</th>
+                                    <th> {{ __("translate.Price") }}</th>
+                                    <th> {{ __("translate.Stock") }}</th>
+                                    <th> {{ __("translate.Stock Alert") }}</th>
+                                    <th> {{ __("translate.tax") }} (%)</th>
+                                    <th> {{ __("translate.warrenty") }}</th>
+                                    <th>{{ __("translate.Action") }}</th>
                                 </tr>
                             </thead>
                             <tfoot class="bg-abasas-dark">
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Sell Type</th>
-                                    <th>Cost</th>
-                                    <th> Price</th>
-                                    <th> Stock</th>
-                                    <th> Stock Alert</th>
-                                    <th> tax (%)</th>
-                                    <th> warrenty</th>
-                                    <th>Action</th>
+                                    <th>{{ __("translate.Id") }}</th>
+                                    <th>{{ __("translate.Name") }}</th>
+                                    <th>{{ __("translate.Brand") }}</th>
+                                    <th>{{ __("translate.Sell Type") }}</th>
+                                    <th>{{ __("translate.Cost") }}</th>
+                                    <th> {{ __("translate.Price") }}</th>
+                                    <th> {{ __("translate.Stock") }}</th>
+                                    <th> {{ __("translate.Stock Alert") }}</th>
+                                    <th> {{ __("translate.tax") }} (%)</th>
+                                    <th> {{ __("translate.warrenty") }}</th>
+                                    <th>{{ __("translate.Action") }}</th>
                                 </tr>
 
                             </tfoot>
