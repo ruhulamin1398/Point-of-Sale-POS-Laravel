@@ -10,6 +10,7 @@
         bgColor.push("#" + Math.floor(Math.random()*16777215).toString(16));
         bdColor.push("#" + Math.floor(Math.random()*16777215).toString(16));
     }
+    console.log(dataArray)
     var ctx = document.getElementById('barChart');
     var myChart = new Chart(ctx, {
         type: 'bar',

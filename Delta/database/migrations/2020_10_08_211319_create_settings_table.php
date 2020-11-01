@@ -19,7 +19,7 @@ class CreateSettingsTable extends Migration
             $table->string('model');
             $table->json('setting')->default(json_encode(['']));
             $table->json('data')->default(json_encode(['']));
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }
