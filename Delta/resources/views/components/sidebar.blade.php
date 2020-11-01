@@ -68,7 +68,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapsePurchase" aria-expanded="true" aria-controls="collapsePurchase">
             <i class="fas fa-fw fa-cog"></i>
-            <span>পণ্য ক্রয়</span>
+            <span>{{__('translate.Purchase')}}</span>
         </a>
         <div id="collapsePurchase" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -104,7 +104,7 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span> {{__('translate.Supplier')}}</span></a>
     </li>
-
+    <hr class="sidebar-divider m-1 p-0 ">
     <li class="nav-item  ">
         <a class="nav-link p-3 " href="{{ route('brands.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>

@@ -179,7 +179,7 @@ return[
 'Designations'=>'পদবি',
 'Payments'=>'পেমেন্ট',
 'Payment Type'=>'পেমেন্টের ধরন',
-
+'New Employee'=> 'নতুন কর্মচারি',
 
         // Message Section
 
@@ -191,10 +191,10 @@ return[
 'This Phone is Already taken'=>'নাম্বারটি ইতিমধ্যে ব্যবহার করা হয়েছে',
 'This Customer Can not be Deleted'=>'এই কাস্টমারটি ডিলিট করতে পারবেন না',
 'Item Deleted'=>'সফলভাবে ডিলিট হয়েছে',
-'Quantity must be greater than 0'=>'পরিমাণ শূন্য(0) এর চেয়ে বেশি হতে হবে',
+'Quantity must be greater than 0'=>'পণ্যের পরিমাণ শূন্য(0)থেকে বেশি হতে হবে',
 'Successfully Dropped'=>'সফলভাবে পণ্য বাতিল হয়েছে',
-'Products Stock is less than Drop quantity'=>'পণ্য স্টক বাতিল পরিমাণের চেয়ে কম', 
-"Can't Delete"=>'দুঃখিত ইহা ডিলিট হবে না',
+'Products Stock is less than Drop quantity'=>'পণ্য বাতিল এর পরিমাণ স্টক থেকে কম হতে হবে', 
+"Can't Delete"=>'দুঃখিত ইহা ডিলিট হবে না', 
 'Payment Deleted'=>'পেমেন্ট ডিলিট হয়েছে', 
 "Can't Update"=>"দুঃখিত ইহা আপডেট হবে না",
 'Warrenty Deleted'=>'ওয়ারেন্টি ডিলিট হয়েছে', 
@@ -230,6 +230,11 @@ return[
 'Product id is Required'=>'পণ্যের আইডি অবশ্যই দিতে হবে', 
 'Quantity is Required'=>'পরিমান অবশ্যই দিতে হবে',
 'Customer is Required'=>'কাস্টমার অবশ্যই দিতে হবে', 
+
+
+
+
+
 'Name is Required'=>'নাম অবশ্যই দিতে হবে',
 'Name is Required'=>'নাম অবশ্যই দিতে হবে',
 'Name is Required'=>'নাম অবশ্যই দিতে হবে',
@@ -238,25 +243,21 @@ return[
 //  End of Validation Message
 
 
-
-
-'Limit'=>'লিমিট', 
-'New Product'=>'নতুন পণ্য',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
+'Select Designation'=>'পদবি সেলেক্ট করুন', 
+'Hour'=>'ঘন্টা', 
+'Fixed Duty'=>'ফিক্সড ডিউটি', 
+'Add User data'=>'ইউজার এর ডাটা যুক্ত করুন', 
+'Username'=>'ইউজার',
+'Email'=>'ই-মেইল', 
+'Password'=>'পাসওয়ার্ড',
+'Amount must be greater than 0'=>'টাকার পরিমান শূন্য(0) হতে বেশি হতে হবে', 
+'Purchase List'=>'ক্রয়ের তালিকা',
+'Purchase No'=>'ক্রয়ের নম্বর',
+'Total'=>'মোট',
+'Time'=>'সময়', 
+'Select A Month'=>'মাস সেলেক্ট করুন',
+'Sell No'=>'বিক্রয় নম্বর',
+'Purchase'=>'পণ্য ক্রয়', 
 ''=>'',
 ''=>'',
 ''=>'',
