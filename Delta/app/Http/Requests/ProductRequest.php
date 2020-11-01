@@ -43,7 +43,7 @@ class ProductRequest extends FormRequest
                 'category_id.required' => $messages->require('Category'),
                 'brand_id.required' => $messages->require('Brand'),
                 'type_id.required' => $messages->require('Type'),
-                'unit_id.required' => $messages->require('Unit'),
+                'unit_id.required' => $messages->require('Unit'), 
                 'stock_alert.required' => $messages->require('Stock Alert'),
                 'price.required' => $messages->require('Price'),
             ];
