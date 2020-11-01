@@ -29,6 +29,7 @@
 
 ---------------------------------------
 
+- order and puchase -> create page(বাকি রইছে)   translation
 
 -  page  not showing {
     - categories

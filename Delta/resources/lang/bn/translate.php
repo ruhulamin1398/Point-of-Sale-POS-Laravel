@@ -84,8 +84,8 @@ return[
 
 'type'=>'ধরণ',
 'unit'=>'ইউনিট', 
-'price Per Unit'=>'মূল্য',
-'Cost Per Unit'=>'খরচ', 
+'price Per Unit'=>'মূল্য (সিঙ্গেল)',
+'Cost Per Unit'=>'খরচ (সিঙ্গেল)', 
 'warrenty'=>'ওয়ারেন্টি',
 'tax'=>'টেক্স',
 'stock'=>'স্টক', 
@@ -159,8 +159,8 @@ return[
 'Print Barcode'=> 'বারকোড প্রিন্ট', 
 'Profit'=> 'লাভ', 
 'Low Stock Product List'=> 'লো স্টক প্রোডাক্ট', 
-'Unit Price'=> 'দাম (একক)', 
-'Unit Cost'=> 'খরচ (একক)', 
+'Unit Price'=> 'মুল্য (সিঙ্গেল)', 
+'Unit Cost'=> 'খরচ (সিঙ্গেল)', 
 'Suppliers List'=> 'সাপ্লাইয়ার লিস্ট', 
 'Edit Suppliers List'=> 'সাপ্লাইয়ার ভূল সংশোধন', 
 'Add new'=> 'নতুন যোগ করুন', 
@@ -179,7 +179,7 @@ return[
 'Designations'=>'পদবি',
 'Payments'=>'পেমেন্ট',
 'Payment Type'=>'পেমেন্টের ধরন',
-
+'New Employee'=> 'নতুন কর্মচারি',
 
         // Message Section
 
@@ -188,13 +188,76 @@ return[
 'Brand Deleted'=>'ব্র্যান্ড ডিলিট হয়েছে',   
 'Enter a valid phone'=>'সঠিক নাম্বার প্রবেশ করুন',
 'Phone is already Taken'=>'নাম্বারটি ইতিমধ্যে ব্যবহার করা হয়েছে', 
+'This Phone is Already taken'=>'নাম্বারটি ইতিমধ্যে ব্যবহার করা হয়েছে',
 'This Customer Can not be Deleted'=>'এই কাস্টমারটি ডিলিট করতে পারবেন না',
 'Item Deleted'=>'সফলভাবে ডিলিট হয়েছে',
-'Quantity must be greater than 0'=>'পরিমাণ শূন্য(0) এর চেয়ে বেশি হতে হবে',
-''=>'',
-''=>'',
-''=>'',
-''=>'',
+'Quantity must be greater than 0'=>'পণ্যের পরিমাণ শূন্য(0)থেকে বেশি হতে হবে',
+'Successfully Dropped'=>'সফলভাবে পণ্য বাতিল হয়েছে',
+'Products Stock is less than Drop quantity'=>'পণ্য বাতিল এর পরিমাণ স্টক থেকে কম হতে হবে', 
+"Can't Delete"=>'দুঃখিত ইহা ডিলিট হবে না', 
+'Payment Deleted'=>'পেমেন্ট ডিলিট হয়েছে', 
+"Can't Update"=>"দুঃখিত ইহা আপডেট হবে না",
+'Warrenty Deleted'=>'ওয়ারেন্টি ডিলিট হয়েছে', 
+
+
+        // Validation Message
+        
+'Name is Required'=>'নাম অবশ্যই দিতে হবে',
+'Phone is already taken'=>'নাম্বারটি ইতিমধ্যে ব্যবহার করা হয়েছে',
+'Stars is Required'=>'স্টার অবশ্যই দিতে হবে', 
+'Title is Required'=>'টাইটেল অবশ্যই দিতে হবে',
+'Description is Required'=>'মতামত অবশ্যই দিতে হবে',  
+'Phone is Required'=>'মোবাইল নম্বর অবশ্যই দিতে হবে', 
+'Designation Name is Required'=>'পদবির নাম অবশ্যই দিতে হবে', 
+'Product is Required'=>'পণ্য অবশ্যই দিতে হবে',
+'Quantity is Required'=>'পরিমান অবশ্যই দিতে হবে',
+'Employee is Required'=>'কর্মচারির নাম অবশ্যই দিতে হবে', 
+'Duty Status is Required'=>'ডিউটি অবশ্যই দিতে হবে',
+'Date is Required'=>'তারিখ অবশ্যই দিতে হবে',
+'Payment Type is Required'=>'পেমেন্টের ধরণ অবশ্যই দিতে হবে',
+'Amount is Required'=>'টাকার পরিমান অবশ্যই দিতে হবে',
+'Month is Required'=>'মাসের নাম অবশ্যই দিতে হবে', 
+'Address is Required'=>'ঠিকানা অবশ্যই দিতে হবে',
+'Salary is Required'=>'বেতন অবশ্যই দিতে হবে',
+'Designation is Required'=>'পদবি অবশ্যই দিতে হবে',
+'Expense Type is Required'=>'খরচের ধরণ অবশ্যই দিতে হবে', 
+'Category is Required'=>'ক্যাটাগরি অবশ্যই দিতে হবে',
+'Brand is Required'=>'ব্র্যান্ড অবশ্যই দিতে হবে',
+'Type is Required'=>'পণ্যের ধরন অবশ্যই দিতে হবে', 
+'Unit is Required'=>'ইউনিট অবশ্যই দিতে হবে', 
+'Stock Alert is Required'=>'স্টক এলার্ট অবশ্যই দিতে হবে',
+'Price is Required'=>'পণ্যের মুল্য অবশ্যই দিতে হবে', 
+'Product id is Required'=>'পণ্যের আইডি অবশ্যই দিতে হবে', 
+'Quantity is Required'=>'পরিমান অবশ্যই দিতে হবে',
+'Customer is Required'=>'কাস্টমার অবশ্যই দিতে হবে', 
+
+
+
+
+
+'Name is Required'=>'নাম অবশ্যই দিতে হবে',
+'Name is Required'=>'নাম অবশ্যই দিতে হবে',
+'Name is Required'=>'নাম অবশ্যই দিতে হবে',
+'Name is Required'=>'নাম অবশ্যই দিতে হবে',
+
+//  End of Validation Message
+
+
+'Select Designation'=>'পদবি সেলেক্ট করুন', 
+'Hour'=>'ঘন্টা', 
+'Fixed Duty'=>'ফিক্সড ডিউটি', 
+'Add User data'=>'ইউজার এর ডাটা যুক্ত করুন', 
+'Username'=>'ইউজার',
+'Email'=>'ই-মেইল', 
+'Password'=>'পাসওয়ার্ড',
+'Amount must be greater than 0'=>'টাকার পরিমান শূন্য(0) হতে বেশি হতে হবে', 
+'Purchase List'=>'ক্রয়ের তালিকা',
+'Purchase No'=>'ক্রয়ের নম্বর',
+'Total'=>'মোট',
+'Time'=>'সময়', 
+'Select A Month'=>'মাস সেলেক্ট করুন',
+'Sell No'=>'বিক্রয় নম্বর',
+'Purchase'=>'পণ্য ক্রয়', 
 ''=>'',
 ''=>'',
 ''=>'',
