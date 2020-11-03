@@ -5,7 +5,6 @@
 - every modal must have withTrashed <!-- primarly done -->
 - number validation for positive
 - in setting every required items update must be 2.
-- employee phone validation error. 
 - update validation needs to be updated.
 - cursor grab and grabing 
 - Employee delete thinking needed . 
@@ -22,7 +21,6 @@
 - purchase page product details tax + warrenty  
 - customer number check in submit order page
 - serial in page of products
-- price -> মূল্য 
 - notifications can be de by dataTable
 - cash management system 
 - 

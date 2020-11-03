@@ -19,6 +19,7 @@ class CreateProductSellTypesTable extends Migration
             $table->unsignedBigInteger('product_type_id');
             $table->unsignedBigInteger('sell_type'); //from unit table
             $table->unsignedBigInteger('purchased_type'); // from unit table
+            $table->softDeletes();
             $table->timestamps();
         });
 
