@@ -90,6 +90,7 @@ return[
 'tax'=>'টেক্স',
 'stock'=>'স্টক', 
 'stock alert'=>'স্টক এলার্ট',
+'Stock Alert'=>'স্টক এলার্ট',
  
 
 
@@ -232,18 +233,10 @@ return[
 'Customer is Required'=>'কাস্টমার অবশ্যই দিতে হবে', 
 
 
-
-
-
-'Name is Required'=>'নাম অবশ্যই দিতে হবে',
-'Name is Required'=>'নাম অবশ্যই দিতে হবে',
-'Name is Required'=>'নাম অবশ্যই দিতে হবে',
-'Name is Required'=>'নাম অবশ্যই দিতে হবে',
-
 //  End of Validation Message
 
 
-'Select Designation'=>'পদবি সেলেক্ট করুন', 
+'Select Designation'=>'পদবি সিলেক্ট করুন', 
 'Hour'=>'ঘন্টা', 
 'Fixed Duty'=>'ফিক্সড ডিউটি', 
 'Add User data'=>'ইউজার এর ডাটা যুক্ত করুন', 
@@ -255,9 +248,30 @@ return[
 'Purchase No'=>'ক্রয়ের নম্বর',
 'Total'=>'মোট',
 'Time'=>'সময়', 
-'Select A Month'=>'মাস সেলেক্ট করুন',
+'Select A Month'=>'মাস সিলেক্ট করুন',
 'Sell No'=>'বিক্রয় নম্বর',
 'Purchase'=>'পণ্য ক্রয়', 
+'Brand Details'=>'ব্র্যন্ডের বিবরণ ',
+'Cost'=>'ব্যয়',
+'Add Product'=>'নতুন পণ্য',       
+'Customer Details'=>'কাস্টমার বিবরণ',
+'Order ID'=>'অর্ডার আইডি', 
+'Customer Buy List'=>'কাস্টমারের ক্রয়ের লিস্ট', 
+'Discount'=>'ছাড়', 
+'Paid Amount'=>'টাকা (পরিশোধিত)',  
+'Purchase ID'=>'ক্রয়ের আইডি', 
+'Product Supply List'=>'সাপ্লাইয়ের লিস্ট', 
+'Supplier Details'=>'সাপ্লাইয়ারের বিবরণ', 
+'Employee Details'=>'কর্মচারির বিবরণ', 
+'Employee Sell List'=>'কর্মচারির বিক্রয়ের লিস্ট', 
+'Cuetomer'=>'কাস্টমার',
+'Product Count'=>'পণ্যের সংখা',
+''=>'',
+''=>'',
+''=>'',
+''=>'',
+''=>'', 
+''=>'',
 ''=>'',
 ''=>'',
 ''=>'',
