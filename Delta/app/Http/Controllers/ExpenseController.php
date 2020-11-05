@@ -64,6 +64,9 @@ class ExpenseController extends Controller
      */
     public function store(ExpenseRequest $request)
     {
+        if($request->amount<0){
+        return Redirect::back()->withErrors(["Amount must be greater than 0"]);
+        }
         //  return $request;
         expense::create($request->all());
         $month = Carbon::now()->format('Y-m-01');
@@ -115,6 +118,10 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, expense $expense)
     {
+        
+        if($request->amount<0){
+            return Redirect::back()->withErrors(["Amount must be greater than 0"]);
+        }
         $previous = $expense->amount;
         $month = $expense->created_at->format('Y-m-01');
         $expense->update($request->all());

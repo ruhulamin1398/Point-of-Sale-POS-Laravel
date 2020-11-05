@@ -20,64 +20,58 @@
                 @csrf
                 <div class="form-row align-items-center">
 
-                    <div class="col-auto pr-4">
-                        <label for="employee_id">{{ __('translate.Select Employee') }}</label>
+                    <div class="col-md-4 col-sm-12  pr-4">
+                        <label for="employee_id">{{ __('translate.Select Employee') }}<span style="color: red"> *</span></label>
                         <select class="form-control form-control" value="1" name="employee_id" id="employee_id"
                             required>
 
                             @foreach ($employees as $employee)
-                            @if($loop->first)
-
-                            <option value="{{$employee->id}}" selected="selected"> {{$employee->name}}</option>
-                            @else
+                            <option disabled selected value> -- select an option -- </option>
 
                             <option value="{{$employee->id}}"> {{$employee->name}}</option>
-                            @endif
+                           
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="col-auto pr-4">
-                        <label for="employee_payment_type_id">{{ __('translate.Select Payment Type') }}Select Payment Type</label>
+                    <div class="col-md-4 col-sm-12  pr-4">
+                        <label for="employee_payment_type_id">{{ __('translate.Select Payment Type') }}<span style="color: red"> *</span></label>
                         <select class="form-control form-control" value="" name="employee_payment_type_id"
                             id="employeePaymentTypeId" required>
                             @foreach ($payment_types as $paymentType)
-                            @if($loop->first)
-                            <option value="{{$paymentType->id}}" selected="selected"> {{$paymentType->name}}</option>
-                            @else
+                            <option disabled selected value> -- select an option -- </option>
                             <option value="{{$paymentType->id}}"> {{$paymentType->name}}</option>
-                            @endif
+                           
                             @endforeach
                         </select>
                     </div>
 
 
-                    <div class="col-auto pr-4" id="employeePaymentStatus">
-                        <label for="employee_payment_type_id">{{ __('translate.Payment Status') }} </label>
+                    <div class="col-md-4 col-sm-12  pr-4" id="employeePaymentStatus">
+                        <label for="employee_payment_type_id">{{ __('translate.Payment Status') }}<span style="color: red"> *</span> </label>
                         <select class="form-control form-control" value="" name="salary_status_id" required>
                             @foreach ($salary_status as $status)
-                            @if($loop->last)
-                            <option value="{{$status->id}}" selected="selected"> {{$status->name}}</option>
-                            @else
+                            <option disabled selected value> -- select an option -- </option>
+
                             <option value="{{$status->id}}"> {{$status->name}}</option>
-                            @endif
+                            
                             @endforeach
                         </select>
                     </div>
 
 
-                    <div class="col-auto pr-4">
-                        <label for="amount">{{ __('translate.Amount') }}</label>
+                    <div class="col-md-4 col-sm-12  pr-4">
+                        <label for="amount">{{ __('translate.Amount') }}<span style="color: red"> *</span></label>
                         <input type="number" step="any" name="amount" class="form-control mb-2" required>
                     </div>
 
-                    <div class="col-auto pr-4">
-                        <label for="month">{{ __('translate.Select Month') }}</label>
+                    <div class="col-md-4 col-sm-12  pr-4">
+                        <label for="month">{{ __('translate.Select Month') }}<span style="color: red"> *</span></label>
                         <input type="month" name="month" class="form-control mb-2" required>
                     </div>
 
 
-                    <div class="col-auto pr-4">
+                    <div class="col-md-4 col-sm-12  pr-4">
 
                         <label for="Comment">{{ __('translate.Comment') }}</label>
                         <textarea class="form-control mb-2" name="Comment" rows="2"></textarea>
@@ -85,7 +79,7 @@
 
 
 
-                    <div class="col-auto ">
+                    <div class="col-md-4 col-sm-12  ">
                         <button type="submit" class="btn bg-abasas-dark mt-3">{{ __('translate.Submit') }}</button>
                     </div>
 

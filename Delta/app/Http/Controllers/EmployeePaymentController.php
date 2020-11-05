@@ -15,6 +15,7 @@ use App\Models\salaryStatus;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use PhpParser\Node\Stmt\Return_;
 
 class EmployeePaymentController extends Controller
@@ -73,6 +74,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function store(EmployeePaymentRequest $request)
     {
+        
+        if($request->amount<0){
+            return Redirect::back()->withErrors(["Amount must be greater than 0"]);
+        }
        // return $request;
         //payment Table 
         $employeePayment = new employeePayment;
@@ -147,6 +152,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function update(Request $request, employeePayment $employeePayment)
     {
+        
+        if($request->amount<0){
+            return Redirect::back()->withErrors(["Amount must be greater than 0"]);
+        }
 //return $request;
          // only amount and comment editable
         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
