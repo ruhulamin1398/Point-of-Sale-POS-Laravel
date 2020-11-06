@@ -17,6 +17,7 @@ class CreatePurchaseAnalysisMonthliesTable extends Migration
             $table->id();
             $table->date('month');
             $table->double('count',18,2)->default(0);
+            $table->double('product_count',18,2)->default(0);
             $table->double('cost',18,2)->default(0);
             $table->double('amount',18,2)->default(0);
             $table->double('discount',18,2)->default(0);

@@ -23,7 +23,8 @@
 - serial in page of products
 - notifications can be de by dataTable
 - cash management system 
-- 
+- product count on sell analysis and purchase analysis
+
 
 ---------------------------------------
 
