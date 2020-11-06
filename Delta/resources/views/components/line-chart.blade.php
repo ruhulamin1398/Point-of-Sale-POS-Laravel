@@ -1,37 +1,15 @@
-<div>
-
-
-    <canvas id="lineChart"></canvas>
+<div>    
+    <canvas id={{ $dataArray['id'] }}></canvas>
     <script>
-        var dataArray= @json(json_decode ( $dataArray , true));
+        var dataArray= @json( $dataArray );
 
-        console.log(dataArray.lebels);
-    var ctx = document.getElementById('lineChart');
+    var ctx = document.getElementById(dataArray.id);
+    console.log(dataArray.datasets);
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: dataArray.lebels,
-            datasets: [{
-                label: dataArray.label,
-                data: dataArray.data,
-                backgroundColor: [
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16)
-                ],
-                borderColor: [
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16),
-                    "#" + Math.floor(Math.random()*16777215).toString(16)
-                ],
-                borderWidth: 1
-            }]
+            datasets: dataArray.datasets,
         },
         options: {
             scales: {
@@ -44,8 +22,5 @@
         }
     });
     </script>
-
-
-
 
 </div>

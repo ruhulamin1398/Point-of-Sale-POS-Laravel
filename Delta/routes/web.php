@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\BarCodeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
@@ -104,6 +105,7 @@ Route::resource('expense_monthly',ExpenseMonthlyController::class);
 
 // analysis
 Route::resource('sell_analysis',SellAnalysisDailyController::class);
+Route::get('analysis',[AnalysisController::class,'index']);
 
 
 
