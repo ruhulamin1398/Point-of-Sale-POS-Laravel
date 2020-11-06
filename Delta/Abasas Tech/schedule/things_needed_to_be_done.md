@@ -28,7 +28,7 @@
 
 ---------------------------------------
 
-- Not Showing Edit and Delete button in Duty_status table
+- order and puchase -> create page(বাকি রইছে)   translation
 
 -  page  not showing {
     - categories
@@ -44,4 +44,8 @@
     - পণ্য বিক্রয় 
     - পণ্য ক্রয়
     
+}
+
+translation ->{
+    - customer controller 140 number line cannt be tranlstede. 
 }
