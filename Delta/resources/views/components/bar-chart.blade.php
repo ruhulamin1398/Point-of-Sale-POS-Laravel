@@ -8,13 +8,7 @@
         type: 'bar',
         data: {
             labels: dataArray.lebels,
-            datasets: [{
-                label: dataArray.label,
-                data: dataArray.data,
-                backgroundColor: dataArray.color	,
-                borderWidth: 1
-            }
-            ]
+            datasets:dataArray.datasets,
         },
         options: {
             scales: {
