@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\supplier;
 use Illuminate\View\Component;
 
 class supplierPhone extends Component
@@ -23,6 +24,7 @@ class supplierPhone extends Component
      */
     public function render()
     {
-        return view('components.supplier-phone');
+        $suppliers = supplier::all();
+        return view('components.supplier-phone',compact('suppliers'));
     }
 }

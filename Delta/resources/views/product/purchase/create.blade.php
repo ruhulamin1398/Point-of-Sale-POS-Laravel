@@ -35,7 +35,7 @@
                             <span class="text-dark  pl-2"> Search</span>
                             <input type="text" name="" id="purchaseProductInputId" class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
                                 autocomplete="off" autofocus >
-                            <div id="productSuggession" class="list-group" id="show-list" style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
+                            <div id="productSuggession" class="list-group"   style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
                         </div>
 
                         
@@ -172,7 +172,7 @@
     </div>
     <div class="col-4 row">
 
-        <x-supplier-phone />
+        <x-customer-phone />
 
 
 

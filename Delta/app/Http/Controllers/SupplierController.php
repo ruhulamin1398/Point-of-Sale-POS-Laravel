@@ -141,18 +141,9 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
 
 
-    public function supplierCheck(Request $request){
-
-
-
-        $supplier = supplier::where('phone',$request->phone)->first();
-        if (is_null($supplier)) {
-            return 0;
-        } else{
-           
-            return $supplier;
-        }
-
+    public function supplierFind(Request $request){
+        $supplier = supplier::find($request->id);
+        return $supplier;
     }
 
 
