@@ -5,6 +5,30 @@
 
 
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{  __('translate.'.$error) }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+@if (session()->has('success'))
+<div class="alert alert-success">
+    @if(is_array(session('success')))
+    <ul>
+        @foreach (session('success') as $message)
+        <li>{{  __('translate.'.$message) }}</li>
+        @endforeach
+    </ul>
+    @else
+    {{ session('success') }}
+    @endif
+</div>
+@endif
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -70,8 +94,8 @@
 
 
 
-                            <td class="align-middle">
-                                <button type="button" title="Edit Product" class="btn btn-success btn-sm" id="edit-product-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-edit" aria-hidden="false"> </i></button>
+                            <td class="align-middle"> 
+                                <a href="{{ route('products.edit',$product->id) }}"> <button type="button" title="Edit Product" class="btn btn-success btn-sm" id="edit-product-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-edit" aria-hidden="false"> </i></button></a>
 
 
                                 <form method="POST" action="{{ route('products.destroy',  $product->id )}} " id="delete-form-{{ $product->id }}" style="display:none; ">

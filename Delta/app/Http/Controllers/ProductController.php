@@ -82,6 +82,7 @@ class ProductController extends Controller
        $product->description=$request->description;
        $product->warrenty_id=$request->warrenty_id;
        $product->tax=$request->tax;
+       $product->tax_type_id=$request->tax_type_id;
        $product->warrenty_id=$request->warrenty_id;
        $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);
        $product->save();
@@ -110,7 +111,19 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $brands = brand::all();
+        $categories = category::all();
+        $types = productType::all();
+        $warrenties = warrenty::all();
+        $tax_types = taxType::all();
+        $pics = unit::where('product_type_id','1')->get();
+        $kg = unit::where('product_type_id','2')->get();
+        $units=[
+            '',
+            $pics,
+            $kg,
+        ];
+        return view('product.edit',compact('brands','categories','types','warrenties','tax_types','product','units'));
     }
 
     /**
@@ -122,9 +135,21 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $product->category_id= $request->category_id;
-        $product->save();
-        return back();
+        $product->name=$request->name;
+       $product->stock_alert=$request->stock_alert;
+       $product->category_id=$request->category_id;
+       $product->type_id=$request->type_id;
+       $product->brand_id=$request->brand_id;
+       $product->unit_id=$request->unit_id;
+       $product->description=$request->description;
+       $product->warrenty_id=$request->warrenty_id;
+       $product->tax=$request->tax;
+       $product->tax_type_id=$request->tax_type_id;
+       $product->warrenty_id=$request->warrenty_id;
+       $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);
+       $product->save();
+     
+       return redirect(route('products.index'))->withSuccess(["Product Updated"]);
     }
 
     /**
