@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\brand;
 use App\Models\category;
 use App\Models\Product;
+use App\Models\productAnalysisYearly;
 use App\Models\productType;
 use App\Models\setting;
 use App\Models\taxType;
@@ -99,7 +100,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return $product;
+        
+        $productAnalysis=$this->productAnalysis();
+        $dataArray = json_decode(json_encode($productAnalysis), true);
+        return view('product.show',compact('product','dataArray'));
     }
 
     
@@ -244,6 +248,40 @@ class ProductController extends Controller
         $unit = unit::find($unit_id);
         $price_per_unit = $price/$unit->value;
         return $price_per_unit;
+    }
+
+
+    public function productAnalysis(){
+        $lebels = array('Purchase','Sell','Return','Drop','Profit');
+        $data = array();
+        $purchase = 0;
+        $Sell = 0;
+        $Return = 0;
+        $Drop = 0;
+        $Profit = 0;
+        $productYearlies = productAnalysisYearly::all();
+        foreach ($productYearlies as $productYearly) {
+            $purchase += $productYearly->purchase;
+            $Sell += $productYearly->sell;
+            $Return += $productYearly->return;
+            $Drop += $productYearly->drop;
+            $Profit += $productYearly->profit;
+        }
+        $data = array($purchase,$Sell,$Return,$Drop,$Profit);
+        $color = array('#FFFF00','#0000FF','#800000','#FF0000','#008000');
+        $productAnalysis = [
+            'id' => 'productAnalysis',
+            "lebels" => $lebels,
+            "datasets" => [
+                [
+                    "label" => "Product Analysis",
+                    "data" => $data,
+                    "backgroundColor" => $color,
+                    "fill" => false
+                ],
+            ]
+        ];
+        return $productAnalysis;
     }
 
 

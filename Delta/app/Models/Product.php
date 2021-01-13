@@ -28,6 +28,9 @@ class Product extends Model
     public function taxType(){
         return $this->belongsTo('App\Models\taxType','tax_type_id','id')->withTrashed()->withTrashed();
     }
+    public function unit(){
+        return $this->belongsTo('App\Models\unit','unit_id','id')->withTrashed()->withTrashed();
+    }
     public function abasas(){
         $this->brand = $this->brand->name;
     }

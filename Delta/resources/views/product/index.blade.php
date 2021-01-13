@@ -119,7 +119,7 @@
                                     </i>
                                 </button>
 
-                                <button type="button" class="btn btn-info btn-sm" title="Print Barcode" id="barcode-print-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-print" aria-hidden="false"> </i></button>
+                                <button type="button" class="btn btn-info btn-sm" title="Print Barcode" id="barcode-print-button" product-item-id={{$id}} value={{$id}} data-toggle="modal" data-target="#barcode-print-modal"> <i class="fa fa-print" aria-hidden="false"> </i></button>
                                 <a href="{{ route('products.show',$id) }}"><button type="button" class="btn btn-primary btn-sm" title="View product" id="product-view-button" > <i class="fa fa-eye" aria-hidden="false"> </i></button></a>
 
 
@@ -141,101 +141,6 @@
 
 
 
-<!-- edit  product -->
-<div class="modal fade" id="edit-product-modal" tabindex="-1" role="dialog" aria-labelledby="edit-product-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-product-modal-label ">Edit Product</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="attachment-body-content">
-
-                <form method="POST" id="create-form" action="">  {{-- {{ route('products.update' ) }} --}}
-
-                    @csrf
-
-
-                    <div class="form-group">
-                        <label for="editProductId2">Id</label>
-                        <input type="text" class="form-control" id="editProductId2" disabled>
-                    </div>
-
-                    <div class="form-group">
-
-                        <input type="text" name="id" class="form-control" id="editProductId" placeholder="Enter product name" hidden>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductName"> Product Name</label>
-                        <input type="text" name="name" class="form-control" id="editProductName" placeholder="Enter product name"required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductCatagoryId">Product Category</label>
-                        <select class="form-control form-control" name="category_id" id="editProductCatagoryId"required>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductBrandId">Product Brand</label>
-                        <select class="form-control form-control" name="brand_id" id="editProductBrandId"required>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductTypeId">Sell Type</label>
-                        <select class="form-control form-control" name="type_id" id="editProductTypeId"required>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductUnitId">Unit Type</label>
-                        <select class="form-control form-control" name="unit_id" id="editProductUnitId"required>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductTaxtId">Tax Type</label>
-                        <select class="form-control form-control" name="tax_type_id" id="editProductTaxtId"required>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductTax"> Tax (%)</label>
-                        <input type="number" name="tax" class="form-control" id="editProductTax" placeholder="" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editProductPrice">Price</label>
-                        <input type="number" step="any" name="price" class="form-control" id="editProductPrice" placeholder=""required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editStockAlert">Stock Alert</label>
-                        <input type="number" step="any" name="stock_alert" class="form-control" id="editStockAlert" placeholder=""required>
-                    </div>
-
-
-                    <button type="submit" class="btn btn-primary"> সাবমিট</button>
-
-
-
-                </form>
-
-
-
-            </div>
-
-        </div>
-    </div>
-</div>
-</div>
-<!-- /edit  product-->
-
 
 
 
@@ -245,7 +150,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-product-modal-label ">Print Code</h5>
+                <h5 class="modal-title text-dark" id="edit-product-modal-label ">Print Barcode</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span>
                 </button>
@@ -276,14 +181,14 @@
 
                                         <div class="col-auto">
                                             <span class="text-dark pl-2"> Product Id</span>
-                                            <input type="number" name="id" id="barcodeProductInput"
+                                            <input type="number" name="product_id" id="barcodeProductInputId"
                                                 class="form-control mb-2" required readonly>
                                         </div>
 
                                         <div class="col-auto">
 
                                             <span class="text-dark pl-2"> Quantity</span>
-                                            <input type="number" name="amount" class="form-control mb-2" required>
+                                            <input type="number" name="quantity" class="form-control mb-2" required>
                                         </div>
 
 
@@ -326,6 +231,11 @@
             ]
         });
 
+        $(document).on('click','#barcode-print-button',function(){
+          
+           var id = $(this).attr('product-item-id'); 
+           $('#barcodeProductInputId').val(id);
+        });
 
 
 

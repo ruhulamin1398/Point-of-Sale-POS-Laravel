@@ -48,9 +48,11 @@
                          echo '<img width="82%" src="data:image/png;base64,' . DNS1D::getBarcodePNG($product->id , "C39") . '"    />';
                          ?>
     
-                         
+                         @php 
+                         $price = $product->price_per_unit * $product->unit->value ;
+                         @endphp
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> price(with vat) :{{ $product->price_per_unit }} </div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
                       
                     
                     </div>
