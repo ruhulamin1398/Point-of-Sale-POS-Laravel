@@ -52,6 +52,10 @@ class RoleTableSeeder extends Seeder
 
         DB::table('brands')->insert([
             [ 
+                 'name' => 'No Brand',
+                'description' => 'No brand Product',
+            ],
+            [ 
                  'name' => 'walton',
                 'description' => 'walton products',
             ],
@@ -81,7 +85,7 @@ class RoleTableSeeder extends Seeder
                 
             ],
             [
-                'name' => 'pcs',
+                'name' => 'Piece',
                 'product_type_id'=>1,
                 'value'=>1,
                 'description' => 'unit description 3',
@@ -452,13 +456,14 @@ class RoleTableSeeder extends Seeder
         ]);
 
         DB::table('tax_types')->insert([
-            [
-                'name' => 'Included',
-                'description' => 'Price Includes Tax',
-            ],
+            
             [
                 'name' => 'Excluded',
                 'description' => 'Price Excludes Tax' ,
+            ],
+            [
+                'name' => 'Included',
+                'description' => 'Price Includes Tax',
             ],
         ]);
 

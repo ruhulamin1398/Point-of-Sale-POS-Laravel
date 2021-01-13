@@ -79,7 +79,7 @@
            // $("#supplier_input_id").val(supplier.id); //no need
 
             html = "";
-            // html += '<div class="text-center text-light" id="supplierName" > Name: ' + supplier.name + '</div>';
+             html += '<div class="text-center text-light" id="supplierPhone" > Phone: ' + supplier.phone + '</div>';
 
             html += '<div class="text-center text-light"  id="supplierCompany"  >Company: ' + supplier.company +
                 '</div>';
@@ -129,10 +129,10 @@
             $('#SupplierPhoneComponantInputNameWarrning').hide()
             $('#SupplierPhoneComponantInputPhoneWarrning').hide()
 
-            if($('#SupplierPhoneComponantInputName').val() == ''){
-                $('#SupplierPhoneComponantInputNameWarrning').show();
-                return ;
-            }
+            // if($('#SupplierPhoneComponantInputName').val() == ''){
+            //     $('#SupplierPhoneComponantInputNameWarrning').show();
+            //     return ;
+            // }
             if($('#SupplierPhoneComponantInputphone').val() == ''){
                 $('#SupplierPhoneComponantInputPhoneWarrning').show();
                 return ;

@@ -84,6 +84,9 @@ class BrandController extends Controller
      */
     public function update(BrandRequest $request, brand $brand)
     {
+        if($brand->id ==1){
+            return Redirect::back()->withErrors(["This Brand Can't be Edited" ]);
+        }
         $brand->update($request->all());
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
@@ -96,6 +99,10 @@ class BrandController extends Controller
      */
     public function destroy(brand $brand)
     {
+        
+        if($brand->id ==1){
+            return Redirect::back()->withErrors(["This Brand Can't be Edited" ]);
+        }
         $brand->delete();
         return Redirect::back()->withErrors(["Brand Deleted" ]);
     }
