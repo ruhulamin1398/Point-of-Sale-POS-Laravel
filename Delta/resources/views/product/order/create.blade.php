@@ -172,7 +172,7 @@
     </div>
     <div class="col-4 row">
 
-        <x-supplier-phone />
+        <x-customer-phone />
 
 
 
