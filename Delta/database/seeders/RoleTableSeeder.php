@@ -35,10 +35,14 @@ class RoleTableSeeder extends Seeder
         ]);
     
         DB::table('categories')->insert([
-                [
-                    'name' => 'Electronics',
-                    'description' => 'description_1',
-                ],
+            [
+                'name' => 'No Category',
+                'description' => 'No Category',
+            ],
+            [
+                'name' => 'Electronics',
+                'description' => 'description_1',
+            ],
                 [
                     'name' => 'Cloth',
                     'description' => 'description_2',
@@ -109,6 +113,7 @@ class RoleTableSeeder extends Seeder
                 'stock'=>'50',
                 'stock_alert'=>20,
                 'sell'=>10,
+                'unit_id'=>3,
                 'description'=>'plo make you comfortable',
 
             ],
@@ -122,6 +127,7 @@ class RoleTableSeeder extends Seeder
                 'stock'=>'50',
                 'stock_alert'=>20,
                 'sell'=>10,
+                'unit_id'=>3,
                 'description'=>'Dont Buy HP,its really bad',
 
             ],  
@@ -136,6 +142,7 @@ class RoleTableSeeder extends Seeder
                 'stock'=>'50',
                 'stock_alert'=>20,
                 'sell'=>10,
+                'unit_id'=>3,
                 'description'=>'plo make you comfortable',
 
             ],
@@ -469,8 +476,12 @@ class RoleTableSeeder extends Seeder
 
         DB::table('warrenties')->insert([
             [
-                'name' => 'Null',
+                'name' => 'No Warrenty',
                 'total_days' => 0,
+            ],
+            [
+                'name' => '1 Year',
+                'total_days' => 365,
             ],
         ]);
 

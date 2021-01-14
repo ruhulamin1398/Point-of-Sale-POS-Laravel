@@ -87,7 +87,7 @@
                             <td id="viewSell">{{$product->category->name}}</td>
                             <td id="viewProductTypeId">{{$product->brand->name}}</td>
                             <td id="viewCost">{{$product->cost_per_unit}}</td>
-                            <td id="viewCost">{{$product->price_per_unit}}</td>
+                            <td id="viewCost">{{$product->price_per_unit * $product->unit->value}}</td>
                             <td id="viewLowLimit">{{$product->stock}}</td>
                             <td id="viewLowLimit">{{$product->tax}} ({{ $product->taxType->name }})</td>
                             <td id="viewLowLimit">{{$product->warrenty->name}}</td>

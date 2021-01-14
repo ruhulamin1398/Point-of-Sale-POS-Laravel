@@ -107,8 +107,13 @@
                                         <select class="form-control form-control" value="" name="category_id" id="catagory_id"
                                             required>
                                             <option selected="selected" disabled>Select Category </option>
+                                            
                                             @foreach ($categories as $category)
+                                            @if ($loop->first)
+                                            <option selected value="{{$category->id}}"> {{$category->name}}</option>
+                                            @else
                                             <option value="{{$category->id}}"> {{$category->name}}</option>
+                                            @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -124,7 +129,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Product Type  <span class="text-danger">*</span></label>
+                                        <label for="type_id">Product Type  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control form-control" name="type_id" id="type_id" required>
@@ -151,7 +156,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Unit  <span class="text-danger">*</span></label>
+                                        <label for="unit_id">Unit  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
@@ -178,11 +183,11 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Price  <span class="text-danger">*</span></label>
+                                        <label for="price">Price  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
-                                         <input type="number" name="price" id="" class="form-control" min='0' placeholder="Price" required>
+                                         <input type="number" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
                                     </div>
 
 
@@ -195,7 +200,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="productName"> Description</label>
+                                        <label for="description"> Description</label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <textarea type="text" name="description" class="form-control" id="description" placeholder="Description"></textarea>
@@ -218,7 +223,7 @@
 
 
                         <div class="form-group col-12  ">
-                            <label for="productName"> Stock Alert</label>
+                            <label for="stock_alert"> Stock Alert</label>
                             <input type="number" name="stock_alert" class="form-control" id="stock_alert" 
                                 value="1" min=1>
                         </div>
@@ -258,9 +263,9 @@
                         </div>
 
                         <div class="form-group col-12  ">
-                            <label for="catagory_id">Tax (%)</label>
+                            <label for="tax">Tax (%)</label>
 
-                            <input type="number" name="tax" id="" class="form-control" min=0 value="0">
+                            <input type="number" name="tax" id="tax" class="form-control" min=0 value="0">
                         </div>
 
                     </div>
