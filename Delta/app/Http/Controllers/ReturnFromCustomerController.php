@@ -44,7 +44,11 @@ class ReturnFromCustomerController extends Controller
      */
     public function create()
     {
-        //
+        $startTime = Carbon::now()->format('Y-m-d 00:00:00');
+        $endTime = Carbon::now()->format('Y-m-d 23:59:59') ;
+        $returnProducsts = returnFromCustomer::where('created_at','>=',$startTime  )->where('created_at','<=',$endTime  )->orderBy('id','desc')->get();
+        $products = Product::all();
+        return view('product.return-product.customer.create',compact('products','returnProducsts'));
     }
 
     /**
@@ -55,7 +59,22 @@ class ReturnFromCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $returnProduct = new returnFromCustomer;
+        $returnProduct->user_id =1; //Auth::user()->id;
+        $returnProduct->product_id =$request->product_id ;
+        $returnProduct->customer_id =$request->return_product_customer_id ;
+        $returnProduct->quantity =$request->quantity ;
+        $returnProduct->price =$request->price ;
+        $returnProduct->comment =$request->comment ;
+        $returnProduct->save();
+        $cost_per_unit = $returnProduct->products->cost_per_unit;
+        $price_per_unit = $returnProduct->price / $returnProduct->quantity;
+        $returnProduct->profit = $price_per_unit - $cost_per_unit;
+        $returnProduct->save();
+         return redirect()->back()->withSuccess(["Product Returned"]);
+        //add analysis
+
+        
     }
 
     /**

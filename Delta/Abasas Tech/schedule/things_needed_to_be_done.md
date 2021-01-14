@@ -24,6 +24,7 @@
 - notifications can be de by dataTable
 - cash management system 
 - product count on sell analysis and purchase analysis
+- auth in return product
 
 
 ---------------------------------------

@@ -191,7 +191,7 @@
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
-                                         <input type="number" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
+                                         <input type="number" step="any" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
                                     </div>
 
 
@@ -228,7 +228,7 @@
 
                         <div class="form-group col-12  ">
                             <label for="productName"> Stock Alert</label>
-                            <input type="number" name="stock_alert" class="form-control" id="stock_alert" 
+                            <input type="number" step="any" name="stock_alert" class="form-control" id="stock_alert" 
                                 value="{{ $product->stock_alert }}" min=1>
                         </div>
 
@@ -269,7 +269,7 @@
                         <div class="form-group col-12  ">
                             <label for="catagory_id">Tax (%)</label>
 
-                            <input type="number" name="tax" id="" class="form-control" min=0 value="{{ $product->tax }}">
+                            <input type="number" step="any" name="tax" id="" class="form-control" min=0 value="{{ $product->tax }}">
                         </div>
 
                     </div>

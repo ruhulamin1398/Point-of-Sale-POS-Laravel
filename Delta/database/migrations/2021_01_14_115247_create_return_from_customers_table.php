@@ -21,7 +21,7 @@ class CreateReturnFromCustomersTable extends Migration
            
             $table->double('quantity',18,3);
             $table->double('price',18,3);
-            $table->double('profit',18,3);
+            $table->double('profit',18,3)->default(0);
             $table->longText('comment')->nullable();
             
             $table->softDeletes();
