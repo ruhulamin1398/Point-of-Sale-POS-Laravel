@@ -108,7 +108,7 @@ Route::resource('expense-types',ExpenseTypeController::class);
 Route::resource('expense-monthlies',ExpenseMonthlyController::class);
 
 // analysis
-Route::get('sell-analysis',SellAnalysisDailyController::class)->name('sell-analysis'); 
+Route::get('sell-analysis',[SellAnalysisDailyController::class, 'index'])->name('sell-analysis'); 
 Route::get('analysis',[AnalysisController::class,'index']);
 
 
