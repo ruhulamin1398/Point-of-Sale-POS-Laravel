@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\customer;
 use Illuminate\View\Component;
 
 class CustomerPhone extends Component
@@ -23,6 +24,7 @@ class CustomerPhone extends Component
      */
     public function render()
     {
-        return view('components.customer-phone');
+        $customers = customer::all();
+        return view('components.customer-phone',compact('customers'));
     }
 }

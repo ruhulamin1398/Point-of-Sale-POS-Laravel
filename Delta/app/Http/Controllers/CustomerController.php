@@ -197,6 +197,28 @@ public function customersDue(Request $request)
 }
 
 
+public function customerFind(Request $request){
+    $customer = customer::find($request->id);
+    return $customer;
+}
+
+
+
+
+
+
+public function customerStore(Request $request){
+
+    $customer= new customer;
+    $customer->name = $request->name;
+    $customer->phone = $request->phone;
+    $customer->address = $request->address;
+    $customer->company = $request->company;
+    $customer->due = 0;
+    $customer->save();
+    return $customer;
+    
+}
 
 
 

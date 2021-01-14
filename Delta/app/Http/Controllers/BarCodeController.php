@@ -36,8 +36,9 @@ class BarCodeController extends Controller
      */
     public function store(Request $request)
     {
+        
         $product = product::find($request->product_id);
-      
+       
         $amount= $request->quantity;
         return view('product.barcode.print',compact('product','amount'));
     }

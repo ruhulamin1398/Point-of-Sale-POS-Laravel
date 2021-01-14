@@ -133,19 +133,19 @@ class PurchaseController extends Controller
         }
         $purchaseDaily->count += 1;
         $purchaseDaily->cost += $order->cost;
-        $purchaseDaily->cash_recieved += $order->paid_amount;
+        $purchaseDaily->cash_given += $order->paid_amount;
         $purchaseDaily->discount += $order->discount;
         $purchaseDaily->amount += $order->total;
         $purchaseDaily->due += $order->total - $order->paid_amount;
         $purchaseMonthly->count += 1;
         $purchaseMonthly->cost += $order->cost;
-        $purchaseMonthly->cash_recieved +=$order->paid_amount;
+        $purchaseMonthly->cash_given +=$order->paid_amount;
         $purchaseMonthly->discount += $order->discount;
         $purchaseMonthly->amount += $order->total;
         $purchaseMonthly->due += $order->total - $order->paid_amount;
         $purchaseYearly->count += 1;
         $purchaseYearly->cost += $order->cost;
-        $purchaseYearly->cash_recieved += $order->paid_amount;
+        $purchaseYearly->cash_given += $order->paid_amount;
         $purchaseYearly->discount += $order->discount;
         $purchaseYearly->amount += $order->total;
         $purchaseYearly->due += $order->total - $order->paid_amount;

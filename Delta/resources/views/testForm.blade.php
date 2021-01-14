@@ -11,7 +11,7 @@
         <div style="position: relative;">
         <input type="text" name="" id="liveSearch" class="form-control form-control-lg rounded-0 border-info" autocomplete="off">
       
-       <div id="result" class="list-group" id="show-list" style="position: absolute;   left:20px;" > </div>
+       <div id="result" class="list-group"   style="position: absolute;   left:20px;" > </div>
 
     </div>  
     </div>

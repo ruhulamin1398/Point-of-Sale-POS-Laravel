@@ -51,7 +51,8 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     { 
         category::create($request->all());
-        return back();
+        return redirect()->back()->withSuccess(['Successfully Created']);
+
     }
 
     /**
@@ -85,15 +86,12 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, category $category)
     {
+        if($category->id==1){
+            return redirect()->back()->withErrors(["Can't Edit This Category"]);
+        }
         $category->update($request->all());
-        return $category;
-        //
-        $category->date_time= $request->date_time;
-        $category->name= $request->name;
-        $category->description= $request->description;
-        $category->created_at= $request->created_at;
-        $category->save();
-        return back();
+        return redirect()->back()->withSuccess(['Successfully Updated']);
+
     }
 
     /**
@@ -104,7 +102,10 @@ class CategoryController extends Controller
      */
     public function destroy(category $category)
     {
+        if($category->id==1){
+            return redirect()->back()->withErrors(["Can't Delete This Category"]);
+        }
         $category->delete();
-        return back();
+        return redirect()->back()->withErrors(['Item Deleted']);
     }
 }
