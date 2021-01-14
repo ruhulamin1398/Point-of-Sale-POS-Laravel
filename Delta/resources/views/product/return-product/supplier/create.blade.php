@@ -19,7 +19,7 @@
                     </nav>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('return-to-supplier.store') }}">
+                    <form method="POST" action="{{ route('return-to-suppliers.store') }}">
                         @csrf
                         <div class="form-row align-items-center">
 

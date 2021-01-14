@@ -74,16 +74,16 @@ Route::resource('product_types',ProductTypeController::class);
 Route::resource('suppliers',SupplierController::class);
 Route::resource('customers',CustomerController::class);
 Route::resource('customer_ratings',CustomerRatingController::class);
-Route::resource('sell_type',ProductSellTypeController::class);
+Route::resource('sell_types',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
-Route::resource('bar_code',BarCodeController::class);
+Route::resource('bar-codes',BarCodeController::class);
 
 Route::resource('return_products',ReturnProductController::class);
-Route::resource('return-to-supplier',ReturnToSupplierController::class);
-Route::resource('return-from-customer',ReturnFromCustomerController::class);
+Route::resource('return-to-suppliers',ReturnToSupplierController::class);
+Route::resource('return-from-customers',ReturnFromCustomerController::class);
 
 
-Route::resource('warrenty',WarrentyController::class);
+Route::resource('warrenties',WarrentyController::class);
 Route::resource('drop_products',DropProductController::class);
 Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ])->name('stock_alert');
 
@@ -98,17 +98,17 @@ Route::resource('employee_payments',EmployeePaymentController::class);
 Route::resource('employee_salaries',EmployeeSalaryController::class);
 
 // Duties  
-Route::resource('duty_status',DutyStatusController::class);
+Route::resource('duty-statuses',DutyStatusController::class);
 Route::resource('employee_duties',EmployeeDutyController::class);
 Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
 
 // Expenses
-Route::resource('expense',ExpenseController::class);
-Route::resource('expense_type',ExpenseTypeController::class);
-Route::resource('expense_monthly',ExpenseMonthlyController::class);
+Route::resource('expenses',ExpenseController::class);
+Route::resource('expense-types',ExpenseTypeController::class);
+Route::resource('expense-monthlies',ExpenseMonthlyController::class);
 
 // analysis
-Route::resource('sell_analysis',SellAnalysisDailyController::class);
+Route::get('sell-analysis',SellAnalysisDailyController::class)->name('sell-analysis'); 
 Route::get('analysis',[AnalysisController::class,'index']);
 
 
