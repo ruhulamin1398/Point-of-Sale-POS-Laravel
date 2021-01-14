@@ -38,7 +38,7 @@
 
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
-                <a class="navbar-brand">নতুন পণ্য</a>
+                <a class="navbar-brand">Edit Product</a>
 
             </nav>
         </div>
@@ -46,8 +46,9 @@
 
 
 
-            <form method="POST" id="product-create-form" action="{{ route('products.store') }}">
+            <form method="POST" id="product-create-form" action="{{ route('products.update',$product->id) }}">
                 @csrf
+                @method('put')
 
 
                 <div class="row">
@@ -62,7 +63,7 @@
                                         <label for="productName"> Product Name <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
-                                        <textarea type="text" name="name" class="form-control" id="name" placeholder="Produc Name" required></textarea>
+                                        <textarea type="text" name="name" class="form-control" id="name" placeholder="Produc Name"  required>{{ $product->name }}</textarea>
                                     </div>
 
 
@@ -82,7 +83,7 @@
                                             required>
                                             <option selected="selected" disabled>Select Category </option>
                                             @foreach ($brands as $brand)
-                                            @if ($loop->first)
+                                            @if ($brand->id == $product->brand_id)
                                                  <option selected value="{{$brand->id}}"> {{$brand->name}}</option>
                                             @else 
                                                 <option value="{{$brand->id}}"> {{$brand->name}}</option>
@@ -107,12 +108,37 @@
                                         <select class="form-control form-control" value="" name="category_id" id="catagory_id"
                                             required>
                                             <option selected="selected" disabled>Select Category </option>
-                                            
                                             @foreach ($categories as $category)
-                                            @if ($loop->first)
-                                            <option selected value="{{$category->id}}"> {{$category->name}}</option>
-                                            @else
-                                            <option value="{{$category->id}}"> {{$category->name}}</option>
+                                            @if ($category->id == $product->category_id)
+                                                <option selected value="{{$category->id}}"> {{$category->name}}</option>
+                                            @else 
+                                                <option value="{{$category->id}}"> {{$category->name}}</option>
+                                            @endif 
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
+
+                                </div>
+                                
+                            </div>
+
+                           
+                            
+                            <div class="form-group col-12 ">
+                                <div class="row">
+                                    <div class="col-md-4 col-12">
+                                        <label for="catagory_id">Product Type  <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-8 col-12">
+                                        <select class="form-control form-control" name="type_id" id="type_id" required>
+                                            <option selected disabled>Select Product Types </option>
+                                            @foreach ($types as $type)
+                                            @if($type->id == $product->type_id)
+                                            <option selected="selected" value="{{$type->id}}"> {{$type->name}}</option>
+                                            @else 
+                                            <option  value="{{$type->id}}"> {{$type->name}}</option>
                                             @endif
                                             @endforeach
                                         </select>
@@ -125,28 +151,6 @@
                             </div>
 
 
-                            
-                            <div class="form-group col-12 ">
-                                <div class="row">
-                                    <div class="col-md-4 col-12">
-                                        <label for="type_id">Product Type  <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-md-8 col-12">
-                                        <select class="form-control form-control" name="type_id" id="type_id" required>
-                                            <option selected disabled>Select Product Types </option>
-                                            @foreach ($types as $type)
-                                            <option value="{{$type->id}}"> {{$type->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-
-
-                                </div>
-                                
-                            </div>
-
-
 
 
                             
@@ -156,11 +160,11 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="unit_id">Unit  <span class="text-danger">*</span></label>
+                                        <label for="catagory_id">Unit  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
-                                        <select class="form-control form-control" name="unit_id" id="unit_id" required>
+                                        <select class="form-control form-control" name="unit_id" id="unit_id"  required>
                                             <option selected disabled> Select Unit </option>
                                             {{---
                                     @foreach ($units as $unit)
@@ -183,7 +187,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="price">Price  <span class="text-danger">*</span></label>
+                                        <label for="catagory_id">Price  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
@@ -200,10 +204,10 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="description"> Description</label>
+                                        <label for="productName"> Description</label>
                                     </div>
                                     <div class="col-md-8 col-12">
-                                        <textarea type="text" name="description" class="form-control" id="description" placeholder="Description"></textarea>
+                                        <textarea type="text" name="description" class="form-control" id="description" placeholder="Description">{{ $product->description }}</textarea>
                                     </div>
 
 
@@ -223,9 +227,9 @@
 
 
                         <div class="form-group col-12  ">
-                            <label for="stock_alert"> Stock Alert</label>
+                            <label for="productName"> Stock Alert</label>
                             <input type="number" step="any" name="stock_alert" class="form-control" id="stock_alert" 
-                                value="1" min=1>
+                                value="{{ $product->stock_alert }}" min=1>
                         </div>
 
 
@@ -236,7 +240,7 @@
                             <select class="form-control" name="warrenty_id" id="warrenty_id" required>
                                 
                                 @foreach ($warrenties as $warrenty)
-                                @if($loop->first)
+                                @if($warrenty->id == $product->warrenty_id)
                                 <option  selected value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
                                 @else
                                 <option value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
@@ -252,7 +256,7 @@
                             <select class="form-control" name="tax_type_id" id="tax_type_id" required>
                                
                                 @foreach ($tax_types as $tax_type)
-                                @if($loop->first)
+                                @if($tax_type->id == $product->tax_type_id)
                                 <option selected value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
                                 @else
                                 <option value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
@@ -263,9 +267,9 @@
                         </div>
 
                         <div class="form-group col-12  ">
-                            <label for="tax">Tax (%)</label>
+                            <label for="catagory_id">Tax (%)</label>
 
-                            <input type="number" step="any" name="tax" id="tax" class="form-control" min=0 value="0">
+                            <input type="number" step="any" name="tax" id="" class="form-control" min=0 value="{{ $product->tax }}">
                         </div>
 
                     </div>
@@ -290,21 +294,65 @@
 <script>
     $(document).ready(function () {
 
+        var product = @json($product);
+        
+      
 
-        $("#type_id").on('change', function () {
             var type_id = $("#type_id").val();
             var units = @json($units);
             var dataArray = units[type_id];
-            // console.log(type_id);units[type_id]
+            
+            console.log(type_id);units[type_id]
 
 
             html = "";
             $.each(dataArray, function (key) {
-
-                html += '<option value="' + dataArray[key].id + '" >' + dataArray[key].name +
+                if(dataArray[key].id == product.unit_id){
+                    html += '<option selected value="' + dataArray[key].id + '" >' + dataArray[key].name +
                     '</option>';
+
+                    $('#price').val(product.price_per_unit * dataArray[key].value);
+                }
+                else{
+                    html += '<option  value="' + dataArray[key].id + '" >' + dataArray[key].name +
+                    '</option>';
+                }
+                
             });
             $("#unit_id").html(html);
+        
+
+
+        
+
+        $("#type_id").on('change', function () {
+
+            
+            type_id = $("#type_id").val();
+            
+            dataArray = units[type_id];
+            
+            console.log(type_id);units[type_id]
+
+
+            html = "";
+            $.each(dataArray, function (key) {
+                if(dataArray[key].id == product.unit_id){
+                    html += '<option selected value="' + dataArray[key].id + '" >' + dataArray[key].name +
+                    '</option>';
+
+                    $('#price').val(product.price_per_unit * dataArray[key].value);
+                }
+                else{
+                    html += '<option  value="' + dataArray[key].id + '" >' + dataArray[key].name +
+                    '</option>';
+                }
+                
+            });
+            $("#unit_id").html(html);
+        
+           
+
         });
     });
 

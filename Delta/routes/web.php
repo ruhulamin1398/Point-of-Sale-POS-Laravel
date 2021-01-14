@@ -25,11 +25,13 @@ use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
+use App\Http\Controllers\ReturnFromCustomerController;
 use App\Http\Controllers\SettingController;
 use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
+use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
@@ -69,7 +71,6 @@ Route::resource('purchases',PurchaseController::class);
 Route::resource('brands',BrandController::class);
 Route::resource('units',UnitController::class);
 Route::resource('product_types',ProductTypeController::class);
-Route::resource('return_products',ReturnProductController::class);
 Route::resource('suppliers',SupplierController::class);
 Route::resource('customers',CustomerController::class);
 Route::resource('customer_ratings',CustomerRatingController::class);
@@ -77,6 +78,9 @@ Route::resource('sell_type',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 Route::resource('bar_code',BarCodeController::class);
 
+Route::resource('return_products',ReturnProductController::class);
+Route::resource('return-to-supplier',ReturnToSupplierController::class);
+Route::resource('return-from-customer',ReturnFromCustomerController::class);
 
 
 Route::resource('warrenty',WarrentyController::class);

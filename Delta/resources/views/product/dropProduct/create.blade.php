@@ -27,7 +27,7 @@
                         <span class="text-dark  pl-2 ">{{ __("translate.Search") }} </span>
                         <input type="text" name="product_id" id="dropProductInputId" class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
                             autocomplete="off" placeholder="Search by id or name or you can barcode" autofocus required>
-                        <div id="productSuggession" class="list-group" id="show-list" style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
+                        <div id="productSuggession" class="list-group"   style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
                     </div>
 
                     <div class="col-auto p-4">
