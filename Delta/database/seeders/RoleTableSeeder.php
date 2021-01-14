@@ -82,13 +82,6 @@ class RoleTableSeeder extends Seeder
                 'description'=> 'unit description 1',
             ],
             [
-                'name' => 'Gram',
-                'product_type_id'=>2,
-                'value'=>0.001,
-                'description' => 'unit description 2',
-                
-            ],
-            [
                 'name' => 'Piece',
                 'product_type_id'=>1,
                 'value'=>1,
@@ -99,6 +92,13 @@ class RoleTableSeeder extends Seeder
                 'product_type_id'=>1,
                 'value'=>12,
                 'description' => 'unit description 4',
+            ],
+            [
+                'name' => 'Gram',
+                'product_type_id'=>2,
+                'value'=>0.001,
+                'description' => 'unit description 2',
+                
             ],
     ]);
 
