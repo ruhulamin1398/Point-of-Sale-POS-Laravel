@@ -52,7 +52,7 @@
 
                 <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Sell')}} </a></a>
                 <a class="collapse-item" href="{{ route('orders.index') }}">{{__('translate.Sell List')}} </a>
-                <a class="collapse-item" href="{{ route('sell_type.index') }}">{{__('translate.Sell Type')}} </a>
+                <a class="collapse-item" href="{{ route('sell_types.index') }}">{{__('translate.Sell Type')}} </a>
 
             </div>
         </div>
@@ -153,7 +153,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item  ">
-        <a class="nav-link p-3 " href="{{ route('bar_code.index') }}">
+        <a class="nav-link p-3 " href="{{ route('bar-codes.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{{__('translate.Code Print')}}</span></a>
     </li>
@@ -196,9 +196,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
 
 
-                <a class="collapse-item" href="{{ route('expense.index') }}">{{__('translate.Daily')}}</a>
-                <a class="collapse-item" href="{{ route('expense_monthly.index') }}">{{__('translate.Monthly')}}</a>
-                <a class="collapse-item" href="{{ route('expense_type.index') }}">{{__('translate.Expense Type')}}</a>
+                <a class="collapse-item" href="{{ route('expenses.index') }}">{{__('translate.Daily')}}</a>
+                <a class="collapse-item" href="{{ route('expense-monthlies.index') }}">{{__('translate.Monthly')}}</a>
+                <a class="collapse-item" href="{{ route('expense-types.index') }}">{{__('translate.Expense Type')}}</a>
 
             </div>
         </div>

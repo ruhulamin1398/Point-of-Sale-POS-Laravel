@@ -78,17 +78,18 @@ class ReturnToSupplierController extends Controller
         $returnProduct->price =$request->price ;
         $returnProduct->comment =$request->comment ;
         $returnProduct->save();
-        $cost_per_unit = $product->cost_per_unit;
-        $price_per_unit = $returnProduct->price / $returnProduct->quantity;
-        $returnProduct->profit = ($price_per_unit - $cost_per_unit) * $returnProduct->quantity ;
+        
+        $cost = $product->cost_per_unit *  $returnProduct->quantity;
+        $price = $returnProduct->price ;
+        $returnProduct->profit = $price - $cost;
         $product->stock -= $request->quantity;
         $returnProduct->save();
         $product->save();
 
         //analysis
-        $this->calculationAnalysis($returnProduct->profit);
-        $this->productAnalysis($returnProduct->profit,$returnProduct->product_id,0);
-        $this->purchaseAnalysis($returnProduct->quantity , $product->cost_per_unit* $request->quantity , $returnProduct->price);
+        $this->calculationAnalysis($returnProduct->profit,$price);
+        $this->productAnalysis($returnProduct->profit,$returnProduct->product_id,$returnProduct->quantity);
+        $this->purchaseAnalysis($returnProduct->quantity , $cost , $returnProduct->price);
 
 
 
@@ -144,7 +145,7 @@ class ReturnToSupplierController extends Controller
     }
 
     
-    public function calculationAnalysis($amount)
+    public function calculationAnalysis($profit,$price)
     {
         // calculation Analysis start
         $month = Carbon::now()->format('Y-m-01');
@@ -165,9 +166,12 @@ class ReturnToSupplierController extends Controller
             $analysysYear = new calculationAnalysisYearly;
             $analysysYear->year = $year;
         }
-        $analysysDate->sell_profit += $amount;
-        $analysysMonth->sell_profit += $amount;
-        $analysysYear->sell_profit += $amount;
+        $analysysDate->buy -= $price;
+        $analysysMonth->buy -= $price;
+        $analysysYear->buy -= $price;
+        $analysysDate->sell_profit += $profit;
+        $analysysMonth->sell_profit += $profit;
+        $analysysYear->sell_profit += $profit;
         $analysysDate->save();
         $analysysMonth->save();
         $analysysYear->save();
@@ -198,13 +202,13 @@ class ReturnToSupplierController extends Controller
             $productYearly->year=$year;
             $productYearly->product_id=$id;
         }
-        $productDaily->sell -= $quantity;
+        $productDaily->purchase -= $quantity;
         $productDaily->return += $quantity;
         $productDaily->profit += $profit;
-        $productMonthly->sell -= $quantity;
+        $productMonthly->purchase -= $quantity;
         $productMonthly->return += $quantity;
         $productMonthly->profit += $profit;
-        $productYearly->sell -= $quantity;
+        $productYearly->purchase -= $quantity;
         $productYearly->return += $quantity;
         $productYearly->profit += $profit;
         $productDaily->save();

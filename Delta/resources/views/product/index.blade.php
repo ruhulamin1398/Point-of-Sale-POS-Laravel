@@ -170,7 +170,7 @@
 
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('bar_code.store') }}">
+                                <form method="POST" action="{{ route('bar-codes.store') }}">
                                     @csrf
                                     <div id="barcodePrintData">
 

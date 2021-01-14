@@ -18,21 +18,21 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Category List",
-                "editTitle":"Edit Category"
+                "title":"Unit List",
+                "editTitle":"Edit Unit"
             },
             "routes":{
                 "create":{
-                    "name":"categories.store",
-                    "link":"categories"
+                    "name":"units.store",
+                    "link":"units"
                 },
                 "update":{
-                    "name":"categories.update",
-                    "link":"categories"
+                    "name":"units.update",
+                    "link":"units"
                 },
                 "delete":{
-                    "name":"categories.destroy",
-                    "link":"categories"
+                    "name":"units.destroy",
+                    "link":"units"
                 }
             },
             "fieldList":[{
@@ -51,6 +51,33 @@ class SettingController extends Controller
     
                "database_name":"name"
             },{
+            
+                "position":3,
+    
+                "create":"2",
+                "read":"1",
+                "update":"2",
+                "require":"1",
+    
+               "input_type":"dropDown",
+               "name":"product_type",
+               "database_name":"product_type_id",
+               "title": "Type",
+               "data" : "product_types"
+            },{
+                    
+                "position":111,
+    
+                "create":"2",
+                "read":"1",
+                "update":"2",
+                "require":"1",
+    
+               "input_type":"number",
+               "name":"value",
+               "title":"Value (in Kg / Piece)",
+               "database_name":"value"
+            },{
                     
                 "position":111,
     
@@ -63,27 +90,14 @@ class SettingController extends Controller
                "name":"description",
                "title":"Description",
                "database_name":"description"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"number",
-               "name":"products_count",
-               "title":"No of Product",
-               "database_name":"products_count"
             }
             ]
         }]' ;
 
-        // $setting =  setting::find(18);
+        // $setting = new setting;
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'categories';
-        // $setting->model = 'App\Models\category';
+        // $setting->table_name = 'units';
+        // $setting->model = 'App\Models\unit';
         // $setting->save();
         // return  "Success";
     }

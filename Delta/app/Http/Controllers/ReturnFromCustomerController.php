@@ -78,9 +78,14 @@ class ReturnFromCustomerController extends Controller
         $returnProduct->price =$request->price ;
         $returnProduct->comment =$request->comment ;
         $returnProduct->save();
-        $cost_per_unit = $product->cost_per_unit;
-        $price_per_unit = $returnProduct->price / $returnProduct->quantity;
-        $returnProduct->profit =   ($price_per_unit - $cost_per_unit) * $returnProduct->quantity;
+        $cost = $product->cost_per_unit *  $returnProduct->quantity;
+        $price_with_tax = $returnProduct->price ;
+        $price = ($price_with_tax * 100) / (100 + $product->tax);
+
+        $tax = $price_with_tax - $price ;
+
+        $returnProduct->profit =     $cost - $price ;
+
         $product->stock += $request->quantity;
         $returnProduct->save();
         $product->save();
@@ -90,9 +95,9 @@ class ReturnFromCustomerController extends Controller
 
         
         //analysis
-        $this->calculationAnalysis($returnProduct->profit);
+        $this->calculationAnalysis($returnProduct->profit,$tax,$price_with_tax);
         $this->productAnalysis($returnProduct->profit,$returnProduct->product_id,$returnProduct->quantity);
-        $this->sellAnalysis($returnProduct->quantity , $product->cost_per_unit* $request->quantity , $returnProduct->price);
+        $this->sellAnalysis($returnProduct->quantity , $cost , $price_with_tax);
 
 
 
@@ -148,7 +153,7 @@ class ReturnFromCustomerController extends Controller
         //
     }
     
-    public function calculationAnalysis($amount)
+    public function calculationAnalysis($profit,$tax,$price)
     {
         // calculation Analysis start
         $month = Carbon::now()->format('Y-m-01');
@@ -169,9 +174,15 @@ class ReturnFromCustomerController extends Controller
             $analysysYear = new calculationAnalysisYearly;
             $analysysYear->year = $year;
         }
-        $analysysDate->sell_profit += $amount;
-        $analysysMonth->sell_profit += $amount;
-        $analysysYear->sell_profit += $amount;
+        $analysysDate->sell -= $price;
+        $analysysMonth->sell -= $price;
+        $analysysYear->sell -= $price;
+        $analysysDate->sell_profit += $profit;
+        $analysysMonth->sell_profit += $profit;
+        $analysysYear->sell_profit += $profit;
+        $analysysDate->tax -= $tax;
+        $analysysMonth->tax -= $tax;
+        $analysysYear->tax -= $tax;
         $analysysDate->save();
         $analysysMonth->save();
         $analysysYear->save();
