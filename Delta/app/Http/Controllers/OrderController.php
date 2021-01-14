@@ -125,7 +125,7 @@ class OrderController extends Controller
         // employee Analysis end
 
         // sell Analysis start
-        $this->sellAnalysis($order);
+        $this->sellAnalysis($order); //product Count is missing
         // sell Analysis end
 
 

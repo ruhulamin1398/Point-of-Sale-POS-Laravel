@@ -187,7 +187,7 @@
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
-                                         <input type="number" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
+                                         <input type="number" step="any" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
                                     </div>
 
 
@@ -224,7 +224,7 @@
 
                         <div class="form-group col-12  ">
                             <label for="stock_alert"> Stock Alert</label>
-                            <input type="number" name="stock_alert" class="form-control" id="stock_alert" 
+                            <input type="number" step="any" name="stock_alert" class="form-control" id="stock_alert" 
                                 value="1" min=1>
                         </div>
 
@@ -265,7 +265,7 @@
                         <div class="form-group col-12  ">
                             <label for="tax">Tax (%)</label>
 
-                            <input type="number" name="tax" id="tax" class="form-control" min=0 value="0">
+                            <input type="number" step="any" name="tax" id="tax" class="form-control" min=0 value="0">
                         </div>
 
                     </div>
