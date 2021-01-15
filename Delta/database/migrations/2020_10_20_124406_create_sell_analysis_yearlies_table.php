@@ -23,7 +23,7 @@ class CreateSellAnalysisYearliesTable extends Migration
             $table->double('discount',18,2)->default(0);
             $table->double('return',18,2)->default(0);
             $table->double('due',18,2)->default(0);
-            $table->double('cash_recieved',18,2)->default(0);
+            $table->double('cash_received',18,2)->default(0);
             $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();

@@ -198,19 +198,19 @@ class OrderController extends Controller
         }
         $sellDaily->count += 1;
         $sellDaily->cost += $order->cost;
-        $sellDaily->cash_recieved += $order->paid_amount;
+        $sellDaily->cash_received += $order->paid_amount;
         $sellDaily->discount += $order->discount;
         $sellDaily->amount += $order->total;
         $sellDaily->due += $order->total - $order->paid_amount;
         $sellMonthly->count += 1;
         $sellMonthly->cost += $order->cost;
-        $sellMonthly->cash_recieved +=$order->paid_amount;
+        $sellMonthly->cash_received +=$order->paid_amount;
         $sellMonthly->discount += $order->discount;
         $sellMonthly->amount += $order->total;
         $sellMonthly->due += $order->total - $order->paid_amount;
         $sellYearly->count += 1;
         $sellYearly->cost += $order->cost;
-        $sellYearly->cash_recieved += $order->paid_amount;
+        $sellYearly->cash_received += $order->paid_amount;
         $sellYearly->discount += $order->discount;
         $sellYearly->amount += $order->total;
         $sellYearly->due += $order->total - $order->paid_amount;
