@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\customerDueRecieve;
+use App\Models\customerDueReceive;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class customerDueRecieveFactory extends Factory
+class customerDueReceiveFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = customerDueRecieve::class;
+    protected $model = customerDueReceive::class;
 
     /**
      * Define the model's default state.
