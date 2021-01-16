@@ -18,51 +18,51 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Category List",
-                "editTitle":"Edit Category"
+                "title":"Due Paid List",
+                "editTitle":"Edit Due Paid"
             },
             "routes":{
                 "create":{
-                    "name":"categories.store",
-                    "link":"categories"
+                    "name":"supplier-due-pays.store",
+                    "link":"supplier-due-pays"
                 },
                 "update":{
-                    "name":"categories.update",
-                    "link":"categories"
+                    "name":"supplier-due-pays.update",
+                    "link":"supplier-due-pays"
                 },
                 "delete":{
-                    "name":"categories.destroy",
-                    "link":"categories"
+                    "name":"supplier-due-pays.destroy",
+                    "link":"supplier-due-pays"
                 }
             },
             "fieldList":[{
                     
                 "position":111,
     
-                "create":"2",
+                "create":"3",
                 "read":"1",
-                "update":"2",
+                "update":"3",
                 "require":"1",
     
                "input_type":"text",
-               "name":"name",
-               "title":"Name",
+               "name":"user_name",
+               "title":"Reference",
     
     
-               "database_name":"name"
+               "database_name":"user_id"
             },{
                     
                 "position":111,
     
-                "create":"1",
+                "create":"3",
                 "read":"1",
-                "update":"1",
-                "require":"0",
+                "update":"3",
+                "require":"1",
     
                "input_type":"text",
-               "name":"description",
-               "title":"Description",
-               "database_name":"description"
+               "name":"supplier",
+               "title":"Supplier",
+               "database_name":"supplier_id"
             },{
                     
                 "position":111,
@@ -73,17 +73,56 @@ class SettingController extends Controller
                 "require":"0",
     
                "input_type":"number",
-               "name":"products_count",
-               "title":"No of Product",
-               "database_name":"products_count"
+               "name":"amount",
+               "title":"Amount",
+               "database_name":"amount"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"number",
+               "name":"pre_due",
+               "title":"Previous Due",
+               "database_name":"pre_due"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"comment",
+               "title":"Comment",
+               "database_name":"comment"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"time",
+               "title":"Time",
+               "database_name":"created_at"
             }
             ]
         }]' ;
 
-        // $setting =  setting::find(18);
+        // $setting = new setting;
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'categories';
-        // $setting->model = 'App\Models\category';
+        // $setting->table_name = 'supplier_due_pays';
+        // $setting->model = 'App\Models\supplierDuePay';
         // $setting->save();
         // return  "Success";
     }

@@ -3,7 +3,7 @@
 <div>
 
     <button type="button" id="printPdf" style="color: white;  background-color:green;  ">Print </button>
-    <a href="{{route("bar_code.index")}}"><button type="button" " style="color: white;  background-color:red;  ">Cancel </button> </a>
+    <a href="{{route("bar-codes.index")}}"><button type="button" " style="color: white;  background-color:red;  ">Cancel </button> </a>
     </div>
     
     <div id="page-top" >  

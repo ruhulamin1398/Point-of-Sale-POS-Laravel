@@ -234,17 +234,17 @@ class ReturnProductController extends Controller
         }
         $sellDaily->cost -= $cost;
         $sellDaily->amount -= $amount;
-        $sellDaily->cash_recieved -= $amount;
+        $sellDaily->cash_received -= $amount;
         $sellDaily->return += $count;
 
         $sellMonthly->cost -= $cost;
         $sellMonthly->amount -= $amount;
-        $sellMonthly->cash_recieved -= $amount;
+        $sellMonthly->cash_received -= $amount;
         $sellMonthly->return += $count ;
 
         $sellYearly->cost -= $cost;
         $sellYearly->amount -= $amount;
-        $sellYearly->cash_recieved -= $amount;
+        $sellYearly->cash_received -= $amount;
         $sellYearly->return +=  $count;
 
         $sellDaily->save();
