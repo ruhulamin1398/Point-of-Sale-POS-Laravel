@@ -87,7 +87,12 @@
                             <td id="viewSell">{{$product->category->name}}</td>
                             <td id="viewProductTypeId">{{$product->brand->name}}</td>
                             <td id="viewCost">{{$product->cost_per_unit}}</td>
-                            <td id="viewCost">{{$product->price_per_unit * $product->unit->value}}</td>
+                            <td id="viewCost"> {{$product->price_per_unit * $product->unit->value}} 
+                                 @if ($product->is_fixed_price == 1)
+                                    (Fixed)
+                                @else 
+                                 (Not Fixed)
+                                @endif  </td>
                             <td id="viewLowLimit">{{$product->stock}}</td>
                             <td id="viewLowLimit">{{$product->tax}} ({{ $product->taxType->name }})</td>
                             <td id="viewLowLimit">{{$product->warrenty->name}}</td>
@@ -175,7 +180,7 @@
                                     <div id="barcodePrintData">
 
                                     </div>
-                                    <div class="form-row align-items-center">
+                                    <div class="row align-items-center">
 
 
 
@@ -189,6 +194,9 @@
 
                                             <span class="text-dark pl-2"> Quantity</span>
                                             <input type="number" name="quantity" class="form-control mb-2" required>
+                                        </div>
+
+                                        <div class="col-auto" id="checkBoxDiv">
                                         </div>
 
 
@@ -235,6 +243,26 @@
           
            var id = $(this).attr('product-item-id'); 
            $('#barcodeProductInputId').val(id);
+           var html = '';
+           var allProducts = @json($products);
+           var product ;
+           
+           $.each(allProducts, function (key, value) {
+                if(value.id == id){
+                    product = value;
+                }
+           });
+            if(product.is_fixed_price == 1){
+                html += '<input class="form-check-input" type="checkbox" name="print_price" id="print_price" checked>';
+                html += '<label class="form-check-label" for="print_price">Print Price  </label>';
+            }
+            else{
+                
+                html += '<input class="form-check-input" type="checkbox" name="print_price" id="print_price">';
+                html += '<label class="form-check-label" for="print_price">Print Price  </label>';
+
+            }
+            $('#checkBoxDiv').html(html);
         });
 
 

@@ -38,9 +38,12 @@ class BarCodeController extends Controller
     {
         
         $product = product::find($request->product_id);
-       
+        $print_price = 0;
+        if($request->print_price == 'on'){
+            $print_price = 1;
+        }
         $amount= $request->quantity;
-        return view('product.barcode.print',compact('product','amount'));
+        return view('product.barcode.print',compact('product','amount','print_price'));
     }
 
     /**

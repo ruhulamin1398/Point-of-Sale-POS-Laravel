@@ -72,7 +72,11 @@
                                 </tr>
                                 <tr class="data-row">
                                     <th>{{ __("translate.Price") }} </th>
-                                    <td>{{ $product->price_per_unit * $product->unit->value }}  </td>
+                                    <td>  {{ $product->price_per_unit * $product->unit->value }} @if ($product->is_fixed_price == 1)
+                                        (Fixed)
+                                    @else 
+                                     (Not Fixed)
+                                    @endif  </td>
                                 </tr>
                                 <tr class="data-row">
                                     <th>{{ __("translate.Warrenty") }} </th>

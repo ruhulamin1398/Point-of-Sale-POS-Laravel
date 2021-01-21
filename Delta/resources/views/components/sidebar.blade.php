@@ -99,10 +99,10 @@
         <div id="collapseReturn" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="{{ route('return-from-customers.index') }}">{{__('translate.From Customer List')}} </a>
-                <a class="collapse-item" href="{{ route('return-from-customers.create') }}">{{__('translate.From Customer')}}  </a>
-                <a class="collapse-item" href="{{ route('return-to-suppliers.index') }}">{{__('translate.To Supplier List')}} </a>
-                <a class="collapse-item" href="{{ route('return-to-suppliers.create') }}">{{__('translate.To Supplier')}}  </a>
+                <a class="collapse-item" href="{{ route('return-from-customers.index') }}">{{__('translate.Returns (Customer) List')}} </a>
+                <a class="collapse-item" href="{{ route('return-from-customers.create') }}">{{__('translate.Return (Customer)')}}  </a>
+                <a class="collapse-item" href="{{ route('return-to-suppliers.index') }}">{{__('translate.Returns (Supplier) List')}} </a>
+                <a class="collapse-item" href="{{ route('return-to-suppliers.create') }}">{{__('translate.Return (Supplier)')}}  </a>
 
             </div>
         </div>
