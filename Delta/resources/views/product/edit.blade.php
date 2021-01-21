@@ -63,7 +63,7 @@
                                         <label for="productName"> Product Name <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
-                                        <textarea type="text" name="name" class="form-control" id="name" placeholder="Produc Name"  required>{{ $product->name }}</textarea>
+                                        <textarea type="text" name="name" class="form-control" id="name" placeholder="Product Name"  required>{{ $product->name }}</textarea>
                                     </div>
 
 
@@ -189,10 +189,24 @@
                                     <div class="col-md-4 col-12">
                                         <label for="catagory_id">Price  <span class="text-danger">*</span></label>
                                     </div>
-                                    <div class="col-md-8 col-12">
-                                        
-                                         <input type="number" step="any" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
+                                    
+
+                                    <div class="col-md-4 col-12">
+                                        <select class="form-control form-control" name="is_fixed_price" id="is_fixed_price" required>
+                                            @if ($product->is_fixed_price ==1)
+                                                <option selected value="1"> Fixed Price </option>
+                                                <option  value="0"> Not Fixed </option>
+                                             @else 
+                                                <option  value="1"> Fixed Price </option>
+                                                 <option selected  value="0"> Not Fixed </option>
+                                            @endif
+                                        </select>
                                     </div>
+                                    <div class="col-md-4 col-12" id="priceDiv">
+                                        <input type="number" step="any" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
+                                        
+                                    </div>
+
 
 
 

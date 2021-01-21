@@ -56,8 +56,15 @@ use Illuminate\Support\Facades\Route;
 */
 
     //   Permission Route
+
 Route::resource('permissions',permissionController::class);
 Route::resource('permission-role',permissionRoleController::class);
+
+
+Route::post('role-permission-store',[permissionController::class, 'rolepermissionstore'])->name('rolepermissionstore');
+
+
+Route::post('remove-permission',[permissionController::class, 'removePermission'])->name('removePermission');
 
 
 

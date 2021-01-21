@@ -64,7 +64,7 @@
 
 
                 
-                    @foreach ($users as $user)
+                    @foreach ($user_with_roles as $user)
               
        
                         <option value="{{ $user->id }}" >{{ $user->name }}</option>
@@ -116,7 +116,7 @@
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar  ">
     
-                <div class="navbar-brand"><span id="eventList"> User With Role & Permissionsxxxxxx</span> </div>
+                <div class="navbar-brand"><span id="eventList"> User With Role & Permissions</span> </div>
                 <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" ><i class="fas fa-plus"
                         id="PlusButton"></i></button></div> 
     
@@ -189,8 +189,14 @@
                                
                            @foreach ($allpermissions as $permissionname)
                                
-                       
-                                {{ $permissionname->name }},
+                       @if($loop->last)
+                     {{ $permissionname->name }}
+                         @else
+                     {{ $permissionname->name }},
+
+                     @endif
+
+     
                                 @endforeach
                             </td>
                          
@@ -206,7 +212,7 @@
                             </form>
   
  
-                                <button title="Delete" id="permissionDeleteButton" class="dataDeleteItemClass btn btn-danger btn-sm" onclick="if(confirm('are you sure to delete this')){
+                                <button title="Delete" id="permissionDeleteButton" class="dataDeleteItemClass btn btn-danger btn-sm" onclick="if(confirm('are you sure to Remove Role From user ?')){
                     document.getElementById('delete-form-{{ $user->id }}').submit();
                 }
                 else{

@@ -17,9 +17,8 @@ class permissionRoleController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
         $all_roles_in_database = Role::all();
-        return view('permissions.role',compact('all_roles_in_database','permissions'));
+        return view('permissions.role',compact('all_roles_in_database'));
     }
 
     /**
@@ -58,7 +57,7 @@ class permissionRoleController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**
@@ -69,7 +68,9 @@ class permissionRoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        $permissions = Permission::all();
+        return view('permissions.edit',compact('role','permissions'));
     }
 
     /**
@@ -90,11 +91,22 @@ class permissionRoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+
+        return $request;
         $role = Role::find($id);
 
         $role->delete();
         return Redirect::back()->withErrors(["Role Deleted" ]);
     }
+
+
+
+
+
+
+
+
+
 }

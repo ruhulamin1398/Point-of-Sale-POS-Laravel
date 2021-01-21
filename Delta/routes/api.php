@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeDutyController;
+use App\Http\Controllers\permissionRoleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
@@ -21,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('all-permissions-by-role',[permissionRoleController::class, 'allPermissionsByRole'])->name('allPermissionsByRole'); 
+
 Route::get('all-products',[ProductController::class,'productAll']);
 Route::get('supplier-find',[SupplierController::class,'supplierFind']);
 Route::post('supplier-create',[SupplierController::class,'supplierStore'])->name("SupplierStore");
