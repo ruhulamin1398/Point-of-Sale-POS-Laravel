@@ -228,6 +228,28 @@
             <span>{{__('translate.Goal')}}</span></a>
     </li>
 
+
+       <!-- Divider -->
+       <hr class="sidebar-divider m-1 p-0 ">
+       <!-- Nav Item - Dashboard -->
+   
+   
+       <li class="nav-item">
+           <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapsepermission" aria-expanded="true" aria-controls="collapseExpenses">
+               <i class="fas fa-clipboard-list"></i>
+               <span>{{__('translate.Permissions')}} </span>
+           </a>
+           <div id="collapsepermission" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
+               <div class="bg-white py-2 collapse-inner rounded">
+   
+   
+                   <a class="collapse-item" href="{{ route('permissions.index') }}">{{__('translate.Permissions')}}</a>
+                   <a class="collapse-item" href="{{ route('permission-role.index') }}">{{__('translate.Role')}}</a>
+   
+               </div>
+           </div>
+       </li>
+   
     <hr class="sidebar-divider m-1 p-0 ">
     <!-- Nav Item - Dashboard -->
     <li class="nav-item  ">
@@ -236,9 +258,15 @@
             <span>user</span></a>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider m-1 p-0 ">
-    <!-- Nav Item - Dashboard -->
+ 
+
+
+
+
+
+
+
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center  d-none d-md-inline">
