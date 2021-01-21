@@ -116,7 +116,7 @@
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar  ">
     
-                <div class="navbar-brand"><span id="eventList"> Role With Persmissions</span> </div>
+                <div class="navbar-brand"><span id="eventList"> User With Role & Permissionsxxxxxx</span> </div>
                 <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" ><i class="fas fa-plus"
                         id="PlusButton"></i></button></div> 
     
