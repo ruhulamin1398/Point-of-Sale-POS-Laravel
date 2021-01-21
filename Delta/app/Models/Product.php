@@ -14,19 +14,22 @@ class Product extends Model
     protected $guarded = [];
 
     public function category(){
-        return $this->belongsTo('App\Models\category','category_id','id')->withTrashed()->withTrashed();
+        return $this->belongsTo('App\Models\category','category_id','id')->withTrashed();
     }
     public function brand(){
-        return $this->belongsTo('App\Models\brand','brand_id','id')->withTrashed()->withTrashed();
+        return $this->belongsTo('App\Models\brand','brand_id','id')->withTrashed();
     }
     public function type(){
-        return $this->belongsTo('App\Models\productType','type_id','id')->withTrashed()->withTrashed();
+        return $this->belongsTo('App\Models\productType','type_id','id')->withTrashed();
     }
     public function warrenty(){
-        return $this->belongsTo('App\Models\warrenty','warrenty_id','id')->withTrashed()->withTrashed();
+        return $this->belongsTo('App\Models\warrenty','warrenty_id','id')->withTrashed();
     }
     public function taxType(){
-        return $this->belongsTo('App\Models\taxType','tax_type_id','id')->withTrashed()->withTrashed();
+        return $this->belongsTo('App\Models\taxType','tax_type_id','id')->withTrashed();
+    }
+    public function unit(){
+        return $this->belongsTo('App\Models\unit','unit_id','id')->withTrashed();
     }
     public function abasas(){
         $this->brand = $this->brand->name;

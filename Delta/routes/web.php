@@ -10,6 +10,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerDueReceiveController;
 use App\Http\Controllers\CustomerRatingController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DropProductController;
@@ -25,14 +26,20 @@ use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
+
 use App\Http\Controllers\permissionController;
 use App\Http\Controllers\permissionRoleController;
+
+use App\Http\Controllers\ReturnFromCustomerController;
+
 use App\Http\Controllers\SettingController;
 use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
+use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
+use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -51,8 +58,6 @@ use Illuminate\Support\Facades\Route;
     //   Permission Route
 Route::resource('permissions',permissionController::class);
 Route::resource('permission-role',permissionRoleController::class);
-
-
 
 
 
@@ -89,17 +94,23 @@ Route::resource('purchases',PurchaseController::class);
 Route::resource('brands',BrandController::class);
 Route::resource('units',UnitController::class);
 Route::resource('product_types',ProductTypeController::class);
-Route::resource('return_products',ReturnProductController::class);
 Route::resource('suppliers',SupplierController::class);
 Route::resource('customers',CustomerController::class);
 Route::resource('customer_ratings',CustomerRatingController::class);
-Route::resource('sell_type',ProductSellTypeController::class);
+Route::resource('sell_types',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
-Route::resource('bar_code',BarCodeController::class);
+Route::resource('bar-codes',BarCodeController::class);
+
+Route::resource('return_products',ReturnProductController::class);
+Route::resource('return-to-suppliers',ReturnToSupplierController::class);
+Route::resource('return-from-customers',ReturnFromCustomerController::class);
+
+Route::resource('customer-due-receives',CustomerDueReceiveController::class);
+Route::resource('supplier-due-pays',SupplierDuePayController::class);
 
 
 
-Route::resource('warrenty',WarrentyController::class);
+Route::resource('warrenties',WarrentyController::class);
 Route::resource('drop_products',DropProductController::class);
 Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ])->name('stock_alert');
 
@@ -114,17 +125,17 @@ Route::resource('employee_payments',EmployeePaymentController::class);
 Route::resource('employee_salaries',EmployeeSalaryController::class);
 
 // Duties  
-Route::resource('duty_status',DutyStatusController::class);
+Route::resource('duty-statuses',DutyStatusController::class);
 Route::resource('employee_duties',EmployeeDutyController::class);
 Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
 
 // Expenses
-Route::resource('expense',ExpenseController::class);
-Route::resource('expense_type',ExpenseTypeController::class);
-Route::resource('expense_monthly',ExpenseMonthlyController::class);
+Route::resource('expenses',ExpenseController::class);
+Route::resource('expense-types',ExpenseTypeController::class);
+Route::resource('expense-monthlies',ExpenseMonthlyController::class);
 
 // analysis
-Route::resource('sell_analysis',SellAnalysisDailyController::class);
+Route::get('sell-analysis',[SellAnalysisDailyController::class, 'index'])->name('sell-analysis'); 
 Route::get('analysis',[AnalysisController::class,'index']);
 
 

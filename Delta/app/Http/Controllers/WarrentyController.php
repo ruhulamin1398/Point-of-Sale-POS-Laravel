@@ -90,6 +90,9 @@ class WarrentyController extends Controller
      */
     public function update(Request $request, warrenty $warrenty)
     {
+        if($warrenty->id==1){
+            return Redirect::back()->withErrors(["This Warrenty Can't be Edited" ]);
+        }
         $warrenty->name = $request->name;
         $warrenty->total_days = $request->total_days;
         $warrenty->save();
@@ -105,6 +108,9 @@ class WarrentyController extends Controller
      */
     public function destroy(warrenty $warrenty)
     {
+        if($warrenty->id==1){
+            return Redirect::back()->withErrors(["This Warrenty Can't be Deleted" ]);
+        }
         
         $warrenty->delete();
         return Redirect::back()->withErrors(["Warrenty Deleted" ]);
