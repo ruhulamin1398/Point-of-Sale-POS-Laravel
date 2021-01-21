@@ -24,6 +24,7 @@ class CreateReturnFromCustomersTable extends Migration
             $table->double('profit',18,3)->default(0);
             $table->longText('comment')->nullable();
             
+            $table->json('data')->default(json_encode(['']));
             $table->softDeletes();
             $table->timestamps();
         });

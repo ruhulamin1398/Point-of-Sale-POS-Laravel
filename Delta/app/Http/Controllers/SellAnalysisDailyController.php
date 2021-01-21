@@ -207,7 +207,7 @@ class SellAnalysisDailyController extends Controller
             array_push($dailyAmount,$sellDaily->amount);
             array_push($dailyDiscount,$sellDaily->discount);
             array_push($dailyDue,$sellDaily->due);
-            array_push($dailyCash,$sellDaily->cash_recieved);
+            array_push($dailyCash,$sellDaily->cash_received);
         }
         $amountAnalysisDaily = [
             'id' => 'amountAnalysisDaily',
@@ -238,7 +238,7 @@ class SellAnalysisDailyController extends Controller
                     "borderColor" => 	"#008080",
                     "fill" => false
                 ],[
-                    "label" => "Daily Cash Recieved",
+                    "label" => "Daily Cash Received",
                     "data" => $dailyCash,
                     "backgroundColor" => "#00FFFF",
                     "borderColor" => 	"#00FFFF",

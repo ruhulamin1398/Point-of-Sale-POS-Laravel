@@ -10,6 +10,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerDueReceiveController;
 use App\Http\Controllers\CustomerRatingController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DropProductController;
@@ -33,6 +34,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnProductController;
 use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
+use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +83,10 @@ Route::resource('bar-codes',BarCodeController::class);
 Route::resource('return_products',ReturnProductController::class);
 Route::resource('return-to-suppliers',ReturnToSupplierController::class);
 Route::resource('return-from-customers',ReturnFromCustomerController::class);
+
+Route::resource('customer-due-receives',CustomerDueReceiveController::class);
+Route::resource('supplier-due-pays',SupplierDuePayController::class);
+
 
 
 Route::resource('warrenties',WarrentyController::class);

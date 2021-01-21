@@ -25,6 +25,8 @@
 - cash management system 
 - product count on sell analysis and purchase analysis
 - auth in return product
+- auth in customer due
+- auth in supplier due
 
 
 ---------------------------------------
