@@ -25,10 +25,10 @@ class permissionController extends Controller
         // $user->givePermissionTo($permission);
         // // return $user->permissions;
         // $permission = Permission::create(['name' => 'read']);
-        $users = User::all();
+        // $users = User::all();
         $roles = Role::all();
         $user_with_roles = User::with('roles')->get();
-        return view('permissions.index',compact('user_with_roles','roles','users'));
+        return view('permissions.index',compact('user_with_roles','roles'));
         
     }
 
@@ -55,7 +55,7 @@ class permissionController extends Controller
         $role = Role::find($request->role_id);
         $user = User::find($request->user_id);
         
-        
+            
         $userallrole =  count($user->getRoleNames()) ;
         
        if($userallrole == 0){
@@ -167,8 +167,42 @@ class permissionController extends Controller
 
         }
 
+
+        
       
 
 
     }
+
+
+
+
+    public function rolepermissionstore(Request $request)
+        {
+            $role = Role::find($request->role_id);
+             $permission = Permission::find($request->permission_id);
+             
+            
+            $role->givePermissionTo($permission);
+            return redirect()->back()->withSuccess(['Permission given Successfully']);
+             
+
+           
+        }
+
+        public function removePermission(Request $request)
+        {
+    
+            $role = Role::find($request->role_id);
+            $permission = Permission::find($request->permission_id);
+
+
+            $role->revokePermissionTo($permission);
+            return redirect()->back()->withErrors(['Permission Removed']);
+
+
+           
+        }
+    
+
 }
