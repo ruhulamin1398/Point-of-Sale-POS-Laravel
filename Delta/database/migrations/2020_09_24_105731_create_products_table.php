@@ -33,7 +33,7 @@ class CreateProductsTable extends Migration
 
             $table->double('price_per_unit',18,2)->nullable();
             $table->double('cost_per_unit',18,2)->nullable();
-            
+            $table->integer('is_fixed_price')->default(1);
             $table->double('stock',18,6)->default(0);
             $table->double('stock_alert',18,6)->default(1);
 
