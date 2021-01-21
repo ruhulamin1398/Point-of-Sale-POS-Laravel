@@ -1,4 +1,3 @@
-
 @extends('includes.app')
 
 
@@ -19,35 +18,45 @@
             <form method="POST" action="{{ route('bar-codes.store') }}">
                 @csrf
                 <div class="form-row align-items-center" id="barcodePrint">
-                  
-                
 
 
-                    
+
+
+
 
                     <div class="col-12 pl-4 pr-4" style="position: relative;">
                         <span class="text-dark  pl-2 "> {{ __('translate.Search')  }}</span>
-                        <input type="text" name="product_id" id="barcodeInputId" class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
+                        <input type="text" name="product_id" id="barcodeInputId"
+                            class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
                             autocomplete="off" placeholder="Search by id or name or you can barcode" autofocus required>
-                        <div id="productSuggession" class="list-group"   style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
+                        <div id="productSuggession" class="list-group"
+                            style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; ">
+                        </div>
                     </div>
 
-                    <div class="col-auto p-4">
+                    <div class="col-12 col-md-3 p-4">
                         <span class="text-dark  pl-2"> {{ __('translate.Product Name')  }}</span>
-                        <input type="text" name="name" id="barcodeName" size="30" value=""
-                            class="form-control  mb-2" readonly required>
+                        <input type="text" name="name" id="barcodeName" size="30" value="" class="form-control  mb-2"
+                            readonly required>
                     </div>
-                    <div class="col-auto p-4">
+                    <div class="col-12 col-md-3 p-4">
 
                         <span class="text-dark pl-1"> {{ __('translate.Quantity')  }}</span>
-                        <input type="number" step="any" name="quantity" id="barcodequantity" size="6"  min="1"
+                        <input type="number" step="any" name="quantity" id="barcodequantity" size="6" min="1"
                             class="form-control  mb-2  inputMinZero" required>
                     </div>
 
-                    <div class="col-auto p-4">
-                        <button type="submit" id="barcodeSubmit" class="btn bg-abasas-dark mt-3" >{{ __('translate.Submit')  }} </button>
+                    <div class="col-12 col-md-3 p-4" id="checkBoxDiv">
+
+                        <input class="form-check-input" type="checkbox" name="print_price" id="print_price">
+                        <label class="form-check-label" for="print_price">Print Price  </label>
                     </div>
-                   
+
+                    <div class="col-12 col-md-3 p-4">
+                        <button type="submit" id="barcodeSubmit"
+                            class="btn bg-abasas-dark btn-block mt-3">{{ __('translate.Submit')  }} </button>
+                    </div>
+
 
                 </div>
 
@@ -60,107 +69,122 @@
 
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-    //                               *****************************************************************************
-    //                                           ##########  Search product suggession    #############
-    //                               *******************************************************************************
-
-
-    var databaseProducts;
-
-$(function () {
+        //                               *****************************************************************************
+        //                                           ##########  Search product suggession    #############
+        //                               *******************************************************************************
 
 
-    var link = $("#homeRoute").val().trim() + "/api/all-products";
-    console.log(link);
+        var databaseProducts;
 
-    $.get(link, function (data) {
-        databaseProducts = data;
+        $(function () {
 
-    });
 
-})
+            var link = $("#homeRoute").val().trim() + "/api/all-products";
+            console.log(link);
 
-    $("#productSuggession").hide();
+            $.get(link, function (data) {
+                databaseProducts = data;
 
-$("#barcodeInputId").on('keyup', function () {
-    $("#productSuggession").show();
+            });
 
-    var searchField = $("#barcodeInputId").val();
-    var expression = new RegExp(searchField, "i");
-    if (searchField.length == 0) {
+        })
+
         $("#productSuggession").hide();
-        return false;
-    }
-    $("#productSuggession").html("");
 
-    var count = 0;
-    $.each(databaseProducts, function (key, value) {
+        $("#barcodeInputId").on('keyup', function () {
+            $("#productSuggession").show();
 
-
-        if (value.name.search(expression) != -1 || value.id == searchField) {
-            if (count == 50) {
+            var searchField = $("#barcodeInputId").val();
+            var expression = new RegExp(searchField, "i");
+            if (searchField.length == 0) {
+                $("#productSuggession").hide();
                 return false;
             }
-            count++;
-            $('#productSuggession').append(
-                '<a herf="#" class="list-group-item list-group-item-action border-1 searchItem text-dark" data-item-id="' +
-                value.id + '">' + +value.id + ' | ' + value.name + ' | ' + value
-                .price_per_unit + ' </a>')
-        }
+            $("#productSuggession").html("");
+
+            var count = 0;
+            $.each(databaseProducts, function (key, value) {
+
+
+                if (value.name.search(expression) != -1 || value.id == searchField) {
+                    if (count == 50) {
+                        return false;
+                    }
+                    count++;
+                    $('#productSuggession').append(
+                        '<a herf="#" class="list-group-item list-group-item-action border-1 searchItem text-dark" data-item-id="' +
+                        value.id + '">' + +value.id + ' | ' + value.name + ' | ' + value
+                        .price_per_unit + ' </a>')
+                }
+
+            });
+            if (count == 0) {
+                $('#productSuggession').html(
+                    '<div class="list-group-item list-group-item-action border-1 text-dark"> Not found any Data </div>'
+                )
+            }
+
+
+
+        });
+
+
+        $('body').click(function () {
+            $("#productSuggession").hide();
+            $("#productSuggession").html("");
+        });
+
+        $(document).on('click', '.searchItem', function () {
+            var id = $(this).attr('data-item-id');
+            $("#barcodeInputId").val(id)
+            $("#barcodeName").val(databaseProducts[id].name)
+            // alert(id);//this one needs to be triggered
+            purchaseProductInputOnInput()
+            $("#productSuggession").hide();
+            $("#productSuggession").html("");
+        });
+
+
+
+        $("#barcodeInputId").on('input', function () {
+            var product_id = parseInt($(this).val().trim());
+            console.log(databaseProducts);
+
+            var product = databaseProducts[product_id];
+            console.log(product);
+            
+            if (typeof product == 'undefined') {
+                $('#barcodeName').val('');
+            } else {
+                var html = '';
+                $('#barcodeName').val(product.name);
+                if(product.is_fixed_price == 1){
+
+                    html += '<input class="form-check-input" type="checkbox" name="print_price" id="print_price" checked>';
+                    html += '<label class="form-check-label" for="print_price">Print Price  </label>';
+                }
+                else{
+                    
+                    html += '<input class="form-check-input" type="checkbox" name="print_price" id="print_price">';
+                    html += '<label class="form-check-label" for="print_price">Print Price  </label>';
+
+                }
+                $('#checkBoxDiv').html(html);
+            }
+            // if($('#barcodeName').val().length==0 || parseFloat($('#barcodeName').val().trim()) <=0)
+            //     alert('hi');
+        });
+
+
 
     });
-    if (count == 0) {
-        $('#productSuggession').html(
-            '<div class="list-group-item list-group-item-action border-1 text-dark"> Not found any Data </div>'
-        )
-    }
 
-
-
-});
-
-
-$('body').click(function () {
-        $("#productSuggession").hide();
-        $("#productSuggession").html("");
-    });
-
-    $(document).on('click', '.searchItem', function () {
-        var id = $(this).attr('data-item-id');
-        $("#barcodeInputId").val(id)
-        $("#barcodeName").val(databaseProducts[id].name)
-        // alert(id);//this one needs to be triggered
-        purchaseProductInputOnInput()
-        $("#productSuggession").hide();
-        $("#productSuggession").html("");
-    });
-
-
-
-    $("#barcodeInputId").on('input', function () {
-        var product_id = parseInt($(this).val().trim());
-        console.log(databaseProducts);
-       
-        var product = databaseProducts[product_id];
-        console.log(product);
-        if (typeof product == 'undefined') {
-            $('#barcodeName').val('');
-        } else {
-            $('#barcodeName').val(product.name);
-        }
-        // if($('#barcodeName').val().length==0 || parseFloat($('#barcodeName').val().trim()) <=0)
-        //     alert('hi');
-     });
-     
-
-
-    });
 </script>
 
 
 
 
- 
+
 @endsection

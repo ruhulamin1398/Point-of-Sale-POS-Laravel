@@ -52,7 +52,10 @@
                          $price = $product->price_per_unit * $product->unit->value ;
                          @endphp
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
+                      @if ($print_price == 1)
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
+                          
+                      @endif
                       
                     
                     </div>

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\customer;
+use App\Models\order;
+use App\Models\Product;
+use App\Models\supplier;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -13,7 +17,12 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('index');
+        
+        $customers = customer::count();
+        $suppliers = supplier::count();
+        $orders = order::count();
+        $products = Product::where('stock','>',0)->count();
+        return view('index',compact('customers','suppliers','orders','products'));
     }
 
     /**

@@ -62,7 +62,7 @@
                                         <label for="productName"> Product Name <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
-                                        <textarea type="text" name="name" class="form-control" id="name" placeholder="Produc Name" required></textarea>
+                                        <textarea type="text" name="name" class="form-control" id="name" placeholder="Product Name" required></textarea>
                                     </div>
 
 
@@ -185,9 +185,15 @@
                                     <div class="col-md-4 col-12">
                                         <label for="price">Price  <span class="text-danger">*</span></label>
                                     </div>
-                                    <div class="col-md-8 col-12">
+                                    <div class="col-md-4 col-12">
+                                        <select class="form-control form-control" name="is_fixed_price" id="is_fixed_price" required>
+                                            <option  selected value="1"> Fixed Price </option>
+                                            <option  value="0"> Not Fixed </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-12" id="priceDiv">
+                                        <input type="number" step="any" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
                                         
-                                         <input type="number" step="any" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
                                     </div>
 
 
