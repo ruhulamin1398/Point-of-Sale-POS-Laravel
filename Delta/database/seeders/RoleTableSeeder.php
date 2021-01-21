@@ -16,22 +16,22 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            [
-                'name' => 'ruhul',
-                'email' => 'ruhul@gmail.com',
-                'password' => Hash::make(1234),
-            ],
-            [
-                'name' => 'sourov',
-                'email' => 'sourov@gmail.com',
-                'password' => Hash::make(1234),
-            ],
-            [
-                'name' => 'masum',
-                'email' => 'masum@gmail.com',
-                'password' => Hash::make(1234),
-            ],
 
+            [
+                'name' => 'Super Admin',
+                'email' => 'superadmin@abadsas.tech',
+                'password' => Hash::make(1234),
+            ],
+            [
+                'name' => 'Admin',
+                'email' => 'admin@abasas.tech',
+                'password' => Hash::make(1234),
+            ],
+            [
+                'name' => 'Admin 2',
+                'email' => 'admin2@abasas.tech',
+                'password' => Hash::make(1234),
+            ]
         ]);
     
         DB::table('categories')->insert([
@@ -487,7 +487,22 @@ class RoleTableSeeder extends Seeder
 
 
         
+        DB::table('roles')->insert([
+            [
+                'name' => 'Super Admin',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Admin',
+                'guard_name' => 'web',
 
+            ],
+            [
+                'name' => 'Admin 2',
+                'guard_name' => 'web',
+
+            ],
+    ]);
 
 
 
