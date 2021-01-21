@@ -504,6 +504,29 @@ class RoleTableSeeder extends Seeder
             ],
     ]);
 
+            
+    DB::table('permissions')->insert([
+        [
+            'name' => 'create',
+            'guard_name' => 'web',
+        ],
+        [
+            'name' => 'read',
+            'guard_name' => 'web',
+
+        ],
+        [
+            'name' => 'edit',
+            'guard_name' => 'web',
+
+        ],
+        [
+            'name' => 'delete',
+            'guard_name' => 'web',
+
+        ],
+]);
+
 
 
 

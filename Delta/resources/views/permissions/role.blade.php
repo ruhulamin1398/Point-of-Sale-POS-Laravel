@@ -132,7 +132,7 @@
                     <tfoot class="bg-abasas-dark">
                         <tr>
     
-                            <th> #</th>
+                            <th>#</th>
                             <th>Role Name</th>
                             <th>Role have Permissions</th>
                             <th>Action</th>
@@ -145,18 +145,20 @@
 
                         @php
                               $itr=1;
+                              
                         @endphp
                      
                         @foreach ($all_roles_in_database as $allrole)
                         @php
                       
-                        $rolepermissions = $allrole->permissions
+                        $rolepermissions = $allrole->permissions;
+                        $id = $allrole->id;
                         @endphp
     
                         <tr class="data-row" >
                             <td class="iteration">{{$itr++}}</td>
-                            <td class="word-break name">{{ $allrole->name }}</td>
-                            <td class="word-break role">
+                            <td class="word-break role">{{ $allrole->name }}</td>
+                            <td class="word-break permissions">
                                 
                                 @foreach ($rolepermissions as $permissions)
                                
@@ -175,21 +177,22 @@
                             </td>
 
                     
-{{--     
+ 
                             <td class="align-middle">
 
                                 <button type="button" class="btn btn-success" id="level-edit-item" data-item-id={{$id}}> <i class="fa fa-edit" aria-hidden="false"> </i></button>
 
 
 
-                            <form method="POST" action="{{ route('permissions.destroy',  $user->id )}}" id="delete-form-{{ $user->id }}" style="display:none; ">
+                            <form method="POST" action="{{ route('permission-role.destroy',  $allrole->id )}}" id="delete-form-{{ $allrole->id }}" style="display:none; ">
                                 {{csrf_field() }}
-                                {{ method_field("delete") }}
-                            </form>
+                                {{ method_field("delete")}}
+
+                            </form> 
   
  
                                 <button title="Delete" id="permissionDeleteButton" class="dataDeleteItemClass btn btn-danger btn-sm" onclick="if(confirm('are you sure to delete this')){
-                    document.getElementById('delete-form-{{ $user->id }}').submit();
+                    document.getElementById('delete-form-{{ $allrole->id }}').submit();
                 }
                 else{
                     event.preventDefault();
@@ -203,7 +206,7 @@
     
     
     
-                            </td> --}}
+                            </td> 
     
     
                         </tr>
@@ -223,6 +226,82 @@
 
 
 
+
+ <!-- Attachment Modal -->
+ <div class="modal fade" id="level-edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark" id="edit-modal-label ">Edit Level</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="attachment-body-content">
+                <form id="level-edit-form" class="form-horizontal" method="POST" action="">
+                @csrf
+                  
+       
+                    <!-- /id -->
+                    <!-- name -->
+                    <div class="form-group">
+                        <label class="col-form-label" for="modal-input-firstname">Role Name</label>
+                        <input type="text" name="role" class="form-control" id="modal-input-role" required autofocus>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <span> Permissions</span>
+                <table  class="table table-striped table-bordered" id="permissionedittable" width="100%" cellspacing="0">
+                 <thead class="bg-light ">
+                    <tr>
+
+
+
+
+                        
+                        <th>
+                        Permission             
+                        </th>
+                        <th>
+                            Action          
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+               
+                </tbody>
+                 
+                </table>
+                    </div>
+
+
+                   
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="form-control btn btn-success">
+                    </div>
+                    <!-- /description -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+     <!-- /Attachment Modal -->
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
         $(document).ready(function(){
         
@@ -232,7 +311,62 @@
             
 
         });
+
+
+        $('body').on('click', "#level-edit-item", function() {
+
+            
+            $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+
+
+
+
+            var options = {
+            'backdrop': 'static'
+            };
+
+            $('#level-edit-modal').modal(options)
+
+
+
+            // on modal show
+            $('#level-edit-modal').on('show.bs.modal', function() {
+            var el = $(".edit-item-trigger-clicked"); // See how its usefull right here?
+            var row = el.closest(".data-row");
+
+            // get the data
+            var id = el.data('item-id');
+
+            var permissions = row.children(".permissions").text().trim();
+            var role = row.children(".role").text().trim();
+             
+              
+              
+
+
+
+            var action= $("#indexLink").val()+'/update/'+id;
+            $("#level-edit-form").attr('action',action);
+
+            // fill the data in the input fields
+            $("#modal-input-id").val(id);
+            $("#modal-input-role").val(role);
+
+
+            });
+            //on modal hide
+            $('#level-edit-modal').on('hide.bs.modal', function() {
+            $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
+            $("#level-edit-form").trigger("reset");
+            });
+
+
         });
+        });
+
+
+
+
 </script>
 
 
