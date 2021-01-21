@@ -26,7 +26,12 @@ use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\permissionController;
+use App\Http\Controllers\permissionRoleController;
+
 use App\Http\Controllers\ReturnFromCustomerController;
+
 use App\Http\Controllers\SettingController;
 use App\Models\category;
 use App\Models\setting;
@@ -49,6 +54,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+    //   Permission Route
+Route::resource('permissions',permissionController::class);
+Route::resource('permission-role',permissionRoleController::class);
+
+
+
+
+
+
 Route::get('getjson',function(){
     return Product::all();
 })->name('getJson');
@@ -57,14 +72,19 @@ Route::post('test-submit',function(Request $request){
 })->name('testSubmit');
 
 Route::view('/test-form','testForm');
-Route::get('/', function () {
 
-return view('welcome');
- })->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+
+
+Route::middleware(['auth'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+
+
+
+Route::get('/',[IndexController::class, 'index'])->name('home'); 
 
 Route::resource('categories',CategoryController::class);
 Route::resource('products',ProductController::class); 
@@ -80,7 +100,7 @@ Route::resource('sell_types',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 Route::resource('bar-codes',BarCodeController::class);
 
-Route::resource('return_products',ReturnProductController::class);
+// Route::resource('return_products',ReturnProductController::class);
 Route::resource('return-to-suppliers',ReturnToSupplierController::class);
 Route::resource('return-from-customers',ReturnFromCustomerController::class);
 
