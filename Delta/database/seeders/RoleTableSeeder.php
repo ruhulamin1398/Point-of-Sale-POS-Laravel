@@ -525,7 +525,17 @@ class RoleTableSeeder extends Seeder
             'guard_name' => 'web',
 
         ],
-]);
+    ]);
+    DB::table('goals')->insert([
+        [
+            'daily' => 25,
+            'weekly' => 175,
+            'monthly' => 750,
+            'yearly' => 9125
+        ],
+
+
+    ]);
 
 
 
