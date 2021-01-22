@@ -107,7 +107,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         
-        $productAnalysis=$this->productAnalysis();
+        $productAnalysis=$this->productAnalysis($product->id);
         $dataArray = json_decode(json_encode($productAnalysis), true);
         return view('product.show',compact('product','dataArray'));
     }
@@ -260,7 +260,7 @@ class ProductController extends Controller
     }
 
 
-    public function productAnalysis(){
+    public function productAnalysis($product_id){
         $lebels = array('Purchase','Sell','Return','Drop','Profit');
         $data = array();
         $purchase = 0;
@@ -268,7 +268,7 @@ class ProductController extends Controller
         $Return = 0;
         $Drop = 0;
         $Profit = 0;
-        $productYearlies = productAnalysisYearly::all();
+        $productYearlies = productAnalysisYearly::where('product_id',$product_id)->get();
         foreach ($productYearlies as $productYearly) {
             $purchase += $productYearly->purchase;
             $Sell += $productYearly->sell;
