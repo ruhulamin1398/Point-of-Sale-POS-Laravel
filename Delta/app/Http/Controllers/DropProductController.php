@@ -37,6 +37,10 @@ class DropProductController extends Controller
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
         $dropProducts = dropProduct::where('created_at', '>=', $monthstart)->where('created_at', '<=', $monthend)->get();
 
+        foreach($dropProducts as $dropProduct){
+            $dropProduct->quantity = $dropProduct->quantity / $dropProduct->products->unit->value;
+            $dropProduct->changed_quantity = $dropProduct->changed_quantity / $dropProduct->products->unit->value;
+        }
         $dataArray = [
             'settings' => $settings,
             'items' => $dropProducts,
@@ -59,6 +63,11 @@ class DropProductController extends Controller
         $settings = setting::where('table_name', 'drop_products')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
         $dropProducts = dropProduct::where('created_at', '>=', $daystart)->where('created_at', '<=', $dayend)->get();
+
+        foreach($dropProducts as $dropProduct){
+            $dropProduct->quantity = $dropProduct->quantity / $dropProduct->products->unit->value;
+            $dropProduct->changed_quantity = $dropProduct->changed_quantity / $dropProduct->products->unit->value;
+        }
         $dataArray = [
             'settings' => $settings,
             'items' => $dropProducts,
@@ -81,12 +90,12 @@ class DropProductController extends Controller
             return redirect()->back()->withErrors(['Quantity must be greater than 0']);
         }
         $product = product::find($request->product_id);
-        if ($product->stock >= $request->quantity) {
+        if ($product->stock >= $request->quantity * $product->unit->value) {
 
             $dropProduct = new dropProduct;
             $dropProduct->user_id = 1;  // auth must be added here
             $dropProduct->product_id = $request->product_id;
-            $dropProduct->quantity = $request->quantity;
+            $dropProduct->quantity = $request->quantity * $product->unit->value;
             $dropProduct->comment = $request->comment;
             $product->stock -= $dropProduct->quantity;
             $product->save();
@@ -97,7 +106,7 @@ class DropProductController extends Controller
             //calculation analysis end
 
             // product analysis start  
-            $this->productAnalysis($request->product_id,$request->quantity,$product->cost_per_unit*$request->quantity);
+            $this->productAnalysis($request->product_id,$dropProduct->quantity,$product->cost_per_unit*$request->quantity);
             // product analysis end
 
             return redirect()->back()->withSuccess(['Successfully Dropped']);
@@ -145,11 +154,11 @@ class DropProductController extends Controller
         }
         $product = Product::find($dropProduct->product_id);
         $dropProduct->changed_quantity -= $dropProduct->quantity;
-        $dropProduct->changed_quantity += $request->quantity;
-        $changedNow = $request->quantity - $dropProduct->quantity;
-        $dropProduct->quantity = $request->quantity;
+        $dropProduct->changed_quantity += ($request->quantity * $product->unit->value);
+        $changedNow = ($request->quantity * $product->unit->value )- $dropProduct->quantity;
+        $dropProduct->quantity = $request->quantity * $product->unit->value;
         $dropProduct->comment = $request->comment;
-        if( $changedNow >= $product->stock){
+        if( $changedNow > $product->stock){
             return redirect()->back()->withErrors(['Products Stock is less than Drop quantity']);
         }
         $product->stock -= $changedNow;

@@ -93,7 +93,7 @@
                                 @else 
                                  (Not Fixed)
                                 @endif  </td>
-                            <td id="viewLowLimit">{{$product->stock}}</td>
+                            <td id="viewLowLimit">{{$product->stock / $product->unit->value}}</td>
                             <td id="viewLowLimit">{{$product->tax}} ({{ $product->taxType->name }})</td>
                             <td id="viewLowLimit">{{$product->warrenty->name}}</td>
 

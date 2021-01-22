@@ -91,8 +91,12 @@
                                     <td>{{ $product->taxType->name }}</td>
                                 </tr>
                                 <tr class="data-row">
+                                    <th>{{ __("translate.Stock") }} </th>
+                                    <td>{{$product->stock / $product->unit->value}}</td>
+                                </tr>
+                                <tr class="data-row">
                                     <th>{{ __("translate.Stock Alert") }} </th>
-                                    <td> {{ $product->stock_alert }} </td>
+                                    <td> {{ $product->stock_alert / $product->unit->value }} </td>
                                 </tr>
                             </tbody>
                         </table>

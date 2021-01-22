@@ -74,8 +74,11 @@ class ProductController extends Controller
     {  
  
        $product = new product;
+       $unit = unit::find($request->unit_id);
        $product->name=$request->name;
-       $product->stock_alert=$request->stock_alert;
+
+       $product->stock_alert=$request->stock_alert * $unit->value;
+
        $product->category_id=$request->category_id;
        $product->type_id=$request->type_id;
        $product->brand_id=$request->brand_id;
@@ -142,8 +145,9 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+       $unit = unit::find($request->unit_id);
         $product->name=$request->name;
-       $product->stock_alert=$request->stock_alert;
+       $product->stock_alert=$request->stock_alert * $unit->value;
        $product->category_id=$request->category_id;
        $product->type_id=$request->type_id;
        $product->brand_id=$request->brand_id;
