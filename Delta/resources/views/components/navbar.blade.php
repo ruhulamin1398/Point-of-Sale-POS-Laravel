@@ -1,17 +1,17 @@
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-abasas-dark topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light  topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars text-light "></i>
+            <i class="fa fa-bars  "></i>
           </button>
 
           
-          <img src="{{asset('img/mabricslogo.png')}}" height="60px" alt="">
-          <a href="#">
- <span class="h2 title text-light"  > Abasas </span> 
-          <span class="h6 title text-light"  > Not Number One, WE are Only One </span> </a> 
+          <img src="{{asset('img/abasas-logo.png')}}" height="60px" alt="Logo">
+          
+ <span class="h2 title "  > Abasas SAAS </span> 
+          <span class="h6 title "  > <sub> Not Number One, WE are Only One</sub> </span>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -38,10 +38,10 @@
 
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
-              <!-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-                <!-- <i class="fas fa-bell fa-fw"></i> -->
+               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <i class="fas fa-bell fa-fw"></i> 
                 <!-- Counter - Alerts -->
-                <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+              <span class="badge badge-danger badge-counter">3+</span> 
               </a>
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -146,7 +146,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline  small text-light">{{Auth::user()->name}}</span>
+                <span class="mr-2 d-none d-lg-inline  small ">{{Auth::user()->name}}</span>
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
               </a>
               <!-- Dropdown - User Information -->
