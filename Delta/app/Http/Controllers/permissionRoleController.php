@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\barCode;
-use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-class BarCodeController extends Controller
+class permissionRoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,8 @@ class BarCodeController extends Controller
      */
     public function index()
     {
-        return view('product.barcode.index');
+        $all_roles_in_database = Role::all();
+        return view('permissions.role',compact('all_roles_in_database'));
     }
 
     /**
@@ -36,46 +39,48 @@ class BarCodeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $product = product::find($request->product_id);
-        $print_price = 0;
-        if($request->print_price == 'on'){
-            $print_price = 1;
-        }
-        $amount= $request->quantity;
-        return view('product.barcode.print',compact('product','amount','print_price'));
+
+        $roleName = $request->name;
+        $role = Role::create(['name' =>$roleName ]);
+        $permission = Permission::find($request->permission_id);
+        $role->givePermissionTo($permission);
+
+
+         return redirect()->back()->withSuccess(['Role Created Successfully']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(barCode $barCode)
+    public function show($id)
     {
-        //
+       //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(barCode $barCode)
+    public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        $permissions = Permission::all();
+        return view('permissions.edit',compact('role','permissions'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, barCode $barCode)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -83,11 +88,25 @@ class BarCodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(barCode $barCode)
+    public function destroy(Request $request, $id)
     {
-        //
+
+        return $request;
+        $role = Role::find($id);
+
+        $role->delete();
+        return Redirect::back()->withErrors(["Role Deleted" ]);
     }
+
+
+
+
+
+
+
+
+
 }

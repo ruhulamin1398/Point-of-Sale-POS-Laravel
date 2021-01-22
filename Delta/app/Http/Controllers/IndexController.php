@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\barCode;
+use App\Models\customer;
+use App\Models\order;
 use App\Models\Product;
+use App\Models\supplier;
 use Illuminate\Http\Request;
 
-class BarCodeController extends Controller
+class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,12 @@ class BarCodeController extends Controller
      */
     public function index()
     {
-        return view('product.barcode.index');
+        
+        $customers = customer::count();
+        $suppliers = supplier::count();
+        $orders = order::count();
+        $products = Product::where('stock','>',0)->count();
+        return view('index',compact('customers','suppliers','orders','products'));
     }
 
     /**
@@ -36,23 +43,16 @@ class BarCodeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $product = product::find($request->product_id);
-        $print_price = 0;
-        if($request->print_price == 'on'){
-            $print_price = 1;
-        }
-        $amount= $request->quantity;
-        return view('product.barcode.print',compact('product','amount','print_price'));
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(barCode $barCode)
+    public function show($id)
     {
         //
     }
@@ -60,10 +60,10 @@ class BarCodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(barCode $barCode)
+    public function edit($id)
     {
         //
     }
@@ -72,10 +72,10 @@ class BarCodeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, barCode $barCode)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -83,10 +83,10 @@ class BarCodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\barCode  $barCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(barCode $barCode)
+    public function destroy($id)
     {
         //
     }
