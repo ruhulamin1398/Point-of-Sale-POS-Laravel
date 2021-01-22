@@ -26,6 +26,7 @@ use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\permissionController;
 use App\Http\Controllers\permissionRoleController;
@@ -106,6 +107,7 @@ Route::resource('customer_ratings',CustomerRatingController::class);
 Route::resource('sell_types',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 Route::resource('bar-codes',BarCodeController::class);
+Route::resource('goals',GoalController::class);
 
 // Route::resource('return_products',ReturnProductController::class);
 Route::resource('return-to-suppliers',ReturnToSupplierController::class);
