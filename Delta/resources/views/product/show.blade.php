@@ -71,6 +71,10 @@
                                     <td>{{ $product->unit->name }} </td>
                                 </tr>
                                 <tr class="data-row">
+                                    <th>{{ __("translate.Cost") }} </th>
+                                    <td>{{ $product->cost_per_unit * $product->unit->value }} </td>
+                                </tr>
+                                <tr class="data-row">
                                     <th>{{ __("translate.Price") }} </th>
                                     <td>  {{ $product->price_per_unit * $product->unit->value }} @if ($product->is_fixed_price == 1)
                                         (Fixed)
@@ -91,8 +95,12 @@
                                     <td>{{ $product->taxType->name }}</td>
                                 </tr>
                                 <tr class="data-row">
+                                    <th>{{ __("translate.Stock") }} </th>
+                                    <td>{{$product->stock / $product->unit->value}}</td>
+                                </tr>
+                                <tr class="data-row">
                                     <th>{{ __("translate.Stock Alert") }} </th>
-                                    <td> {{ $product->stock_alert }} </td>
+                                    <td> {{ $product->stock_alert / $product->unit->value }} </td>
                                 </tr>
                             </tbody>
                         </table>

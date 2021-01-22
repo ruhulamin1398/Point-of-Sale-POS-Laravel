@@ -37,6 +37,9 @@ class ReturnToSupplierController extends Controller
         $settings = setting::where('table_name', 'return_to_suppliers')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
         $returnProducts =  returnToSupplier::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
+        foreach($returnProducts as $returnProduct){
+            $returnProduct->quantity = $returnProduct->quantity / $returnProduct->products->unit->value;
+        }
         $dataArray = [
             'settings' => $settings,
             'items' =>$returnProducts,
@@ -74,7 +77,7 @@ class ReturnToSupplierController extends Controller
         $returnProduct->user_id =1; //Auth::user()->id;
         $returnProduct->product_id =$request->product_id ;
         $returnProduct->supplier_id =$request->return_product_supplier_id ;
-        $returnProduct->quantity =$request->quantity ;
+        $returnProduct->quantity =$request->quantity * $product->unit->value ;
         $returnProduct->price =$request->price ;
         $returnProduct->comment =$request->comment ;
         $returnProduct->save();
@@ -82,7 +85,7 @@ class ReturnToSupplierController extends Controller
         $cost = $product->cost_per_unit *  $returnProduct->quantity;
         $price = $returnProduct->price ;
         $returnProduct->profit = $price - $cost;
-        $product->stock -= $request->quantity;
+        $product->stock -= $returnProduct->quantity;
         $returnProduct->save();
         $product->save();
 
