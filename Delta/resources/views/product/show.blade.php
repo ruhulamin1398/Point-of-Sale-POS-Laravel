@@ -111,7 +111,7 @@
                 <div class="col-12 col-md-6">
                     <div class=" d-none d-md-block">
                         
-                    <x-bar-chart :dataArray="$dataArray" />
+                    <x-bar-chart :dataArray="$dataArray" id="productAnalysis" />
 
                     </div>
 
