@@ -255,7 +255,9 @@ $('body').click(function () {
 
     $(document).on('click', '.searchItem', function () {
         var id = $(this).attr('data-item-id');
-        $("#returnProductInputId").val(id)
+        $("#returnProductInputId").val(id);
+        $("#returnProductName").val(databaseProducts[id].name);
+
         // alert(id);//this one needs to be triggered
         //purchaseProductInputOnInput()
         $("#productSuggession").hide();
