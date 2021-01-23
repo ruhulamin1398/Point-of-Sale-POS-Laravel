@@ -31,8 +31,7 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "vendor-dir": "../vendor"
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
