@@ -52,11 +52,7 @@ class BrandController extends Controller
 
         $brand = brand::create($request->all());
  
-        $online_sync = new onlineSync;
-        $online_sync->model = 'App\Models\brand';
-        $online_sync->action_type = 'create';
-        $online_sync->reference_id = $brand->id;
-        $online_sync->save();
+        $this->onlineSync('brand','create',$brand->id);
 
         return redirect()->back()->withSuccess(['Successfully Created']);
     }

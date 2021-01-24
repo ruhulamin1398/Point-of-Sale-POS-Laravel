@@ -44,8 +44,8 @@ class SyncDatabase extends Command
     {
         $this->datas = onlineSync::all();
         foreach ($this->datas as $data) {
-            $data->data = $data->model::find($data->reference_id);
-            $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(3, 500)->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
+            $data->data = $data->model::withTrashed()->find($data->reference_id);
+            $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(10, 500)->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
                 'data' => $data
             ]);
             if ($response->status() == 200) {
