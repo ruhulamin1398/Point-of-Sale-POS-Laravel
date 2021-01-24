@@ -68,17 +68,22 @@ class ExpenseController extends Controller
         return Redirect::back()->withErrors(["Amount must be greater than 0"]);
         }
         //  return $request;
-        expense::create($request->all());
+      $expense = expense::create($request->all());
         $month = Carbon::now()->format('Y-m-01');
         $expenseMonthly = expenseMonthly::where('month', $month)->where('employee_id', $request->employee_id)->first();
+        $expense_monthly_method = 'update';
         if (is_null($expenseMonthly)) {
             $expenseMonthly = new expenseMonthly;
             $expenseMonthly->month = $month;
             $expenseMonthly->employee_id = $request->employee_id;
+            $expense_monthly_method = 'create';
+
         }
         $expenseMonthly->amount += $request->amount;
         $expenseMonthly->save();
 
+        $this->onlineSync('expense','create',$expense->id);
+        $this->onlineSync('expenseMonthly',$expense_monthly_method,$expenseMonthly->id);
 
         //calcualtion analysis start
         $this->calculationAnalysis($request->amount);
@@ -125,6 +130,7 @@ class ExpenseController extends Controller
         $previous = $expense->amount;
         $month = $expense->created_at->format('Y-m-01');
         $expense->update($request->all());
+       
         if (!is_null($request->amount)) {
             $expense->changed_amount -= $previous;
             $expense->changed_amount += $request->amount;
@@ -134,6 +140,10 @@ class ExpenseController extends Controller
         }
         $expense->save();
         $expenseMonthly->save();
+
+
+        $this->onlineSync('expense','create',$expense->id);
+        $this->onlineSync('expenseMonthly','update',$expenseMonthly->id);
 
         if (!is_null($request->amount)) {
             //calcualtion analysis start
@@ -159,12 +169,17 @@ class ExpenseController extends Controller
         $expenseMonthly->amount -= $expense->amount;
         $expenseMonthly->save();
         $expense->delete();
+
+        $this->onlineSync('expenseMonthly','update',$expenseMonthly->id);
+        $this->onlineSync('expense','delete',$expense->id);
         return Redirect::back()->withErrors(["Expense Deleted"]);
       //  return Redirect::back()->withErrors(["Can't Delete"]);
     }
 
     public function calculationAnalysis($amount)
     {
+
+        $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
         // calculation Analysis start
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
@@ -175,14 +190,17 @@ class ExpenseController extends Controller
         if (is_null($analysysDate)) {
             $analysysDate = new calculationAnalysisDaily;
             $analysysDate->date = $date;
+            $daily_method_type = 'create';
         }
         if (is_null($analysysMonth)) {
             $analysysMonth = new calculationAnalysisMonthly;
             $analysysMonth->month = $month;
+            $monthly_method_type = 'create';
         }
         if (is_null($analysysYear)) {
             $analysysYear = new calculationAnalysisYearly;
             $analysysYear->year = $year;
+            $yearly_method_type = 'create';
         }
         $analysysDate->expense += $amount;
         $analysysMonth->expense += $amount;
@@ -190,6 +208,14 @@ class ExpenseController extends Controller
         $analysysDate->save();
         $analysysMonth->save();
         $analysysYear->save();
+
+
+        $this->onlineSync('calculationAnalysisDaily',$daily_method_type,$analysysDate->id);
+
+        $this->onlineSync('calculationAnalysisMonthly',$monthly_method_type,$analysysMonth->id);
+
+        $this->onlineSync('calculationAnalysisYearly',$yearly_method_type,$analysysYear->id);
+
         // calculation Analysis end
 
     }

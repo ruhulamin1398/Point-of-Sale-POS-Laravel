@@ -52,8 +52,7 @@ class OrderController extends Controller
     public function create()
     {
             
-        $paymentSystems = paymentSystem::all();
-       
+        $paymentSystems = paymentSystem::all();      
         return view('product.order.create',compact('paymentSystems'));
     }
 
@@ -114,6 +113,14 @@ class OrderController extends Controller
         $order->cost =$cost;
         $order->profit =$profit;
         $order->save();
+
+
+        $this->onlineSync('order','create',$order->id);
+        $this->onlineSync('customer','update',$customer->id);
+        $this->onlineSync('orderDetail','create',$orderDetail->id);
+
+        
+
 
         // calculation Analysis start
         $this->calculationAnalysis($profit,$order->total,$totaltax);
@@ -178,6 +185,9 @@ class OrderController extends Controller
     }
 
     public function sellAnalysis($order){
+
+    $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
+      
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -187,14 +197,17 @@ class OrderController extends Controller
         if(is_null($sellDaily)){
             $sellDaily= new sellAnalysisDaily;
             $sellDaily->date=$date;
+            $daily_method_type = 'create';
         }
         if(is_null($sellMonthly)){
             $sellMonthly= new sellAnalysisMonthly;
             $sellMonthly->month=$month;
+            $monthly_method_type = 'create';
         }
         if(is_null($sellYearly)){
             $sellYearly= new sellAnalysisYearly;
             $sellYearly->year=$year;
+            $yearly_method_type = 'create';
         }
         $sellDaily->count += 1;
         $sellDaily->cost += $order->cost;
@@ -217,8 +230,17 @@ class OrderController extends Controller
         $sellDaily->save();
         $sellMonthly->save();
         $sellYearly->save();
+
+        $this->onlineSync('sellAnalysisDaily',$daily_method_type,$sellDaily->id);
+
+        $this->onlineSync('sellAnalysisMonthly',$monthly_method_type,$sellMonthly->id);
+
+        $this->onlineSync('sellAnalysisYearly',$yearly_method_type,$sellYearly->id);
+
     }
     public function productAnalysis($profit,$id,$quantity){
+        $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
+
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -228,17 +250,20 @@ class OrderController extends Controller
         if(is_null($productDaily)){
             $productDaily= new productAnalysisDaily;
             $productDaily->date=$date;
-            $productDaily->product_id=$id;
+            $productDaily->product_id=$id; 
+            $daily_method_type = 'create';
         }
         if(is_null($productMonthly)){
             $productMonthly= new productAnalysisMonthly;
             $productMonthly->month=$month;
-            $productMonthly->product_id=$id;
+            $productMonthly->product_id=$id;          
+            $monthly_method_type = 'create';
         }
         if(is_null($productYearly)){
             $productYearly= new productAnalysisYearly;
             $productYearly->year=$year;
             $productYearly->product_id=$id;
+            $yearly_method_type = 'create';
         }
         $productDaily->sell += $quantity;
         $productDaily->profit += $profit;
@@ -250,8 +275,19 @@ class OrderController extends Controller
         $productMonthly->save();
         $productYearly->save();
 
+
+        $this->onlineSync('productAnalysisDaily',$daily_method_type,$productDaily->id);
+
+        $this->onlineSync('productAnalysisMonthly',$monthly_method_type,$productMonthly->id);
+
+        $this->onlineSync('productAnalysisYearly',$yearly_method_type,$productYearly->id);
+
+
+
     }
     public function calculationAnalysis($profit,$sell,$tax){
+
+        $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -261,14 +297,17 @@ class OrderController extends Controller
         if(is_null($calculationAnalysisDaily)){
             $calculationAnalysisDaily= new calculationAnalysisDaily;
             $calculationAnalysisDaily->date=$date;
+            $daily_method_type = 'create';
         }
         if(is_null($calculationAnalysisMonthly)){
             $calculationAnalysisMonthly= new calculationAnalysisMonthly;
             $calculationAnalysisMonthly->month=$month;
+            $monthly_method_type = 'create';
         }
         if(is_null($calculationAnalysisYearly)){
             $calculationAnalysisYearly= new calculationAnalysisYearly;
             $calculationAnalysisYearly->year=$year;
+            $yearly_method_type = 'create';
         }
         $calculationAnalysisDaily->sell_profit += $profit;
         $calculationAnalysisMonthly->sell_profit += $profit;
@@ -283,8 +322,19 @@ class OrderController extends Controller
         $calculationAnalysisMonthly->save();
         $calculationAnalysisYearly->save();
 
+
+        $this->onlineSync('calculationAnalysisDaily',$daily_method_type,$calculationAnalysisDaily->id);
+
+        $this->onlineSync('calculationAnalysisMonthly',$monthly_method_type,$calculationAnalysisMonthly->id);
+
+        $this->onlineSync('calculationAnalysisYearly',$yearly_method_type,$calculationAnalysisYearly->id);
+
+
+
     }
     public function employeeAnalysis($profit){
+
+        $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -294,14 +344,17 @@ class OrderController extends Controller
         if(is_null($employeeDaily)){
             $employeeDaily= new employeeAnalysisDaily;
             $employeeDaily->date=$date;
+            $daily_method_type = 'create';
         }
         if(is_null($employeeMonthly)){
             $employeeMonthly= new employeeAnalysisMonthly;
             $employeeMonthly->month=$month;
+            $monthly_method_type = 'create';
         }
         if(is_null($employeeYearly)){
             $employeeYearly= new employeeAnalysisYearly;
             $employeeYearly->year=$year;
+            $yearly_method_type = 'create';
         }
         $employeeDaily->sell += 1;
         $employeeDaily->profit += $profit;
@@ -312,5 +365,12 @@ class OrderController extends Controller
         $employeeDaily->save();
         $employeeMonthly->save();
         $employeeYearly->save();
+
+        $this->onlineSync('employeeAnalysisDaily',$daily_method_type,$employeeDaily->id);
+
+        $this->onlineSync('employeeAnalysisMonthly',$monthly_method_type,$employeeMonthly->id);
+
+        $this->onlineSync('employeeAnalysisYearly',$yearly_method_type,$employeeYearly->id);
+
     }
 }

@@ -47,7 +47,9 @@ class ExpenseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        expenseType::create($request->all());
+       $expense_type = expenseType::create($request->all());
+        
+       $this->onlineSync('expenseType','create',$expense_type->id);
         return redirect()->back()->withSuccess(['Successfully Created']);
     }
 
@@ -83,6 +85,8 @@ class ExpenseTypeController extends Controller
     public function update(Request $request, expenseType $expenseType)
     {
         $expenseType->update($request->all());
+
+        $this->onlineSync('expenseType','update',$expenseType->id);
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
@@ -96,6 +100,8 @@ class ExpenseTypeController extends Controller
     {
 
         $expenseType->delete();
+        $this->onlineSync('expenseType','delete',$expenseType->id);
+
         return Redirect::back()->withErrors(["Item Deleted" ]);
 
         // $counts = $expenseType->expense->count();

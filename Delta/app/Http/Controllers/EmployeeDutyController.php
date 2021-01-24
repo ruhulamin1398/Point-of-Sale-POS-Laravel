@@ -103,13 +103,16 @@ class EmployeeDutyController extends Controller
     public function store(EmployeeDutyRequest $request)
     {
         //monthly duty section start
-        $month = Carbon:: parse($request->date)->format('Y-m').'-01' ;
+         $month = Carbon:: parse($request->date)->format('Y-m').'-01' ;
          $employeeId= $request->employee_id;
          $dutyMonthly = employeeDutyMonthly:: where('employee_id',$employeeId)->where('month',$month)->first();
+         $duty_monthly_method = 'update';
         if(is_null($dutyMonthly)){
             $dutyMonthly=new employeeDutyMonthly;
             $dutyMonthly->employee_id = $employeeId;
             $dutyMonthly->month = $month;
+            $duty_monthly_method = 'create';
+
         }
         //monthly duty section end
 
@@ -117,10 +120,12 @@ class EmployeeDutyController extends Controller
         //employee duty start
         $employee = employee::find($request->employee_id);
         $employeeDuty = employeeDuty::where('employee_id', $request->employee_id)->where('date', $request->date)->first();
+        $duty_method = 'update';
         if (is_null($employeeDuty)) {
             $employeeDuty = new employeeDuty;
             $employeeDuty->employee_id = $request->employee_id;
             $employeeDuty->date = $request->date;
+            $duty_method = 'create';
         }
         //employee duty end
         
@@ -172,6 +177,11 @@ class EmployeeDutyController extends Controller
 
         $dutyMonthly->save();
         $employeeDuty->save();
+
+ 
+        $this->onlineSync('employeeDutyMonthly',$duty_monthly_method,$dutyMonthly->id);
+        $this->onlineSync('employeeDuty',$duty_method,$employeeDuty->id);
+
         return Redirect::back()->withSuccess(['Successfully Created']);
     }
 

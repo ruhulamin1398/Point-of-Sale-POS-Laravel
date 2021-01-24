@@ -20,6 +20,8 @@ class Controller extends BaseController
         return $price_per_unit;
 
     }
+
+    
     public function onlineSync($model,$action_type,$reference_id){
         $onlineSync = new onlineSync;
         $onlineSync->model = "App\Models\\" . $model;

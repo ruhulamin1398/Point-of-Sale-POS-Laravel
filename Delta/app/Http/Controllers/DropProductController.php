@@ -101,6 +101,10 @@ class DropProductController extends Controller
             $product->save();
             $dropProduct->save();
 
+            $this->onlineSync('dropProduct','create',$dropProduct->id);
+
+            $this->onlineSync('Product','update',$product->id);
+
             //calculation analysis start
             $this->calculationAnalysis($product->cost_per_unit*$request->quantity);
             //calculation analysis end
@@ -165,6 +169,10 @@ class DropProductController extends Controller
         $product->save();
         $dropProduct->save();
 
+        $this->onlineSync('dropProduct','update',$dropProduct->id);
+
+        $this->onlineSync('Product','update',$product->id);
+
 
         //calculation analysis start
         $this->calculationAnalysis($product->cost_per_unit*$changedNow);
@@ -200,10 +208,18 @@ class DropProductController extends Controller
 
 
         $dropProduct->delete();
+
+        $this->onlineSync('dropProduct','delete',$dropProduct->id);
+        $this->onlineSync('Product','update',$product->id);
+
+
         return Redirect::back()->withErrors(["Item Deleted"]);
     }
 
     public function calculationAnalysis($amount){
+
+        $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
+
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -213,14 +229,18 @@ class DropProductController extends Controller
         if (is_null($analysysDate)) {
             $analysysDate = new calculationAnalysisDaily;
             $analysysDate->date = $date;
+            $daily_method_type = 'create';
         }
         if (is_null($analysysMonth)) {
             $analysysMonth = new calculationAnalysisMonthly;
             $analysysMonth->month = $month;
+            $monthly_method_type = 'create';
         }
         if (is_null($analysysYear)) {
             $analysysYear = new calculationAnalysisYearly;
             $analysysYear->year = $year;
+            $yearly_method_type = 'create';
+            
         }
         $analysysDate->drop_loss += $amount;
         $analysysMonth->drop_loss += $amount;
@@ -228,10 +248,20 @@ class DropProductController extends Controller
         $analysysDate->save();
         $analysysMonth->save();
         $analysysYear->save();
+
+
+
+        $this->onlineSync('calculationAnalysisDaily',$daily_method_type,$analysysDate->id);
+
+        $this->onlineSync('calculationAnalysisMonthly',$monthly_method_type,$analysysMonth->id);
+
+        $this->onlineSync('calculationAnalysisYearly',$yearly_method_type,$analysysYear->id);
+
+
     }
 
     public function productAnalysis($id,$quantity,$loss){
-        
+        $analysis_date_method = $analysis_month_method = $analysis_year_method = 'update';
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -242,16 +272,21 @@ class DropProductController extends Controller
             $analysysDate= new productAnalysisDaily;
             $analysysDate->date=$date;
             $analysysDate->product_id=$id;
+            $analysis_date_method = 'create';
         }
         if(is_null($analysysMonth)){
             $analysysMonth= new productAnalysisMonthly;
             $analysysMonth->month=$month;
             $analysysMonth->product_id=$id;
+            $analysis_month_method = 'create';
+
         }
         if(is_null($analysysYear)){
             $analysysYear= new productAnalysisYearly;
             $analysysYear->year=$year;
             $analysysYear->product_id=$id;
+            $analysis_year_method = 'create';
+
         }
         $analysysDate->drop += $quantity;
         $analysysMonth->drop += $quantity;
@@ -262,5 +297,15 @@ class DropProductController extends Controller
         $analysysDate->save();
         $analysysMonth->save();
         $analysysYear->save();
+
+
+
+        $this->onlineSync('productAnalysisDaily',$analysis_date_method,$analysysDate->id);
+
+        $this->onlineSync('productAnalysisMonthly',$analysis_month_method,$analysysMonth->id);
+
+        $this->onlineSync('calculationAnalysisYearly',$analysis_year_method,$analysysYear->id);
+
+
     }
 }
