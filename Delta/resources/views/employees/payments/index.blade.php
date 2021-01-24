@@ -24,9 +24,9 @@
                         <label for="employee_id">{{ __('translate.Select Employee') }}<span style="color: red"> *</span></label>
                         <select class="form-control form-control" value="1" name="employee_id" id="employee_id"
                             required>
-
-                            @foreach ($employees as $employee)
                             <option disabled selected value> -- select an option -- </option>
+                            @foreach ($employees as $employee)
+                            
 
                             <option value="{{$employee->id}}"> {{$employee->name}}</option>
                            
@@ -38,8 +38,10 @@
                         <label for="employee_payment_type_id">{{ __('translate.Select Payment Type') }}<span style="color: red"> *</span></label>
                         <select class="form-control form-control" value="" name="employee_payment_type_id"
                             id="employeePaymentTypeId" required>
-                            @foreach ($payment_types as $paymentType)
+
                             <option disabled selected value> -- select an option -- </option>
+                            @foreach ($payment_types as $paymentType)
+                            
                             <option value="{{$paymentType->id}}"> {{$paymentType->name}}</option>
                            
                             @endforeach
@@ -50,8 +52,10 @@
                     <div class="col-md-4 col-sm-12  pr-4" id="employeePaymentStatus">
                         <label for="employee_payment_type_id">{{ __('translate.Payment Status') }}<span style="color: red"> *</span> </label>
                         <select class="form-control form-control" value="" name="salary_status_id" required>
-                            @foreach ($salary_status as $status)
+
                             <option disabled selected value> -- select an option -- </option>
+                            @foreach ($salary_status as $status)
+                    
 
                             <option value="{{$status->id}}"> {{$status->name}}</option>
                             

@@ -38,7 +38,7 @@ class EmployeePaymentController extends Controller
 
 
         $settings = setting::where('table_name','employee_payments')->first();
-$settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
         
         $dataArray=[
@@ -93,10 +93,11 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
          $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
          $employee = employee::find($employeePayment->employee_id);
-
+         $employee_salary_method = 'update';
          if(is_null($salaries)){
              $salaries= new employeeSalary;
              $salaries->fixed_salary = $employee->salary;
+             $employee_salary_method = 'create';
          }
         $salaries->salary_status_id= $employeePayment->salary_status_id;
          if(  $employeePayment->employee_payment_type_id == 1)
@@ -112,6 +113,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
          $salaries->month= $employeePayment->month;
          $salaries->save();
          $employeePayment->save();
+
+         $this->onlineSync('employeeSalary',$employee_salary_method,$salaries->id);
+         $this->onlineSync('employeePayment','create',$employeePayment->id);
+
 
         // calculation Analysis start
         $this->calculationAnalysis($request->amount);
@@ -156,7 +161,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         if($request->amount<0){
             return Redirect::back()->withErrors(["Amount must be greater than 0"]);
         }
-//return $request;
+        //return $request;
          // only amount and comment editable
         $salaries = employeeSalary::where('employee_id',$employeePayment->employee_id)->where('month',$employeePayment->month)->first();
         $different =$request->amount-$employeePayment->amount;
@@ -175,6 +180,11 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
         $salaries->save();
         $employeePayment->save();
+
+        $this->onlineSync('employeeSalary','update',$salaries->id);
+        $this->onlineSync('employeePayment','update',$employeePayment->id);
+
+
 
         // calculation Analysis start
         $this->calculationAnalysis($different);
@@ -209,12 +219,16 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         $salaries->save();
         $employeePayment->delete();
 
+        $this->onlineSync('employeeSalary','update',$salaries->id);
+        $this->onlineSync('employeePayment','delete',$employeePayment->id);
 
         return redirect()->back()->withErrors(['Payment Deleted']);
     }
 
 
     public function calculationAnalysis($amount){
+
+        $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
         // calculation Analysis start
         $month = Carbon::now()->format('Y-m-01') ;
         $date = Carbon::now()->format('Y-m-d');
@@ -225,14 +239,17 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         if(is_null($analysysDate)){
             $analysysDate= new calculationAnalysisDaily;
             $analysysDate->date=$date;
+            $daily_method_type = 'create';
         }
         if(is_null($analysysMonth)){
             $analysysMonth= new calculationAnalysisMonthly;
             $analysysMonth->month=$month;
+            $monthly_method_type = 'create';
         }
         if(is_null($analysysYear)){
             $analysysYear= new calculationAnalysisYearly;
             $analysysYear->year=$year;
+            $yearly_method_type = 'create';
         }
         $analysysDate->payment += $amount;
         $analysysMonth->payment += $amount;
@@ -241,6 +258,14 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         $analysysMonth->save();
         $analysysYear->save();
         // calculation Analysis end
+
+
+        
+        $this->onlineSync('calculationAnalysisDaily',$daily_method_type,$analysysDate->id);
+
+        $this->onlineSync('calculationAnalysisMonthly',$monthly_method_type,$analysysMonth->id);
+
+        $this->onlineSync('calculationAnalysisYearly',$yearly_method_type,$analysysYear->id);
 
 
     }

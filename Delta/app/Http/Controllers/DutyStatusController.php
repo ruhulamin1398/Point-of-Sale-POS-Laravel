@@ -96,6 +96,7 @@ class DutyStatusController extends Controller
         // return back();
         
         $dutyStatus->update($request->all());
+        $this->onlineSync('dutyStatus','update',$dutyStatus->id);      
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
