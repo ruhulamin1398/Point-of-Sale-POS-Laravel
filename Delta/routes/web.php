@@ -26,6 +26,7 @@ use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\permissionController;
 use App\Http\Controllers\permissionRoleController;
@@ -41,7 +42,9 @@ use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
 use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\WarrentyController;
+use App\Models\onlineSync;
 use App\Models\Product;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -106,6 +109,7 @@ Route::resource('customer_ratings',CustomerRatingController::class);
 Route::resource('sell_types',ProductSellTypeController::class);
 Route::resource('payment_systems',PaymentSystemController::class);
 Route::resource('bar-codes',BarCodeController::class);
+Route::resource('goals',GoalController::class);
 
 // Route::resource('return_products',ReturnProductController::class);
 Route::resource('return-to-suppliers',ReturnToSupplierController::class);
@@ -201,5 +205,20 @@ Route::get("chart",function(){
     $dataArray= json_encode($dataArray);
     
     return view('test.chart',compact('dataArray'));
+
+});
+
+
+Route::get('sync-test',function(){
+
+    $data = onlineSync::first();
+    
+     
+    $data->data = $data->model::find($data->reference_id);
+    // return $data['data'];
+    $response = Http::withBasicAuth('admin@abasas.tech', '1234')->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
+        'data' => $data
+    ]);
+    return $response;
 
 });

@@ -1,9 +1,10 @@
 <div>
     
-    <canvas id={{ $dataArray['id'] }}></canvas>
+    <canvas id={{ $id }}></canvas>
     <script>
    var dataArray= @json($dataArray);
-    var ctx = document.getElementById(dataArray.id);
+   var id= @json($id);
+    var ctx = document.getElementById(id);
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {

@@ -37,6 +37,9 @@ class ReturnFromCustomerController extends Controller
         $settings = setting::where('table_name', 'return_from_customers')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
         $returnProducts =  returnFromCustomer::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
+        foreach($returnProducts as $returnProduct){
+            $returnProduct->quantity = $returnProduct->quantity / $returnProduct->products->unit->value;
+        }
         $dataArray = [
             'settings' => $settings,
             'items' =>$returnProducts,
@@ -74,7 +77,7 @@ class ReturnFromCustomerController extends Controller
         $returnProduct->user_id =1; //Auth::user()->id;
         $returnProduct->product_id =$request->product_id ;
         $returnProduct->customer_id =$request->return_product_customer_id ;
-        $returnProduct->quantity =$request->quantity ;
+        $returnProduct->quantity =$request->quantity * $product->unit->value;
         $returnProduct->price =$request->price ;
         $returnProduct->comment =$request->comment ;
         $returnProduct->save();
@@ -86,7 +89,7 @@ class ReturnFromCustomerController extends Controller
 
         $returnProduct->profit =     $cost - $price ;
 
-        $product->stock += $request->quantity;
+        $product->stock += $returnProduct->quantity;
         $returnProduct->save();
         $product->save();
 

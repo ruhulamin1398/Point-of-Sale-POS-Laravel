@@ -12,9 +12,11 @@ class barChart extends Component
      * @return void
      */
     public $dataArray;
-    public function __construct($dataArray)
+    public $id;
+    public function __construct($dataArray,$id)
     {
         $this->dataArray= $dataArray;
+        $this->id= $id;
     }
 
     /**

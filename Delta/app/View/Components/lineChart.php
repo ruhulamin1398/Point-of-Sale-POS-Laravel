@@ -11,9 +11,11 @@ class lineChart extends Component
      *
      * @return void
      */
+    public $id;
     public $dataArray;
-    public function __construct($dataArray)
+    public function __construct($dataArray,$id)
     {
+        $this->id= $id;
         $this->dataArray= $dataArray;
     }
 

@@ -10,9 +10,9 @@
 - Employee delete thinking needed . 
 - notification on update and delete . 
 - non createable and non updateable page createLabe and updateLabel hide .
-- product create star in required .
+
 - Tax in only products not in purchase 
-- product add tax and warrenty 
+
 - order page input types number and parse float 
 - purchase page cost calculation on same product diffrent time (average)
 - supplier ,custommer , user , employee delete -> permanent users .

@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployeeDutyController;
 use App\Http\Controllers\permissionRoleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
+use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,31 @@ Route::get('customer-find',[CustomerController::class,'customerFind']);
 Route::post('customer-create',[CustomerController::class,'customerStore'])->name("CustomerStore");
 Route::get('get-product-by-id',[ProductController::class,'getProductById'])->name("getProductById");
 Route::get('get-weekly-employee-duties',[EmployeeDutyController::class, 'get_weekly_Data'])->name("get-weekly-employee-duties");
+
+
+
+Route::post('/sync-database',function( Request $request){
+    
+    if($request->data['action_type'] == 'create'){
+        $request->data['model']::create( $request->data['data']);
+        return 'create success';
+    }
+
+
+
+
+    if($request->data['action_type'] == 'update'){
+        $row = $request->data['model']::find($request->data['data']['id']);
+        $row->update($request->data['data']);
+        return 'update success';
+    }
+
+    if($request->data['action_type'] == 'delete'){
+        $row = $request->data['model']::find($request->data['data']['id']);
+        $row->delete();
+        return 'delete success';
+    }
+    
+
+    
+    })->middleware('auth.basic')->name('sync-database');
