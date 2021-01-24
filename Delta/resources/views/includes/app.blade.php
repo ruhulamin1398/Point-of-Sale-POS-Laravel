@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{asset('css/admin/datatables.min.css')}}">
     <link rel="stylesheet" src="{{asset('bootstrap-select/css/bootstrap-select.min.css')}}">
     
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{asset('css/admin/jquery-ui.min.css')}}">
     <style>
         .border-dotted{
             border-style: dotted;
@@ -60,56 +60,62 @@
     
     <script src="{{asset('js/abasas/app.js')}}"></script>
     
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
+  <script src="{{asset('js/admin/jquery-ui.js')}}"></script>
 </head>
 
-<body>
+<body id="page-top">
 
 
-
-    <x-navbar>
-
-    </x-navbar>
-
-
-
-    <div class="row">
-
-        <div class="col-2">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+    
+    
             <x-sidebar />
+       
+    
+        
+    
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+    
+                <!-- Main Content -->
+                <div id="content">
+    
+                    
+                    <x-navbar/>
+    
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+    
+                        @yield('content')
+    
+                </div>
+                <!-- End of Main Content -->
+    
+                <!-- Footer -->
+                <x-footer>
+
+                </x-footer>
+                <!-- End of Footer -->
+    
+            </div>
+            <!-- End of Content Wrapper -->
+    
         </div>
-        <div class="col-10">
-
-
-
-
-            @yield('content')
-
-
-
-
-
+        <!-- End of Page Wrapper -->
         </div>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    
+    
+    
+      
+    
+    
+    
+    </body>
 
-
-
-
-
-    </div>
-
-    </div>
-    <x-footer>
-
-    </x-footer>
-
-
-
-
-
-
-
-</body>
 
 </html>

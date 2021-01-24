@@ -86,14 +86,14 @@
                             <td id="viewName">{{$product->name}}</td>
                             <td id="viewSell">{{$product->category->name}}</td>
                             <td id="viewProductTypeId">{{$product->brand->name}}</td>
-                            <td id="viewCost">{{$product->cost_per_unit}}</td>
+                            <td id="viewCost">{{$product->cost_per_unit * $product->unit->value}}</td>
                             <td id="viewCost"> {{$product->price_per_unit * $product->unit->value}} 
                                  @if ($product->is_fixed_price == 1)
                                     (Fixed)
                                 @else 
                                  (Not Fixed)
                                 @endif  </td>
-                            <td id="viewLowLimit">{{$product->stock}}</td>
+                            <td id="viewLowLimit">{{$product->stock / $product->unit->value}}</td>
                             <td id="viewLowLimit">{{$product->tax}} ({{ $product->taxType->name }})</td>
                             <td id="viewLowLimit">{{$product->warrenty->name}}</td>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\calculationAnalysisDaily;
 use App\Models\calculationAnalysisMonthly;
+use App\Models\calculationAnalysisYearly;
 use App\Models\sellAnalysisDaily;
 use App\Models\sellAnalysisMonthly;
 use Carbon\Carbon;
@@ -13,6 +14,19 @@ class AnalysisController extends Controller
 {
     public function index()
     {
+        $today = Carbon::now()->format('Y-m-d');
+        $calculation = calculationAnalysisDaily::where('date',$today)->first();
+        $sell = $purchase = $expense = $profit =0;
+        if(!is_null($calculation)){
+            $expense += $calculation->expense;
+            $expense += $calculation->payment;
+            $expense += $calculation->drop_loss;
+            $expense += $calculation->tax;
+            $sell += $calculation->sell;
+            $purchase += $calculation->buy;
+            $profit += $calculation->sell_profit;
+        }
+        $profit -= $expense;
 
         $sellAnalysisDaily=$this->sellAnalysisDaily();
         $sellAnalysisMonthly=$this->sellAnalysisMonthly();
@@ -24,7 +38,7 @@ class AnalysisController extends Controller
         $amountAnalysisDaily = json_decode(json_encode($amountAnalysisDaily), true);
         $amountAnalysisMonthly = json_decode(json_encode($amountAnalysisMonthly), true);
 
-        return view('analysis.index', compact('sellAnalysisDaily', 'sellAnalysisMonthly','amountAnalysisDaily','amountAnalysisMonthly'));
+        return view('analysis.index', compact('sellAnalysisDaily', 'sellAnalysisMonthly','amountAnalysisDaily','amountAnalysisMonthly','sell','purchase','expense','profit'));
     }
 
 

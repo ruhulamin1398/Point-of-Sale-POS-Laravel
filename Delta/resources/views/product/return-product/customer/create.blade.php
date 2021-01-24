@@ -42,9 +42,9 @@
                             </div>
                             <div class="col-12 col-md-6 ">
 
-                                <span class="text-dark "> {{ __("translate.Quantity(Piece / K.G.)") }}</span>
+                                <span class="text-dark "> {{ __("translate.Quantity") }}</span>
                                 <input type="number" step="any" name="quantity" id="returnProductQuantity"
-                                   class="form-control    inputMinZero" placeholder="Piece/K.G." required>
+                                   class="form-control    inputMinZero"  required>
                             </div>
                             <div class="col-12 col-md-6 ">
 
@@ -120,7 +120,7 @@
                             <th>Customer</th>
                             <th>Product Id</th>
                             <th>Product Id</th>
-                            <th>Quantity (Piece / K.G.)</th>
+                            <th>Quantity </th>
                             <th>Total Price</th>
                             <th>Comment</th>
                         </tr>
@@ -134,7 +134,7 @@
                             <th>Customer</th>
                             <th>Product Id</th>
                             <th>Product Name</th>
-                            <th>Quantity (Piece / K.G.)</th>
+                            <th>Quantity</th>
                             <th>Total Price</th>
                             <th>Comment</th>
                         </tr>
@@ -151,7 +151,7 @@
                         <td>{{$returnProducst->customer->name}}</td>
                         <td>{{$returnProducst->product_id}}</td>
                         <td>{{$returnProducst->products->name}}</td>
-                        <td>{{$returnProducst->quantity}}</td>
+                        <td>{{$returnProducst->quantity / $returnProducst->products->unit->value }}</td>
                         <td>{{$returnProducst->price}}</td>
 
                         <td>{{$returnProducst->comment}}</td>
@@ -255,7 +255,8 @@ $('body').click(function () {
 
     $(document).on('click', '.searchItem', function () {
         var id = $(this).attr('data-item-id');
-        $("#returnProductInputId").val(id)
+        $("#returnProductInputId").val(id);
+        $("#returnProductName").val(databaseProducts[id].name);
         // alert(id);//this one needs to be triggered
         //purchaseProductInputOnInput()
         $("#productSuggession").hide();
