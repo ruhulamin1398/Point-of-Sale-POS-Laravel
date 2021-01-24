@@ -90,9 +90,12 @@ class ProductController extends Controller
        $product->warrenty_id=$request->warrenty_id;
 
        $product->is_fixed_price = $request->is_fixed_price;
-        $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);
+       $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);
        
        $product->save();
+
+       
+        $this->onlineSync('product','create',$product->id);
      
        return redirect(route('products.index'))->withSuccess(["Product Created"]);
 
@@ -162,6 +165,7 @@ class ProductController extends Controller
        $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);
        $product->save();
      
+       $this->onlineSync('Product','update',$product->id);
        return redirect(route('products.index'))->withSuccess(["Product Updated"]);
     }
 
@@ -175,6 +179,8 @@ class ProductController extends Controller
     {  
         if($product->stock <=0){
             $product->delete();
+            
+           $this->onlineSync('Product','update',$product->id);
             return Redirect::back()->withErrors(["Item Deleted" ]);
         }
         else{

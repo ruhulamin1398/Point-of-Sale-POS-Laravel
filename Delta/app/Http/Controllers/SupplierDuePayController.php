@@ -71,6 +71,13 @@ class SupplierDuePayController extends Controller
         $supplier->due = $supplier->due - $request->amount;
         $due->save();
         $supplier->save();
+
+
+
+        $this->onlineSync('supplierDuePay','create',$due->id);
+        $this->onlineSync('supplier','update',$supplier->id);
+
+
         $this->purchaseAnalysis($request->amount);
         return redirect(route('supplier-due-pays.index'))->withSuccess(['Successfully Paid']);
     
@@ -122,6 +129,10 @@ class SupplierDuePayController extends Controller
     }
     
     public function purchaseAnalysis( $amount){
+
+        $daily_method = $monthly_method = $yearly_method = 'update';
+
+
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -129,16 +140,21 @@ class SupplierDuePayController extends Controller
         $sellMonthly= purchaseAnalysisMonthly::where('month',$month)->first();
         $sellYearly= purchaseAnalysisYearly::where('year',$year)->first();
         if(is_null($sellDaily)){
+
+
             $sellDaily= new purchaseAnalysisDaily;
             $sellDaily->date=$date;
+            $daily_method = 'create';
         }
         if(is_null($sellMonthly)){
             $sellMonthly= new purchaseAnalysisMonthly;
             $sellMonthly->month=$month;
+            $monthly_method = 'create';
         }
         if(is_null($sellYearly)){
             $sellYearly= new purchaseAnalysisYearly;
             $sellYearly->year=$year;
+            $yearly_method = 'create';
         }
 
         $sellDaily->cash_given += $amount;
@@ -149,6 +165,14 @@ class SupplierDuePayController extends Controller
         $sellDaily->save();
         $sellMonthly->save();
         $sellYearly->save();
+
+
+        
+
+        $this->onlineSync('purchaseAnalysisDaily',$daily_method,$sellDaily->id);
+        $this->onlineSync('purchaseAnalysisMonthly',$monthly_method,$sellMonthly->id);
+        $this->onlineSync('purchaseAnalysisYearly',$yearly_method,$sellYearly->id);
+      
     }
 
 }

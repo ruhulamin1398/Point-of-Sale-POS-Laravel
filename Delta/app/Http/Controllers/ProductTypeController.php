@@ -73,6 +73,8 @@ class ProductTypeController extends Controller
         $productType->name= $request->name;
         $productType->description= $request->description;
         $productType->save();
+        
+        $this->onlineSync('productType','update',$productType->id);
         return back();
 
     }
@@ -86,6 +88,7 @@ class ProductTypeController extends Controller
     public function destroy(productType $productType)
     {
         $productType->delete();
+        $this->onlineSync('productType','delete',$productType->id);
         return back();
     }
 }

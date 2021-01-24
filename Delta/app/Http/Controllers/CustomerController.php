@@ -190,15 +190,15 @@ public function ApiShow(Request $request)
 
 }
 
-public function customersDue(Request $request)
-{
-    // return $request;
-    $customer = Customer::find($request->id);
-    return $customer;
-    $customer->due = $request->due;
-    $customer->save();
-    return $customer->due;
-}
+// public function customersDue(Request $request)
+// {
+//     // return $request;
+//     $customer = Customer::find($request->id);
+//     return $customer;
+//     $customer->due = $request->due;
+//     $customer->save();
+//     return $customer->due;
+// }
 
 
 public function customerFind(Request $request){
@@ -220,6 +220,9 @@ public function customerStore(Request $request){
     $customer->company = $request->company;
     $customer->due = 0;
     $customer->save();
+
+    
+    $this->onlineSync('customer','create',$customer->id);
     return $customer;
     
 }

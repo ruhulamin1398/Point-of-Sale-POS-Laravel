@@ -179,7 +179,7 @@ Route::get('suppliersdue_api', [SupplierController::class, 'suppliersDue']);
 Route::get('customers_api', [CustomerController::class, 'apiIndex']);
 Route::get('customer_view_api', [CustomerController::class, 'ApiShow']);
 Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']);
-Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
+// Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
 
 
 
