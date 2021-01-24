@@ -7,6 +7,7 @@ use App\Models\calculationAnalysisMonthly;
 use App\Models\calculationAnalysisYearly;
 use App\Models\customer;
 use App\Models\customerDueReceive;
+use App\Models\onlineSync;
 use App\Models\sellAnalysisDaily;
 use App\Models\sellAnalysisMonthly;
 use App\Models\sellAnalysisYearly;
@@ -60,6 +61,7 @@ class CustomerDueReceiveController extends Controller
      */
     public function store(Request $request)
     {
+
         $due = new customerDueReceive;
         $customer = customer::find($request->customer_id);
 
@@ -76,6 +78,21 @@ class CustomerDueReceiveController extends Controller
         $due->save();
         $customer->save();
         $this->sellAnalysis( $request->amount);
+
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\customerDueReceive';
+        $online_sync->action_type = 'create';
+        $online_sync->reference_id = $due->id;
+
+        $online_sync->save();
+
+        $online_sync_customer = new onlineSync;
+        $online_sync_customer->model = 'App\Models\customer';
+        $online_sync_customer->action_type = 'update';
+        $online_sync_customer->reference_id = $customer->id;
+        $online_sync_customer->save();
+
+   
         return redirect(route('customer-due-receives.index'))->withSuccess(['Successfully Received']);
     }
 
@@ -125,6 +142,9 @@ class CustomerDueReceiveController extends Controller
     }
     
     public function sellAnalysis($amount){
+
+        $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
+
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
@@ -134,14 +154,18 @@ class CustomerDueReceiveController extends Controller
         if(is_null($sellDaily)){
             $sellDaily= new sellAnalysisDaily;
             $sellDaily->date=$date;
+            $daily_method_type = 'create';
         }
         if(is_null($sellMonthly)){
             $sellMonthly= new sellAnalysisMonthly;
             $sellMonthly->month=$month;
+            $monthly_method_type = 'create';
         }
         if(is_null($sellYearly)){
             $sellYearly= new sellAnalysisYearly;
             $sellYearly->year=$year;
+            $yearly_method_type = 'create';
+
         }
         $sellDaily->cash_received += $amount;	
         $sellMonthly->cash_received += $amount;
@@ -150,6 +174,32 @@ class CustomerDueReceiveController extends Controller
         $sellDaily->save();
         $sellMonthly->save();
         $sellYearly->save();
+
+
+        $online_sync_daily = new onlineSync;
+        $online_sync_daily->model = 'App\Models\sellAnalysisDaily';
+        $online_sync_daily->action_type = $daily_method_type;
+        $online_sync_daily->reference_id = $sellDaily->id;
+        $online_sync_daily->save();
+
+
+        $online_sync_monthly = new onlineSync;
+        $online_sync_monthly->model = 'App\Models\sellAnalysisMonthly';
+        $online_sync_monthly->action_type = $monthly_method_type;
+        $online_sync_monthly->reference_id = $sellMonthly->id;
+        $online_sync_monthly->save();
+
+
+
+        
+        $online_sync_yearly = new onlineSync;
+        $online_sync_yearly->model = 'App\Models\sellAnalysisYearly';
+        $online_sync_yearly->action_type = $yearly_method_type;
+        $online_sync_yearly->reference_id = $sellYearly->id;
+        $online_sync_yearly->save();
+
+
+
     }
 
     

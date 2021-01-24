@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DesignationRequest;
 use App\Models\designation;
+use App\Models\onlineSync;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -53,7 +54,13 @@ class DesignationController extends Controller
     {
       
 
-        designation::create($request->all());
+         $designation = designation::create($request->all());
+
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\designation';
+        $online_sync->action_type = 'create';
+        $online_sync->reference_id = $designation->id;
+        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Created']);
 
 
@@ -98,6 +105,12 @@ class DesignationController extends Controller
 
         
         $designation->update($request->all());
+
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\designation';
+        $online_sync->action_type = 'update';
+        $online_sync->reference_id = $designation->id;
+        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
 
@@ -121,7 +134,17 @@ class DesignationController extends Controller
             return Redirect::back()->withErrors(["Can't delete.","Many Employee has this Designation. To delete it please change designation in Employee. " ]);
         }
         else{
+            
             $designation->delete();
+
+
+
+            $online_sync = new onlineSync;
+            $online_sync->model = 'App\Models\designation';
+            $online_sync->action_type = 'delete';
+            $online_sync->reference_id = $designation->id;
+            $online_sync->save();
+
             return Redirect::back()->withErrors(["Item Deleted" ]);
         }
     }

@@ -213,7 +213,7 @@
     $(document).on('click', '.searchSupplier', function () {
         var id = $(this).attr('data-item-id');
         var name = $(this).attr('data-item-name');
-        $("#supplier_id").val(id)
+        $("#supplier_input_id").val(id)
         $("#supplierSearchField").val(name)
         
         $("#supplierSuggession").hide();
