@@ -9,5 +9,4 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class onlineSync extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 }
