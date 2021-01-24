@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomerRequest;
 use App\Models\customer;
+use App\Models\onlineSync;
 use App\Models\order;
 use App\Models\setting;
 use Carbon\Carbon;
@@ -54,7 +55,12 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request)
     {
-        customer::create($request->all());
+      $customer = customer::create($request->all());
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\customer';
+        $online_sync->action_type = 'create';
+        $online_sync->reference_id = $customer->id;
+        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Created']);
 
     }
@@ -110,6 +116,12 @@ class CustomerController extends Controller
             }
         }   
         $customer->update($request->all());
+
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\customer';
+        $online_sync->action_type = 'update';
+        $online_sync->reference_id = $customer->id;
+        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
     
@@ -139,7 +151,12 @@ class CustomerController extends Controller
         {
             return Redirect::back()->withErrors(["Can not delete this customer. This customer has ".$customer->due .' Tk due' ]);
         }
-        $customer->delete();    
+        $customer->delete();   
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\customer';
+        $online_sync->action_type = 'delete';
+        $online_sync->reference_id = $customer->id;
+        $online_sync->save(); 
         return Redirect::back()->withErrors(["Item Deleted" ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\category;
+use App\Models\onlineSync;
 use App\Models\productType;
 use App\Models\setting;
 use Illuminate\Http\Request;
@@ -51,6 +52,12 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     { 
         category::create($request->all());
+
+        $category = $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\category';
+        $online_sync->action_type = 'create';
+        $online_sync->reference_id = $category->id;
+        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Created']);
 
     }
@@ -90,6 +97,12 @@ class CategoryController extends Controller
             return redirect()->back()->withErrors(["Can't Edit This Category"]);
         }
         $category->update($request->all());
+
+        $category = $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\category';
+        $online_sync->action_type = 'update';
+        $online_sync->reference_id = $category->id;
+        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
     }
@@ -106,6 +119,12 @@ class CategoryController extends Controller
             return redirect()->back()->withErrors(["Can't Delete This Category"]);
         }
         $category->delete();
+
+        $category = $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\category';
+        $online_sync->action_type = 'delete';
+        $online_sync->reference_id = $category->id;
+        $online_sync->save();
         return redirect()->back()->withErrors(['Item Deleted']);
     }
 }
