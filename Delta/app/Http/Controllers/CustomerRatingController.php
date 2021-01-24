@@ -44,11 +44,8 @@ class CustomerRatingController extends Controller
         $customerRating->description = $request->description;
         $customerRating->save();
 
-        // $online_sync = new onlineSync;
-        // $online_sync->model = 'App\Models\customer';
-        // $online_sync->action_type = 'create';
-        // $online_sync->reference_id = $customer->id;
-        // $online_sync->save();
+
+        $this->onlineSync('customerRating','create',$customerRating->id);
         return back();
     }
 
@@ -87,6 +84,8 @@ class CustomerRatingController extends Controller
         $customerRating->name = $request->name;
         $customerRating->description = $request->description;
         $customerRating->save();
+        $this->onlineSync('customerRating','update',$customerRating->id);
+
         return back();
     }
 

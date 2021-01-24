@@ -74,7 +74,8 @@ class GoalController extends Controller
         $goal->weekly = $request->weekly;
         $goal->monthly = $request->monthly;
         $goal->yearly = $request->yearly;
-        $goal->save();
+        $goal->save();   
+        $this->onlineSync('goal','update',$goal->id);
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 

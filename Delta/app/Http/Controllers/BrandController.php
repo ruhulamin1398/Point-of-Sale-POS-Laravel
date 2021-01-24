@@ -53,7 +53,6 @@ class BrandController extends Controller
         $brand = brand::create($request->all());
  
         $this->onlineSync('brand','create',$brand->id);
-
         return redirect()->back()->withSuccess(['Successfully Created']);
     }
 
@@ -94,12 +93,8 @@ class BrandController extends Controller
 
        
         $brand->update($request->all());
+        $this->onlineSync('brand','update',$brand->id);
 
-        $online_sync = new onlineSync;
-        $online_sync->model = 'App\Models\brand';
-        $online_sync->action_type = 'update';
-        $online_sync->reference_id = $brand->id;
-        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
@@ -117,11 +112,7 @@ class BrandController extends Controller
         }
         
         $brand->delete();
-        $online_sync = new onlineSync;
-        $online_sync->model = 'App\Models\brand';
-        $online_sync->action_type = 'delete';
-        $online_sync->reference_id = $brand->id;
-        $online_sync->save();
+        $this->onlineSync('brand','delete',$brand->id);
         return Redirect::back()->withErrors(["Brand Deleted"]);
     }
 }

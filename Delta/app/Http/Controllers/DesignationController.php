@@ -56,11 +56,8 @@ class DesignationController extends Controller
 
          $designation = designation::create($request->all());
 
-        $online_sync = new onlineSync;
-        $online_sync->model = 'App\Models\designation';
-        $online_sync->action_type = 'create';
-        $online_sync->reference_id = $designation->id;
-        $online_sync->save();
+         $this->onlineSync('designation','create',$designation->id);
+
         return redirect()->back()->withSuccess(['Successfully Created']);
 
 
@@ -106,11 +103,8 @@ class DesignationController extends Controller
         
         $designation->update($request->all());
 
-        $online_sync = new onlineSync;
-        $online_sync->model = 'App\Models\designation';
-        $online_sync->action_type = 'update';
-        $online_sync->reference_id = $designation->id;
-        $online_sync->save();
+        $this->onlineSync('designation','update',$designation->id);
+
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
 
@@ -137,13 +131,8 @@ class DesignationController extends Controller
             
             $designation->delete();
 
+            $this->onlineSync('designation','delete',$designation->id);
 
-
-            $online_sync = new onlineSync;
-            $online_sync->model = 'App\Models\designation';
-            $online_sync->action_type = 'delete';
-            $online_sync->reference_id = $designation->id;
-            $online_sync->save();
 
             return Redirect::back()->withErrors(["Item Deleted" ]);
         }

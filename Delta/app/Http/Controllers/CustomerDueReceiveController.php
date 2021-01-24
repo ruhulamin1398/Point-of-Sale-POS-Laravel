@@ -79,18 +79,11 @@ class CustomerDueReceiveController extends Controller
         $customer->save();
         $this->sellAnalysis( $request->amount);
 
-        $online_sync = new onlineSync;
-        $online_sync->model = 'App\Models\customerDueReceive';
-        $online_sync->action_type = 'create';
-        $online_sync->reference_id = $due->id;
+        $this->onlineSync('customerDueReceive','create',$due->id);
 
-        $online_sync->save();
 
-        $online_sync_customer = new onlineSync;
-        $online_sync_customer->model = 'App\Models\customer';
-        $online_sync_customer->action_type = 'update';
-        $online_sync_customer->reference_id = $customer->id;
-        $online_sync_customer->save();
+        $this->onlineSync('customer','update',$customer->id);
+
 
    
         return redirect(route('customer-due-receives.index'))->withSuccess(['Successfully Received']);
@@ -175,28 +168,27 @@ class CustomerDueReceiveController extends Controller
         $sellMonthly->save();
         $sellYearly->save();
 
-
-        $online_sync_daily = new onlineSync;
-        $online_sync_daily->model = 'App\Models\sellAnalysisDaily';
-        $online_sync_daily->action_type = $daily_method_type;
-        $online_sync_daily->reference_id = $sellDaily->id;
-        $online_sync_daily->save();
-
-
-        $online_sync_monthly = new onlineSync;
-        $online_sync_monthly->model = 'App\Models\sellAnalysisMonthly';
-        $online_sync_monthly->action_type = $monthly_method_type;
-        $online_sync_monthly->reference_id = $sellMonthly->id;
-        $online_sync_monthly->save();
-
-
-
         
-        $online_sync_yearly = new onlineSync;
-        $online_sync_yearly->model = 'App\Models\sellAnalysisYearly';
-        $online_sync_yearly->action_type = $yearly_method_type;
-        $online_sync_yearly->reference_id = $sellYearly->id;
-        $online_sync_yearly->save();
+      $this->onlineSync('sellAnalysisDaily',$daily_method_type,$sellDaily->id);
+
+
+      $this->onlineSync('sellAnalysisMonthly',$monthly_method_type,$sellMonthly->id);
+
+        // $online_sync_monthly = new onlineSync;
+        // $online_sync_monthly->model = 'App\Models\sellAnalysisMonthly';
+        // $online_sync_monthly->action_type = $monthly_method_type;
+        // $online_sync_monthly->reference_id = $sellMonthly->id;
+        // $online_sync_monthly->save();
+
+
+
+      $this->onlineSync('sellAnalysisYearly',$yearly_method_type,$sellYearly->id);
+        
+        // $online_sync_yearly = new onlineSync;
+        // $online_sync_yearly->model = 'App\Models\sellAnalysisYearly';
+        // $online_sync_yearly->action_type = $yearly_method_type;
+        // $online_sync_yearly->reference_id = $sellYearly->id;
+        // $online_sync_yearly->save();
 
 
 

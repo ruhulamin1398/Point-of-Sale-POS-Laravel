@@ -76,9 +76,15 @@ class EmployeeController extends Controller
             $user->email = $request->email;
             $user->password= Hash::make($request->password);
             $user->save();
+            
+      $this->onlineSync('User','create',$user->id);
+
         }
         $employee->user_id=$user->id;
         $employee->save();
+
+       $this->onlineSync('employee','create',$employee->id);
+
 
         return redirect()->back()->withSuccess(['Successfully Created']);
 
@@ -145,6 +151,9 @@ class EmployeeController extends Controller
         }    
         
         $employee->update($request->all());
+        
+       $this->onlineSync('employee','update',$employee->id);
+
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
  
