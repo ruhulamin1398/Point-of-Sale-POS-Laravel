@@ -58,30 +58,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-    //   Permission Route
+//   Permission Route
 
-Route::resource('permissions',permissionController::class);
-Route::resource('permission-role',permissionRoleController::class);
-
-
-Route::post('role-permission-store',[permissionController::class, 'rolepermissionstore'])->name('rolepermissionstore');
+Route::resource('permissions', permissionController::class);
+Route::resource('permission-role', permissionRoleController::class);
 
 
-Route::post('remove-permission',[permissionController::class, 'removePermission'])->name('removePermission');
+Route::post('role-permission-store', [permissionController::class, 'rolepermissionstore'])->name('rolepermissionstore');
 
 
+Route::post('remove-permission', [permissionController::class, 'removePermission'])->name('removePermission');
 
 
 
 
-Route::get('getjson',function(){
+
+
+Route::get('getjson', function () {
     return Product::all();
 })->name('getJson');
-Route::post('test-submit',function(Request $request){
+Route::post('test-submit', function (Request $request) {
     return $request;
 })->name('testSubmit');
 
-Route::view('/test-form','testForm');
+Route::view('/test-form', 'testForm');
 
 
 
@@ -94,59 +94,59 @@ Route::middleware(['auth'])->get('/dashboard', function () {
 
 
 
-Route::get('/',[IndexController::class, 'index'])->name('home'); 
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
-Route::resource('categories',CategoryController::class);
-Route::resource('products',ProductController::class); 
-Route::resource('orders',OrderController::class);
-Route::resource('purchases',PurchaseController::class);
-Route::resource('brands',BrandController::class);
-Route::resource('units',UnitController::class);
-Route::resource('product_types',ProductTypeController::class);
-Route::resource('suppliers',SupplierController::class);
-Route::resource('customers',CustomerController::class);
-Route::resource('customer_ratings',CustomerRatingController::class);
-Route::resource('sell_types',ProductSellTypeController::class);
-Route::resource('payment_systems',PaymentSystemController::class);
-Route::resource('bar-codes',BarCodeController::class);
-Route::resource('goals',GoalController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('products', ProductController::class);
+Route::resource('orders', OrderController::class);
+Route::resource('purchases', PurchaseController::class);
+Route::resource('brands', BrandController::class);
+Route::resource('units', UnitController::class);
+Route::resource('product_types', ProductTypeController::class);
+Route::resource('suppliers', SupplierController::class);
+Route::resource('customers', CustomerController::class);
+Route::resource('customer_ratings', CustomerRatingController::class);
+Route::resource('sell_types', ProductSellTypeController::class);
+Route::resource('payment_systems', PaymentSystemController::class);
+Route::resource('bar-codes', BarCodeController::class);
+Route::resource('goals', GoalController::class);
 
 // Route::resource('return_products',ReturnProductController::class);
-Route::resource('return-to-suppliers',ReturnToSupplierController::class);
-Route::resource('return-from-customers',ReturnFromCustomerController::class);
+Route::resource('return-to-suppliers', ReturnToSupplierController::class);
+Route::resource('return-from-customers', ReturnFromCustomerController::class);
 
-Route::resource('customer-due-receives',CustomerDueReceiveController::class);
-Route::resource('supplier-due-pays',SupplierDuePayController::class);
+Route::resource('customer-due-receives', CustomerDueReceiveController::class);
+Route::resource('supplier-due-pays', SupplierDuePayController::class);
 
 
 
-Route::resource('warrenties',WarrentyController::class);
-Route::resource('drop_products',DropProductController::class);
-Route::get('stock_alert',[ProductController::class ,'lowStockProduct' ])->name('stock_alert');
+Route::resource('warrenties', WarrentyController::class);
+Route::resource('drop_products', DropProductController::class);
+Route::get('stock_alert', [ProductController::class, 'lowStockProduct'])->name('stock_alert');
 
 //Employees
-Route::resource('employees',EmployeeController::class);
-Route::resource('designations',DesignationController::class);
+Route::resource('employees', EmployeeController::class);
+Route::resource('designations', DesignationController::class);
 
 
 // Payments     
-Route::resource('employee_payment_types',EmployeePaymentTypeController::class);
-Route::resource('employee_payments',EmployeePaymentController::class);
-Route::resource('employee_salaries',EmployeeSalaryController::class);
+Route::resource('employee_payment_types', EmployeePaymentTypeController::class);
+Route::resource('employee_payments', EmployeePaymentController::class);
+Route::resource('employee_salaries', EmployeeSalaryController::class);
 
 // Duties  
-Route::resource('duty-statuses',DutyStatusController::class);
-Route::resource('employee_duties',EmployeeDutyController::class);
+Route::resource('duty-statuses', DutyStatusController::class);
+Route::resource('employee_duties', EmployeeDutyController::class);
 Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
 
 // Expenses
-Route::resource('expenses',ExpenseController::class);
-Route::resource('expense-types',ExpenseTypeController::class);
-Route::resource('expense-monthlies',ExpenseMonthlyController::class);
+Route::resource('expenses', ExpenseController::class);
+Route::resource('expense-types', ExpenseTypeController::class);
+Route::resource('expense-monthlies', ExpenseMonthlyController::class);
 
 // analysis
-Route::get('sell-analysis',[SellAnalysisDailyController::class, 'index'])->name('sell-analysis'); 
-Route::get('analysis',[AnalysisController::class,'index']);
+Route::get('sell-analysis', [SellAnalysisDailyController::class, 'index'])->name('sell-analysis');
+Route::get('analysis', [AnalysisController::class, 'index']);
 
 
 
@@ -154,7 +154,7 @@ Route::get('analysis',[AnalysisController::class,'index']);
 
 
 
-Route::resource('settings',SettingController::class);
+Route::resource('settings', SettingController::class);
 
 
 
@@ -170,55 +170,54 @@ Route::get('product_check_api', [ProductController::class, 'apiProducutCheck']);
 // Route::get('apisearchproduct', [ProductController::class, 'ApiSearchProduct']); 
 
 
-Route::get('suppliers_api', [SupplierController::class, 'apiIndex']); 
-Route::get('supplier_view_api', [SupplierController::class, 'ApiShow']); 
-Route::get('supplierscheck_api', [SupplierController::class, 'supplierCheck']); 
-Route::get('suppliersdue_api', [SupplierController::class, 'suppliersDue']); 
+Route::get('suppliers_api', [SupplierController::class, 'apiIndex']);
+Route::get('supplier_view_api', [SupplierController::class, 'ApiShow']);
+Route::get('supplierscheck_api', [SupplierController::class, 'supplierCheck']);
+Route::get('suppliersdue_api', [SupplierController::class, 'suppliersDue']);
 
 
-Route::get('customers_api', [CustomerController::class, 'apiIndex']); 
-Route::get('customer_view_api', [CustomerController::class, 'ApiShow']); 
-Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']); 
-Route::get('customers_due_api', [CustomerController::class, 'customersDue']); 
+Route::get('customers_api', [CustomerController::class, 'apiIndex']);
+Route::get('customer_view_api', [CustomerController::class, 'ApiShow']);
+Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']);
+Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
 
 
 
 
 ///// testing 
-Route::get("chart",function(){
-    
+Route::get("chart", function () {
+
     // $a = '[{
     //     "label": " TK " ,
     //     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
     //     data: [-12, 19, 3, 5, 2, 3]
     // }]' ;
 
-    $labels= ['Jeans', 'Shirt', 'T-shirt1', 'Polo-shirt', 'Pant', 'Shoe',];
-    $data= [67, 12,43, 25, 44, 55];
-    $dataArray= [
-        'label'=>"asdfasfas",
-        "lebels" =>$labels,
-        'data' =>$data,
+    $labels = ['Jeans', 'Shirt', 'T-shirt1', 'Polo-shirt', 'Pant', 'Shoe',];
+    $data = [67, 12, 43, 25, 44, 55];
+    $dataArray = [
+        'label' => "asdfasfas",
+        "lebels" => $labels,
+        'data' => $data,
 
     ];
-    
-    $dataArray= json_encode($dataArray);
-    
-    return view('test.chart',compact('dataArray'));
 
+    $dataArray = json_encode($dataArray);
+
+    return view('test.chart', compact('dataArray'));
 });
 
 
-Route::get('sync-test',function(){
+Route::get('sync-test', function () {
 
-    $data = onlineSync::first();
-    
-     
-    $data->data = $data->model::find($data->reference_id);
-    // return $data['data'];
-    $response = Http::withBasicAuth('admin@abasas.tech', '1234')->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
-        'data' => $data
-    ]);
-    return $response;
-
+    // $datas = onlineSync::all();
+    // foreach ($datas as $data) {
+    //     $data->data = $data->model::find($data->reference_id);
+    //     $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(3, 5)->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
+    //         'data' => $data
+    //     ]);
+    //     if ($response->status() == 200) {
+    //         $data->delete();
+    //     }
+    // }
 });
