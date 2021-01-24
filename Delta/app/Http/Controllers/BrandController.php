@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandRequest;
 use App\Models\brand;
+use App\Models\onlineSync;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -16,13 +17,13 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
-                
-        $settings = setting::where('table_name','brands')->first();
-        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
-        
-        $dataArray=[
-            'settings'=>$settings,
+    {
+
+        $settings = setting::where('table_name', 'brands')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+        $dataArray = [
+            'settings' => $settings,
             'items' => brand::all(),
         ];
         return view('product.brand.index', compact('dataArray'));
@@ -48,9 +49,16 @@ class BrandController extends Controller
     public function store(BrandRequest $request)
 
     {
-        brand::create($request->all());
-        return redirect()->back()->withSuccess(['Successfully Created']);
 
+        $brand = brand::create($request->all());
+ 
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\brand';
+        $online_sync->action_type = 'create';
+        $online_sync->reference_id = $brand->id;
+        $online_sync->save();
+
+        return redirect()->back()->withSuccess(['Successfully Created']);
     }
 
     /**
@@ -61,7 +69,7 @@ class BrandController extends Controller
      */
     public function show(brand $brand)
     {
-        return view('product.brand.show',compact('brand'));
+        return view('product.brand.show', compact('brand'));
     }
 
     /**
@@ -84,10 +92,18 @@ class BrandController extends Controller
      */
     public function update(BrandRequest $request, brand $brand)
     {
-        if($brand->id ==1){
-            return Redirect::back()->withErrors(["This Brand Can't be Edited" ]);
+        if ($brand->id == 1) {
+            return Redirect::back()->withErrors(["This Brand Can't be Edited"]);
         }
+
+       
         $brand->update($request->all());
+
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\brand';
+        $online_sync->action_type = 'update';
+        $online_sync->reference_id = $brand->id;
+        $online_sync->save();
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
@@ -99,11 +115,17 @@ class BrandController extends Controller
      */
     public function destroy(brand $brand)
     {
-        
-        if($brand->id ==1){
-            return Redirect::back()->withErrors(["This Brand Can't be Edited" ]);
+
+        if ($brand->id == 1) {
+            return Redirect::back()->withErrors(["This Brand Can't be Edited"]);
         }
+        
         $brand->delete();
-        return Redirect::back()->withErrors(["Brand Deleted" ]);
+        $online_sync = new onlineSync;
+        $online_sync->model = 'App\Models\brand';
+        $online_sync->action_type = 'delete';
+        $online_sync->reference_id = $brand->id;
+        $online_sync->save();
+        return Redirect::back()->withErrors(["Brand Deleted"]);
     }
 }

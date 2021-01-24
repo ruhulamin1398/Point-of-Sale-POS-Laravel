@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomerRatingRequest;
 use App\Models\customerRating;
+use App\Models\onlineSync;
 use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\StartSession;
 
@@ -42,6 +43,12 @@ class CustomerRatingController extends Controller
         $customerRating->name = $request->name;
         $customerRating->description = $request->description;
         $customerRating->save();
+
+        // $online_sync = new onlineSync;
+        // $online_sync->model = 'App\Models\customer';
+        // $online_sync->action_type = 'create';
+        // $online_sync->reference_id = $customer->id;
+        // $online_sync->save();
         return back();
     }
 

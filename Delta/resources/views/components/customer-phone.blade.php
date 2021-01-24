@@ -213,7 +213,7 @@
     $(document).on('click', '.searchCustomer', function () {
         var id = $(this).attr('data-item-id');
         var name = $(this).attr('data-item-name');
-        $("#customer_id").val(id)
+        $("#customer_input_id").val(id)
         $("#customerSearchField").val(name)
         
         $("#customerSuggession").hide();
