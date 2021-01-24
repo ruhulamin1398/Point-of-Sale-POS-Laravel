@@ -16,7 +16,7 @@ class SyncDatabase extends Command
      * @var string
      */
     protected $signature = 'sync:database';
-    protected $data;
+    protected $datas;
 
     /**
      * The console command description.
@@ -42,21 +42,15 @@ class SyncDatabase extends Command
      */
     public function handle()
     {
-
-             $this->data = onlineSync::first();
-             $this->data->data = category::find($this->data->reference_id);
-
-        // while( true ){
-        //     $this->data = onlineSync::first();
-            
-        //     if(!is_null($this->data)){
-            $response = Http::withBasicAuth('admin@abasas.tech', '1234')->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
-                'data' => $this->data
+        $this->datas = onlineSync::all();
+        foreach ($this->datas as $data) {
+            $data->data = $data->model::find($data->reference_id);
+            $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(3, 500)->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
+                'data' => $data
             ]);
-        //     }      
-        //     else{
-        //         break;
-        //     }
-        // }
+            if ($response->status() == 200) {
+                $data->delete();
+            }
+        }
     }
 }

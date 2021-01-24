@@ -40,22 +40,20 @@ Route::post('/sync-database',function( Request $request){
     
     if($request->data['action_type'] == 'create'){
         $request->data['model']::create( $request->data['data']);
-        return 'create success';
+        return response('success', 200);
     }
-
-
 
 
     if($request->data['action_type'] == 'update'){
         $row = $request->data['model']::find($request->data['data']['id']);
         $row->update($request->data['data']);
-        return 'update success';
+        return response('success', 200);
     }
 
     if($request->data['action_type'] == 'delete'){
         $row = $request->data['model']::find($request->data['data']['id']);
         $row->delete();
-        return 'delete success';
+        return response('success', 200);
     }
     
 
