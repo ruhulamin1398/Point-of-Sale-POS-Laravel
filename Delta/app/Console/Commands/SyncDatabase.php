@@ -62,6 +62,5 @@ class SyncDatabase extends Command
         } else {
             $this->error('Bad internet connection');
         }
-        $this->info('The command finished!');
     }
 }

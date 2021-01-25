@@ -45,13 +45,13 @@ Route::post('/sync-database',function( Request $request){
 
 
     if($request->data['action_type'] == 'update'){
-        $row = $request->data['model']::find($request->data['data']['id']);
+        $row = $request->data['model']::withTrashed()->find($request->data['data']['id']);
         $row->update($request->data['data']);
         return response('success', 200);
     }
 
     if($request->data['action_type'] == 'delete'){
-        $row = $request->data['model']::find($request->data['data']['id']);
+        $row = $request->data['model']::withTrashed()->find($request->data['data']['id']);
         $row->delete();
         return response('success', 200);
     }

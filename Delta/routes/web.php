@@ -111,7 +111,6 @@ Route::resource('payment_systems', PaymentSystemController::class);
 Route::resource('bar-codes', BarCodeController::class);
 Route::resource('goals', GoalController::class);
 
-// Route::resource('return_products',ReturnProductController::class);
 Route::resource('return-to-suppliers', ReturnToSupplierController::class);
 Route::resource('return-from-customers', ReturnFromCustomerController::class);
 

@@ -203,6 +203,9 @@ class SettingController extends Controller
         $data[0]['fieldList'] = $fieldList;
         $setting->setting = json_encode(json_encode($data));
         $setting->save();
+
+        $this->onlineSync('setting','update',$setting->id);
+
         return;
         return $setting->setting;
     }
