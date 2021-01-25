@@ -62,6 +62,10 @@ http://127.0.0.1:8000/payment_systems -> {
 
 
 
+ ..have to give onlineSync in Sell and purchase controller 
+
+
+
 <!-- Sync test -->
         $this->datas = onlineSync::all();
             foreach ($this->datas as $data) {
@@ -78,3 +82,7 @@ http://127.0.0.1:8000/payment_systems -> {
                 }
             }
             $this->info('The command was successful!');
+
+
+
+
