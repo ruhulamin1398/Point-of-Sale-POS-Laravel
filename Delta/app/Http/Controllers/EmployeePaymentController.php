@@ -74,7 +74,6 @@ class EmployeePaymentController extends Controller
      */
     public function store(EmployeePaymentRequest $request)
     {
-        
         if($request->amount<0){
             return Redirect::back()->withErrors(["Amount must be greater than 0"]);
         }
@@ -83,7 +82,12 @@ class EmployeePaymentController extends Controller
         $employeePayment = new employeePayment;
         $employeePayment->employee_id = $request->employee_id;
         $employeePayment->employee_payment_type_id = $request->employee_payment_type_id;
-        $employeePayment->salary_status_id = $request->salary_status_id;
+        if(!is_null($request->salary_status_id)){
+            $employeePayment->salary_status_id = $request->salary_status_id;
+        }
+        else{
+            $employeePayment->salary_status_id =2;
+        }
         $employeePayment->amount = $request->amount;
         $employeePayment->month =$request->month.'-01';
         $employeePayment->Comment = $request->Comment;
