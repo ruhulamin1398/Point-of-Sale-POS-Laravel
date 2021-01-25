@@ -168,7 +168,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         $supplier->due = 0;
         $supplier->save();
         
-      $this->onlineSync('supplier','create',$supplier->id);
+        $this->onlineSync('supplier','create',$supplier->id);
         return $supplier;
         
     }

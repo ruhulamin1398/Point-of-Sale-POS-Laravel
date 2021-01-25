@@ -17,7 +17,7 @@ class ExpenseTypeController extends Controller
     public function index()
     {
 
-        $settings = setting::where('table_name', 'expense_type')->first();
+        $settings = setting::where('table_name', 'expense_types')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
 
 
