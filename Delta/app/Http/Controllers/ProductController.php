@@ -95,7 +95,7 @@ class ProductController extends Controller
        $product->save();
 
        
-        $this->onlineSync('product','create',$product->id);
+        $this->onlineSync('Product','create',$product->id);
      
        return redirect(route('products.index'))->withSuccess(["Product Created"]);
 
