@@ -14,6 +14,7 @@ use App\Models\sellAnalysisYearly;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerDueReceiveController extends Controller
 {
@@ -69,7 +70,7 @@ class CustomerDueReceiveController extends Controller
             return redirect()->back()->withErrors(['Due is less than Amount']);
         }
 
-        $due->user_id = 1 ; //Auth::user()->id;
+        $due->user_id = Auth::user()->id;
         $due->customer_id = $request->customer_id;
         $due->amount = $request->amount;
         $due->comment = $request->comment;

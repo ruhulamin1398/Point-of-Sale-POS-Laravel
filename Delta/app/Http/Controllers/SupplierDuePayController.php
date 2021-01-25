@@ -10,6 +10,7 @@ use App\Models\supplier;
 use App\Models\supplierDuePay;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupplierDuePayController extends Controller
 {
@@ -63,7 +64,7 @@ class SupplierDuePayController extends Controller
             return redirect()->back()->withErrors(['Due is less than Amount']);
         }
 
-        $due->user_id = 1 ; //Auth::user()->id;
+        $due->user_id = Auth::user()->id;
         $due->supplier_id = $request->supplier_id;
         $due->amount = $request->amount;
         $due->comment = $request->comment;

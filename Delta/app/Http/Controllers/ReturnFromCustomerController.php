@@ -16,6 +16,7 @@ use App\Models\sellAnalysisYearly;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReturnFromCustomerController extends Controller
 {
@@ -74,7 +75,7 @@ class ReturnFromCustomerController extends Controller
         $product = Product::find($request->product_id);
 
         $returnProduct = new returnFromCustomer;
-        $returnProduct->user_id =1; //Auth::user()->id;
+        $returnProduct->user_id =Auth::user()->id;
         $returnProduct->product_id =$request->product_id ;
         $returnProduct->customer_id =$request->return_product_customer_id ;
         $returnProduct->quantity =$request->quantity * $product->unit->value;
