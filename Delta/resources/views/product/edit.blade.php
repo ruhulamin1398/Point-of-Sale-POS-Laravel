@@ -38,7 +38,7 @@
 
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
-                <a class="navbar-brand">Edit Product</a>
+                <a class="navbar-brand">{{ __('translate.Edit Product') }}</a>
 
             </nav>
         </div>
@@ -60,7 +60,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="productName"> Product Name <span class="text-danger">*</span></label>
+                                        <label for="productName"> {{ __('translate.Product Name') }} <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <textarea type="text" name="name" class="form-control" id="name" placeholder="Product Name"  required>{{ $product->name }}</textarea>
@@ -76,7 +76,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="brand_id">Product Brand  <span class="text-danger">*</span></label>
+                                        <label for="brand_id">{{ __('translate.Product Brand') }}  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control" value="" name="brand_id" id="brand_id"
@@ -102,7 +102,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Product Category  <span class="text-danger">*</span></label>
+                                        <label for="catagory_id">{{ __('translate.Product Category') }}  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control form-control" value="" name="category_id" id="catagory_id"
@@ -129,7 +129,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Product Type  <span class="text-danger">*</span></label>
+                                        <label for="catagory_id">{{ __('translate.Product Type') }}<span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control form-control" name="type_id" id="type_id" required>
@@ -160,7 +160,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Unit  <span class="text-danger">*</span></label>
+                                        <label for="catagory_id">{{ __('translate.Unit') }}  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
@@ -187,18 +187,18 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Price  <span class="text-danger">*</span></label>
+                                        <label for="catagory_id">{{ __('translate.Price') }}   <span class="text-danger">*</span></label>
                                     </div>
                                     
 
                                     <div class="col-md-4 col-12">
                                         <select class="form-control form-control" name="is_fixed_price" id="is_fixed_price" required>
                                             @if ($product->is_fixed_price ==1)
-                                                <option selected value="1"> Fixed Price </option>
-                                                <option  value="0"> Not Fixed </option>
+                                                <option selected value="1"> {{ __('translate.Fixed Price') }} </option>
+                                                <option  value="0"> {{ __('translate.Not Fixed') }} </option>
                                              @else 
-                                                <option  value="1"> Fixed Price </option>
-                                                 <option selected  value="0"> Not Fixed </option>
+                                                <option  value="1"> {{ __('translate.Fixed Price') }} </option>
+                                                 <option selected  value="0"> {{ __('translate.Not Fixed') }} </option>
                                             @endif
                                         </select>
                                     </div>
@@ -218,7 +218,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="productName"> Description</label>
+                                        <label for="productName"> {{ __('translate.Description') }}</label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <textarea type="text" name="description" class="form-control" id="description" placeholder="Description">{{ $product->description }}</textarea>
@@ -241,7 +241,7 @@
 
 
                         <div class="form-group col-12  ">
-                            <label for="productName"> Stock Alert</label>
+                            <label for="productName">{{ __('translate.Stock Alert') }}</label>
                             <input type="number" step="any" name="stock_alert" class="form-control" id="stock_alert" 
                                 value="{{ $product->stock_alert }}" min=1>
                         </div>
@@ -250,7 +250,7 @@
 
 
                         <div class="form-group col-12  ">
-                            <label for="warrenty_id">Warrenty</label>
+                            <label for="warrenty_id">{{ __('translate.Warrenty') }}</label>
                             <select class="form-control" name="warrenty_id" id="warrenty_id" required>
                                 
                                 @foreach ($warrenties as $warrenty)
@@ -266,7 +266,7 @@
                         </div>
 
                         <div class="form-group col-12  ">
-                            <label for="tax_type_id">Tax Type</label>
+                            <label for="tax_type_id">{{ __('translate.Tax Type') }}</label>
                             <select class="form-control" name="tax_type_id" id="tax_type_id" required>
                                
                                 @foreach ($tax_types as $tax_type)
@@ -281,14 +281,14 @@
                         </div>
 
                         <div class="form-group col-12  ">
-                            <label for="catagory_id">Tax (%)</label>
+                            <label for="catagory_id">{{ __('translate.Tax') }} (%)</label>
 
                             <input type="number" step="any" name="tax" id="" class="form-control" min=0 value="{{ $product->tax }}">
                         </div>
 
                     </div>
 
-                   <button type="submit" id="product-create-submit-button btn-lg" class="btn bg-abasas-dark"> Create Product</button>
+                   <button type="submit" id="product-create-submit-button btn-lg" class="btn bg-abasas-dark"> {{ __('translate.Submit')}}</button>
 
                 </div>
 
