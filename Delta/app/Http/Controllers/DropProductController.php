@@ -14,6 +14,7 @@ use App\Models\productAnalysisYearly;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class DropProductController extends Controller
@@ -93,7 +94,7 @@ class DropProductController extends Controller
         if ($product->stock >= $request->quantity * $product->unit->value) {
 
             $dropProduct = new dropProduct;
-            $dropProduct->user_id = 1;  // auth must be added here
+            $dropProduct->user_id = Auth::user()->id;  // auth must be added here
             $dropProduct->product_id = $request->product_id;
             $dropProduct->quantity = $request->quantity * $product->unit->value;
             $dropProduct->comment = $request->comment;

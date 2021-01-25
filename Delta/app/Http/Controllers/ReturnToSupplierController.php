@@ -16,6 +16,7 @@ use App\Models\returnToSupplier;
 use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReturnToSupplierController extends Controller
 {
@@ -74,7 +75,7 @@ class ReturnToSupplierController extends Controller
         $product = Product::find($request->product_id);
 
         $returnProduct = new returnToSupplier();
-        $returnProduct->user_id =1; //Auth::user()->id;
+        $returnProduct->user_id =Auth::user()->id;
         $returnProduct->product_id =$request->product_id ;
         $returnProduct->supplier_id =$request->return_product_supplier_id ;
         $returnProduct->quantity =$request->quantity * $product->unit->value ;
