@@ -13,7 +13,7 @@ class returnToSupplier extends Model
     protected $guarded = [];
 
     public function products(){
-        return $this->belongsTo('App\Models\product','product_id','id')->withTrashed();
+        return $this->belongsTo('App\Models\Product','product_id','id')->withTrashed();
     }
     public function supplier(){
         return $this->belongsTo('App\Models\supplier','supplier_id','id')->withTrashed();

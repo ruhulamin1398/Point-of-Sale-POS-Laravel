@@ -14,7 +14,7 @@ class dropProduct extends Model
         return $this->hasOne('App\Models\employee','user_id','user_id')->withTrashed();
     }
     public function products(){
-        return $this->belongsTo('App\Models\product','product_id','id')->withTrashed();
+        return $this->belongsTo('App\Models\Product','product_id','id')->withTrashed();
     }
     public function abasas(){
         // $this->products_count = $this->products->count();

@@ -13,7 +13,7 @@ class returnFromCustomer extends Model
     protected $guarded = [];
 
     public function products(){
-        return $this->belongsTo('App\Models\product','product_id','id')->withTrashed();
+        return $this->belongsTo('App\Models\Product','product_id','id')->withTrashed();
     }
     public function customer(){
         return $this->belongsTo('App\Models\customer','customer_id','id')->withTrashed();
