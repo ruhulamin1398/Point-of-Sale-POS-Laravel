@@ -21,6 +21,7 @@ use App\Models\sellAnalysisMonthly;
 use App\Models\sellAnalysisYearly;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -67,7 +68,7 @@ class OrderController extends Controller
         // return $request;
         // validation later
         $order = new order;
-        $order->user_id= 1;   //auth must be added here
+        $order->user_id= Auth::user()->id;   //auth must be added here
         $order->customer_id=$request->order['customer_id'];
         $order->payment_system_id= $request->order['payment_system_id'];
         $order->paid_amount= $request->order['paid_amount'];
