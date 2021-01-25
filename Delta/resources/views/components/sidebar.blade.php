@@ -30,7 +30,7 @@
                 <a class="collapse-item" href="{{ route('products.create') }}">{{__('translate.Add New')}}</a>
                 <a class="collapse-item" href="{{ route('categories.index') }}">{{__('translate.Category')}}</a>
                 <a class="collapse-item" href="{{ route('brands.index') }}">{{__('translate.Brands')}}</a>
-                <a class="collapse-item" href="{{ route('product_types.index') }}">{{__('translate.Product Types')}}</a>
+                {{-- <a class="collapse-item" href="{{ route('product_types.index') }}">{{__('translate.Product Types')}}</a> --}}
                 {{-- <a class="collapse-item" href="{{ route('return_products.index') }}">{{__('translate.Return Product')}}</a> --}}
                 <a class="collapse-item" href="{{ route('warrenties.index') }}">{{__('translate.Warrenty')}}</a>
                 <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
