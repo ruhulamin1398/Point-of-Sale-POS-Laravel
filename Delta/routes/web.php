@@ -152,7 +152,6 @@ Route::get('analysis', [AnalysisController::class, 'index']);
 
 
 
-
 Route::resource('settings', SettingController::class);
 
 
