@@ -30,11 +30,11 @@
                 <a class="collapse-item" href="{{ route('products.create') }}">{{__('translate.Add New')}}</a>
                 <a class="collapse-item" href="{{ route('categories.index') }}">{{__('translate.Category')}}</a>
                 <a class="collapse-item" href="{{ route('brands.index') }}">{{__('translate.Brands')}}</a>
-                {{-- <a class="collapse-item" href="{{ route('product_types.index') }}">{{__('translate.Product Types')}}</a> --}}
-                {{-- <a class="collapse-item" href="{{ route('return_products.index') }}">{{__('translate.Return Product')}}</a> --}}
                 <a class="collapse-item" href="{{ route('warrenties.index') }}">{{__('translate.Warrenty')}}</a>
-                <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
                 <a class="collapse-item" href="{{ route('units.index') }}">{{__('translate.Units')}}</a>
+                <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
+                <a class="collapse-item" href="{{ route('drop_products.create') }}">{{__('translate.Drop Product')}}</a>
+                <a class="collapse-item" href="{{ route('drop_products.index') }}">{{__('translate.Drop Product List')}}</a>
             </div>
         </div>
     </li>
@@ -53,7 +53,8 @@
 
                 <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Sell')}} </a></a>
                 <a class="collapse-item" href="{{ route('orders.index') }}">{{__('translate.Sell List')}} </a>
-                <a class="collapse-item" href="{{ route('sell_types.index') }}">{{__('translate.Sell Type')}} </a>
+                <a class="collapse-item" href="{{ route('return-from-customers.index') }}">{{__('translate.Return List')}} </a>
+                <a class="collapse-item" href="{{ route('return-from-customers.create') }}">{{__('translate.Return Product')}}  </a>
 
             </div>
         </div>
@@ -76,6 +77,8 @@
 
                 <a class="collapse-item" href="{{ route('purchases.create') }}">{{__('translate.Buy')}} </a>
                 <a class="collapse-item" href="{{ route('purchases.index') }}">{{__('translate.Perchase List')}}  </a>
+                <a class="collapse-item" href="{{ route('return-to-suppliers.index') }}">{{__('translate.Return List')}} </a>
+                <a class="collapse-item" href="{{ route('return-to-suppliers.create') }}">{{__('translate.Return Product')}}  </a>
 
             </div>
         </div>
@@ -83,31 +86,6 @@
 
 
     <!--purchase -->
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
-
-    <!-- Divider -->
-
-    <hr class="sidebar-divider m-1 p-0 ">
-
-    <!--purchase -->
-    <li class="nav-item">
-        <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseReturn" aria-expanded="true" aria-controls="collapseReturn">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>{{__('translate.Return Product')}}</span>
-        </a>
-        <div id="collapseReturn" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-
-                <a class="collapse-item" href="{{ route('return-from-customers.index') }}">{{__('translate.Returns (Customer) List')}} </a>
-                <a class="collapse-item" href="{{ route('return-from-customers.create') }}">{{__('translate.Return (Customer)')}}  </a>
-                <a class="collapse-item" href="{{ route('return-to-suppliers.index') }}">{{__('translate.Returns (Supplier) List')}} </a>
-                <a class="collapse-item" href="{{ route('return-to-suppliers.create') }}">{{__('translate.Return (Supplier)')}}  </a>
-
-            </div>
-        </div>
-    </li>
-
 
     <!--purchase -->
 
@@ -170,11 +148,12 @@
         <div id="collapseStaff" class="collapse" aria-labelledby="headingStaff" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('employees.index') }}"> {{__('translate.All Employee')}}</a>
+                <a class="collapse-item" href="{{ route('designations.index') }}">{{__('translate.Designations')}}</a>
                 <a class="collapse-item" href="{{ route('employee_salaries.index') }}">{{__('translate.Salary')}}</a>
                 <a class="collapse-item" href="{{ route('employee_payments.index') }}">{{__('translate.Payments')}}</a>
                 <a class="collapse-item" href="{{ route('employee_payment_types.index') }}">{{__('translate.Payment Type')}}</a>
                 <a class="collapse-item" href="{{ route('employee_duties.index') }}">{{__('translate.Duty')}}</a>
-                <a class="collapse-item" href="{{ route('designations.index') }}">{{__('translate.Designations')}}</a>
+                <a class="collapse-item" href="{{ route('duty-statuses.index') }}">{{__('translate.Duty Status')}}</a>
 
             </div>
         </div>
@@ -249,7 +228,7 @@
         </div>
     </li>
 
-    <hr class="sidebar-divider m-1 p-0 ">
+    {{-- <hr class="sidebar-divider m-1 p-0 ">
     <li class="nav-item">
         <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseRating" aria-expanded="true" aria-controls="collapseSell">
             <i class="fas fa-chart-bar"></i>
@@ -262,7 +241,7 @@
           
             </div> 
         </div>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
@@ -298,9 +277,9 @@
     <hr class="sidebar-divider m-1 p-0 ">
     <!-- Nav Item - Dashboard -->
     <li class="nav-item  ">
-        <a class="nav-link p-3 " href="#">
+        <a class="nav-link p-3 " href="{{ route('users.index') }}">
             <i class="fas fa-user"></i>
-            <span>user</span></a>
+            <span>{{__('translate.Users')}}</span></a>
     </li>
 
  
