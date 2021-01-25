@@ -41,6 +41,7 @@ use App\Http\Controllers\ReturnProductController;
 use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
 use App\Http\Controllers\SupplierDuePayController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\onlineSync;
 use App\Models\Product;
@@ -110,6 +111,7 @@ Route::resource('sell_types', ProductSellTypeController::class);
 Route::resource('payment_systems', PaymentSystemController::class);
 Route::resource('bar-codes', BarCodeController::class);
 Route::resource('goals', GoalController::class);
+Route::resource('users', UserController::class);
 
 Route::resource('return-to-suppliers', ReturnToSupplierController::class);
 Route::resource('return-from-customers', ReturnFromCustomerController::class);
