@@ -77,7 +77,7 @@ class EmployeeController extends Controller
             $user->password= Hash::make($request->password);
             $user->save();
             $employee->user_id=$user->id;
-      $this->onlineSync('User','create',$user->id);
+      $this->onlineSync('userTable','create',$user->id);
 
         }
        
