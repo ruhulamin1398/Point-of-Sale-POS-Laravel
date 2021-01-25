@@ -51,7 +51,7 @@
 
                     <div class="col-md-4 col-sm-12  pr-4" id="employeePaymentStatus">
                         <label for="employee_payment_type_id">{{ __('translate.Payment Status') }}<span style="color: red"> *</span> </label>
-                        <select class="form-control form-control" value="" name="salary_status_id" required>
+                        <select class="form-control form-control" value="2" name="salary_status_id" id="salary_status_id" required>
 
                             <option disabled selected value> -- select an option -- </option>
                             @foreach ($salary_status as $status)
@@ -118,8 +118,11 @@
         $('#employeePaymentTypeId').on('input', function () {
             if ($(this).val() == 1) {
                 $('#employeePaymentStatus').show();
+                $("#salary_status_id").prop('required',true);
             } else {
                 $('#employeePaymentStatus').hide();
+                $("#salary_status_id").prop('required',false);
+
             }
         });
 

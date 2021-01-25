@@ -10,4 +10,5 @@ class customerRating extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }

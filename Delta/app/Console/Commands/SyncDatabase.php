@@ -14,7 +14,7 @@ class SyncDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:database';
+    protected $signature = 'database:sync';
     protected $datas;
 
     /**
@@ -41,8 +41,6 @@ class SyncDatabase extends Command
      */
     public function handle()
     {
-
-
 
         $connected = @fsockopen("www.example.com", 80);
         if ($connected) {
