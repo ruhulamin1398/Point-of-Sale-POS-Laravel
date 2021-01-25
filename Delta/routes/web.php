@@ -102,7 +102,7 @@ Route::resource('orders', OrderController::class);
 Route::resource('purchases', PurchaseController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('units', UnitController::class);
-Route::resource('product_types', ProductTypeController::class);
+// Route::resource('product_types', ProductTypeController::class);
 Route::resource('suppliers', SupplierController::class);
 Route::resource('customers', CustomerController::class);
 Route::resource('customer_ratings', CustomerRatingController::class);
