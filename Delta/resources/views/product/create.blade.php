@@ -38,7 +38,7 @@
 
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
-                <a class="navbar-brand">নতুন পণ্য</a>
+                <a class="navbar-brand">{{__('translate.New Product')  }}</a>
 
             </nav>
         </div>
@@ -59,7 +59,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="productName"> Product Name <span class="text-danger">*</span></label>
+                                        <label for="productName"> {{ __('translate.Product Name') }} <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <textarea type="text" name="name" class="form-control" id="name" placeholder="Product Name" required></textarea>
@@ -75,12 +75,12 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="brand_id">Product Brand  <span class="text-danger">*</span></label>
+                                        <label for="brand_id"> {{ __('translate.Product Brand') }}  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control" value="" name="brand_id" id="brand_id"
                                             required>
-                                            <option selected="selected" disabled>Select Category </option>
+                                            <option selected="selected" disabled>Select Brand</option>
                                             @foreach ($brands as $brand)
                                             @if ($loop->first)
                                                  <option selected value="{{$brand->id}}"> {{$brand->name}}</option>
@@ -101,12 +101,12 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="catagory_id">Product Category  <span class="text-danger">*</span></label>
+                                        <label for="catagory_id">{{ __('translate.Product Category') }}  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control form-control" value="" name="category_id" id="catagory_id"
                                             required>
-                                            <option selected="selected" disabled>Select Category </option>
+                                            <option selected="selected" disabled>Select Category</option>
                                             
                                             @foreach ($categories as $category)
                                             @if ($loop->first)
@@ -129,7 +129,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="type_id">Product Type  <span class="text-danger">*</span></label>
+                                        <label for="type_id"> {{ __('translate.Product Type') }}<span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control form-control" name="type_id" id="type_id" required>
@@ -156,12 +156,12 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="unit_id">Unit  <span class="text-danger">*</span></label>
+                                        <label for="unit_id">{{ __('translate.Unit') }}  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         
                                         <select class="form-control form-control" name="unit_id" id="unit_id" required>
-                                            <option selected disabled> Select Unit </option>
+                                            <option selected disabled>Select Unit</option>
                                             {{---
                                     @foreach ($units as $unit)
                                     <option value="{{$unit->id}}"> {{$unit->name}}</option>
@@ -183,12 +183,12 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="price">Price  <span class="text-danger">*</span></label>
+                                        <label for="price">{{ __('translate.Price') }}  <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <select class="form-control form-control" name="is_fixed_price" id="is_fixed_price" required>
-                                            <option  selected value="1"> Fixed Price </option>
-                                            <option  value="0"> Not Fixed </option>
+                                            <option  selected value="1"> {{ __('translate.Fixed Price') }}  </option>
+                                            <option  value="0"> {{ __('translate.Not Fixed') }} </option>
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-12" id="priceDiv">
@@ -197,7 +197,7 @@
                                     </div>
 
 
-
+ 
                                 </div>
                                 
                             </div>
@@ -206,7 +206,7 @@
                             <div class="form-group col-12 ">
                                 <div class="row">
                                     <div class="col-md-4 col-12">
-                                        <label for="description"> Description</label>
+                                        <label for="description"> {{ __('translate.Description') }}</label>
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <textarea type="text" name="description" class="form-control" id="description" placeholder="Description"></textarea>
@@ -229,7 +229,7 @@
 
 
                         <div class="form-group col-12  ">
-                            <label for="stock_alert"> Stock Alert</label>
+                            <label for="stock_alert">  {{ __('translate.Stock Alert') }}</label>
                             <input type="number" step="any" name="stock_alert" class="form-control" id="stock_alert" 
                                 value="1" min=1>
                         </div>
@@ -238,7 +238,7 @@
 
 
                         <div class="form-group col-12  ">
-                            <label for="warrenty_id">Warrenty</label>
+                            <label for="warrenty_id"> {{ __('translate.Warrenty') }}</label>
                             <select class="form-control" name="warrenty_id" id="warrenty_id" required>
                                 
                                 @foreach ($warrenties as $warrenty)
@@ -254,7 +254,7 @@
                         </div>
 
                         <div class="form-group col-12  ">
-                            <label for="tax_type_id">Tax Type</label>
+                            <label for="tax_type_id"> {{ __('translate.Tax Type') }}</label>
                             <select class="form-control" name="tax_type_id" id="tax_type_id" required>
                                
                                 @foreach ($tax_types as $tax_type)
@@ -269,14 +269,14 @@
                         </div>
 
                         <div class="form-group col-12  ">
-                            <label for="tax">Tax (%)</label>
+                            <label for="tax">{{ __('translate.Tax') }} (%)</label> 
 
                             <input type="number" step="any" name="tax" id="tax" class="form-control" min=0 value="0">
                         </div>
 
                     </div>
 
-                   <button type="submit" id="product-create-submit-button btn-lg" class="btn bg-abasas-dark"> Create Product</button>
+                   <button type="submit" id="product-create-submit-button btn-lg" class="btn bg-abasas-dark"> {{ __('translate.Submit')}}</button>
 
                 </div>
 

@@ -11,7 +11,7 @@
 
             <div class="card-header py-3 bg-abasas-dark  text-light ">
                 <nav class="navbar ">
-                    <span><a class="navbar-brand">Purchase</a><i class="fas fa-tools pl-2"
+                    <span><a class="navbar-brand">{{ __('translate.Purchase') }}</a><i class="fas fa-tools pl-2"
                             id="taxCountSetting"></i></span>
 
                 </nav>
@@ -32,7 +32,7 @@
                         </div> --}}
 
                         <div class="col-12" style="position: relative;">
-                            <span class="text-dark  pl-2"> Search</span>
+                            <span class="text-dark  pl-2"> {{ __('translate.Search') }} </span>
                             <input type="text" name="" id="purchaseProductInputId" class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
                                 autocomplete="off" autofocus >
                             <div id="productSuggession" class="list-group"   style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
@@ -53,20 +53,20 @@
 
 
                         <div class="col-auto">
-                            <span class="text-dark  pl-2"> পণ্যের নাম</span>
+                            <span class="text-dark  pl-2">{{ __('translate.Product Name') }}    </span>
                             <input type="text" name="name" id="purchaseProductInputName" size="20" value=""
                                 class="form-control  mb-2" readonly>
                         </div>
                         <div class="col-auto">
 
-                            <span class="text-dark pl-1"> মূল্য</span>
+                            <span class="text-dark pl-1"> {{ __('translate.Price') }}   </span>
                             <input type="text" name="price" id="purchaseProductInputPrice" size="6" value=0 min="0"
                                 class="form-control  mb-2  inputMinZero">
                         </div>
 
                         <div class="col-auto">
 
-                            <span class="text-dark pl-1"> ডিসকাউন্ট <span id="percentageIcon"> ( % ) </span> <i
+                            <span class="text-dark pl-1">  {{ __('translate.Discount') }}    <span id="percentageIcon"> ( % ) </span> <i
                                     class="fas fa-tools" id="disCountSetting"></i></span>
                             <input type="text" name="discount" id="purchaseProductInputdiscount" size="6" min="0"
                                 value=0 class="form-control  mb-2 inputMinZero">
@@ -88,7 +88,7 @@
                         <input type="text" name="" id="purchaseProductInputDiscountValue" value="0" hidden>
 
                         <div class="col-auto">
-                            <span class="text-dark pl-1"> পরিমান </span>
+                            <span class="text-dark pl-1">  {{ __('translate.Quantity') }}    </span>
                             <input type="text" name="quantity" id="purchaseProductInputQuantity" size="6" value=1
                                 min="1" class="form-control  mb-2  inputMinOne">
                         </div>
@@ -98,7 +98,7 @@
 
                         <div class="col-auto">
 
-                            <span class="text-dark pl-1"> মোট</span>
+                            <span class="text-dark pl-1"> {{ __('translate.Total') }}  </span>
                             <input type="text" name="total" id="purchaseProductInputTotal" size="10" value=0
                                 class="form-control  mb-2  inputMinZero ">
                         </div>
@@ -107,13 +107,13 @@
 
                         <div class="col-auto">
                             <button type="button" id="purchaseProductInputSubmit" data-submit-type="create"
-                                data-item-id="0" class="btn btn-success mt-3" disabled="true"> সাবমিট</button>
+                                data-item-id="0" class="btn btn-success mt-3" disabled="true"> {{ __('translate.Submit') }} </button>
                         </div>
 
                     </div>
 
                 </form>
-                <div id="purchaseProductError" class="text-danger "> পণ্যটি পাওয়া যায়নি , আবার চেষ্টা করুন !!! </div>
+                <div id="purchaseProductError" class="text-danger ">  {{ __('translate.Product not found, try again !!!') }} </div>
 
 
 
@@ -124,7 +124,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 bg-abasas-dark">
-                <b>পণ্যের লিস্ট</b>
+                <b> {{ __('translate.Product List') }} </b>
 
             </div>
             <div class="card-body">
@@ -136,25 +136,25 @@
 
                             <tr>
                                 <th>#</th>
-                                <th>আইডি</th>
-                                <th>নাম</th>
-                                <th> মূল্য</th>
-                                <th>পরিমান</th>
-                                <th>Discount</th>
-                                <th>মোট</th>
-                                <th> একশন</th>
+                                <th> {{ __('translate.Id') }}  </th>
+                                <th> {{ __('translate.Name') }} </th>
+                                <th> {{ __('translate.Price') }}</th>
+                                <th> {{ __('translate.Quantity') }}</th>
+                                <th> {{ __('translate.Discount') }}</th>
+                                <th> {{ __('translate.Total') }}</th>
+                                <th> {{ __('translate.Action') }} </th>
                             </tr>
                         </thead>
                         <tfoot class="bg-abasas-dark">
                             <tr>
                                 <th>#</th>
-                                <th>আইডি</th>
-                                <th>নাম</th>
-                                <th> মূল্য</th>
-                                <th>পরিমান</th>
-                                <th>Discount</th>
-                                <th>মোট</th>
-                                <th>একশন</th>
+                                <th> {{ __('translate.Id') }}  </th>
+                                <th> {{ __('translate.Name') }} </th>
+                                <th> {{ __('translate.Price') }}</th>
+                                <th> {{ __('translate.Quantity') }}</th>
+                                <th> {{ __('translate.Discount') }}</th>
+                                <th> {{ __('translate.Total') }}</th>
+                                <th> {{ __('translate.Action') }} </th>
                             </tr>
 
                         </tfoot>
@@ -184,7 +184,7 @@
 
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
-                            <div class="text-left  "> Prodcut Discount</div>
+                            <div class="text-left  "> {{ __('translate.Prodcut Discount') }} </div>
                         </div>
                         <div class="col-6">
                             <div class="text-right " id="ProductDiscountTotal">0</div>
@@ -195,7 +195,7 @@
 
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-8 ">
-                            <div class="text-left  "> Discount More <span id="moreDiscountPercentageIcon"> ( % ) </span>
+                            <div class="text-left  ">  {{ __('translate.Discount More') }} <span id="moreDiscountPercentageIcon"> ( % ) </span>
                                 <i class="fas fa-tools pl-2" id="purchasePageMoreDiscountSetting"></i></div>
                         </div>
                         <div class="col-4">
@@ -209,7 +209,7 @@
                     <input type="text" name="" id="discountTotal" value="0" class="inputMinZero" hidden>
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
-                            <div class="text-left  "> Total Dioscount</div>
+                            <div class="text-left  ">  {{ __('translate.Total Dioscount') }}</div>
                         </div>
                         <div class="col-6">
                             <div class="text-right " id="totalDiscountInText">0 + 0</div>
@@ -229,7 +229,7 @@
 
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
-                            <div class="text-left  "> Tax ( <span id="taxView">15</span>%) <i class="fas fa-tools pl-2"
+                            <div class="text-left  "> {{ __('translate.Tax') }} ( <span id="taxView">15</span>%) <i class="fas fa-tools pl-2"
                                     id="TaxSetting"></i></span></div>
                         </div>
                         <div class="col-6">
@@ -238,7 +238,7 @@
                     </div>
                     <div class="row border-bottom border-dark  mb-2">
                         <div class="col-6 ">
-                            <div class="text-left  "> Previous Due</div>
+                            <div class="text-left  "> {{ __('translate.Previous Due') }} </div>
                         </div>
                         <div class="col-6">
 
@@ -252,13 +252,13 @@
 
                     <div class="row mb-2">
                         <div class="col-12 col-md-6 pt-1 pb-1 border-dark bg-dark border-dotted ">
-                            <div class="text-center h5 "> Total</div>
+                            <div class="text-center h5 ">  {{ __('translate.Total') }}</div>
                             <input type="text" name="" id="totalWithOutDue" value=0 class="inputMinZero" hidden>
                             <div class="text-center h5 text-success " id="finalTotal">0</div>
                         </div>
 
                         <div class="col-12 col-md-6  border-dark pt-1 pb-1  border-dotted">
-                            <div class="text-center h5"> Due</div>
+                            <div class="text-center h5">  {{ __('translate.Due') }}</div>
                             <div class="text-center h5 text-danger" id="totalDue">0 </div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@
 
                     <div class="row   mb-2">
 
-                        <div class="text-center  border-top border-dark  mb-2 col-12 "> Add Payment</div>
+                        <div class="text-center  border-top border-dark  mb-2 col-12 ">  {{ __('translate.Add Payment') }}  </div>
                         {{--
               <form>
 @foreach($paymentSystems as $paymentSystem)
@@ -307,7 +307,7 @@
                             <input type="text" class="form-control inputMinZero " id="PayAmount"
                                 aria-describedby="inputGroupAppend" value="0" required>
                             <div class="input-group-append">
-                                <span class="btn btn-success" id="orderCompleteButton">Complete</span>
+                                <span class="btn btn-success" id="orderCompleteButton"> {{ __('translate.Complete') }}</span>
                             </div>
                         </div>
                     </div>
