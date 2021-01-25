@@ -9,4 +9,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class onlineSync extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 }

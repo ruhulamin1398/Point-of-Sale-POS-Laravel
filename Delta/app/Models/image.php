@@ -10,4 +10,5 @@ class image extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }

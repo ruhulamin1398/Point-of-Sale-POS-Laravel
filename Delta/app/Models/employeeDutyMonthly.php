@@ -9,6 +9,7 @@ class employeeDutyMonthly extends Model
 {
     use HasFactory;
     use SoftDeletes; 
+    protected $guarded = [];
     
     
     

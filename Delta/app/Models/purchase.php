@@ -10,6 +10,8 @@ class purchase extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    
+    protected $guarded = [];
     public function user(){
         return $this->belongsTo('App\Models\User','user_id','id')->withTrashed();
     }

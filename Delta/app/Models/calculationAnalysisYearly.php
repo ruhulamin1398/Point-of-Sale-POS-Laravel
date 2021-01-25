@@ -10,4 +10,5 @@ class calculationAnalysisYearly extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }

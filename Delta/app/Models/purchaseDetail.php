@@ -10,4 +10,5 @@ class purchaseDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }

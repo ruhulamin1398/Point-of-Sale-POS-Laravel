@@ -10,4 +10,5 @@ class purchaseAnalysisDaily extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }
