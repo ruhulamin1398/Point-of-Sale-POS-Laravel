@@ -55,6 +55,7 @@ class WarrentyController extends Controller
         $warrenty->total_days = $request->total_days;
         $warrenty->save();
         
+        $this->onlineSync('warrenty','create',$warrenty->id);
         return redirect()->back()->withSuccess(['Successfully Created']);
 
     }
@@ -96,7 +97,7 @@ class WarrentyController extends Controller
         $warrenty->name = $request->name;
         $warrenty->total_days = $request->total_days;
         $warrenty->save();
-        
+        $this->onlineSync('warrenty','update',$warrenty->id);
         return redirect()->back()->withSuccess(['Successfully Updated']);
     }
 
@@ -113,6 +114,7 @@ class WarrentyController extends Controller
         }
         
         $warrenty->delete();
+        $this->onlineSync('warrenty','delete',$warrenty->id);
         return Redirect::back()->withErrors(["Warrenty Deleted" ]);
     }
 }

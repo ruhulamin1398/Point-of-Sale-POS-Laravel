@@ -82,8 +82,7 @@ class EmployeeController extends Controller
         }
         $employee->user_id=$user->id;
         $employee->save();
-
-       $this->onlineSync('employee','create',$employee->id);
+        $this->onlineSync('employee','create',$employee->id);
 
 
         return redirect()->back()->withSuccess(['Successfully Created']);
@@ -151,9 +150,6 @@ class EmployeeController extends Controller
         }    
         
         $employee->update($request->all());
-        
-       $this->onlineSync('employee','update',$employee->id);
-
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
  
