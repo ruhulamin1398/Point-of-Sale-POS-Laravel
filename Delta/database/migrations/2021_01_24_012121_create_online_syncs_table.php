@@ -18,7 +18,6 @@ class CreateOnlineSyncsTable extends Migration
             $table->string('model')->nullable();
             $table->string('action_type')->default('create');
             $table->unsignedBigInteger('reference_id')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

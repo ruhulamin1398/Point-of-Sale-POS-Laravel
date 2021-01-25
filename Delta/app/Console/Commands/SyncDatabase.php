@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\category;
 use App\Models\onlineSync;
 use Illuminate\Console\Command;
 
@@ -42,15 +41,28 @@ class SyncDatabase extends Command
      */
     public function handle()
     {
-        $this->datas = onlineSync::all();
-        foreach ($this->datas as $data) {
-            $data->data = $data->model::withTrashed()->find($data->reference_id);
-            $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(10, 500)->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
-                'data' => $data
-            ]);
-            if ($response->status() == 200) {
-                $data->delete();
+
+
+
+        $connected = @fsockopen("www.example.com", 80);
+        if ($connected) {
+            $this->datas = onlineSync::all();
+            foreach ($this->datas as $data) {
+                $data->data = $data->model::withTrashed()->find($data->reference_id);
+                $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(10, 500)->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
+                    'data' => $data
+                ]);
+                if ($response->status() == 200) {
+                    $data->delete();
+                    $this->info('The command was successful!');
+                }
+                else{
+                    $this->error('Something went wrong!');
+                }
             }
+            fclose($connected);
+        } else {
+            $this->error('Bad internet connection');
         }
     }
 }
