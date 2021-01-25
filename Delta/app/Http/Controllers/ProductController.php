@@ -180,7 +180,7 @@ class ProductController extends Controller
         if($product->stock <=0){
             $product->delete();
             
-           $this->onlineSync('Product','update',$product->id);
+           $this->onlineSync('Product','delete',$product->id);
             return Redirect::back()->withErrors(["Item Deleted" ]);
         }
         else{
