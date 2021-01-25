@@ -19,6 +19,7 @@ class CreateGoalsTable extends Migration
             $table->bigInteger('weekly');
             $table->bigInteger('monthly');
             $table->bigInteger('yearly');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
