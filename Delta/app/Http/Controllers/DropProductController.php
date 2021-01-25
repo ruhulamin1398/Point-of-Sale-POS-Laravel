@@ -304,7 +304,7 @@ class DropProductController extends Controller
 
         $this->onlineSync('productAnalysisMonthly',$analysis_month_method,$analysysMonth->id);
 
-        $this->onlineSync('calculationAnalysisYearly',$analysis_year_method,$analysysYear->id);
+        $this->onlineSync('productAnalysisYearly',$analysis_year_method,$analysysYear->id);
 
 
     }

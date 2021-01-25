@@ -55,6 +55,11 @@ translation ->{
 
 
 
+http://127.0.0.1:8000/payment_systems -> {
+    remove add button 
+    remove edit and delete button
+}
+
 
 
 <!-- Sync test -->
