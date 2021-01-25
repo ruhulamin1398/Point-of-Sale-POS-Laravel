@@ -1,6 +1,5 @@
 - number validation , number must be greatr than or equal to zero.
 - in product barcode print button.
-- drop product auth
 - bar code print page
 - every modal must have withTrashed <!-- primarly done -->
 - number validation for positive
@@ -24,9 +23,6 @@
 - notifications can be de by dataTable
 - cash management system 
 - product count on sell analysis and purchase analysis
-- auth in return product
-- auth in customer due
-- auth in supplier due
 
 
 ---------------------------------------
