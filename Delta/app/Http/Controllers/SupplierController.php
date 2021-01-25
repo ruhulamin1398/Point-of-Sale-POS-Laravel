@@ -55,7 +55,9 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function store(SupplierRequest $request)
     {
-        supplier::create($request->all());
+      $supplier = supplier::create($request->all());
+      
+      $this->onlineSync('supplier','create',$supplier->id);
         return redirect()->back()->withSuccess(['Successfully Created']);
 
     }
@@ -112,6 +114,9 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         } 
 
         $supplier->update($request->all());
+
+        $this->onlineSync('supplier','update',$supplier->id);
+
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
         // $supplier->name= $request->name;
@@ -132,6 +137,8 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
     {
 
         $supplier->delete();
+
+        $this->onlineSync('supplier','delete',$supplier->id);
         return Redirect::back()->withErrors(["Item Deleted" ]);
 
 
@@ -160,6 +167,8 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         $supplier->company = $request->company;
         $supplier->due = 0;
         $supplier->save();
+        
+      $this->onlineSync('supplier','create',$supplier->id);
         return $supplier;
         
     }

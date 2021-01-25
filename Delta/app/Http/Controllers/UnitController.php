@@ -48,7 +48,9 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        unit::create($request->all());
+         $unit = unit::create($request->all());
+         
+         $this->onlineSync('unit','create',$unit->id);
         return redirect()->back()->withSuccess(['Successfully Created']);
     }
 
@@ -87,11 +89,13 @@ class UnitController extends Controller
             $unit->name = $request->name;
             $unit->description = $request->description;
             $unit->save();
+       
 
-
+            $this->onlineSync('unit','update',$unit->id);
             return redirect()->back()->withSuccess(['Successfully Updated']);
         }
         $unit->update($request->all());
+        $this->onlineSync('unit','update',$unit->id);
         return redirect()->back()->withSuccess(['Successfully Updated']);
 
     }
@@ -108,6 +112,7 @@ class UnitController extends Controller
             return redirect()->back()->withErrors(["Can't Delete This Unit"]);
         }
         $unit->delete();
+        $this->onlineSync('unit','delete',$unit->id);
         return redirect()->back()->withErrors(['Item Deleted']);
 
     }
