@@ -10,4 +10,5 @@ class employeeAnalysisYearly extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }

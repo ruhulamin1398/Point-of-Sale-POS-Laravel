@@ -10,4 +10,5 @@ class productAnalysisMonthly extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }

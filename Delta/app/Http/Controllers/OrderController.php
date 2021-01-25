@@ -105,6 +105,7 @@ class OrderController extends Controller
             $profit += $product['profit'];
            // $totaltax += $product['tax'];
              $orderDetail->save();
+             $this->onlineSync('orderDetail','create',$orderDetail->id);
             // product Analysis start
             $this->productAnalysis($orderDetail->profit,$orderDetail->product_id,$orderDetail->quantity);
             // product Analysis end
@@ -117,7 +118,6 @@ class OrderController extends Controller
 
         $this->onlineSync('order','create',$order->id);
         $this->onlineSync('customer','update',$customer->id);
-        $this->onlineSync('orderDetail','create',$orderDetail->id);
 
         
 

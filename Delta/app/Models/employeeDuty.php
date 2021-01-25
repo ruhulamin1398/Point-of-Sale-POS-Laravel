@@ -9,6 +9,7 @@ class employeeDuty extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 
     public function dutyStatus(){
         return $this->belongsTo('App\Models\dutyStatus','duty_status_id','id')->withTrashed();
