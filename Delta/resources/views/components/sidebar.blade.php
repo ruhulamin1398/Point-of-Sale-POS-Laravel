@@ -267,8 +267,8 @@
                <div class="bg-white py-2 collapse-inner rounded">
    
    
-                   <a class="collapse-item" href="{{ route('permissions.index') }}">{{__('translate.Permissions')}}</a>
-                   <a class="collapse-item" href="{{ route('permission-role.index') }}">{{__('translate.Role')}}</a>
+                   <a class="collapse-item" href="{{ route('user-roles.index') }}">{{__('translate.Role')}}</a>
+                   {{-- <a class="collapse-item" href="{{ route('permission-role.index') }}">{{__('translate.Role')}}</a> --}}
    
                </div>
            </div>

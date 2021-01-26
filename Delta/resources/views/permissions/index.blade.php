@@ -50,7 +50,7 @@
 
            
             <div class="card-body">
-                <form method="POST" id="createEventForm" action="{{ route('permissions.store' ) }}" enctype="multipart/form-data">
+                <form method="POST" id="createEventForm" action="{{ route('user-roles.store' ) }}" enctype="multipart/form-data">
                     @csrf
                     @method('post')
 
@@ -116,7 +116,7 @@
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar  ">
     
-                <div class="navbar-brand"><span id="eventList"> User With Role & Permissions</span> </div>
+                <div class="navbar-brand"><span id="eventList"> User With Role</span> </div>
                 <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton" ><i class="fas fa-plus"
                         id="PlusButton"></i></button></div> 
     
@@ -134,7 +134,6 @@
                             <th> #</th>
                             <th>User Name</th>
                             <th>Role</th>
-                            <th>Permissions</th>
                             <th>Action</th>
     
                         </tr>
@@ -145,7 +144,6 @@
                             <th> #</th>
                             <th>User Name</th>
                             <th>Role</th>
-                            <th>Permissions</th>
                             <th>Action</th>
     
                         </tr>
@@ -158,11 +156,12 @@
                         @endphp
                         @foreach ($user_with_roles as $user)
                         @php
-                        $allpermissions = $user->getAllPermissions();
                         $allrole = $user->roles;
                         $id = $user->id;
                     @endphp
     
+                        @if ($allrole->count()>0)
+                            
                         <tr class="data-row" >
                             <td class="iteration">{{$itr++}}</td>
                             <td class="word-break name">{{ $user->name }}</td>
@@ -185,28 +184,13 @@
                             </td>
 
                            
-                            <td class="word-break permissions">
-                               
-                           @foreach ($allpermissions as $permissionname)
-                               
-                       @if($loop->last)
-                     {{ $permissionname->name }}
-                         @else
-                     {{ $permissionname->name }},
-
-                     @endif
-
-     
-                                @endforeach
-                            </td>
-                         
     
                             <td class="align-middle">
 
                               
 
 
-                            <form method="POST" action="{{ route('permissions.destroy',  $user->id )}}" id="delete-form-{{ $user->id }}" style="display:none; ">
+                            <form method="POST" action="{{ route('user-roles.destroy',  $user->id )}}" id="delete-form-{{ $user->id }}" style="display:none; ">
                                 {{csrf_field() }}
                                 {{ method_field("delete") }}
                             </form>
@@ -231,6 +215,8 @@
     
     
                         </tr>
+                        
+                        @endif
                         @endforeach
     
                     </tbody>

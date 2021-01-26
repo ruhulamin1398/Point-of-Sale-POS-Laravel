@@ -7,14 +7,11 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UnitController;
-use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerDueReceiveController;
-use App\Http\Controllers\CustomerRatingController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DropProductController;
-use App\Http\Controllers\ProductSellTypeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PaymentSystemController;
 use App\Http\Controllers\EmployeeController;
@@ -34,16 +31,13 @@ use App\Http\Controllers\permissionRoleController;
 use App\Http\Controllers\ReturnFromCustomerController;
 
 use App\Http\Controllers\SettingController;
-use App\Models\category;
-use App\Models\setting;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ReturnProductController;
 use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
 use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\userRoleController;
 use App\Http\Controllers\WarrentyController;
-use App\Models\onlineSync;
 use App\Models\Product;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -58,18 +52,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//   Permission Route
-
-Route::resource('permissions', permissionController::class);
-Route::resource('permission-role', permissionRoleController::class);
-
-
-Route::post('role-permission-store', [permissionController::class, 'rolepermissionstore'])->name('rolepermissionstore');
-
-
-Route::post('remove-permission', [permissionController::class, 'removePermission'])->name('removePermission');
-
 
 
 
@@ -146,6 +128,18 @@ Route::resource('expense-monthlies', ExpenseMonthlyController::class);
 // analysis
 Route::get('sell-analysis', [SellAnalysisDailyController::class, 'index'])->name('sell-analysis');
 Route::get('analysis', [AnalysisController::class, 'index']);
+
+
+//   Permission Route
+
+Route::resource('user-roles', userRoleController::class);
+Route::resource('permission-role', permissionRoleController::class);
+
+
+Route::post('role-permission-store', [permissionController::class, 'rolepermissionstore'])->name('rolepermissionstore');
+
+
+Route::post('remove-permission', [permissionController::class, 'removePermission'])->name('removePermission');
 
 
 
