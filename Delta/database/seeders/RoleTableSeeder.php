@@ -486,64 +486,7 @@ class RoleTableSeeder extends Seeder
         ]);
 
 
-        
-        DB::table('roles')->insert([
-            [
-                'name' => 'Super Admin',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'Admin',
-                'guard_name' => 'web',
 
-            ],
-            [
-                'name' => 'Staff',
-                'guard_name' => 'web',
-
-            ],
-    ]);
-
-            
-    DB::table('permissions')->insert([
-        [
-            'name' => 'create',
-            'guard_name' => 'web',
-        ],
-        [
-            'name' => 'read',
-            'guard_name' => 'web',
-
-        ],
-        [
-            'name' => 'edit',
-            'guard_name' => 'web',
-
-        ],
-        [
-            'name' => 'delete',
-            'guard_name' => 'web',
-
-        ],
-    ]);
-            
-    DB::table('model_has_roles')->insert([
-        [
-            'role_id' => 1,
-            'model_type' => 'App\Models\User',
-            'model_id' => 1,
-        ],
-        [
-            'role_id' => 2,
-            'model_type' => 'App\Models\User',
-            'model_id' => 2,
-        ],
-        [
-            'role_id' => 3,
-            'model_type' => 'App\Models\User',
-            'model_id' => 3,
-        ],
-    ]);
     DB::table('goals')->insert([
         [
             'daily' => 25,
