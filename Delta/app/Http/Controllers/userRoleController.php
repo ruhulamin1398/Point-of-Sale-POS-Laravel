@@ -112,4 +112,15 @@ class userRoleController extends Controller
          return redirect()->back()->withErrors(['Role Removed']);
         }
     }
+
+   /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function rolepermissionstore(Request $request)
+    {
+        return $request;
+    }
 }

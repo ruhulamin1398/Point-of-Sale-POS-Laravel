@@ -133,13 +133,9 @@ Route::get('analysis', [AnalysisController::class, 'index']);
 //   Permission Route
 
 Route::resource('user-roles', userRoleController::class);
-Route::resource('permission-role', permissionRoleController::class);
 
 
-Route::post('role-permission-store', [permissionController::class, 'rolepermissionstore'])->name('rolepermissionstore');
-
-
-Route::post('remove-permission', [permissionController::class, 'removePermission'])->name('removePermission');
+Route::post('role-permission-store', [userRoleController::class, 'rolepermissionstore'])->name('rolepermissionstore');
 
 
 
@@ -174,7 +170,10 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 // Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
 
 
+Route::get('permission-test',function(){
 
+    return view('permissions.test');
+});
 
 ///// testing 
 Route::get("chart", function () {
