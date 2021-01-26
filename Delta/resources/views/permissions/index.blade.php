@@ -44,7 +44,7 @@
     
             <div class="card-header py-3  bg-abasas-dark ">
                 <nav class="navbar navbar-dark">
-                    <a class="navbar-brand text-light"> Add Permission to user </a>
+                    <a class="navbar-brand text-light"> {{ __('translate.Assign Role to User') }} </a>
                 </nav>
             </div>
 
@@ -60,7 +60,7 @@
                     <div class="form-group col-md-6 col-sm-12 ">
                         <label for="name"> User <span style="color: red"> *</span></label>
                        <select name="user_id" id="" class="form-control" required>
-                        <option selected disabled>Select User</option>
+                        <option selected disabled value="">Select User</option>
 
 
                 
@@ -80,7 +80,7 @@
                     
                             <label for="permission">Role</label>
                                 <select name="role_id" id="" class="form-control" required>
-                                    <option selected disabled>Select Role</option>
+                                    <option selected disabled value="">Select Role</option>
             
             
                             
