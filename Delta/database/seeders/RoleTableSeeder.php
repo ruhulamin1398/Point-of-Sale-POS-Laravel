@@ -19,7 +19,7 @@ class RoleTableSeeder extends Seeder
 
             [
                 'name' => 'Super Admin',
-                'email' => 'superadmin@abadsas.tech',
+                'email' => 'superadmin@abasas.tech',
                 'password' => Hash::make(1234),
             ],
             [
@@ -28,8 +28,8 @@ class RoleTableSeeder extends Seeder
                 'password' => Hash::make(1234),
             ],
             [
-                'name' => 'Admin 2',
-                'email' => 'admin2@abasas.tech',
+                'name' => 'Staff',
+                'email' => 'staff@abasas.tech',
                 'password' => Hash::make(1234),
             ]
         ]);
@@ -498,7 +498,7 @@ class RoleTableSeeder extends Seeder
 
             ],
             [
-                'name' => 'Admin 2',
+                'name' => 'Staff',
                 'guard_name' => 'web',
 
             ],
@@ -524,6 +524,24 @@ class RoleTableSeeder extends Seeder
             'name' => 'delete',
             'guard_name' => 'web',
 
+        ],
+    ]);
+            
+    DB::table('model_has_roles')->insert([
+        [
+            'role_id' => 1,
+            'model_type' => 'App\Models\User',
+            'model_id ' => 1,
+        ],
+        [
+            'role_id' => 2,
+            'model_type' => 'App\Models\User',
+            'model_id ' => 2,
+        ],
+        [
+            'role_id' => 3,
+            'model_type' => 'App\Models\User',
+            'model_id ' => 3,
         ],
     ]);
     DB::table('goals')->insert([

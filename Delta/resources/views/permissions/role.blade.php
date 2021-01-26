@@ -71,7 +71,7 @@
                     
                             <label for="permission">Permission</label>
                             <select class="form-control"  id="sel1" name="permission_id" required >
-                                <option selected disabled>Select Permission</option>
+                                <option selected disabled value="">Select Permission</option>
                                     @foreach ($permissions as $permission)
 
                                 
