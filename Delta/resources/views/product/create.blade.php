@@ -80,7 +80,7 @@
                                     <div class="col-md-8 col-12">
                                         <select class="form-control" value="" name="brand_id" id="brand_id"
                                             required>
-                                            <option selected="selected" disabled>Select Brand</option>
+                                            <option selected="selected" disabled value="">Select Brand</option>
                                             @foreach ($brands as $brand)
                                             @if ($loop->first)
                                                  <option selected value="{{$brand->id}}"> {{$brand->name}}</option>
@@ -106,7 +106,7 @@
                                     <div class="col-md-8 col-12">
                                         <select class="form-control form-control" value="" name="category_id" id="catagory_id"
                                             required>
-                                            <option selected="selected" disabled>Select Category</option>
+                                            <option selected="selected" disabled value="">Select Category</option>
                                             
                                             @foreach ($categories as $category)
                                             @if ($loop->first)
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <select class="form-control form-control" name="type_id" id="type_id" required>
-                                            <option selected disabled>Select Product Types </option>
+                                            <option selected disabled value="">Select Product Types </option>
                                             @foreach ($types as $type)
                                             <option value="{{$type->id}}"> {{$type->name}}</option>
                                             @endforeach
@@ -161,7 +161,7 @@
                                     <div class="col-md-8 col-12">
                                         
                                         <select class="form-control form-control" name="unit_id" id="unit_id" required>
-                                            <option selected disabled>Select Unit</option>
+                                            <option selected disabled value="">Select Unit</option>
                                             {{---
                                     @foreach ($units as $unit)
                                     <option value="{{$unit->id}}"> {{$unit->name}}</option>

@@ -46,7 +46,7 @@
                     <div class="col-12 col-md-4 p-md-4 p-0">
                         <label for="employee_id">{{ __('translate.Employee')  }} <span style="color: red">*</span></label>
                         <select class="form-control" value="" name="employee_id" id="employee_id" required>
-                        <option selected disabled>Select Employee </option>
+                        <option selected disabled value="">Select Employee </option>
                         @foreach ($employees as $employee)
                         
                         <option value="{{$employee->id}}"> {{$employee->name}}</option>
