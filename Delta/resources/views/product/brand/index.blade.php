@@ -8,7 +8,8 @@
 
 
 <x-data-table
-:dataArray="$dataArray"
+
+:dataArray="$dataArray" 
 />
 
 

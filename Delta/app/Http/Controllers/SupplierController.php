@@ -28,6 +28,7 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         $dataArray=[
             'settings'=>$settings,
             'items' => supplier::all(),
+            'page_name' => 'Supplier',
         ];
  
         // return $dataArray;

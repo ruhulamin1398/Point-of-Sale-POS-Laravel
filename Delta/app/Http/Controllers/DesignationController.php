@@ -26,6 +26,7 @@ class DesignationController extends Controller
                 $dataArray=[
                     'settings'=>$settings,
                     'items' => designation::all(),
+                    'page_name' => 'Designation',
                 ];
         
         

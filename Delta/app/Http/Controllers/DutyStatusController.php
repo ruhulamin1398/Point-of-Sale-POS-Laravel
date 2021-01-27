@@ -25,7 +25,8 @@ class DutyStatusController extends Controller
                 
                 $dataArray=[
                     'settings'=>$settings,
-                    'items' => dutyStatus::all()
+                    'items' => dutyStatus::all(),
+                    'page_name' => 'Duty Status',
                     
                 ];
               

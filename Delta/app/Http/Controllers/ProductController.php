@@ -202,6 +202,7 @@ class ProductController extends Controller
     $dataArray=[
         'settings'=>$settings,
         'items' => $lowStockProducts,
+        'page_name' => 'Stock Alert',
     ];
       return view('product.stock-alert.index',compact('dataArray'));     
     }

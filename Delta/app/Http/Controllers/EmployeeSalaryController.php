@@ -31,6 +31,7 @@ class EmployeeSalaryController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' => $salaries,
+            'page_name' => 'Employee Salary',
 
         ];
 

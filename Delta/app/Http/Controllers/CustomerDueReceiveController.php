@@ -40,6 +40,7 @@ class CustomerDueReceiveController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' =>$dues,
+            'page_name' => 'Customer Due Receive',
         ];
          return view('due.customer.index',compact('dataArray'));
     }

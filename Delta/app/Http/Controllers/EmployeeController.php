@@ -34,6 +34,7 @@ class EmployeeController extends Controller
                     'items' =>$employees,
                     'users'=> $users,
                     'designations'=> $designations,
+                    'page_name' => 'Employees',
                 ];
         
         

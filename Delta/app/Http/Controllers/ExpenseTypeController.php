@@ -24,6 +24,7 @@ class ExpenseTypeController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' => expenseType::all(),
+            'page_name' => 'Expense Type',
         ];
 
         return view('expenses.expense-type', compact('dataArray'));
