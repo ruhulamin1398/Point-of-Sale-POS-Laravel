@@ -47,6 +47,7 @@ class EmployeePaymentController extends Controller
             'employees'=> $employees,
             'payment_types'=> $payment_types,
             'salary_statuses'=> $salary_status,
+            'page_name' => 'Employee Payments',
         ];
 
 

@@ -25,8 +25,6 @@ use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\permissionController;
-use App\Http\Controllers\permissionRoleController;
 
 use App\Http\Controllers\ReturnFromCustomerController;
 
@@ -39,8 +37,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\userRoleController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -171,6 +169,13 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 
 
 Route::get('permission-test',function(){
+    $role = Role::find(5);
+    // return $role->hasPermissionTo('Brand Delete');
+    $permissions = $role->permissions()->where('route_name','brands')->get();
+    return $permissions;
+    $permission = $permissions->where('name','Create')->first();
+    return $permission;
+    return $permissions;
 
     return view('permissions.test');
 });

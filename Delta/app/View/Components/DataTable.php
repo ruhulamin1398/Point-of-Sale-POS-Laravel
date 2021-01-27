@@ -3,6 +3,8 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class DataTable extends Component
 {
@@ -26,7 +28,9 @@ class DataTable extends Component
      */
     public function render()
     {
-       
-        return view('components.data-table');
+        
+        $roles = Role::all();
+        $permissions = Permission::where('page_name',$this->dataArray['page_name'])->get();
+        return view('components.data-table',compact('roles','permissions'));
     }
 }

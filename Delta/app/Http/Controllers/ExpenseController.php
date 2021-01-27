@@ -41,6 +41,7 @@ class ExpenseController extends Controller
             'items' => expense::where('created_at', '>=', $month . '-01 00:00:00')->where('created_at', '<=', $month . '-31 23:59:59')->get(),
             'employees' => employee::all(),
             'expense_types' => expenseType::all(),
+            'page_name' => 'Expense',
         ];
         $month = Carbon::parse($month)->format('F, Y');
         return view('expenses.index', compact('dataArray', 'month'));

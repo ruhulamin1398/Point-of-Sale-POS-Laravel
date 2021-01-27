@@ -25,6 +25,7 @@ class EmployeePaymentTypeController extends Controller
                 $dataArray=[
                     'settings'=>$settings,
                     'items' => employeePaymentType::all(),
+                    'page_name' => 'Employee Payment Type',
                 
                 ];
 

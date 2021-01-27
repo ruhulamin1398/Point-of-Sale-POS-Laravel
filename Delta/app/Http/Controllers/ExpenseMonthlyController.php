@@ -28,6 +28,7 @@ class ExpenseMonthlyController extends Controller
         $dataArray=[
             'settings'=>$settings,
             'items' => $expenseMonthly,
+            'page_name' => 'Expense Monthly',
         ];
 
 

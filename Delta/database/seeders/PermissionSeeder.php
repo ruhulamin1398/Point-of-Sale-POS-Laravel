@@ -17,27 +17,63 @@ class PermissionSeeder extends Seeder
 
         DB::table('permissions')->insert([
             [
-                'name' => 'create',
-                'route_name' => 'products',
+                'name' => 'Brand Create',
+                'page_name' => 'Brand',
                 'guard_name' => 'web',
             ],
             [
-                'name' => 'read',
-                'route_name' => 'products',
+                'name' => 'Brand Read',
+                'page_name' => 'Brand',
                 'guard_name' => 'web',
 
             ],
             [
-                'name' => 'edit',
-                'route_name' => 'products',
+                'name' => 'Brand Edit',
+                'page_name' => 'Brand',
                 'guard_name' => 'web',
 
             ],
             [
-                'name' => 'delete',
-                'route_name' => 'products',
+                'name' => 'Brand Delete',
+                'page_name' => 'Brand',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Brand View',
+                'page_name' => 'Brand',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Brand Page',
+                'page_name' => 'Brand',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Unit Create',
+                'page_name' => 'Unit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Unit Read',
+                'page_name' => 'Unit',
                 'guard_name' => 'web',
 
+            ],
+            [
+                'name' => 'Unit Edit',
+                'page_name' => 'Unit',
+                'guard_name' => 'web',
+
+            ],
+            [
+                'name' => 'Unit Delete',
+                'page_name' => 'Unit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Unit Page',
+                'page_name' => 'Unit',
+                'guard_name' => 'web',
             ],
         ]);
 
@@ -49,6 +85,16 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'name' => 'Admin',
+                'guard_name' => 'web',
+
+            ],
+            [
+                'name' => 'Manager',
+                'guard_name' => 'web',
+
+            ],
+            [
+                'name' => 'Analyser',
                 'guard_name' => 'web',
 
             ],
@@ -88,11 +134,148 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 2,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 3,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 4,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 5,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 6,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 7,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 8,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 9,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 1,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 2,
                 'role_id' => 2,
             ],
             [
                 'permission_id' => 3,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 4,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 5,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 6,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 7,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 8,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 9,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 1,
                 'role_id' => 3,
+            ],
+            [
+                'permission_id' => 4,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 5,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 6,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 7,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 8,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 9,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 3,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 4,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 5,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 6,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 7,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 8,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 9,
+                'role_id' => 4,
+            ],
+            
+            [
+                'permission_id' => 1,
+                'role_id' => 5,
+            ],
+            [
+                'permission_id' => 2,
+                'role_id' => 5,
+            ],
+            [
+                'permission_id' => 3,
+                'role_id' => 5,
+            ],
+            [
+                'permission_id' => 5,
+                'role_id' => 5,
+            ],
+            [
+                'permission_id' => 6,
+                'role_id' => 5,
             ],
         ]);
 

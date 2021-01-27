@@ -24,6 +24,7 @@ class PaymentSystemController extends Controller
                 $dataArray=[
                     'settings'=>$settings,
                     'items' => paymentSystem::all(),
+                    'page_name' => 'Payment System',
                 ];
         
         

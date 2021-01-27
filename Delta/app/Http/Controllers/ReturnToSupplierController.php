@@ -44,6 +44,7 @@ class ReturnToSupplierController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' =>$returnProducts,
+            'page_name' => 'Return To Supplier',
         ];
 
 
