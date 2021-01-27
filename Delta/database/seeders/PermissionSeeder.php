@@ -77,11 +77,6 @@ class PermissionSeeder extends Seeder
                 'guard_name' => 'web',
             ],
             [
-                'name' => 'Null',
-                'page_name' => 'All',
-                'guard_name' => 'web',
-            ],
-            [
                 'name' => 'Super Admin',
                 'page_name' => 'All',
                 'guard_name' => 'web',
@@ -289,7 +284,7 @@ class PermissionSeeder extends Seeder
                 'role_id' => 5,
             ],
             [
-                'permission_id' => 13,
+                'permission_id' => 12,
                 'role_id' => 1,
             ],
         ]);

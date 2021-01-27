@@ -97,8 +97,8 @@
          <nav class="navbar  ">
 
              <div class="navbar-brand"><span id="componentDetailsTitle">
-                     {{ __('translate.'.$componentDetails['title'])  }}</span> <i class="fas fa-tools pl-2"
-                     id="pageSetting"></i></div>
+                     {{ __('translate.'.$componentDetails['title'])  }}</span>   @can('Super Admin') <i class="fas fa-tools pl-2"
+                     id="pageSetting"></i> @endcan </div>
 
              @can($page_name.' Create')
              <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton"
@@ -322,14 +322,14 @@
                          <a class="nav-link active " id="setting-tab" data-toggle="tab" href="#Setting" role="tab"
                              aria-controls="Setting" aria-selected="true"><b>{{__('translate.Setting')}}</b> </a>
                      </li>
-                     @can('Super Admin')
+                   
 
 
                      <li class="nav-item">
                          <a class="nav-link" id="permission-tab" data-toggle="tab" href="#permission" role="tab"
                              aria-controls="permission" aria-selected="false"><b> {{__('translate.Permission')}}</b></a>
                      </li>
-                     @endcan
+                    
                  </ul>
                  {{-- <h5 class="modal-title " id="setting-modal-label "> {{ __('translate.'.$componentDetails['title'])  }}
                  </h5> --}}
@@ -453,7 +453,7 @@
 
 
                              <div class="table-responsive">
-                                 <table class="table table-striped table-bordered" id="dataTable" width="100%"
+                                 <table class="table table-striped table-bordered" https://github.com/haruncpi/barcode-server width="100%"
                                      cellspacing="0">
                                      <thead class="bg-abasas-dark">
 
