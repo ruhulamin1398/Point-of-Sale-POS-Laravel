@@ -36,6 +36,7 @@ class SupplierDuePayController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' =>$dues,
+            'page_name' => 'Supplier Due Pay',
         ];
          return view('due.supplier.index',compact('dataArray'));
     }

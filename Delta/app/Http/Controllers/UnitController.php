@@ -24,6 +24,8 @@ class UnitController extends Controller
             'settings'=>$settings,
             'items' => unit::all(),
             'product_types'=> productType::all(),
+            'page_name' => 'Unit',
+            
         ];
 
 

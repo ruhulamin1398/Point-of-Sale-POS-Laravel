@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandRequest;
 use App\Models\brand;
-use App\Models\onlineSync;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -18,13 +17,13 @@ class BrandController extends Controller
      */
     public function index()
     {
-
         $settings = setting::where('table_name', 'brands')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
 
         $dataArray = [
             'settings' => $settings,
             'items' => brand::all(),
+            'page_name' => 'Brand',
         ];
         return view('product.brand.index', compact('dataArray'));
     }

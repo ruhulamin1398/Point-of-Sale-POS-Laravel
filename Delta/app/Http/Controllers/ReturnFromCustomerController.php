@@ -44,6 +44,7 @@ class ReturnFromCustomerController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' =>$returnProducts,
+            'page_name' => 'Return From Customer',
         ];
 
 

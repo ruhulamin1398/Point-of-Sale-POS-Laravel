@@ -29,6 +29,7 @@ class CustomerController extends Controller
                 $dataArray=[
                     'settings'=>$settings,
                     'items' => customer::all(),
+                    'page_name'=>'Customer',
                 ];
         
         

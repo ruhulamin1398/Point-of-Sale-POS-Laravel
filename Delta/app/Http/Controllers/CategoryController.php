@@ -27,6 +27,7 @@ class CategoryController extends Controller
             'settings'=>$settings,
             'items' => category::all(),
             'product_types'=> productType::all(),
+            'page_name' => 'Product Type',
         ];
 
 

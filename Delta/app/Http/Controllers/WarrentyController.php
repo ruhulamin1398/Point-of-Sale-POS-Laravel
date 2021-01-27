@@ -24,6 +24,7 @@ class WarrentyController extends Controller
                 $dataArray=[
                     'settings'=>$settings,
                     'items' => warrenty::all(),
+                    'page_name' => 'Warrenty',
                 ];
         
         

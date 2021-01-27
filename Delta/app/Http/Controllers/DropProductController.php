@@ -45,6 +45,7 @@ class DropProductController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' => $dropProducts,
+            'page_name' => 'Drop Product',
         ];
 
 
@@ -72,6 +73,7 @@ class DropProductController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' => $dropProducts,
+            'page_name' => 'Drop Product Create',
         ];
 
 
