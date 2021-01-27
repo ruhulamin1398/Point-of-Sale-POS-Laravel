@@ -219,7 +219,7 @@
 
                     <div class="row border-bottom border-dark bg-dark mb-2">
                         <div class="col-6 ">
-                            <div class="text-left  "> Sub Total</div>
+                            <div class="text-left  "> {{ __('translate.Sub Total') }}</div>
                         </div>
                         <div class="col-6">
                             <div class="text-right" id="purchaseSubtotal">0</div>
