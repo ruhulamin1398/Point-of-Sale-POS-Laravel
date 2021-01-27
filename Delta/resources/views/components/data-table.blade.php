@@ -453,7 +453,7 @@
 
 
                              <div class="table-responsive">
-                                 <table class="table table-striped table-bordered" https://github.com/haruncpi/barcode-server width="100%"
+                                 <table class="table table-striped table-bordered"  width="100%"
                                      cellspacing="0">
                                      <thead class="bg-abasas-dark">
 
