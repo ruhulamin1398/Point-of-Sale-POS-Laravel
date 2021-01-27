@@ -39,6 +39,18 @@
      @endif
  </div>
  @endif
+
+
+
+
+
+
+
+
+
+
+
+
  <!-- Begin Page Content -->
  <div class="collapse" id="createNewForm">
      <div class="card mb-4 shadow">
@@ -117,7 +129,10 @@
                          @endif
                          @endforeach
 
+                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
+                         auth()->user()->can($page_name.' View') )
                          <th>{{__('translate.Action')}}</th>
+                         @endif
 
                      </tr>
                  </thead>
@@ -135,7 +150,10 @@
                          @endif
                          @endforeach
 
+                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
+                         auth()->user()->can($page_name.' View') )
                          <th>{{__('translate.Action')}}</th>
+                         @endif
 
                      </tr>
 
@@ -176,6 +194,8 @@
 
 
 
+                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
+                         auth()->user()->can($page_name.' View') )
                          <td class="align-middle">
                              @can($page_name.' Edit')
                              <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm"
@@ -219,6 +239,7 @@
 
 
                          </td>
+                         @endif
 
                      </tr>
                      @endforeach
@@ -431,173 +452,167 @@
                          <div class="modal-body">
 
 
+                             <div class="table-responsive">
+                                 <table class="table table-striped table-bordered" id="dataTable" width="100%"
+                                     cellspacing="0">
+                                     <thead class="bg-abasas-dark">
 
-                             <table class="table table-striped table-bordered" id="dataTable" width="100%"
-                                 cellspacing="0">
-                                 <thead class="bg-abasas-dark">
+                                         <tr>
 
-                                     <tr>
+                                             <th>{{ __('translate.Permission') }} </th>
 
-                                         <th>Permissions </th>
-
-                                         @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
-                                             @endfor
-                                     </tr>
-                                 </thead>
-
-
-                                 <tbody>
-
-                                     @php
-                                     $itr = 1;
-                                     @endphp
+                                             @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
+                                                 @endfor
+                                         </tr>
+                                     </thead>
 
 
+                                     <tbody>
 
-                                     @php
-                                     $permision_name = $page_name." Page";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">{{ __('translate.Page Access') }}</td>
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="page{{ $i }}"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-
-                                     @endif
-
-                                     @php
-                                     $permision_name = $page_name." Create";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">{{ __('translate.Create') }} </td>
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create{{ $i }}"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." Read";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">{{ __('translate.Read') }} </td>
-
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="read{{ $i }}"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." Edit";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">{{ __('translate.Edit') }} </td>
-
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="edit{{ $i }}"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." Delete";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">{{ __('translate.Delete') }} </td>
-
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="delete{{ $i }}"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." View";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">{{ __('translate.view') }}</td>
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="view{{ $i }}"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-
-                                     @endif
-
-
-                                     @php
-                                     $permision_name = $page_name." Page";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">{{ __('translate.Page') }}</td>
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="page{{ $i }}"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-
-                                     @endif
-
-
-                                 </tbody>
+                                         @php
+                                         $itr = 1;
+                                         @endphp
 
 
 
-                             </table>
+                                         @php
+                                         $permision_name = $page_name." Page";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+                                         @endphp
+                                         @if (!is_null($permission))
 
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Page Access') }}</td>
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="page{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+
+                                         @endif
+
+                                         @php
+                                         $permision_name = $page_name." Create";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Create Access') }} </td>
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="create{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." Read";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Read Access') }} </td>
+
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="read{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." Edit";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Edit Access') }} </td>
+
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="edit{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." Delete";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Delete Access') }} </td>
+
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="delete{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." View";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.view Access') }}</td>
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="view{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+
+                                         @endif
+
+
+
+
+                                     </tbody>
+
+
+
+                                 </table>
+                             </div>
                          </div>
                          <div class="modal-footer">
                              <button type="submit"
