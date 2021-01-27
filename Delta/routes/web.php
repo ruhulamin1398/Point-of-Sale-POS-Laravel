@@ -169,13 +169,14 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 
 
 Route::get('permission-test',function(){
-    $role = Role::find(5);
-    // return $role->hasPermissionTo('Brand Delete');
-    $permissions = $role->permissions()->where('route_name','brands')->get();
-    return $permissions;
-    $permission = $permissions->where('name','Create')->first();
-    return $permission;
-    return $permissions;
+    
+    // $role = Role::find(5);
+    // // return $role->hasPermissionTo('Brand Delete');
+    // $permissions = $role->permissions()->where('route_name','brands')->get();
+    // return $permissions;
+    // $permission = $permissions->where('name','Create')->first();
+    // return $permission;
+    // return $permissions;
 
     return view('permissions.test');
 });

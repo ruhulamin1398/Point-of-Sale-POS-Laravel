@@ -17,6 +17,11 @@ class PermissionSeeder extends Seeder
 
         DB::table('permissions')->insert([
             [
+                'name' => 'Null',
+                'page_name' => 'All',
+                'guard_name' => 'web',
+            ],
+            [
                 'name' => 'Brand Create',
                 'page_name' => 'Brand',
                 'guard_name' => 'web',

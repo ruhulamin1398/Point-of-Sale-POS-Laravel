@@ -414,6 +414,7 @@
                  <div class="tab-pane fade" id="permission" role="tabpanel" aria-labelledby="permission-tab">
                      <form action="{{ route('rolepermissionstore') }}" method="post">
                          @csrf
+                         <input type="text" name="page_name" value="{{ $page_name }}" hidden>
                          <div class="modal-body">
 
 
@@ -450,7 +451,7 @@
                                          <td class="iteration">Create </td>
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
+                                             <label class="checkbox-inline"><input type="checkbox" name="create{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
                                                  @endif></label>
                                              </td>
@@ -470,7 +471,7 @@
 
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
+                                             <label class="checkbox-inline"><input type="checkbox" name="read{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
                                                  @endif></label>
                                              </td>
@@ -490,7 +491,7 @@
 
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
+                                             <label class="checkbox-inline"><input type="checkbox" name="edit{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
                                                  @endif></label>
                                              </td>
@@ -510,7 +511,7 @@
 
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
+                                             <label class="checkbox-inline"><input type="checkbox" name="delete{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
                                                  @endif></label>
                                              </td>
@@ -527,7 +528,7 @@
                                      <tr class="data-row">
                                          <td class="iteration">View</td>
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
+                                             <label class="checkbox-inline"><input type="checkbox" name="view{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
                                                  @endif></label>
                                              </td>
@@ -547,7 +548,7 @@
                                      <tr class="data-row">
                                          <td class="iteration">Page</td>
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
+                                             <label class="checkbox-inline"><input type="checkbox" name="page{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
                                                  @endif></label>
                                              </td>
