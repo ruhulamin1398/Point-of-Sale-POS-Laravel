@@ -16,11 +16,7 @@ class PermissionSeeder extends Seeder
     {
 
         DB::table('permissions')->insert([
-            [
-                'name' => 'Null',
-                'page_name' => 'All',
-                'guard_name' => 'web',
-            ],
+            
             [
                 'name' => 'Brand Create',
                 'page_name' => 'Brand',
@@ -78,6 +74,16 @@ class PermissionSeeder extends Seeder
             [
                 'name' => 'Unit Page',
                 'page_name' => 'Unit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Null',
+                'page_name' => 'All',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Super Admin',
+                'page_name' => 'All',
                 'guard_name' => 'web',
             ],
         ]);
@@ -281,6 +287,10 @@ class PermissionSeeder extends Seeder
             [
                 'permission_id' => 6,
                 'role_id' => 5,
+            ],
+            [
+                'permission_id' => 13,
+                'role_id' => 1,
             ],
         ]);
 

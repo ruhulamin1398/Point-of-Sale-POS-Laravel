@@ -39,7 +39,6 @@
      @endif
  </div>
  @endif
-
  <!-- Begin Page Content -->
  <div class="collapse" id="createNewForm">
      <div class="card mb-4 shadow">
@@ -88,13 +87,17 @@
              <div class="navbar-brand"><span id="componentDetailsTitle">
                      {{ __('translate.'.$componentDetails['title'])  }}</span> <i class="fas fa-tools pl-2"
                      id="pageSetting"></i></div>
+
+             @can($page_name.' Create')
              <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton"
                      data-toggle="collapse" data-target="#createNewForm" aria-expanded="false"
                      aria-controls="collapseExample"><i class="fas fa-plus" id="PlusButton"></i></button></div>
 
-
+             @endcan
          </nav>
      </div>
+
+     @can($page_name.' Read')
      <div class="card-body">
 
          <div class="table-responsive">
@@ -174,11 +177,12 @@
 
 
                          <td class="align-middle">
+                             @can($page_name.' Edit')
                              <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm"
                                  id="data-edit-button" data-item-id={{$itemId}} data-item-index={{$itr-2}}> <i
                                      class="fa fa-edit" aria-hidden="false"> </i></button>
-
-
+                             @endcan
+                             @can($page_name.' Delete')
                              <form method="POST" action="{{route($routes['delete']['name'],$itemId)}}"
                                  id="delete-form-{{ $item->id }}" style="display:none; ">
                                  {{csrf_field() }}
@@ -199,16 +203,18 @@
 
                                  </i>
                              </button>
+                             @endcan
 
-                             @php
+                             {{-- @php
                              $allowedTables = array("categories", "brands", "employees", "customers", "suppliers");
                              @endphp
-                             @if (in_array($routes['create']['link'], $allowedTables))
+                             @if (in_array($routes['create']['link'], $allowedTables)) --}}
+                             @can($page_name.' View')
                              <a href="{{ route($routes['create']['link'].'.show',$itemId) }}"> <button title="View"
                                      type="button" class="dataEditItemClass btn btn-info btn-sm" id="data-show-button">
                                      <i class="fa fa-eye text-white" aria-hidden="false"> </i></button></a>
 
-                             @endif
+                             @endcan
 
 
 
@@ -222,7 +228,9 @@
 
              </table>
          </div>
+
      </div>
+     @endcan
  </div>
 
 
@@ -285,7 +293,7 @@
      aria-hidden="true">
      <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
-             <div class="modal-header bg-light">
+             <div class="modal-header ">
 
 
                  <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -293,10 +301,14 @@
                          <a class="nav-link active " id="setting-tab" data-toggle="tab" href="#Setting" role="tab"
                              aria-controls="Setting" aria-selected="true"><b>{{__('translate.Setting')}}</b> </a>
                      </li>
+                     @can('Super Admin')
+
+
                      <li class="nav-item">
                          <a class="nav-link" id="permission-tab" data-toggle="tab" href="#permission" role="tab"
                              aria-controls="permission" aria-selected="false"><b> {{__('translate.Permission')}}</b></a>
                      </li>
+                     @endcan
                  </ul>
                  {{-- <h5 class="modal-title " id="setting-modal-label "> {{ __('translate.'.$componentDetails['title'])  }}
                  </h5> --}}
@@ -404,7 +416,8 @@
                      </div>
 
                      <div class="modal-footer">
-                         <div class="btn btn-info btn-block " id="settingsSaveButton"> {{ __('translate.Save')  }}</div>
+                         <div class="btn bg-abasas-dark btn-block " id="settingsSaveButton"> {{ __('translate.Save')  }}
+                         </div>
                      </div>
 
 
@@ -440,6 +453,26 @@
                                      @endphp
 
 
+
+                                     @php
+                                     $permision_name = $page_name." Page";
+                                     $permission = $permissions->where('name',$permision_name)->first();
+                                     @endphp
+                                     @if (!is_null($permission))
+
+                                     <tr class="data-row">
+                                         <td class="iteration">{{ __('translate.Page Access') }}</td>
+                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
+                                             <label class="checkbox-inline"><input type="checkbox" name="page{{ $i }}"
+                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                 @endif></label>
+                                             </td>
+                                             @endfor
+
+                                     </tr>
+
+                                     @endif
+
                                      @php
                                      $permision_name = $page_name." Create";
                                      $permission = $permissions->where('name',$permision_name)->first();
@@ -448,7 +481,7 @@
                                      @if (!is_null($permission))
 
                                      <tr class="data-row">
-                                         <td class="iteration">Create </td>
+                                         <td class="iteration">{{ __('translate.Create') }} </td>
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
                                              <label class="checkbox-inline"><input type="checkbox" name="create{{ $i }}"
@@ -467,7 +500,7 @@
                                      @if (!is_null($permission))
 
                                      <tr class="data-row">
-                                         <td class="iteration">Read </td>
+                                         <td class="iteration">{{ __('translate.Read') }} </td>
 
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
@@ -487,7 +520,7 @@
                                      @if (!is_null($permission))
 
                                      <tr class="data-row">
-                                         <td class="iteration">Edit </td>
+                                         <td class="iteration">{{ __('translate.Edit') }} </td>
 
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
@@ -507,7 +540,7 @@
                                      @if (!is_null($permission))
 
                                      <tr class="data-row">
-                                         <td class="iteration">Delete </td>
+                                         <td class="iteration">{{ __('translate.Delete') }} </td>
 
 
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
@@ -526,7 +559,7 @@
                                      @if (!is_null($permission))
 
                                      <tr class="data-row">
-                                         <td class="iteration">View</td>
+                                         <td class="iteration">{{ __('translate.view') }}</td>
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
                                              <label class="checkbox-inline"><input type="checkbox" name="view{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
@@ -538,7 +571,7 @@
 
                                      @endif
 
-                                     
+
                                      @php
                                      $permision_name = $page_name." Page";
                                      $permission = $permissions->where('name',$permision_name)->first();
@@ -546,7 +579,7 @@
                                      @if (!is_null($permission))
 
                                      <tr class="data-row">
-                                         <td class="iteration">Page</td>
+                                         <td class="iteration">{{ __('translate.Page') }}</td>
                                          @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
                                              <label class="checkbox-inline"><input type="checkbox" name="page{{ $i }}"
                                                      @if($roles[$i]->hasPermissionTo($permision_name)) checked
@@ -568,7 +601,7 @@
                          </div>
                          <div class="modal-footer">
                              <button type="submit"
-                                 class="btn btn-info btn-block form-control  ">{{ __('translate.Save')  }}</button>
+                                 class="btn bg-abasas-dark btn-block form-control  ">{{ __('translate.Save')  }}</button>
                          </div>
                      </form>
                  </div>
