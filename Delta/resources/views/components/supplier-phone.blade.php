@@ -1,5 +1,5 @@
 <div class="card border-light bg-abasas-dark  text-center w-100 p-2">
-    <h3 class="text-white">Supplier  <button type="button" id="NewSupplierButton" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button></h3>
+    <h3 class="text-white"> {{ __('translate.Supplier') }} <button type="button" id="NewSupplierButton" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button></h3>
 
     <div class="card-body">
         <div class="row no-gutters ">
@@ -11,7 +11,7 @@
 
 
 
-                    <span class="text-light  pl-2"> Search</span>
+                    <span class="text-light  pl-2"> {{ __('translate.Search') }}</span>
                     <div class="col-auto " style="position: relative;">
                         
                         <input type="text" name="" id="supplierSearchField" class="form-control form-control-lg  mb-1 p-4 inputMinZero rounded-1 border-info"
@@ -36,24 +36,24 @@
                 @csrf
 
                     <div class="col-auto">
-                        <input type="text" name="name" placeholder="Name" id="SupplierPhoneComponantInputName"
+                        <input type="text" name="name" placeholder="{{ __('translate.Name') }}" id="SupplierPhoneComponantInputName"
                             class="form-control mb-2">
-                        <p class="text-danger"style="display: none;" id="SupplierPhoneComponantInputNameWarrning">Enter Name</p>
+                        <p class="text-danger"style="display: none;" id="SupplierPhoneComponantInputNameWarrning"> {{ __('translate.Enter Name') }}</p>
                     </div>
                     <div class="col-auto">
-                        <input type="text" id="SupplierPhoneComponantInputphone" name="phone" class="form-control mb-2" placeholder="Phone">
-                        <p class="text-danger" style="display: none;" id="SupplierPhoneComponantInputPhoneWarrning">Enter Phone</p>
+                        <input type="text" id="SupplierPhoneComponantInputphone" name="phone" class="form-control mb-2" placeholder="{{ __('translate.Phone') }}">
+                        <p class="text-danger" style="display: none;" id="SupplierPhoneComponantInputPhoneWarrning"> {{ __('translate.Enter Phone') }}</p>
                     </div>
                     <div class="col-auto">
-                        <input type="text" name="address" placeholder="Address" id="SupplierPhoneComponantInputAddress"
-                            class="form-control mb-2">
-                    </div>
-                    <div class="col-auto">
-                        <input type="text" name="company" placeholder="Company" id="SupplierPhoneComponantInputCompany"
+                        <input type="text" name="address" placeholder="{{ __('translate.Address') }}" id="SupplierPhoneComponantInputAddress"
                             class="form-control mb-2">
                     </div>
                     <div class="col-auto">
-                        <button type="button" id="addsupplierButton" class="btn btn-primary mt-3">Completed</button>
+                        <input type="text" name="company" placeholder="{{ __('translate.Company') }}" id="SupplierPhoneComponantInputCompany"
+                            class="form-control mb-2">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" id="addsupplierButton" class="btn btn-primary mt-3"> {{ __('translate.Completed') }}</button>
                     </div>
                 
             </form>
