@@ -40,8 +40,8 @@
 
                 <div class="card-header bg-abasas-dark py-3">
                     <nav class="navbar navbar-dark">
-                        <h6 class="m-0 font-weight-bold ">Due Pay</h6>
-                        <a href="{{ route('supplier-due-pays.index') }}" class="text-light">  <button class="btn btn-success " id="create-button"> Due Paid List  </button></a>
+                        <h6 class="m-0 font-weight-bold "> {{ __('translate.Due Pay') }}</h6>
+                        <a href="{{ route('supplier-due-pays.index') }}" class="text-light">  <button class="btn btn-success " id="create-button"> {{ __('translate.Due Paid List') }}  </button></a>
 
                     </nav>
                 </div>
@@ -54,19 +54,19 @@
                                 <input type="text" name="supplier_id" id="SupplierCashsupplierId" value=0 class="form-control mb-2" hidden>
                             
                             <div class="col-12 col-md-4">
-                                <label for="SupplierCashAmount">Amount<span class="text-danger">*</span></label>
+                                <label for="SupplierCashAmount">  {{ __('translate.Amount') }}<span class="text-danger">*</span></label>
                                 <input type="number" step="any" id="SupplierCashAmount" name="amount" class="form-control mb-2" required>
                             </div>
 
                             <div class="col-12 col-md-4">
 
-                                <label for="comment">Comment</label>
+                                <label for="comment">{{ __('translate.Comment') }}</label>
                                 <input type="text" name="comment" id="comment" class="form-control mb-2">
                             </div>
 
 
                             <div class="col-12 col-md-4">
-                                <button type="submit" class="btn btn-primary btn-block mt-3" id="supplierCashPaySubmit">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-block mt-3" id="supplierCashPaySubmit"> {{ __('translate.Submit') }}</button>
                             </div>
 
                         </div>

@@ -70,7 +70,7 @@
     $(document).ready(function(){
         $('#createNewForm').hide().removeClass("collapse");
         $('#AddNewFormButtonDiv').hide();
-        $('#componentDetailsTitle').text("Today's Dropped Products");
+        $('#componentDetailsTitle').text("{{ __('translate.Todays Dropped Products') }}");
 
 
 
