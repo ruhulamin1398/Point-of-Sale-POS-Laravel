@@ -15,7 +15,7 @@
 
                 <div class="card-header py-3 bg-abasas-dark">
                     <nav class="navbar ">
-                        Product Return
+                        {{__('translate.Product Return')}}
                     </nav>
                 </div>
                 <div class="card-body">
@@ -104,7 +104,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-light ">
-                <a class="navbar-brand">Todays Returned Products</a>
+                <a class="navbar-brand">{{__('translate.Todays Returned Products')}}</a>
 
             </nav>
         </div>
@@ -116,13 +116,13 @@
 
                         <tr>
                             <th>#</th>
-                            <th>Reference</th>
-                            <th>Customer</th>
-                            <th>Product Id</th>
-                            <th>Product Id</th>
-                            <th>Quantity </th>
-                            <th>Total Price</th>
-                            <th>Comment</th>
+                            <th>{{__('translate.Reference')}}</th>
+                            <th>{{__('translate.Customer')}}</th>
+                            <th>{{__('translate.Product Id')}}</th>
+                            <th>{{__('translate.Product Name')}}</th>
+                            <th> {{__('translate.Quantity')}}</th>
+                            <th>{{__('translate.Total Price')}}</th>
+                            <th>{{__('translate.Comment')}}</th>
                         </tr>
                     </thead>
                     <tfoot class="bg-abasas-dark">
@@ -130,13 +130,13 @@
 
                         <tr>
                             <th>#</th>
-                            <th>Reference</th>
-                            <th>Customer</th>
-                            <th>Product Id</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Total Price</th>
-                            <th>Comment</th>
+                            <th>{{__('translate.Reference')}}</th>
+                            <th>{{__('translate.Customer')}}</th>
+                            <th>{{__('translate.Product Id')}}</th>
+                            <th>{{__('translate.Product Name')}}</th>
+                            <th> {{__('translate.Quantity')}}</th>
+                            <th>{{__('translate.Total Price')}}</th>
+                            <th>{{__('translate.Comment')}}</th>
                         </tr>
                         </tr>
 
