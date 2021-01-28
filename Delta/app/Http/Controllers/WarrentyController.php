@@ -17,6 +17,10 @@ class WarrentyController extends Controller
     public function index()
     {     
 
+        
+        if(! auth()->user()->hasPermissionTo('Warrenty Page')){
+            return abort(401);
+        }
         $settings = setting::where('table_name','warrenties')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         

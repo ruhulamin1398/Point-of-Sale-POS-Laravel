@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Spatie\Permission\Models\Role;
+
 class SupplierDuePayController extends Controller
 {
     /**
@@ -22,6 +24,9 @@ class SupplierDuePayController extends Controller
     public function index(Request $request)
     {
         
+        if(! auth()->user()->hasPermissionTo('Supplier Due Pay Page')){
+            return abort(401);
+        }
         
         $monthStart=Carbon::now()->format('Y-m-01 00:00:00');
         $monthEnd=Carbon::now()->format('Y-m-31 23:59:59');
@@ -48,7 +53,12 @@ class SupplierDuePayController extends Controller
      */
     public function create()
     {
-        return view('due.supplier.create');
+        
+        if(! auth()->user()->hasPermissionTo('Supplier Due Pay Create Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
+        return view('due.supplier.create',compact('roles'));
     }
 
     /**

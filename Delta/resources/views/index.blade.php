@@ -26,7 +26,7 @@
 
         <!-- Growth Card Example -->
         <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
-          <div class="card border-left-primary shadow h-100 py-4">
+          <div class="card border-left-primary shadow  py-4">
             <div class="card-img-top ">
               <i class="fas fa-calendar fa-2x text-info"></i>
             </div>
@@ -44,7 +44,7 @@
 
         <!--Today order  Card Example -->
         <div class="col-xl-3 col-md-6 mb-4 text-center vtopCard">
-          <div class="card border-left-success shadow h-100 py-4">
+          <div class="card border-left-success shadow  py-4">
             <div class="card-img-top ">
               <i class="fas fa-calendar fa-2x text-info"></i>
             </div>
@@ -62,7 +62,7 @@
 
         <!-- Today item selll Card Example -->
         <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
-          <div class="card border-left-info shadow h-100 py-4">
+          <div class="card border-left-info shadow  py-4">
             <div class="card-img-top ">
               <i class="fas fa-calendar fa-2x text-info"></i>
             </div>
@@ -80,7 +80,7 @@
 
         <!-- Today sell Amount Card Example -->
         <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
-          <div class="card border-left-info shadow h-100 py-4">
+          <div class="card border-left-info shadow  py-4">
             <div class="card-img-top ">
               <i class="fas fa-calendar fa-2x text-info"></i>
             </div>
@@ -104,7 +104,7 @@
             <div class="row ">
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('orders.create') }}"> <i class="fas fa-hand-pointer fa-2x  text-info "></i></a>
                   </div>
@@ -124,7 +124,7 @@
               
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('purchases.index') }}"> <i class="fas fa-shopping-cart fa-2x  text-info "></i></a>
                   </div>
@@ -145,7 +145,7 @@
 
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('products.index') }}"> <i class="fas fa-shopping-bag fa-2x  text-info "></i></a>
                   </div>
@@ -164,7 +164,7 @@
 
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('return-from-customers.create') }}"> <i class="fas fa-dollar-sign fa-2x  text-info "></i></a>
                   </div>
@@ -180,7 +180,7 @@
 
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('return-to-suppliers.create') }}"> <i class="fas fa-dollar-sign fa-2x  text-info "></i></a>
                   </div>
@@ -197,7 +197,7 @@
 
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('drop_products.create') }}"> <i class="fas fa-calendar fa-2x  text-info "></i></a>
                   </div>
@@ -220,7 +220,7 @@
               
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('suppliers.index') }}"> <i class="fas fa-people-carry fa-2x  text-info "></i></a>
                   </div>
@@ -240,7 +240,7 @@
               
                <!-- Growth Card Example -->
                <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('customers.index') }}"> <i class="fas fa-user fa-2x  text-info "></i></a>
                   </div>
@@ -259,7 +259,7 @@
 
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
-                <div class="card border-none  h-100 p-4">
+                <div class="card border-none   p-4">
                   <div class="card-img-top ">
                     <a href="{{ route('expenses.index') }}"> <i class="fas fa-hand-holding-usd fa-2x  text-info "></i></a>
                   </div>

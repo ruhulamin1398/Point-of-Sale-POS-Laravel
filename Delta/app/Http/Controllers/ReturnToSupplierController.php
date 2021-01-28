@@ -17,6 +17,7 @@ use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class ReturnToSupplierController extends Controller
 {
@@ -28,6 +29,9 @@ class ReturnToSupplierController extends Controller
     public function index(Request $request)
     {
         
+        if(! auth()->user()->hasPermissionTo('Return To Supplier Page')){
+            return abort(401);
+        }
         $monthStart=Carbon::now()->format('Y-m-01 00:00:00');
         $monthEnd=Carbon::now()->format('Y-m-31 23:59:59');
         if( ! is_null($request->month)){
@@ -58,11 +62,16 @@ class ReturnToSupplierController extends Controller
      */
     public function create()
     {
+        
+        if(! auth()->user()->hasPermissionTo('Return To Supplier Create Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
         $startTime = Carbon::now()->format('Y-m-d 00:00:00');
         $endTime = Carbon::now()->format('Y-m-d 23:59:59') ;
         $returnProducsts = returnToSupplier::where('created_at','>=',$startTime  )->where('created_at','<=',$endTime  )->orderBy('id','desc')->get();
         $products = Product::all();
-        return view('product.return-product.supplier.create',compact('products','returnProducsts'));
+        return view('product.return-product.supplier.create',compact('products','returnProducsts','roles'));
     }
 
     /**

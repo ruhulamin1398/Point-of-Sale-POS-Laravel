@@ -28,6 +28,9 @@ class ExpenseController extends Controller
     {
         // return $request;
 
+        if(! auth()->user()->hasPermissionTo('Expense Page')){
+            return abort(401);
+        }
 
         $settings = setting::where('table_name', 'expenses')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);

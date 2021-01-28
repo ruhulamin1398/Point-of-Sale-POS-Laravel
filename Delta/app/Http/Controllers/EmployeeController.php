@@ -22,6 +22,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        if(! auth()->user()->hasPermissionTo('Employee Page')){
+            return abort(401);
+        }
     
         $settings = setting::where('table_name','employees')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
@@ -102,6 +105,10 @@ class EmployeeController extends Controller
      */
     public function show(employee $employee , Request $request)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Employee View')){
+            return abort(401);
+        }
         $monthStart= Carbon::now()->format('Y-m-01 00:00:00');
         $monthEnd= Carbon:: now()->format('Y-m-31 23:59:59');
         if(!is_null($request->month)){
