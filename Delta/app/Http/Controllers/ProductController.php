@@ -15,6 +15,7 @@ use App\Models\warrenty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class ProductController extends Controller
 {
@@ -27,8 +28,13 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if(! auth()->user()->hasPermissionTo('Product Page')){
+            return abort(401);
+        }
+
+        $roles = Role::all();
         $products= Product::all();
-        return view('product.index',compact('products'));
+        return view('product.index',compact('products','roles'));
     }
     
     public function productAll(){
@@ -47,6 +53,11 @@ class ProductController extends Controller
      */
     public function create()
     {
+        
+        
+        if(! auth()->user()->hasPermissionTo('Product Create')){
+            return abort(401);
+        }
         $warrenties = warrenty::all();
         $tax_types = taxType::all();
         $types = productType::all();
@@ -73,6 +84,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {  
  
+
        $product = new product;
        $unit = unit::find($request->unit_id);
        $product->name=$request->name;
@@ -110,6 +122,10 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         
+        if(! auth()->user()->hasPermissionTo('Product View')){
+            return abort(401);
+        }
+        
         $productAnalysis=$this->productAnalysis($product->id);
         $dataArray = json_decode(json_encode($productAnalysis), true);
         return view('product.show',compact('product','dataArray'));
@@ -124,6 +140,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Product Edit')){
+            return abort(401);
+        }
         $brands = brand::all();
         $categories = category::all();
         $types = productType::all();
