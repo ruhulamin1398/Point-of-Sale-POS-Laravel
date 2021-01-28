@@ -40,6 +40,17 @@
  </div>
  @endif
 
+
+
+
+
+
+
+
+
+
+
+
  <!-- Begin Page Content -->
  <div class="collapse" id="createNewForm">
      <div class="card mb-4 shadow">
@@ -86,15 +97,22 @@
          <nav class="navbar  ">
 
              <div class="navbar-brand"><span id="componentDetailsTitle">
-                     {{ __('translate.'.$componentDetails['title'])  }}</span> <i class="fas fa-tools pl-2"
-                     id="pageSetting"></i></div>
+                     {{ __('translate.'.$componentDetails['title'])  }}</span>   @can('Super Admin') <i class="fas fa-tools pl-2"
+                     id="pageSetting"></i> @endcan </div>
+            @can($page_name.' Read')
+            <div id="searchByMonth"></div>
+            @endcan
+             @can($page_name.' Create')
              <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton"
                      data-toggle="collapse" data-target="#createNewForm" aria-expanded="false"
                      aria-controls="collapseExample"><i class="fas fa-plus" id="PlusButton"></i></button></div>
 
-
+             @endcan
+             
          </nav>
      </div>
+
+     @can($page_name.' Read')
      <div class="card-body">
 
          <div class="table-responsive">
@@ -114,7 +132,10 @@
                          @endif
                          @endforeach
 
+                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
+                         auth()->user()->can($page_name.' View') )
                          <th>{{__('translate.Action')}}</th>
+                         @endif
 
                      </tr>
                  </thead>
@@ -132,7 +153,10 @@
                          @endif
                          @endforeach
 
+                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
+                         auth()->user()->can($page_name.' View') )
                          <th>{{__('translate.Action')}}</th>
+                         @endif
 
                      </tr>
 
@@ -173,12 +197,15 @@
 
 
 
+                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
+                         auth()->user()->can($page_name.' View') )
                          <td class="align-middle">
+                             @can($page_name.' Edit')
                              <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm"
                                  id="data-edit-button" data-item-id={{$itemId}} data-item-index={{$itr-2}}> <i
                                      class="fa fa-edit" aria-hidden="false"> </i></button>
-
-
+                             @endcan
+                             @can($page_name.' Delete')
                              <form method="POST" action="{{route($routes['delete']['name'],$itemId)}}"
                                  id="delete-form-{{ $item->id }}" style="display:none; ">
                                  {{csrf_field() }}
@@ -199,20 +226,23 @@
 
                                  </i>
                              </button>
+                             @endcan
 
-                             @php
+                             {{-- @php
                              $allowedTables = array("categories", "brands", "employees", "customers", "suppliers");
                              @endphp
-                             @if (in_array($routes['create']['link'], $allowedTables))
+                             @if (in_array($routes['create']['link'], $allowedTables)) --}}
+                             @can($page_name.' View')
                              <a href="{{ route($routes['create']['link'].'.show',$itemId) }}"> <button title="View"
                                      type="button" class="dataEditItemClass btn btn-info btn-sm" id="data-show-button">
                                      <i class="fa fa-eye text-white" aria-hidden="false"> </i></button></a>
 
-                             @endif
+                             @endcan
 
 
 
                          </td>
+                         @endif
 
                      </tr>
                      @endforeach
@@ -222,7 +252,9 @@
 
              </table>
          </div>
+
      </div>
+     @endcan
  </div>
 
 
@@ -285,7 +317,7 @@
      aria-hidden="true">
      <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
-             <div class="modal-header bg-light">
+             <div class="modal-header ">
 
 
                  <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -293,10 +325,14 @@
                          <a class="nav-link active " id="setting-tab" data-toggle="tab" href="#Setting" role="tab"
                              aria-controls="Setting" aria-selected="true"><b>{{__('translate.Setting')}}</b> </a>
                      </li>
+                   
+
+
                      <li class="nav-item">
                          <a class="nav-link" id="permission-tab" data-toggle="tab" href="#permission" role="tab"
                              aria-controls="permission" aria-selected="false"><b> {{__('translate.Permission')}}</b></a>
                      </li>
+                    
                  </ul>
                  {{-- <h5 class="modal-title " id="setting-modal-label "> {{ __('translate.'.$componentDetails['title'])  }}
                  </h5> --}}
@@ -328,6 +364,7 @@
                                          {{ __('translate.'. $fieldList[$i]['title'] )  }}</th>
                                      <td>
                                          <div class="form-check-inline">
+                                            @can($page_name.' Create')
                                              <label class="form-check-label createLabel">
                                                  @if( $fieldList[$i]['create']==1 )
                                                  <input type="checkbox" class="form-check-input create abasasCheckBox "
@@ -346,8 +383,10 @@
                                                      value="3">
                                                  @endif
                                                  {{ __('translate.Create')  }} </label>
+                                                 @endcan
                                          </div>
                                          <div class="form-check-inline">
+                                            @can($page_name.' Read')
                                              <label class="form-check-label readLabel">
                                                  @if( $fieldList[$i]['read'] == 1 )
                                                  <input type="checkbox" class="form-check-input read abasasCheckBox "
@@ -367,8 +406,10 @@
                                                  @endif
                                                  {{ __('translate.Read')  }}
                                              </label>
+                                             @endcan
                                          </div>
                                          <div class="form-check-inline">
+                                            @can($page_name.' Edit')
                                              <label class="form-check-label updateLabel">
                                                  @if( $fieldList[$i]['update'] ==1 )
                                                  <input type="checkbox" class="form-check-input update abasasCheckBox "
@@ -385,6 +426,7 @@
                                                  @endif
                                                  {{ __('translate.Update')  }}
                                              </label>
+                                             @endcan
                                          </div>
 
 
@@ -404,7 +446,8 @@
                      </div>
 
                      <div class="modal-footer">
-                         <div class="btn btn-info btn-block " id="settingsSaveButton"> {{ __('translate.Save')  }}</div>
+                         <div class="btn bg-abasas-dark btn-block " id="settingsSaveButton"> {{ __('translate.Save')  }}
+                         </div>
                      </div>
 
 
@@ -414,160 +457,175 @@
                  <div class="tab-pane fade" id="permission" role="tabpanel" aria-labelledby="permission-tab">
                      <form action="{{ route('rolepermissionstore') }}" method="post">
                          @csrf
+                         <input type="text" name="page_name" value="{{ $page_name }}" hidden>
                          <div class="modal-body">
 
 
+                             <div class="table-responsive">
+                                 <table class="table table-striped table-bordered"  width="100%"
+                                     cellspacing="0">
+                                     <thead class="bg-abasas-dark">
 
-                             <table class="table table-striped table-bordered" id="dataTable" width="100%"
-                                 cellspacing="0">
-                                 <thead class="bg-abasas-dark">
+                                         <tr>
 
-                                     <tr>
+                                             <th>{{ __('translate.Permission') }} </th>
 
-                                         <th>Permissions </th>
-
-                                         @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
-                                             @endfor
-                                     </tr>
-                                 </thead>
-
-
-                                 <tbody>
-
-                                     @php
-                                     $itr = 1;
-                                     @endphp
+                                             @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
+                                                 @endfor
+                                         </tr>
+                                     </thead>
 
 
-                                     @php
-                                     $permision_name = $page_name." Create";
-                                     $permission = $permissions->where('name',$permision_name)->first();
+                                     <tbody>
 
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">Create </td>
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." Read";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">Read </td>
-
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." Edit";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">Edit </td>
-
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." Delete";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">Delete </td>
-
-
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-                                     @endif
-                                     @php
-                                     $permision_name = $page_name." View";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">View</td>
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-
-                                     @endif
-
-                                     
-                                     @php
-                                     $permision_name = $page_name." Page";
-                                     $permission = $permissions->where('name',$permision_name)->first();
-                                     @endphp
-                                     @if (!is_null($permission))
-
-                                     <tr class="data-row">
-                                         <td class="iteration">Page</td>
-                                         @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
-                                             <label class="checkbox-inline"><input type="checkbox" name="create"
-                                                     @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                 @endif></label>
-                                             </td>
-                                             @endfor
-
-                                     </tr>
-
-                                     @endif
-
-
-                                 </tbody>
+                                         @php
+                                         $itr = 1;
+                                         @endphp
 
 
 
-                             </table>
+                                         @php
+                                         $permision_name = $page_name." Page";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+                                         @endphp
+                                         @if (!is_null($permission))
 
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Page Access') }}</td>
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="page{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+
+                                         @endif
+
+                                         @php
+                                         $permision_name = $page_name." Create";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Create Access') }} </td>
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="create{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." Read";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Read Access') }} </td>
+
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="read{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." Edit";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Edit Access') }} </td>
+
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="edit{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." Delete";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Delete Access') }} </td>
+
+
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="delete{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+                                         @endif
+                                         @php
+                                         $permision_name = $page_name." View";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.view Access') }}</td>
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="view{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+
+                                         @endif
+
+
+
+
+                                     </tbody>
+
+
+
+                                 </table>
+                             </div>
                          </div>
                          <div class="modal-footer">
                              <button type="submit"
-                                 class="btn btn-info btn-block form-control  ">{{ __('translate.Save')  }}</button>
+                                 class="btn bg-abasas-dark btn-block form-control  ">{{ __('translate.Save')  }}</button>
                          </div>
                      </form>
                  </div>

@@ -261,12 +261,13 @@
        <li class="nav-item">
            <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapsepermission" aria-expanded="true" aria-controls="collapseExpenses">
                <i class="fas fa-clipboard-list"></i>
-               <span>{{__('translate.Permissions')}} </span>
+               <span>{{__('translate.User Management')}} </span>
            </a>
            <div id="collapsepermission" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
    
    
+                   <a class="collapse-item" href="{{ route('users.index') }}">{{__('translate.Users')}}</a>
                    <a class="collapse-item" href="{{ route('user-roles.index') }}">{{__('translate.Role')}}</a>
                    {{-- <a class="collapse-item" href="{{ route('permission-role.index') }}">{{__('translate.Role')}}</a> --}}
    
@@ -274,13 +275,6 @@
            </div>
        </li>
    
-    <hr class="sidebar-divider m-1 p-0 ">
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item  ">
-        <a class="nav-link p-3 " href="{{ route('users.index') }}">
-            <i class="fas fa-user"></i>
-            <span>{{__('translate.Users')}}</span></a>
-    </li>
 
  
 
