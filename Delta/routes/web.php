@@ -25,7 +25,7 @@ use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\IndexController;
-
+use App\Http\Controllers\PosSettingController;
 use App\Http\Controllers\ReturnFromCustomerController;
 
 use App\Http\Controllers\SettingController;
@@ -37,6 +37,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\userRoleController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -167,6 +168,8 @@ Route::get('customer_view_api', [CustomerController::class, 'ApiShow']);
 Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']);
 // Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
 
+
+Route::resource('pos-setting',PosSettingController::class);
 
 Route::get('permission-test',function(){
     
