@@ -18,6 +18,9 @@ class EmployeePaymentTypeController extends Controller
     {
         
 
+        if(! auth()->user()->hasPermissionTo('Employee Payment Type Page')){
+            return abort(401);
+        }
         $settings = setting::where('table_name','employee_payment_types')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         

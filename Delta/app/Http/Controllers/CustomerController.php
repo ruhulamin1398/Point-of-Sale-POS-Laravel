@@ -21,6 +21,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        
+        if(! auth()->user()->hasPermissionTo('Customer Page')){
+            return abort(401);
+        }
          
         $settings = setting::where('table_name','customers')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
@@ -56,6 +60,7 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request)
     {
+        
       $customer = customer::create($request->all());
        $this->onlineSync('customer','create',$customer->id);
        return redirect()->back()->withSuccess(['Successfully Created']);
@@ -70,6 +75,10 @@ class CustomerController extends Controller
      */
     public function show(customer $customer, Request $request)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Customer View')){
+            return abort(401);
+        }
         $monthStart= Carbon::now()->format('Y-m-01 00:00:00');
         $monthEnd= Carbon:: now()->format('Y-m-31 23:59:59');
         if(!is_null($request->month)){
@@ -101,6 +110,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, customer $customer)
     {
+        
         if(!is_null($request->phone))
         {
             $length= strlen($request->phone);
@@ -133,6 +143,7 @@ class CustomerController extends Controller
      */
     public function destroy(customer $customer)
     {
+        
         // there some thinking is required 
         if($customer->id ==1 )
         {
@@ -141,7 +152,7 @@ class CustomerController extends Controller
         }
         if($customer->due !=0 )
         {
-            return Redirect::back()->withErrors(["Can not delete this customer. This customer has ".$customer->due .' Tk due' ]);
+            return Redirect::back()->withErrors(["Can not delete this customer. This customer has due" ]);
         }
         $customer->delete();   
         $this->onlineSync('customer','delete',$customer->id);

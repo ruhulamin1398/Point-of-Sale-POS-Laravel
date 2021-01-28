@@ -18,6 +18,9 @@ class DesignationController extends Controller
      */
     public function index()
     {
+        if(! auth()->user()->hasPermissionTo('Designation Page')){
+            return abort(401);
+        }
          
         $settings = setting::where('table_name','designations')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
