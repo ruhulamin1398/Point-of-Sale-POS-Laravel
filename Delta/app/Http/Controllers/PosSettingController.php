@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\image;
 use App\Models\posSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class PosSettingController extends Controller
 {
@@ -15,7 +16,8 @@ class PosSettingController extends Controller
      */
     public function index()
     {
-        return view('pos-setting.index');
+        $settings = posSetting::find(1);
+        return view('pos-setting.index',compact('settings'));
     }
 
     /**
@@ -38,28 +40,7 @@ class PosSettingController extends Controller
     {
 
 
-        $posSetting = new posSetting;
-        $posSetting->shop_name = $request->shop_name;
-        $posSetting->shop_moto = $request->shop_moto;
-        $posSetting->shop_phone = $request->shop_phone;
-        $posSetting->shop_email = $request->shop_email;
-        $posSetting->language = $request->language;
-        $posSetting->due_system = $request->due_system;
-        $posSetting->customer_due = $request->customer_due;
-        $posSetting->supplier_due = $request->supplier_due;
-
-
-        if(!is_null($request->logo)){
-
-            $logoFileName = time() . $request->logo->getClientOriginalName();
-            request()->logo->move(public_path('image'), $logoFileName);
-            $posSetting->logo = $logoFileName;
-
-        }
-
-        
-
-         $posSetting->save();
+//
      
     }
 
@@ -92,9 +73,41 @@ class PosSettingController extends Controller
      * @param  \App\Models\posSetting  $posSetting
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, posSetting $posSetting)
+    public function update(Request $request,$id)
     {
-        //
+
+        $posSetting =  posSetting::find(1);
+
+
+        $posSetting->shop_name = $request->shop_name;
+        $posSetting->shop_moto = $request->shop_moto;
+        $posSetting->shop_phone = $request->shop_phone;
+        $posSetting->shop_email = $request->shop_email;
+
+
+        $posSetting->language = $request->language;
+        $posSetting->customer_due = $request->customer_due;
+        $posSetting->supplier_due = $request->supplier_due;
+    
+
+
+
+        if(!is_null($request->logo)){
+             
+            $image_path = public_path('image/').$posSetting->logo;
+            unlink($image_path);
+
+            $logoFileName = time() . $request->logo->getClientOriginalName();
+            request()->logo->move(public_path('image'), $logoFileName);
+            $posSetting->logo = $logoFileName;
+
+        }
+
+        $posSetting->save();
+        
+        App::setLocale($posSetting->language);
+        $this->onlineSync('posSetting','update',$posSetting->id);
+        return back();
     }
 
     /**
