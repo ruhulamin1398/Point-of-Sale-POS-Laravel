@@ -35,6 +35,7 @@
                 <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
                 <a class="collapse-item" href="{{ route('drop_products.create') }}">{{__('translate.Drop Product')}}</a>
                 <a class="collapse-item" href="{{ route('drop_products.index') }}">{{__('translate.Drop Product List')}}</a>
+                <a class="collapse-item" href="{{ route('bar-codes.index') }}">{{__('translate.Code Print')}}</a>
             </div>
         </div>
     </li>
@@ -90,48 +91,50 @@
     <!--purchase -->
 
 
+   
+    
         <!-- Divider -->
 
         <hr class="sidebar-divider m-1 p-0 ">
 
         <!--purchase -->
         <li class="nav-item">
-            <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseDue" aria-expanded="true" aria-controls="collapseDue">
+            <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseCustomer" aria-expanded="true" aria-controls="collapseCustomer">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>{{__('translate.Due')}}</span>
+                <span>{{__('translate.Customer')}}</span>
             </a>
-            <div id="collapseDue" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
+            <div id="collapseCustomer" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
     
-                    <a class="collapse-item" href="{{ route('customer-due-receives.index') }}">{{__('translate.Receive List')}} </a>
-                    <a class="collapse-item" href="{{ route('customer-due-receives.create') }}">{{__('translate.Receive')}}  </a>
-                    <a class="collapse-item" href="{{ route('supplier-due-pays.index') }}">{{__('translate.Pay List')}} </a>
-                    <a class="collapse-item" href="{{ route('supplier-due-pays.create') }}">{{__('translate.Pay')}}  </a>
+                    <a class="collapse-item" href="{{ route('customers.index') }}">{{__('translate.Customer')}} </a>
+                    <a class="collapse-item" href="{{ route('customer-due-receives.index') }}">{{__('translate.Due Receive List')}} </a>
+                    <a class="collapse-item" href="{{ route('customer-due-receives.create') }}">{{__('translate.Due Receive')}}  </a>
+    
+                </div>
+            </div>
+        </li>
+        <!-- Divider -->
+
+        <hr class="sidebar-divider m-1 p-0 ">
+
+        <!--purchase -->
+        <li class="nav-item">
+            <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseSupplier" aria-expanded="true" aria-controls="collapseSupplier">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>{{__('translate.Supplier')}}</span>
+            </a>
+            <div id="collapseSupplier" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+    
+                    <a class="collapse-item" href="{{ route('suppliers.index') }}">{{__('translate.Supplier')}} </a>
+                    <a class="collapse-item" href="{{ route('supplier-due-pays.index') }}">{{__('translate.Due Pay List')}} </a>
+                    <a class="collapse-item" href="{{ route('supplier-due-pays.create') }}">{{__('translate.Due Pay')}}  </a>
     
                 </div>
             </div>
         </li>
     
 
-
-
-    <hr class="sidebar-divider m-1 p-0 ">
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item  ">
-        <a class="nav-link p-3 " href="{{ route('customers.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>{{__('translate.Customer')}}</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider m-1 p-0 ">
-
-    <!--supplier  Collapse Menu -->
-    <li class="nav-item  ">
-        <a class="nav-link p-3 " href="{{ route('suppliers.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span> {{__('translate.Supplier')}}</span></a>
-    </li>
     
 
 
@@ -172,15 +175,6 @@
     </li>
 
 
-    <!-- Divider -->
-    <hr class="sidebar-divider m-1 p-0 ">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item  ">
-        <a class="nav-link p-3 " href="{{ route('bar-codes.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>{{__('translate.Code Print')}}</span></a>
-    </li>
 
     <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
