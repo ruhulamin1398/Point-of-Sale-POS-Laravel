@@ -539,6 +539,57 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Return From Customer Create',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Product Page',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product View',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Edit',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Delete',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Read',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Create',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Price',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Cost',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Graph',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Product Print',
+                'page_name' => 'Product',
+                'guard_name' => 'web',
+            ],
+
 
 
 
@@ -969,6 +1020,46 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 94,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 95,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 96,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 97,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 98,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 99,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 100,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 101,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 102,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 103,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 104,
                 'role_id' => 1,
             ],
             [

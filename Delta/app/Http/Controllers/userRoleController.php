@@ -305,6 +305,124 @@ class userRoleController extends Controller
                 $roles[4]->revokePermissionTo($page_permission->name);
             }
         }
+        // price Permission
+        $price_permission = $permissions->where('name',$request->page_name.' Price')->first();
+        if(!is_null($page_permission)){
+            
+            if($request->price1 == 'on'){
+                $roles[1]->givePermissionTo($price_permission->name);
+            }
+            else{
+                $roles[1]->revokePermissionTo($price_permission->name);
+            }
+            if($request->price2 == 'on'){
+                $roles[2]->givePermissionTo($price_permission->name);
+            }
+            else{
+                $roles[2]->revokePermissionTo($price_permission->name);
+            }
+            if($request->price3 == 'on'){
+                $roles[3]->givePermissionTo($price_permission->name);
+            }
+            else{
+                $roles[3]->revokePermissionTo($price_permission->name);
+            }
+            if($request->price4 == 'on'){
+                $roles[4]->givePermissionTo($price_permission->name);
+            }
+            else{
+                $roles[4]->revokePermissionTo($price_permission->name);
+            }
+        }
+        // cost Permission
+        $cost_permission = $permissions->where('name',$request->page_name.' Cost')->first();
+        if(!is_null($page_permission)){
+            
+            if($request->cost1 == 'on'){
+                $roles[1]->givePermissionTo($cost_permission->name);
+            }
+            else{
+                $roles[1]->revokePermissionTo($cost_permission->name);
+            }
+            if($request->cost2 == 'on'){
+                $roles[2]->givePermissionTo($cost_permission->name);
+            }
+            else{
+                $roles[2]->revokePermissionTo($cost_permission->name);
+            }
+            if($request->cost3 == 'on'){
+                $roles[3]->givePermissionTo($cost_permission->name);
+            }
+            else{
+                $roles[3]->revokePermissionTo($cost_permission->name);
+            }
+            if($request->cost4 == 'on'){
+                $roles[4]->givePermissionTo($cost_permission->name);
+            }
+            else{
+                $roles[4]->revokePermissionTo($cost_permission->name);
+            }
+        }
+        
+        // graph Permission
+        $grap_permission = $permissions->where('name',$request->page_name.' Graph')->first();
+        if(!is_null($page_permission)){
+            
+            if($request->graph1 == 'on'){
+                $roles[1]->givePermissionTo($grap_permission->name);
+            }
+            else{
+                $roles[1]->revokePermissionTo($grap_permission->name);
+            }
+            if($request->graph2 == 'on'){
+                $roles[2]->givePermissionTo($grap_permission->name);
+            }
+            else{
+                $roles[2]->revokePermissionTo($grap_permission->name);
+            }
+            if($request->graph3 == 'on'){
+                $roles[3]->givePermissionTo($grap_permission->name);
+            }
+            else{
+                $roles[3]->revokePermissionTo($grap_permission->name);
+            }
+            if($request->graph4 == 'on'){
+                $roles[4]->givePermissionTo($grap_permission->name);
+            }
+            else{
+                $roles[4]->revokePermissionTo($grap_permission->name);
+            }
+        }
+        
+        // Print Permission
+        $print_permission = $permissions->where('name',$request->page_name.' Print')->first();
+        if(!is_null($page_permission)){
+            
+            if($request->print1 == 'on'){
+                $roles[1]->givePermissionTo($print_permission->name);
+            }
+            else{
+                $roles[1]->revokePermissionTo($print_permission->name);
+            }
+            if($request->print2 == 'on'){
+                $roles[2]->givePermissionTo($print_permission->name);
+            }
+            else{
+                $roles[2]->revokePermissionTo($print_permission->name);
+            }
+            if($request->print3 == 'on'){
+                $roles[3]->givePermissionTo($print_permission->name);
+            }
+            else{
+                $roles[3]->revokePermissionTo($print_permission->name);
+            }
+            if($request->print4 == 'on'){
+                $roles[4]->givePermissionTo($print_permission->name);
+            }
+            else{
+                $roles[4]->revokePermissionTo($print_permission->name);
+            }
+        }
 
 
 

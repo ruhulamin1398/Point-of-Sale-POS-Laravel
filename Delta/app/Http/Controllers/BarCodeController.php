@@ -15,6 +15,10 @@ class BarCodeController extends Controller
      */
     public function index()
     {
+        
+        if(! auth()->user()->hasPermissionTo('Product Print')){
+            return abort(401);
+        }
         return view('product.barcode.index');
     }
 

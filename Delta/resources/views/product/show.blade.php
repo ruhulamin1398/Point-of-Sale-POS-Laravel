@@ -70,10 +70,13 @@
                                     <th>{{ __("translate.Unit") }} </th>
                                     <td>{{ $product->unit->name }} </td>
                                 </tr>
+                                @can('Product Cost')
                                 <tr class="data-row">
                                     <th>{{ __("translate.Cost") }} </th>
                                     <td>{{ $product->cost_per_unit * $product->unit->value }} </td>
                                 </tr>
+                                @endcan
+                                @can('Product Price')
                                 <tr class="data-row">
                                     <th>{{ __("translate.Price") }} </th>
                                     <td>  {{ $product->price_per_unit * $product->unit->value }} @if ($product->is_fixed_price == 1)
@@ -82,6 +85,7 @@
                                      (Not Fixed)
                                     @endif  </td>
                                 </tr>
+                                @endcan
                                 <tr class="data-row">
                                     <th>{{ __("translate.Warrenty") }} </th>
                                     <td>{{ $product->warrenty->name }} </td>
@@ -109,11 +113,11 @@
 
                 </div>
                 <div class="col-12 col-md-6">
-                    <div class=" d-none d-md-block">
+                    @can('Product Graph')
                         
                     <x-bar-chart :dataArray="$dataArray" id="productAnalysis" />
-
-                    </div>
+                    @endcan 
+                   
 
                     <p class="pt-4"><b> {{ __("translate.Product Description") }} </b>: {{ $product->description }}</p>
 
