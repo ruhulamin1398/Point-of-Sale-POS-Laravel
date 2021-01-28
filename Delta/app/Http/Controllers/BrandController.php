@@ -7,6 +7,7 @@ use App\Models\brand;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Permission;
 
 class BrandController extends Controller
 {
@@ -17,6 +18,10 @@ class BrandController extends Controller
      */
     public function index()
     {
+        if(! auth()->user()->hasPermissionTo('Brand Page')){
+            return abort(401);
+        }
+            
         $settings = setting::where('table_name', 'brands')->first();
         $settings->setting = json_decode(json_decode($settings->setting, true), true);
 
@@ -48,7 +53,7 @@ class BrandController extends Controller
     public function store(BrandRequest $request)
 
     {
-
+        
         $brand = brand::create($request->all());
  
         $this->onlineSync('brand','create',$brand->id);
@@ -63,6 +68,10 @@ class BrandController extends Controller
      */
     public function show(brand $brand)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Brand View')){
+            return abort(401);
+        }
         return view('product.brand.show', compact('brand'));
     }
 
@@ -105,6 +114,7 @@ class BrandController extends Controller
      */
     public function destroy(brand $brand)
     {
+        
 
         if ($brand->id == 1) {
             return Redirect::back()->withErrors(["This Brand Can't be Edited"]);

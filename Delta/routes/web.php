@@ -37,7 +37,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\userRoleController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\Product;
+
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Routing\Route as RoutingRoute;
+
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -169,10 +173,13 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 // Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
 
 
+  
+
 Route::resource('pos-setting',PosSettingController::class);
 
 Route::get('permission-test',function(){
     
+  // return Hash::check($request->value, auth()->user()->password);
     // $role = Role::find(5);
     // // return $role->hasPermissionTo('Brand Delete');
     // $permissions = $role->permissions()->where('route_name','brands')->get();

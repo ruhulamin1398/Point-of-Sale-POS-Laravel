@@ -17,6 +17,9 @@ class PaymentSystemController extends Controller
     {
        
 
+        if(! auth()->user()->hasPermissionTo('Payment System Page')){
+            return abort(401);
+        }
         $settings = setting::where('table_name','payment_systems')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         

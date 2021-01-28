@@ -193,6 +193,11 @@ class ProductController extends Controller
     
     public function lowStockProduct()
     {  
+        
+        
+        if(! auth()->user()->hasPermissionTo('Stock Alert Page')){
+            return abort(401);
+        }
       $lowStockProducts =  Product::whereColumn('stock' ,'<' ,'stock_alert')->get();
      
       $settings = setting::where('table_name','stock_alert')->first();

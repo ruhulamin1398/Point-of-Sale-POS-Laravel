@@ -15,6 +15,7 @@ use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class CustomerDueReceiveController extends Controller
 {
@@ -27,6 +28,9 @@ class CustomerDueReceiveController extends Controller
     {
 
         
+        if(! auth()->user()->hasPermissionTo('Customer Due Receive Page')){
+            return abort(401);
+        }
         $monthStart=Carbon::now()->format('Y-m-01 00:00:00');
         $monthEnd=Carbon::now()->format('Y-m-31 23:59:59');
         if( ! is_null($request->month)){
@@ -52,7 +56,12 @@ class CustomerDueReceiveController extends Controller
      */
     public function create()
     {
-        return view('due.customer.create');
+        
+        if(! auth()->user()->hasPermissionTo('Customer Due Receive Create Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
+        return view('due.customer.create',compact('roles'));
     }
 
     /**

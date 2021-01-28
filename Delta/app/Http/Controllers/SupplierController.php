@@ -20,6 +20,10 @@ class SupplierController extends Controller
      */
     public function index()
     {
+        
+        if(! auth()->user()->hasPermissionTo('Supplier Page')){
+            return abort(401);
+        }
        
 $settings = setting::where('table_name','suppliers')->first();
 $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
@@ -71,6 +75,10 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
      */
     public function show(supplier $supplier , Request $request)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Supplier View')){
+            return abort(401);
+        }
         $monthStart= Carbon::now()->format('Y-m-01 00:00:00');
         $monthEnd= Carbon:: now()->format('Y-m-31 23:59:59');
         if(!is_null($request->month)){

@@ -18,6 +18,9 @@ class DutyStatusController extends Controller
      */
     public function index()
     {
+        if(! auth()->user()->hasPermissionTo('Duty Status Page')){
+            return abort(401);
+        }
 
         $settings = setting::where('table_name','duty_statuses')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);

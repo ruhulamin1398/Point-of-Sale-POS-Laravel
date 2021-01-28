@@ -19,6 +19,9 @@ class CategoryController extends Controller
     public function index()
     {
        
+        if(! auth()->user()->hasPermissionTo('Category Page')){
+            return abort(401);
+        }
 
         $settings = setting::where('table_name','categories')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
@@ -66,6 +69,10 @@ class CategoryController extends Controller
      */
     public function show(category $category)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Category View')){
+            return abort(401);
+        }
         return view('product.category.show',compact('category'));
     }
 

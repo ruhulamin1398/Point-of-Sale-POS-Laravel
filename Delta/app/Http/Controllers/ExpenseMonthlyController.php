@@ -16,6 +16,10 @@ class ExpenseMonthlyController extends Controller
      */
     public function index(Request $request)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Expense Monthly Page')){
+            return abort(401);
+        }
         $month = Carbon::now()->format('Y-m-01');
         if(!is_null($request->month)){
             $month= $request->month.'-01';

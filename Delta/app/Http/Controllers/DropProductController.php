@@ -26,6 +26,9 @@ class DropProductController extends Controller
      */
     public function index(Request $request)
     {
+        if(! auth()->user()->hasPermissionTo('Drop Product Page')){
+            return abort(401);
+        }
         if (is_null($request->month)) {
             $monthstart = Carbon::now()->format("Y-m-01 00:00:00");
             $monthend = Carbon::now()->format("Y-m-31 23:59:59");
@@ -60,6 +63,9 @@ class DropProductController extends Controller
     public function create()
     {
         
+        if(! auth()->user()->hasPermissionTo('Drop Product Create Page')){
+            return abort(401);
+        }
         $daystart = Carbon::now()->format("Y-m-d 00:00:00");
         $dayend = Carbon::now()->format("Y-m-d 23:59:59");
         $settings = setting::where('table_name', 'drop_products')->first();

@@ -519,6 +519,26 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Supplier Due Pay',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Customer Due Receive Create Page',
+                'page_name' => 'Customer Due Receive Create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Supplier Due Pay Create Page',
+                'page_name' => 'Supplier Due Pay Create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Return To Supplier Create Page',
+                'page_name' => 'Return To Supplier Create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Return From Customer Create Page',
+                'page_name' => 'Return From Customer Create',
+                'guard_name' => 'web',
+            ],
 
 
 
@@ -933,6 +953,22 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 90,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 91,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 92,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 93,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 94,
                 'role_id' => 1,
             ],
             [
