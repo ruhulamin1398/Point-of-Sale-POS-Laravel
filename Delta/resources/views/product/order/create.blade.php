@@ -135,6 +135,7 @@
 
 
                             <tr>
+                                <th>#</th>
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
                                 <th>{{ __("translate.Price") }} </th>
@@ -147,6 +148,8 @@
                         </thead>
                         <tfoot class="bg-abasas-dark">
                             <tr>
+                                
+                                <th>#</th>
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
                                 <th>{{ __("translate.Price") }} </th>

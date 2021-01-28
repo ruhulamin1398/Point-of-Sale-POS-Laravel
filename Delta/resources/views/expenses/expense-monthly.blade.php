@@ -22,11 +22,8 @@
 
        
 
-        $('#createNewForm').hide().removeClass("collapse");
-        $('#AddNewFormButtonDiv').html(html);
+        $('#searchByMonth').html(html);
 
-        var table = $('#dataTable').DataTable();
-        table.columns( [-1] ).visible( false );
 
 
     })
