@@ -99,13 +99,16 @@
              <div class="navbar-brand"><span id="componentDetailsTitle">
                      {{ __('translate.'.$componentDetails['title'])  }}</span>   @can('Super Admin') <i class="fas fa-tools pl-2"
                      id="pageSetting"></i> @endcan </div>
-
+            @can($page_name.' Read')
+            <div id="searchByMonth"></div>
+            @endcan
              @can($page_name.' Create')
              <div id="AddNewFormButtonDiv"><button type="button" class="btn btn-success btn-lg" id="AddNewFormButton"
                      data-toggle="collapse" data-target="#createNewForm" aria-expanded="false"
                      aria-controls="collapseExample"><i class="fas fa-plus" id="PlusButton"></i></button></div>
 
              @endcan
+             
          </nav>
      </div>
 
@@ -361,6 +364,7 @@
                                          {{ __('translate.'. $fieldList[$i]['title'] )  }}</th>
                                      <td>
                                          <div class="form-check-inline">
+                                            @can($page_name.' Create')
                                              <label class="form-check-label createLabel">
                                                  @if( $fieldList[$i]['create']==1 )
                                                  <input type="checkbox" class="form-check-input create abasasCheckBox "
@@ -379,8 +383,10 @@
                                                      value="3">
                                                  @endif
                                                  {{ __('translate.Create')  }} </label>
+                                                 @endcan
                                          </div>
                                          <div class="form-check-inline">
+                                            @can($page_name.' Read')
                                              <label class="form-check-label readLabel">
                                                  @if( $fieldList[$i]['read'] == 1 )
                                                  <input type="checkbox" class="form-check-input read abasasCheckBox "
@@ -400,8 +406,10 @@
                                                  @endif
                                                  {{ __('translate.Read')  }}
                                              </label>
+                                             @endcan
                                          </div>
                                          <div class="form-check-inline">
+                                            @can($page_name.' Edit')
                                              <label class="form-check-label updateLabel">
                                                  @if( $fieldList[$i]['update'] ==1 )
                                                  <input type="checkbox" class="form-check-input update abasasCheckBox "
@@ -418,6 +426,7 @@
                                                  @endif
                                                  {{ __('translate.Update')  }}
                                              </label>
+                                             @endcan
                                          </div>
 
 
