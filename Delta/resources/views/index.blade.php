@@ -330,7 +330,7 @@
                 <h6 class="m-0 font-weight-bold ">Developed By</h6>
               </div>
               <div class="card-body text-center">
-                <img src="{{asset('img/Abasas.com logo.png')}}" height="50px" alt="Abasas Logo">
+                <img src="{{asset('image/abasas-logo.png')}}" height="50px" alt="Abasas Logo">
                 <div class="text-dark font-weight-bold "> <i class="fas fa-phone fa-sm fa-fw mr-2 text-success-400  "></i> 01798142111</div>
                <a href="http://abasas.tech" target="_blank"> <div class="text-dark font-weight-bold ">http://abasas.tech</div> </a>
               </div>
