@@ -8,9 +8,9 @@
           </button>
 
           
-          <img src="{{asset('img/abasas-logo.png')}}" height="60px" alt="Logo">
+          <img src="{{asset('image/abasas-logo.png')}}" height="60px" alt="Logo">
           
- <span class="h2 title "  > Abasas SAAS </span> 
+ <span class="h2 title "  > SAAS </span> 
           <span class="h6 title "  > <sub> Not Number One, WE are Only One</sub> </span>
 
           <!-- Topbar Navbar -->
