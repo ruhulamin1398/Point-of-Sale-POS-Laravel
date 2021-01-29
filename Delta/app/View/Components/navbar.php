@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\posSetting;
 use Illuminate\View\Component;
 
 class navbar extends Component
@@ -23,6 +24,7 @@ class navbar extends Component
      */
     public function render()
     {
-        return view('components.navbar');
+        $settings = posSetting::find(1);
+        return view('components.navbar',compact('settings'));
     }
 }

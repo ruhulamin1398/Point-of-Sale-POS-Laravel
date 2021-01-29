@@ -6,6 +6,7 @@ use App\Models\image;
 use App\Models\posSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
 
 class PosSettingController extends Controller
 {
@@ -75,8 +76,12 @@ class PosSettingController extends Controller
      */
     public function update(Request $request,$id)
     {
-
+ 
+        
         $posSetting =  posSetting::find(1);
+
+
+        
 
 
         $posSetting->shop_name = $request->shop_name;
@@ -84,6 +89,7 @@ class PosSettingController extends Controller
         $posSetting->shop_phone = $request->shop_phone;
         $posSetting->shop_email = $request->shop_email;
 
+ 
 
         $posSetting->language = $request->language;
         $posSetting->customer_due = $request->customer_due;
@@ -96,10 +102,16 @@ class PosSettingController extends Controller
              
             $image_path = public_path('image/').$posSetting->logo;
             unlink($image_path);
+             $imageDimension = getimagesize($request->logo);
+             if($imageDimension[0] <= 1360 && $imageDimension[1] <= 424) {
 
-            $logoFileName = time() . $request->logo->getClientOriginalName();
-            request()->logo->move(public_path('image'), $logoFileName);
-            $posSetting->logo = $logoFileName;
+                $logoFileName = time() . $request->logo->getClientOriginalName();
+                request()->logo->move(public_path('image'), $logoFileName);
+                $posSetting->logo = 'image/'. $logoFileName;
+             }else{
+                return Redirect::back()->withErrors(["Image Dimension Must Be lower Then 1360 X 424"]);
+             }
+           
 
         }
 
