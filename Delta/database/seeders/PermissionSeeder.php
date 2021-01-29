@@ -624,6 +624,11 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Duty Monthly',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Goal Page',
+                'page_name' => 'Goal',
+                'guard_name' => 'web',
+            ],
 
 
 
@@ -1123,6 +1128,10 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 111,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 112,
                 'role_id' => 1,
             ],
             [

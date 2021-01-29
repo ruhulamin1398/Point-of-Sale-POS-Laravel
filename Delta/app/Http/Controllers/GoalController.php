@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\goal;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class GoalController extends Controller
 {
@@ -14,8 +15,12 @@ class GoalController extends Controller
      */
     public function index()
     {
+        if(! auth()->user()->hasPermissionTo('Goal Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
         $goal = goal::find(1);
-        return view('goal.index',compact('goal'));
+        return view('goal.index',compact('goal','roles'));
     }
 
     /**
