@@ -7,11 +7,12 @@
             <i class="fa fa-bars  "></i>
           </button>
 
+          <img src="{{ asset($settings->logo) }}" height="60px" alt="Logo">
+
           
-          <img src="{{asset('image/abasas-logo.png')}}" height="60px" alt="Logo">
-          
- <span class="h2 title "  > SAAS </span> 
-          <span class="h6 title "  > <sub> Not Number One, WE are Only One</sub> </span>
+          {{-- <img src="{{asset(  )}}" height="60px" alt="Logo"> --}}
+   <span class="h2 title "  > {{ $settings->shop_name }} </span> 
+          <span class="h6 title "  > <sub> {{ $settings->shop_moto }}</sub> </span>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">

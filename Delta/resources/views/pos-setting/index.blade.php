@@ -3,6 +3,29 @@
 @section('content')
 
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{  __('translate.'.$error) }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+@if (session()->has('success'))
+<div class="alert alert-success">
+    @if(is_array(session('success')))
+    <ul>
+        @foreach (session('success') as $message)
+        <li>{{  __('translate.'.$message) }}</li>
+        @endforeach
+    </ul>
+    @else
+    {{ session('success') }}
+    @endif
+</div>
+@endif
 
 
 
@@ -145,7 +168,7 @@
 
 
                     <div class="form-group col-12 col-md-3">
-                        <input type="file" name="logo" class="form-control-file" id="logo">
+                        <input type="file" name="logo"  class="form-control-file" id="logoImage" >
                     </div>
 
 

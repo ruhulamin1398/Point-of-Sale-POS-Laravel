@@ -8,10 +8,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\App;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    
 
     public function calPricePerUnit($sell,$unit_id){
 
@@ -28,6 +31,11 @@ class Controller extends BaseController
         $onlineSync->action_type = $action_type;
         $onlineSync->reference_id = $reference_id;
         $onlineSync->save();
+    }
+
+    public function localization($local){
+        return $local;
+        App::setLocale('en');
     }
 
 }
