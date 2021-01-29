@@ -19,6 +19,7 @@ use App\Models\purchaseAnalysisMonthly;
 use App\Models\purchaseAnalysisYearly;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class PurchaseController extends Controller
 {
@@ -29,16 +30,21 @@ class PurchaseController extends Controller
      */
     public function index(Request $request)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Purchase Page')){
+            return abort(401);
+        }  
         $monthStart = Carbon:: now()->format('Y-m-01 00:00:00');
         $monthEnd = Carbon:: now()->format('Y-m-31 23:59:59');
         if(! is_null($request->month)){
             $monthStart = Carbon:: parse($request->month)->format('Y-m-01 00:00:00');
             $monthEnd = Carbon:: parse($request->month)->format('Y-m-31 23:59:59');
         }
+        $roles = Role::all();
         $month = Carbon:: parse($monthStart)->format('F, Y');
         $purchases= purchase::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
 
-        return view('product.purchase.index',compact('purchases','month'));
+        return view('product.purchase.index',compact('purchases','month','roles'));
        
     }
 
@@ -49,9 +55,14 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        
+        if(! auth()->user()->hasPermissionTo('Purchase Create Page')){
+            return abort(401);
+        }  
+        
+        $roles = Role::all();
         $paymentSystems = paymentSystem::all();
-        return view('product.purchase.create',compact('paymentSystems'));
+        return view('product.purchase.create',compact('paymentSystems','roles'));
     }
 
     /**

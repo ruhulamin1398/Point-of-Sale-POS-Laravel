@@ -155,7 +155,9 @@
                 <a class="collapse-item" href="{{ route('employee_salaries.index') }}">{{__('translate.Salary')}}</a>
                 <a class="collapse-item" href="{{ route('employee_payments.index') }}">{{__('translate.Payments')}}</a>
                 <a class="collapse-item" href="{{ route('employee_payment_types.index') }}">{{__('translate.Payment Type')}}</a>
-                <a class="collapse-item" href="{{ route('employee_duties.index') }}">{{__('translate.Duty')}}</a>
+                <a class="collapse-item" href="{{ route('employee_duties.create') }}">{{__('translate.New Duty')}}</a>
+                <a class="collapse-item" href="{{ route('employee_duties.index') }}">{{__('translate.Weekly Duty')}}</a>
+                <a class="collapse-item" href="{{ route('employee_duties_monthly') }}">{{__('translate.Monthly Duty')}}</a>
                 <a class="collapse-item" href="{{ route('duty-statuses.index') }}">{{__('translate.Duty Status')}}</a>
 
             </div>
