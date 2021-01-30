@@ -272,23 +272,19 @@ return[
 
 
 
-
-
-
-
-'Product Count'=>'পণ্যের সংখা',
-'New Product'=>'নতুন পণ্য',
-'Product Name'=>'পণ্যের নাম',
-'Product Brand'=>'পণ্যের ব্র্যান্ড',
-'Product Category'=>'পণ্যের ক্যাটাগরি', 
-'Select Category'=>'ক্যাটাগরি সিলেক্ট করুন', 
-'Select Brand'=>'ব্র্যান্ড সিলেক্ট করুন', 
-'Product Type'=>'পণ্যের ধরণ',
-'Select Product Types'=>'পণ্যের ধরণ সিলেক্ট করুন',
-'Select Unit'=>'ইউনিট সিলেক্ট করুন',
-'Fixed Price'=>'ফিক্সড',
-'Not Fixed'=>'ফিক্সড না',
-'Tax Type'=>'টেক্স এর ধরণ', 
+'Product Count'=>'Product Count',
+'New Product'=>'New Product',
+'Product Name'=>'Product Name',
+'Product Brand'=>'Product Brand',
+'Product Category'=>'Product Category', 
+'Select Category'=>'Select Category', 
+'Select Brand'=>'Select Brand', 
+'Product Type'=>'Product Type',
+'Select Product Types'=>'Select Product Types',
+'Select Unit'=>'Select Unit',
+'Fixed Price'=>'Fixed Price',
+'Not Fixed'=>'Not Fixed',
+'Tax Type'=>'Tax Type', 
 'Daily Target'=>'দৈনিক লক্ষ্যমাত্রা',
 'Weekly Target'=>'সাপ্তাহিক লক্ষ্যমাত্রা',
 'Monthly Target'=>'মাসিক লক্ষ্যমাত্রা',
