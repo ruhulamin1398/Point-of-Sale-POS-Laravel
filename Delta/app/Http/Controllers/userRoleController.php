@@ -307,7 +307,7 @@ class userRoleController extends Controller
         }
         // price Permission
         $price_permission = $permissions->where('name',$request->page_name.' Price')->first();
-        if(!is_null($page_permission)){
+        if(!is_null($price_permission)){
             
             if($request->price1 == 'on'){
                 $roles[1]->givePermissionTo($price_permission->name);
@@ -336,7 +336,7 @@ class userRoleController extends Controller
         }
         // cost Permission
         $cost_permission = $permissions->where('name',$request->page_name.' Cost')->first();
-        if(!is_null($page_permission)){
+        if(!is_null($cost_permission)){
             
             if($request->cost1 == 'on'){
                 $roles[1]->givePermissionTo($cost_permission->name);
@@ -366,7 +366,7 @@ class userRoleController extends Controller
         
         // graph Permission
         $grap_permission = $permissions->where('name',$request->page_name.' Graph')->first();
-        if(!is_null($page_permission)){
+        if(!is_null($grap_permission)){
             
             if($request->graph1 == 'on'){
                 $roles[1]->givePermissionTo($grap_permission->name);
@@ -396,7 +396,7 @@ class userRoleController extends Controller
         
         // Print Permission
         $print_permission = $permissions->where('name',$request->page_name.' Print')->first();
-        if(!is_null($page_permission)){
+        if(!is_null($print_permission)){
             
             if($request->print1 == 'on'){
                 $roles[1]->givePermissionTo($print_permission->name);
