@@ -22,6 +22,7 @@ use App\Models\sellAnalysisYearly;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class OrderController extends Controller
 {
@@ -32,6 +33,10 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Order Page')){
+            return abort(401);
+        }
         $monthStart = Carbon:: now()->format('Y-m-01 00:00:00');
         $monthEnd = Carbon:: now()->format('Y-m-31 23:59:59');
         if(! is_null($request->month)){
@@ -39,9 +44,9 @@ class OrderController extends Controller
             $monthEnd = Carbon:: parse($request->month)->format('Y-m-31 23:59:59');
         }
         $month = Carbon:: parse($monthStart)->format('F, Y');
-
+        $roles = Role::all();
         $orders= order::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
-        return view('product.order.index',compact('orders','month'));
+        return view('product.order.index',compact('orders','month','roles'));
     }
   
 
@@ -52,9 +57,13 @@ class OrderController extends Controller
      */
     public function create()
     {
-            
+         
+        if(! auth()->user()->hasPermissionTo('Order Create Page')){
+            return abort(401);
+        }   
+        $roles = Role::all();
         $paymentSystems = paymentSystem::all();      
-        return view('product.order.create',compact('paymentSystems'));
+        return view('product.order.create',compact('paymentSystems','roles'));
     }
 
     /**

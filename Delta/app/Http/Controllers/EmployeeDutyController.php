@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class EmployeeDutyController extends Controller
 {
@@ -21,6 +22,10 @@ class EmployeeDutyController extends Controller
      */
     public function index(Request $request)
     {
+        if(! auth()->user()->hasPermissionTo('Duty Weekly Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
 
         $currentWeekFirstDay = "";
         if (!is_null($request->week)) {
@@ -68,7 +73,7 @@ class EmployeeDutyController extends Controller
 
         // return $collection;
         // return $weeklyEmployeesDutyData;
-        return view('employees.duty.index', compact('employees', 'weeklyEmployeesDutyData', 'weekDaysArray'));
+        return view('employees.duty.index', compact('employees', 'weeklyEmployeesDutyData', 'weekDaysArray','roles'));
     }
 
     /**
@@ -78,6 +83,11 @@ class EmployeeDutyController extends Controller
      */
     public function create()
     {
+        
+        if(! auth()->user()->hasPermissionTo('Duty Create Page')){
+            return abort(401);
+        }
+
         $todayEmployeeDuties = employeeDuty::whereDate('date', Carbon::today())->get();
         foreach ($todayEmployeeDuties as $duty) {
             if (!is_null($duty->enter_time)) {
@@ -87,11 +97,12 @@ class EmployeeDutyController extends Controller
                 $duty->exit_time =  Carbon::parse($duty->exit_time)->format('h : i A');
             }
         }
+        $roles = Role::all();
         // return $todayEmployeeDuties;
         $employees = employee::all();
         $dutyStatuses = dutyStatus::all();
 
-        return view('employees.duty.create', compact('employees', 'dutyStatuses', 'todayEmployeeDuties'));
+        return view('employees.duty.create', compact('employees', 'dutyStatuses', 'todayEmployeeDuties','roles'));
     }
 
     /**
@@ -235,6 +246,11 @@ class EmployeeDutyController extends Controller
 
     public function dutyMonthly(Request $request)
     {
+        
+        if(! auth()->user()->hasPermissionTo('Duty Monthly Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
         $month = $request->month;
         if (is_null($request->month)) {
             $month = Carbon::now()->format('Y-m');
@@ -247,7 +263,7 @@ class EmployeeDutyController extends Controller
             $duty->month = Carbon:: parse($duty->month)->format('F, Y');
         }
 
-        return view('employees.duty.duty-monthly',compact('monthlyDuties'));
+        return view('employees.duty.duty-monthly',compact('monthlyDuties','roles'));
 
 
     }

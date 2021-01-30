@@ -121,7 +121,7 @@ Route::resource('employee_salaries', EmployeeSalaryController::class);
 // Duties  
 Route::resource('duty-statuses', DutyStatusController::class);
 Route::resource('employee_duties', EmployeeDutyController::class);
-Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly']);
+Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly'])->name('employee_duties_monthly');
 
 // Expenses
 Route::resource('expenses', ExpenseController::class);
