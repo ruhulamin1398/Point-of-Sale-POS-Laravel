@@ -68,7 +68,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __("translate.Order ID") }}</th>
-                                    <th>{{ __("translate.Cuetomer") }}</th>
+                                    <th>{{ __("translate.Customer") }}</th>
                                     <th>{{ __("translate.Total") }}</th>
                                     <th>{{ __("translate.Discount") }}</th>
                                     <th>{{ __("translate.Paid Amount") }}</th>
@@ -81,7 +81,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __("translate.Order ID") }}</th>
-                                    <th>{{ __("translate.Cuetomer") }}</th>
+                                    <th>{{ __("translate.Customer") }}</th>
                                     <th>{{ __("translate.Total") }}</th>
                                     <th>{{ __("translate.Discount") }}</th>
                                     <th>{{ __("translate.Paid Amount") }}</th>

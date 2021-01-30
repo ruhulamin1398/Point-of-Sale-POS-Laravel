@@ -271,23 +271,16 @@
            </div>
        </li>
    
-       <li class="nav-item">
-        <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseposSetting" aria-expanded="true" aria-controls="collapseExpenses">
-            <i class="fas fa-clipboard-list"></i>
-            <span>{{__('translate.Setting')}} </span>
+
+    <hr class="sidebar-divider m-1 p-0 ">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed  p-3 " href="{{ route('pos-setting.index') }}"   aria-expanded="true" aria-controls="collapseStaff">
+            <i class="fas fa-dollar-sign"></i>
+            <span> {{__('translate.Setting')}} </span>
         </a>
-        <div id="collapseposSetting" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
 
-
-                <a class="collapse-item" href="{{ route('pos-setting.index') }}">{{__('translate.POS Setting')}}</a>
-                {{-- <a class="collapse-item" href="{{ route('permission-role.index') }}">{{__('translate.Role')}}</a> --}}
-
-            </div>
-        </div>
     </li>
-
- 
 
 
 
