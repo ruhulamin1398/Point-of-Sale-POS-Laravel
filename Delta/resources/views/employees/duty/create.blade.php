@@ -207,7 +207,7 @@
 
 
 
-
+@can('Super Admin')
 
  <!-- Attachment Modal -->
  <div class="modal fade" id="setting-modal" tabindex="-1" role="dialog" aria-labelledby="setting-modal-label"
@@ -286,7 +286,7 @@
      </div>
  </div>
 
-
+@endcan
 
 
 

@@ -19,6 +19,10 @@ class userRoleController extends Controller
     public function index()
     {
         
+        if(! auth()->user()->hasPermissionTo('User Role Page')){
+            return abort(401);
+        }
+
         $roles = Role::all();
         $user_with_roles = User::with('roles')->get();
         return view('permissions.index',compact('user_with_roles','roles'));

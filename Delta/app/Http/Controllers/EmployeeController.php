@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class EmployeeController extends Controller
 {
@@ -29,6 +30,7 @@ class EmployeeController extends Controller
         $settings = setting::where('table_name','employees')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         
+        $roles = Role::all();
         $designations   =designation::all();     
         $users   = User::all();     
         $employees =  employee::all();
@@ -41,7 +43,7 @@ class EmployeeController extends Controller
                 ];
         
         
-                return view('employees.index', compact('dataArray','designations','users','employees'));
+                return view('employees.index', compact('dataArray','designations','users','employees','roles'));
         
 
     }
@@ -80,6 +82,8 @@ class EmployeeController extends Controller
             $user->email = $request->email;
             $user->password= Hash::make($request->password);
             $user->save();
+            $role = Role::find($request->role_id);
+            $user->assignRole($role);
             $employee->user_id=$user->id;
       $this->onlineSync('userTable','create',$user->id);
 
