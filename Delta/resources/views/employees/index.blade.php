@@ -35,8 +35,7 @@
 
         <div class="card-header py-3  bg-abasas-dark ">
             <nav class="navbar navbar-dark">
-                <a class="navbar-brand text-light">{{ __("translate.New Employee") }}  @can('Super Admin') <i class="fas fa-tools pl-2"
-                    id="pageSetting" data-toggle="modal" data-target="#setting-modal"></i> @endcan</a>
+                <a class="navbar-brand text-light">{{ __("translate.New Employee") }}  </a>
             </nav>
         </div>
         <div class="card-body">
@@ -97,6 +96,7 @@
                     <div id="emptySpace1"class="col-md-4 col-sm-12  p-4" ></div>
                     <div id="emptySpace2"class="col-md-4 col-sm-12  p-4"></div>
                     <div id="emptySpace3"class="col-md-4 col-sm-12  p-4"></div>
+                    <div id="emptySpace4"class="col-md-4 col-sm-12  p-4"></div>
 
                     <div class="col-auto ">
                         <button type="submit" id="employeeSubmit" class="form-control btn bg-abasas-dark ml-4">{{ __("translate.Submit") }}</button>
@@ -118,83 +118,6 @@
 
 
 
- <!-- Attachment Modal -->
- <div class="modal fade" id="setting-modal" tabindex="-1" role="dialog" aria-labelledby="setting-modal-label"
-     aria-hidden="true">
-     <div class="modal-dialog modal-lg" role="document">
-         <div class="modal-content">
-             <div class="modal-header bg-abasas-dark">
-
-                <nav class="navbar navbar-light  ">
-                    <a class="navbar-brand">{{__('translate.Permission')}}</a>
-    
-                </nav>
-                
-            <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span>
-            </button>
-
-             </div>
-             <form action="{{ route('rolepermissionstore') }}" method="post">
-                @csrf
-                <input type="text" name="page_name" value="Weekly Duty" required hidden>
-             <div class="modal-body" >
-
-
-                
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered"  width="100%"
-                        cellspacing="0">
-                        <thead class="bg-abasas-dark">
-
-                            <tr>
-
-                                <th>{{ __('translate.Permission') }} </th>
-
-                                @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
-                                    @endfor
-                            </tr>
-                        </thead>
-
-
-                        <tbody>
-
-
-                            @php
-                            $permision_name = "Weekly Duty Page";
-                            @endphp
-                            
-                            <tr class="data-row">
-                                <td class="iteration">{{ __('translate.Page Access') }}</td>
-                                @for ($i=1 ; $i<5 ; $i++) <td
-                                    class="word-break name justify-content-center">
-                                    <label class="checkbox-inline"><input type="checkbox"
-                                            name="page{{ $i }}"
-                                            @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                        @endif></label>
-                                    </td>
-                                    @endfor
-
-                            </tr>
-
-                        </tbody>
-
-
-
-                    </table>
-                </div>
-
-             </div>
-
-             <div class="modal-footer">
-                <button type="submit"
-                                 class="btn bg-abasas-dark btn-block form-control  ">{{ __('translate.Save')  }}</button>
-            </div>
-             </form>
-         </div>
-     </div>
- </div>
-
 
 
 
@@ -211,7 +134,7 @@
         });
 
         // user section add
-        var html1 = '', html2= '', html3= '';
+        var html1 = '', html2= '', html3= '', html4= '';
         
         html1+='<div class="col-12">';
         html1+='        <label for="userName">{{ __("translate.Username") }}<span style="color: red"> *</span></label>';
@@ -230,18 +153,35 @@
         html3+='</div></div>';
 
         
+        html4+='<div class="col-12">';
+        html4+='<label for="role_id">{{ __("translate.Select Role") }}<span style="color: red"> *</span></label>';
+        html4+='<select class="form-control form-control" value="" name="role_id" id="role_id" required>';
+        html4+='<option disabled selected value> -- select an option -- </option>';
+        @foreach ($roles as $role)
+        @if ($loop->first && !auth()->user()->can('Super Admin'))
+        
+        @else 
+            html4+='<option value="{{$role->id}}"> {{$role->name}}</option>';
+        @endif
+        @endforeach
+        html4+='</select>';
+        html4+='</div>';
+
+        
        
         $('body').on('click', '#userAddCheck', function () {
                 
             if ($(this).is(":checked")) {
                 $('#emptySpace1').html(html1);
-                $('#emptySpace2').html(html2);
-                $('#emptySpace3').html(html3);
+                $('#emptySpace2').html(html4);
+                $('#emptySpace3').html(html2);
+                $('#emptySpace4').html(html3);
                 }
                 else{
                 $('#emptySpace1').html('');
                 $('#emptySpace2').html('');
                 $('#emptySpace3').html('');
+                $('#emptySpace4').html('');
                 
                 }
             

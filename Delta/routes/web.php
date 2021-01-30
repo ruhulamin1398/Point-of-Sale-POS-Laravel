@@ -130,7 +130,7 @@ Route::resource('expense-monthlies', ExpenseMonthlyController::class);
 
 // analysis
 Route::get('sell-analysis', [SellAnalysisDailyController::class, 'index'])->name('sell-analysis');
-Route::get('analysis', [AnalysisController::class, 'index']);
+Route::get('analysis', [AnalysisController::class, 'index'])->name('analysis');
 
 
 //   Permission Route

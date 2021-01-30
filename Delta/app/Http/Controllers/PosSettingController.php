@@ -7,6 +7,7 @@ use App\Models\posSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class PosSettingController extends Controller
 {
@@ -17,8 +18,14 @@ class PosSettingController extends Controller
      */
     public function index()
     {
+        
+        if(! auth()->user()->hasPermissionTo('Pos Setting Page')){
+            return abort(401);
+        }
+
+        $roles = Role::all();
         $settings = posSetting::find(1);
-        return view('pos-setting.index',compact('settings'));
+        return view('pos-setting.index',compact('settings','roles'));
     }
 
     /**
