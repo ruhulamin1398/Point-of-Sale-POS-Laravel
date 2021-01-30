@@ -79,11 +79,11 @@
            // $("#customer_input_id").val(customer.id); //no need
 
             html = "";
-             html += '<div class="text-center text-light" id="customerPhone" > Phone: ' + customer.phone + '</div>';
+             html += '<div class="text-center text-light" id="customerPhone" > {{ __('translate.Phone') }}: ' + customer.phone + '</div>';
 
-            html += '<div class="text-center text-light"  id="customerCompany"  >Company: ' + customer.company +
+            html += '<div class="text-center text-light"  id="customerCompany"  >{{ __('translate.Company') }} : ' + customer.company +
                 '</div>';
-            html += '<div class="text-center text-light">Due : <span class="text-danger" id="customerDue">' +
+            html += '<div class="text-center text-light">{{ __('translate.Due') }} : <span class="text-danger" id="customerDue">' +
                 customer.due + '</span></div>';
             $("#customerPhoneArea").html(html);
             $("#customerPhoneArea").show();

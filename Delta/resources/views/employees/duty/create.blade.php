@@ -53,7 +53,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-4 col-sm-12  p-2">
-                        <label for="catagory_id">{{ __('translate.Select Employee Nam') }}e</label>
+                        <label for="catagory_id">{{ __('translate.Select Employee Name') }}</label>
                         <select class="form-control form-control" value="" name="employee_id" id="employeeId" required>
                             <option value="" selected disabled> Select an Employee</option>
                             @foreach ($employees as $employee)
@@ -136,7 +136,7 @@
     <div class="card-header py-3 bg-abasas-dark">
         <nav class="navbar  ">
 
-            <div class="navbar-brand">{{ __('translate.Employee Duty') }} ({{ __('translate.Today') }}) </div>
+            <div class="navbar-brand">{{ __('translate.Employee Duty (Today)') }}  </div>
 
 
 

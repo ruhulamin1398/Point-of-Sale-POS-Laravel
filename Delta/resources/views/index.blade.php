@@ -33,7 +33,7 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Customer</div>
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Customer') }}</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $customers }}</div>
                 </div>
 
@@ -51,7 +51,7 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Supplier</div>
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Supplier') }}</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $suppliers }}</div>
                 </div>
 
@@ -69,7 +69,7 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Orders </div>
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Orders') }}  </div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $orders }}</div>
                 </div>
 
@@ -87,7 +87,7 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Producs</div>
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Products') }}</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $products }}</div>
                 </div>
 
@@ -111,7 +111,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('orders.create') }}">Order</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('orders.create') }}">{{ __('translate.Order') }} </a> </div>
                       </div>
 
 
@@ -131,7 +131,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('purchases.index') }}">Purchase</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('purchases.index') }}">{{ __('translate.Purchase') }} </a> </div>
                       </div>
 
 
@@ -152,7 +152,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('products.index') }}">Products</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('products.index') }}"> {{ __('translate.Products') }}</a> </div>
                       </div>
 
 
@@ -171,7 +171,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('return-from-customers.create') }}">Return Product (Customer)</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('return-from-customers.create') }}"> {{ __('translate.Return Product (Customer)') }} </a> </div>
                       </div>
                     </div>
                   </div>
@@ -187,7 +187,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('return-to-suppliers.create') }}">Return Product (Supplier)</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('return-to-suppliers.create') }}">{{ __('translate.Return Product (Supplier)') }}  </a> </div>
                       </div>
                     </div>
                   </div>
@@ -204,7 +204,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('drop_products.create') }}">Drop Product</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('drop_products.create') }}">{{ __('translate.Drop Product') }} </a> </div>
                       </div>
 
 
@@ -227,7 +227,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('suppliers.index') }}">Suppliers</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('suppliers.index') }}">{{ __('translate.Suppliers') }} </a> </div>
                       </div>
 
 
@@ -247,7 +247,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('customers.index') }}">Customers</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('customers.index') }}">{{ __('translate.Customers') }} </a> </div>
                       </div>
 
 
@@ -266,7 +266,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('expenses.index') }}">Expense</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('expenses.index') }}">{{ __('translate.Expense') }} </a> </div>
                       </div>
 
 
@@ -301,19 +301,19 @@
 
                <div class="card-body">
 
-                <h4 class="small font-weight-bold">Daily Target<span class="float-right">{{(int)$goal->daily}}%</span></h4>
+                <h4 class="small font-weight-bold">{{ __('translate.Daily Target') }}<span class="float-right">{{(int)$goal->daily}}%</span></h4>
                 <div class="progress mb-4">
                   <div class="progress-bar bg-secondary" role="progressbar" style="width: {{$goal->daily}}%" aria-valuenow="{{$goal->daily}}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Weekly Target <span class="float-right">{{(int)$goal->weekly}}%</span></h4>
+                <h4 class="small font-weight-bold">{{ __('translate.Weekly Target') }} <span class="float-right">{{(int)$goal->weekly}}%</span></h4>
                 <div class="progress mb-4">
                   <div class="progress-bar" role="progressbar" style="width: {{$goal->weekly}}%" aria-valuenow="{{$goal->weekly}}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Monthly Target <span class="float-right">{{(int)$goal->monthly}}%</span></h4>
+                <h4 class="small font-weight-bold">{{ __('translate.Monthly Target') }} <span class="float-right">{{(int)$goal->monthly}}%</span></h4>
                 <div class="progress mb-4">
                   <div class="progress-bar bg-info" role="progressbar" style="width: {{$goal->monthly}}%" aria-valuenow="{{$goal->monthly}}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <h4 class="small font-weight-bold">Yearly Target <span class="float-right"> {{(int)$goal->yearly}}%</span></h4>
+                <h4 class="small font-weight-bold">{{ __('translate.Yearly Target') }} <span class="float-right"> {{(int)$goal->yearly}}%</span></h4>
                 <div class="progress">
                   <div class="progress-bar bg-success" role="progressbar" style="width: {{$goal->yearly}}%" aria-valuenow=" {{$goal->yearly}}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
