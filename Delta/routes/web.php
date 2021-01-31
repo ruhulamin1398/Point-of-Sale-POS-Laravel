@@ -36,6 +36,7 @@ use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\userRoleController;
 use App\Http\Controllers\WarrentyController;
+use App\Models\posSetting;
 use App\Models\Product;
 
 use Illuminate\Support\Facades\Hash;
@@ -56,6 +57,12 @@ use Spatie\Permission\Models\Role;
 |
 */
 
+Route::group(['abasas'=>'abasas'], function() {
+   // this Route group only for language change
+
+    $locale  = posSetting::find(1)->language;
+          
+    App::setLocale($locale);
 
 
 
@@ -246,4 +253,5 @@ Route::get('sync-test', function () {
     //         $data->delete();
     //     }
     // }
+});
 });
