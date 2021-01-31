@@ -389,7 +389,7 @@ return[
 'Supplier Due'=>'বাকী (সাস্প্লায়ার)',
 'System Settings'=>'সিস্টেম সেটিংস',
 'Setting Updated Successful'=>'সেটিং সফলভাবে আপডেট হয়েছে',
-''=>'',
+'Image Dimension Must Be lower Then 1360 X 424'=>'লোগো এর আকৃতি 1360 X 424 px এর ছোট হতে হবে',
 ''=>'',
 ''=>'',
 ''=>'',

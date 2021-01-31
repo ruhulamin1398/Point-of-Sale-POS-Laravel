@@ -99,12 +99,14 @@ class PosSettingController extends Controller
 
 
         if(!is_null($request->logo)){
-             
-            $image_path = public_path('image/').$posSetting->logo;
-            unlink($image_path);
-             $imageDimension = getimagesize($request->logo);
-             if($imageDimension[0] <= 1360 && $imageDimension[1] <= 424) {
 
+            
+            $imageDimension = getimagesize($request->logo);
+            if($imageDimension[0] <= 1360 && $imageDimension[1] <= 424) {
+
+            $image_path = public_path('/').$posSetting->logo;
+            unlink($image_path);
+            
                 $logoFileName = time() . $request->logo->getClientOriginalName();
                 request()->logo->move(public_path('image'), $logoFileName);
                 $posSetting->logo = 'image/'. $logoFileName;

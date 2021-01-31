@@ -23,7 +23,7 @@ class PosSettingSeeder extends Seeder
                 'language' => 'bn',
                 'customer_due' => 'yes',
                 'supplier_due' => 'yes',
-                'logo' => 'image/abasas-logo.png',
+                'logo' => 'image/Abasas.com logo.png',
             ],
          
         ]);
