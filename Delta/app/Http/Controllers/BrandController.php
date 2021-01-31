@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandRequest;
 use App\Models\brand;
+use App\Models\posSetting;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -18,6 +19,8 @@ class BrandController extends Controller
      */
     public function index()
     {
+
+
         if(! auth()->user()->hasPermissionTo('Brand Page')){
             return abort(401);
         }
@@ -53,6 +56,8 @@ class BrandController extends Controller
     public function store(BrandRequest $request)
 
     {
+
+       
         
         $brand = brand::create($request->all());
  
