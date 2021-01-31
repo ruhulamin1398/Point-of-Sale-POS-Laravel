@@ -388,7 +388,7 @@ return[
 'Shop Logo'=>'Shop Logo', 
 'Supplier Due'=>'Supplier Due',
 'System Settings'=>'System Settings',
-''=>'',
+'Setting Updated Successful'=>'Setting Updated Successful',
 ''=>'',
 ''=>'',
 ''=>'',

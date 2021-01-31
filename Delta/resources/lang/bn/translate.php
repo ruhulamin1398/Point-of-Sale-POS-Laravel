@@ -388,7 +388,7 @@ return[
 'Shop Logo'=>'দোকানের লোগো', 
 'Supplier Due'=>'বাকী (সাস্প্লায়ার)',
 'System Settings'=>'সিস্টেম সেটিংস',
-''=>'',
+'Setting Updated Successful'=>'সেটিং সফলভাবে আপডেট হয়েছে',
 ''=>'',
 ''=>'',
 ''=>'',

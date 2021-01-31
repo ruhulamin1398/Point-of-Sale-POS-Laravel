@@ -119,7 +119,7 @@ class PosSettingController extends Controller
         
         App::setLocale($posSetting->language);
         $this->onlineSync('posSetting','update',$posSetting->id);
-        return back();
+        return Redirect::back()->withSuccess(["Setting Updated Successful"]);
     }
 
     /**
