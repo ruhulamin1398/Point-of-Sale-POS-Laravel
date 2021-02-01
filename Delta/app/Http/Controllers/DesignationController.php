@@ -129,7 +129,7 @@ class DesignationController extends Controller
     {
         $counts = $designation->employee->count();
         if( $counts != 0 ){
-            return Redirect::back()->withErrors(["Can't delete.","Many Employee has this Designation. To delete it please change designation in Employee. " ]);
+            return Redirect::back()->withErrors(["Can't delete ,Many Employee has this Designation. To delete it please change designation in Employee" ]);
         }
         else{
             

@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
@@ -26,7 +27,6 @@
     @endif
 </div>
 @endif
-
 
 
 <!-- Begin Page Content -->

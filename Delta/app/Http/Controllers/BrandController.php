@@ -123,7 +123,7 @@ class BrandController extends Controller
 
         if ($brand->id == 1) {
             return Redirect::back()->withErrors(["This Brand Can't be Edited"]);
-        }
+        } 
         
         $brand->delete();
         $this->onlineSync('brand','delete',$brand->id);

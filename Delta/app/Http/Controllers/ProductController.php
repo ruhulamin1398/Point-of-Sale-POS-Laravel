@@ -204,7 +204,7 @@ class ProductController extends Controller
             return Redirect::back()->withErrors(["Item Deleted" ]);
         }
         else{
-            return Redirect::back()->withErrors(["This Products Stock is not Zero",'Please Sell or drop that product to delete this Product' ]);
+            return Redirect::back()->withErrors(['This Products Stock is not Zero','Please Sell or drop that product to delete this Product']);
         }
        
     }
