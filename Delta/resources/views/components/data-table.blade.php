@@ -364,8 +364,8 @@
                                          {{ __('translate.'. $fieldList[$i]['title'] )  }}</th>
                                      <td>
                                          <div class="form-check-inline">
-                                            @can($page_name.' Create')
-                                             <label class="form-check-label createLabel">
+                                            
+                                             <label class="form-check-label createLabel" @if( !auth()->user()->can($page_name.' Create')) hidden @endif>
                                                  @if( $fieldList[$i]['create']==1 )
                                                  <input type="checkbox" class="form-check-input create abasasCheckBox "
                                                      value="1" checked>
@@ -383,11 +383,10 @@
                                                      value="3">
                                                  @endif
                                                  {{ __('translate.Create')  }} </label>
-                                                 @endcan
+                                                 
                                          </div>
                                          <div class="form-check-inline">
-                                            @can($page_name.' Read')
-                                             <label class="form-check-label readLabel">
+                                             <label class="form-check-label readLabel" @if( !auth()->user()->can($page_name.' Read')) hidden @endif>
                                                  @if( $fieldList[$i]['read'] == 1 )
                                                  <input type="checkbox" class="form-check-input read abasasCheckBox "
                                                      value="1" checked>
@@ -406,11 +405,10 @@
                                                  @endif
                                                  {{ __('translate.Read')  }}
                                              </label>
-                                             @endcan
+                                             
                                          </div>
                                          <div class="form-check-inline">
-                                            @can($page_name.' Edit')
-                                             <label class="form-check-label updateLabel">
+                                             <label class="form-check-label updateLabel" @if( !auth()->user()->can($page_name.' Edit')) hidden @endif>
                                                  @if( $fieldList[$i]['update'] ==1 )
                                                  <input type="checkbox" class="form-check-input update abasasCheckBox "
                                                      value="1" checked>
@@ -426,7 +424,7 @@
                                                  @endif
                                                  {{ __('translate.Update')  }}
                                              </label>
-                                             @endcan
+                                             
                                          </div>
 
 
