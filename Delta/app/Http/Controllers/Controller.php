@@ -32,6 +32,14 @@ class Controller extends BaseController
         $onlineSync->reference_id = $reference_id;
         $onlineSync->save();
     }
+    public function onlinePermissionSync($model,$action_type,$reference_id,$target_id){
+        $onlineSync = new onlineSync;
+        $onlineSync->model =  $model;
+        $onlineSync->action_type = $action_type;
+        $onlineSync->reference_id = $reference_id;
+        $onlineSync->target_id = $target_id;
+        $onlineSync->save();
+    }
 
     public function localization($local){
         return $local;

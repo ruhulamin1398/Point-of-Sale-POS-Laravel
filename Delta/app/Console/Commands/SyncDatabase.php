@@ -44,10 +44,13 @@ class SyncDatabase extends Command
 
 
 
+        
         // $this->datas = onlineSync::all();
         // foreach ($this->datas as $data) {
-        //     $data->data = $data->model::withTrashed()->find($data->reference_id);
-        //     $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(10, 500)->post('http://127.0.0.1:7000/api/sync-database', [
+        //     if( !($data->model == 'UserRole' || $data->model == 'RolePermission') ){
+        //         $data->data = $data->model::withTrashed()->find($data->reference_id);
+        //     }
+        //     $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(5, 200)->post('http://127.0.0.1:7000/api/sync-database', [
         //         'data' => $data
         //     ]);
         //     if ($response->status() == 200) {
@@ -66,7 +69,9 @@ class SyncDatabase extends Command
         if ($connected) {
             $this->datas = onlineSync::all();
             foreach ($this->datas as $data) {
-                $data->data = $data->model::withTrashed()->find($data->reference_id);
+                if( !($data->model == 'UserRole' || $data->model == 'RolePermission') ){
+                    $data->data = $data->model::withTrashed()->find($data->reference_id);
+                }
                 $response = Http::withBasicAuth('admin@abasas.tech', '1234')->retry(5, 200)->post('https://demos.abasas.tech/saas/Delta/public/api/sync-database', [
                     'data' => $data
                 ]);

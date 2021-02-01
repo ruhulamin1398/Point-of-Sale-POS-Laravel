@@ -56,9 +56,12 @@ class userRoleController extends Controller
         if(count($prev_role_names)>0){
             $prev_role = Role::where('name',$user->getRoleNames()[0])->first();
             $user->removeRole($prev_role);
+            $this->onlinePermissionSync('UserRole','remove',$request->user_id,$prev_role->id);
         }
 
         $user->assignRole($role);
+        
+        $this->onlinePermissionSync('UserRole','assign',$request->user_id,$request->role_id);
         return redirect()->back()->withSuccess(['Role given Successfully']);
 
     }
@@ -113,6 +116,8 @@ class userRoleController extends Controller
             $userrole =   $user->getRoleNames();
          $role = Role::where('name',$userrole)->first();
          $user->removeRole($role);
+         $this->onlinePermissionSync('UserRole','remove',$user->id,$role->id);
+
          return redirect()->back()->withErrors(['Role Removed']);
         }
     }
@@ -134,27 +139,36 @@ class userRoleController extends Controller
             
             if($request->create1 == 'on'){
                 $roles[1]->givePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$create_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$create_permission->id);
+
             }
             if($request->create2 == 'on'){
                 $roles[2]->givePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$create_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$create_permission->id);
             }
             if($request->create3 == 'on'){
                 $roles[3]->givePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$create_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$create_permission->id);
             }
             if($request->create4 == 'on'){
                 $roles[4]->givePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$create_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($create_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$create_permission->id);
             }
 
 
@@ -167,27 +181,35 @@ class userRoleController extends Controller
             
             if($request->read1 == 'on'){
                 $roles[1]->givePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$read_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$read_permission->id);
             }
             if($request->read2 == 'on'){
                 $roles[2]->givePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$read_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$read_permission->id);
             }
             if($request->read3 == 'on'){
                 $roles[3]->givePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$read_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$read_permission->id);
             }
             if($request->read4 == 'on'){
                 $roles[4]->givePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$read_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($read_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$read_permission->id);
             }
         }
 
@@ -197,27 +219,35 @@ class userRoleController extends Controller
             
             if($request->edit1 == 'on'){
                 $roles[1]->givePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$edit_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$edit_permission->id);
             }
             if($request->edit2 == 'on'){
                 $roles[2]->givePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$edit_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$edit_permission->id);
             }
             if($request->edit3 == 'on'){
                 $roles[3]->givePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$edit_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$edit_permission->id);
             }
             if($request->edit4 == 'on'){
                 $roles[4]->givePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$edit_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($edit_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$edit_permission->id);
             }
         }
 
@@ -227,27 +257,35 @@ class userRoleController extends Controller
             
             if($request->delete1 == 'on'){
                 $roles[1]->givePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$delete_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$delete_permission->id);
             }
             if($request->delete2 == 'on'){
                 $roles[2]->givePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$delete_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$delete_permission->id);
             }
             if($request->delete3 == 'on'){
                 $roles[3]->givePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$delete_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$delete_permission->id);
             }
             if($request->delete4 == 'on'){
                 $roles[4]->givePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$delete_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($delete_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$delete_permission->id);
             }
         }
 
@@ -257,27 +295,35 @@ class userRoleController extends Controller
             
             if($request->view1 == 'on'){
                 $roles[1]->givePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$view_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$view_permission->id);
             }
             if($request->view2 == 'on'){
                 $roles[2]->givePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$view_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$view_permission->id);
             }
             if($request->view3 == 'on'){
                 $roles[3]->givePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$view_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$view_permission->id);
             }
             if($request->view4 == 'on'){
                 $roles[4]->givePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$view_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($view_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$view_permission->id);
             }
         }
         // Page Permission
@@ -286,27 +332,35 @@ class userRoleController extends Controller
             
             if($request->page1 == 'on'){
                 $roles[1]->givePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$page_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$page_permission->id);
             }
             if($request->page2 == 'on'){
                 $roles[2]->givePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$page_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$page_permission->id);
             }
             if($request->page3 == 'on'){
                 $roles[3]->givePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$page_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$page_permission->id);
             }
             if($request->page4 == 'on'){
                 $roles[4]->givePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$page_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($page_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$page_permission->id);
             }
         }
         // price Permission
@@ -315,27 +369,35 @@ class userRoleController extends Controller
             
             if($request->price1 == 'on'){
                 $roles[1]->givePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$price_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$price_permission->id);
             }
             if($request->price2 == 'on'){
                 $roles[2]->givePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$price_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$price_permission->id);
             }
             if($request->price3 == 'on'){
                 $roles[3]->givePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$price_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$price_permission->id);
             }
             if($request->price4 == 'on'){
                 $roles[4]->givePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$price_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($price_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$price_permission->id);
             }
         }
         // cost Permission
@@ -344,27 +406,35 @@ class userRoleController extends Controller
             
             if($request->cost1 == 'on'){
                 $roles[1]->givePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$cost_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$cost_permission->id);
             }
             if($request->cost2 == 'on'){
                 $roles[2]->givePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$cost_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$cost_permission->id);
             }
             if($request->cost3 == 'on'){
                 $roles[3]->givePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$cost_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$cost_permission->id);
             }
             if($request->cost4 == 'on'){
                 $roles[4]->givePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$cost_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($cost_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$cost_permission->id);
             }
         }
         
@@ -374,27 +444,35 @@ class userRoleController extends Controller
             
             if($request->graph1 == 'on'){
                 $roles[1]->givePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$grap_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$grap_permission->id);
             }
             if($request->graph2 == 'on'){
                 $roles[2]->givePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$grap_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$grap_permission->id);
             }
             if($request->graph3 == 'on'){
                 $roles[3]->givePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$grap_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$grap_permission->id);
             }
             if($request->graph4 == 'on'){
                 $roles[4]->givePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$grap_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($grap_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$grap_permission->id);
             }
         }
         
@@ -404,34 +482,40 @@ class userRoleController extends Controller
             
             if($request->print1 == 'on'){
                 $roles[1]->givePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[1]->id,$print_permission->id);
             }
             else{
                 $roles[1]->revokePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[1]->id,$print_permission->id);
             }
             if($request->print2 == 'on'){
                 $roles[2]->givePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[2]->id,$print_permission->id);
             }
             else{
                 $roles[2]->revokePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[2]->id,$print_permission->id);
             }
             if($request->print3 == 'on'){
                 $roles[3]->givePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[3]->id,$print_permission->id);
             }
             else{
                 $roles[3]->revokePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[3]->id,$print_permission->id);
             }
             if($request->print4 == 'on'){
                 $roles[4]->givePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','assign',$roles[4]->id,$print_permission->id);
             }
             else{
                 $roles[4]->revokePermissionTo($print_permission->name);
+                $this->onlinePermissionSync('RolePermission','remove',$roles[4]->id,$print_permission->id);
             }
         }
 
 
 
         return redirect()->back()->withSuccess(['Permissions Saved']);
-        // $role->givePermissionTo($permission);
-        // $role->revokePermissionTo($permission);
     }
 }
