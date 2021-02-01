@@ -6,6 +6,8 @@ use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
 use App\Models\User;
 use App\Models\designation;
+use App\Models\employeeDutyMonthly;
+use App\Models\employeeSalary;
 use App\Models\order;
 use App\Models\setting;
 use Carbon\Carbon;
@@ -85,7 +87,7 @@ class EmployeeController extends Controller
             $role = Role::find($request->role_id);
             $user->assignRole($role);
             $employee->user_id=$user->id;
-      $this->onlineSync('userTable','create',$user->id);
+         $this->onlineSync('userTable','create',$user->id);
 
         }
        
@@ -93,7 +95,7 @@ class EmployeeController extends Controller
         $this->onlineSync('employee','create',$employee->id);
 
 
-        return redirect()->back()->withSuccess(['Successfully Created']);
+        return redirect::back()->withSuccess(['Successfully Created']);
 
 
 
@@ -162,7 +164,7 @@ class EmployeeController extends Controller
         }    
         
         $employee->update($request->all());
-        return redirect()->back()->withSuccess(['Successfully Updated']);
+        return Redirect::back()->withSuccess(['Successfully Updated']);
 
  
         // $employee->name = $request->name;
@@ -188,6 +190,7 @@ class EmployeeController extends Controller
     {
         // need deep thinking 
         //$employee->delete();
-        return Redirect::back()->withErrors(["Can't Delete" ]);
+
+        return Redirect::back()->withErrors(["Can't Delete"]);
     }
 }
