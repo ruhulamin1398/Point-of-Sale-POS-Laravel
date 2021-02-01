@@ -88,6 +88,7 @@ class EmployeeController extends Controller
             $user->assignRole($role);
             $employee->user_id=$user->id;
          $this->onlineSync('userTable','create',$user->id);
+        $this->onlinePermissionSync('UserRole','assign',$user->id,$role->id);
 
         }
        

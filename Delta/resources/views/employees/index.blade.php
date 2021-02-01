@@ -4,30 +4,6 @@
 
 
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{  __('translate.'.$error) }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
-@if (session()->has('success'))
-<div class="alert alert-success">
-    @if(is_array(session('success')))
-    <ul>
-        @foreach (session('success') as $message)
-        <li>{{  __('translate.'.$message) }}</li>
-        @endforeach
-    </ul>
-    @else
-    {{ session('success') }}
-    @endif
-</div>
-@endif
-
 
 <!-- Begin Page Content -->
 <div style="display: none;" id="employeeInputForm">

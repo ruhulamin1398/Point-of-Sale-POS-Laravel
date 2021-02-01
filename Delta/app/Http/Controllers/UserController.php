@@ -62,6 +62,8 @@ class UserController extends Controller
         
         $this->onlineSync('userTable','create',$user->id);
         $this->onlineSync('employee','update',$employee->id);
+        $this->onlinePermissionSync('UserRole','assign',$user->id,$role->id);
+
         return redirect()->back()->withSuccess(["User Created"]);
     }
 
