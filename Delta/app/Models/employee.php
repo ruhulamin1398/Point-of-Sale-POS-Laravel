@@ -19,7 +19,7 @@ class employee extends Model
 
     }
 
-    public function userName()
+    public function user()
     {
         
      return $this->belongsTo('App\Models\user','user_id','id')->withTrashed();

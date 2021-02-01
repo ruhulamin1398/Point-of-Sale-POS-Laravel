@@ -88,6 +88,7 @@ class EmployeeController extends Controller
             $user->assignRole($role);
             $employee->user_id=$user->id;
          $this->onlineSync('userTable','create',$user->id);
+        $this->onlinePermissionSync('UserRole','assign',$user->id,$role->id);
 
         }
        
@@ -188,9 +189,22 @@ class EmployeeController extends Controller
      */
     public function destroy(employee $employee)
     {
-        // need deep thinking 
-        //$employee->delete();
-
-        return Redirect::back()->withErrors(["Can't Delete"]);
+        
+        $dusties = employeeDutyMonthly::where('employee_id',$employee->id)->get();
+        $salaries = employeeSalary::where('employee_id',$employee->id)->get()->groupBy('month');
+        $month= 0;
+        foreach($dusties as $duty){
+            $month = $duty->month;
+            if(isset($salaries[$month])){
+                if($salaries[$month][0]->salary_status_id == 2)
+                return Redirect::back()->withErrors(["Can't Delete.","Employee has unpaid Sallary"]);
+            }
+            else{
+                return Redirect::back()->withErrors(["Can't Delete.","Employee has unpaid Sallary"]);
+            }
+        }
+        $employee->delete();
+        $employee->user->delete();
+        return Redirect::back()->withErrors(["Employee Deleted"]);
     }
 }
