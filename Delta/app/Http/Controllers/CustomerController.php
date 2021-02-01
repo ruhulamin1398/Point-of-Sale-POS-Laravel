@@ -147,7 +147,7 @@ class CustomerController extends Controller
         // there some thinking is required 
         if($customer->id ==1 )
         {
-            return Redirect::back()->withErrors(['This Customer Can not be Deleted.' ]);
+            return Redirect::back()->withErrors(['This Customer Can not be Deleted' ]);
 
         }
         if($customer->due !=0 )

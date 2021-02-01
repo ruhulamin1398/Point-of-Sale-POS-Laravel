@@ -6,6 +6,8 @@ use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
 use App\Models\User;
 use App\Models\designation;
+use App\Models\employeeDutyMonthly;
+use App\Models\employeeSalary;
 use App\Models\order;
 use App\Models\setting;
 use Carbon\Carbon;
@@ -188,8 +190,7 @@ class EmployeeController extends Controller
     {
         // need deep thinking 
         //$employee->delete();
-       return $employee;
 
-        return Redirect::back()->withErrors(["Can't Delete" ]);
+        return Redirect::back()->withErrors(["Can't Delete"]);
     }
 }
