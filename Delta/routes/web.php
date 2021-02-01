@@ -57,12 +57,12 @@ use Spatie\Permission\Models\Role;
 |
 */
 
-Route::group(['abasas'=>'abasas'], function() {
-   // this Route group only for language change
 
-    $locale  = posSetting::find(1)->language;
-          
-    App::setLocale($locale);
+
+
+
+
+
 
 
 
@@ -184,12 +184,12 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 
 Route::resource('pos-setting',PosSettingController::class);
 
+Route::get('categorized-product', [ProductController::class, 'categorized_product'])->name('categorized_product');
+
+
 Route::get('permission-test',function(){
-    
 
 
-
-    
   // return Hash::check($request->value, auth()->user()->password);
     // $role = Role::find(5);
     // // return $role->hasPermissionTo('Brand Delete');
@@ -253,5 +253,4 @@ Route::get('sync-test', function () {
     //         $data->delete();
     //     }
     // }
-});
 });

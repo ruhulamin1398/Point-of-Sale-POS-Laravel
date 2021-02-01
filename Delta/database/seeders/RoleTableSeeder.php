@@ -418,7 +418,7 @@ class RoleTableSeeder extends Seeder
                 'description' => ' manager can do anything',
             ],
             [
-                'name' => 'staf',
+                'name' => 'staff',
                 'description' =>'will help to sell',
             ],
             [
