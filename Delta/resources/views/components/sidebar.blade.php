@@ -14,6 +14,9 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{{__('translate.Home')}}</span></a>
     </li>
+
+
+    @if( auth()->user()->can('Product Page') || auth()->user()->can('Product Create') ||  auth()->user()->can('Category Page') || auth()->user()->can('Brand Page') ||  auth()->user()->can('Warrenty Page') || auth()->user()->can('Unit Page') || auth()->user()->can('Stock Alert Page') ||  auth()->user()->can('Drop Product Create Page') ||   auth()->user()->can('Drop Product Page')  ||  auth()->user()->can('Product Print') )
     <hr class="sidebar-divider m-1 p-0 ">
     <!-- Product Collapse Menu -->
     <li class="nav-item">
@@ -25,20 +28,41 @@
             <div class="bg-white py-2 collapse-inner rounded">
 
 
-
+                @can('Product Page')
                 <a class="collapse-item" href="{{ route('products.index') }}">{{__('translate.All Products')}}</a>
+                @endcan
+                @can('Product Create')
                 <a class="collapse-item" href="{{ route('products.create') }}">{{__('translate.Add New')}}</a>
+                @endcan
+                @can('Category Page')
                 <a class="collapse-item" href="{{ route('categories.index') }}">{{__('translate.Category')}}</a>
+                @endcan
+                @can('Brand Page')
                 <a class="collapse-item" href="{{ route('brands.index') }}">{{__('translate.Brands')}}</a>
+                @endcan
+                @can('Warrenty Page')
                 <a class="collapse-item" href="{{ route('warrenties.index') }}">{{__('translate.Warrenty')}}</a>
+                @endcan
+                @can('Unit Page')
                 <a class="collapse-item" href="{{ route('units.index') }}">{{__('translate.Units')}}</a>
+                @endcan
+                @can('Stock Alert Page')
                 <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
+                @endcan
+                @can('Drop Product Create Page')
                 <a class="collapse-item" href="{{ route('drop_products.create') }}">{{__('translate.Drop Product')}}</a>
+                @endcan
+                @can('Drop Product Page')
                 <a class="collapse-item" href="{{ route('drop_products.index') }}">{{__('translate.Drop Product List')}}</a>
+                @endcan
+                @can('Product Print')
                 <a class="collapse-item" href="{{ route('bar-codes.index') }}">{{__('translate.Code Print')}}</a>
+                @endcan
             </div>
         </div>
     </li>
+    @endif
+    @if(  auth()->user()->can('Order Create Page')  ||  auth()->user()->can('Order Page') ||  auth()->user()->can('Return From Customer Page') ||  auth()->user()->can('Return From Customer Create Page') )
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -52,19 +76,29 @@
         <div id="collapseSell" class="collapse" aria-labelledby="headingSell" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Sell')}} </a></a>
+                @can('Order Create Page')
+                <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Sell')}} </a>
+                @endcan
+                @can('Order Page')
                 <a class="collapse-item" href="{{ route('orders.index') }}">{{__('translate.Sell List')}} </a>
+                @endcan
+                @can('Return From Customer Page')
                 <a class="collapse-item" href="{{ route('return-from-customers.index') }}">{{__('translate.Return List')}} </a>
+                @endcan
+                @can('Return From Customer Create Page')
                 <a class="collapse-item" href="{{ route('return-from-customers.create') }}">{{__('translate.Return Product')}}  </a>
+                @endcan
 
             </div>
         </div>
     </li>
+    @endif
 
 
     <!--sell -->
     <!-- Divider -->
 
+    @if( auth()->user()->can('Purchase Create Page') || auth()->user()->can('Purchase Page') ||auth()->user()->can('Return To Supplier Page') || auth()->user()->can('Return To Supplier Create Page'))
     <hr class="sidebar-divider m-1 p-0 ">
 
     <!--purchase -->
@@ -76,14 +110,23 @@
         <div id="collapsePurchase" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
+                @can('Purchase Create Page')
                 <a class="collapse-item" href="{{ route('purchases.create') }}">{{__('translate.Buy')}} </a>
+                @endcan
+                @can('Purchase Page')
                 <a class="collapse-item" href="{{ route('purchases.index') }}">{{__('translate.Perchase List')}}  </a>
+                @endcan
+                @can('Return To Supplier Page')
                 <a class="collapse-item" href="{{ route('return-to-suppliers.index') }}">{{__('translate.Return List')}} </a>
+                @endcan
+                @can('Return To Supplier Create Page')
                 <a class="collapse-item" href="{{ route('return-to-suppliers.create') }}">{{__('translate.Return Product')}}  </a>
+                @endcan
 
             </div>
         </div>
     </li>
+    @endif
 
 
     <!--purchase -->
@@ -95,6 +138,7 @@
     
         <!-- Divider -->
 
+        @if( auth()->user()->can('Customer Page') || auth()->user()->can('Customer Due Receive Page') || auth()->user()->can('Customer Due Receive Create Page'))
         <hr class="sidebar-divider m-1 p-0 ">
 
         <!--purchase -->
@@ -106,14 +150,23 @@
             <div id="collapseCustomer" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
     
+                    @can('Customer Page')
                     <a class="collapse-item" href="{{ route('customers.index') }}">{{__('translate.Customer')}} </a>
+                    @endcan
+                    @can('Customer Due Receive Page')
                     <a class="collapse-item" href="{{ route('customer-due-receives.index') }}">{{__('translate.Due Receive List')}} </a>
+                    @endcan
+                    @can('Customer Due Receive Create Page')
                     <a class="collapse-item" href="{{ route('customer-due-receives.create') }}">{{__('translate.Due Receive')}}  </a>
+                    @endcan
     
                 </div>
             </div>
         </li>
         <!-- Divider -->
+        @endif
+
+        @if(  auth()->user()->can('Supplier Page')  ||  auth()->user()->can('Supplier Due Pay Page')  ||  auth()->user()->can('Supplier Due Pay Create Page') )
 
         <hr class="sidebar-divider m-1 p-0 ">
 
@@ -125,20 +178,27 @@
             </a>
             <div id="collapseSupplier" class="collapse" aria-labelledby="headingPurchase" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-    
+                    @can('Supplier Page')
                     <a class="collapse-item" href="{{ route('suppliers.index') }}">{{__('translate.Supplier')}} </a>
+                    @endcan
+                    @can('Supplier Due Pay Page')
                     <a class="collapse-item" href="{{ route('supplier-due-pays.index') }}">{{__('translate.Due Pay List')}} </a>
+                    @endcan
+                    @can('Supplier Due Pay Create Page')
                     <a class="collapse-item" href="{{ route('supplier-due-pays.create') }}">{{__('translate.Due Pay')}}  </a>
+                    @endcan
     
                 </div>
             </div>
         </li>
+        @endif
     
 
     
 
 
 
+    @if( auth()->user()->can('Employee Page') || auth()->user()->can('Designation Page') || auth()->user()->can('Employee Salary Page') || auth()->user()->can('Employee Payments Page') || auth()->user()->can('Employee Payment Type Page') || auth()->user()->can('Duty Create Page') || auth()->user()->can('Duty Weekly Page') || auth()->user()->can('Duty Monthly Page') || auth()->user()->can('Duty Status Page') )
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -150,21 +210,39 @@
         </a>
         <div id="collapseStaff" class="collapse" aria-labelledby="headingStaff" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                @can('Employee Page')
                 <a class="collapse-item" href="{{ route('employees.index') }}"> {{__('translate.All Employee')}}</a>
+                @endcan
+                @can('Designation Page')
                 <a class="collapse-item" href="{{ route('designations.index') }}">{{__('translate.Designations')}}</a>
+                @endcan
+                @can('Employee Salary Page')
                 <a class="collapse-item" href="{{ route('employee_salaries.index') }}">{{__('translate.Salary')}}</a>
+                @endcan
+                @can('Employee Payments Page')
                 <a class="collapse-item" href="{{ route('employee_payments.index') }}">{{__('translate.Payments')}}</a>
+                @endcan
+                @can('Employee Payment Type Page')
                 <a class="collapse-item" href="{{ route('employee_payment_types.index') }}">{{__('translate.Payment Type')}}</a>
+                @endcan
+                @can('Duty Create Page')
                 <a class="collapse-item" href="{{ route('employee_duties.create') }}">{{__('translate.New Duty')}}</a>
+                @endcan
+                @can('Duty Weekly Page')
                 <a class="collapse-item" href="{{ route('employee_duties.index') }}">{{__('translate.Weekly Duty')}}</a>
+                @endcan
+                @can('Duty Monthly Page')
                 <a class="collapse-item" href="{{ route('employee_duties_monthly') }}">{{__('translate.Monthly Duty')}}</a>
+                @endcan
+                @can('Duty Status Page')
                 <a class="collapse-item" href="{{ route('duty-statuses.index') }}">{{__('translate.Duty Status')}}</a>
+                @endcan
 
             </div>
         </div>
     </li>
-
-
+    @endif
+    @can('Payment System Page')
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -175,11 +253,12 @@
         </a>
 
     </li>
+    @endcan
 
 
 
     <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
-
+    @can('Analysis Page')
     <hr class="sidebar-divider m-1 p-0 ">
 
     <!-- Nav Item - Dashboard -->
@@ -192,16 +271,14 @@
         <div id="collapseAnalysis" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-
-                <a class="collapse-item" href="#">First </a>
-                <a class="collapse-item" href="#">Secend</a>
-                <a class="collapse-item" href="#">Third</a>
+                <a class="collapse-item" href="{{ route('analysis') }}">{{ __('translate.Analysis') }} </a>
 
             </div>
         </div>
     </li>
+    @endcan
 
-
+    @if( auth()->user()->can('Expense Page') || auth()->user()->can('Expense Monthly Page') || auth()->user()->can('Expense Type Page') )
 
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -216,13 +293,20 @@
             <div class="bg-white py-2 collapse-inner rounded">
 
 
+                @can('Expense Page')
                 <a class="collapse-item" href="{{ route('expenses.index') }}">{{__('translate.Daily')}}</a>
+                @endcan
+                @can('Expense Monthly Page')
                 <a class="collapse-item" href="{{ route('expense-monthlies.index') }}">{{__('translate.Monthly')}}</a>
+                @endcan
+                @can('Expense Type Page')
                 <a class="collapse-item" href="{{ route('expense-types.index') }}">{{__('translate.Expense Type')}}</a>
+                @endcan
 
             </div>
         </div>
     </li>
+    @endif 
 
     {{-- <hr class="sidebar-divider m-1 p-0 ">
     <li class="nav-item">
@@ -239,6 +323,7 @@
         </div>
     </li> --}}
 
+    @can('Goal Page')
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
     <!-- Nav Item - Dashboard -->
@@ -247,8 +332,9 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{{__('translate.Goal')}}</span></a>
     </li>
+    @endcan
 
-
+    @if( auth()->user()->can('User Page') || auth()->user()->can('User Role Page'))
        <!-- Divider -->
        <hr class="sidebar-divider m-1 p-0 ">
        <!-- Nav Item - Dashboard -->
@@ -262,15 +348,20 @@
            <div id="collapsepermission" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
    
-   
+                    @can('User Page')
                    <a class="collapse-item" href="{{ route('users.index') }}">{{__('translate.Users')}}</a>
+                   @endcan
+                   @can('User Role Page')
                    <a class="collapse-item" href="{{ route('user-roles.index') }}">{{__('translate.Role')}}</a>
                    {{-- <a class="collapse-item" href="{{ route('permission-role.index') }}">{{__('translate.Role')}}</a> --}}
-   
+                    @endcan
                </div>
            </div>
        </li>
+       @endif 
    
+       @can('Pos Setting Page')
+       
 
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -281,6 +372,7 @@
         </a>
 
     </li>
+    @endcan
 
 
 

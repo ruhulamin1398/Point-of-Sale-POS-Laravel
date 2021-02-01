@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -18,9 +19,14 @@ class UserController extends Controller
      */
     public function index()
     {
+        
+        if(! auth()->user()->hasPermissionTo('User Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
         $employees = employee::whereNull('user_id')->get();
         $users = User::all();
-        return view('user.index',compact('users','employees'));
+        return view('user.index',compact('users','employees','roles'));
     }
 
     /**
@@ -50,6 +56,10 @@ class UserController extends Controller
         $employee = employee::find($request->employee_id);
         $employee->user_id = $user->id;
         $employee->save();
+        
+        $role = Role::find($request->role_id);
+        $user->assignRole($role);
+        
         $this->onlineSync('userTable','create',$user->id);
         $this->onlineSync('employee','update',$employee->id);
         return redirect()->back()->withSuccess(["User Created"]);
