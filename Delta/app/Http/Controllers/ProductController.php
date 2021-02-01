@@ -267,8 +267,18 @@ class ProductController extends Controller
 
     }
 
+    public function categorized_product()
+    {
+ 
+        // $products = Product::all()->groupBy('category_id');
+        $categories = category::all();
+        return view('product.categorized_product',compact('categories'));
+        
+    }
 
-   
+
+
+    
 
 
     public function getProductById(Request $request){
