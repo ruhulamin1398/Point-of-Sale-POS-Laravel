@@ -85,7 +85,7 @@ class EmployeeController extends Controller
             $role = Role::find($request->role_id);
             $user->assignRole($role);
             $employee->user_id=$user->id;
-      $this->onlineSync('userTable','create',$user->id);
+         $this->onlineSync('userTable','create',$user->id);
 
         }
        
@@ -93,7 +93,7 @@ class EmployeeController extends Controller
         $this->onlineSync('employee','create',$employee->id);
 
 
-        return redirect()->back()->withSuccess(['Successfully Created']);
+        return redirect::back()->withSuccess(['Successfully Created']);
 
 
 
@@ -162,7 +162,7 @@ class EmployeeController extends Controller
         }    
         
         $employee->update($request->all());
-        return redirect()->back()->withSuccess(['Successfully Updated']);
+        return Redirect::back()->withSuccess(['Successfully Updated']);
 
  
         // $employee->name = $request->name;
@@ -188,6 +188,8 @@ class EmployeeController extends Controller
     {
         // need deep thinking 
         //$employee->delete();
+       return $employee;
+
         return Redirect::back()->withErrors(["Can't Delete" ]);
     }
 }
