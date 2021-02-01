@@ -18,7 +18,6 @@ class PosSettingController extends Controller
      */
     public function index()
     {
-        
         if(! auth()->user()->hasPermissionTo('Pos Setting Page')){
             return abort(401);
         }

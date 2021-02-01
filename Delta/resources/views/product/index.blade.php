@@ -1,8 +1,11 @@
 
 @extends('includes.app')
 
+@php
+    
+ $GLOBALS['CurrentUser']= auth()->user(); 
+@endphp
 @section('content')
-
 
 
 @if ($errors->any())
@@ -70,8 +73,8 @@
                             <th>{{ __("translate.Stock") }} </th>
                             <th>{{ __("translate.tax") }} (%)</th>
                             <th>{{ __("translate.warrenty") }} </th>
-                            @if( auth()->user()->can('Product Delete') || auth()->user()->can('Product Edit') ||
-                         auth()->user()->can('Product View') || auth()->user()->can('Product Print')  )
+                            @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
+                         $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
                             <th>{{ __("translate.Action") }}</th>
                             @endcan
                         </tr>
@@ -91,8 +94,8 @@
                             <th>{{ __("translate.Stock") }} </th>
                             <th>{{ __("translate.tax") }} (%)</th>
                             <th>{{ __("translate.warrenty") }} </th>
-                            @if( auth()->user()->can('Product Delete') || auth()->user()->can('Product Edit') ||
-                         auth()->user()->can('Product View') || auth()->user()->can('Product Print')  )
+                            @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
+                         $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
                             <th>{{ __("translate.Action") }}</th>
                             @endcan
                         </tr>
@@ -124,8 +127,8 @@
 
 
 
-                            @if( auth()->user()->can('Product Delete') || auth()->user()->can('Product Edit') ||
-                         auth()->user()->can('Product View') || auth()->user()->can('Product Print')  )
+                            @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
+                         $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
                             <td class="align-middle"> 
                                 @can('Product Edit')
                                 <a href="{{ route('products.edit',$product->id) }}"> <button type="button" title="Edit Product" class="btn btn-success btn-sm" id="edit-product-button" product-item-id={{$id}} value={{$id}}> <i class="fa fa-edit" aria-hidden="false"> </i></button></a>

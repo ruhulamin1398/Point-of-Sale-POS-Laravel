@@ -15,7 +15,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     
-
     public function calPricePerUnit($sell,$unit_id){
 
         $unit = unit::find($unit_id);

@@ -205,6 +205,10 @@ class EmployeeController extends Controller
         }
         $employee->delete();
         $employee->user->delete();
+        
+        $this->onlineSync('employee','delete',$employee->id);
+        $this->onlineSync('userTable','delete',$employee->user->id);
+
         return Redirect::back()->withErrors(["Employee Deleted"]);
     }
 }

@@ -6,8 +6,6 @@
 
 
 
-
-
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active ">
         <a class="nav-link p-3 " href="{{ route('home') }}">
@@ -16,7 +14,8 @@
     </li>
 
 
-    @if( auth()->user()->can('Product Page') || auth()->user()->can('Product Create') ||  auth()->user()->can('Category Page') || auth()->user()->can('Brand Page') ||  auth()->user()->can('Warrenty Page') || auth()->user()->can('Unit Page') || auth()->user()->can('Stock Alert Page') ||  auth()->user()->can('Drop Product Create Page') ||   auth()->user()->can('Drop Product Page')  ||  auth()->user()->can('Product Print') )
+    
+    @if( $GLOBALS['CurrentUser']->can('Product Page') || $GLOBALS['CurrentUser']->can('Product Create') ||  $GLOBALS['CurrentUser']->can('Category Page') || $GLOBALS['CurrentUser']->can('Brand Page') ||  $GLOBALS['CurrentUser']->can('Warrenty Page') || $GLOBALS['CurrentUser']->can('Unit Page') || $GLOBALS['CurrentUser']->can('Stock Alert Page') ||  $GLOBALS['CurrentUser']->can('Drop Product Create Page') ||   $GLOBALS['CurrentUser']->can('Drop Product Page')  ||  $GLOBALS['CurrentUser']->can('Product Print') )
     <hr class="sidebar-divider m-1 p-0 ">
     <!-- Product Collapse Menu -->
     <li class="nav-item">
@@ -62,7 +61,7 @@
         </div>
     </li>
     @endif
-    @if(  auth()->user()->can('Order Create Page')  ||  auth()->user()->can('Order Page') ||  auth()->user()->can('Return From Customer Page') ||  auth()->user()->can('Return From Customer Create Page') )
+    @if(  $GLOBALS['CurrentUser']->can('Order Create Page')  ||  $GLOBALS['CurrentUser']->can('Order Page') ||  $GLOBALS['CurrentUser']->can('Return From Customer Page') ||  $GLOBALS['CurrentUser']->can('Return From Customer Create Page') )
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -98,7 +97,7 @@
     <!--sell -->
     <!-- Divider -->
 
-    @if( auth()->user()->can('Purchase Create Page') || auth()->user()->can('Purchase Page') ||auth()->user()->can('Return To Supplier Page') || auth()->user()->can('Return To Supplier Create Page'))
+    @if( $GLOBALS['CurrentUser']->can('Purchase Create Page') || $GLOBALS['CurrentUser']->can('Purchase Page') ||$GLOBALS['CurrentUser']->can('Return To Supplier Page') || $GLOBALS['CurrentUser']->can('Return To Supplier Create Page'))
     <hr class="sidebar-divider m-1 p-0 ">
 
     <!--purchase -->
@@ -138,7 +137,7 @@
     
         <!-- Divider -->
 
-        @if( auth()->user()->can('Customer Page') || auth()->user()->can('Customer Due Receive Page') || auth()->user()->can('Customer Due Receive Create Page'))
+        @if( $GLOBALS['CurrentUser']->can('Customer Page') || $GLOBALS['CurrentUser']->can('Customer Due Receive Page') || $GLOBALS['CurrentUser']->can('Customer Due Receive Create Page'))
         <hr class="sidebar-divider m-1 p-0 ">
 
         <!--purchase -->
@@ -166,7 +165,7 @@
         <!-- Divider -->
         @endif
 
-        @if(  auth()->user()->can('Supplier Page')  ||  auth()->user()->can('Supplier Due Pay Page')  ||  auth()->user()->can('Supplier Due Pay Create Page') )
+        @if(  $GLOBALS['CurrentUser']->can('Supplier Page')  ||  $GLOBALS['CurrentUser']->can('Supplier Due Pay Page')  ||  $GLOBALS['CurrentUser']->can('Supplier Due Pay Create Page') )
 
         <hr class="sidebar-divider m-1 p-0 ">
 
@@ -198,7 +197,7 @@
 
 
 
-    @if( auth()->user()->can('Employee Page') || auth()->user()->can('Designation Page') || auth()->user()->can('Employee Salary Page') || auth()->user()->can('Employee Payments Page') || auth()->user()->can('Employee Payment Type Page') || auth()->user()->can('Duty Create Page') || auth()->user()->can('Duty Weekly Page') || auth()->user()->can('Duty Monthly Page') || auth()->user()->can('Duty Status Page') )
+    @if( $GLOBALS['CurrentUser']->can('Employee Page') || $GLOBALS['CurrentUser']->can('Designation Page') || $GLOBALS['CurrentUser']->can('Employee Salary Page') || $GLOBALS['CurrentUser']->can('Employee Payments Page') || $GLOBALS['CurrentUser']->can('Employee Payment Type Page') || $GLOBALS['CurrentUser']->can('Duty Create Page') || $GLOBALS['CurrentUser']->can('Duty Weekly Page') || $GLOBALS['CurrentUser']->can('Duty Monthly Page') || $GLOBALS['CurrentUser']->can('Duty Status Page') )
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -278,7 +277,7 @@
     </li>
     @endcan
 
-    @if( auth()->user()->can('Expense Page') || auth()->user()->can('Expense Monthly Page') || auth()->user()->can('Expense Type Page') )
+    @if( $GLOBALS['CurrentUser']->can('Expense Page') || $GLOBALS['CurrentUser']->can('Expense Monthly Page') || $GLOBALS['CurrentUser']->can('Expense Type Page') )
 
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -334,7 +333,7 @@
     </li>
     @endcan
 
-    @if( auth()->user()->can('User Page') || auth()->user()->can('User Role Page'))
+    @if( $GLOBALS['CurrentUser']->can('User Page') || $GLOBALS['CurrentUser']->can('User Role Page'))
        <!-- Divider -->
        <hr class="sidebar-divider m-1 p-0 ">
        <!-- Nav Item - Dashboard -->
