@@ -406,9 +406,9 @@ return[
 'Expense Deleted'=>'সফলভাবে ডিলেট হয়েছে', 
 "This Products Stock is not Zero','Please Sell or drop that product to delete this Product"=>"দুঃখিত, পণ্যটি স্টকে রয়ে গেছে। হয়ত বিক্রয় করুন না হয় বাতিল করুন",
 "This Warrenty Can't be Edited"=>"দুঃখিত! এই ওয়ারেন্টি সংশোধন করতে পারবেন না",  
-''=>'',
-''=>'',
-''=>'',
+'Edit Expenses'=>'খরচ সংশোধন', 
+'Categorized Product List'=>'ক্যাটাগরি অনুযায়ি পণ্যের লিস্ট',
+''=>'', 
 ''=>'',
 ];
 
