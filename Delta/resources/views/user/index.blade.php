@@ -1,5 +1,9 @@
 @extends('includes.app')
 
+@php
+    
+ $GLOBALS['CurrentUser']= auth()->user(); 
+@endphp
 
 @section('content')
 
@@ -66,7 +70,7 @@
                         <select class="form-control form-control" value="" name="role_id" id="role_id" required>
                         <option disabled selected value> -- select an option -- </option>
                         @foreach ($roles as $role)
-                        @if ($loop->first && !auth()->user()->can('Super Admin'))
+                        @if ($loop->first && !$GLOBALS['CurrentUser']->can('Super Admin'))
                         
                         @else 
                             <option value="{{$role->id}}"> {{$role->name}}</option>
@@ -131,7 +135,7 @@
                     <th>{{__('translate.Employee Name')}}</th>
                     <th>{{__('translate.Username')}}</th>
                     <th>{{__('translate.Email')}}</th>
-                    @if( auth()->user()->can('User Delete') || auth()->user()->can('User Edit')  )
+                    @if( $GLOBALS['CurrentUser']->can('User Delete') || $GLOBALS['CurrentUser']->can('User Edit')  )
                     <th>{{__('translate.Action')}}</th>
                     @endif
 
@@ -145,7 +149,7 @@
                     <th>{{__('translate.Employee Name')}}</th>
                     <th>{{__('translate.Username')}}</th>
                     <th>{{__('translate.Email')}}</th>
-                    @if( auth()->user()->can('User Delete') || auth()->user()->can('User Edit')  )
+                    @if( $GLOBALS['CurrentUser']->can('User Delete') || $GLOBALS['CurrentUser']->can('User Edit')  )
                     <th>{{__('translate.Action')}}</th>
                     @endif
 
@@ -156,6 +160,7 @@
                     $itr=1;
                 @endphp
                 @foreach ($users as $user)
+                @if($user->hasRole($roles[0]) && $GLOBALS['CurrentUser']->hasRole($roles[0]))
                 <tr>
                     <td>{{ $itr++ }}</td>
                     <td>{{ $user->employee->name }}</td>
@@ -167,7 +172,7 @@
 
 
                     
-                    @if( auth()->user()->can('User Delete') || auth()->user()->can('User Edit')  )
+                    @if( $GLOBALS['CurrentUser']->can('User Delete') || $GLOBALS['CurrentUser']->can('User Edit')  )
                     <td class="align-middle">
                         @can('User Edit')
                         <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm" id="data-edit-button" data-item-id={{$user->id}} > <i
@@ -201,7 +206,54 @@
 
                 </tr>
 
+                @endif
+                @if(!$user->hasRole($roles[0]) )
+                <tr>
+                    <td>{{ $itr++ }}</td>
+                    <td>{{ $user->employee->name }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
                     
+
+
+
+
+                    
+                    @if( $GLOBALS['CurrentUser']->can('User Delete') || $GLOBALS['CurrentUser']->can('User Edit')  )
+                    <td class="align-middle">
+                        @can('User Edit')
+                        <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm" id="data-edit-button" data-item-id={{$user->id}} > <i
+                                class="fa fa-edit" aria-hidden="false"> </i></button>
+                        @endcan 
+                        @can('User Delete')
+                        <form method="POST" action="{{route('users.destroy',$user->id)}}"
+                            id="delete-form-{{ $user->id }}" style="display:none; ">
+                            {{csrf_field() }}
+                            {{ method_field("delete") }}
+                        </form>
+
+
+
+
+                        <button title="Delete" class="dataDeleteItemClass btn btn-danger btn-sm" onclick="if(confirm('are you sure to delete this')){
+				document.getElementById('delete-form-{{ $user->id }}').submit();
+			}
+			else{
+				event.preventDefault();
+			}
+			" class="btn btn-danger btn-sm btn-raised">
+                            <i class="fa fa-trash" aria-hidden="false">
+
+                            </i>
+                        </button>
+                        @endcan 
+                    </td>
+
+                    @endif
+
+                </tr>
+
+                @endif
                 @endforeach
                 
 

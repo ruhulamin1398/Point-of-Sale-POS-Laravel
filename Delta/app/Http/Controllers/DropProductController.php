@@ -99,7 +99,7 @@ class DropProductController extends Controller
             return redirect()->back()->withErrors(['Quantity must be greater than 0']);
         }
         $product = product::find($request->product_id);
-        if ($product->stock >= $request->quantity * $product->unit->value) {
+        if ($product->stock >= $request->quantity * $product->unit->value || $product->stock_controll == 'no') {
 
             $dropProduct = new dropProduct;
             $dropProduct->user_id = Auth::user()->id;  // auth must be added here
@@ -107,6 +107,9 @@ class DropProductController extends Controller
             $dropProduct->quantity = $request->quantity * $product->unit->value;
             $dropProduct->comment = $request->comment;
             $product->stock -= $dropProduct->quantity;
+            if($product->stock <0){
+                $product->stock = 0;
+            }
             $product->save();
             $dropProduct->save();
 
@@ -171,10 +174,14 @@ class DropProductController extends Controller
         $changedNow = ($request->quantity * $product->unit->value )- $dropProduct->quantity;
         $dropProduct->quantity = $request->quantity * $product->unit->value;
         $dropProduct->comment = $request->comment;
-        if( $changedNow > $product->stock){
+        if( $changedNow > $product->stock && $product->stock_controll == 'yes'){
             return redirect()->back()->withErrors(['Products Stock is less than Drop quantity']);
         }
         $product->stock -= $changedNow;
+        
+        if($product->stock <0){
+            $product->stock = 0;
+        }
         $product->save();
         $dropProduct->save();
 

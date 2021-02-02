@@ -7,12 +7,12 @@
             <i class="fa fa-bars  "></i>
           </button>
 
-          <img src="{{ asset($settings->logo) }}" height="60px" alt="Logo">
+          <img src="{{ asset(session('logo')) }}" height="60px" alt="Logo">
 
           
           {{-- <img src="{{asset(  )}}" height="60px" alt="Logo"> --}}
-   <span class="h2 title "  > {{ $settings->shop_name }} </span> 
-          <span class="h6 title "  > <sub> {{ $settings->shop_moto }}</sub> </span>
+   <span class="h2 title "  > {{ session('shop_name') }} </span> 
+          <span class="h6 title "  > <sub> {{ session('shop_moto') }}</sub> </span>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">

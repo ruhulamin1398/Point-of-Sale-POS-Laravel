@@ -100,6 +100,7 @@ class ProductController extends Controller
        $product->tax=$request->tax;
        $product->tax_type_id=$request->tax_type_id;
        $product->warrenty_id=$request->warrenty_id;
+       $product->stock_controll=$request->stock_controll;
 
        $product->is_fixed_price = $request->is_fixed_price;
        $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);
@@ -180,6 +181,7 @@ class ProductController extends Controller
        $product->tax=$request->tax;
        $product->tax_type_id=$request->tax_type_id;
        $product->warrenty_id=$request->warrenty_id;
+       $product->stock_controll=$request->stock_controll; 
        
        $product->is_fixed_price = $request->is_fixed_price;
        $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);

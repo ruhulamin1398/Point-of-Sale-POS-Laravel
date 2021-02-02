@@ -7,6 +7,7 @@ use App\Models\posSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class PosSettingController extends Controller
@@ -18,7 +19,6 @@ class PosSettingController extends Controller
      */
     public function index()
     {
-        
         if(! auth()->user()->hasPermissionTo('Pos Setting Page')){
             return abort(401);
         }
@@ -102,9 +102,6 @@ class PosSettingController extends Controller
         $posSetting->customer_due = $request->customer_due;
         $posSetting->supplier_due = $request->supplier_due;
     
-
-
-
         if(!is_null($request->logo)){
 
             
@@ -124,9 +121,34 @@ class PosSettingController extends Controller
 
         }
 
+
         $posSetting->save();
+        $roles = Role::all();
         
-        App::setLocale($posSetting->language);
+            
+        $customerDuePermission = Permission::where('name','Allow Customer Due')->first();
+        $supplierDuePermission = Permission::where('name','Allow Supplier Due')->first();
+
+        foreach($roles as $role){
+            if($posSetting->customer_due == 'yes'){
+                $role->givePermissionTo($customerDuePermission);
+                $this->onlinePermissionSync('RolePermission','assign',$role->id,$customerDuePermission->id);
+            }
+            else{
+                $role->revokePermissionTo($customerDuePermission);
+                $this->onlinePermissionSync('RolePermission','remove',$role->id,$customerDuePermission->id);
+            }
+            if($posSetting->supplier_due == 'yes'){
+                $role->givePermissionTo($supplierDuePermission);
+                $this->onlinePermissionSync('RolePermission','assign',$role->id,$supplierDuePermission->id);
+            }
+            else{
+                $role->revokePermissionTo($supplierDuePermission);
+                $this->onlinePermissionSync('RolePermission','remove',$role->id,$supplierDuePermission->id);
+            }
+
+        }
+        
         $this->onlineSync('posSetting','update',$posSetting->id);
         return Redirect::back()->withSuccess(["Setting Updated Successful"]);
     }

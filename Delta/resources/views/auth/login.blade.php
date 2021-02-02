@@ -2,7 +2,7 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             {{-- <x-jet-authentication-card-logo /> --}}
-            <img src="{{asset('image/abasas-logo.png')}}" width="200px" alt="Logo">
+            <img src="{{asset(asset(session('logo')))}}" width="200px" alt="Logo">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

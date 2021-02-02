@@ -24,7 +24,7 @@ class SupplierDuePayController extends Controller
     public function index(Request $request)
     {
         
-        if(! auth()->user()->hasPermissionTo('Supplier Due Pay Page')){
+        if((! auth()->user()->hasPermissionTo('Supplier Due Pay Page')) || (!auth()->user()->hasPermissionTo('Allow Supplier Due'))){
             return abort(401);
         }
         
@@ -52,11 +52,11 @@ class SupplierDuePayController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        
-        if(! auth()->user()->hasPermissionTo('Supplier Due Pay Create Page')){
+    { 
+        if((! auth()->user()->hasPermissionTo('Supplier Due Pay Create Page')) || (!auth()->user()->hasPermissionTo('Allow Supplier Due'))){
             return abort(401);
         }
+        
         $roles = Role::all();
         return view('due.supplier.create',compact('roles'));
     }

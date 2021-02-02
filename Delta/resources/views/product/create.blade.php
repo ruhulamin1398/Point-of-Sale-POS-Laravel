@@ -274,6 +274,16 @@
                             <input type="number" step="any" name="tax" id="tax" class="form-control" min=0 value="0">
                         </div>
 
+                       
+                        <div class="form-group col-12  ">
+                            <label for="stock_controll"> {{ __('translate.Stock Controll') }}</label>
+                            <select class="form-control" name="stock_controll" id="stock_controll">
+                                <option selected value="yes"> Yes</option>
+                                <option  value="no">No</option>
+                            </select>
+                        </div>
+                     
+
                     </div>
 
                    <button type="submit" id="product-create-submit-button btn-lg" class="btn bg-abasas-dark"> {{ __('translate.Submit')}}</button>

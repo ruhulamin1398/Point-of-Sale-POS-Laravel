@@ -134,7 +134,7 @@
         html4+='<select class="form-control form-control" value="" name="role_id" id="role_id" required>';
         html4+='<option disabled selected value> -- select an option -- </option>';
         @foreach ($roles as $role)
-        @if ($loop->first && !auth()->user()->can('Super Admin'))
+        @if ($loop->first && !$GLOBALS['CurrentUser']->can('Super Admin'))
         
         @else 
             html4+='<option value="{{$role->id}}"> {{$role->name}}</option>';

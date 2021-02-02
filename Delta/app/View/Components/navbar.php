@@ -24,7 +24,6 @@ class navbar extends Component
      */
     public function render()
     {
-        $settings = posSetting::find(1);
-        return view('components.navbar',compact('settings'));
+        return view('components.navbar');
     }
 }
