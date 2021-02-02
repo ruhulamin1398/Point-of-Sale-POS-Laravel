@@ -6,6 +6,7 @@
  $componentDetails=$settings->setting[0]['componentDetails'];
  $items= $dataArray['items'];
  $page_name = $dataArray['page_name'];
+ $GLOBALS['CurrentUser']= auth()->user();   
 
  @endphp
  <script>
@@ -132,8 +133,8 @@
                          @endif
                          @endforeach
 
-                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
-                         auth()->user()->can($page_name.' View') )
+                         @if( $GLOBALS['CurrentUser']->can($page_name.' Delete') || $GLOBALS['CurrentUser']->can($page_name.' Edit') ||
+                         $GLOBALS['CurrentUser']->can($page_name.' View') )
                          <th>{{__('translate.Action')}}</th>
                          @endif
 
@@ -153,8 +154,8 @@
                          @endif
                          @endforeach
 
-                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
-                         auth()->user()->can($page_name.' View') )
+                         @if( $GLOBALS['CurrentUser']->can($page_name.' Delete') || $GLOBALS['CurrentUser']->can($page_name.' Edit') ||
+                         $GLOBALS['CurrentUser']->can($page_name.' View') )
                          <th>{{__('translate.Action')}}</th>
                          @endif
 
@@ -197,8 +198,8 @@
 
 
 
-                         @if( auth()->user()->can($page_name.' Delete') || auth()->user()->can($page_name.' Edit') ||
-                         auth()->user()->can($page_name.' View') )
+                         @if( $GLOBALS['CurrentUser']->can($page_name.' Delete') || $GLOBALS['CurrentUser']->can($page_name.' Edit') ||
+                         $GLOBALS['CurrentUser']->can($page_name.' View') )
                          <td class="align-middle">
                              @can($page_name.' Edit')
                              <button title="Edit" type="button" class="dataEditItemClass btn btn-success btn-sm"
@@ -365,7 +366,7 @@
                                      <td>
                                          <div class="form-check-inline">
                                             
-                                             <label class="form-check-label createLabel" @if( !auth()->user()->can($page_name.' Create')) hidden @endif>
+                                             <label class="form-check-label createLabel" @if( !$GLOBALS['CurrentUser']->can($page_name.' Create')) hidden @endif>
                                                  @if( $fieldList[$i]['create']==1 )
                                                  <input type="checkbox" class="form-check-input create abasasCheckBox "
                                                      value="1" checked>
@@ -386,7 +387,7 @@
                                                  
                                          </div>
                                          <div class="form-check-inline">
-                                             <label class="form-check-label readLabel" @if( !auth()->user()->can($page_name.' Read')) hidden @endif>
+                                             <label class="form-check-label readLabel" @if( !$GLOBALS['CurrentUser']->can($page_name.' Read')) hidden @endif>
                                                  @if( $fieldList[$i]['read'] == 1 )
                                                  <input type="checkbox" class="form-check-input read abasasCheckBox "
                                                      value="1" checked>
@@ -408,7 +409,7 @@
                                              
                                          </div>
                                          <div class="form-check-inline">
-                                             <label class="form-check-label updateLabel" @if( !auth()->user()->can($page_name.' Edit')) hidden @endif>
+                                             <label class="form-check-label updateLabel" @if( !$GLOBALS['CurrentUser']->can($page_name.' Edit')) hidden @endif>
                                                  @if( $fieldList[$i]['update'] ==1 )
                                                  <input type="checkbox" class="form-check-input update abasasCheckBox "
                                                      value="1" checked>

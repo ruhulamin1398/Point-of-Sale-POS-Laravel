@@ -27,10 +27,10 @@ class CustomerDueReceiveController extends Controller
     public function index(Request $request)
     {
 
-        
-        if(! auth()->user()->hasPermissionTo('Customer Due Receive Page')){
+        if((! auth()->user()->hasPermissionTo('Customer Due Receive Page')) || (!auth()->user()->hasPermissionTo('Allow Customer Due'))){
             return abort(401);
         }
+        
         $monthStart=Carbon::now()->format('Y-m-01 00:00:00');
         $monthEnd=Carbon::now()->format('Y-m-31 23:59:59');
         if( ! is_null($request->month)){
@@ -57,7 +57,7 @@ class CustomerDueReceiveController extends Controller
     public function create()
     {
         
-        if(! auth()->user()->hasPermissionTo('Customer Due Receive Create Page')){
+        if((! auth()->user()->hasPermissionTo('Customer Due Receive Create Page')) || (!auth()->user()->hasPermissionTo('Allow Customer Due'))){
             return abort(401);
         }
         $roles = Role::all();

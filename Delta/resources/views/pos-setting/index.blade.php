@@ -50,7 +50,7 @@
             <form method="POST" action="{{ route('pos-setting.update',1) }}" enctype="multipart/form-data">
                 @method('put')
                 @csrf
-                <div class="row m-4">
+                <div class="row m-md-4 m-0">
 
                     <div class="form-group col-12 col-md-3">
                         <label for="name"> {{ __('translate.Shop Name') }}  </label>
@@ -79,7 +79,7 @@
                 </div>
 
 
-                <div class="row m-4">
+                <div class="row m-md-4 m-0">
 
                     <div class="form-group col-12 col-md-3">
                         <label for="phone"> {{ __('translate.Shop Phone') }}  </label>
@@ -108,7 +108,7 @@
                 </div>
 
 
-                <div class="row m-4">
+                <div class="row m-md-4 m-0">
 
                     <div class="form-group col-12 col-md-3">
                         <label for="language"> {{ __('translate.Language') }}  </label>
@@ -162,16 +162,7 @@
                 </div>
 
 
-                <div class="row m-4">
-
-                    <div class="form-group col-12 col-md-3">
-                        <label for="customer_due"> {{ __('translate.Shop Logo') }} </label>
-                    </div>
-
-
-                    <div class="form-group col-12 col-md-3">
-                        <input type="file" name="logo"  class="form-control-file" id="logoImage" >
-                    </div>
+                <div class="row m-md-4 m-0">
 
 
                     <div class="form-group col-12 col-md-3">
@@ -200,12 +191,24 @@
 
                     </div>
 
+                    
+                    
+                    <div class="form-group col-12 col-md-3">
+                        <label for="customer_due"> {{ __('translate.Shop Logo') }} </label>
+                    </div>
+
+
+                    <div class="form-group col-12 col-md-3">
+                        <input type="file" name="logo"  class="form-control-file" id="logoImage" accept=".png, .jpg, .jpeg" >
+                    </div>
+
+
 
 
 
                 </div>
 
-                <div class="row m-4">
+                <div class="row m-md-4 m-0">
 
 
 

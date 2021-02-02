@@ -83,12 +83,16 @@ class ReturnToSupplierController extends Controller
     public function store(Request $request)
     {
         $product = Product::find($request->product_id);
+        if( $request->quantity * $product->unit->value  > $product->stock && $product->stock_controll == 'yes'){
+            return redirect()->back()->withErrors(['Products Stock is less than return quantity']);
+        }
 
         $returnProduct = new returnToSupplier();
         $returnProduct->user_id =Auth::user()->id;
         $returnProduct->product_id =$request->product_id ;
         $returnProduct->supplier_id =$request->return_product_supplier_id ;
         $returnProduct->quantity =$request->quantity * $product->unit->value ;
+
         $returnProduct->price =$request->price ;
         $returnProduct->comment =$request->comment ;
         $returnProduct->save();
@@ -97,6 +101,10 @@ class ReturnToSupplierController extends Controller
         $price = $returnProduct->price ;
         $returnProduct->profit = $price - $cost;
         $product->stock -= $returnProduct->quantity;
+        
+        if($product->stock <0){
+            $product->stock = 0;
+        }
         $returnProduct->save();
         $product->save();
 

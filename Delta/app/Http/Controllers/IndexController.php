@@ -12,6 +12,7 @@ use App\Models\sellAnalysisYearly;
 use App\Models\supplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class IndexController extends Controller
 {
@@ -22,7 +23,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        
+        // App::setLocale('bn');
         $customers = customer::count();
         $suppliers = supplier::count();
         $orders = order::count();
