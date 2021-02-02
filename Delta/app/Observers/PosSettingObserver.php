@@ -27,9 +27,12 @@ class PosSettingObserver
      */
     public function updated(posSetting $posSetting)
     {
-        //   $brand = new brand;
-        //  $brand->name = 'test bradngfggrr';
-        //  $brand->save();
+            session(['shop_name' => $posSetting->shop_name]);
+            session(['shop_moto' => $posSetting->shop_moto]);
+            session(['shop_phone' => $posSetting->shop_phone]);
+            session(['shop_email' => $posSetting->shop_email]);
+            session(['language' => $posSetting->language]);
+            session(['logo' => $posSetting->logo]);
 
     }
 

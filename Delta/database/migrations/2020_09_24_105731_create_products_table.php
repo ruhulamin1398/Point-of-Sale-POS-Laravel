@@ -39,6 +39,8 @@ class CreateProductsTable extends Migration
 
             $table->double('sell',18,2)->default(0);
             $table->double('tax',18,2)->default(0);
+            
+            $table->string('stock_controll')->default('yes');
 
             
             $table->longText('description')->nullable();

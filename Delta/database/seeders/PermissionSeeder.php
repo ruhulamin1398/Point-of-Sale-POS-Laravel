@@ -679,6 +679,21 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Analysis',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Allow Customer Due',
+                'page_name' => 'Analysis',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Allow Supplier Due',
+                'page_name' => 'Analysis',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Allow Stock Controll',
+                'page_name' => 'Analysis',
+                'guard_name' => 'web',
+            ],
 
 
 
@@ -1223,6 +1238,66 @@ class PermissionSeeder extends Seeder
             [
                 'permission_id' => 122,
                 'role_id' => 1,
+            ],
+            [
+                'permission_id' => 123,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 124,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 125,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 123,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 124,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 125,
+                'role_id' => 2,
+            ],
+            [
+                'permission_id' => 123,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 124,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 125,
+                'role_id' => 3,
+            ],
+            [
+                'permission_id' => 123,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 124,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 125,
+                'role_id' => 4,
+            ],
+            [
+                'permission_id' => 123,
+                'role_id' => 5,
+            ],
+            [
+                'permission_id' => 124,
+                'role_id' => 5,
+            ],
+            [
+                'permission_id' => 125,
+                'role_id' => 5,
             ],
            
         ]);

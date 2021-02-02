@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\onlineSync;
+use App\Models\posSetting;
 use App\Models\unit;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -14,6 +15,20 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function __construct()
+    {
+        if(!session()->has('language')){
+            $pos_setting= posSetting::find(1);
+            session(['shop_name' => $pos_setting->shop_name]);
+            session(['shop_moto' => $pos_setting->shop_moto]);
+            session(['shop_phone' => $pos_setting->shop_phone]);
+            session(['shop_email' => $pos_setting->shop_email]);
+            session(['language' => $pos_setting->language]);
+            session(['logo' => $pos_setting->logo]);
+        }
+        App::setLocale(session('language'));
+        
+    }
     
     public function calPricePerUnit($sell,$unit_id){
 
