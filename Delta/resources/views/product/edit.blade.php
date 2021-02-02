@@ -285,6 +285,20 @@
 
                             <input type="number" step="any" name="tax" id="" class="form-control" min=0 value="{{ $product->tax }}">
                         </div>
+                        
+                        <div class="form-group col-12  ">
+                            <label for="stock_controll"> {{ __('translate.Stock Controll') }}</label>
+                            <select class="form-control" name="stock_controll" id="stock_controll">
+                                @if($product->stock_controll=='yes')
+                                <option selected value="yes"> Yes</option>
+                                <option  value="no">No</option>
+                                @else 
+                                <option  value="yes"> Yes</option>
+                                <option selected value="no">No</option>
+                                @endif
+
+                            </select>
+                        </div>
 
                     </div>
 

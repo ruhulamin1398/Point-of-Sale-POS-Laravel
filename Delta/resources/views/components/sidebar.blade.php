@@ -137,7 +137,7 @@
     
         <!-- Divider -->
 
-        @if( $GLOBALS['CurrentUser']->can('Customer Page') || $GLOBALS['CurrentUser']->can('Customer Due Receive Page') || $GLOBALS['CurrentUser']->can('Customer Due Receive Create Page'))
+        @if( $GLOBALS['CurrentUser']->can('Customer Page') || ( $GLOBALS['CurrentUser']->can('Customer Due Receive Create Page') && $GLOBALS['CurrentUser']->can('Allow Customer Due')) || ( $GLOBALS['CurrentUser']->can('Customer Due Receive Page') && $GLOBALS['CurrentUser']->can('Allow Customer Due')))
         <hr class="sidebar-divider m-1 p-0 ">
 
         <!--purchase -->
@@ -152,12 +152,13 @@
                     @can('Customer Page')
                     <a class="collapse-item" href="{{ route('customers.index') }}">{{__('translate.Customer')}} </a>
                     @endcan
-                    @can('Customer Due Receive Page')
+                    @if( $GLOBALS['CurrentUser']->can('Customer Due Receive Page') && $GLOBALS['CurrentUser']->can('Allow Customer Due'))
                     <a class="collapse-item" href="{{ route('customer-due-receives.index') }}">{{__('translate.Due Receive List')}} </a>
-                    @endcan
-                    @can('Customer Due Receive Create Page')
+                    @endif
+                    
+                    @if( $GLOBALS['CurrentUser']->can('Customer Due Receive Create Page') && $GLOBALS['CurrentUser']->can('Allow Customer Due'))
                     <a class="collapse-item" href="{{ route('customer-due-receives.create') }}">{{__('translate.Due Receive')}}  </a>
-                    @endcan
+                    @endif
     
                 </div>
             </div>
@@ -165,7 +166,7 @@
         <!-- Divider -->
         @endif
 
-        @if(  $GLOBALS['CurrentUser']->can('Supplier Page')  ||  $GLOBALS['CurrentUser']->can('Supplier Due Pay Page')  ||  $GLOBALS['CurrentUser']->can('Supplier Due Pay Create Page') )
+        @if(  $GLOBALS['CurrentUser']->can('Supplier Page')  ||  ( $GLOBALS['CurrentUser']->can('Supplier Due Pay Page') && $GLOBALS['CurrentUser']->can('Allow Supplier Due'))  ||  ( $GLOBALS['CurrentUser']->can('Supplier Due Pay Create Page') && $GLOBALS['CurrentUser']->can('Allow Supplier Due')) )
 
         <hr class="sidebar-divider m-1 p-0 ">
 
@@ -180,12 +181,15 @@
                     @can('Supplier Page')
                     <a class="collapse-item" href="{{ route('suppliers.index') }}">{{__('translate.Supplier')}} </a>
                     @endcan
-                    @can('Supplier Due Pay Page')
+
+                    @if( $GLOBALS['CurrentUser']->can('Supplier Due Pay Page') && $GLOBALS['CurrentUser']->can('Allow Supplier Due'))
                     <a class="collapse-item" href="{{ route('supplier-due-pays.index') }}">{{__('translate.Due Pay List')}} </a>
-                    @endcan
-                    @can('Supplier Due Pay Create Page')
+                    @endif
+
+                    @if( $GLOBALS['CurrentUser']->can('Supplier Due Pay Create Page') && $GLOBALS['CurrentUser']->can('Allow Supplier Due'))
+                    
                     <a class="collapse-item" href="{{ route('supplier-due-pays.create') }}">{{__('translate.Due Pay')}}  </a>
-                    @endcan
+                    @endif
     
                 </div>
             </div>

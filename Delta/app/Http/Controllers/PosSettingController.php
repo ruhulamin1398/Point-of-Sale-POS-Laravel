@@ -101,7 +101,6 @@ class PosSettingController extends Controller
         $posSetting->language = $request->language;
         $posSetting->customer_due = $request->customer_due;
         $posSetting->supplier_due = $request->supplier_due;
-        $posSetting->stock_controll = $request->stock_controll;
     
         if(!is_null($request->logo)){
 
@@ -129,7 +128,6 @@ class PosSettingController extends Controller
             
         $customerDuePermission = Permission::where('name','Allow Customer Due')->first();
         $supplierDuePermission = Permission::where('name','Allow Supplier Due')->first();
-        $stockControllPermission = Permission::where('name','Allow Stock Controll')->first();
 
         foreach($roles as $role){
             if($posSetting->customer_due == 'yes'){
@@ -147,14 +145,6 @@ class PosSettingController extends Controller
             else{
                 $role->revokePermissionTo($supplierDuePermission);
                 $this->onlinePermissionSync('RolePermission','remove',$role->id,$supplierDuePermission->id);
-            }
-            if($posSetting->stock_controll == 'yes'){
-                $role->givePermissionTo($stockControllPermission);
-                $this->onlinePermissionSync('RolePermission','assign',$role->id,$stockControllPermission->id);
-            }
-            else{
-                $role->revokePermissionTo($stockControllPermission);
-                $this->onlinePermissionSync('RolePermission','remove',$role->id,$stockControllPermission->id);
             }
 
         }

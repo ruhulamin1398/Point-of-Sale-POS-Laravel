@@ -22,7 +22,6 @@ class CreatePosSettingsTable extends Migration
             $table->string('language')->nullable();
             $table->string('customer_due')->nullable();
             $table->string('supplier_due')->nullable();
-            $table->string('stock_controll')->default('yes');
             $table->string('logo')->nullable();
             $table->softDeletes();
             $table->timestamps();

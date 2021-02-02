@@ -106,6 +106,10 @@
                                     <th>{{ __("translate.Stock Alert") }} </th>
                                     <td> {{ $product->stock_alert / $product->unit->value }} </td>
                                 </tr>
+                                <tr class="data-row">
+                                    <th>{{ __("translate.Stock Controll") }} </th>
+                                    <td> {{ $product->stock_controll }} </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

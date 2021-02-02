@@ -190,31 +190,8 @@
 
 
                     </div>
-                    <div class="form-group col-12 col-md-3">
-                        <label for="stock_controll"> {{ __('translate.Stock Controll') }} </label>
-                    </div>
 
-
-                    <div class="form-group col-12 col-md-3">
-                        <select class="form-control" value="" name="stock_controll" id="stock_controll">
-                            <option selected disabled value="">Select</option>
-
-
-                          @if($settings->stock_controll == 'yes')
-                            <option selected value="yes"> Yes</option>
-                            <option value="no"> No</option>
-
-                        @else
-                        <option  value="yes"> Yes</option>
-                        <option selected value="no"> No</option>
-                         @endif
-
-                          
-
-                        </select>
-
-
-                    </div>
+                    
                     
                     <div class="form-group col-12 col-md-3">
                         <label for="customer_due"> {{ __('translate.Shop Logo') }} </label>
