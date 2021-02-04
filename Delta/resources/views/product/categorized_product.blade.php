@@ -151,6 +151,93 @@
 </div>
 
 
+
+
+@can('Super Admin')
+ <!-- Attachment Modal -->
+ <div class="modal fade" id="setting-modal" tabindex="-1" role="dialog" aria-labelledby="setting-modal-label"
+     aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+             <div class="modal-header bg-abasas-dark">
+
+                <nav class="navbar navbar-light  ">
+                    <a class="navbar-brand">{{__('translate.Permission')}}</a>
+    
+                </nav>
+                
+            <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span>
+            </button>
+
+             </div>
+             <form action="" method="post">
+                @csrf
+             <div class="modal-body" >
+
+
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered"  width="100%"
+                        cellspacing="0">
+                        <thead class="bg-abasas-dark">
+
+                            <tr>
+
+                                <th>{{ __('translate.Permission') }} </th>
+
+                                @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
+                                    @endfor
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr class="data-row">
+                                <td class="iteration">{{ __('translate.Page Access') }}</td>
+                                @for ($i=1 ; $i<5 ; $i++) <td
+                                    class="word-break name justify-content-center">
+                                    <label class="checkbox-inline"><input type="checkbox"
+                                            name="1"
+                                             checked
+                                       ></label>
+                                    </td>
+                                    @endfor
+
+                            </tr>
+
+
+                            
+
+                        </tbody>
+
+
+
+                    </table>
+                </div>
+
+             </div>
+
+             <div class="modal-footer">
+                <button type="submit"
+                                 class="btn bg-abasas-dark btn-block form-control  ">{{ __('translate.Save')  }}</button>
+            </div>
+             </form>
+         </div>
+     </div>
+ </div>
+@endcan
+
+
+
+
+
+
+
+
+
+
 <script>
 
     $(document).ready(function(){

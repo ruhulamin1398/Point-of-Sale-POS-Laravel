@@ -18,77 +18,51 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Due Paid List",
-                "editTitle":"Edit Due Paid"
+                "title":"Product List",
+                "editTitle":"Edit Product"
             },
             "routes":{
                 "create":{
-                    "name":"supplier-due-pays.store",
-                    "link":"supplier-due-pays"
+                    "name":"products.store",
+                    "link":"products"
                 },
                 "update":{
-                    "name":"supplier-due-pays.update",
-                    "link":"supplier-due-pays"
+                    "name":"products.update",
+                    "link":"products"
                 },
                 "delete":{
-                    "name":"supplier-due-pays.destroy",
-                    "link":"supplier-due-pays"
+                    "name":"products.destroy",
+                    "link":"products"
                 }
             },
             "fieldList":[{
                     
                 "position":111,
     
+                "create":"0",
+                "read":"1",
+                "update":"0",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"id",
+               "title":"Id",
+    
+    
+               "database_name":"id"
+            },{
+                    
+                "position":111,
+    
                 "create":"3",
                 "read":"1",
                 "update":"3",
                 "require":"1",
     
                "input_type":"text",
-               "name":"user_name",
-               "title":"Reference",
-    
-    
-               "database_name":"user_id"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"1",
-    
-               "input_type":"text",
-               "name":"supplier",
-               "title":"Supplier",
-               "database_name":"supplier_id"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"number",
-               "name":"amount",
-               "title":"Amount",
-               "database_name":"amount"
-            },{
-                    
-                "position":111,
-    
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
-    
-               "input_type":"number",
-               "name":"pre_due",
-               "title":"Previous Due",
-               "database_name":"pre_due"
+               "name":"name",
+               "title":"Name",
+               "database_name":"name"
             },{
                     
                 "position":111,
@@ -99,9 +73,9 @@ class SettingController extends Controller
                 "require":"0",
     
                "input_type":"text",
-               "name":"comment",
-               "title":"Comment",
-               "database_name":"comment"
+               "name":"category",
+               "title":"Category",
+               "database_name":"category_id"
             },{
                     
                 "position":111,
@@ -112,17 +86,100 @@ class SettingController extends Controller
                 "require":"0",
     
                "input_type":"text",
-               "name":"time",
-               "title":"Time",
-               "database_name":"created_at"
+               "name":"brand",
+               "title":"Brand",
+               "database_name":"brand_id"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"cost",
+               "title":"Cost",
+               "database_name":"cost"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"price",
+               "title":"Price",
+               "database_name":"price"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"real_stock",
+               "title":"Stock",
+               "database_name":"stock"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"tax_with_type",
+               "title":"Tax",
+               "database_name":"tax"
+            },{
+                    
+                "position":111,
+    
+                "create":"3",
+                "read":"1",
+                "update":"3",
+                "require":"0",
+    
+               "input_type":"text",
+               "name":"warrenty",
+               "title":"Warrenty",
+               "database_name":"warrenty_id"
             }
             ]
         }]' ;
 
+        // $a= [
+        //     "1" =>[
+        //          "Super Admin"=> 1, 
+        //          "Admin"=> 1, 
+        //          "Manager"=> 1, 
+        //          "Cashier"=> 1, 
+        //          "Staff"=> 1, 
+        //      ],
+        //      "2" =>[
+        //           "Super Admin"=> 1, 
+        //           "Admin"=> 1, 
+        //           "Manager"=> 1, 
+        //           "Cashier"=> 1, 
+        //           "Staff"=> 1, 
+        //       ],
+        // ];
+        
+        
         // $setting = new setting;
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'supplier_due_pays';
-        // $setting->model = 'App\Models\supplierDuePay';
+        // $setting->table_name = 'products';
+        // $setting->model = 'App\Models\Product';
         // $setting->save();
         // return  "Success";
     }
