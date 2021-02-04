@@ -32,9 +32,18 @@ class ProductController extends Controller
             return abort(401);
         }
 
+           
+        $settings = setting::where('table_name', 'products')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+        $products = Product::all() ; 
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $products,
+            'page_name' => 'Product',
+        ];
+
         $roles = Role::all();
-        $products= Product::all();
-        return view('product.index',compact('products','roles'));
+        return view('product.index',compact('dataArray','roles'));
     }
     
     public function productAll(){

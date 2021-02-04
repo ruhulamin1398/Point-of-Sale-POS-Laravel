@@ -8,6 +8,7 @@ use App\Models\onlineSync;
 use App\Models\productType;
 use App\Models\setting;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class CategoryController extends Controller
 {
@@ -73,7 +74,20 @@ class CategoryController extends Controller
         if(! auth()->user()->hasPermissionTo('Category View')){
             return abort(401);
         }
-        return view('product.category.show',compact('category'));
+
+        
+        $settings = setting::where('table_name', 'products')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+        $products = $category->products ; 
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $products,
+            'page_name' => 'Product',
+        ];
+
+        $roles = Role::all();
+
+        return view('product.category.show',compact('category','dataArray','roles'));
     }
 
     /**

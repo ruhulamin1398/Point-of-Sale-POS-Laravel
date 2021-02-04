@@ -9,6 +9,7 @@ use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class BrandController extends Controller
 {
@@ -77,7 +78,20 @@ class BrandController extends Controller
         if(! auth()->user()->hasPermissionTo('Brand View')){
             return abort(401);
         }
-        return view('product.brand.show', compact('brand'));
+
+          
+        $settings = setting::where('table_name', 'products')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+        $products = $brand->products ; 
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $products,
+            'page_name' => 'Product',
+        ];
+
+        $roles = Role::all();
+
+        return view('product.brand.show', compact('brand','dataArray','roles'));
     }
 
     /**

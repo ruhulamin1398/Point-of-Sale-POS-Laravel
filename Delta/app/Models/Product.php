@@ -33,7 +33,12 @@ class Product extends Model
     }
     public function abasas(){
         $this->brand = $this->brand->name;
+        $this->warrenty = $this->warrenty->name;
         $this->category = $this->category->name;
+        $this->cost = $this->cost_per_unit * $this->unit->value ;
+        $this->price = $this->price_per_unit * $this->unit->value ;
+        $this->real_stock = $this->stock / $this->unit->value ;
+        $this->tax_with_type = $this->tax ." (" . $this->taxType->name . ")" ;
     }
     
 
