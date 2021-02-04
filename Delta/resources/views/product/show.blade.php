@@ -29,26 +29,27 @@
 @endif
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid p-0">
 
 
 
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4 ml-0 mr-0">
+    <div class="card shadow m-0 p-0">
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
                 <a class="navbar-brand">{{ __("translate.Product Details") }}</a>
 
             </nav>
         </div>
-        <div class="card-body">
+        <div class="card-body ">
             <div class="row">
                 <div class="col-12 col-md-6">
 
 
-                    <div class="table-responsive" >
-                        <table class="table table-striped table-bordered" id="SingleProductTable" width="100%" cellspacing="0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="SingleProductTable" width="100%"
+                            cellspacing="0">
                             <tbody>
                                 <tr class="data-row">
                                     <th>{{ __("translate.Name") }}</th>
@@ -112,73 +113,106 @@
                                 </tr>
                             </tbody>
                         </table>
+
+                        <p class="pt-4"><b> {{ __("translate.Product Description") }} </b>: {{ $product->description }}
+                        </p>
                     </div>
+
+
+                    
 
 
                 </div>
                 <div class="col-12 col-md-6">
                     @can('Product Graph')
-                        
-                    <x-pie-chart :dataArray="$dataArray" id="productAnalysispie" />
-                    @endcan 
-           
-                    <div class="row pt-3 p-2"> 
-                        <table class="table table-striped table-bordered" id="SingleProductChartTable" width="100%" cellspacing="0">
+
+                    <div class="p-0 p-md-4">
+                        <h3 class="text-center"> {{ __('translate.Analysis Results') }}</h3>
+                        <table class="table table-striped table-bordered" id="SingleProductChartTable" width="100%"
+                            cellspacing="0">
                             <tbody>
                                 <tr class="data-row">
                                     <th>{{ __('translate.Purchase') }}</th>
-                                    <td> {{ $dataArray['datasets'][0]['data'][0] }} </td> 
+                                    <td> {{ $dataArray['datasets'][0]['data'][0] }} </td>
                                 </tr>
                                 <tr class="data-row">
                                     <th>{{ __('translate.Sell') }}</th>
-                                    <td > {{ $dataArray['datasets'][0]['data'][1] }} </td> 
+                                    <td> {{ $dataArray['datasets'][0]['data'][1] }} </td>
                                 </tr>
                                 <tr class="data-row">
                                     <th>{{ __('translate.Profit') }}</th>
-                                    <td >{{ $dataArray['datasets'][0]['data'][4] }} </td> 
+                                    <td>{{ $dataArray['datasets'][0]['data'][4] }} </td>
                                 </tr>
-
-                                 <tr class="data-row">
+    
+                                <tr class="data-row">
                                     <th> {{ __('translate.Return') }}</th>
-                                    <td >{{ $dataArray['datasets'][0]['data'][2] }} </td>
-                                </tr> 
+                                    <td>{{ $dataArray['datasets'][0]['data'][2] }} </td>
+                                </tr>
                                 <tr class="data-row">
                                     <th> {{ __('translate.Drop') }}</th>
-                                    <td > {{ $dataArray['datasets'][0]['data'][3] }} </td>
-                                </tr> 
+                                    <td> {{ $dataArray['datasets'][0]['data'][3] }} </td>
+                                </tr>
                             </tbody>
                         </table>
+                    <x-pie-chart :dataArray="$dataArray" id="productAnalysispie" />
                     </div>
+                   
+                
+                    @endcan
 
-                     
-{{-- 
-                    @can('Product Graph')
-                        
-                    <x-bar-chart :dataArray="$dataArray" id="productAnalysisbar" />
-                    @endcan 
-                    --}}
 
-                    <p class="pt-4"><b> {{ __("translate.Product Description") }} </b>: {{ $product->description }}</p>
+
+
+                    
+
+
+
+
 
                 </div>
             </div>
 
         </div>
 
-                    {{-- Graph Details Section --}}
+        {{-- Graph Details Section --}}
+        @can('Product Graph')
+        <div class="row p-2">
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 col-12">
-            
-                                {{-- <x-line-chart :dataArray="$dataArray" id="productAnalysisline" /> --}}
+            <div class="col-12 col-md-4 p-0 p-md-4">
 
-            
-                            </div>
- 
-                        </div>
-            
-                    </div>
+                <x-line-chart :dataArray="$productAnalysisSell" id="productAnalysisSell" />
+                
+            </div>
+            <div class="col-12 col-md-4 p-0 p-md-4">
+
+
+                <x-line-chart :dataArray="$productAnalysisDrop" id="productAnalysisDrop" />
+           
+
+            </div>
+            <div class="col-12 col-md-4 p-0 p-md-4">
+
+
+                <x-line-chart :dataArray="$productAnalysisProfit" id="productAnalysisProfit" />
+          
+
+            </div>
+            <div class="col-12 col-md-4 p-0 p-md-4">
+                    <x-line-chart :dataArray="$productAnalysisPurchase" id="productAnalysisPurchase" />
+             
+
+
+            </div>
+            <div class="col-12 col-md-4 p-0 p-md-4">
+
+                <x-line-chart :dataArray="$productAnalysisReturn" id="productAnalysisReturn" />
+              
+
+
+            </div>
+
+        </div>
+        @endcan
 
 
 
