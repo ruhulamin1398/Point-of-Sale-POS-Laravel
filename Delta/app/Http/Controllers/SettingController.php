@@ -16,113 +16,131 @@ class SettingController extends Controller
     {
 
 
-        $a = '[{
-            "componentDetails":{
-                "title":"Due Paid List",
-                "editTitle":"Edit Due Paid"
-            },
-            "routes":{
-                "create":{
-                    "name":"supplier-due-pays.store",
-                    "link":"supplier-due-pays"
-                },
-                "update":{
-                    "name":"supplier-due-pays.update",
-                    "link":"supplier-due-pays"
-                },
-                "delete":{
-                    "name":"supplier-due-pays.destroy",
-                    "link":"supplier-due-pays"
-                }
-            },
-            "fieldList":[{
+        // $a = '[{
+        //     "componentDetails":{
+        //         "title":"Due Paid List",
+        //         "editTitle":"Edit Due Paid"
+        //     },
+        //     "routes":{
+        //         "create":{
+        //             "name":"supplier-due-pays.store",
+        //             "link":"supplier-due-pays"
+        //         },
+        //         "update":{
+        //             "name":"supplier-due-pays.update",
+        //             "link":"supplier-due-pays"
+        //         },
+        //         "delete":{
+        //             "name":"supplier-due-pays.destroy",
+        //             "link":"supplier-due-pays"
+        //         }
+        //     },
+        //     "fieldList":[{
                     
-                "position":111,
+        //         "position":111,
     
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"1",
+        //         "create":"3",
+        //         "read":"1",
+        //         "update":"3",
+        //         "require":"1",
     
-               "input_type":"text",
-               "name":"user_name",
-               "title":"Reference",
+        //        "input_type":"text",
+        //        "name":"user_name",
+        //        "title":"Reference",
     
     
-               "database_name":"user_id"
-            },{
+        //        "database_name":"user_id"
+        //     },{
                     
-                "position":111,
+        //         "position":111,
     
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"1",
+        //         "create":"3",
+        //         "read":"1",
+        //         "update":"3",
+        //         "require":"1",
     
-               "input_type":"text",
-               "name":"supplier",
-               "title":"Supplier",
-               "database_name":"supplier_id"
-            },{
+        //        "input_type":"text",
+        //        "name":"supplier",
+        //        "title":"Supplier",
+        //        "database_name":"supplier_id"
+        //     },{
                     
-                "position":111,
+        //         "position":111,
     
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
+        //         "create":"3",
+        //         "read":"1",
+        //         "update":"3",
+        //         "require":"0",
     
-               "input_type":"number",
-               "name":"amount",
-               "title":"Amount",
-               "database_name":"amount"
-            },{
+        //        "input_type":"number",
+        //        "name":"amount",
+        //        "title":"Amount",
+        //        "database_name":"amount"
+        //     },{
                     
-                "position":111,
+        //         "position":111,
     
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
+        //         "create":"3",
+        //         "read":"1",
+        //         "update":"3",
+        //         "require":"0",
     
-               "input_type":"number",
-               "name":"pre_due",
-               "title":"Previous Due",
-               "database_name":"pre_due"
-            },{
+        //        "input_type":"number",
+        //        "name":"pre_due",
+        //        "title":"Previous Due",
+        //        "database_name":"pre_due"
+        //     },{
                     
-                "position":111,
+        //         "position":111,
     
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
+        //         "create":"3",
+        //         "read":"1",
+        //         "update":"3",
+        //         "require":"0",
     
-               "input_type":"text",
-               "name":"comment",
-               "title":"Comment",
-               "database_name":"comment"
-            },{
+        //        "input_type":"text",
+        //        "name":"comment",
+        //        "title":"Comment",
+        //        "database_name":"comment"
+        //     },{
                     
-                "position":111,
+        //         "position":111,
     
-                "create":"3",
-                "read":"1",
-                "update":"3",
-                "require":"0",
+        //         "create":"3",
+        //         "read":"1",
+        //         "update":"3",
+        //         "require":"0",
     
-               "input_type":"text",
-               "name":"time",
-               "title":"Time",
-               "database_name":"created_at"
-            }
-            ]
-        }]' ;
+        //        "input_type":"text",
+        //        "name":"time",
+        //        "title":"Time",
+        //        "database_name":"created_at"
+        //     }
+        //     ]
+        // }]' ;
 
+        $a= [
+            "1" =>[
+                 "Super Admin"=> 1, 
+                 "Admin"=> 1, 
+                 "Manager"=> 1, 
+                 "Cashier"=> 1, 
+                 "Staff"=> 1, 
+             ],
+             "2" =>[
+                  "Super Admin"=> 1, 
+                  "Admin"=> 1, 
+                  "Manager"=> 1, 
+                  "Cashier"=> 1, 
+                  "Staff"=> 1, 
+              ],
+        ];
+        
+        
         // $setting = new setting;
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'supplier_due_pays';
-        // $setting->model = 'App\Models\supplierDuePay';
+        // $setting->table_name = 'categorized_products';
+        // $setting->model = 'App\Models\Product';
         // $setting->save();
         // return  "Success";
     }

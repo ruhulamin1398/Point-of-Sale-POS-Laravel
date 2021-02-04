@@ -33,6 +33,7 @@ class Product extends Model
     }
     public function abasas(){
         $this->brand = $this->brand->name;
+        $this->category = $this->category->name;
     }
     
 
