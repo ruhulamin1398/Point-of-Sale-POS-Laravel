@@ -25,7 +25,7 @@ class UserController extends Controller
         }
         $roles = Role::all();
         $employees = employee::whereNull('user_id')->get();
-        $users = User::all();
+        $users = User::where('id','!=',1)->get();
         return view('user.index',compact('users','employees','roles'));
     }
 
@@ -116,6 +116,9 @@ class UserController extends Controller
      */
     public function destroy(User  $user)
     {
+        if($user->id == 1){
+            return redirect()->back()->withErrors(["Sorry, Cannot Delete Super Admin"]);
+        }
         $employee = employee::find($user->employee->id);
         $user->delete();
         $employee->user_id = Null ;

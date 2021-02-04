@@ -23,6 +23,11 @@ class RoleTableSeeder extends Seeder
                 'password' => Hash::make(1234),
             ],
             [
+                'name' => 'SuperAdmin',
+                'email' => 'superadmin@gmail.com',
+                'password' => Hash::make(1234),
+            ],
+            [
                 'name' => 'Admin',
                 'email' => 'admin@abasas.tech',
                 'password' => Hash::make(1234),
