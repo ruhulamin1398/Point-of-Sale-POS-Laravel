@@ -12,6 +12,7 @@ use App\Models\setting;
 use App\Models\taxType;
 use App\Models\unit;
 use App\Models\warrenty;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -131,14 +132,23 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        
+         
         if(! auth()->user()->hasPermissionTo('Product View')){
             return abort(401);
         }
         
-        $productAnalysis=$this->productAnalysis($product->id);
-        $dataArray = json_decode(json_encode($productAnalysis), true);
-        return view('product.show',compact('product','dataArray'));
+        // $productAnalysis=$this->productAnalysis($product);
+        $data=$this->productAnalysisYearly($product);
+        $dataArray = json_decode(json_encode($data['productAnalysis']), true);
+
+        
+        $productAnalysisSell = json_decode(json_encode($data['productAnalysisSell']), true);
+        $productAnalysisPurchase = json_decode(json_encode($data['productAnalysisPurchase']), true);
+        $productAnalysisReturn = json_decode(json_encode($data['productAnalysisReturn']), true);
+        $productAnalysisDrop = json_decode(json_encode($data['productAnalysisDrop']), true);
+        $productAnalysisProfit = json_decode(json_encode($data['productAnalysisProfit']), true);
+
+        return view('product.show',compact('product','dataArray','productAnalysisSell','productAnalysisPurchase','productAnalysisReturn','productAnalysisDrop','productAnalysisProfit'));
     }
 
     
@@ -315,38 +325,163 @@ class ProductController extends Controller
     }
 
 
-    public function productAnalysis($product_id){
-        $lebels = array('Purchase','Sell','Return','Drop','Profit');
-        $data = array();
-        $purchase = 0;
-        $Sell = 0;
-        $Return = 0;
-        $Drop = 0;
-        $Profit = 0;
-        $productYearlies = productAnalysisYearly::where('product_id',$product_id)->get();
-        foreach ($productYearlies as $productYearly) {
-            $purchase += $productYearly->purchase;
-            $Sell += $productYearly->sell;
-            $Return += $productYearly->return;
-            $Drop += $productYearly->drop;
-            $Profit += $productYearly->profit;
-        }
-        $data = array($purchase,$Sell,$Return,$Drop,$Profit);
-        $color = array('#FFFF00','#0000FF','#800000','#FF0000','#008000');
-        $productAnalysis = [
-            'id' => 'productAnalysis',
-            "lebels" => $lebels,
-            "datasets" => [
-                [
-                    "label" => "Product Analysis",
-                    "data" => $data,
-                    "backgroundColor" => $color,
-                    "fill" => false
-                ],
-            ]
-        ];
-        return $productAnalysis;
+    // public function productAnalysis($product){
+    //     $unit = $product->unit->value;
+    //     $lebels = array('Purchase','Sell','Return','Drop','Profit');
+    //     $data = array();
+    //     $purchase = 0;
+    //     $Sell = 0;
+    //     $Return = 0;
+    //     $Drop = 0;
+    //     $Profit = 0;
+    //     $productYearlies = productAnalysisYearly::where('product_id',$product->id)->get();
+    //     foreach ($productYearlies as $productYearly) {
+    //         $purchase += $productYearly->purchase;
+    //         $Sell += $productYearly->sell;
+    //         $Return += $productYearly->return;
+    //         $Drop += $productYearly->drop;
+    //         $Profit += $productYearly->profit;
+    //     }
+    //     $data = array($purchase,$Sell,$Return,$Drop,$Profit);
+    //     $color = array('#FFFF00','#0000FF','#800000','#FF0000','#008000');
+    //     $productAnalysis = [
+    //         'id' => 'productAnalysis',
+    //         "lebels" => $lebels,
+    //         "datasets" => [
+    //             [
+    //                 "label" => "Product Analysis",
+    //                 "data" => $data,
+    //                 "backgroundColor" => $color,
+    //                 "fill" => false
+    //             ],
+    //         ]
+    //     ];
+    //     return $productAnalysis;
+    // }
+
+
+
+    
+// ***************** ProductAnalysisYearly ******************
+
+public function productAnalysisYearly($product){
+    $unit = $product->unit->value;
+    $lebels = array('Purchase','Sell','Return','Drop','Profit');
+    $purchase = 0;
+    $Sell = 0;
+    $Return = 0;
+    $Drop = 0;
+    $Profit = 0;
+
+    $year = array();
+    $yearlySell = array();
+    $yearlyPurchase = array();
+    $yearlyReturn = array();
+    $yearlyDrop = array();
+    $yearlyProfit = array();
+    $productYearlies = productAnalysisYearly::where('product_id',$product->id)->get();
+    foreach ($productYearlies as $yearly) {
+        array_push($year, $yearly->year);
+        array_push($yearlySell, $yearly->sell/$unit);
+        array_push($yearlyPurchase, $yearly->purchase/$unit);
+        array_push($yearlyReturn, $yearly->return/$unit);
+        array_push($yearlyDrop, $yearly->drop/$unit);
+        array_push($yearlyProfit, $yearly->profit);
+
+        $purchase += $yearly->purchase/$unit;
+        $Sell += $yearly->sell/$unit;
+        $Return += $yearly->return/$unit;
+        $Drop += $yearly->drop/$unit;
+        $Profit += $yearly->profit;
     }
+
+    $data = array($purchase,$Sell,$Return,$Drop,$Profit);
+    $color = array('#FFFF00','#0000FF','#800000','#FF0000','#008000');
+    $productAnalysis = [
+        'id' => 'productAnalysis',
+        "lebels" => $lebels,
+        "datasets" => [
+            [
+                "label" => "Product Analysis",
+                "data" => $data,
+                "backgroundColor" => $color,
+                "fill" => false
+            ],
+        ]
+    ];
+    $productAnalysisSell = [
+        "lebels" => $year,
+        "datasets" => [
+            [
+                "label" => "Sell",
+                "data" => $yearlySell,
+                "backgroundColor" => "#C70039",
+                "borderColor" =>     "#C70039",
+                "fill" => false
+            ],
+        ]
+    ];
+
+    
+    $productAnalysisPurchase = [
+        "lebels" => $year,
+        "datasets" => [
+            [
+                "label" => "Purchase",
+                "data" => $yearlyPurchase,
+                "backgroundColor" => "#C70039",
+                "borderColor" =>     "#C70039",
+                "fill" => false
+            ],
+        ]
+    ];
+
+    
+    $productAnalysisReturn = [
+        "lebels" => $year,
+        "datasets" => [
+            [
+                "label" => "Return",
+                "data" => $yearlyReturn,
+                "backgroundColor" => "#C70039",
+                "borderColor" =>     "#C70039",
+                "fill" => false
+            ],
+        ]
+    ];
+
+    
+    $productAnalysisDrop = [
+        "lebels" => $year,
+        "datasets" => [
+            [
+                "label" => "Drop",
+                "data" => $yearlyDrop,
+                "backgroundColor" => "#C70039",
+                "borderColor" =>     "#C70039",
+                "fill" => false
+            ],
+        ]
+    ];
+
+    
+    $productAnalysisProfit = [
+        "lebels" => $year,
+        "datasets" => [
+            [
+                "label" => "Profit",
+                "data" => $yearlyProfit,
+                "backgroundColor" => "#C70039",
+                "borderColor" =>     "#C70039",
+                "fill" => false
+            ],
+        ]
+    ];
+    $data = array("productAnalysisSell"=>$productAnalysisSell, "productAnalysisPurchase"=>$productAnalysisPurchase,"productAnalysisReturn"=>$productAnalysisReturn,  "productAnalysisDrop"=>$productAnalysisDrop, "productAnalysisProfit"=>$productAnalysisProfit,"productAnalysis"=>$productAnalysis );
+    return $data;
+
+}
+
 
 
 

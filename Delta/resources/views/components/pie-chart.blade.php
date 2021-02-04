@@ -1,5 +1,5 @@
 
-<canvas id={{ $id}} width="400" height="400"></canvas>
+<canvas id={{ $id}} width="400" height="300"></canvas>
 <script>
     var dataArray= @json( $dataArray );
     var id= @json( $id );
