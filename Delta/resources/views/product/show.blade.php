@@ -119,9 +119,44 @@
                 <div class="col-12 col-md-6">
                     @can('Product Graph')
                         
-                    <x-bar-chart :dataArray="$dataArray" id="productAnalysis" />
+                    <x-pie-chart :dataArray="$dataArray" id="productAnalysispie" />
                     @endcan 
-                   
+           
+                    <div class="row pt-3 p-2"> 
+                        <table class="table table-striped table-bordered" id="SingleProductChartTable" width="100%" cellspacing="0">
+                            <tbody>
+                                <tr class="data-row">
+                                    <th>{{ __('translate.Purchase') }}</th>
+                                    <td> {{ $dataArray['datasets'][0]['data'][0] }} </td> 
+                                </tr>
+                                <tr class="data-row">
+                                    <th>{{ __('translate.Sell') }}</th>
+                                    <td > {{ $dataArray['datasets'][0]['data'][1] }} </td> 
+                                </tr>
+                                <tr class="data-row">
+                                    <th>{{ __('translate.Profit') }}</th>
+                                    <td >{{ $dataArray['datasets'][0]['data'][4] }} </td> 
+                                </tr>
+
+                                 <tr class="data-row">
+                                    <th> {{ __('translate.Return') }}</th>
+                                    <td >{{ $dataArray['datasets'][0]['data'][2] }} </td>
+                                </tr> 
+                                <tr class="data-row">
+                                    <th> {{ __('translate.Drop') }}</th>
+                                    <td > {{ $dataArray['datasets'][0]['data'][3] }} </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+
+                     
+{{-- 
+                    @can('Product Graph')
+                        
+                    <x-bar-chart :dataArray="$dataArray" id="productAnalysisbar" />
+                    @endcan 
+                    --}}
 
                     <p class="pt-4"><b> {{ __("translate.Product Description") }} </b>: {{ $product->description }}</p>
 
@@ -129,6 +164,24 @@
             </div>
 
         </div>
+
+                    {{-- Graph Details Section --}}
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-12">
+            
+                                {{-- <x-line-chart :dataArray="$dataArray" id="productAnalysisline" /> --}}
+
+            
+                            </div>
+ 
+                        </div>
+            
+                    </div>
+
+
+
     </div>
 
 </div>
