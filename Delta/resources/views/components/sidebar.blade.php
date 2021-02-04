@@ -76,7 +76,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
 
                 @can('Order Create Page')
-                <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Sell')}} </a>
+                <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Product Sell')}} </a>
                 @endcan
                 @can('Order Page')
                 <a class="collapse-item" href="{{ route('orders.index') }}">{{__('translate.Sell List')}} </a>

@@ -23,7 +23,7 @@ return[
  'Analysis'=> 'এনালাইসিস',
  'Low Stock Products'=> 'লো স্টক প্রোডাক্ট',
 
- 'Sell'=> 'বিক্রয় করুন',
+ 'Sell'=> 'বিক্রয়',
  'Sell List'=> 'বিক্রয় লিস্ট',
  'Buy'=> 'পণ্য ক্রয় করুন',
  'Perchase List'=> 'ক্রয়ের লিস্ট',
@@ -256,7 +256,7 @@ return[
 'Sell No'=>'বিক্রয় নম্বর',
 'Purchase'=>'পণ্য ক্রয়', 
 'Brand Details'=>'ব্র্যন্ডের বিবরণ ',
-'Cost'=>'ব্যয়',
+'Cost'=>'ক্রয়মুল্য', 
 'Add Product'=>'নতুন পণ্য',       
 'Customer Details'=>'কাস্টমারের বিবরণ', 
 'Order ID'=>'অর্ডার আইডি', 
@@ -404,7 +404,14 @@ return[
 "This Warrenty Can't be Edited"=>"দুঃখিত! এই ওয়ারেন্টি সংশোধন করতে পারবেন না",  
 'Edit Expenses'=>'খরচ সংশোধন', 
 'Categorized Product List'=>'ক্যাটাগরি অনুযায়ি পণ্যের লিস্ট',
-''=>'', 
+'Stock Controll'=>'স্টক কন্ট্রোল',  
+'Return'=>'ফেরত', 
+'Drop'=>'বাতিল', 
+'Product Sell'=>'বিক্রয় করুন', 
+''=>'',
+''=>'',
+''=>'',
+''=>'',
 ''=>'',
 ];
 
