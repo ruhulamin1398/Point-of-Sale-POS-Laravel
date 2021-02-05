@@ -1,14 +1,14 @@
 @extends('includes.app')
 
 @php
- $dataArray['items'] = $dataArray['items']->sortByDesc('id');
- $settings= $dataArray['settings'];
- $fieldList=$settings->setting[0]['fieldList'];
- $routes=$settings->setting[0]['routes'];
- $componentDetails=$settings->setting[0]['componentDetails'];
- $items= $dataArray['items'];
- $page_name = $dataArray['page_name'];
- $GLOBALS['CurrentUser']= auth()->user();  
+$dataArray['items'] = $dataArray['items']->sortByDesc('id');
+$settings= $dataArray['settings'];
+$fieldList=$settings->setting[0]['fieldList'];
+$routes=$settings->setting[0]['routes'];
+$componentDetails=$settings->setting[0]['componentDetails'];
+$items= $dataArray['items'];
+$page_name = $dataArray['page_name'];
+$GLOBALS['CurrentUser']= auth()->user();
 
 
 @endphp
@@ -40,7 +40,7 @@
 
 
 <!-- Begin Page Content -->
-<div class="container-fluid p-0" >
+<div class="container-fluid p-0">
 
 
     <div class="row  ">
@@ -59,8 +59,53 @@
                     </nav>
                 </div>
                 <div class="card-body">
-                    <h1> {{ __("translate.Name") }} : {{$category->name}}</h1>
-                    <b> {{ __("translate.Description") }} : {{$category->description}}</b><br>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+
+                            <h1> {{ __("translate.Name") }} : {{$category->name}}</h1>
+                            <b> {{ __("translate.Description") }} : {{$category->description}} </b><br>
+
+                            @can('Category Graph')
+
+                            <div class="p-0 pt-4">
+                                <h5 class="text-left"> {{ __('translate.Analysis Results') }}:</h5>
+                                <table class="table table-striped table-bordered" id="SingleProductChartTable" width="100%"
+                                    cellspacing="0">
+                                    <tbody>
+                                        <tr class="data-row">
+                                            <th>{{ __('translate.Purchase') }}</th>
+                                            <td> {{ $dataArrayPie['datasets'][0]['data'][0] }} </td>
+                                        </tr>
+                                        <tr class="data-row">
+                                            <th>{{ __('translate.Sell') }}</th>
+                                            <td> {{ $dataArrayPie['datasets'][0]['data'][1] }} </td>
+                                        </tr>
+                                        <tr class="data-row">
+                                            <th>{{ __('translate.Profit') }}</th>
+                                            <td>{{ $dataArrayPie['datasets'][0]['data'][4] }} </td>
+                                        </tr>
+            
+                                        <tr class="data-row">
+                                            <th> {{ __('translate.Return') }}</th>
+                                            <td>{{ $dataArrayPie['datasets'][0]['data'][2] }} </td>
+                                        </tr>
+                                        <tr class="data-row">
+                                            <th> {{ __('translate.Drop') }}</th>
+                                            <td> {{ $dataArrayPie['datasets'][0]['data'][3] }} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        
+                            @endcan
+                        </div>
+                        @can('Category Graph')
+                        <div class="col-12 col-md-6">
+                            <x-pie-chart :dataArray="$dataArrayPie" id="productAnalysispie" />
+                        </div>
+                        @endcan
+                    </div>
                 </div>
 
 
@@ -69,181 +114,199 @@
 
 
 
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-abasas-dark">
-            <nav class="navbar navbar-dark ">
-                
-                
-                <span>
-                    {{ __("translate.Product List") }}   @can('Super Admin') <i class="fas fa-tools pl-2"
-                    id="pageSetting" data-toggle="modal" data-target="#setting-modal"></i> @endcan  </span>
-                    @can('Product Create')
-               <a href="{{ route("products.create") }}"> <button class="btn btn-success " id="create-button">{{ __("translate.Add Product") }}</button></a>
-               @endcan
-            </nav>
-        </div>
-        @can('Product Read')
-        <div class="card-body">
-            <div class="table-responsive" >
-                <table class="table table-striped table-bordered" id="productTable" width="100%" cellspacing="0">
-                    <thead class="bg-abasas-dark">
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 bg-abasas-dark">
+                    <nav class="navbar navbar-dark ">
 
 
-                        <tr>
-
-                            @foreach( $fieldList as $field)
-                            @if($field['name'] ==  'price'   )
-                                @if($field['read']==1 &&  $GLOBALS['CurrentUser']->can('Product Price'))
-                                <th> {{ __('translate.'.$field['title'])  }}</th>
-                                @endif
-                            @elseif($field['name'] ==  'cost' )
-                                @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Cost')  )
-                                <th> {{ __('translate.'.$field['title'])  }}</th>
-                                @endif
-                            @else 
-                                @if($field['read']==1)
-                                <th> {{ __('translate.'.$field['title'])  }}</th>
-                                @endif
-
-                            @endif
-                            @endforeach
-        
-                            @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
-                         $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
-                            <th>{{ __("translate.Action") }}</th>
-                            @endcan
-                        </tr>
-                    </thead>
-                    <tfoot class="bg-abasas-dark">
-                        <tr> 
-                            
-                            @foreach( $fieldList as $field)
-                            
-                            @if($field['name'] ==  'price'  )
-                                @if($field['read']==1  && $GLOBALS['CurrentUser']->can('Product Price'))
-                                <th> {{ __('translate.'.$field['title'])  }}</th>
-                                @endif
-                            @elseif($field['name'] ==  'cost'   )
-                                @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Cost'))
-                                <th> {{ __('translate.'.$field['title'])  }}</th>
-                                @endif
-                            @else 
-                                @if($field['read']==1)
-                                <th> {{ __('translate.'.$field['title'])  }}</th>
-                                @endif
-
-                            @endif
+                        <span>
+                            {{ __("translate.Product List") }} @can('Super Admin') <i class="fas fa-tools pl-2"
+                                id="pageSetting" data-toggle="modal" data-target="#setting-modal"></i> @endcan </span>
+                        @can('Product Create')
+                        <a href="{{ route("products.create") }}"> <button class="btn btn-success "
+                                id="create-button">{{ __("translate.Add Product") }}</button></a>
+                        @endcan
+                    </nav>
+                </div>
+                @can('Product Read')
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="productTable" width="100%"
+                            cellspacing="0">
+                            <thead class="bg-abasas-dark">
 
 
-                            @endforeach
+                                <tr>
+
+                                    @foreach( $fieldList as $field)
+                                    @if($field['name'] == 'price' )
+                                    @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Price'))
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+                                    @elseif($field['name'] == 'cost' )
+                                    @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Cost') )
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+                                    @else
+                                    @if($field['read']==1)
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+
+                                    @endif
+                                    @endforeach
+
+                                    @if( $GLOBALS['CurrentUser']->can('Product Delete') ||
+                                    $GLOBALS['CurrentUser']->can('Product Edit') ||
+                                    $GLOBALS['CurrentUser']->can('Product View') ||
+                                    $GLOBALS['CurrentUser']->can('Product Print') )
+                                    <th>{{ __("translate.Action") }}</th>
+                                    @endcan
+                                </tr>
+                            </thead>
+                            <tfoot class="bg-abasas-dark">
+                                <tr>
+
+                                    @foreach( $fieldList as $field)
+
+                                    @if($field['name'] == 'price' )
+                                    @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Price'))
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+                                    @elseif($field['name'] == 'cost' )
+                                    @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Cost'))
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+                                    @else
+                                    @if($field['read']==1)
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+
+                                    @endif
+
+
+                                    @endforeach
 
 
 
 
-                            @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
-                         $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
-                            <th>{{ __("translate.Action") }}</th>
-                            @endcan
-                        </tr>
+                                    @if( $GLOBALS['CurrentUser']->can('Product Delete') ||
+                                    $GLOBALS['CurrentUser']->can('Product Edit') ||
+                                    $GLOBALS['CurrentUser']->can('Product View') ||
+                                    $GLOBALS['CurrentUser']->can('Product Print') )
+                                    <th>{{ __("translate.Action") }}</th>
+                                    @endcan
+                                </tr>
 
-                    </tfoot>
-                      <tbody>
+                            </tfoot>
+                            <tbody>
 
-                        @foreach ($items as $item)
-                        
-                        @php
-                        $item->abasas();
-                        $itemId = $item->id;
-                        @endphp
+                                @foreach ($items as $item)
 
-                        <tr class="data-row">
-                            
-                         @foreach( $fieldList as $field)
-
-
-                         @if ( $field['name'] ==  'price'  )
-                            @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Price') )
                                 @php
-                                $name= $field['name'];
+                                $item->abasas();
+                                $itemId = $item->id;
                                 @endphp
-                                <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
-                            @endif
 
-                         @elseif( $field['name'] ==  'cost'  )
-                            @if($field['read']==1  && $GLOBALS['CurrentUser']->can('Product Cost'))
-                                @php
-                                $name= $field['name'];
-                                @endphp
-                                <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
-                            @endif
+                                <tr class="data-row">
 
-                         @else 
-                            @if($field['read']==1)
-                                @php
-                                $name= $field['name'];
-                                @endphp
-                                <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
-                            @endif
-                             
-                         @endif
-
-                        
-
-                         @endforeach
+                                    @foreach( $fieldList as $field)
 
 
- 
-                            @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
-                         $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
-                            <td class="align-middle"> 
-                                @can('Product Edit')
-                                <a href="{{ route('products.edit',$itemId) }}"> <button type="button" title="Edit Product" class="btn btn-success btn-sm" id="edit-product-button" product-item-id={{$itemId}} value={{$itemId}}> <i class="fa fa-edit" aria-hidden="false"> </i></button></a>
-                                @endcan
-                                @can('Product Delete')
-                                <form method="POST" action="{{ route('products.destroy',  $itemId )}} " id="delete-form-{{ $itemId }}" style="display:none; ">
-                                    {{csrf_field() }}
-                                    {{ method_field("delete") }}
-                                </form>
-                               
+                                    @if ( $field['name'] == 'price' )
+                                    @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Price') )
+                                    @php
+                                    $name= $field['name'];
+                                    @endphp
+                                    <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+                                    @endif
+
+                                    @elseif( $field['name'] == 'cost' )
+                                    @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Product Cost'))
+                                    @php
+                                    $name= $field['name'];
+                                    @endphp
+                                    <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+                                    @endif
+
+                                    @else
+                                    @if($field['read']==1)
+                                    @php
+                                    $name= $field['name'];
+                                    @endphp
+                                    <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+                                    @endif
+
+                                    @endif
 
 
 
+                                    @endforeach
 
-                                <button title="Delete Product" class="btn btn-danger  btn-sm" onclick="if(confirm('are you sure to delete this')){
+
+
+                                    @if( $GLOBALS['CurrentUser']->can('Product Delete') ||
+                                    $GLOBALS['CurrentUser']->can('Product Edit') ||
+                                    $GLOBALS['CurrentUser']->can('Product View') ||
+                                    $GLOBALS['CurrentUser']->can('Product Print') )
+                                    <td class="align-middle">
+                                        @can('Product Edit')
+                                        <a href="{{ route('products.edit',$itemId) }}"> <button type="button"
+                                                title="Edit Product" class="btn btn-success btn-sm"
+                                                id="edit-product-button" product-item-id={{$itemId}} value={{$itemId}}>
+                                                <i class="fa fa-edit" aria-hidden="false"> </i></button></a>
+                                        @endcan
+                                        @can('Product Delete')
+                                        <form method="POST" action="{{ route('products.destroy',  $itemId )}} "
+                                            id="delete-form-{{ $itemId }}" style="display:none; ">
+                                            {{csrf_field() }}
+                                            {{ method_field("delete") }}
+                                        </form>
+
+
+
+
+
+                                        <button title="Delete Product" class="btn btn-danger  btn-sm" onclick="if(confirm('are you sure to delete this')){
 				document.getElementById('delete-form-{{ $itemId }}').submit();
 			}
 			else{
 				event.preventDefault();
 			}
 			" class="btn btn-danger btn-sm btn-raised">
-                                    <i class="fa fa-trash" aria-hidden="false">
+                                            <i class="fa fa-trash" aria-hidden="false">
 
-                                    </i>
-                                </button>
-                                @endcan
-                                @can('Product Print')
-                                <button type="button" class="btn btn-info btn-sm" title="Print Barcode" id="barcode-print-button" product-item-id={{$itemId}} value={{$itemId}} data-toggle="modal" data-target="#barcode-print-modal"> <i class="fa fa-print" aria-hidden="false"> </i></button>
-                                @endcan
-                                @can('Product View')
-                                <a href="{{ route('products.show',$itemId) }}"><button type="button" class="btn btn-primary btn-sm" title="View product" id="product-view-button" > <i class="fa fa-eye" aria-hidden="false"> </i></button></a>
-                                @endcan
+                                            </i>
+                                        </button>
+                                        @endcan
+                                        @can('Product Print')
+                                        <button type="button" class="btn btn-info btn-sm" title="Print Barcode"
+                                            id="barcode-print-button" product-item-id={{$itemId}} value={{$itemId}}
+                                            data-toggle="modal" data-target="#barcode-print-modal"> <i
+                                                class="fa fa-print" aria-hidden="false"> </i></button>
+                                        @endcan
+                                        @can('Product View')
+                                        <a href="{{ route('products.show',$itemId) }}"><button type="button"
+                                                class="btn btn-primary btn-sm" title="View product"
+                                                id="product-view-button"> <i class="fa fa-eye" aria-hidden="false">
+                                                </i></button></a>
+                                        @endcan
 
-                            </td>
-                            @endif  
+                                    </td>
+                                    @endif
 
-                        </tr>
-                        @endforeach 
+                                </tr>
+                                @endforeach
 
-                    </tbody> 
-                </table>
+                            </tbody>
+                        </table>
 
 
 
+                    </div>
+                </div>
+                @endcan
             </div>
-        </div>
-        @endcan
-    </div>
         </div>
 
     </div>
@@ -307,7 +370,8 @@
 
 
                                         <div class="col-auto">
-                                            <button type="submit" class="btn btn-primary mt-3">{{ __('trranslate.Submit') }} </button>
+                                            <button type="submit"
+                                                class="btn btn-primary mt-3">{{ __('trranslate.Submit') }} </button>
                                         </div>
 
                                     </div>
@@ -351,14 +415,14 @@
                         <a class="nav-link active " id="setting-tab" data-toggle="tab" href="#Setting" role="tab"
                             aria-controls="Setting" aria-selected="true"><b>{{__('translate.Setting')}}</b> </a>
                     </li>
-                  
+
 
 
                     <li class="nav-item">
                         <a class="nav-link" id="permission-tab" data-toggle="tab" href="#permission" role="tab"
                             aria-controls="permission" aria-selected="false"><b> {{__('translate.Permission')}}</b></a>
                     </li>
-                   
+
                 </ul>
                 {{-- <h5 class="modal-title " id="setting-modal-label "> {{ __('translate.'.$componentDetails['title'])  }}
                 </h5> --}}
@@ -389,9 +453,10 @@
                                     <th scope="row"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
                                         {{ __('translate.'. $fieldList[$i]['title'] )  }}</th>
                                     <td>
-                                        
+
                                         <div class="form-check-inline">
-                                            <label class="form-check-label readLabel" @if( !$GLOBALS['CurrentUser']->can($page_name.' Read')) hidden @endif>
+                                            <label class="form-check-label readLabel" @if(
+                                                !$GLOBALS['CurrentUser']->can($page_name.' Read')) hidden @endif>
                                                 @if( $fieldList[$i]['read'] == 1 )
                                                 <input type="checkbox" class="form-check-input read abasasCheckBox "
                                                     value="1" checked>
@@ -405,14 +470,13 @@
                                                     value="2" checked disabled>
                                                 @else
 
-                                                <input type="checkbox" class="form-check-input read" disabled
-                                                    value="3">
+                                                <input type="checkbox" class="form-check-input read" disabled value="3">
                                                 @endif
                                                 {{ __('translate.Read')  }}
                                             </label>
-                                            
+
                                         </div>
-                                       
+
 
 
                                     </td>
@@ -443,217 +507,216 @@
                     <form action="{{ route('rolepermissionstore') }}" method="post">
                         @csrf
                         <input type="text" name="page_name" value="Product" required hidden>
-                     <div class="modal-body" >
-        
-        
-                        
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered"  width="100%"
-                                cellspacing="0">
-                                <thead class="bg-abasas-dark">
-        
-                                    <tr>
-        
-                                        <th>{{ __('translate.Permission') }} </th>
-        
-                                        @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
-                                            @endfor
-                                    </tr>
-                                </thead>
-        
-        
-                                <tbody>
-        
-        
-        
-        
-                                    
-                                    @php
-                                    $permision_name = "Product Create";
-        
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Create Access') }} </td>
-        
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="create{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-                                    @php
-                                    $permision_name = "Product Read";
-        
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Read Access') }} </td>
-        
-        
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="read{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-        
-                                    @php
-                                    $permision_name = "Product Edit";
-        
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Edit Access') }} </td>
-        
-        
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="edit{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-        
-                                    @php
-                                    $permision_name = "Product Delete";
-        
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Delete Access') }} </td>
-        
-        
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="delete{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-        
-        
-                                    @php
-                                    $permision_name = "Product View";
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.view Access') }}</td>
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="view{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-        
-                                    @php
-                                    $permision_name = "Product Price";
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Price Access') }}</td>
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="price{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-                                    
-        
-                                    @php
-                                    $permision_name = "Product Cost";
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Cost Access') }}</td>
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="cost{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-        
-                                    
-        
-                                    @php
-                                    $permision_name = "Product Graph";
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Graph Access') }}</td>
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="graph{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-                                    @php
-                                    $permision_name = "Product Print";
-                                    @endphp
-        
-                                    <tr class="data-row">
-                                        <td class="iteration">{{ __('translate.Print Access') }}</td>
-                                        @for ($i=1 ; $i<5 ; $i++) <td
-                                            class="word-break name justify-content-center">
-                                            <label class="checkbox-inline"><input type="checkbox"
-                                                    name="print{{ $i }}"
-                                                    @if($roles[$i]->hasPermissionTo($permision_name)) checked
-                                                @endif></label>
-                                            </td>
-                                            @endfor
-        
-                                    </tr>
-        
-                                  
-        
-        
-        
-        
-        
-                                </tbody>
-        
-        
-        
-                            </table>
+                        <div class="modal-body">
+
+
+
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                    <thead class="bg-abasas-dark">
+
+                                        <tr>
+
+                                            <th>{{ __('translate.Permission') }} </th>
+
+                                            @for ($i=1 ; $i<5 ; $i++) <th>{{ $roles[$i]->name }}</th>
+                                                @endfor
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+
+
+
+
+
+                                        @php
+                                        $permision_name = "Product Create";
+
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Create Access') }} </td>
+
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="create{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+                                        @php
+                                        $permision_name = "Product Read";
+
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Read Access') }} </td>
+
+
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="read{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+
+                                        @php
+                                        $permision_name = "Product Edit";
+
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Edit Access') }} </td>
+
+
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="edit{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+
+                                        @php
+                                        $permision_name = "Product Delete";
+
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Delete Access') }} </td>
+
+
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="delete{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+
+
+                                        @php
+                                        $permision_name = "Product View";
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.view Access') }}</td>
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="view{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+
+                                        @php
+                                        $permision_name = "Product Price";
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Price Access') }}</td>
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="price{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+
+
+                                        @php
+                                        $permision_name = "Product Cost";
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Cost Access') }}</td>
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="cost{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+
+
+
+                                        @php
+                                        $permision_name = "Product Graph";
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Graph Access') }}</td>
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="graph{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+                                        @php
+                                        $permision_name = "Product Print";
+                                        @endphp
+
+                                        <tr class="data-row">
+                                            <td class="iteration">{{ __('translate.Print Access') }}</td>
+                                            @for ($i=1 ; $i<5 ; $i++) <td
+                                                class="word-break name justify-content-center">
+                                                <label class="checkbox-inline"><input type="checkbox"
+                                                        name="print{{ $i }}"
+                                                        @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                    @endif></label>
+                                                </td>
+                                                @endfor
+
+                                        </tr>
+
+
+
+
+
+
+
+                                    </tbody>
+
+
+
+                                </table>
+                            </div>
+
                         </div>
-        
-                     </div>
-        
-                     <div class="modal-footer">
-                        <button type="submit"
-                                         class="btn bg-abasas-dark btn-block form-control  ">{{ __('translate.Save')  }}</button>
-                    </div>
-                     </form>
+
+                        <div class="modal-footer">
+                            <button type="submit"
+                                class="btn bg-abasas-dark btn-block form-control  ">{{ __('translate.Save')  }}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -673,35 +736,36 @@
 
 
 <script>
-    $(document).ready(function(){
-        
-        $('#productTable').DataTable({   
+    $(document).ready(function () {
+
+        $('#productTable').DataTable({
             dom: 'lBfrtip',
             buttons: [
-                'copy', 'csv', 'excel' , 'pdf' , 'print'
+                'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
 
-        $(document).on('click','#barcode-print-button',function(){
-          
-           var id = $(this).attr('product-item-id'); 
-           $('#barcodeProductInputId').val(id);
-           var html = '';
-           var allProducts = @json($items);
-           var product ;
-           
-           $.each(allProducts, function (key, value) {
-                if(value.id == id){
+        $(document).on('click', '#barcode-print-button', function () {
+
+            var id = $(this).attr('product-item-id');
+            $('#barcodeProductInputId').val(id);
+            var html = '';
+            var allProducts = @json($items);
+            var product;
+
+            $.each(allProducts, function (key, value) {
+                if (value.id == id) {
                     product = value;
                 }
-           });
-            if(product.is_fixed_price == 1){
-                html += '<input class="form-check-input" type="checkbox" name="print_price" id="print_price" checked>';
+            });
+            if (product.is_fixed_price == 1) {
+                html +=
+                    '<input class="form-check-input" type="checkbox" name="print_price" id="print_price" checked>';
                 html += '<label class="form-check-label" for="print_price">Print Price  </label>';
-            }
-            else{
-                
-                html += '<input class="form-check-input" type="checkbox" name="print_price" id="print_price">';
+            } else {
+
+                html +=
+                    '<input class="form-check-input" type="checkbox" name="print_price" id="print_price">';
                 html += '<label class="form-check-label" for="print_price">Print Price  </label>';
 
             }
@@ -725,60 +789,61 @@
 
 
 
-    $("#settingsSaveButton").on('click', function () {
-        var positionArray = {
-        "_token": $("#csrfToken").val().trim()
-
-        };
-
-        $("#sortable").children().each(function (index) {
-            var name = $(this).attr('data-name').trim()
-            var position = $(this).attr('data-position').trim();
-            var create = 0;
-            var read = $(this).find('.read').val().trim();
-            var update = 0;
-
-
-
-            positionArray[name] = {
-                position: position,
-                create: create,
-                read: read,
-                update: update
+        $("#settingsSaveButton").on('click', function () {
+            var positionArray = {
+                "_token": $("#csrfToken").val().trim()
 
             };
 
-        // console.log(positionArray);
+            $("#sortable").children().each(function (index) {
+                var name = $(this).attr('data-name').trim()
+                var position = $(this).attr('data-position').trim();
+                var create = 0;
+                var read = $(this).find('.read').val().trim();
+                var update = 0;
+
+
+
+                positionArray[name] = {
+                    position: position,
+                    create: create,
+                    read: read,
+                    update: update
+
+                };
+
+                // console.log(positionArray);
+            });
+            saveSettings(positionArray);
+
         });
-    saveSettings(positionArray);
 
-    });
-
-    function saveSettings(positionArray) {
-        var url = $("#homeRoute").val().trim() + "/settings/" + "{{ $settings->id }}";
-        // console.log(url);
-        $.ajax({
-            url: url,
-            data: positionArray,
-            type: 'put',
-            success: function (data) {
-                location.reload(true);
-                // console.log(data);
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
-    }
-        
+        function saveSettings(positionArray) {
+            var url = $("#homeRoute").val().trim() + "/settings/" + "{{ $settings->id }}";
+            // console.log(url);
+            $.ajax({
+                url: url,
+                data: positionArray,
+                type: 'put',
+                success: function (data) {
+                    location.reload(true);
+                    // console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
 
 
 
 
 
-        
+
+
     })
+
 </script>
 
 
-    @endsection
+@endsection
