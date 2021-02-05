@@ -3,7 +3,9 @@
 
 @section('content')
 
-
+@php
+$create_setting = $settings->setting;
+@endphp
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -86,7 +88,7 @@
                                         <select class="form-control" value="" name="brand_id" id="brand_id" required>
                                             <option selected="selected" disabled value="">Select Brand</option>
                                             @foreach ($brands as $brand)
-                                            @if ($loop->first)
+                                            @if ($create_setting['brand_id'] == $brand->id)
                                             <option selected value="{{$brand->id}}"> {{$brand->name}}</option>
                                             @else
                                             <option value="{{$brand->id}}"> {{$brand->name}}</option>
@@ -114,7 +116,7 @@
                                             <option selected="selected" disabled value="">Select Category</option>
 
                                             @foreach ($categories as $category)
-                                            @if ($loop->first)
+                                            @if ($create_setting['category_id']== $category->id)
                                             <option selected value="{{$category->id}}"> {{$category->name}}</option>
                                             @else
                                             <option value="{{$category->id}}"> {{$category->name}}</option>
@@ -141,7 +143,11 @@
                                         <select class="form-control form-control" name="type_id" id="type_id" required>
                                             <option selected disabled value="">Select Product Types </option>
                                             @foreach ($types as $type)
+                                            @if($create_setting['type_id']== $type->id)
+                                            <option selected value="{{$type->id}}"> {{$type->name}}</option>
+                                            @else
                                             <option value="{{$type->id}}"> {{$type->name}}</option>
+                                            @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -169,11 +175,13 @@
 
                                         <select class="form-control form-control" name="unit_id" id="unit_id" required>
                                             <option selected disabled value="">Select Unit</option>
-                                            {{---
-                                    @foreach ($units as $unit)
-                                    <option value="{{$unit->id}}"> {{$unit->name}}</option>
+                                            @foreach ($units[$create_setting['type_id']] as $unit)
+                                            @if($create_setting['unit_id']== $unit->id)
+                                            <option selected value="{{$unit->id}}"> {{$unit->name}}</option>
+                                            @else
+                                            <option value="{{$unit->id}}"> {{$unit->name}}</option>
+                                            @endif
                                             @endforeach
-                                            ---}}
                                         </select>
                                     </div>
 
@@ -196,8 +204,13 @@
                                     <div class="col-md-4 col-12">
                                         <select class="form-control form-control" name="is_fixed_price"
                                             id="is_fixed_price" required>
+                                            @if($create_setting['is_fixed_price']== 1)
                                             <option selected value="1"> {{ __('translate.Fixed Price') }} </option>
                                             <option value="0"> {{ __('translate.Not Fixed') }} </option>
+                                            @else
+                                            <option value="1"> {{ __('translate.Fixed Price') }} </option>
+                                            <option selected value="0"> {{ __('translate.Not Fixed') }} </option>
+                                            @endif
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-12" id="priceDiv">
@@ -242,7 +255,7 @@
                         <div class="form-group col-12  ">
                             <label for="stock_alert"> {{ __('translate.Stock Alert') }}</label>
                             <input type="number" step="any" name="stock_alert" class="form-control" id="stock_alert"
-                                value="1" min=1>
+                                value="{{ $create_setting['stock_alert'] }}" min=1>
                         </div>
 
 
@@ -253,7 +266,7 @@
                             <select class="form-control" name="warrenty_id" id="warrenty_id" required>
 
                                 @foreach ($warrenties as $warrenty)
-                                @if($loop->first)
+                                @if($create_setting['warrenty_id']== $warrenty->id)
                                 <option selected value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
                                 @else
                                 <option value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
@@ -269,7 +282,7 @@
                             <select class="form-control" name="tax_type_id" id="tax_type_id" required>
 
                                 @foreach ($tax_types as $tax_type)
-                                @if($loop->first)
+                                @if($create_setting['tax_type_id']== $tax_type->id)
                                 <option selected value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
                                 @else
                                 <option value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
@@ -289,8 +302,13 @@
                         <div class="form-group col-12  ">
                             <label for="stock_controll"> {{ __('translate.Stock Control') }}</label>
                             <select class="form-control" name="stock_controll" id="stock_controll">
+                                @if ($create_setting['stock_controll'] == "yes")
                                 <option selected value="yes"> Yes</option>
                                 <option value="no">No</option>
+                                @else
+                                <option value="yes"> Yes</option>
+                                <option selected value="no">No</option>
+                                @endif
                             </select>
                         </div>
 
@@ -338,189 +356,198 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
+                    <form method="POST" action="{{route('settings.update',$settings->id)}}">
+                        @csrf
+                        @method('put') 
+                        <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                            <tbody>
 
-                    <table class="table table-striped table-bordered" width="100%" cellspacing="0">
-                        <tbody>
+                                <tr class="data-row">
 
-                            <tr class="data-row">
+                                    <td>{{ __('translate.Product Brand') }} </td>
+                                    <td> <select class="form-control" value="" name="brand_id" id="brand_id" required>
+                                            <option selected="selected" disabled value="">Select Brand</option>
+                                            @foreach ($brands as $brand)
+                                            @if ($create_setting['brand_id'] == $brand->id)
+                                            <option selected value="{{$brand->id}}"> {{$brand->name}}</option>
+                                            @else
+                                            <option value="{{$brand->id}}"> {{$brand->name}}</option>
+                                            @endif
 
-                                <td>{{ __('translate.Product Brand') }} </td>
-                                <td> <select class="form-control" value="" name="brand_id" id="brand_id" required>
-                                        <option selected="selected" disabled value="">Select Brand</option>
-                                        @foreach ($brands as $brand)
-                                        @if ($create_setting['brand_id'] == $brand->id)
-                                        <option selected value="{{$brand->id}}"> {{$brand->name}}</option>
-                                        @else
-                                        <option value="{{$brand->id}}"> {{$brand->name}}</option>
-                                        @endif
-
-                                        @endforeach
-                                    </select> </td>
-
-
-                            </tr>
-
-                            <tr class="data-row">
-
-                                <td>{{ __('translate.Product Category') }} </td>
-                                <td>
-                                    <select class="form-control form-control" value="" name="category_id"
-                                        id="catagory_id" required>
-                                        <option selected="selected" disabled value="">Select Category</option>
-
-                                        @foreach ($categories as $category)
-                                        @if ($create_setting['category_id']== $category->id)
-                                        <option selected value="{{$category->id}}"> {{$category->name}}</option>
-                                        @else
-                                        <option value="{{$category->id}}"> {{$category->name}}</option>
-                                        @endif
-                                        @endforeach
-                                    </select>
-                                </td>
+                                            @endforeach
+                                        </select> </td>
 
 
-                            </tr>
+                                </tr>
 
-                            <tr class="data-row">
+                                <tr class="data-row">
 
-                                <td>{{ __('translate.Product Type') }} </td>
-                                <td> <select class="form-control form-control" name="type_id" id="type_id" required>
-                                        <option selected disabled value="">Select Product Types </option>
-                                        @foreach ($types as $type)
-                                        @if($create_setting['type_id']== $type->id)
-                                        <option selected value="{{$type->id}}"> {{$type->name}}</option>
-                                        @else
-                                        <option value="{{$type->id}}"> {{$type->name}}</option>
-                                        @endif
-                                        @endforeach
-                                    </select>
-                                </td>
+                                    <td>{{ __('translate.Product Category') }} </td>
+                                    <td>
+                                        <select class="form-control form-control" value="" name="category_id"
+                                            id="catagory_id" required>
+                                            <option selected="selected" disabled value="">Select Category</option>
 
-
-                            </tr>
-
-                            <tr class="data-row">
-
-                                <td>{{ __('translate.Unit') }} </td>
-                                <td>
-                                    <select class="form-control form-control" name="unit_id" id="unit_id" required>
-                                        <option selected disabled value="">Select Unit</option>
-                                        @foreach ($units[$create_setting['type_id']] as $unit)
-                                        @if($create_setting['unit_id']== $unit->id)
-                                        <option selected value="{{$unit->id}}"> {{$unit->name}}</option>
-                                        @else
-                                        <option value="{{$unit->id}}"> {{$unit->name}}</option>
-                                        @endif
-                                        @endforeach
-
-                                    </select>
-                                </td>
+                                            @foreach ($categories as $category)
+                                            @if ($create_setting['category_id']== $category->id)
+                                            <option selected value="{{$category->id}}"> {{$category->name}}</option>
+                                            @else
+                                            <option value="{{$category->id}}"> {{$category->name}}</option>
+                                            @endif
+                                            @endforeach
+                                        </select>
+                                    </td>
 
 
-                            </tr>
+                                </tr>
 
-                            <tr class="data-row">
+                                <tr class="data-row">
 
-                                <td>{{ __('translate.Price Type') }} </td>
-                                <td>
-                                    <select class="form-control form-control" name="is_fixed_price"
-                                    id="is_fixed_price" required>
-                                    @if($create_setting['is_fixed_price']== 1)
-                                    <option selected value="1"> {{ __('translate.Fixed Price') }} </option>
-                                    <option value="0"> {{ __('translate.Not Fixed') }} </option>
-                                    @else 
-                                    <option  value="1"> {{ __('translate.Fixed Price') }} </option>
-                                    <option selected value="0"> {{ __('translate.Not Fixed') }} </option>
-                                    @endif
-                                </select>
-                                 </td>
-
-
-                            </tr>
-
-                            <tr class="data-row">
-
-                                <td>{{ __('translate.Stock Alert') }} </td>
-                                <td>
-                                    <input type="number" step="any" name="stock_alert" class="form-control" id="stock_alert"
-                                    value="{{ $create_setting['stock_alert'] }}" min=1>
-                                </td>
+                                    <td>{{ __('translate.Product Type') }} </td>
+                                    <td> <select class="form-control form-control" name="type_id" id="modal_type_id"
+                                            required>
+                                            <option selected disabled value="">Select Product Types </option>
+                                            @foreach ($types as $type)
+                                            @if($create_setting['type_id']== $type->id)
+                                            <option selected value="{{$type->id}}"> {{$type->name}}</option>
+                                            @else
+                                            <option value="{{$type->id}}"> {{$type->name}}</option>
+                                            @endif
+                                            @endforeach
+                                        </select>
+                                    </td>
 
 
-                            </tr>
+                                </tr>
 
-                            <tr class="data-row">
+                                <tr class="data-row">
 
-                                <td>{{ __('translate.Warrenty') }} </td>
-                                <td>
-                                    <select class="form-control" name="warrenty_id" id="warrenty_id" required>
+                                    <td>{{ __('translate.Unit') }} </td>
+                                    <td>
+                                        <select class="form-control form-control" name="unit_id" id="modal_unit_id"
+                                            required>
+                                            <option selected disabled value="">Select Unit</option>
+                                            @foreach ($units[$create_setting['type_id']] as $unit)
+                                            @if($create_setting['unit_id']== $unit->id)
+                                            <option selected value="{{$unit->id}}"> {{$unit->name}}</option>
+                                            @else
+                                            <option value="{{$unit->id}}"> {{$unit->name}}</option>
+                                            @endif
+                                            @endforeach
 
-                                        @foreach ($warrenties as $warrenty)
-                                        @if($create_setting['warrenty_id']== $warrenty->id)
-                                        <option selected value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
-                                        @else
-                                        <option value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
-                                        @endif
-        
-                                        @endforeach
-        
-                                    </select>
-                                </td>
-
-
-                            </tr>
-
-                            <tr class="data-row">
-
-                                <td>{{ __('translate.Tax Type') }} </td>
-                                <td>
-                                    <select class="form-control" name="tax_type_id" id="tax_type_id" required>
-
-                                        @foreach ($tax_types as $tax_type)
-                                        @if($create_setting['tax_type_id']== $tax_type->id)
-                                        <option selected value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
-                                        @else
-                                        <option value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
-                                        @endif
-        
-                                        @endforeach
-                                    </select>
-                                </td>
+                                        </select>
+                                    </td>
 
 
-                            </tr>
+                                </tr>
 
-                            <tr class="data-row">
+                                <tr class="data-row">
 
-                                <td>{{ __('translate.Tax') }} </td>
-                                <td>
-                                    
-                            <input type="number" step="any" name="tax" id="tax" class="form-control" min=0 value="{{ $create_setting['tax'] }}">
-                                </td>
-
-
-                            </tr>
-
-                            <tr class="data-row">
-
-                                <td>{{ __('translate.Stock Control') }} </td>
-                                <td>
-                                    <select class="form-control" name="stock_controll" id="stock_controll">
-                                        @if ($create_setting['stock_controll'] == "yes")
-                                        <option selected value="yes"> Yes</option>
-                                        <option value="no">No</option>
-                                        @else
-                                        <option  value="yes"> Yes</option>
-                                        <option selected value="no">No</option>
-                                        @endif
- 
-                                    </select>
-                                </td>
+                                    <td>{{ __('translate.Price Type') }} </td>
+                                    <td>
+                                        <select class="form-control form-control" name="is_fixed_price"
+                                            id="is_fixed_price" required>
+                                            @if($create_setting['is_fixed_price']== 1)
+                                            <option selected value="1"> {{ __('translate.Fixed Price') }} </option>
+                                            <option value="0"> {{ __('translate.Not Fixed') }} </option>
+                                            @else
+                                            <option value="1"> {{ __('translate.Fixed Price') }} </option>
+                                            <option selected value="0"> {{ __('translate.Not Fixed') }} </option>
+                                            @endif
+                                        </select>
+                                    </td>
 
 
-                            </tr>
-                        </tbody>
-                    </table>
+                                </tr>
+
+                                <tr class="data-row">
+
+                                    <td>{{ __('translate.Stock Alert') }} </td>
+                                    <td>
+                                        <input type="number" step="any" name="stock_alert" class="form-control"
+                                            id="stock_alert" value="{{ $create_setting['stock_alert'] }}" min=1>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr class="data-row">
+
+                                    <td>{{ __('translate.Warrenty') }} </td>
+                                    <td>
+                                        <select class="form-control" name="warrenty_id" id="warrenty_id" required>
+
+                                            @foreach ($warrenties as $warrenty)
+                                            @if($create_setting['warrenty_id']== $warrenty->id)
+                                            <option selected value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
+                                            @else
+                                            <option value="{{$warrenty->id}}"> {{$warrenty->name}}</option>
+                                            @endif
+
+                                            @endforeach
+
+                                        </select>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr class="data-row">
+
+                                    <td>{{ __('translate.Tax Type') }} </td>
+                                    <td>
+                                        <select class="form-control" name="tax_type_id" id="tax_type_id" required>
+
+                                            @foreach ($tax_types as $tax_type)
+                                            @if($create_setting['tax_type_id']== $tax_type->id)
+                                            <option selected value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
+                                            @else
+                                            <option value="{{$tax_type->id}}"> {{$tax_type->name}}</option>
+                                            @endif
+
+                                            @endforeach
+                                        </select>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr class="data-row">
+
+                                    <td>{{ __('translate.Tax') }} </td>
+                                    <td>
+
+                                        <input type="number" step="any" name="tax" id="tax" class="form-control" min=0
+                                            value="{{ $create_setting['tax'] }}">
+                                    </td>
+
+
+                                </tr>
+
+                                <tr class="data-row">
+
+                                    <td>{{ __('translate.Stock Control') }} </td>
+                                    <td>
+                                        <select class="form-control" name="stock_controll" id="stock_controll">
+                                            @if ($create_setting['stock_controll'] == "yes")
+                                            <option selected value="yes"> Yes</option>
+                                            <option value="no">No</option>
+                                            @else
+                                            <option value="yes"> Yes</option>
+                                            <option selected value="no">No</option>
+                                            @endif
+
+                                        </select>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button type="submit" id="product-create-submit-button btn-lg" class="btn bg-abasas-dark" style="float: right">
+                            {{ __('translate.Submit')}}</button>
+                    </form>
                 </div>
             </div>
 
@@ -548,6 +575,25 @@
                     '</option>';
             });
             $("#unit_id").html(html);
+        });
+
+
+
+
+        $("#modal_type_id").on('change', function () {
+            var type_id = $("#modal_type_id").val();
+            var units = @json($units);
+            var dataArray = units[type_id];
+            // console.log(type_id);units[type_id]
+
+
+            html = "";
+            $.each(dataArray, function (key) {
+
+                html += '<option value="' + dataArray[key].id + '" >' + dataArray[key].name +
+                    '</option>';
+            });
+            $("#modal_unit_id").html(html);
         });
     });
 

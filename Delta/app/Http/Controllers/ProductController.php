@@ -69,7 +69,7 @@ class ProductController extends Controller
             return abort(401);
         }
         $settings = setting::where('table_name', 'products_create')->first();
-        $create_setting = (json_decode($settings->setting, true));
+        $settings->setting = (json_decode($settings->setting, true));
 
         $warrenties = warrenty::all();
         $tax_types = taxType::all();
@@ -83,7 +83,7 @@ class ProductController extends Controller
           $pics,
           $kg,
       ];
-        return view ('product.create',compact('types','brands','categories','units','warrenties','tax_types','create_setting'));
+        return view ('product.create',compact('types','brands','categories','units','warrenties','tax_types','settings'));
         //
     }
 

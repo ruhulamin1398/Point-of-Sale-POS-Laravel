@@ -247,8 +247,27 @@ class SettingController extends Controller
     public function update(Request $request, setting $setting)
     {
         // echo "--------------";
+       if($setting['table_name'] == 'products_create'){
+        $data = [
+            "brand_id" => $request->brand_id,
+            "category_id" => $request->category_id,
+            "type_id" => $request->type_id,
+            "unit_id" => $request->unit_id,
+            "is_fixed_price" => $request->is_fixed_price,
+            "stock_alert" => $request->stock_alert,
+            "warrenty_id" => $request->warrenty_id,
+            "tax_type_id" => $request->tax_type_id,
+            "tax" => $request->tax,
+            "stock_controll" => $request->stock_controll,
+        ];
 
+        $setting->setting = (json_encode($data));
+        $setting->save();
+        return redirect()->back()->withSuccess('Succesfully Updated');
 
+       }else{
+
+      
         $data =  json_decode(json_decode($setting->setting, true), true);
         $fieldList = $data[0]['fieldList'];
 
@@ -276,6 +295,7 @@ class SettingController extends Controller
 
         return;
         return $setting->setting;
+    }
     }
 
     /**
