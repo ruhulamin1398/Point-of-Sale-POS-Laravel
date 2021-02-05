@@ -68,6 +68,9 @@ class ProductController extends Controller
         if(! auth()->user()->hasPermissionTo('Product Create')){
             return abort(401);
         }
+        $settings = setting::where('table_name', 'products_create')->first();
+        $create_setting = (json_decode($settings->setting, true));
+
         $warrenties = warrenty::all();
         $tax_types = taxType::all();
         $types = productType::all();
@@ -80,8 +83,7 @@ class ProductController extends Controller
           $pics,
           $kg,
       ];
-     
-        return view ('product.create',compact('types','brands','categories','units','warrenties','tax_types'));
+        return view ('product.create',compact('types','brands','categories','units','warrenties','tax_types','create_setting'));
         //
     }
 
@@ -415,8 +417,8 @@ public function productAnalysisYearly($product){
             [
                 "label" => "Sell",
                 "data" => $yearlySell,
-                "backgroundColor" => "#C70039",
-                "borderColor" =>     "#C70039",
+                "backgroundColor" => "#0000FF",
+                "borderColor" =>     "#0000FF",
                 "fill" => false
             ],
         ]
@@ -429,8 +431,8 @@ public function productAnalysisYearly($product){
             [
                 "label" => "Purchase",
                 "data" => $yearlyPurchase,
-                "backgroundColor" => "#C70039",
-                "borderColor" =>     "#C70039",
+                "backgroundColor" => "#FFFF00",
+                "borderColor" =>     "#FFFF00",
                 "fill" => false
             ],
         ]
@@ -443,8 +445,8 @@ public function productAnalysisYearly($product){
             [
                 "label" => "Return",
                 "data" => $yearlyReturn,
-                "backgroundColor" => "#C70039",
-                "borderColor" =>     "#C70039",
+                "backgroundColor" => "#800000",
+                "borderColor" =>     "#800000",
                 "fill" => false
             ],
         ]
@@ -457,8 +459,8 @@ public function productAnalysisYearly($product){
             [
                 "label" => "Drop",
                 "data" => $yearlyDrop,
-                "backgroundColor" => "#C70039",
-                "borderColor" =>     "#C70039",
+                "backgroundColor" => "#FF0000",
+                "borderColor" =>     "#FF0000",
                 "fill" => false
             ],
         ]
@@ -471,8 +473,8 @@ public function productAnalysisYearly($product){
             [
                 "label" => "Profit",
                 "data" => $yearlyProfit,
-                "backgroundColor" => "#C70039",
-                "borderColor" =>     "#C70039",
+                "backgroundColor" => "#008000",
+                "borderColor" =>     "#008000",
                 "fill" => false
             ],
         ]

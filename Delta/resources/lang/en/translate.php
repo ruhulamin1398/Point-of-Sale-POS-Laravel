@@ -409,7 +409,7 @@ return[
 "This Warrenty Can't be Edited"=>"This Warrenty Can't be Edited",  
 'Edit Expenses'=>'Edit Expenses',
 'Categorized Product List'=>'Categorized Product List', 
-'Stock Controll'=>'Stock Controll',
+'Stock Control'=>'Stock Control',
 'Return'=>'Return', 
 'Drop'=>'Drop',
 'Product Sell'=>'Sell Product', 
