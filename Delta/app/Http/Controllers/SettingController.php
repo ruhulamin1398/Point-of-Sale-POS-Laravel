@@ -263,6 +263,7 @@ class SettingController extends Controller
 
         $setting->setting = (json_encode($data));
         $setting->save();
+        $this->onlineSync('setting','update',$setting->id);
         return redirect()->back()->withSuccess('Succesfully Updated');
 
        }else{
