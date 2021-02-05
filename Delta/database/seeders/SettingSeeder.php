@@ -138,6 +138,12 @@ class SettingSeeder extends Seeder
                 'model' => 'App\Models\Product',
                 'setting' => '"[{\"componentDetails\":{\"title\":\"Product List\",\"editTitle\":\"Edit Product\"},\"routes\":{\"create\":{\"name\":\"products.store\",\"link\":\"products\"},\"update\":{\"name\":\"products.update\",\"link\":\"products\"},\"delete\":{\"name\":\"products.destroy\",\"link\":\"products\"}},\"fieldList\":[{\"position\":\"1\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"id\",\"title\":\"Id\",\"database_name\":\"id\"},{\"position\":\"2\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"brand\",\"title\":\"Brand\",\"database_name\":\"brand_id\"},{\"position\":\"3\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"cost\",\"title\":\"Cost\",\"database_name\":\"cost\"},{\"position\":\"4\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"category\",\"title\":\"Category\",\"database_name\":\"category_id\"},{\"position\":\"5\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"1\",\"input_type\":\"text\",\"name\":\"name\",\"title\":\"Name\",\"database_name\":\"name\"},{\"position\":\"6\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"price\",\"title\":\"Price\",\"database_name\":\"price\"},{\"position\":\"7\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"real_stock\",\"title\":\"Stock\",\"database_name\":\"stock\"},{\"position\":\"8\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"tax_with_type\",\"title\":\"Tax\",\"database_name\":\"tax\"},{\"position\":\"9\",\"create\":\"0\",\"read\":\"1\",\"update\":\"0\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"warrenty\",\"title\":\"Warrenty\",\"database_name\":\"warrenty_id\"}]}]"',
             ],
+            
+            [
+                'table_name' => 'products_create',
+                'model' => 'App\Models\Product',
+                'setting' => '{"brand_id":"1","category_id":"1","type_id":"1","unit_id":"2","is_fixed_price":"1","stock_alert":"1","warrenty_id":"1","tax_type_id":"1","tax":"0","stock_controll":"yes"}',
+            ],
         ]);
 
     }

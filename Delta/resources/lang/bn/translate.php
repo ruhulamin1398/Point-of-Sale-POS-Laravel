@@ -404,7 +404,7 @@ return[
 "This Warrenty Can't be Edited"=>"দুঃখিত! এই ওয়ারেন্টি সংশোধন করতে পারবেন না",  
 'Edit Expenses'=>'খরচ সংশোধন', 
 'Categorized Product List'=>'ক্যাটাগরি অনুযায়ি পণ্যের লিস্ট',
-'Stock Controll'=>'স্টক কন্ট্রোল',  
+'Stock Control'=>'স্টক কন্ট্রোল',  
 'Return'=>'ফেরত', 
 'Drop'=>'বাতিল', 
 'Product Sell'=>'বিক্রয় করুন', 
