@@ -59,8 +59,54 @@
                     </nav>
                 </div>
                 <div class="card-body">
-                    <h1>{{ __('translate.Name') }} : {{$brand->name}}</h1>
-                    <b> {{ __('translate.Description') }} : {{$brand->description}}</b><br>
+                    
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+
+                            <h1> {{ __("translate.Name") }} : {{$brand->name}}</h1>
+                            <b> {{ __("translate.Description") }} : {{$brand->description}} </b><br>
+
+                            @can('Brand Graph')
+
+                            <div class="p-0 pt-4">
+                                <h5 class="text-left"> {{ __('translate.Analysis Results') }}:</h5>
+                                <table class="table table-striped table-bordered" id="SingleProductChartTable" width="100%"
+                                    cellspacing="0">
+                                    <tbody>
+                                        <tr class="data-row">
+                                            <th>{{ __('translate.Purchase') }}</th>
+                                            <td> {{ $dataArrayPie['datasets'][0]['data'][0] }} </td>
+                                        </tr>
+                                        <tr class="data-row">
+                                            <th>{{ __('translate.Sell') }}</th>
+                                            <td> {{ $dataArrayPie['datasets'][0]['data'][1] }} </td>
+                                        </tr>
+                                        <tr class="data-row">
+                                            <th>{{ __('translate.Profit') }}</th>
+                                            <td>{{ $dataArrayPie['datasets'][0]['data'][4] }} </td>
+                                        </tr>
+            
+                                        <tr class="data-row">
+                                            <th> {{ __('translate.Return') }}</th>
+                                            <td>{{ $dataArrayPie['datasets'][0]['data'][2] }} </td>
+                                        </tr>
+                                        <tr class="data-row">
+                                            <th> {{ __('translate.Drop') }}</th>
+                                            <td> {{ $dataArrayPie['datasets'][0]['data'][3] }} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        
+                            @endcan
+                        </div>
+                        @can('Brand Graph')
+                        <div class="col-12 col-md-6">
+                            <x-pie-chart :dataArray="$dataArrayPie" id="productAnalysispie" />
+                        </div>
+                        @endcan
+                    </div>
                 </div>
 
 

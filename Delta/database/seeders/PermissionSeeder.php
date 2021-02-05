@@ -689,6 +689,16 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Analysis',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Brand Graph',
+                'page_name' => 'Brand',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Category Graph',
+                'page_name' => 'Category',
+                'guard_name' => 'web',
+            ],
 
 
 
@@ -734,14 +744,20 @@ class PermissionSeeder extends Seeder
                 'model_id' => 1,
             ],
             [
-                'role_id' => 2,
+                'role_id' => 1,
                 'model_type' => 'App\Models\User',
                 'model_id' => 2,
             ],
             [
-                'role_id' => 3,
+                'role_id' => 2,
                 'model_type' => 'App\Models\User',
                 'model_id' => 3,
+            ],
+            
+            [
+                'role_id' => 5,
+                'model_type' => 'App\Models\User',
+                'model_id' => 4,
             ],
         ]);
 
@@ -1240,6 +1256,14 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 124,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 125,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 126,
                 'role_id' => 1,
             ],
             [
