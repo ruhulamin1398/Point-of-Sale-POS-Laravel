@@ -1,9 +1,8 @@
 
-
 <div>
 
     <button type="button" id="printPdf" style="color: white;  background-color:green;  ">Print </button>
-    <a href="{{route("bar-codes.index")}}"><button type="button" " style="color: white;  background-color:red;  ">Cancel </button> </a>
+    <a href="{{route("bar-codes.index")}}"><button type="button"  style="color: white;  background-color:red;  ">Cancel </button> </a>
     </div>
     
     <div id="page-top" >  
@@ -20,7 +19,15 @@
         <meta name="author" content="">
     
         <link rel="stylesheet" href="{{asset('css/admin/sb-admin-2.min.css')}}">
-
+        <script src="{{asset('js/admin/jquery.min.js')}}"></script>
+        <script src="{{asset('js/admin/bootstrapbundle.js')}}"></script>
+        <script src="{{asset('js/admin/easing.min.js')}}"></script>
+        <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
+        <script src="{{asset('js/admin/printThis.js')}}"></script>
+        <script src="{{asset('bootstrap-select/js/bootstrap-select.min.js')}}"></script>
+        <script src="{{asset('js/abasas/app.js')}}"></script>
+    
+        
     
     </head>
     
@@ -75,7 +82,6 @@
                         
         </div>
     
-    
     <script>
         
 $(document).ready(function () {        
@@ -92,15 +98,7 @@ $("#printPdf").click(function() {
     </script>
     
         <!-- Bootstrap core JavaScript-->    
-    <script src="{{asset('js/admin/jquery.min.js')}}"></script>
-    <script src="{{asset('js/admin/bootstrapbundle.js')}}"></script>
-    <script src="{{asset('js/admin/easing.min.js')}}"></script>
-    <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
-    <script src="{{asset('js/admin/printThis.js')}}"></script>
-    <script src="{{asset('bootstrap-select/js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('js/abasas/app.js')}}"></script>
 
-    
     
     
     
