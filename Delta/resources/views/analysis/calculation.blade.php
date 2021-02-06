@@ -12,7 +12,7 @@
             <nav class="navbar  ">
 
                 <div class="navbar-brand">
-                    Sell Analysis <span id="monthOrYear"> ({{ $data['month'] }})</span>
+                    Calculation Analysis <span id="monthOrYear"> ({{ $data['month'] }})</span>
                 </div>
                 <div id="searchByMonth">
 
@@ -60,8 +60,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Sell Count</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['dailyCount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Buy</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['dailyBuy'] }}</div>
                                     </div>
             
                                 </div>
@@ -76,9 +76,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Product Count
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Sell
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyPurchaseCard">{{ $data['dailyProductCount'] }}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyPurchaseCard">{{ $data['dailySell'] }}</div>
                                     </div>
             
                                 </div>
@@ -93,9 +93,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Cost
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Sell Profit
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyExpenseCard"> {{ $data['dailyCost'] }} </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyExpenseCard"> {{ $data['dailySellProfit'] }} </div>
                                     </div>
             
                                 </div>
@@ -110,8 +110,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Amount</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard"> {{ $data['dailyAmount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Profit</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard"> {{ $data['dailySellProfit'] }}</div>
                                     </div>
             
                                 </div>
@@ -126,8 +126,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Discount</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyDiscount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Drop</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyDrop'] }}</div>
                                     </div>
             
                                 </div>
@@ -142,8 +142,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Return</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyReturn'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Expense</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyExpense'] }}</div>
                                     </div>
             
                                 </div>
@@ -158,8 +158,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Due</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyDue'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Payment</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyPayment'] }}</div>
                                     </div>
             
                                 </div>
@@ -174,8 +174,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Cash Received</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyCashReceived'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Tax</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyTax'] }}</div>
                                     </div>
             
                                 </div>
@@ -190,54 +190,54 @@
 
 
                 </div>
-                
+
                 <div class="row p-2">
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyCountGraph']" id="dailyCountGraph" />
+                        <x-line-chart :dataArray="$data['dailyBuyGraph']" id="dailyBuyGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyProductCountGraph']" id="dailyProductCountGraph" />
+                        <x-line-chart :dataArray="$data['dailySellGraph']" id="dailySellGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyCostGraph']" id="dailyCostGraph" />
+                        <x-line-chart :dataArray="$data['dailySellProfitGraph']" id="dailySellProfitGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyAmountGraph']" id="dailyAmountGraph" />
+                        <x-line-chart :dataArray="$data['dailyProfitGraph']" id="dailyProfitGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyDiscountGraph']" id="dailyDiscountGraph" />
+                        <x-line-chart :dataArray="$data['dailyDropGraph']" id="dailyDropGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyReturnGraph']" id="dailyReturnGraph" />
+                        <x-line-chart :dataArray="$data['dailyExpenseGraph']" id="dailyExpenseGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyDueGraph']" id="dailyDueGraph" />
+                        <x-line-chart :dataArray="$data['dailyPaymentGraph']" id="dailyPaymentGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyCashReceivedGraph']" id="dailyCashReceivedGraph" />
+                        <x-line-chart :dataArray="$data['dailyTaxGraph']" id="dailyTaxGraph" />
                         
                     </div>
 
@@ -258,8 +258,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Sell Count</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['monthlyCount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Buy</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySellCard">{{ $data['monthlyBuy'] }}</div>
                                     </div>
             
                                 </div>
@@ -274,9 +274,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Product Count
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Sell
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyPurchaseCard">{{ $data['monthlyProductCount'] }}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyPurchaseCard">{{ $data['monthlySell'] }}</div>
                                     </div>
             
                                 </div>
@@ -291,9 +291,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Cost
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Sell Profit
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyExpenseCard"> {{ $data['monthlyCost'] }} </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyExpenseCard">{{ $data['monthlySellProfit'] }} </div>
                                     </div>
             
                                 </div>
@@ -308,8 +308,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Amount</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard"> {{ $data['monthlyAmount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Profit</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyProfit'] }}</div>
                                     </div>
             
                                 </div>
@@ -324,8 +324,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Discount</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['monthlyDiscount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Drop</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlySellProfit'] }}</div>
                                     </div>
             
                                 </div>
@@ -340,8 +340,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Return</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['monthlyReturn'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Expense</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyDrop'] }}</div>
                                     </div>
             
                                 </div>
@@ -356,8 +356,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Due</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['monthlyDue'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Payment</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyExpense'] }}</div>
                                     </div>
             
                                 </div>
@@ -372,18 +372,14 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Cash Received</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['monthlyCashReceived'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Tax</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyTax'] }}</div>
                                     </div>
             
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
 
 
 
@@ -393,49 +389,49 @@
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyCountGraph']" id="monthlyCountGraph" />
+                        <x-line-chart :dataArray="$data['monthlyBuyGraph']" id="monthlyBuyGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyProductCountGraph']" id="monthlyProductCountGraph" />
+                        <x-line-chart :dataArray="$data['monthlySellGraph']" id="monthlySellGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyCostGraph']" id="monthlyCostGraph" />
+                        <x-line-chart :dataArray="$data['monthlySellProfitGraph']" id="monthlySellProfitGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyAmountGraph']" id="monthlyAmountGraph" />
+                        <x-line-chart :dataArray="$data['monthlyProfitGraph']" id="monthlyProfitGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyDiscountGraph']" id="monthlyDiscountGraph" />
+                        <x-line-chart :dataArray="$data['monthlyDropGraph']" id="monthlyDropGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyReturnGraph']" id="monthlyReturnGraph" />
+                        <x-line-chart :dataArray="$data['monthlyExpenseGraph']" id="monthlyExpenseGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyDueGraph']" id="monthlyDueGraph" />
+                        <x-line-chart :dataArray="$data['monthlyPaymentGraph']" id="monthlyPaymentGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyCashReceivedGraph']" id="monthlyCashReceivedGraph" />
+                        <x-line-chart :dataArray="$data['monthlyTaxGraph']" id="monthlyTaxGraph" />
                         
                     </div>
 
@@ -447,7 +443,7 @@
             {{-- Yearly --}}
             <div class="tab-pane fade pt-4 p-2" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
 
-
+                
                 <div class="row">
 
                     <!-- Growth Card Example -->
@@ -457,8 +453,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Sell Count</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['yearlyCount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Buy</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="YearlySellCard">{{ $data['yearlyBuy'] }}</div>
                                     </div>
             
                                 </div>
@@ -473,9 +469,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Product Count
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Sell
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyPurchaseCard">{{ $data['yearlyProductCount'] }}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyPurchaseCard">{{ $data['yearlySell'] }}</div>
                                     </div>
             
                                 </div>
@@ -490,9 +486,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Cost
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Sell Profit
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyExpenseCard"> {{ $data['yearlyCost'] }} </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyExpenseCard">{{ $data['yearlySellProfit'] }} </div>
                                     </div>
             
                                 </div>
@@ -507,8 +503,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Amount</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard"> {{ $data['yearlyAmount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Profit</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyProfit'] }}</div>
                                     </div>
             
                                 </div>
@@ -523,8 +519,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Discount</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['yearlyDiscount'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Drop</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyDrop'] }}</div>
                                     </div>
             
                                 </div>
@@ -539,8 +535,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Return</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['yearlyReturn'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Expense </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyExpense'] }}</div>
                                     </div>
             
                                 </div>
@@ -555,8 +551,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Due</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['yearlyDue'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Payment</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyPayment'] }}</div>
                                     </div>
             
                                 </div>
@@ -571,18 +567,14 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Cash Received</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['yearlyCashReceived'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Tax</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyTax'] }}</div>
                                     </div>
             
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
 
 
 
@@ -592,49 +584,49 @@
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyCountGraph']" id="yearlyCountGraph" />
+                        <x-line-chart :dataArray="$data['yearlyBuyGraph']" id="yearlyBuyGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyProductCountGraph']" id="yearlyProductCountGraph" />
+                        <x-line-chart :dataArray="$data['yearlySellGraph']" id="yearlySellGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyCostGraph']" id="yearlyCostGraph" />
+                        <x-line-chart :dataArray="$data['yearlySellProfitGraph']" id="yearlySellProfitGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyAmountGraph']" id="yearlyAmountGraph" />
+                        <x-line-chart :dataArray="$data['yearlyProfitGraph']" id="yearlyProfitGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyDiscountGraph']" id="yearlyDiscountGraph" />
+                        <x-line-chart :dataArray="$data['yearlyDropGraph']" id="yearlyDropGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyReturnGraph']" id="yearlyReturnGraph" />
+                        <x-line-chart :dataArray="$data['yearlyExpenseGraph']" id="yearlyExpenseGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyDueGraph']" id="yearlyDueGraph" />
+                        <x-line-chart :dataArray="$data['yearlyPaymentGraph']" id="yearlyPaymentGraph" />
                         
                     </div>
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyCashReceivedGraph']" id="yearlyCashReceivedGraph" />
+                        <x-line-chart :dataArray="$data['yearlyTaxGraph']" id="yearlyTaxGraph" />
                         
                     </div>
 

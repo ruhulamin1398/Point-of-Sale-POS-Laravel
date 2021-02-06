@@ -43,15 +43,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
  <!-- Begin Page Content -->
  <div class="collapse" id="createNewForm">
      <div class="card mb-4 shadow">
@@ -603,6 +594,27 @@
                                                  class="word-break name justify-content-center">
                                                  <label class="checkbox-inline"><input type="checkbox"
                                                          name="view{{ $i }}"
+                                                         @if($roles[$i]->hasPermissionTo($permision_name)) checked
+                                                     @endif></label>
+                                                 </td>
+                                                 @endfor
+
+                                         </tr>
+
+                                         @endif
+
+                                         @php
+                                         $permision_name = $page_name." Graph";
+                                         $permission = $permissions->where('name',$permision_name)->first();
+                                         @endphp
+                                         @if (!is_null($permission))
+
+                                         <tr class="data-row">
+                                             <td class="iteration">{{ __('translate.Graph Access') }}</td>
+                                             @for ($i=1 ; $i<5 ; $i++) <td
+                                                 class="word-break name justify-content-center">
+                                                 <label class="checkbox-inline"><input type="checkbox"
+                                                         name="graph{{ $i }}"
                                                          @if($roles[$i]->hasPermissionTo($permision_name)) checked
                                                      @endif></label>
                                                  </td>
