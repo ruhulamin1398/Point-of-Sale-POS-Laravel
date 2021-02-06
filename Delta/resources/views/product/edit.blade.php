@@ -287,7 +287,7 @@
                         </div>
                         
                         <div class="form-group col-12  ">
-                            <label for="stock_controll"> {{ __('translate.Stock Controll') }}</label>
+                            <label for="stock_controll"> {{ __('translate.Stock Control') }}</label>
                             <select class="form-control" name="stock_controll" id="stock_controll">
                                 @if($product->stock_controll=='yes')
                                 <option selected value="yes"> Yes</option>

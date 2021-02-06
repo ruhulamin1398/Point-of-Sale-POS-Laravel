@@ -108,7 +108,7 @@
                                     <td> {{ $product->stock_alert / $product->unit->value }} </td>
                                 </tr>
                                 <tr class="data-row">
-                                    <th>{{ __("translate.Stock Controll") }} </th>
+                                    <th>{{ __("translate.Stock Control") }} </th>
                                     <td> {{ $product->stock_controll }} </td>
                                 </tr>
                             </tbody>
