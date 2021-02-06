@@ -12,7 +12,7 @@
             <nav class="navbar  ">
 
                 <div class="navbar-brand">
-                    Sell Analysis <span id="monthOrYear"> ({{ $data['month'] }})</span>
+                    Buy Analysis <span id="monthOrYear"> ({{ $data['month'] }})</span>
                 </div>
                 <div id="searchByMonth">
 
@@ -60,7 +60,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Sell Count</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Buy Count</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['dailyCount'] }}</div>
                                     </div>
             
@@ -174,8 +174,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Cash Received</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyCashReceived'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Cash Given</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyCashGiven'] }}</div>
                                     </div>
             
                                 </div>
@@ -237,7 +237,7 @@
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['dailyCashReceivedGraph']" id="dailyCashReceivedGraph" />
+                        <x-line-chart :dataArray="$data['dailyCashGivenGraph']" id="dailyCashGivenGraph" />
                         
                     </div>
 
@@ -258,7 +258,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Sell Count</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Buy Count</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['monthlyCount'] }}</div>
                                     </div>
             
@@ -372,8 +372,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Cash Received</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['monthlyCashReceived'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Cash Given</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['monthlyCashGiven'] }}</div>
                                     </div>
             
                                 </div>
@@ -435,7 +435,7 @@
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['monthlyCashReceivedGraph']" id="monthlyCashReceivedGraph" />
+                        <x-line-chart :dataArray="$data['monthlyCashGivenGraph']" id="monthlyCashGivenGraph" />
                         
                     </div>
 
@@ -457,7 +457,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Sell Count</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Buy Count</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['yearlyCount'] }}</div>
                                     </div>
             
@@ -571,8 +571,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Cash Received</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['yearlyCashReceived'] }}</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Cash Given</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['yearlyCashGiven'] }}</div>
                                     </div>
             
                                 </div>
@@ -634,7 +634,7 @@
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
-                        <x-line-chart :dataArray="$data['yearlyCashReceivedGraph']" id="yearlyCashReceivedGraph" />
+                        <x-line-chart :dataArray="$data['yearlyCashGivenGraph']" id="yearlyCashGivenGraph" />
                         
                     </div>
 

@@ -16,6 +16,7 @@ class CreateEmployeeAnalysisDailiesTable extends Migration
         Schema::create('employee_analysis_dailies', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->unsignedBigInteger('employee_id')->default(1);
             $table->double('sell',18,2)->default(0);
             $table->double('profit',18,2)->default(0);
             $table->softDeletes();
