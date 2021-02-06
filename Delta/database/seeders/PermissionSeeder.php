@@ -699,6 +699,11 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Category',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Employee Graph',
+                'page_name' => 'Employee',
+                'guard_name' => 'web',
+            ],
 
 
 
@@ -1264,6 +1269,10 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 126,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 127,
                 'role_id' => 1,
             ],
             [
