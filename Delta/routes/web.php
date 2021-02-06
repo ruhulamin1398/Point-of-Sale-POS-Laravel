@@ -38,7 +38,7 @@ use App\Http\Controllers\userRoleController;
 use App\Http\Controllers\WarrentyController;
 use App\Models\posSetting;
 use App\Models\Product;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Routing\Route as RoutingRoute;
@@ -138,6 +138,7 @@ Route::resource('expense-monthlies', ExpenseMonthlyController::class);
 // analysis
 Route::get('sell-analysis', [SellAnalysisDailyController::class, 'index'])->name('sell-analysis');
 Route::get('analysis', [AnalysisController::class, 'index'])->name('analysis');
+Route::get('calculation-analysis', [AnalysisController::class, 'calculation'])->name('calculation-analysis');
 
 
 //   Permission Route
@@ -189,7 +190,8 @@ Route::get('categorized-product', [ProductController::class, 'categorized_produc
 
 Route::get('permission-test',function(){
 
-
+    $date = ((new Carbon)->parse('2021-02-31')->subDays(rand(0, 30)))->format('Y-m-d');
+    return $date;
   // return Hash::check($request->value, auth()->user()->password);
     // $role = Role::find(5);
     // // return $role->hasPermissionTo('Brand Delete');
