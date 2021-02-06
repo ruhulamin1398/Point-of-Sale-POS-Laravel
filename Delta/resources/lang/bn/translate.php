@@ -410,7 +410,7 @@ return[
 'Product Sell'=>'বিক্রয় করুন', 
 'Analysis Results'=>'এনালাইসিসের ফলাফল', 
 'Print Barcode'=>'বারকোড প্রিন্ট', 
-''=>'',
+'Product Returned'=>'সফলভাবে পণ্য ফেরত নেয়া হয়েছে',
 ''=>'',
 ''=>'',
 ];

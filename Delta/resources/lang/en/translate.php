@@ -415,7 +415,7 @@ return[
 'Product Sell'=>'Sell Product', 
 'Analysis Results'=>'Analysis Results', 
 'Print Barcode'=>'Print Barcode',
-''=>'',
+'Product Returned'=>'Product Returned',
 ''=>'',
 ''=>'',
 ''=>'',
