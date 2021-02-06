@@ -138,7 +138,8 @@ Route::resource('expense-monthlies', ExpenseMonthlyController::class);
 // analysis
 Route::get('sell-analysis', [SellAnalysisDailyController::class, 'index'])->name('sell-analysis');
 Route::get('analysis', [AnalysisController::class, 'index'])->name('analysis');
-Route::get('calculation-analysis', [AnalysisController::class, 'calculation'])->name('calculation-analysis');
+Route::get('calculation-analysis', [AnalysisController::class, 'calculationAnalysis'])->name('calculation-analysis');
+Route::get('buy-analysis', [AnalysisController::class, 'buyAnalysis'])->name('buy-analysis');
 
 
 //   Permission Route

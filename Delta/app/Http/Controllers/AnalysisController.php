@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\calculationAnalysisDaily;
 use App\Models\calculationAnalysisMonthly;
 use App\Models\calculationAnalysisYearly;
+use App\Models\purchaseAnalysisDaily;
+use App\Models\purchaseAnalysisMonthly;
+use App\Models\purchaseAnalysisYearly;
 use App\Models\sellAnalysisDaily;
 use App\Models\sellAnalysisMonthly;
 use Carbon\Carbon;
@@ -41,7 +44,7 @@ class AnalysisController extends Controller
         return view('analysis.index', compact('sellAnalysisDaily', 'sellAnalysisMonthly','amountAnalysisDaily','amountAnalysisMonthly','sell','purchase','expense','profit'));
     }
 
-    public function calculation(Request $request){
+    public function calculationAnalysis(Request $request){
         $monthStart = Carbon::now()->format('Y-m-01');
         $monthEnd = Carbon::now()->format('Y-m-31');
         $yearStart = Carbon::now()->format('Y-01-01');
@@ -55,15 +58,151 @@ class AnalysisController extends Controller
             $yearEnd = $request->year . '-12-31';
             
         }
-        $data = $this->calculationAnalysis($monthEnd , $monthStart , $yearEnd ,$yearStart);
+        $data = $this->calculationAnalysisResults($monthEnd , $monthStart , $yearEnd ,$yearStart);
         return view('analysis.calculation',compact('data'));
+    }
+
+    
+    public function buyAnalysis(Request $request){
+        $monthStart = Carbon::now()->format('Y-m-01');
+        $monthEnd = Carbon::now()->format('Y-m-31');
+        $yearStart = Carbon::now()->format('Y-01-01');
+        $yearEnd = Carbon::now()->format('Y-12-31');
+        if(! is_null($request->month)){
+            $monthStart = $request->month . '-01';
+            $monthEnd = $request->month . '-31';
+        }
+        if(! is_null($request->year)){
+            $yearStart = $request->year . '-01-01';
+            $yearEnd = $request->year . '-12-31';
+            
+        }
+        $data = $this->buyAnalysisResults($monthEnd , $monthStart , $yearEnd ,$yearStart);
+        return view('analysis.buy',compact('data'));
     }
 
 
 
+// ***************** Buy Analysis ******************
+
+public function buyAnalysisResults($monthEnd , $monthStart , $yearEnd ,$yearStart){
+    $data = array();
+    $data['month'] = Carbon::parse($monthStart)->format('F');
+    $data['year'] = Carbon::parse($yearStart)->format('Y');
+    $dailies = purchaseAnalysisDaily::where('date' ,'<=' ,$monthEnd )->where('date' ,'>=' ,$monthStart )->get();
+    $monthlies = purchaseAnalysisMonthly::where('month' ,'<=' ,$yearEnd )->where('month' ,'>=' ,$yearStart )->get();
+    $yarlies = purchaseAnalysisYearly::all();
+    $data['dailyCount'] = $data['dailyProductCount'] = $data['dailyCost'] = $data['dailyAmount'] = $data['dailyDiscount'] = $data['dailyReturn'] =  $data['dailyDue'] = $data['dailyCashGiven'] = 0;
+    $data['monthlyCount'] = $data['monthlyProductCount'] = $data['monthlyCost'] = $data['monthlyAmount'] = $data['monthlyDiscount'] = $data['monthlyReturn'] =  $data['monthlyDue'] = $data['monthlyCashGiven'] = 0;
+    $data['yearlyCount'] = $data['yearlyProductCount'] = $data['yearlyCost'] = $data['yearlyAmount'] = $data['yearlyDiscount'] = $data['yearlyReturn'] =  $data['yearlyDue'] = $data['yearlyCashGiven'] = 0;
+    $dailyLabels = $monthlyLabels = $yearlyLabels = array();
+    $dailyCountData = $dailyProductCountData = $dailyCostData = $dailyAmountData = $dailyDiscountData = $dailyReturnData =  $dailyDueData = $dailyCashGivenData = array();
+    $monthlyCountData = $monthlyProductCountData = $monthlyCostData = $monthlyAmountData = $monthlyDiscountData = $monthlyReturnData =  $monthlyDueData = $monthlyCashGivenData = array();
+    $yearlyCountData = $yearlyProductCountData = $yearlyCostData = $yearlyAmountData = $yearlyDiscountData = $yearlyReturnData =  $yearlyDueData = $yearlyCashGivenData = array();
+    
+    foreach($dailies as $daily){
+        
+        $data['dailyCount'] += $daily->count;
+        $data['dailyProductCount'] += $daily->product_count;
+        $data['dailyCost'] += $daily->cost;
+        $data['dailyAmount'] += $daily->amount;
+        $data['dailyDiscount'] += $daily->discount;
+        $data['dailyReturn'] += $daily->return;
+        $data['dailyDue'] += $daily->due;
+        $data['dailyCashGiven'] += $daily->cash_given;
+
+        array_push($dailyLabels, $daily->date);
+
+        array_push($dailyCountData, $daily->count);
+        array_push($dailyProductCountData, $daily->product_count);
+        array_push($dailyCostData, $daily->cost);
+        array_push($dailyAmountData, $daily->amount);
+        array_push($dailyDiscountData, $daily->discount);
+        array_push($dailyReturnData, $daily->return);
+        array_push($dailyDueData, $daily->due);
+        array_push($dailyCashGivenData, $daily->cash_given);
+    }
+
+    foreach($monthlies as $monthly){
+        $data['monthlyCount'] += $monthly->count;
+        $data['monthlyProductCount'] += $monthly->product_count;
+        $data['monthlyCost'] += $monthly->cost;
+        $data['monthlyAmount'] += $monthly->amount;
+        $data['monthlyDiscount'] += $monthly->discount;
+        $data['monthlyReturn'] += $monthly->return;
+        $data['monthlyDue'] += $monthly->due;
+        $data['monthlyCashGiven'] += $monthly->cash_given;
+
+        $month = Carbon::parse($monthly->month)->format('F');
+        array_push($monthlyLabels, $month);
+
+        array_push($monthlyCountData, $monthly->count);
+        array_push($monthlyProductCountData, $monthly->product_count);
+        array_push($monthlyCostData, $monthly->cost);
+        array_push($monthlyAmountData, $monthly->amount);
+        array_push($monthlyDiscountData, $monthly->discount);
+        array_push($monthlyReturnData, $monthly->return);
+        array_push($monthlyDueData, $monthly->due);
+        array_push($monthlyCashGivenData, $monthly->cash_given);
+    }
+    
+
+    foreach($yarlies as $yearly){
+        $data['yearlyCount'] += $yearly->count;
+        $data['yearlyProductCount'] += $yearly->product_count;
+        $data['yearlyCost'] += $yearly->cost;
+        $data['yearlyAmount'] += $yearly->amount;
+        $data['yearlyDiscount'] += $yearly->discount;
+        $data['yearlyReturn'] += $yearly->return;
+        $data['yearlyDue'] += $yearly->due;
+        $data['yearlyCashGiven'] += $yearly->cash_given;
+
+        array_push($yearlyLabels, $yearly->year);
+
+        array_push($yearlyCountData, $yearly->count);
+        array_push($yearlyProductCountData, $yearly->product_count);
+        array_push($yearlyCostData, $yearly->cost);
+        array_push($yearlyAmountData, $yearly->amount);
+        array_push($yearlyDiscountData, $yearly->discount);
+        array_push($yearlyReturnData, $yearly->return);
+        array_push($yearlyDueData, $yearly->due);
+        array_push($yearlyCashGivenData, $yearly->cash_given);
+    }
+    
+    $data['dailyCountGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Buy Count', $dailyCountData ,'#306754')  ), true);
+    $data['dailyProductCountGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Product Count', $dailyProductCountData ,'#FFFF00')  ), true);
+    $data['dailyCostGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Cost', $dailyCostData ,'#008000')  ), true);
+    $data['dailyAmountGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Amount', $dailyAmountData ,'#0000A0')  ), true);
+    $data['dailyDiscountGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Discount', $dailyDiscountData ,'#008080')  ), true);
+    $data['dailyReturnGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Return', $dailyReturnData ,'#00FF00')  ), true);
+    $data['dailyDueGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Due', $dailyDueData ,'#FF0000')  ), true);
+    $data['dailyCashGivenGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Cash Given', $dailyCashGivenData ,'#FFA500')  ), true);
+    
+    $data['monthlyCountGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Buy Count', $monthlyCountData ,'#306754')  ), true);
+    $data['monthlyProductCountGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Product Count', $monthlyProductCountData ,'#FFFF00')  ), true);
+    $data['monthlyCostGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Cost', $monthlyCostData ,'#008000')  ), true);
+    $data['monthlyAmountGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Amount', $monthlyAmountData ,'#0000A0')  ), true);
+    $data['monthlyDiscountGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Discount', $monthlyDiscountData ,'#008080')  ), true);
+    $data['monthlyReturnGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Return', $monthlyReturnData ,'#00FF00')  ), true);
+    $data['monthlyDueGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Due', $monthlyDueData ,'#FF0000')  ), true);
+    $data['monthlyCashGivenGraph'] = json_decode(json_encode(  $this->chartGenerator($monthlyLabels ,'Cash Given', $monthlyCashGivenData ,'#FFA500')  ), true);
+    
+    $data['yearlyCountGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Buy Count', $yearlyCountData ,'#306754')  ), true);
+    $data['yearlyProductCountGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Product Count', $yearlyProductCountData ,'#FFFF00')  ), true);
+    $data['yearlyCostGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Cost', $yearlyCostData ,'#008000')  ), true);
+    $data['yearlyAmountGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Amount', $yearlyAmountData ,'#0000A0')  ), true);
+    $data['yearlyDiscountGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Discount', $yearlyDiscountData ,'#008080')  ), true);
+    $data['yearlyReturnGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Return', $yearlyReturnData ,'#00FF00')  ), true);
+    $data['yearlyDueGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Due', $yearlyDueData ,'#FF0000')  ), true);
+    $data['yearlyCashGivenGraph'] = json_decode(json_encode(  $this->chartGenerator($yearlyLabels ,'Cash Given', $yearlyCashGivenData ,'#FFA500') ) ,true ); 
+
+    return $data;
+
+}
+
 // ***************** Calculation Analysis ******************
 
-public function calculationAnalysis($monthEnd , $monthStart , $yearEnd ,$yearStart){
+public function calculationAnalysisResults($monthEnd , $monthStart , $yearEnd ,$yearStart){
     $data = array();
     $data['month'] = Carbon::parse($monthStart)->format('F');
     $data['year'] = Carbon::parse($yearStart)->format('Y');
