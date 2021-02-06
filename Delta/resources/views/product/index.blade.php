@@ -235,7 +235,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-product-modal-label ">Print Barcode</h5>
+                <h5 class="modal-title text-dark" id="edit-product-modal-label ">{{ __('translate.Print Barcode') }} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span>
                 </button>
@@ -265,23 +265,23 @@
 
 
                                         <div class="col-auto">
-                                            <span class="text-dark pl-2"> {{ __('trranslate.Product Id') }}</span>
+                                            <span class="text-dark pl-2"> {{ __('translate.Product Id') }}</span>
                                             <input type="number" name="product_id" id="barcodeProductInputId"
                                                 class="form-control mb-2" required readonly>
                                         </div>
 
                                         <div class="col-auto">
 
-                                            <span class="text-dark pl-2">{{ __('trranslate.Quantity') }} </span>
+                                            <span class="text-dark pl-2">{{ __('translate.Quantity') }} </span>
                                             <input type="number" name="quantity" class="form-control mb-2" required>
                                         </div>
 
-                                        <div class="col-auto" id="checkBoxDiv">
+                                        <div class="col-auto m-2" id="checkBoxDiv">
                                         </div>
 
 
                                         <div class="col-auto">
-                                            <button type="submit" class="btn btn-primary mt-3">{{ __('trranslate.Submit') }} </button>
+                                            <button type="submit" class="btn btn-primary mt-3">{{ __('translate.Submit') }} </button>
                                         </div>
 
                                     </div>

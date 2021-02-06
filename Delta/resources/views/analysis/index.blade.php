@@ -154,10 +154,6 @@
             <x-line-chart :dataArray="$amountAnalysisDaily" id='amountAnalysisDailyLine' />
         </div>
 
-
-
-
-
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
                 <a class="navbar-brand">Calculations Monthly</a>
