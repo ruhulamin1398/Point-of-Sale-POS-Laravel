@@ -275,6 +275,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
 
                 <a class="collapse-item" href="{{ route('analysis') }}">{{ __('translate.Analysis') }} </a>
+                <a class="collapse-item" href="{{ route('calculation-analysis') }}">{{ __('translate.Calculation Analysis') }} </a>
+                <a class="collapse-item" href="{{ route('buy-analysis') }}">{{ __('translate.Buy Analysis') }} </a>
+                <a class="collapse-item" href="{{ route('sell-analysis') }}">{{ __('translate.Sell Analysis') }} </a>
 
             </div>
         </div>
