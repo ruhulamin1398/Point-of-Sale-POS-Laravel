@@ -18,31 +18,38 @@ class AnalysisController extends Controller
 {
     public function index()
     {
+        $data = array();
         $today = Carbon::now()->format('Y-m-d');
         $calculation = calculationAnalysisDaily::where('date',$today)->first();
-        $sell = $purchase = $expense = $profit =0;
+        $sell = sellAnalysisDaily::where('date',$today)->first();
+        $buy = purchaseAnalysisDaily::where('date',$today)->first();
+        $data['sell'] = $data['buy'] = $data['sellProfit'] = $data['profit'] = $data['expense'] = $data['payment'] = $data['sellCount'] = $data['buyCount'] = 0;
         if(!is_null($calculation)){
-            $expense += $calculation->expense;
-            $expense += $calculation->payment;
-            $expense += $calculation->drop_loss;
-            $expense += $calculation->tax;
-            $sell += $calculation->sell;
-            $purchase += $calculation->buy;
-            $profit += $calculation->sell_profit;
+            $data['sell']= $calculation->sell;
+            $data['buy'] = $calculation->buy;
+            $data['sellProfit'] =$calculation->sell_profit;
+             $data['expense'] =$calculation->expense;
+              $data['payment'] =$calculation->payment;
+              
+             $data['profit'] = $data['sellProfit'] - $data['expense'] -  $data['payment'] - $calculation->drop_loss - $calculation->tax ;
         }
-        $profit -= $expense;
-
+        if(!is_null($sell)){
+            $data['sellCount']= $sell->count;
+        }
+        if(!is_null($buy)){
+            $data['buyount']= $buy->count;
+        }
         $sellAnalysisDaily=$this->sellAnalysisDaily();
         $sellAnalysisMonthly=$this->sellAnalysisMonthly();
         $amountAnalysisDaily= $this->amountAnalysisDaily();
         $amountAnalysisMonthly= $this->amountAnalysisMonthly();
 
-        $sellAnalysisDaily = json_decode(json_encode($sellAnalysisDaily), true);
-        $sellAnalysisMonthly = json_decode(json_encode($sellAnalysisMonthly), true);
-        $amountAnalysisDaily = json_decode(json_encode($amountAnalysisDaily), true);
-        $amountAnalysisMonthly = json_decode(json_encode($amountAnalysisMonthly), true);
+        $data['sellAnalysisDaily'] = json_decode(json_encode($sellAnalysisDaily), true);
+        $data['sellAnalysisMonthly'] = json_decode(json_encode($sellAnalysisMonthly), true);
+        $data['amountAnalysisDaily'] = json_decode(json_encode($amountAnalysisDaily), true);
+        $data['amountAnalysisMonthly'] = json_decode(json_encode($amountAnalysisMonthly), true);
 
-        return view('analysis.index', compact('sellAnalysisDaily', 'sellAnalysisMonthly','amountAnalysisDaily','amountAnalysisMonthly','sell','purchase','expense','profit'));
+        return view('analysis.index', compact('data'));
     }
 
     public function calculationAnalysis(Request $request){
