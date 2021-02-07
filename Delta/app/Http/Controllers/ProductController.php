@@ -278,12 +278,23 @@ class ProductController extends Controller
 
     public function categorized_product()
     {
- 
-        $settings = setting::where('table_name', 'categorized_products')->first();
-        $setting = json_decode($settings->setting, true);
-        $categories = category::all();
+
+        
+        $settings = setting::where('table_name', 'products')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+        $settings2 = setting::where('table_name', 'categorized_products')->first();
+        $settings2->setting = json_decode($settings2->setting, true);
+        $categories = category::all();; 
+        $dataArray = [
+            'settings' => $settings,
+            'categorySettings' => $settings2,
+            'items' => $categories,
+            'page_name' => 'Product',
+        ];
+        
+
         $roles = Role::all();
-        return view('product.categorized_product',compact('categories','setting','roles'));
+        return view('product.categorized_product',compact('dataArray','roles'));
         
     }
 

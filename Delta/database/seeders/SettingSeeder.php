@@ -144,6 +144,12 @@ class SettingSeeder extends Seeder
                 'model' => 'App\Models\Product',
                 'setting' => '{"brand_id":"1","category_id":"1","type_id":"1","unit_id":"2","is_fixed_price":"1","stock_alert":"1","warrenty_id":"1","tax_type_id":"1","tax":"0","stock_controll":"yes"}',
             ],
+            
+            [
+                'table_name' => 'categorized_products',
+                'model' => 'App\Models\Product',
+                'setting' => '{"1":{"Admin":1,"Manager":1,"Analyser":1,"Staff":1}}',
+            ],
         ]);
 
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\setting;
 use Illuminate\Http\Request;
 
@@ -159,37 +160,29 @@ class SettingController extends Controller
         // }]' ;
 
         // $a= [
-        //     "1" =>[
-        //          "Super Admin"=> 1, 
+        //     "1" =>[ 
         //          "Admin"=> 1, 
         //          "Manager"=> 1, 
-        //          "Cashier"=> 1, 
+        //          "Analyser"=> 1, 
         //          "Staff"=> 1, 
         //      ],
-        //      "2" =>[
-        //           "Super Admin"=> 1, 
-        //           "Admin"=> 1, 
-        //           "Manager"=> 1, 
-        //           "Cashier"=> 1, 
-        //           "Staff"=> 1, 
-        //       ],
         // ];
          
-            $a = [
-                "brand_id" => 1,
-                "category_id" => 1,
-                "type_id" => 1,
-                "unit_id" => 2,
-                "is_fixed_price" => 1,
-                "stock_alert" => 1 ,
-                "warrenty_id" => 1,
-                "tax_type_id" => 1,
-                "tax" => 0,
-                "stock_controll" =>"yes"
-            ];
+            // $a = [
+            //     "brand_id" => 1,
+            //     "category_id" => 1,
+            //     "type_id" => 1,
+            //     "unit_id" => 2,
+            //     "is_fixed_price" => 1,
+            //     "stock_alert" => 1 ,
+            //     "warrenty_id" => 1,
+            //     "tax_type_id" => 1,
+            //     "tax" => 0,
+            //     "stock_controll" =>"yes"
+            // ];
         // $setting = new setting;
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'products_create';
+        // $setting->table_name = 'categorized_products';
         // $setting->model = 'App\Models\Product';
         // $setting->save();
         // return  "Success";
@@ -246,6 +239,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, setting $setting)
     {
+       
         // echo "--------------";
        if($setting['table_name'] == 'products_create'){
         $data = [
@@ -266,7 +260,19 @@ class SettingController extends Controller
         $this->onlineSync('setting','update',$setting->id);
         return redirect()->back()->withSuccess('Succesfully Updated');
 
-       }else{
+       }
+       elseif($setting['table_name'] == 'categorized_products'){
+           $categories = category::all();
+           $data = array();
+            foreach($categories as $category ){
+                $data[$category->id] = $request[$category->id];
+            }
+            $setting->setting = (json_encode($data));
+            $setting->save();
+            $this->onlineSync('setting','update',$setting->id);
+            return ;
+       }
+       else{
 
       
         $data =  json_decode(json_decode($setting->setting, true), true);

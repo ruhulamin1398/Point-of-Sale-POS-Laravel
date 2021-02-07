@@ -92,6 +92,7 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 
 Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
+Route::get('categorized-product', [ProductController::class, 'categorized_product'])->name('categorized_product');
 Route::resource('orders', OrderController::class);
 Route::resource('purchases', PurchaseController::class);
 Route::resource('brands', BrandController::class);
@@ -187,7 +188,6 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 
 Route::resource('pos-setting',PosSettingController::class);
 
-Route::get('categorized-product', [ProductController::class, 'categorized_product'])->name('categorized_product');
 
 
 Route::get('permission-test',function(){
