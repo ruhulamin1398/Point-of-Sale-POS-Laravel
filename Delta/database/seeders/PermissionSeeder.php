@@ -434,6 +434,11 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Stock Alert',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Stock Alert Edit',
+                'page_name' => 'Stock Alert',
+                'guard_name' => 'web',
+            ],
             
             [
                 'name' => 'Warrenty Create',
@@ -1309,6 +1314,10 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 131,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 132,
                 'role_id' => 1,
             ],
             [

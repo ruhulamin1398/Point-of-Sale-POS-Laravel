@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\productAnalysisYearly;
 use App\Models\productType;
 use App\Models\setting;
+use App\Models\stockAlert;
 use App\Models\taxType;
 use App\Models\unit;
 use App\Models\warrenty;
@@ -118,9 +119,13 @@ class ProductController extends Controller
        $product->price_per_unit= $this->calPricePerUnit($request->price,$request->unit_id);
        
        $product->save();
+       $stock_alert=new stockAlert;
+       $stock_alert->product_id = $product->id;
+       $stock_alert->save();
 
        
         $this->onlineSync('Product','create',$product->id);
+        $this->onlineSync('stockAlert','create',$stock_alert->id);
      
        return redirect(route('products.index'))->withSuccess(["Product Created"]);
 
@@ -221,9 +226,11 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {  
         if($product->stock <=0){
+            $product->stockAlert->delete();
             $product->delete();
             
            $this->onlineSync('Product','delete',$product->id);
+           $this->onlineSync('stockAlert','delete',$product->stockAlert->id);
             return Redirect::back()->withErrors(["Item Deleted" ]);
         }
         else{
@@ -233,27 +240,6 @@ class ProductController extends Controller
     }
 
 
-    
-    public function lowStockProduct()
-    {  
-        
-        
-        if(! auth()->user()->hasPermissionTo('Stock Alert Page')){
-            return abort(401);
-        }
-      $lowStockProducts =  Product::whereColumn('stock' ,'<' ,'stock_alert')->get();
-     
-      $settings = setting::where('table_name','stock_alert')->first();
-      $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
-      
-              
-    $dataArray=[
-        'settings'=>$settings,
-        'items' => $lowStockProducts,
-        'page_name' => 'Stock Alert',
-    ];
-      return view('product.stock-alert.index',compact('dataArray'));     
-    }
 
 
         //Api Area start

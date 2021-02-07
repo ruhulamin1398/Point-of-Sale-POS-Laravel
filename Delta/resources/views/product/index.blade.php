@@ -89,7 +89,7 @@
                             @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
                          $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
                             <th>{{ __("translate.Action") }}</th>
-                            @endcan
+                            @endif
                         </tr>
                     </thead>
                     <tfoot class="bg-abasas-dark">
@@ -121,7 +121,7 @@
                             @if( $GLOBALS['CurrentUser']->can('Product Delete') || $GLOBALS['CurrentUser']->can('Product Edit') ||
                          $GLOBALS['CurrentUser']->can('Product View') || $GLOBALS['CurrentUser']->can('Product Print')  )
                             <th>{{ __("translate.Action") }}</th>
-                            @endcan
+                            @endif
                         </tr>
 
                     </tfoot>

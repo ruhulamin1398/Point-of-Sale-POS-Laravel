@@ -32,6 +32,7 @@ use App\Http\Controllers\SettingController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
+use App\Http\Controllers\StockAlertController;
 use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\userRoleController;
@@ -113,7 +114,7 @@ Route::resource('supplier-due-pays', SupplierDuePayController::class);
 
 Route::resource('warrenties', WarrentyController::class);
 Route::resource('drop_products', DropProductController::class);
-Route::get('stock_alert', [ProductController::class, 'lowStockProduct'])->name('stock_alert');
+Route::resource('stock-alerts', StockAlertController::class);
 
 //Employees
 Route::resource('employees', EmployeeController::class);
