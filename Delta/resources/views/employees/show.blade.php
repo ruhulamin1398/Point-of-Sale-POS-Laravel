@@ -21,11 +21,20 @@
                     </nav>
                 </div>
                 <div class="card-body">
-
-                    <h1> {{ __("translate.Name") }} : {{$employee->name}}</h1>
-                    <b> {{ __("translate.Phone") }} : {{$employee->phone}}</b><br>
-                    <b> {{ __("translate.Designation") }} : {{$employee->designation->name}}</b><br>
-                    <b> {{ __("translate.Address") }} : {{$employee->address}}</b><br>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <h1> {{ __("translate.Name") }} : {{$employee->name}}</h1>
+                            <b> {{ __("translate.Phone") }} : {{$employee->phone}}</b><br>
+                            <b> {{ __("translate.Designation") }} : {{$employee->designation->name}}</b><br>
+                            <b> {{ __("translate.Address") }} : {{$employee->address}}</b><br>
+                        </div>
+                        @can('Employee Graph')
+                        <div class="col-12 col-md-6">
+                            <x-pie-chart :dataArray="$employeeGraph" id="employeeGraph" />
+                            
+                        </div>
+                        @endcan
+                    </div>
 
                 </div>
 

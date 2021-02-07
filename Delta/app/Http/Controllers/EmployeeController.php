@@ -6,6 +6,7 @@ use App\Http\Requests\EmployeeRequest;
 use App\Models\employee;
 use App\Models\User;
 use App\Models\designation;
+use App\Models\employeeAnalysisYearly;
 use App\Models\employeeDutyMonthly;
 use App\Models\employeeSalary;
 use App\Models\order;
@@ -124,7 +125,8 @@ class EmployeeController extends Controller
         }
        $month = Carbon:: parse($monthStart)->format('F');
         $orders= order::where('user_id', $employee->user_id )->where('created_at','<=',$monthEnd)->where('created_at','>=',$monthStart)->get(); 
-        return view('employees.show',compact('employee','orders','month'));
+        $employeeGraph = $this->employeeAnalysisYearly($employee);
+        return view('employees.show',compact('employee','orders','month','employeeGraph'));
     }
 
     /**
@@ -211,4 +213,40 @@ class EmployeeController extends Controller
 
         return Redirect::back()->withErrors(["Employee Deleted"]);
     }
+
+
+
+
+    
+    // ***************** employeeAnalysisYearly ******************
+
+    public function employeeAnalysisYearly($employee){
+    
+        $lebels = array('Sell','Profit');
+        $Sell = 0;
+        $Profit = 0;
+    
+        $employeeYearlies = employeeAnalysisYearly::where('employee_id',$employee->id)->get();
+
+        foreach ($employeeYearlies as $yearly) {
+            $Sell += $yearly->sell;
+            $Profit += $yearly->profit;
+        }
+        $data = array($Sell,$Profit);
+        $color = array('#FFFF00','#0000FF');
+        $employeeAnalysis = [
+            "lebels" => $lebels,
+            "datasets" => [
+                [
+                    "label" => "Employee Analysis",
+                    "data" => $data,
+                    "backgroundColor" => $color,
+                    "fill" => false
+                ],
+            ]
+        ];
+        return json_decode(json_encode($employeeAnalysis), true);
+    
+    }
+    
 }
