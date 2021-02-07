@@ -32,6 +32,7 @@ use App\Http\Controllers\SettingController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ReturnToSupplierController;
 use App\Http\Controllers\SellAnalysisDailyController;
+use App\Http\Controllers\StockAlertController;
 use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\userRoleController;
@@ -91,6 +92,7 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 
 Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
+Route::get('categorized-product', [ProductController::class, 'categorized_product'])->name('categorized_product');
 Route::resource('orders', OrderController::class);
 Route::resource('purchases', PurchaseController::class);
 Route::resource('brands', BrandController::class);
@@ -113,7 +115,7 @@ Route::resource('supplier-due-pays', SupplierDuePayController::class);
 
 Route::resource('warrenties', WarrentyController::class);
 Route::resource('drop_products', DropProductController::class);
-Route::get('stock_alert', [ProductController::class, 'lowStockProduct'])->name('stock_alert');
+Route::resource('stock-alerts', StockAlertController::class);
 
 //Employees
 Route::resource('employees', EmployeeController::class);
@@ -186,7 +188,6 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 
 Route::resource('pos-setting',PosSettingController::class);
 
-Route::get('categorized-product', [ProductController::class, 'categorized_product'])->name('categorized_product');
 
 
 Route::get('permission-test',function(){

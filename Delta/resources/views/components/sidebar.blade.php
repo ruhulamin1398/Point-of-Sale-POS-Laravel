@@ -46,7 +46,7 @@
                 <a class="collapse-item" href="{{ route('units.index') }}">{{__('translate.Units')}}</a>
                 @endcan
                 @can('Stock Alert Page')
-                <a class="collapse-item" href="{{ route('stock_alert') }}">{{__('translate.Low Stock Products')}}</a>
+                <a class="collapse-item" href="{{ route('stock-alerts.index') }}">{{__('translate.Low Stock Products')}}</a>
                 @endcan
                 @can('Drop Product Create Page')
                 <a class="collapse-item" href="{{ route('drop_products.create') }}">{{__('translate.Drop Product')}}</a>

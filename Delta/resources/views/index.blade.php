@@ -147,12 +147,12 @@
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
                 <div class="card border-none   p-4">
                   <div class="card-img-top ">
-                    <a href="{{ route('products.index') }}"> <i class="fas fa-shopping-bag fa-2x  text-info "></i></a>
+                    <a href="{{ route('categorized_product') }}"> <i class="fas fa-shopping-bag fa-2x  text-info "></i></a>
                   </div>
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('products.index') }}"> {{ __('translate.Products') }}</a> </div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> <a href="{{ route('categorized_product') }}"> {{ __('translate.Products') }}</a> </div>
                       </div>
 
 

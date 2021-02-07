@@ -31,6 +31,9 @@ class Product extends Model
     public function unit(){
         return $this->belongsTo('App\Models\unit','unit_id','id')->withTrashed();
     }
+    public function stockAlert(){
+        return $this->hasOne('App\Models\stockAlert','product_id','id')->withTrashed();
+    }
     public function abasas(){
         $this->brand = $this->brand->name;
         $this->warrenty = $this->warrenty->name;

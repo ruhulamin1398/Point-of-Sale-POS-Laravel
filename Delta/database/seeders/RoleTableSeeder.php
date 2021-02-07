@@ -107,52 +107,67 @@ class RoleTableSeeder extends Seeder
             ],
     ]);
 
-        DB::table('products')->insert([
-            [
-                'name' => 'Polo Shirt',
-                'category_id' => 1,
-                'image_id'=> 1,
-                'brand_id'=> 1,
-                'price_per_unit'=>100,
-                'cost_per_unit'=>50,
-                'stock'=>'50',
-                'stock_alert'=>20,
-                'sell'=>10,
-                'unit_id'=>3,
-                'description'=>'plo make you comfortable',
+    DB::table('products')->insert([
+        [
+            'name' => 'Polo Shirt',
+            'category_id' => 1,
+            'image_id'=> 1,
+            'brand_id'=> 1,
+            'price_per_unit'=>100,
+            'cost_per_unit'=>50,
+            'stock'=>'50',
+            'stock_alert'=>20,
+            'sell'=>10,
+            'unit_id'=>3,
+            'description'=>'plo make you comfortable',
 
-            ],
-            [
-                'name' => 'HP Laptop',
-                'category_id' => 2,
-                'image_id'=> 2,
-                'brand_id'=> 2,
-                'price_per_unit'=>100,
-                'cost_per_unit'=>50,
-                'stock'=>'50',
-                'stock_alert'=>20,
-                'sell'=>10,
-                'unit_id'=>3,
-                'description'=>'Dont Buy HP,its really bad',
+        ],
+        [
+            'name' => 'HP Laptop',
+            'category_id' => 2,
+            'image_id'=> 2,
+            'brand_id'=> 2,
+            'price_per_unit'=>100,
+            'cost_per_unit'=>50,
+            'stock'=>'50',
+            'stock_alert'=>20,
+            'sell'=>10,
+            'unit_id'=>3,
+            'description'=>'Dont Buy HP,its really bad',
 
-            ],  
-             
-            [
-                'name' => 'Polo jeans',
-                'category_id' => 3,
-                'image_id'=> 3,
-                'brand_id'=> 3,
-                'price_per_unit'=>100,
-                'cost_per_unit'=>50,
-                'stock'=>'50',
-                'stock_alert'=>20,
-                'sell'=>10,
-                'unit_id'=>3,
-                'description'=>'plo make you comfortable',
+        ],  
+         
+        [
+            'name' => 'Polo jeans',
+            'category_id' => 3,
+            'image_id'=> 3,
+            'brand_id'=> 3,
+            'price_per_unit'=>100,
+            'cost_per_unit'=>50,
+            'stock'=>'50',
+            'stock_alert'=>20,
+            'sell'=>10,
+            'unit_id'=>3,
+            'description'=>'plo make you comfortable',
 
-            ],
+        ],
+    ]);
+    DB::table('stock_alerts')->insert([
+        [
+            'product_id' => 1,
 
-        ]);
+        ],
+        [
+            'product_id' => 2,
+
+        ],  
+         
+        [
+            'product_id' => 3,
+
+        ],
+
+    ]);
 
         DB::table('employee_duties')->insert([
             [
