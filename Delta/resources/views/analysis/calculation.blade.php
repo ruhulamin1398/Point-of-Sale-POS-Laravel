@@ -12,7 +12,7 @@
             <nav class="navbar  ">
 
                 <div class="navbar-brand">
-                    Calculation Analysis <span id="monthOrYear"> ({{ $data['month'] }})</span>
+                     {{ __('translate.Calculation Analysis') }} <span id="monthOrYear"> ({{ $data['month'] }})</span>
                 </div>
                 <div id="searchByMonth">
 
@@ -37,13 +37,13 @@
         
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="daily-tab" data-toggle="tab" href="#daily" role="tab" aria-controls="daily" aria-selected="true">Monthly</a>
+              <a class="nav-link active" id="daily-tab" data-toggle="tab" href="#daily" role="tab" aria-controls="daily" aria-selected="true">{{ __('translate.Monthly') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="monthly-tab" data-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="false">Yearly</a>
+              <a class="nav-link" id="monthly-tab" data-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="false">{{ __('translate.Yearly') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="yearly-tab" data-toggle="tab" href="#yearly" role="tab" aria-controls="yearly" aria-selected="false">Total</a>
+              <a class="nav-link" id="yearly-tab" data-toggle="tab" href="#yearly" role="tab" aria-controls="yearly" aria-selected="false">{{ __('translate.Total') }}</a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -60,7 +60,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Buy</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Monthly Buy') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailySellCard">{{ $data['dailyBuy'] }}</div>
                                     </div>
             
@@ -76,7 +76,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Sell
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Monthly Sell') }}
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyPurchaseCard">{{ $data['dailySell'] }}</div>
                                     </div>
@@ -93,7 +93,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Sell Profit
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Monthly Sell Profit') }}
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyExpenseCard"> {{ $data['dailySellProfit'] }} </div>
                                     </div>
@@ -110,7 +110,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Profit</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Monthly Profit') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard"> {{ $data['dailySellProfit'] }}</div>
                                     </div>
             
@@ -126,7 +126,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Drop</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Monthly Drop') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyDrop'] }}</div>
                                     </div>
             
@@ -142,7 +142,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Expense</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Monthly Expense') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyExpense'] }}</div>
                                     </div>
             
@@ -158,7 +158,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Payment</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Monthly Payment') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyPayment'] }}</div>
                                     </div>
             
@@ -174,7 +174,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Tax</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Monthly Tax') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="dailyProfitCard">{{ $data['dailyTax'] }}</div>
                                     </div>
             
@@ -258,7 +258,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Buy</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Yearly Buy') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySellCard">{{ $data['monthlyBuy'] }}</div>
                                     </div>
             
@@ -274,7 +274,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Sell
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Yearly Sell') }}
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyPurchaseCard">{{ $data['monthlySell'] }}</div>
                                     </div>
@@ -291,7 +291,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Sell Profit
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Yearly Sell Profit') }}
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyExpenseCard">{{ $data['monthlySellProfit'] }} </div>
                                     </div>
@@ -308,7 +308,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Profit</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Yearly Profit') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyProfit'] }}</div>
                                     </div>
             
@@ -324,7 +324,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Drop</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Yearly Drop') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlySellProfit'] }}</div>
                                     </div>
             
@@ -340,7 +340,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Expense</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Yearly Expense') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyDrop'] }}</div>
                                     </div>
             
@@ -356,7 +356,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Payment</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ __('translate.Yearly Payment') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyExpense'] }}</div>
                                     </div>
             
@@ -372,7 +372,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yearly Tax</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Yearly Tax') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlyProfitCard">{{ $data['monthlyTax'] }}</div>
                                     </div>
             
@@ -453,7 +453,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Buy</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Buy') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800" id="YearlySellCard">{{ $data['yearlyBuy'] }}</div>
                                     </div>
             
@@ -469,7 +469,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Sell
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Sell') }}
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyPurchaseCard">{{ $data['yearlySell'] }}</div>
                                     </div>
@@ -486,7 +486,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Sell Profit
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Sell Profit') }}
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyExpenseCard">{{ $data['yearlySellProfit'] }} </div>
                                     </div>
@@ -503,7 +503,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Profit</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Profit') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyProfit'] }}</div>
                                     </div>
             
@@ -519,7 +519,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Drop</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Drop') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyDrop'] }}</div>
                                     </div>
             
@@ -535,7 +535,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Expense </div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Expense') }} </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyExpense'] }}</div>
                                     </div>
             
@@ -551,7 +551,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Payment</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Payment') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyPayment'] }}</div>
                                     </div>
             
@@ -567,7 +567,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Tax</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ __('translate.Total Tax') }}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"  id="YearlyProfitCard">{{ $data['yearlyTax'] }}</div>
                                     </div>
             
