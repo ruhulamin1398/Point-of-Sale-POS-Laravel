@@ -261,7 +261,9 @@
 
 
     <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
-    @can('Analysis Page')
+    
+    @if( $GLOBALS['CurrentUser']->can('Analysis Page') || $GLOBALS['CurrentUser']->can('Calculation Analysis Page') || $GLOBALS['CurrentUser']->can('Buy Analysis Page') || $GLOBALS['CurrentUser']->can('Sell Analysis Page') )
+
     <hr class="sidebar-divider m-1 p-0 ">
 
     <!-- Nav Item - Dashboard -->
@@ -273,16 +275,23 @@
         </a>
         <div id="collapseAnalysis" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-
+                @can('Analysis Page')
                 <a class="collapse-item" href="{{ route('analysis') }}">{{ __('translate.Analysis') }} </a>
+                @endcan
+                @can('Calculation Analysis Page')
                 <a class="collapse-item" href="{{ route('calculation-analysis') }}">{{ __('translate.Calculation Analysis') }} </a>
+                @endcan
+                @can('Buy Analysis Page')
                 <a class="collapse-item" href="{{ route('buy-analysis') }}">{{ __('translate.Buy Analysis') }} </a>
+                @endcan
+                @can('Sell Analysis Page')
                 <a class="collapse-item" href="{{ route('sell-analysis') }}">{{ __('translate.Sell Analysis') }} </a>
+                @endcan
 
             </div>
         </div>
     </li>
-    @endcan
+    @endif
 
     @if( $GLOBALS['CurrentUser']->can('Expense Page') || $GLOBALS['CurrentUser']->can('Expense Monthly Page') || $GLOBALS['CurrentUser']->can('Expense Type Page') )
 

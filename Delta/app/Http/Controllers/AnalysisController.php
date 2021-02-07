@@ -13,11 +13,17 @@ use App\Models\sellAnalysisMonthly;
 use App\Models\sellAnalysisYearly;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AnalysisController extends Controller
 {
     public function index()
     {
+        
+        if(! auth()->user()->hasPermissionTo('Analysis Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
         $data = array();
         $today = Carbon::now()->format('Y-m-d');
         $calculation = calculationAnalysisDaily::where('date',$today)->first();
@@ -49,10 +55,16 @@ class AnalysisController extends Controller
         $data['amountAnalysisDaily'] = json_decode(json_encode($amountAnalysisDaily), true);
         $data['amountAnalysisMonthly'] = json_decode(json_encode($amountAnalysisMonthly), true);
 
-        return view('analysis.index', compact('data'));
+        return view('analysis.index', compact('data','roles'));
     }
 
     public function calculationAnalysis(Request $request){
+        
+        if(! auth()->user()->hasPermissionTo('Calculation Analysis Page')){
+            return abort(401);
+        }
+        
+        $roles = Role::all();
         $monthStart = Carbon::now()->format('Y-m-01');
         $monthEnd = Carbon::now()->format('Y-m-31');
         $yearStart = Carbon::now()->format('Y-01-01');
@@ -67,11 +79,16 @@ class AnalysisController extends Controller
             
         }
         $data = $this->calculationAnalysisResults($monthEnd , $monthStart , $yearEnd ,$yearStart);
-        return view('analysis.calculation',compact('data'));
+        return view('analysis.calculation',compact('data','roles'));
     }
 
     
     public function buyAnalysis(Request $request){
+        
+        if(! auth()->user()->hasPermissionTo('Buy Analysis Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
         $monthStart = Carbon::now()->format('Y-m-01');
         $monthEnd = Carbon::now()->format('Y-m-31');
         $yearStart = Carbon::now()->format('Y-01-01');
@@ -86,11 +103,16 @@ class AnalysisController extends Controller
             
         }
         $data = $this->buyAnalysisResults($monthEnd , $monthStart , $yearEnd ,$yearStart);
-        return view('analysis.buy',compact('data'));
+        return view('analysis.buy',compact('data','roles'));
     }
 
     
     public function sellAnalysis(Request $request){
+        
+        if(! auth()->user()->hasPermissionTo('Sell Analysis Page')){
+            return abort(401);
+        }
+        $roles = Role::all();
         $monthStart = Carbon::now()->format('Y-m-01');
         $monthEnd = Carbon::now()->format('Y-m-31');
         $yearStart = Carbon::now()->format('Y-01-01');
@@ -105,7 +127,7 @@ class AnalysisController extends Controller
             
         }
         $data = $this->sellAnalysisResults($monthEnd , $monthStart , $yearEnd ,$yearStart);
-        return view('analysis.sell',compact('data'));
+        return view('analysis.sell',compact('data','roles'));
     }
 
 
