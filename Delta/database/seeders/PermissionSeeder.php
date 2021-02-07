@@ -704,6 +704,26 @@ class PermissionSeeder extends Seeder
                 'page_name' => 'Employee',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'Analysis Page',
+                'page_name' => 'Analysis',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Sell Analysis Page',
+                'page_name' => 'Sell Analysis',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Buy Analysis Page',
+                'page_name' => 'Buy Analysis',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'Calculation Analysis Page',
+                'page_name' => 'Calculation Analysis',
+                'guard_name' => 'web',
+            ],
 
 
 
@@ -1273,6 +1293,22 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'permission_id' => 127,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 128,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 129,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 130,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 131,
                 'role_id' => 1,
             ],
             [
