@@ -19,6 +19,7 @@ use App\Models\productAnalysisYearly;
 use App\Models\sellAnalysisDaily;
 use App\Models\sellAnalysisMonthly;
 use App\Models\sellAnalysisYearly;
+use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,19 @@ class OrderController extends Controller
         $month = Carbon:: parse($monthStart)->format('F, Y');
         $roles = Role::all();
         $orders= order::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
-        return view('product.order.index',compact('orders','month','roles'));
+        
+        
+        $settings = setting::where('table_name', 'orders')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $orders,
+            'page_name' => 'Order',
+        ];
+
+        return view('product.order.index',compact('dataArray','month','roles'));
     }
   
 

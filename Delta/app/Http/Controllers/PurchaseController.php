@@ -17,6 +17,7 @@ use App\Models\purchase;
 use App\Models\purchaseAnalysisDaily;
 use App\Models\purchaseAnalysisMonthly;
 use App\Models\purchaseAnalysisYearly;
+use App\Models\setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -44,7 +45,18 @@ class PurchaseController extends Controller
         $month = Carbon:: parse($monthStart)->format('F, Y');
         $purchases= purchase::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
 
-        return view('product.purchase.index',compact('purchases','month','roles'));
+        
+        $settings = setting::where('table_name', 'purchases')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $purchases,
+            'page_name' => 'Purchase',
+        ];
+
+        return view('product.purchase.index',compact('dataArray','month','roles'));
        
     }
 

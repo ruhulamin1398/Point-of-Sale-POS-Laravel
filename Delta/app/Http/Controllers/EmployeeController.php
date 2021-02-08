@@ -126,7 +126,18 @@ class EmployeeController extends Controller
        $month = Carbon:: parse($monthStart)->format('F');
         $orders= order::where('user_id', $employee->user_id )->where('created_at','<=',$monthEnd)->where('created_at','>=',$monthStart)->get(); 
         $employeeGraph = $this->employeeAnalysisYearly($employee);
-        return view('employees.show',compact('employee','orders','month','employeeGraph'));
+
+        
+        $settings = setting::where('table_name', 'orders')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $orders,
+            'page_name' => 'Order',
+        ];
+        return view('employees.show',compact('employee','dataArray','month','employeeGraph'));
     }
 
     /**

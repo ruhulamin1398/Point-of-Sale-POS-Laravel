@@ -17,4 +17,11 @@ class order extends Model
     public function customer(){
         return $this->belongsTo('App\Models\customer','customer_id','id')->withTrashed();
     }
+
+
+    
+    public function abasas(){
+        $this->customer = $this->customer->name;
+        $this->time = $this->created_at->format('d M,Y h:i:a');
+    }   
 }

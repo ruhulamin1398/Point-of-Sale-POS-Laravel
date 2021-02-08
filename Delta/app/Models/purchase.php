@@ -18,4 +18,9 @@ class purchase extends Model
     public function supplier(){
         return $this->belongsTo('App\Models\supplier','supplier_id','id')->withTrashed();
     }
+    
+    public function abasas(){
+        $this->supplier = $this->supplier->name;
+        $this->time = $this->created_at->format('d M,Y h:i:a');
+    } 
 }
