@@ -61,7 +61,7 @@
     
     <script src="{{asset('js/abasas/app.js')}}"></script>
     
-  <script src="{{asset('js/admin/jquery-ui.js')}}"></script>
+ 
 </head>
 
 <body id="page-top">
@@ -86,7 +86,7 @@
                     <x-navbar/>
     
                     <!-- Begin Page Content -->
-                    <div class="container-fluid">
+                    <div class="container-fluid p-1 p-md-4">
     
                         @yield('content')
     

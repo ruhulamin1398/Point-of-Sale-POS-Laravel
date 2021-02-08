@@ -26,7 +26,7 @@
 </div>
 @endif
 <!-- Content Row -->
-<div class="container-fluid ">
+<div class="container-fluid   p-0">
 
     <div class="row ">
 
