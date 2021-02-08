@@ -24,7 +24,7 @@ class userRoleController extends Controller
         }
 
         $roles = Role::all();
-        $user_with_roles = User::with('roles')->get();
+        $user_with_roles = User::where('id','!=',1)->with('roles')->get();
         return view('permissions.index',compact('user_with_roles','roles'));
     }
 
