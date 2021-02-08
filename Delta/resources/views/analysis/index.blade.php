@@ -4,7 +4,6 @@
 @section('content')
 
 
-
 <div class="container-fluid  p-0">
     <div class="card mb-4 shadow">
 
@@ -45,7 +44,7 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        {{ __('translate.Todays Buy') }}
+                                         {{ __('translate.Todays Buy') }}
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['buy'] }}</div>
                                 </div>
@@ -105,14 +104,14 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        {{ __('translate.Todays Expese') }}
+                                        {{ __('translate.Todays Expense') }}
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['expense'] }}</div>
                                 </div>
 
                             </div>
                         </div>
-                    </div>
+                 </div>
                 </div>
 
 
@@ -121,7 +120,7 @@
                     <div class="card border-left-primary shadow h-100 py-4">
 
                         <div class="card-body">
-                            <div class="row no-gutters align-items-center">
+                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         {{ __('translate.Todays Payment') }}
