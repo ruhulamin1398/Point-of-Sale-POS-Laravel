@@ -31,6 +31,12 @@ $(document).ready(function(){
 
      (function($) {
         "use strict"; // Start of use strict
+
+        
+        if ($(window).width() < 768) {
+          $('.sidebar .collapse').collapse('hide');
+          $(".sidebar").toggleClass("toggled");
+        };
       
         // Toggle the side navigation
         $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
