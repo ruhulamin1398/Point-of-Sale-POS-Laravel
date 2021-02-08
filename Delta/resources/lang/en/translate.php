@@ -480,6 +480,14 @@ return[
 'Yearly Cash Received'=>'Yearly Cash Received',
 'Monthly Cash Received'=>'Monthly Cash Received', 
 'Total Cash Received'=>'Total Cash Received', 
+'Todays Sell'=>'Todays Sell',
+'Todays Buy'=>'Todays Buy',
+'Todays Sell Profit'=>'Todays Sell Profit',
+'Todays Profit'=>'Todays Profit',
+'Todays Expense'=>'Todays Expense',
+'Todays Payment'=>'Todays Payment',
+'Todays Sell Count'=>'Todays Sell Count',
+'Todays Buy Count'=>'Todays Buy Count',
 ''=>'',
 ''=>'',
 ''=>'',
@@ -487,6 +495,5 @@ return[
 ''=>'',
 ''=>'',
 ''=>'',
-''=>'',
-];
+]; 
 
