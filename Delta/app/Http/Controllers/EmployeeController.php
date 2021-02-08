@@ -36,7 +36,7 @@ class EmployeeController extends Controller
         $roles = Role::all();
         $designations   =designation::all();     
         $users   = User::all();     
-        $employees =  employee::all();
+        $employees =  employee::where('id','!=',1)->get();
                 $dataArray=[
                     'settings'=>$settings,
                     'items' =>$employees,

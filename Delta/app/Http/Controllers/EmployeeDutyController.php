@@ -38,7 +38,7 @@ class EmployeeDutyController extends Controller
         // $currentWeekFirstDay= now()->startOfWeek()->format('Y-m-d H:i');
         $weekDaysArray = [];
         $weeklyEmployeesDutyData = [];
-        $employees = employee::all();
+        $employees = employee::where('id','!=',1)->get();
         $length = count($employees);
         $firstDay = new Carbon(carbon::parse($currentWeekFirstDay)->format('Y-m-d'));
 
@@ -99,7 +99,7 @@ class EmployeeDutyController extends Controller
         }
         $roles = Role::all();
         // return $todayEmployeeDuties;
-        $employees = employee::all();
+        $employees = employee::where('id','!=',1)->get();
         $dutyStatuses = dutyStatus::all();
 
         return view('employees.duty.create', compact('employees', 'dutyStatuses', 'todayEmployeeDuties','roles'));

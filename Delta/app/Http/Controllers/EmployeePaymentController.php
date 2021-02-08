@@ -36,7 +36,7 @@ class EmployeePaymentController extends Controller
             $month= Carbon:: parse($request->month)->format('Y-m-01');
         }
         $employeePayment= employeePayment:: where('month',$month)->get();
-        $employees = employee::all();
+        $employees = employee::where('id','!=',1)->get();
         $payment_types = employeePaymentType :: all();
         $salary_status = salaryStatus::all();
 

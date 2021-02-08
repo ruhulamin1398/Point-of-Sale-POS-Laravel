@@ -113,7 +113,7 @@
                 <a class="collapse-item" href="{{ route('purchases.create') }}">{{__('translate.Buy')}} </a>
                 @endcan
                 @can('Purchase Page')
-                <a class="collapse-item" href="{{ route('purchases.index') }}">{{__('translate.Perchase List')}}  </a>
+                <a class="collapse-item" href="{{ route('purchases.index') }}">{{__('translate.Purchase List')}}  </a>
                 @endcan
                 @can('Return To Supplier Page')
                 <a class="collapse-item" href="{{ route('return-to-suppliers.index') }}">{{__('translate.Return List')}} </a>
@@ -245,7 +245,7 @@
         </div>
     </li>
     @endif
-    @can('Payment System Page')
+    {{-- @can('Payment System Page')
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
 
@@ -256,10 +256,42 @@
         </a>
 
     </li>
-    @endcan
+    @endcan --}}
 
 
 
+
+    @if( $GLOBALS['CurrentUser']->can('Expense Page') || $GLOBALS['CurrentUser']->can('Expense Monthly Page') || $GLOBALS['CurrentUser']->can('Expense Type Page') )
+
+    <hr class="sidebar-divider m-1 p-0 ">
+
+    <!-- Nav Item - Dashboard -->
+
+    <li class="nav-item">
+        <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseExpenses" aria-expanded="true" aria-controls="collapseExpenses">
+            <i class="fas fa-clipboard-list"></i>
+            <span>{{__('translate.Expense')}} </span>
+        </a>
+        <div id="collapseExpenses" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+
+                @can('Expense Page')
+                <a class="collapse-item" href="{{ route('expenses.index') }}">{{__('translate.Daily')}}</a>
+                @endcan
+                @can('Expense Monthly Page')
+                <a class="collapse-item" href="{{ route('expense-monthlies.index') }}">{{__('translate.Monthly')}}</a>
+                @endcan
+                @can('Expense Type Page')
+                <a class="collapse-item" href="{{ route('expense-types.index') }}">{{__('translate.Expense Type')}}</a>
+                @endcan
+
+            </div>
+        </div>
+    </li>
+    @endif 
+
+    
     <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
     
     @if( $GLOBALS['CurrentUser']->can('Analysis Page') || $GLOBALS['CurrentUser']->can('Calculation Analysis Page') || $GLOBALS['CurrentUser']->can('Buy Analysis Page') || $GLOBALS['CurrentUser']->can('Sell Analysis Page') )
@@ -292,36 +324,6 @@
         </div>
     </li>
     @endif
-
-    @if( $GLOBALS['CurrentUser']->can('Expense Page') || $GLOBALS['CurrentUser']->can('Expense Monthly Page') || $GLOBALS['CurrentUser']->can('Expense Type Page') )
-
-    <hr class="sidebar-divider m-1 p-0 ">
-
-    <!-- Nav Item - Dashboard -->
-
-    <li class="nav-item">
-        <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseExpenses" aria-expanded="true" aria-controls="collapseExpenses">
-            <i class="fas fa-clipboard-list"></i>
-            <span>{{__('translate.Expense')}} </span>
-        </a>
-        <div id="collapseExpenses" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-
-
-                @can('Expense Page')
-                <a class="collapse-item" href="{{ route('expenses.index') }}">{{__('translate.Daily')}}</a>
-                @endcan
-                @can('Expense Monthly Page')
-                <a class="collapse-item" href="{{ route('expense-monthlies.index') }}">{{__('translate.Monthly')}}</a>
-                @endcan
-                @can('Expense Type Page')
-                <a class="collapse-item" href="{{ route('expense-types.index') }}">{{__('translate.Expense Type')}}</a>
-                @endcan
-
-            </div>
-        </div>
-    </li>
-    @endif 
 
     {{-- <hr class="sidebar-divider m-1 p-0 ">
     <li class="nav-item">
