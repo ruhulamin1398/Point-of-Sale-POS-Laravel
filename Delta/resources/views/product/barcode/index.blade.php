@@ -144,9 +144,10 @@
             $("#barcodeInputId").val(id)
             $("#barcodeName").val(databaseProducts[id].name)
             // alert(id);//this one needs to be triggered
-            purchaseProductInputOnInput()
+            // purchaseProductInputOnInput()
             $("#productSuggession").hide();
             $("#productSuggession").html("");
+             $('#barcodeSubmit').prop("disabled",false);
         });
 
 
@@ -160,6 +161,8 @@
             
             if (typeof product == 'undefined') {
                 $('#barcodeName').val('');
+                 $('#barcodeSubmit').prop("disabled",true);
+
             } else {
                 var html = '';
                 $('#barcodeName').val(product.name);
@@ -175,6 +178,8 @@
 
                 }
                 $('#checkBoxDiv').html(html);
+                $('#barcodeSubmit').prop("disabled",false);
+
             }
             // if($('#barcodeName').val().length==0 || parseFloat($('#barcodeName').val().trim()) <=0)
             //     alert('hi');

@@ -148,9 +148,11 @@ $('body').click(function () {
         $("#dropProductInputId").val(id)
         $("#dropProductName").val(databaseProducts[id].name);
         // alert(id);//this one needs to be triggered
-        purchaseProductInputOnInput()
+        // purchaseProductInputOnInput()
         $("#productSuggession").hide();
         $("#productSuggession").html("");
+        
+        $('#dropProductSubmit').prop("disabled",false);
     });
 
 
@@ -163,8 +165,10 @@ $('body').click(function () {
         console.log(product);
         if (typeof product == 'undefined') {
             $('#dropProductName').val('');
+            $('#dropProductSubmit').prop("disabled",true);
         } else {
             $('#dropProductName').val(product.name);
+            $('#dropProductSubmit').prop("disabled",false);
         }
         // if($('#dropProductName').val().length==0 || parseFloat($('#dropProductName').val().trim()) <=0)
         //     alert('hi');

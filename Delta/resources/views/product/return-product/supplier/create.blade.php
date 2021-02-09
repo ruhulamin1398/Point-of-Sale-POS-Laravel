@@ -369,6 +369,7 @@ $('body').click(function () {
         //purchaseProductInputOnInput()
         $("#productSuggession").hide();
         $("#productSuggession").html("");
+         $('#returnProductSubmit').prop("disabled",false);
     });
 
 
@@ -379,8 +380,10 @@ $('body').click(function () {
         var product = databaseProducts[product_id];
         if (typeof product == 'undefined') {
             $('#returnProductName').val('');
+         $('#returnProductSubmit').prop("disabled",true);
         } else {
             $('#returnProductName').val(product.name);
+         $('#returnProductSubmit').prop("disabled",false);
         }
         // if($('#returnProductName').val().length==0 || parseFloat($('#returnProductName').val().trim()) <=0)
         //     alert('hi');
