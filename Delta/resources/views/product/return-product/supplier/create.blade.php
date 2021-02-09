@@ -309,7 +309,7 @@ $('#dataTable1').DataTable({
     var databaseProducts  ;
     $(function () {
         var link = $("#homeRoute").val().trim() + "/api/all-products";
-        console.log(link);
+        // console.log(link);
         $.get(link, function (data) {
             databaseProducts = data;
         });
