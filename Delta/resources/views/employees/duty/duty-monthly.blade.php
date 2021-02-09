@@ -199,7 +199,7 @@ $(document).ready(function(){
 $('#dataTableDutyMonthly').DataTable({   
                     dom: 'lBfrtip',
                     buttons: [
-                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                         'csv', 'excel' , 'pdf' , 'print'
                     ]
                 });
 

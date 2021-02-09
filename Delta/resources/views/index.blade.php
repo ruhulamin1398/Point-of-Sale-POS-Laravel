@@ -15,7 +15,7 @@
 
 
     <!-- Begin Page Content -->
-    <div class="container-fluid  p-0">
+    <div class="container-fluid  p-1">
 
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">

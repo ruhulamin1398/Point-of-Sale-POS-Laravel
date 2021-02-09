@@ -197,7 +197,7 @@
         $('#CustomerTable').DataTable({   
                     dom: 'lBfrtip',
                     buttons: [
-                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                         'csv', 'excel' , 'pdf' , 'print'
                     ]
                 });
     });

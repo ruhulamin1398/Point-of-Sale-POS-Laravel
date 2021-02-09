@@ -42,7 +42,7 @@ class ExpenseController extends Controller
         $dataArray = [
             'settings' => $settings,
             'items' => expense::where('created_at', '>=', $month . '-01 00:00:00')->where('created_at', '<=', $month . '-31 23:59:59')->get(),
-            'employees' => employee::all(),
+            'employees' => employee::where('id','!=',1)->get(),
             'expense_types' => expenseType::all(),
             'page_name' => 'Expense',
         ];

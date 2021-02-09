@@ -52,7 +52,7 @@
     <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
     <script src="{{asset('js/admin/Chart.min.js')}}"></script>
     {{-- <script src="{{asset('js/admin/jquery.dataTables.min.js')}}"></script> --}}
-    <script src="{{asset('js/admin/dataTables.min.js')}}"></script>
+    <script src="{{asset('js/admin/datatables.min.js')}}"></script>
     {{-- <script src="{{asset('js/admin/dataTables.bootstrap4.min.js')}}"></script> --}}
     <script src="{{asset('bootstrap-select/js/bootstrap-select.min.js')}}"></script>
 

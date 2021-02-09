@@ -810,7 +810,7 @@
          $('#dataTable').DataTable({
              dom: 'lBfrtip',
              buttons: [
-                 'copy', 'csv', 'excel', 'pdf', 'print'
+                 'csv', 'excel', 'pdf', 'print'
              ]
          });
 
@@ -926,7 +926,7 @@
 
          html = "";
 
-         html += '<div class="form-group col-md-4 col-sm-12  p-4">';
+         html += '<div class="form-group col-md-4 col-sm-12 p-0 p-md-4">';
          html += '<label class="col-form-label" >  {{ __("translate.".$field["title"] ) }} ' + @if($require == 1)
          '<span style="color: red"> *</span>'
          @else ""
@@ -966,8 +966,8 @@
          // // </div>
 
          html = "";
-         html += '<div class="col-md-4 col-sm-12  p-4">';
-         html += '<label class="text-dark pl-4"> {{ __("translate.".$field["title"])  }} ' + @if($require == 1)
+         html += '<div class="col-md-4 col-sm-12   p-0 p-md-4">';
+         html += '<label class="text-dark "> {{ __("translate.".$field["title"])  }} ' + @if($require == 1)
          '<span style="color: red"> *</span>'
          @else ""
          @endif + '   </label>';
