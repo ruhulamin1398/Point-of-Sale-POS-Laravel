@@ -20,6 +20,7 @@ use App\Models\sellAnalysisDaily;
 use App\Models\sellAnalysisMonthly;
 use App\Models\sellAnalysisYearly;
 use App\Models\setting;
+use App\Models\unit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,7 +76,9 @@ class OrderController extends Controller
             return abort(401);
         }   
         $roles = Role::all();
-        $paymentSystems = paymentSystem::all();      
+        $paymentSystems = paymentSystem::all(); 
+        
+     
         return view('product.order.create',compact('paymentSystems','roles'));
     }
 

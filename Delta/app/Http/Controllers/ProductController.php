@@ -52,7 +52,11 @@ class ProductController extends Controller
         $p= Product::all();
       
         $products= array();
+        $itr = 1;
         foreach($p as $product){
+
+            $product->unit;
+         
             $products[$product->id]=$product;
         }
         return $products;

@@ -1,11 +1,14 @@
 @extends('includes.app')
+@php
+   $GLOBALS['CurrentUser']= auth()->user();   
+@endphp
 
 
 @section('content')
 
 <div class="row">
 
-    <div class="col-8">
+    <div class="col-12 col-md-8">
 
         <div class="card mb-4 shadow">
 
@@ -60,15 +63,15 @@
                         <div class="col-auto">
 
                             <span class="text-dark pl-1"> {{ __('translate.Price') }} </span>
-                            <input type="text" name="price" id="purchaseProductInputPrice" size="6" value=0 min="0"
-                                class="form-control  mb-2  inputMinZero">
+                            <input type="number" step="any" name="price" id="purchaseProductInputPrice" size="6" value=0 min="0"
+                                class="form-control  mb-2  inputMinZero" >
                         </div>
 
                         <div class="col-auto">
 
                             <span class="text-dark pl-1">{{ __('translate.Discount') }} <span id="percentageIcon"> ( % ) </span> <i
                                     class="fas fa-tools" id="disCountSetting"></i></span>
-                            <input type="text" name="discount" id="purchaseProductInputdiscount" size="6" min="0"
+                            <input type="number" step="any" name="discount" id="purchaseProductInputdiscount" size="6" min="0"
                                 value=0 class="form-control  mb-2 inputMinZero">
                         </div>
 
@@ -89,7 +92,7 @@
 
                         <div class="col-auto">
                             <span class="text-dark pl-1">{{ __('translate.Quantity') }} </span>
-                            <input type="text" name="quantity" id="purchaseProductInputQuantity" size="6" value=1
+                            <input type="number" step="any" name="quantity" id="purchaseProductInputQuantity" size="6" value=1
                                 min="1" class="form-control  mb-2  inputMinOne">
                         </div>
 
@@ -99,8 +102,8 @@
                         <div class="col-auto">
 
                             <span class="text-dark pl-1">{{ __('translate.Total') }}</span>
-                            <input type="text" name="total" id="purchaseProductInputTotal" size="10" value=0
-                                class="form-control  mb-2  inputMinZero ">
+                            <input type="number" step="any" name="total" id="purchaseProductInputTotal" size="10" value=0
+                                class="form-control  mb-2  inputMinZero " readonly>
                         </div>
 
 
@@ -172,7 +175,7 @@
 
 
     </div>
-    <div class="col-4 row">
+    <div class="col-12 col-md-4 row">
 
         <x-customer-phone />
 
@@ -206,7 +209,7 @@
                         </div>
                     </div>
 
-                    <input type="text" id="productPurchaseMoreDiscountType" value='1' class="inputMinZero" hidden>
+                    <input type="number" step="any" id="productPurchaseMoreDiscountType" value='1' class="inputMinZero" hidden>
 
                     <input type="text" name="" id="discountTotal" value="0" class="inputMinZero" hidden>
                     <div class="row border-bottom border-dark mb-2">
@@ -231,8 +234,7 @@
 
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
-                            <div class="text-left  "> {{ __("translate.Tax") }} ( <span id="taxView">15</span>%) <i class="fas fa-tools pl-2"
-                                    id="TaxSetting"></i></span></div>
+                            <div class="text-left  "> {{ __("translate.Tax") }}</div>
                         </div>
                         <div class="col-6">
                             <div class="text-right " id="taxValue">0</div>
@@ -425,7 +427,7 @@
 
 
 <!-- Tax Discount Type Modal -->
-
+{{-- 
 <div class="modal fade   " id="taxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered  border-none " role="document">
@@ -447,7 +449,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- /// purchase  Complete modal  -->
 <div class=" modal fade" id="PrintPurchaseModalwwwwwwwwww" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label"
