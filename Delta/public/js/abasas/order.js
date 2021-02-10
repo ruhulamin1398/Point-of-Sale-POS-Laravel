@@ -78,11 +78,9 @@ $(document).ready(function () {
     }
 
     $("#purchaseProductError").hide();
-    $("#purchaseProductStockError").hide();
 
 
     function purchaseProductInputOnInput() {
-        $("#purchaseProductStockError").hide();
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
 
@@ -98,7 +96,6 @@ $(document).ready(function () {
         } else {
             
             var productPrice = product.price_per_unit * product.unit.value ;
-            // var productStock = product.stock / product.unit.value ;
             if(product.tax_type_id ==1){
                 productPrice = productPrice + (productPrice * product.tax * 0.01 ) ;
             }
@@ -118,12 +115,6 @@ $(document).ready(function () {
             $("#purchaseProductInputQuantity").val(1);
             $("#purchaseProductInputTotal").val(productPrice);
 
-            // if(productStock < 1  && product.stock_controll=='yes'){
-            //     $("#purchaseProductStockError").show();
-            //     $("#purchaseProductInputSubmit").attr("disabled", true);
-            //     return 0;
-
-            // }
             
             $("#purchaseProductInputSubmit").attr("disabled", false);
 
@@ -131,7 +122,7 @@ $(document).ready(function () {
 
     }
     $("#purchaseProductInputId").on('input', function () {
-
+        $("#purchaseProductStockError").hide();
         purchaseProductInputOnInput()
 
 
@@ -150,9 +141,10 @@ $(document).ready(function () {
         calIndivitualTotal();
     });
     $("#purchaseProductInputQuantity").on('input', function () {
-        // if($("#purchaseProductStockError").is(":visible")){
-        //     $("#purchaseProductInputSubmit").attr("disabled", false);
-        // }
+        if($("#purchaseProductStockError").is(":visible")){
+            $("#purchaseProductInputSubmit").attr("disabled", false);
+            $("#purchaseProductStockError").hide();
+        }
         calIndivitualTotal();
     });
 
@@ -237,6 +229,20 @@ $(document).ready(function () {
             var total = $("#purchaseProductInputTotal").val().trim();
             // var cost = databaseProducts[id]['cost_per_unit'] * quantity;
             // var profit= total-cost;
+            
+            var product = databaseProducts[id];
+            var productStock = product.stock / product.unit.value ;
+            var checkQuantity = quantity;
+            if (!(typeof purchaseTableData[id] == 'undefined')) {
+                checkQuantity = purchaseTableData[id].quantity + checkQuantity;
+    
+            }
+
+            if(!(typeof product == 'undefined') &&  productStock < checkQuantity  && product.stock_controll=='yes'){
+                $("#purchaseProductStockError").show();
+                $("#purchaseProductInputSubmit").attr("disabled", true);
+                return ;
+            }
 
 
         } else {
@@ -301,6 +307,16 @@ $(document).ready(function () {
             var total = $("#purchaseProductInputTotal").val().trim();
 
 
+            var product = databaseProducts[id];
+            var productStock = product.stock / product.unit.value ;
+            if(!(typeof product == 'undefined') &&  productStock < quantity  && product.stock_controll=='yes'){
+                $("#purchaseProductStockError").show();
+                $("#purchaseProductInputSubmit").attr("disabled", true);
+                return ;
+
+            }
+
+
         } else {
 
             // if not laoded 
@@ -353,15 +369,6 @@ $(document).ready(function () {
         var id = parseInt($("#purchaseProductInputId").val().trim());
 
 
-        // var product = databaseProducts[id];
-        // var productStock = product.stock / product.unit.value ;
-        // var inputStock = parseFloat($("#purchaseProductInputQuantity").val());
-        // if(!(typeof product == 'undefined') &&  productStock < inputStock  && product.stock_controll=='yes'){
-        //     $("#purchaseProductStockError").show();
-        //     $("#purchaseProductInputSubmit").attr("disabled", true);
-        //     return ;
-
-        // }
         if (submitButtonType == 'update') {
             console.log("submitButtonType == 'update'");
             if (submitButtonProductId == id) {
@@ -375,7 +382,6 @@ $(document).ready(function () {
             console.log('create method Called');
             AddNewProductOnPruchaseCart();
         }
-        $("#purchaseProductStockError").hide();
 
         $("#purchaseProductInputSubmit").data("submit-type", 'create');
         $("#purchaseProductInputSubmit").data("item-id", 0);
@@ -418,6 +424,8 @@ $(document).ready(function () {
         console.log("Clicked On " + prooductId);
         delete purchaseTableData[prooductId];
         printPurchaseTableData();
+        $("#purchaseProductError").hide();
+        $("#purchaseProductStockError").hide();
     });
 
 
@@ -447,6 +455,7 @@ $(document).ready(function () {
 
         purchasePagePercentageInitialization(product.discountType);
         $("#purchaseProductError").hide();
+        $("#purchaseProductStockError").hide();
         $("#purchaseProductInputSubmit").attr("disabled", false);
 
     });

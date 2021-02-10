@@ -1,3 +1,7 @@
+
+@php
+$GLOBALS['CurrentUser']= auth()->user();   
+@endphp
 <div class="card border-light bg-abasas-dark  text-center w-100 p-2">
     <h3 class="text-white"> {{ __('translate.Supplier') }} <button type="button" id="NewSupplierButton" class="btn btn-success btn-sm"><i class="fas fa-plus" id="NewCustomerButtonIcon"></i></button></h3>
 
@@ -83,7 +87,7 @@
 
             html += '<div class="text-center text-light"  id="supplierCompany"  >{{ __('translate.Company') }}: ' + supplier.company +
                 '</div>';
-            html += '<div class="text-center text-light">{{ __('translate.Due') }} : <span class="text-danger" id="supplierDue">' +
+            html += '<div class="text-center text-light" @if(! $GLOBALS["CurrentUser"]->can("Allow Supplier Due")  ) hidden @endif>{{ __('translate.Due') }} : <span class="text-danger" id="supplierDue">' +
                 supplier.due + '</span></div>';
             $("#supplierPhoneArea").html(html);
             $("#supplierPhoneArea").show();

@@ -92,8 +92,8 @@
 
                         <div class="col-auto">
                             <span class="text-dark pl-1">{{ __('translate.Quantity') }} </span>
-                            <input type="number" step="any" name="quantity" id="purchaseProductInputQuantity" size="6" value=1
-                                min="1" class="form-control  mb-2  inputMinOne">
+                            <input type="number" step="any" name="quantity" id="purchaseProductInputQuantity" size="6" value=1 min="0"
+                                min="1" class="form-control  mb-2 inputMinZero ">
                         </div>
 
 
