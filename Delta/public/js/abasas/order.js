@@ -78,9 +78,11 @@ $(document).ready(function () {
     }
 
     $("#purchaseProductError").hide();
+    $("#purchaseProductStockError").hide();
 
 
     function purchaseProductInputOnInput() {
+        $("#purchaseProductStockError").hide();
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
 
@@ -96,6 +98,7 @@ $(document).ready(function () {
         } else {
             
             var productPrice = product.price_per_unit * product.unit.value ;
+            // var productStock = product.stock / product.unit.value ;
             if(product.tax_type_id ==1){
                 productPrice = productPrice + (productPrice * product.tax * 0.01 ) ;
             }
@@ -115,6 +118,13 @@ $(document).ready(function () {
             $("#purchaseProductInputQuantity").val(1);
             $("#purchaseProductInputTotal").val(productPrice);
 
+            // if(productStock < 1  && product.stock_controll=='yes'){
+            //     $("#purchaseProductStockError").show();
+            //     $("#purchaseProductInputSubmit").attr("disabled", true);
+            //     return 0;
+
+            // }
+            
             $("#purchaseProductInputSubmit").attr("disabled", false);
 
         }
@@ -132,6 +142,7 @@ $(document).ready(function () {
 
     $("#purchaseProductInputPrice").on('input', function () {
 
+
         calIndivitualTotal();
     });
     $("#purchaseProductInputdiscount").on('input', function () {
@@ -139,7 +150,9 @@ $(document).ready(function () {
         calIndivitualTotal();
     });
     $("#purchaseProductInputQuantity").on('input', function () {
-
+        // if($("#purchaseProductStockError").is(":visible")){
+        //     $("#purchaseProductInputSubmit").attr("disabled", false);
+        // }
         calIndivitualTotal();
     });
 
@@ -217,7 +230,7 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
-            var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+            var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
             var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
@@ -281,7 +294,7 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
-            var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+            var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
             var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
@@ -303,7 +316,7 @@ $(document).ready(function () {
         // var id = parseInt($("#purchaseProductInputId").val().trim());
         // var name = $("#purchaseProductInputName").val().trim();
         // var price = $("#purchaseProductInputPrice").val().trim();
-        // var quantity = parseInt($("#purchaseProductInputQuantity").val().trim());
+        // var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
         // var discountType = $("#purchaseProductInputDiscountType").val().trim();
         // var discount = $("#purchaseProductInputdiscount").val().trim();
         // var discountValue = $("#purchaseProductInputDiscountValue").val().trim();
@@ -336,7 +349,19 @@ $(document).ready(function () {
     function purchaseInputSubmitFunction() {
         var submitButtonType = $("#purchaseProductInputSubmit").data("submit-type");
         var submitButtonProductId = $("#purchaseProductInputSubmit").data("item-id");
+        
         var id = parseInt($("#purchaseProductInputId").val().trim());
+
+
+        // var product = databaseProducts[id];
+        // var productStock = product.stock / product.unit.value ;
+        // var inputStock = parseFloat($("#purchaseProductInputQuantity").val());
+        // if(!(typeof product == 'undefined') &&  productStock < inputStock  && product.stock_controll=='yes'){
+        //     $("#purchaseProductStockError").show();
+        //     $("#purchaseProductInputSubmit").attr("disabled", true);
+        //     return ;
+
+        // }
         if (submitButtonType == 'update') {
             console.log("submitButtonType == 'update'");
             if (submitButtonProductId == id) {
@@ -350,7 +375,7 @@ $(document).ready(function () {
             console.log('create method Called');
             AddNewProductOnPruchaseCart();
         }
-
+        $("#purchaseProductStockError").hide();
 
         $("#purchaseProductInputSubmit").data("submit-type", 'create');
         $("#purchaseProductInputSubmit").data("item-id", 0);
@@ -476,15 +501,14 @@ $(document).ready(function () {
         var previousDue = $("#customerDue").text().trim();
         previousDue = (previousDue == "" ? 0 : previousDue);
 
-        previousDue = parseFloat(previousDue).toFixed( 2 );
-        $("#purchasePreviousDue").text(previousDue);
-
+        previousDue = parseFloat(previousDue);
+     
         // var tax = parseFloat($("#taxValue").text().trim());
         var subTotal = parseFloat($("#purchaseSubtotal").text().trim());
-        var total = parseFloat(subTotal  + previousDue);
-        $("#totalWithOutDue").val(parseFloat(subTotal));
-        $("#finalTotal").text(total);
-        $("#PayAmount").val(total);
+        var total = (subTotal  + previousDue);
+        $("#totalWithOutDue").val(subTotal);
+        $("#finalTotal").text(total.toFixed( 2 ));
+        $("#PayAmount").val(total.toFixed( 2 ));
         $("#totalDue").text(0);
     }
 
@@ -507,7 +531,7 @@ $(document).ready(function () {
 
         calculatePurchaseFinal();
 
-        var subtotal = parseInt(calSubTotal());
+        var subtotal = parseFloat(calSubTotal());
         console.log('SubTotal ' + subtotal);
         if (subtotal < 0) {
             $(this).val(0);
@@ -546,7 +570,7 @@ $(document).ready(function () {
 
     $("#PayAmount").on('input', function () {
         $("#changeAmount").html('');
-        var total = parseInt($("#finalTotal").text().trim());
+        var total = parseFloat($("#finalTotal").text().trim());
 
         var pay = $(this).val();
 
@@ -554,7 +578,7 @@ $(document).ready(function () {
             $(this).val(0);
             pay = "0";
         }
-        pay = parseInt(pay);
+        pay = parseFloat(pay);
         var due = total - pay;
         if (due <= 0) {
             $("#changeAmount").html("Exchange : " + (pay - total) + " TK");

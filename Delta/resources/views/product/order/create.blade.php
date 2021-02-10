@@ -116,7 +116,8 @@
                     </div>
 
                 </form>
-                <div id="purchaseProductError" class="text-danger ">{{ __('translate.Product not found, try again !!!') }} </div>
+                <div id="purchaseProductError" class="text-danger " style="display: none;">{{ __('translate.Product not found, try again !!!') }} </div>
+                <div id="purchaseProductStockError" class="text-danger " style="display: none;">{{ __('translate.Product dont have enough stock, try again !!!') }} </div>
 
 
 
