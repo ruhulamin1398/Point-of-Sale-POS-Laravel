@@ -794,9 +794,11 @@ $("#orderCompleteButton").attr("disabled", false);
         
         $("#orderCompleteButton").attr("disabled", true);
         if (cartIsEmpty()==1) {
-            alert('please add some Product');     
-        $("#orderCompleteButton").attr("disabled", false);
-            return;
+            alert('please add some Product');  
+            
+            $("#purchaseProductInputId").focus();   
+            $("#orderCompleteButton").attr("disabled", false);
+                return;
         }
 
         $("#orderCompleteButton").attr("disabled", false); /// onlly for testing , after teasting remove this 
