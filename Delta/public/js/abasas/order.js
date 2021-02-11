@@ -777,8 +777,8 @@ function cartIsEmpty(){
     jQuery.each(purchaseTableData, function (row) {
         //////////////////////////////// adding cost and total
         var id = purchaseTableData[row].id; 
-        purchaseTableData[row].cost = databaseProducts[id]['cost_per_unit'] * purchaseTableData[row].quantity;
-        purchaseTableData[row].profit= purchaseTableData[row].total-purchaseTableData[row].cost;
+        purchaseTableData[row].cost = databaseProducts[id]['cost_per_unit'] * purchaseTableData[row].quantity * databaseProducts[id].unit.value;
+        purchaseTableData[row].profit= purchaseTableData[row].total - purchaseTableData[row].cost - purchaseTableData[row].tax;
         cardLegth++;
     });
     if (cardLegth == 0) {
@@ -802,7 +802,7 @@ $("#orderCompleteButton").attr("disabled", false);
         $("#orderCompleteButton").attr("disabled", false); /// onlly for testing , after teasting remove this 
 
         var orderData={
-            customer_id : 1,
+            customer_id : $('#customer_input_id').val(),
             payment_system_id : $("#paymentSystemId").val().trim(),
             paid_amount : $("#PayAmount").val().trim(),
             tax : $("#taxValue").text().trim(),
@@ -829,6 +829,7 @@ $("#orderCompleteButton").attr("disabled", false);
                 "order_details":purchaseTableData
             },
             success: function (data) {
+                location.reload(true);
                 console.log(data);
 
                 // viewSupplierData(supplier);

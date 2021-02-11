@@ -223,6 +223,15 @@
                     </div>
 
 
+                    <div class="row border-bottom border-dark mb-2">
+                        <div class="col-6 ">
+                            <div class="text-left  "> {{ __("translate.Tax") }}</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-right " id="taxValue">0</div>
+                        </div>
+                    </div>
+
                     <div class="row border-bottom border-dark bg-dark mb-2">
                         <div class="col-6 ">
                             <div class="text-left  ">  {{ __("translate.Sub Total") }}</div>
@@ -232,16 +241,7 @@
                         </div>
                     </div>
 
-
-                    <div class="row border-bottom border-dark mb-2">
-                        <div class="col-6 ">
-                            <div class="text-left  "> {{ __("translate.Tax") }}</div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-right " id="taxValue">0</div>
-                        </div>
-                    </div>
-                    <div class="row border-bottom border-dark  mb-2">
+                    <div class="row border-bottom border-dark  mb-2" @if(! $GLOBALS["CurrentUser"]->can("Allow Customer Due")  ) hidden @endif>
                         <div class="col-6 ">
                             <div class="text-left  "> {{ __("translate.Previous Due") }}</div>
                         </div>
@@ -256,16 +256,17 @@
                     </div>
 
                     <div class="row mb-2">
-                        <div class="col-12 col-md-6 pt-1 pb-1 border-dark bg-dark border-dotted ">
+                        <div class="col-12 @can('Allow Customer Due') col-md-6 @endcan pt-1 pb-1 border-dark bg-dark border-dotted ">
                             <div class="text-center h5 "> {{ __("translate.Total") }}</div>
                             <input type="text" name="" id="totalWithOutDue" value=0 class="inputMinZero" hidden>
                             <div class="text-center h5 text-success " id="finalTotal">0</div>
                         </div>
-
-                        <div class="col-12 col-md-6  border-dark pt-1 pb-1  border-dotted">
+                       
+                        <div class="col-12 col-md-6  border-dark pt-1 pb-1  border-dotted" @if(! $GLOBALS["CurrentUser"]->can("Allow Customer Due")  ) hidden @endif>
                             <div class="text-center h5">  {{ __("translate.Due") }}</div>
                             <div class="text-center h5 text-danger" id="totalDue">0 </div>
                         </div>
+                      
                     </div>
 
 
