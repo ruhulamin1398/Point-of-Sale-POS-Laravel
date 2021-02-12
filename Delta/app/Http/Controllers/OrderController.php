@@ -100,15 +100,24 @@ class OrderController extends Controller
         $order->tax= $request->order['tax'];
         $order->cost =0;
         $order->pre_due=$request->order['pre_due'];
-        $order->due=$request->order['due'];
         $order->discount=$request->order['discount'];
         $order->profit =0;
         $order->total=$request->order['total'];
         
         $order->save();
-        $customer = customer::find($order->customer_id);
-        $customer->due = $order->due;
-        $customer->save();
+        if( auth()->user()->hasPermissionTo('Allow Customer Due')){
+            $customer = customer::find($order->customer_id);
+            $customer->due = $order->due;
+            $customer->save();
+            $order->due=$request->order['due'];
+            
+            $this->onlineSync('customer','update',$customer->id);
+        }
+        else{
+            $order->discount += $request->order['due'];
+
+        }
+        
         
         $cost=0;
         $profit=0;
@@ -153,7 +162,6 @@ class OrderController extends Controller
 
 
         $this->onlineSync('order','create',$order->id);
-        $this->onlineSync('customer','update',$customer->id);
 
         
 
@@ -168,7 +176,7 @@ class OrderController extends Controller
         // employee Analysis end
 
         // sell Analysis start
-        $this->sellAnalysis($order,$productCount); //product Count is missing
+        $this->sellAnalysis($order,$productCount);
         // sell Analysis end
 
         return $order;
