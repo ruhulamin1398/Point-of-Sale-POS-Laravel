@@ -106,16 +106,18 @@ class OrderController extends Controller
         
         $order->save();
         if( auth()->user()->hasPermissionTo('Allow Customer Due')){
+            
+            $order->due=$request->order['due'];
+            
             $customer = customer::find($order->customer_id);
             $customer->due = $order->due;
             $customer->save();
-            $order->due=$request->order['due'];
             
             $this->onlineSync('customer','update',$customer->id);
         }
         else{
             $order->discount += $request->order['due'];
-
+            $order->due= 0;
         }
         
         
@@ -130,7 +132,7 @@ class OrderController extends Controller
             $databaseProduct = Product::find($product['id']);
             $orderDetail->order_id = $order->id;
             $orderDetail->product_id = $product['id'];
-            $orderDetail->price = $product['price'];
+            $orderDetail->price = $product['price'] / $databaseProduct->unit->value ;
             $orderDetail->quantity = $product['quantity'] * $databaseProduct->unit->value  ;
             $orderDetail->discount = $product['discount'];
             $orderDetail->tax = $product['tax'];

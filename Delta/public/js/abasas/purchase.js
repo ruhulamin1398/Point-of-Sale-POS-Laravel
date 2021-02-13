@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     var purchaseTableData = {};
 
-
+    //done
     function calIndivitualDiscount() {
         var discountType = $("#purchaseProductInputDiscountType").val().trim();
         var price = $("#purchaseProductInputPrice").val().trim();
@@ -32,7 +32,7 @@ $(document).ready(function () {
             return discountValue;
         }
     }
-
+    //done
     function calIndivitualTotal() {
 
         var price = $("#purchaseProductInputPrice").val().trim();
@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     }
 
-
+    //done
     function setIndivitualInputFieldDefault() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
@@ -58,11 +58,11 @@ $(document).ready(function () {
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
-        $("#purchaseProductInputQuantity").val(1);
+        $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
     }
 
-
+    //done
     function setIndivitualInputDetailsDefault() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
@@ -71,14 +71,14 @@ $(document).ready(function () {
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
-        $("#purchaseProductInputQuantity").val(1);
+        $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
         $("#purchaseProductError").show();
     }
 
     $("#purchaseProductError").hide();
 
-
+    //done
     function purchaseProductInputOnInput() {
 
         $("#purchaseProductInputSubmit").attr("disabled", true);
@@ -100,6 +100,8 @@ $(document).ready(function () {
         }
 
     }
+    
+    //done
     $("#purchaseProductInputId").on('input', function () {
 
         purchaseProductInputOnInput()
@@ -108,12 +110,17 @@ $(document).ready(function () {
     });
 
 
+    
+    //                               ****************************************
+    //                               ########## On Price Input #############
+    //  
 
 
+    //done
     $("#purchaseProductInputPrice").on('input', function () {
 
         calIndivitualTotal();
-        if(  !($("#purchaseProductInputName").val() == '')  &&  !($("#purchaseProductInputPrice").val() == '')  ){
+        if(  !($("#purchaseProductInputName").val() == '')  &&  !($("#purchaseProductInputPrice").val() == '')  &&  !($("#purchaseProductInputQuantity").val() == '')  ){
             
             $("#purchaseProductInputSubmit").attr("disabled", false);
         }
@@ -125,30 +132,64 @@ $(document).ready(function () {
     });
 
 
+    //done
+    $("#purchaseProductInputPrice").keypress(function (e) {
+        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+            if( !($("#purchaseProductInputPrice").val() == '')  ){
+                $('#purchaseProductInputQuantity').focus();
+            }
+        }
+
+    });
     
-    // $("#purchaseProductInputPrice").keypress(function (e) {
-    //     if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
-    //         if( !($("#purchaseProductInputPrice").val() == '')  ){
-    //             $('#purchaseProductInputQuantity').focus();
-    //         }
-    //     }
+    //                               ****************************************
+    //                               ########## On Discount Input #############
+    //  
 
-    // });
-
-
+    //done
     $("#purchaseProductInputdiscount").on('input', function () {
 
         calIndivitualTotal();
     });
+
+
+
+
+
+    //                               ****************************************
+    //                               ########## On Quantity input #############
+    //  
+
+    //done
     $("#purchaseProductInputQuantity").on('input', function () {
 
         calIndivitualTotal();
+        
+        if(  !($("#purchaseProductInputName").val() == '')  &&  !($("#purchaseProductInputPrice").val() == '')  &&  !($("#purchaseProductInputQuantity").val() == '')  ){
+            
+            $("#purchaseProductInputSubmit").attr("disabled", false);
+        }
+        else{
+            $("#purchaseProductInputSubmit").attr("disabled", true);
+
+        }
+
+    });
+    //done
+    $("#purchaseProductInputQuantity").keypress(function (e) {
+        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+            if(  !($("#purchaseProductInputName").val() == '')  &&  !($("#purchaseProductInputPrice").val() == '')  &&  !($("#purchaseProductInputQuantity").val() == '')  ){    
+                purchaseInputSubmitFunction();
+            }
+        }
+
     });
 
 
 
     //                          indivisual submit button click area start 
 
+        //done
 
     function printPurchaseTableData() {
         console.log('your current array is ');
@@ -157,7 +198,6 @@ $(document).ready(function () {
         var html = '';
         $("#purchaseProductTableTbody").html(html);
         html = '';
-
         var i = 0;
         totalCost = 0;
         var productDiscountValue = 0;
@@ -168,10 +208,10 @@ $(document).ready(function () {
             html += '<td>' + ++i + '</td>'
             html += '<td>' + purchaseTableData[row].id + '</td>'
             html += '<td>' + purchaseTableData[row].name + '</td>'
-            html += '<td>' + purchaseTableData[row].price + '</td>'
+            html += '<td>' + parseFloat(purchaseTableData[row].price).toFixed( 2 ) + '</td>'
             html += '<td>' + purchaseTableData[row].quantity + '</td>'
-            html += '<td>' + purchaseTableData[row].discountValue + '</td>'
-            html += '<td>' + purchaseTableData[row].total + '</td>'
+            html += '<td>' + parseFloat(purchaseTableData[row].discountValue).toFixed( 2 ) + '</td>'
+            html += '<td>' +parseFloat( purchaseTableData[row].total).toFixed( 2 ) + '</td>'
             html += '<td>'
 
             html += '<button type="button" productId=' + purchaseTableData[row].id + ' id="purchaseProductTableEdit" class="btn btn-success"> <i class="fa fa-edit" aria-hidden="false"> </i></button>'
@@ -183,10 +223,11 @@ $(document).ready(function () {
             productDiscountValue += purchaseTableData[row].discountValue;
             productPurchaseTotal += purchaseTableData[row].total;
 
-            $("#ProductDiscountTotal").text(productDiscountValue);
-            $("#productPurchaseTotal").val(productPurchaseTotal);
 
         });
+        
+        $("#ProductDiscountTotal").text(parseFloat(productDiscountValue).toFixed(2));
+        $("#productPurchaseTotal").val(parseFloat(productPurchaseTotal).toFixed(2));
         $("#purchaseProductTableTbody").html(html);
         calculatePurchaseFinal();
     }
@@ -207,7 +248,7 @@ $(document).ready(function () {
     }
 
 
-
+    //done
     function AddNewProductOnPruchaseCart() {
 
         // check if data is successfully loaded or not 
@@ -262,7 +303,7 @@ $(document).ready(function () {
         setIndivitualInputFieldDefault();
         $("#purchaseProductInputId").focus();
     }
-
+    //done
     function updateProductOnPruchaseCart() {
 
 
@@ -325,7 +366,7 @@ $(document).ready(function () {
         $("#purchaseProductInputId").focus();
 
     };
-
+    //done
     function purchaseInputSubmitFunction() {
         var submitButtonType = $("#purchaseProductInputSubmit").data("submit-type");
         var submitButtonProductId = $("#purchaseProductInputSubmit").data("item-id");
@@ -363,6 +404,7 @@ $(document).ready(function () {
     //                               ****************************************
 
     ///// test 
+    //done
     $("#purchaseProductInputId").keypress(function (e) {
         if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
             
@@ -386,7 +428,7 @@ $(document).ready(function () {
 
 
 
-
+    //done
     $("body").on("click", "#purchaseProductTableDelete", function () {
         var prooductId = $(this).attr('productId');
         console.log("Clicked On " + prooductId);
@@ -401,6 +443,7 @@ $(document).ready(function () {
     //                               ##########  purchase product table delete button start here   #############
     //                               *******************************************************************************
 
+    //done
     $("body").on("click", "#purchaseProductTableEdit", function () {
         var prooductId = $(this).attr('productId');
         console.log("Clicked On update button " + prooductId);
@@ -429,6 +472,7 @@ $(document).ready(function () {
 
 
 
+    // done
     // Final caculation start 
     function calMoreDiscount() {
         var discountType = $("#productPurchaseMoreDiscountType").val().trim();
@@ -439,25 +483,25 @@ $(document).ready(function () {
         if (discountType == 1) {
             var moreDiscountValue = (productPurchaseTotal * moreDiscountInput * 0.01);
             var totalDiscount = moreDiscountValue + ProductDiscountTotal;
-            $("#discountTotal").val(totalDiscount);
-            $("#totalDiscountInText").text(parseFloat(moreDiscountValue) + " + " + parseFloat(ProductDiscountTotal))
+            $("#discountTotal").val(totalDiscount.toFixed( 2 ));
+            $("#totalDiscountInText").text(parseFloat(moreDiscountValue).toFixed( 2 ) + " + " + parseFloat(ProductDiscountTotal).toFixed( 2 ))
             return totalDiscount;
         } else {
             var totalDiscount = moreDiscountInput + ProductDiscountTotal;
 
-            $("#discountTotal").val(totalDiscount);
-            $("#totalDiscountInText").text(parseFloat(ProductDiscountTotal) + " + " + parseFloat(moreDiscountInput))
+            $("#discountTotal").val(totalDiscount.toFixed( 2 ));
+            $("#totalDiscountInText").text(parseFloat(ProductDiscountTotal).toFixed( 2 ) + " + " + parseFloat(moreDiscountInput).toFixed( 2 ))
             return totalDiscount;
         }
     }
-
+    //done
     function calSubTotal() {
 
         var ProductDiscountTotal = parseFloat($("#ProductDiscountTotal").text().trim());
         var productPurchaseTotal = parseFloat($("#productPurchaseTotal").val().trim());
         var discountTotal = parseFloat($("#discountTotal").val());
         var subTotal = parseFloat(productPurchaseTotal - discountTotal + ProductDiscountTotal);
-        $("#purchaseSubtotal").text(subTotal);
+        $("#purchaseSubtotal").text(subTotal.toFixed( 2 ));
         return subTotal;
     }
 
@@ -470,24 +514,25 @@ $(document).ready(function () {
 
     // }
 
+    //done
     function calTotal() {
         var previousDue = $("#supplierDue").text().trim();
         previousDue = (previousDue == "" ? 0 : previousDue);
 
         previousDue = parseFloat(previousDue);
-        $("#purchasePreviousDue").text(previousDue);
+        $("#purchasePreviousDue").text(previousDue.toFixed( 2 ));
 
         var subTotal = parseFloat($("#purchaseSubtotal").text().trim());
         var total = parseFloat(subTotal + previousDue);
-        $("#totalWithOutDue").val(parseFloat(subTotal ));
-        $("#finalTotal").text(total);
-        $("#PayAmount").val(total);
+        $("#totalWithOutDue").val(parseFloat(subTotal ).toFixed( 2 ));
+        $("#finalTotal").text(total.toFixed( 2 ));
+        $("#PayAmount").val(total.toFixed( 2 ));
         $("#totalDue").text(0);
     }
 
 
 
-
+    //done
     function calculatePurchaseFinal() {
         $("#changeAmount").html('');
 
@@ -499,7 +544,7 @@ $(document).ready(function () {
     }
 
 
-
+    //done 
     $("#moreDiscountInput").on('input', function () {
 
         calculatePurchaseFinal();
@@ -540,7 +585,7 @@ $(document).ready(function () {
 
 
 
-
+    //done
     $("#PayAmount").on('input', function () {
         $("#changeAmount").html('');
         var total = parseFloat($("#finalTotal").text().trim());
@@ -565,13 +610,13 @@ $(document).ready(function () {
 
     // discount Area Start Here 
 
-
+    //done
     // product discount start
     $("#disCountSetting").on('click', function () {
 
         $("#discountModal").modal();
     });
-
+    //done
     function purchasePagePercentageInitialization(percentageType) {
 
 
@@ -587,7 +632,7 @@ $(document).ready(function () {
     }
     purchasePagePercentageInitialization(1);
 
-
+    //done
     $(".purchasePagePercentageSelect").on('click', function () {
 
 
@@ -604,12 +649,12 @@ $(document).ready(function () {
 
 
     // more discount  start
-
+    //done
     $("#purchasePageMoreDiscountSetting").on('click', function () {
 
         $("#moreDiscountModal").modal();
     });
-
+    //done
     function purchasePageMorePercentageInitialization(percentageType) {
 
 
@@ -624,6 +669,7 @@ $(document).ready(function () {
     }
     purchasePageMorePercentageInitialization(1);
 
+    //done
 
     $(".purchasePageMoreDiscountSelect").on('click', function () {
 
@@ -641,60 +687,149 @@ $(document).ready(function () {
     });
 
 
-    // Tax Section start
+    // // Tax Section start
 
-    $("#TaxSetting").on('click', function () {
-        $("#taxModal").modal();
-    });
+    // $("#TaxSetting").on('click', function () {
+    //     $("#taxModal").modal();
+    // });
 
-    $("#taxInput").on('keyup', function () {
-        var tax = $(this).val().trim();
-        if (tax.length == 0) {
+    // $("#taxInput").on('keyup', function () {
+    //     var tax = $(this).val().trim();
+    //     if (tax.length == 0) {
 
-            $(this).val(0);
-            $("#taxView").text(0);
-        }
-        if (tax >= 100) {
-            $(this).val(0);
-            $("#taxView").text(0);
-        } else {
-            $("#taxView").text(tax);
-        }
-        calculatePurchaseFinal();
+    //         $(this).val(0);
+    //         $("#taxView").text(0);
+    //     }
+    //     if (tax >= 100) {
+    //         $(this).val(0);
+    //         $("#taxView").text(0);
+    //     } else {
+    //         $("#taxView").text(tax);
+    //     }
+    //     calculatePurchaseFinal();
 
-    });
-    $("#taxInput").on('change', function () {
-        var tax = $(this).val().trim();
-        if (tax.length == 0) {
+    // });
+    // $("#taxInput").on('change', function () {
+    //     var tax = $(this).val().trim();
+    //     if (tax.length == 0) {
 
-            $(this).val(0);
-            $("#taxView").text(0);
-        }
-        if (tax >= 100) {
-            $(this).val(0);
-            $("#taxView").text(0);
-        } else {
-            $("#taxView").text(parseFloat(tax));
-        }
-        calculatePurchaseFinal();
+    //         $(this).val(0);
+    //         $("#taxView").text(0);
+    //     }
+    //     if (tax >= 100) {
+    //         $(this).val(0);
+    //         $("#taxView").text(0);
+    //     } else {
+    //         $("#taxView").text(parseFloat(tax));
+    //     }
+    //     calculatePurchaseFinal();
 
-    });
-
-
+    // });
 
 
-    ///// order complete button 
-    $("#orderCompleteButton").on('click', function () {
 
-        $("#PrintPurchaseModal").modal({
-            backdrop: 'static',
-            keyboard: false
+
+
+
+
+
+
+    //                               *****************************************************************************
+    //                                           ##########  Purchase complete button start    #############
+    //                               *******************************************************************************
+
+    function cartIsEmpty(){
+        var cardLegth =0;
+        jQuery.each(purchaseTableData, function (row) {
+            cardLegth++;
+            return false;
         });
-    })
-    // on modal hide
-    $('#PrintPurchaseModal').on('hide.bs.modal', function () {
-        alert()
-    });
+        if (cardLegth == 0) {
+            return 1;
+        }
+        else{
+            return 2
+        }
+    }
+    
+    $("#orderCompleteButton").attr("disabled", false);
+        $("#orderCompleteButton").on('click', function () {
+            
+            $("#orderCompleteButton").attr("disabled", true);
+            if (cartIsEmpty()==1) {
+                alert('please add some Product');  
+                
+                $("#purchaseProductInputId").focus();   
+                $("#orderCompleteButton").attr("disabled", false);
+                    return;
+            }
+    
+            // $("#orderCompleteButton").attr("disabled", false); /// onlly for testing , after teasting remove this 
+    
+            var purchaseData={
+                supplier_id : $('#supplier_input_id').val(),
+                payment_system_id : $("#paymentSystemId").val().trim(),
+                paid_amount : $("#PayAmount").val().trim(),
+                pre_due : $("#purchasePreviousDue").text().trim(),
+                due : $("#totalDue").text().trim(),
+                discount : $("#discountTotal").val().trim(),
+                total : $("#totalWithOutDue").val().trim(),
+    
+            };
+            console.log(purchaseData)
+          
+    
+          
+            var act = $("#homeRoute").val().trim()+'/purchases'; 
+            var token = $("#csrfToken").val().trim();           
+            console.log("---------- action " + act);
+         
+            $.ajax({
+                type: 'post',
+                url: act,
+                data:{
+                    "_token":token,
+                    "purchase" :purchaseData,
+                    "purchase_details":purchaseTableData
+                },
+                success: function (data) {
+                    location.reload(true);
+                    console.log(data);
+    
+                    // viewSupplierData(supplier);
+                },
+                error: function (data) {
+                    alert("Failed order ..... Try Again !!!!!!!!!!!")
+                    console.log('An error occurred.');
+                    console.log(data);
+                },
+            });
+    
+    
+    
+            console.log(cartIsEmpty());
+        });
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -713,6 +848,7 @@ $(document).ready(function () {
         var searchField = $("#purchaseProductInputId").val();
         var expression = new RegExp(searchField, "i");
         if (searchField.length == 0) {
+            $("#productSuggession").hide();
             return false;
         }
         $("#productSuggession").html("");

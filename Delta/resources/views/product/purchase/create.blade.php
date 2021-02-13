@@ -92,7 +92,7 @@
 
                         <div class="col-auto">
                             <span class="text-dark pl-1">{{ __('translate.Quantity') }} </span>
-                            <input type="number" step="any" name="quantity" id="purchaseProductInputQuantity" size="6" value=1 min="0"
+                            <input type="number" step="any" name="quantity" id="purchaseProductInputQuantity" size="6" min="0"
                                 min="1" class="form-control  mb-2 inputMinZero ">
                         </div>
 
@@ -221,7 +221,7 @@
                         </div>
                     </div>
 
-
+{{-- 
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
                             <div class="text-left  "> {{ __("translate.Tax") }}</div>
@@ -229,7 +229,7 @@
                         <div class="col-6">
                             <div class="text-right " id="taxValue">0</div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="row border-bottom border-dark bg-dark mb-2">
                         <div class="col-6 ">

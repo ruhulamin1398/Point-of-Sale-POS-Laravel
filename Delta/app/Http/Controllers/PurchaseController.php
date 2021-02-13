@@ -17,9 +17,12 @@ use App\Models\purchase;
 use App\Models\purchaseAnalysisDaily;
 use App\Models\purchaseAnalysisMonthly;
 use App\Models\purchaseAnalysisYearly;
+use App\Models\purchaseDetail;
 use App\Models\setting;
+use App\Models\supplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class PurchaseController extends Controller
@@ -85,7 +88,89 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $purchase = new purchase;
+        $purchase->user_id= Auth::user()->id;   //auth must be added here
+        $purchase->supplier_id=$request->purchase['supplier_id'];
+        $purchase->payment_system_id= $request->purchase['payment_system_id'];
+        $purchase->paid_amount= $request->purchase['paid_amount'];
+        $purchase->pre_due=$request->purchase['pre_due'];
+        $purchase->discount=$request->purchase['discount'];
+        $purchase->total=$request->purchase['total'];
+        
+        $purchase->save();
+
+        $this->onlineSync('purchase','create',$purchase->id);
+
+        if( auth()->user()->hasPermissionTo('Allow Supplier Due')){
+            
+            $purchase->due=$request->purchase['due'];
+            $supplier = supplier::find($purchase->supplier_id);
+            $supplier->due = $purchase->due;
+            $supplier->save();
+            
+            $this->onlineSync('supplier','update',$supplier->id);
+        }
+        else{
+            $purchase->discount += $request->purchase['due'];
+            $purchase->due=0;
+        }
+
+        $productCount = 0;
+       
+
+        foreach($request->purchase_details as $product){
+
+            $purchaseDetail = new purchaseDetail;
+            $databaseProduct = Product::find($product['id']);
+            $purchaseDetail->purchase_id = $purchase->id;
+            $purchaseDetail->product_id = $product['id'];
+            $purchaseDetail->price = $product['price']  / $databaseProduct->unit->value ;
+            $purchaseDetail->quantity = $product['quantity'] * $databaseProduct->unit->value  ;
+            $purchaseDetail->discount = $product['discount'];
+            $purchaseDetail->total = $product['total'];
+            $productCount += $purchaseDetail->quantity;
+            $purchaseDetail->save();
+
+
+            $totalCost = $databaseProduct->cost_per_unit * $databaseProduct->stock + $purchaseDetail->price * $purchaseDetail->quantity ;
+            $databaseProduct->stock += $purchaseDetail->quantity;
+            $databaseProduct->cost_per_unit = $totalCost / $databaseProduct->stock;
+            $databaseProduct->save();
+
+             $this->onlineSync('purchaseDetail','create',$purchaseDetail->id);
+             $this->onlineSync('Product','update',$databaseProduct->id);
+
+            // // product Analysis start
+            // $this->productAnalysis($purchaseDetail);
+            // // product Analysis end
+
+        }
+
+
+
+
+        
+
+
+        // // calculation Analysis start
+        // $this->calculationAnalysis($order);
+        // // calculation Analysis end
+
+
+        // // employee Analysis start
+        // $this->employeeAnalysis($profit);
+        // // employee Analysis end
+
+        // // sell Analysis start
+        // $this->sellAnalysis($order,$productCount);
+        // // sell Analysis end
+
+        return $purchase;
+
+
+
+
     }
 
     /**

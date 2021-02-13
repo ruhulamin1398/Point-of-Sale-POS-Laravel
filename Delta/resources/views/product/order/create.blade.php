@@ -14,7 +14,7 @@
 
             <div class="card-header py-3 bg-abasas-dark  text-light ">
                 <nav class="navbar ">
-                    <span><a class="navbar-brand">{{ __('translate.Purchase') }}</a> @can('Super Admin') <i class="fas fa-tools pl-2"
+                    <span><a class="navbar-brand">{{ __('translate.Order') }}</a> @can('Super Admin') <i class="fas fa-tools pl-2"
                         id="pageSetting" data-toggle="modal" data-target="#setting-modal"></i> @endcan </span>
 
                 </nav>

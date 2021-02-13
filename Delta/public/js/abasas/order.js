@@ -137,6 +137,18 @@ $(document).ready(function () {
 
         calIndivitualTotal();
     });
+    
+    $("#purchaseProductInputPrice").keypress(function (e) {
+        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+            if(  !($("#purchaseProductInputName").val() == '')  &&  !($("#purchaseProductInputPrice").val() == '')  &&  !($("#purchaseProductInputQuantity").val() == '')  ){    
+                purchaseInputSubmitFunction();
+            }
+        }
+
+    }); 
+
+
+
     $("#purchaseProductInputdiscount").on('input', function () {
 
         calIndivitualTotal();
@@ -189,11 +201,12 @@ $(document).ready(function () {
             productPurchaseTotal += purchaseTableData[row].total;
             productTotalTax += purchaseTableData[row].tax;
 // console.log(purchaseTableData[row]);
-            $("#ProductDiscountTotal").text(productDiscountValue);
-            $("#productPurchaseTotal").val(productPurchaseTotal);
             
 
         });
+        
+        $("#ProductDiscountTotal").text(productDiscountValue);
+        $("#productPurchaseTotal").val(productPurchaseTotal);
         $("#taxValue").text(parseFloat(productTotalTax.toFixed( 2 )));
         $("#purchaseProductTableTbody").html(html);
         calculatePurchaseFinal();
