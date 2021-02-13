@@ -5,6 +5,9 @@
 
 
 @section('content')
+<div class="loader" style="display: none;" id="pageloader">
+    <img src="{{ asset('image/loading.gif') }}" alt="Loading..." />
+</div>
 
 <div class="row">
 
@@ -610,6 +613,7 @@
     </div>
 </div>
 <!-- /Attachment Modal -->
+
 
 
 

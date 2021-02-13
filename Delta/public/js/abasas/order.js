@@ -835,6 +835,7 @@ $("#orderCompleteButton").attr("disabled", false);
         var token = $("#csrfToken").val().trim();           
         console.log("---------- action " + act);
      
+        $('#pageloader').show();
         $.ajax({
             type: 'post',
             url: act,
@@ -844,12 +845,16 @@ $("#orderCompleteButton").attr("disabled", false);
                 "order_details":purchaseTableData
             },
             success: function (data) {
+                
+                $('#pageloader').hide();
                 location.reload(true);
                 console.log(data);
 
                 // viewSupplierData(supplier);
             },
             error: function (data) {
+                
+                $('#pageloader').hide();
                 alert("Failed order ..... Try Again !!!!!!!!!!!")
                 console.log('An error occurred.');
                 console.log(data);

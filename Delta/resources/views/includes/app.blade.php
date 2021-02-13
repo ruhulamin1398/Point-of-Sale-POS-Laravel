@@ -33,6 +33,25 @@
             text-align:center;
             margin-left: 20px;
         }
+
+        
+    .loader {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader > img {
+    width: 50px;
+}
    
 .bg-abasas-dark {
 
@@ -65,6 +84,9 @@
 </head>
 
 <body id="page-top">
+
+
+    
 
 
         <!-- Page Wrapper -->
