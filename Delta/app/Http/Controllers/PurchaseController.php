@@ -105,7 +105,7 @@ class PurchaseController extends Controller
         if( auth()->user()->hasPermissionTo('Allow Supplier Due')){
             
             $purchase->due=$request->purchase['due'];
-            $supplier = supplier::find($purchase->supplier_id);
+            $supplier = $purchase->supplier;
             $supplier->due = $purchase->due;
             $supplier->save();
             
@@ -241,26 +241,35 @@ class PurchaseController extends Controller
             $yearly_method = 'create';
 
         }
+
+        
+        $total = $purchase->total + $purchase->due;
+        $received_amount = $purchase->cash_received;
+        $received_amount = $total >= $received_amount ? $received_amount : $total;
+
+
+
         $purchaseDaily->count += 1;
         $purchaseDaily->product_count += $productCount;
         $purchaseDaily->cost += $purchase->total;
-        $purchaseDaily->cash_given += $purchase->paid_amount;
+        $purchaseDaily->amount += $purchase->total;
+        $purchaseDaily->cash_given += $received_amount ;
         $purchaseDaily->discount += $purchase->discount;
-        $purchaseDaily->due += $purchase->due;
+        $purchaseDaily->due += $purchase->due - $purchase->pre_due;
 
         $purchaseMonthly->count += 1;
         $purchaseMonthly->product_count += $productCount;
         $purchaseMonthly->cost += $purchase->total;
-        $purchaseMonthly->cash_given +=$purchase->paid_amount;
+        $purchaseMonthly->cash_given += $received_amount;
         $purchaseMonthly->discount += $purchase->discount;
-        $purchaseMonthly->due += $purchase->due;
+        $purchaseMonthly->due += $purchase->due - $purchase->pre_due;
 
         $purchaseYearly->count += 1;
         $purchaseYearly->product_count += $productCount;
         $purchaseYearly->cost += $purchase->total;
-        $purchaseYearly->cash_given += $purchase->paid_amount;
+        $purchaseYearly->cash_given += $received_amount;
         $purchaseYearly->discount += $purchase->discount;
-        $purchaseYearly->due += $purchase->due;
+        $purchaseYearly->due += $purchase->due - $purchase->pre_due;
 
         $purchaseDaily->save();
         $purchaseMonthly->save();

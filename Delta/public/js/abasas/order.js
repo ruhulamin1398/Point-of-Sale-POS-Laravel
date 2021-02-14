@@ -836,6 +836,7 @@ $("#orderCompleteButton").attr("disabled", false);
         console.log("---------- action " + act);
      
         $('#pageloader').show();
+        
         $.ajax({
             type: 'post',
             url: act,
@@ -847,7 +848,8 @@ $("#orderCompleteButton").attr("disabled", false);
             success: function (data) {
                 
                 $('#pageloader').hide();
-                location.reload(true);
+                 location.reload(true);
+                // console.log('data');
                 console.log(data);
 
                 // viewSupplierData(supplier);

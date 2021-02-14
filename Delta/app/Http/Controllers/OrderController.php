@@ -109,7 +109,7 @@ class OrderController extends Controller
             
             $order->due=$request->order['due'];
             
-            $customer = customer::find($order->customer_id);
+            $customer = $order->customer;
             $customer->due = $order->due;
             $customer->save();
             
@@ -254,28 +254,33 @@ class OrderController extends Controller
             $sellYearly->year=$year;
             $yearly_method_type = 'create';
         }
+
+        $total = $order->total + $order->due;
+        $received_amount = $order->paid_amount;
+        $received_amount = ($total >= $received_amount) ? $received_amount : $total;
+
         $sellDaily->count += 1;
         $sellDaily->cost += $order->cost;
-        $sellDaily->cash_received += $order->paid_amount;
+        $sellDaily->cash_received += $received_amount;
         $sellDaily->discount += $order->discount;
         $sellDaily->amount += $order->total;
-        $sellDaily->due += $order->total - $order->paid_amount;
+        $sellDaily->due += $order->due - $order->pre_due;
         $sellDaily->product_count += $productCount;
 
         $sellMonthly->count += 1;
         $sellMonthly->cost += $order->cost;
-        $sellMonthly->cash_received +=$order->paid_amount;
+        $sellMonthly->cash_received += $received_amount;
         $sellMonthly->discount += $order->discount;
         $sellMonthly->amount += $order->total;
-        $sellMonthly->due += $order->total - $order->paid_amount;
+        $sellMonthly->due +=  $order->due - $order->pre_due;
         $sellMonthly->product_count += $productCount;
 
         $sellYearly->count += 1;
         $sellYearly->cost += $order->cost;
-        $sellYearly->cash_received += $order->paid_amount;
+        $sellYearly->cash_received +=  $received_amount;
         $sellYearly->discount += $order->discount;
         $sellYearly->amount += $order->total;
-        $sellYearly->due += $order->total - $order->paid_amount;
+        $sellYearly->due +=  $order->due - $order->pre_due;
         $sellYearly->product_count += $productCount;
 
         $sellDaily->save();

@@ -98,7 +98,7 @@
         <div class="row ">
           <div class="col-xl-8 col-lg-7 ">
             <!-- 1111111111111111111111111111111111111111111111111111 -->
-            <div class="row ">
+            <div class="row pl-2 ">
               <!-- Growth Card Example -->
               <div class="col-xl-4 col-md-6 mb-4  text-center  ">
                 <div class="card border-none   p-4">

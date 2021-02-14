@@ -108,7 +108,7 @@
                     <x-navbar/>
     
                     <!-- Begin Page Content -->
-                    <div class="container-fluid p-1 p-md-4">
+                    <div class="container-fluid pl-1 pl-md-2 ">
     
                         @yield('content')
     
