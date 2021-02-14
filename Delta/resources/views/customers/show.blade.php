@@ -1,9 +1,23 @@
 @extends('includes.app')
+
+
+@php
+ $dataArray['items'] = $dataArray['items']->sortByDesc('id');
+ $settings= $dataArray['settings'];
+ $fieldList=$settings->setting[0]['fieldList'];
+ $routes=$settings->setting[0]['routes'];
+ $componentDetails=$settings->setting[0]['componentDetails'];
+ $items= $dataArray['items'];
+ $page_name = $dataArray['page_name'];
+ $GLOBALS['CurrentUser']= auth()->user();  
+
+
+@endphp
 @section('content')
 
 
 <!-- Content Row -->
-<div class="container-fluid ">
+<div class="container-fluid p-0 ">
 
     <div class="row ">
 
@@ -58,72 +72,114 @@
                         </div>
                     </nav>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered" id="dataTableOrder" width="100%" cellspacing="0">
-                            <thead class="bg-abasas-dark">
+                
+        @can('Order Read')
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="CustomerTable" width="100%" cellspacing="0">
+                    <thead class="bg-abasas-dark">
 
 
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('translate.Order ID') }}</th>
-                                    <th>{{ __('translate.Reference') }}</th>
-                                    <th>{{ __('translate.Total') }}</th>
-                                    <th>{{ __('translate.Discount') }}</th>
-                                    <th>{{ __('translate.Paid Amount') }}</th>
-                                    <th>{{ __('translate.Due') }}</th>
-                                    <th>{{ __('translate.Time') }}</th>
-                                    <th> {{ __('translate.Action') }}</th>
-                                </tr>
-                            </thead>
-                            <tfoot class="bg-abasas-dark">
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('translate.Order ID') }}</th>
-                                    <th>{{ __('translate.Reference') }}</th>
-                                    <th>{{ __('translate.Total') }}</th>
-                                    <th>{{ __('translate.Discount') }}</th>
-                                    <th>{{ __('translate.Paid Amount') }}</th>
-                                    <th>{{ __('translate.Due') }}</th>
-                                    <th>{{ __('translate.Time') }}</th>
-                                    <th> {{ __('translate.Action') }}</th>
-                                </tr>
+                        <tr>
+                            <th>#</th>
+                            @foreach( $fieldList as $field)
+                            @if($field['name'] ==  'total'   )
+                                @if($field['read']==1 &&  $GLOBALS['CurrentUser']->can('Order Price'))
+                                <th> {{ __('translate.'.$field['title'])  }}</th>
+                                @endif
+                            @else 
+                                @if($field['read']==1)
+                                <th> {{ __('translate.'.$field['title'])  }}</th>
+                                @endif
 
-                            </tfoot>
-                            <tbody>
+                            @endif
+                            @endforeach
+                            @can('Order View')
+                            <th> {{ __("translate.Action") }}</th>
+                            @endcan
+                        </tr>
+                    </thead>
+                    <tfoot class="bg-abasas-dark">
+                        <tr>
+                            <th>#</th>
+                            @foreach( $fieldList as $field)
+                            @if($field['name'] ==  'total'   )
+                                @if($field['read']==1 &&  $GLOBALS['CurrentUser']->can('Order Price'))
+                                <th> {{ __('translate.'.$field['title'])  }}</th>
+                                @endif
+                            @else 
+                                @if($field['read']==1)
+                                <th> {{ __('translate.'.$field['title'])  }}</th>
+                                @endif
 
-                                <?php $i = 1; ?>
-                                @foreach ($orders as $order )
+                            @endif
+                            @endforeach
+                            @can('Order View')
+                            <th> {{ __("translate.Action") }}</th>
+                            @endcan
+                        </tr>
 
-                                <tr class="data-row">
-                                    <td>{{$i++}}</td>
-                                    <td>{{$order->id}}</td>
-                                    <td>{{$order->user->employee->name }}</td>
-                                    <td>{{$order->total}}</td>
-                                    <td>{{$order->discount}}</td>
-                                    <td>{{$order->paid_amount}}</td>
-                                    <td>{{$order->due}}</td>
-
-
-                                    <td>{{ $order->created_at->format('M-d-Y h:m:a')}}</td>
-
-
-                                    <td class="align-middle">
-                                        <a href="#"> <button type="button" class="btn btn-success" id="edit-item"> <i
-                                                    class="fa fa-eye" aria-hidden="false"> </i></button></a>
+                    </tfoot>
+                    @php
+                           $itr= 1;
+                    @endphp
+                    <tbody>
 
 
+                            
+
+                        @foreach ($items as $item)
+                        
+                        @php
+                        $item->abasas();
+                        $itemId = $item->id;
+                        @endphp
+
+                        <tr class="data-row">
+                            <td class=" word-break "> {{ $itr++ }}</td>
+                         @foreach( $fieldList as $field)
 
 
-                                    </td>
+                         @if ( $field['name'] ==  'price'  )
+                            @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Order Price') )
+                                @php
+                                $name= $field['name'];
+                                @endphp
+                                <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+                            @endif
 
-                                </tr>
-                                @endforeach
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                         @else 
+                            @if($field['read']==1)
+                                @php
+                                $name= $field['name'];
+                                @endphp
+                                <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+                            @endif
+                             
+                         @endif
+
+                        
+
+                         @endforeach
+                             @can('Order View')
+                            <td class="align-middle"> 
+                                
+                                <a href=""><button type="button" class="btn btn-primary btn-sm" title="View Order" id="order-view-button" > <i class="fa fa-eye" aria-hidden="false"> </i></button></a>
+                                
+
+                            </td>
+                            @endcan
+
+                        </tr>
+                        @endforeach 
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @endcan
             </div>
         </div>
 
@@ -138,10 +194,10 @@
 
 <script>
     $(document).ready(function(){
-        $('#dataTableOrder').DataTable({   
+        $('#CustomerTable').DataTable({   
                     dom: 'lBfrtip',
                     buttons: [
-                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                         'csv', 'excel' , 'pdf' , 'print'
                     ]
                 });
     });

@@ -33,6 +33,25 @@
             text-align:center;
             margin-left: 20px;
         }
+
+        
+    .loader {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader > img {
+    width: 50px;
+}
    
 .bg-abasas-dark {
 
@@ -52,7 +71,7 @@
     <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
     <script src="{{asset('js/admin/Chart.min.js')}}"></script>
     {{-- <script src="{{asset('js/admin/jquery.dataTables.min.js')}}"></script> --}}
-    <script src="{{asset('js/admin/dataTables.min.js')}}"></script>
+    <script src="{{asset('js/admin/datatables.min.js')}}"></script>
     {{-- <script src="{{asset('js/admin/dataTables.bootstrap4.min.js')}}"></script> --}}
     <script src="{{asset('bootstrap-select/js/bootstrap-select.min.js')}}"></script>
 
@@ -61,10 +80,13 @@
     
     <script src="{{asset('js/abasas/app.js')}}"></script>
     
-  <script src="{{asset('js/admin/jquery-ui.js')}}"></script>
+ 
 </head>
 
 <body id="page-top">
+
+
+    
 
 
         <!-- Page Wrapper -->
@@ -86,7 +108,7 @@
                     <x-navbar/>
     
                     <!-- Begin Page Content -->
-                    <div class="container-fluid">
+                    <div class="container-fluid pl-1 pl-md-2 ">
     
                         @yield('content')
     

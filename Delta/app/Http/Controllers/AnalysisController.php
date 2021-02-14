@@ -37,7 +37,7 @@ class AnalysisController extends Controller
              $data['expense'] =$calculation->expense;
               $data['payment'] =$calculation->payment;
               
-             $data['profit'] = $data['sellProfit'] - $data['expense'] -  $data['payment'] - $calculation->drop_loss - $calculation->tax ;
+             $data['profit'] = $data['sellProfit'] - $data['expense'] -  $data['payment'] - $calculation->drop_loss  ;
         }
         if(!is_null($sell)){
             $data['sellCount']= $sell->count;
@@ -392,7 +392,7 @@ public function calculationAnalysisResults($monthEnd , $monthStart , $yearEnd ,$
         $data['dailySellProfit'] += $calculation->sell_profit;
         $data['dailyDrop'] += $calculation->drop_loss;
         $data['dailyTax'] += $calculation->tax;
-        $profit = $data['dailySellProfit'] - $data['dailyExpense'] - $data['dailyPayment'] - $data['dailyDrop'] - $data['dailyTax'];
+        $profit = $data['dailySellProfit'] - $data['dailyExpense'] - $data['dailyPayment'] - $data['dailyDrop'];
         $data['dailyProfit'] += $profit;
         array_push($dailyLabels, $calculation->date);
         array_push($dailyProfitData, $profit);
@@ -413,7 +413,7 @@ public function calculationAnalysisResults($monthEnd , $monthStart , $yearEnd ,$
         $data['monthlySellProfit'] += $calculation->sell_profit;
         $data['monthlyDrop'] += $calculation->drop_loss;
         $data['monthlyTax'] += $calculation->tax;
-        $profit = $data['monthlySellProfit'] - $data['monthlyExpense'] - $data['monthlyPayment'] - $data['monthlyDrop'] - $data['monthlyTax'];
+        $profit = $data['monthlySellProfit'] - $data['monthlyExpense'] - $data['monthlyPayment'] - $data['monthlyDrop'];
         $data['monthlyProfit'] += $profit;
         $month = Carbon::parse($calculation->month)->format('F');
         array_push($monthlyLabels, $month);
@@ -437,7 +437,7 @@ public function calculationAnalysisResults($monthEnd , $monthStart , $yearEnd ,$
         $data['yearlySellProfit'] += $calculation->sell_profit;
         $data['yearlyDrop'] += $calculation->drop_loss;
         $data['yearlyTax'] += $calculation->tax;
-        $profit = $data['yearlySellProfit'] - $data['yearlyExpense'] - $data['yearlyPayment'] - $data['yearlyDrop'] - $data['yearlyTax'];
+        $profit = $data['yearlySellProfit'] - $data['yearlyExpense'] - $data['yearlyPayment'] - $data['yearlyDrop'] ;
         $data['yearlyProfit'] += $profit;
         array_push($yearlyLabels, $calculation->year);
         array_push($yearlyProfitData, $profit);
@@ -449,6 +449,7 @@ public function calculationAnalysisResults($monthEnd , $monthStart , $yearEnd ,$
         array_push($yearlyDropData, $calculation->drop_loss);
         array_push($yearlyTaxData, $calculation->tax);
     }
+    
     
     $data['dailySellGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Sell', $dailySellData ,'#306754')  ), true);
     $data['dailyExpenseGraph'] = json_decode(json_encode(  $this->chartGenerator($dailyLabels ,'Expense', $dailyExpenseData ,'#FFFF00')  ), true);

@@ -23,33 +23,33 @@
 
                     
 
-                    <div class="col-12 pl-4 pr-4" style="position: relative;">
+                    <div class="col-12 " style="position: relative;">
                         <span class="text-dark  pl-2 ">{{ __("translate.Search") }} </span>
                         <input type="text" name="product_id" id="dropProductInputId" class="form-control form-control-lg  mb-4 p-4 inputMinZero rounded-1 border-info"
                             autocomplete="off" placeholder="Search by id or name or you can barcode" autofocus required>
                         <div id="productSuggession" class="list-group"   style="position: absolute;   left:20px; z-index:9999; max-height: 200px;overflow:scroll; "> </div>
                     </div>
 
-                    <div class="col-auto p-4">
+                    <div class="col--12 col-md-3 ">
                         <span class="text-dark  pl-2">{{ __("translate.Product Name") }} </span>
                         <input type="text" name="name" id="dropProductName" size="30" value=""
                             class="form-control  mb-2" readonly required>
                     </div>
-                    <div class="col-auto p-4">
+                    <div class="col--12 col-md-3">
 
                         <span class="text-dark pl-1"> {{ __("translate.Quantity") }}</span>
-                        <input type="number" step="any" name="quantity" id="dropProductQuantity" size="6"  min="1"
+                        <input type="number" step="any" name="quantity" id="dropProductQuantity"   min="1"
                             class="form-control  mb-2  inputMinZero"  required>
                     </div>
-                    <div class="col-auto p-4">
+                    <div class="col--12 col-md-3">
 
                         <span class="text-dark pl-1"> {{ __("translate.Comment") }} </span>
-                        <input type="text" name="comment" id="dropProductComment" size="30"  min="0"
+                        <input type="text" name="comment" id="dropProductComment" size="30" 
                             class="form-control  mb-2 ">
                     </div>
 
-                    <div class="col-auto p-4">
-                        <button type="submit" id="dropProductSubmit" class="btn bg-abasas-dark mt-3">{{ __('translate.Submit')  }}</button>
+                    <div class="col--12 col-md-3 ">
+                        <button type="submit" id="dropProductSubmit" class="btn btn-block bg-abasas-dark mt-3">{{ __('translate.Submit')  }}</button>
                     </div>
                    
 
@@ -148,9 +148,11 @@ $('body').click(function () {
         $("#dropProductInputId").val(id)
         $("#dropProductName").val(databaseProducts[id].name);
         // alert(id);//this one needs to be triggered
-        purchaseProductInputOnInput()
+        // purchaseProductInputOnInput()
         $("#productSuggession").hide();
         $("#productSuggession").html("");
+        
+        $('#dropProductSubmit').prop("disabled",false);
     });
 
 
@@ -163,8 +165,10 @@ $('body').click(function () {
         console.log(product);
         if (typeof product == 'undefined') {
             $('#dropProductName').val('');
+            $('#dropProductSubmit').prop("disabled",true);
         } else {
             $('#dropProductName').val(product.name);
+            $('#dropProductSubmit').prop("disabled",false);
         }
         // if($('#dropProductName').val().length==0 || parseFloat($('#dropProductName').val().trim()) <=0)
         //     alert('hi');

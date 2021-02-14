@@ -35,7 +35,7 @@
     
     
     
-        <div  class="container-fluid " id="printdata">
+        <div  class="container-fluid   p-0" id="printdata">
           
             <div class="row">
     

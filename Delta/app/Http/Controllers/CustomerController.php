@@ -87,7 +87,17 @@ class CustomerController extends Controller
         }
        $month = Carbon:: parse($monthStart)->format('F');
         $orders= order::where('customer_id', $customer->id)->where('created_at','<=',$monthEnd)->where('created_at','>=',$monthStart)->get(); 
-        return view('customers.show',compact('customer','orders','month'));
+        
+        $settings = setting::where('table_name', 'orders')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $orders,
+            'page_name' => 'Order',
+        ];
+        return view('customers.show',compact('customer','dataArray','month'));
     }
 
     /**

@@ -1,5 +1,9 @@
+
+@php
+$GLOBALS['CurrentUser']= auth()->user();   
+@endphp
 <div class="card border-light bg-abasas-dark  text-center w-100 p-2">
-    <h3 class="text-white">{{ __('translate.Customer') }}  <button type="button" id="NewCustomerButton" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button></h3>
+    <h3 class="text-white">{{ __('translate.Customer') }}  <button type="button" id="NewCustomerButton" class="btn btn-success btn-sm"><i class="fas fa-plus" id="NewCustomerButtonIcon"></i></button></h3>
 
     <div class="card-body">
         <div class="row no-gutters ">
@@ -83,7 +87,7 @@
 
             html += '<div class="text-center text-light"  id="customerCompany"  >{{ __('translate.Company') }} : ' + customer.company +
                 '</div>';
-            html += '<div class="text-center text-light">{{ __('translate.Due') }} : <span class="text-danger" id="customerDue">' +
+            html += '<div class="text-center text-light"   @if(! $GLOBALS["CurrentUser"]->can("Allow Customer Due")  ) hidden @endif>{{ __('translate.Due') }} : <span class="text-danger" id="customerDue">' +
                 customer.due + '</span></div>';
             $("#customerPhoneArea").html(html);
             $("#customerPhoneArea").show();
@@ -123,7 +127,8 @@
     //                               *******************************************************************************
 
         $(document).on('click','#NewCustomerButton',function(){
-            $("#customerPhoneAreaForm").show();
+            $("#customerPhoneAreaForm").toggle();
+            $('#NewCustomerButtonIcon').toggleClass('fa-plus').toggleClass('fa-minus');
         });
         $("#addcustomerButton").on('click', function () {
             $('#CustomerPhoneComponantInputNameWarrning').hide()
@@ -175,6 +180,7 @@
         var searchField = $("#customerSearchField").val();
         var expression = new RegExp(searchField, "i");
         if (searchField.length == 0) {
+            $("#customerSuggession").hide();
             return false;
         }
         $("#customerSuggession").html("");

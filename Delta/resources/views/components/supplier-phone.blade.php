@@ -1,5 +1,9 @@
+
+@php
+$GLOBALS['CurrentUser']= auth()->user();   
+@endphp
 <div class="card border-light bg-abasas-dark  text-center w-100 p-2">
-    <h3 class="text-white"> {{ __('translate.Supplier') }} <button type="button" id="NewSupplierButton" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button></h3>
+    <h3 class="text-white"> {{ __('translate.Supplier') }} <button type="button" id="NewSupplierButton" class="btn btn-success btn-sm"><i class="fas fa-plus" id="NewCustomerButtonIcon"></i></button></h3>
 
     <div class="card-body">
         <div class="row no-gutters ">
@@ -83,7 +87,7 @@
 
             html += '<div class="text-center text-light"  id="supplierCompany"  >{{ __('translate.Company') }}: ' + supplier.company +
                 '</div>';
-            html += '<div class="text-center text-light">{{ __('translate.Due') }} : <span class="text-danger" id="supplierDue">' +
+            html += '<div class="text-center text-light" @if(! $GLOBALS["CurrentUser"]->can("Allow Supplier Due")  ) hidden @endif>{{ __('translate.Due') }} : <span class="text-danger" id="supplierDue">' +
                 supplier.due + '</span></div>';
             $("#supplierPhoneArea").html(html);
             $("#supplierPhoneArea").show();
@@ -123,7 +127,8 @@
     //                               *******************************************************************************
 
         $(document).on('click','#NewSupplierButton',function(){
-            $("#supplierPhoneAreaForm").show();
+            $("#supplierPhoneAreaForm").toggle();
+            $('#NewCustomerButtonIcon').toggleClass('fa-plus').toggleClass('fa-minus');
         });
         $("#addsupplierButton").on('click', function () {
             $('#SupplierPhoneComponantInputNameWarrning').hide()
@@ -175,6 +180,7 @@
         var searchField = $("#supplierSearchField").val();
         var expression = new RegExp(searchField, "i");
         if (searchField.length == 0) {
+            $("#supplierSuggession").hide();
             return false;
         }
         $("#supplierSuggession").html("");

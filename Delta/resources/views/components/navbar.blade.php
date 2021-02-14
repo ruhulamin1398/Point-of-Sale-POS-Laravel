@@ -6,24 +6,28 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars  "></i>
           </button>
-
-          <img src="{{ asset(session('logo')) }}" height="60px" alt="Logo">
+          <a href="{{ route('home') }}">
+          <img src="{{ asset(session('logo')) }}"  height="50px" alt="Logo"></a>
 
           
           {{-- <img src="{{asset(  )}}" height="60px" alt="Logo"> --}}
-   <span class="h2 title "  > {{ session('shop_name') }} </span> 
-          <span class="h6 title "  > <sub> {{ session('shop_moto') }}</sub> </span>
+          <a href="{{ route('home') }}">
+           <span class="h2 title d-none d-md-block text-dark"  > {{ session('shop_name') }} </span> 
+          </a>
+          <a href="{{ route('home') }}">
+          <span class="h6 title d-none d-md-block text-dark "  > <sub> {{ session('shop_moto') }}</sub> </span>
+          </a>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
+            <li class="nav-item dropdown no-arrow d-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in " aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
@@ -38,7 +42,7 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
+            <li class="nav-item dropdown no-arrow mx-1 ">
                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  <i class="fas fa-bell fa-fw"></i> 
                 <!-- Counter - Alerts -->
@@ -87,7 +91,7 @@
             </li>
 
             <!-- Nav Item - Messages -->
-            <li class="nav-item dropdown no-arrow mx-1">
+            <li class="nav-item dropdown no-arrow mx-1 d-none">
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-envelope "></i> 
                  

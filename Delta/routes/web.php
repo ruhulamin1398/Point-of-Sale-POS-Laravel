@@ -105,6 +105,9 @@ Route::resource('bar-codes', BarCodeController::class);
 Route::resource('goals', GoalController::class);
 Route::resource('users', UserController::class);
 
+Route::resource('pos-setting',PosSettingController::class);
+
+
 Route::resource('return-to-suppliers', ReturnToSupplierController::class);
 Route::resource('return-from-customers', ReturnFromCustomerController::class);
 
@@ -185,8 +188,6 @@ Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']
 
 
   
-
-Route::resource('pos-setting',PosSettingController::class);
 
 
 

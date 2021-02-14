@@ -1,9 +1,22 @@
 @extends('includes.app')
+
+@php
+ $dataArray['items'] = $dataArray['items']->sortByDesc('id');
+ $settings= $dataArray['settings'];
+ $fieldList=$settings->setting[0]['fieldList'];
+ $routes=$settings->setting[0]['routes'];
+ $componentDetails=$settings->setting[0]['componentDetails'];
+ $items= $dataArray['items'];
+ $page_name = $dataArray['page_name'];
+ $GLOBALS['CurrentUser']= auth()->user();  
+
+
+@endphp
 @section('content')
 
 
 <!-- Content Row -->
-<div class="container-fluid ">
+<div class="container-fluid p-0">
 
     <div class="row ">
 
@@ -36,95 +49,114 @@
 
 
 
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 bg-abasas-dark text-light">
-                    <nav class="navbar navbar-light">
-                      <a class="navbar-brand"> {{ __("translate.Product Supply List") }} ( {{ $month }} ) </a>    {{--  {{ $month }} --}}
-                        <div>
-                            <form method="get">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto">
-                                        {{ __("translate.Select A Month") }}
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="month" name="month" class="form-control mb-2" id="inlineFormInput"
-                                            required>
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary mt-3">{{ __("translate.Submit") }}</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </nav>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered" id="dataTablePurchase" width="100%" cellspacing="0">
-                            <thead class="bg-abasas-dark">
-
-
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __("translate.Purchase ID") }}</th>
-                                    <th>{{ __("translate.Reference") }}</th>
-                                    <th>{{ __("translate.Total") }}</th>
-                                    <th>{{ __("translate.Discount") }}</th>
-                                    <th>{{ __("translate.Paid Amount") }}</th>
-                                    <th>{{ __("translate.Due") }}</th>
-                                    <th>{{ __("translate.Time") }}</th>
-                                    <th>{{ __("translate.Action") }} </th>
-                                </tr>
-                            </thead>
-                            <tfoot class="bg-abasas-dark">
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __("translate.Purchase ID") }}</th>
-                                    <th>{{ __("translate.Reference") }}</th>
-                                    <th>{{ __("translate.Total") }}</th>
-                                    <th>{{ __("translate.Discount") }}</th>
-                                    <th>{{ __("translate.Paid Amount") }}</th>
-                                    <th>{{ __("translate.Due") }}</th>
-                                    <th>{{ __("translate.Time") }}</th>
-                                    <th>{{ __("translate.Action") }} </th>
-                                </tr>
-
-                            </tfoot>
-                            <tbody>
-
-                                <?php $i = 1; ?>
-                                @foreach ($purchases as $purchase )
-
-                                <tr class="data-row">
-                                    <td>{{$i++}}</td>
-                                    <td>{{$purchase->id}}</td>
-                                    <td>{{$purchase->user->employee->name }}</td>
-                                    <td>{{$purchase->total}}</td>
-                                    <td>{{$purchase->discount}}</td>
-                                    <td>{{$purchase->paid_amount}}</td>
-                                    <td>{{$purchase->due}}</td>
-
-
-                                    <td>{{ $purchase->created_at->format('M-d-Y h:m:a')}}</td>
-
-
-                                    <td class="align-middle">
-                                        <a href="#"> <button type="button" class="btn btn-success" id="edit-item"> <i
-                                                    class="fa fa-eye" aria-hidden="false"> </i></button></a>
-
-
-
-
-                                    </td>
-
-                                </tr>
+            @can('Purchase Read')
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="supplierTable" width="100%" cellspacing="0">
+                        <thead class="bg-abasas-dark">
+    
+    
+                            <tr>
+                                <th>#</th>
+                                @foreach( $fieldList as $field)
+                                @if($field['name'] ==  'total'   )
+                                    @if($field['read']==1 &&  $GLOBALS['CurrentUser']->can('Purchase Price'))
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+                                @else 
+                                    @if($field['read']==1)
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+    
+                                @endif
                                 @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
+                                @can('Purchase View')
+                                <th> {{ __("translate.Action") }}</th>
+                                @endcan
+                            </tr>
+                        </thead>
+                        <tfoot class="bg-abasas-dark">
+                            <tr>
+                                <th>#</th>
+                                @foreach( $fieldList as $field)
+                                @if($field['name'] ==  'total'   )
+                                    @if($field['read']==1 &&  $GLOBALS['CurrentUser']->can('Purchase Price'))
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+                                @else 
+                                    @if($field['read']==1)
+                                    <th> {{ __('translate.'.$field['title'])  }}</th>
+                                    @endif
+    
+                                @endif
+                                @endforeach
+                                @can('Purchase View')
+                                <th> {{ __("translate.Action") }}</th>
+                                @endcan
+                            </tr>
+    
+                        </tfoot>
+                        @php
+                               $itr= 1;
+                        @endphp
+                        <tbody>
+    
+    
+                                
+    
+                            @foreach ($items as $item)
+                            
+                            @php
+                            $item->abasas();
+                            $itemId = $item->id;
+                         
+                            @endphp
+    
+                            <tr class="data-row">
+                                <td class=" word-break "> {{ $itr++ }}</td>
+                             @foreach( $fieldList as $field)
+    
+    
+                             @if ( $field['name'] ==  'total'  )
+                                @if($field['read']==1 && $GLOBALS['CurrentUser']->can('Purchase Price') )
+                                    @php
+                                    $name= $field['name'];
+                                    @endphp
+                                    <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+                                @endif
+    
+    
+                             @else 
+                                @if($field['read']==1)
+                                    @php
+                                    $name= $field['name'];
+                                    @endphp
+                                    <td class="  word-break  {{$field['database_name']}} "> {{ $item->$name}}</td>
+                                @endif
+                                 
+                             @endif
+    
+                            
+    
+                             @endforeach
+                                 @can('Purchase View')
+                                <td class="align-middle"> 
+                                    
+                                    <a href=""><button type="button" class="btn btn-primary btn-sm" title="View Order" id="order-view-button" > <i class="fa fa-eye" aria-hidden="false"> </i></button></a>
+                                    
+    
+                                </td>
+                                @endcan
+    
+                            </tr>
+                            @endforeach 
+    
+    
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            @endcan
         </div>
 
 
@@ -138,10 +170,10 @@
 
 <script>
     $(document).ready(function(){
-        $('#dataTablePurchase').DataTable({   
+        $('#supplierTable').DataTable({   
                     dom: 'lBfrtip',
                     buttons: [
-                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                         'csv', 'excel' , 'pdf' , 'print'
                     ]
                 });
     });

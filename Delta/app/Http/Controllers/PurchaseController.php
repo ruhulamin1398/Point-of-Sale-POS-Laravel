@@ -17,8 +17,12 @@ use App\Models\purchase;
 use App\Models\purchaseAnalysisDaily;
 use App\Models\purchaseAnalysisMonthly;
 use App\Models\purchaseAnalysisYearly;
+use App\Models\purchaseDetail;
+use App\Models\setting;
+use App\Models\supplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class PurchaseController extends Controller
@@ -44,7 +48,18 @@ class PurchaseController extends Controller
         $month = Carbon:: parse($monthStart)->format('F, Y');
         $purchases= purchase::where('created_at','>=',$monthStart)->where('created_at','<=',$monthEnd)->get();
 
-        return view('product.purchase.index',compact('purchases','month','roles'));
+        
+        $settings = setting::where('table_name', 'purchases')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $purchases,
+            'page_name' => 'Purchase',
+        ];
+
+        return view('product.purchase.index',compact('dataArray','month','roles'));
        
     }
 
@@ -73,7 +88,85 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $purchase = new purchase;
+        $purchase->user_id= Auth::user()->id;  
+        $purchase->supplier_id=$request->purchase['supplier_id'];
+        $purchase->payment_system_id= $request->purchase['payment_system_id'];
+        $purchase->paid_amount= $request->purchase['paid_amount'];
+        $purchase->pre_due=$request->purchase['pre_due'];
+        $purchase->discount=$request->purchase['discount'];
+        $purchase->total=$request->purchase['total'];
+        
+        $purchase->save();
+
+        $this->onlineSync('purchase','create',$purchase->id);
+
+        if( auth()->user()->hasPermissionTo('Allow Supplier Due')){
+            
+            $purchase->due=$request->purchase['due'];
+            $supplier = $purchase->supplier;
+            $supplier->due = $purchase->due;
+            $supplier->save();
+            
+            $this->onlineSync('supplier','update',$supplier->id);
+        }
+        else{
+            $purchase->discount += $request->purchase['due'];
+            $purchase->due=0;
+        }
+
+        $productCount = 0;
+       
+
+        foreach($request->purchase_details as $product){
+
+            $purchaseDetail = new purchaseDetail;
+            $databaseProduct = Product::find($product['id']);
+            $purchaseDetail->purchase_id = $purchase->id;
+            $purchaseDetail->product_id = $product['id'];
+            $purchaseDetail->price = $product['price']  / $databaseProduct->unit->value ;
+            $purchaseDetail->quantity = $product['quantity'] * $databaseProduct->unit->value  ;
+            $purchaseDetail->discount = $product['discount'];
+            $purchaseDetail->total = $product['total'];
+            $productCount += $purchaseDetail->quantity;
+            $purchaseDetail->save();
+
+
+            $totalCost = $databaseProduct->cost_per_unit * $databaseProduct->stock + $purchaseDetail->price * $purchaseDetail->quantity ;
+            $databaseProduct->stock += $purchaseDetail->quantity;
+            $databaseProduct->cost_per_unit = $totalCost / $databaseProduct->stock;
+            $databaseProduct->save();
+
+             $this->onlineSync('purchaseDetail','create',$purchaseDetail->id);
+             $this->onlineSync('Product','update',$databaseProduct->id);
+
+            // product Analysis start
+            $this->productAnalysis($purchaseDetail);
+            // product Analysis end
+
+        }
+
+        $purchase->save();
+
+
+        
+
+
+        // calculation Analysis start
+        $this->calculationAnalysis($purchase);
+        // calculation Analysis end
+
+
+        // purchase Analysis start
+        $this->purchaseAnalysis($purchase,$productCount);
+        // purchase Analysis end
+
+        return $purchase;
+
+
+
+
     }
 
     /**
@@ -123,7 +216,7 @@ class PurchaseController extends Controller
 
 
     
-    public function purchaseAnalysis($order){
+    public function purchaseAnalysis($purchase,$productCount){
         $daily_method = $monthly_method = $yearly_method = 'update';
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
@@ -148,24 +241,36 @@ class PurchaseController extends Controller
             $yearly_method = 'create';
 
         }
+
+        
+        $total = $purchase->total + $purchase->due;
+        $received_amount = $purchase->cash_received;
+        $received_amount = $total >= $received_amount ? $received_amount : $total;
+
+
+
         $purchaseDaily->count += 1;
-        $purchaseDaily->cost += $order->cost;
-        $purchaseDaily->cash_given += $order->paid_amount;
-        $purchaseDaily->discount += $order->discount;
-        $purchaseDaily->amount += $order->total;
-        $purchaseDaily->due += $order->total - $order->paid_amount;
+        $purchaseDaily->product_count += $productCount;
+        $purchaseDaily->cost += $purchase->total;
+        $purchaseDaily->amount += $purchase->total;
+        $purchaseDaily->cash_given += $received_amount ;
+        $purchaseDaily->discount += $purchase->discount;
+        $purchaseDaily->due += $purchase->due - $purchase->pre_due;
+
         $purchaseMonthly->count += 1;
-        $purchaseMonthly->cost += $order->cost;
-        $purchaseMonthly->cash_given +=$order->paid_amount;
-        $purchaseMonthly->discount += $order->discount;
-        $purchaseMonthly->amount += $order->total;
-        $purchaseMonthly->due += $order->total - $order->paid_amount;
+        $purchaseMonthly->product_count += $productCount;
+        $purchaseMonthly->cost += $purchase->total;
+        $purchaseMonthly->cash_given += $received_amount;
+        $purchaseMonthly->discount += $purchase->discount;
+        $purchaseMonthly->due += $purchase->due - $purchase->pre_due;
+
         $purchaseYearly->count += 1;
-        $purchaseYearly->cost += $order->cost;
-        $purchaseYearly->cash_given += $order->paid_amount;
-        $purchaseYearly->discount += $order->discount;
-        $purchaseYearly->amount += $order->total;
-        $purchaseYearly->due += $order->total - $order->paid_amount;
+        $purchaseYearly->product_count += $productCount;
+        $purchaseYearly->cost += $purchase->total;
+        $purchaseYearly->cash_given += $received_amount;
+        $purchaseYearly->discount += $purchase->discount;
+        $purchaseYearly->due += $purchase->due - $purchase->pre_due;
+
         $purchaseDaily->save();
         $purchaseMonthly->save();
         $purchaseYearly->save();
@@ -179,7 +284,7 @@ class PurchaseController extends Controller
 
 
     }
-    public function productAnalysis($profit,$id,$quantity){
+    public function productAnalysis($purchaseDetail){
 
         $daily_method = $monthly_method = $yearly_method = 'update';
 
@@ -187,34 +292,31 @@ class PurchaseController extends Controller
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
-        $productDaily= productAnalysisDaily::where('date',$date)->where('product_id',$id )->first();
-        $productMonthly= productAnalysisMonthly::where('month',$month)->where('product_id',$id)->first();
-        $productYearly= productAnalysisYearly::where('year',$year)->where('product_id',$id)->first();
+        $productDaily= productAnalysisDaily::where('date',$date)->where('product_id',$purchaseDetail-> product_id)->first();
+        $productMonthly= productAnalysisMonthly::where('month',$month)->where('product_id',$purchaseDetail->product_id)->first();
+        $productYearly= productAnalysisYearly::where('year',$year)->where('product_id',$purchaseDetail->product_id)->first();
         if(is_null($productDaily)){
             $productDaily= new productAnalysisDaily;
             $productDaily->date=$date;
-            $productDaily->product_id=$id;
+            $productDaily->product_id=$purchaseDetail->product_id;
             $daily_method = 'create';
         }
         if(is_null($productMonthly)){
             $productMonthly= new productAnalysisMonthly;
             $productMonthly->month=$month;
-            $productMonthly->product_id=$id;
+            $productMonthly->product_id=$purchaseDetail->product_id;
             $monthly_method = 'create';
 
         }
         if(is_null($productYearly)){
             $productYearly= new productAnalysisYearly;
             $productYearly->year=$year;
-            $productYearly->product_id=$id;
+            $productYearly->product_id=$purchaseDetail->product_id;
             $yearly_method = 'create';
         }
-        $productDaily->sell += $quantity;
-        $productDaily->profit += $profit;
-        $productMonthly->sell += $quantity;
-        $productMonthly->profit += $profit;
-        $productYearly->sell += $quantity;
-        $productYearly->profit += $profit;
+        $productDaily->sell += $purchaseDetail->quantity;
+        $productMonthly->sell += $purchaseDetail->quantity;
+        $productYearly->sell += $purchaseDetail->quantity;
         $productDaily->save();
         $productMonthly->save();
         $productYearly->save();
@@ -225,7 +327,7 @@ class PurchaseController extends Controller
       
 
     }
-    public function calculationAnalysis($profit,$sell,$tax){
+    public function calculationAnalysis($purchase){
 
         $daily_method = $monthly_method = $yearly_method = 'update';
 
@@ -253,15 +355,10 @@ class PurchaseController extends Controller
             $yearly_method = 'create';
 
         }
-        $calculationAnalysisDaily->sell_profit += $profit;
-        $calculationAnalysisMonthly->sell_profit += $profit;
-        $calculationAnalysisYearly->sell_profit += $profit;
-        $calculationAnalysisDaily->sell += $sell;
-        $calculationAnalysisMonthly->sell += $sell;
-        $calculationAnalysisYearly->sell += $sell;
-        $calculationAnalysisDaily->tax += $tax;
-        $calculationAnalysisMonthly->tax += $tax;
-        $calculationAnalysisYearly->tax += $tax;
+        
+        $calculationAnalysisDaily->buy += $purchase->total;
+        $calculationAnalysisMonthly->buy += $purchase->total;
+        $calculationAnalysisYearly->buy += $purchase->total;
         $calculationAnalysisDaily->save();
         $calculationAnalysisMonthly->save();
         $calculationAnalysisYearly->save();
@@ -273,50 +370,6 @@ class PurchaseController extends Controller
         $this->onlineSync('calculationAnalysisYearly',$yearly_method,$calculationAnalysisYearly->id);
       
 
-
-    }
-    public function employeeAnalysis($profit){
-
-        $daily_method = $monthly_method = $yearly_method = 'update';
-
-        $month = Carbon::now()->format('Y-m-01');
-        $date = Carbon::now()->format('Y-m-d');
-        $year = Carbon::now()->format('Y');
-        $employeeDaily= employeeAnalysisDaily::where('date',$date)->first();
-        $employeeMonthly= employeeAnalysisMonthly::where('month',$month)->first();
-        $employeeYearly= employeeAnalysisYearly::where('year',$year)->first();
-        if(is_null($employeeDaily)){
-            $employeeDaily= new employeeAnalysisDaily;
-            $employeeDaily->date=$date;
-            $daily_method = 'create';
-        }
-        if(is_null($employeeMonthly)){
-            $employeeMonthly= new employeeAnalysisMonthly;
-            $employeeMonthly->month=$month;
-            $monthly_method = 'create';
-
-        }
-        if(is_null($employeeYearly)){
-            $employeeYearly= new employeeAnalysisYearly;
-            $employeeYearly->year=$year;
-            $yearly_method = 'create';
-
-        }
-        $employeeDaily->sell += 1;
-        $employeeDaily->profit += $profit;
-        $employeeMonthly->sell += 1;
-        $employeeMonthly->profit += $profit;
-        $employeeYearly->sell += 1;
-        $employeeYearly->profit += $profit;
-        $employeeDaily->save();
-        $employeeMonthly->save();
-        $employeeYearly->save();
-
-
-        $this->onlineSync('employeeAnalysisDaily',$daily_method,$employeeDaily->id);
-        $this->onlineSync('employeeAnalysisMonthly',$monthly_method,$employeeMonthly->id);
-        $this->onlineSync('employeeAnalysisYearly',$yearly_method,$employeeYearly->id);
-      
 
     }
 }

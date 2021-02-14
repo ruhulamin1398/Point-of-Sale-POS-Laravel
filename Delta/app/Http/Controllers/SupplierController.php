@@ -87,7 +87,19 @@ $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
         }
        $month = Carbon:: parse($monthStart)->format('F');
         $purchases= purchase::where('supplier_id', $supplier->id)->where('created_at','<=',$monthEnd)->where('created_at','>=',$monthStart)->get(); 
-        return view('suppliers.show',compact('supplier','purchases','month'));
+        
+ 
+        $settings = setting::where('table_name', 'purchases')->first();
+        $settings->setting = json_decode(json_decode($settings->setting, true), true);
+
+
+        $dataArray = [
+            'settings' => $settings,
+            'items' => $purchases,
+            'page_name' => 'Purchase',
+        ];
+
+        return view('suppliers.show',compact('supplier','dataArray','month'));
     }
 
     /**

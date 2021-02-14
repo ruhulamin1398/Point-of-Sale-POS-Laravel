@@ -41,7 +41,7 @@
 @endif
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid p-0">
 
 
 
@@ -668,7 +668,7 @@
         $('#productTable').DataTable({   
             dom: 'lBfrtip',
             buttons: [
-                'copy', 'csv', 'excel' , 'pdf' , 'print'
+                'csv', 'excel' , 'pdf' , 'print'
             ]
         });
 

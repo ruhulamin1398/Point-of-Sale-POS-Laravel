@@ -284,15 +284,19 @@ class RoleTableSeeder extends Seeder
         ]);
         DB::table('payment_systems')->insert([
             [
-                'payment_system' => 'cash',
-                'description'=>'bkash is most popular way',
+                'payment_system' => 'Cash',
+                'description'=>'Cash is most popular way',
             ],
             [
-                'payment_system' => 'rocket',
-                'description'=>'rocket is most popular way',
+                'payment_system' => 'Rocket',
+                'description'=>'Rocket is most popular way',
             ],
             [
-                'payment_system' => 'card',
+                'payment_system' => 'Bkash',
+                'description'=>'Bkash is most popular way',
+            ],
+            [
+                'payment_system' => 'Card',
                 'description'=>'you can also use card',
             ],
         ]);

@@ -28,12 +28,12 @@
 
 
 <!-- Content Row -->
-<div class="container-fluid ">
+<div class="container-fluid  p-0 ">
 
     <div class="row ">
 
         <!-- main body start -->
-        <div class="col-xl-8 col-lg-8 col-md-8   ">
+        <div class="col-xl-8 col-lg-8 col-md-8  order-2 order-md-1 ">
 
 
             <div class="card mb-4 shadow">
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Left Sidebar Start -->
-        <div class="col-xl-4 col-lg-4 col-md-4   ">
+        <div class="col-xl-4 col-lg-4 col-md-4 order-1 order-md-2  ">
 
             <x-customer-phone />
 

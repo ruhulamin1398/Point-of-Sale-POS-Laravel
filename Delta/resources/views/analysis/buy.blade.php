@@ -152,7 +152,8 @@
                         </div>
                     </div>
             
-                    <!-- Today sell Amount Card Example -->
+                    @can('Allow Supplier Due')
+                    <!-- Today Buy Due Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
                         <div class="card border-left-info shadow h-100 py-4">
             
@@ -167,6 +168,7 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
             
                     <!-- Today sell Amount Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
@@ -229,12 +231,13 @@
                         <x-line-chart :dataArray="$data['dailyReturnGraph']" id="dailyReturnGraph" />
                         
                     </div>
-                    
+                    @can('Allow Supplier Due')
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
                         <x-line-chart :dataArray="$data['dailyDueGraph']" id="dailyDueGraph" />
                         
                     </div>
+                    @endcan
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
@@ -349,7 +352,7 @@
                             </div>
                         </div>
                     </div>
-            
+                    @can('Allow Supplier Due')
                     <!-- Today sell Amount Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
                         <div class="card border-left-info shadow h-100 py-4">
@@ -365,6 +368,7 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
             
                     <!-- Today sell Amount Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
@@ -427,12 +431,13 @@
                         <x-line-chart :dataArray="$data['monthlyReturnGraph']" id="monthlyReturnGraph" />
                         
                     </div>
-                    
+                    @can('Allow Supplier Due')
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
                         <x-line-chart :dataArray="$data['monthlyDueGraph']" id="monthlyDueGraph" />
                         
                     </div>
+                    @endcan
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
@@ -548,7 +553,7 @@
                             </div>
                         </div>
                     </div>
-            
+                    @can('Allow Supplier Due')
                     <!-- Today sell Amount Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
                         <div class="card border-left-info shadow h-100 py-4">
@@ -564,6 +569,7 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
             
                     <!-- Today sell Amount Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4 text-center topCard">
@@ -626,12 +632,13 @@
                         <x-line-chart :dataArray="$data['yearlyReturnGraph']" id="yearlyReturnGraph" />
                         
                     </div>
-                    
+                    @can('Allow Supplier Due')
                     <div class="col-12 col-md-6 p-0 p-md-4">
 
                         <x-line-chart :dataArray="$data['yearlyDueGraph']" id="yearlyDueGraph" />
                         
                     </div>
+                    @endcan
                     
                     <div class="col-12 col-md-6 p-0 p-md-4">
 

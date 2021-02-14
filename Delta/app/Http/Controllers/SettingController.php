@@ -17,147 +17,82 @@ class SettingController extends Controller
     {
 
 
-        // $a = '[{
-        //     "componentDetails":{
-        //         "title":"Product List",
-        //         "editTitle":"Edit Product"
-        //     },
-        //     "routes":{
-        //         "create":{
-        //             "name":"products.store",
-        //             "link":"products"
-        //         },
-        //         "update":{
-        //             "name":"products.update",
-        //             "link":"products"
-        //         },
-        //         "delete":{
-        //             "name":"products.destroy",
-        //             "link":"products"
-        //         }
-        //     },
-        //     "fieldList":[{
+        $a = '[{
+            "componentDetails":{
+                "title":"Purchase List",
+                "editTitle":"Edit Purchase"
+            },
+            "routes":{
+                "create":{
+                    "name":"purchases.store",
+                    "link":"purchases"
+                },
+                "update":{
+                    "name":"purchases.update",
+                    "link":"purchases"
+                },
+                "delete":{
+                    "name":"purchases.destroy",
+                    "link":"purchases"
+                }
+            },
+            "fieldList":[{
                     
-        //         "position":111,
+                "position":111,
     
-        //         "create":"0",
-        //         "read":"1",
-        //         "update":"0",
-        //         "require":"0",
+                "create":"0",
+                "read":"1",
+                "update":"0",
+                "require":"0",
     
-        //        "input_type":"text",
-        //        "name":"id",
-        //        "title":"Id",
+               "input_type":"text",
+               "name":"id",
+               "title":"Purchase No",
     
     
-        //        "database_name":"id"
-        //     },{
+               "database_name":"id"
+            },{
                     
-        //         "position":111,
+                "position":111,
     
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"1",
+                "create":"0",
+                "read":"1",
+                "update":"0",
+                "require":"0",
     
-        //        "input_type":"text",
-        //        "name":"name",
-        //        "title":"Name",
-        //        "database_name":"name"
-        //     },{
+               "input_type":"text",
+               "name":"supplier",
+               "title":"Supplier",
+               "database_name":"supplier_id"
+            },{
                     
-        //         "position":111,
+                "position":111,
     
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"0",
+                "create":"0",
+                "read":"1",
+                "update":"0",
+                "require":"0",
     
-        //        "input_type":"text",
-        //        "name":"category",
-        //        "title":"Category",
-        //        "database_name":"category_id"
-        //     },{
+               "input_type":"text",
+               "name":"total",
+               "title":"Total",
+               "database_name":"total"
+            },{
                     
-        //         "position":111,
+                "position":111,
     
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"0",
+                "create":"0",
+                "read":"1",
+                "update":"0",
+                "require":"0",
     
-        //        "input_type":"text",
-        //        "name":"brand",
-        //        "title":"Brand",
-        //        "database_name":"brand_id"
-        //     },{
-                    
-        //         "position":111,
-    
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"0",
-    
-        //        "input_type":"text",
-        //        "name":"cost",
-        //        "title":"Cost",
-        //        "database_name":"cost"
-        //     },{
-                    
-        //         "position":111,
-    
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"0",
-    
-        //        "input_type":"text",
-        //        "name":"price",
-        //        "title":"Price",
-        //        "database_name":"price"
-        //     },{
-                    
-        //         "position":111,
-    
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"0",
-    
-        //        "input_type":"text",
-        //        "name":"real_stock",
-        //        "title":"Stock",
-        //        "database_name":"stock"
-        //     },{
-                    
-        //         "position":111,
-    
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"0",
-    
-        //        "input_type":"text",
-        //        "name":"tax_with_type",
-        //        "title":"Tax",
-        //        "database_name":"tax"
-        //     },{
-                    
-        //         "position":111,
-    
-        //         "create":"3",
-        //         "read":"1",
-        //         "update":"3",
-        //         "require":"0",
-    
-        //        "input_type":"text",
-        //        "name":"warrenty",
-        //        "title":"Warrenty",
-        //        "database_name":"warrenty_id"
-        //     }
-        //     ]
-        // }]' ;
+               "input_type":"text",
+               "name":"time",
+               "title":"Time",
+               "database_name":"created_at"
+            }
+            ]
+        }]' ;
 
         // $a= [
         //     "1" =>[ 
@@ -182,8 +117,8 @@ class SettingController extends Controller
             // ];
         // $setting = new setting;
         // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'categorized_products';
-        // $setting->model = 'App\Models\Product';
+        // $setting->table_name = 'purchases';
+        // $setting->model = 'App\Models\purchase';
         // $setting->save();
         // return  "Success";
     }

@@ -33,7 +33,7 @@
 
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid  p-0">
     <div class="card mb-4 shadow">
 
 
@@ -304,7 +304,7 @@
         $('#dataTableDuty').DataTable({   
                     dom: 'lBfrtip',
                     buttons: [
-                        'copy', 'csv', 'excel' , 'pdf' , 'print'
+                        'csv', 'excel' , 'pdf' , 'print'
                     ]
                 });
         $('#dutyStatusId').on('input', function () {

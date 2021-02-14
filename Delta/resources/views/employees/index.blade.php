@@ -20,12 +20,12 @@
                 <div class="form-row align-items-center">
 
 
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="name">{{ __("translate.Name") }}<span style="color: red"> *</span></label>
                         <input type="text" name="name" class="form-control mb-2" placeholder="Name" required>
                     </div>
 
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="designation_id">{{ __("translate.Select Designation") }}<span style="color: red"> *</span></label>
                         <select class="form-control form-control" value="1" name="designation_id" id="designation_id" required>
                             <option disabled selected value> -- select an option -- </option>
@@ -35,47 +35,47 @@
                         </select>
                     </div>
 
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="phone">{{ __("translate.Phone") }}<span style="color: red"> *</span></label>
                         <input type="tel" id="phoneInput" name="phone" class="form-control mb-2"  placeholder="Phone"required>
                         <span style="color: red"  id="phoneFieldWarning"> </span>
 
                     </div>
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="address">{{ __("translate.Address") }}<span style="color: red"> *</span></label>
                         <input type="text" name="address" class="form-control mb-2"  placeholder="Address" required>
                     </div>
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="fixed_duty_hour">{{ __("translate.Fixed Duty") }} ({{ __("translate.Hour") }})<span style="color: red"> *</span></label>
                         <input type="number" name="fixed_duty_hour" class="form-control mb-2"  placeholder="Fixed Duty(Hour)" required>
                     </div>
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="salary ">{{ __("translate.Salary") }}<span style="color: red"> *</span> </label>
                         <input type="number" step="any" name="salary" class="form-control mb-2"placeholder="Salary" required>
                     </div>
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12 p-0 p-md-4">
                         <label for="joining_date">{{ __("translate.Joining Date") }}</label>
                         <input type="date" name="joining_date" class="form-control mb-2">
                     </div>
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12 p-0 p-md-4">
                         <label for="term_of_contract">{{ __("translate.Term of Contract") }}</label>
                         <input type="date" name="term_of_contract" class="form-control mb-2">
                     </div>
-                    <div class="col-md-4 col-sm-12  p-4">
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="reference ">{{ __("translate.Reference") }} </label>
                         <input type="text" name="reference" class="form-control mb-2"placeholder="Reference">
                     </div>
-                    <div class="col-12  p-4 ml-4" id="checkBoxDiv">
+                    <div class="col-12  p-0 p-md-4 ml-4" id="checkBoxDiv">
                         <input class="form-check-input " name="add_user" type="checkbox" id="userAddCheck" value="1">
                         <label class="form-check-label" for="userAddCheck">{{ __("translate.Add User data") }}</label>
                     </div>
-                    <div id="emptySpace1"class="col-md-4 col-sm-12  p-4" ></div>
-                    <div id="emptySpace2"class="col-md-4 col-sm-12  p-4"></div>
-                    <div id="emptySpace3"class="col-md-4 col-sm-12  p-4"></div>
-                    <div id="emptySpace4"class="col-md-4 col-sm-12  p-4"></div>
+                    <div id="emptySpace1"class="col-md-4 col-sm-12  p-0 p-md-4 inputFireldsForUser" style="display: none" ></div>
+                    <div id="emptySpace2"class="col-md-4 col-sm-12  p-0 p-md-4 inputFireldsForUser" style="display: none" ></div>
+                    <div id="emptySpace3"class="col-md-4 col-sm-12  p-0 p-md-4 inputFireldsForUser" style="display: none" ></div>
+                    <div id="emptySpace4"class="col-md-4 col-sm-12  p-0 p-md-4 inputFireldsForUser" style="display: none" ></div>
 
-                    <div class="col-auto ">
-                        <button type="submit" id="employeeSubmit" class="form-control btn bg-abasas-dark ml-4">{{ __("translate.Submit") }}</button>
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
+                        <button type="submit" id="employeeSubmit" class="form-control btn btn-block bg-abasas-dark">{{ __("translate.Submit") }}</button>
                     </div>
                    
 
@@ -152,12 +152,16 @@
                 $('#emptySpace2').html(html4);
                 $('#emptySpace3').html(html2);
                 $('#emptySpace4').html(html3);
+                $('.inputFireldsForUser').show();
                 }
                 else{
                 $('#emptySpace1').html('');
                 $('#emptySpace2').html('');
                 $('#emptySpace3').html('');
                 $('#emptySpace4').html('');
+                
+                $('.inputFireldsForUser').hide();
+                $("#employeeSubmit").attr("disabled", false);
                 
                 }
             
