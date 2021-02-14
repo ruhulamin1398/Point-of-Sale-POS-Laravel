@@ -109,7 +109,7 @@
                                 </tr>
                                 <tr class="data-row">
                                     <th>{{ __("translate.Stock Control") }} </th>
-                                    <td> {{ $product->stock_controll }} </td>
+                                    <td class="text-capitalize"> {{ $product->stock_controll }} </td>
                                 </tr>
                             </tbody>
                         </table>
