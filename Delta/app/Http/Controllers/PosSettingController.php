@@ -101,6 +101,11 @@ class PosSettingController extends Controller
         $posSetting->language = $request->language;
         $posSetting->customer_due = $request->customer_due;
         $posSetting->supplier_due = $request->supplier_due;
+
+        
+        $posSetting->tax = $request->tax;
+
+        // tax 
     
         if(!is_null($request->logo)){
 

@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $settings = setting::where('table_name','categories')->first();
         $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
 
-        $dataArray=[
+        $dataArray=[  
             'settings'=>$settings,
             'items' => category::all(),
             'product_types'=> productType::all(),

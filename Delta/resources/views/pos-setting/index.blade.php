@@ -162,6 +162,55 @@
                 </div>
 
 
+
+                
+                <div class="row m-md-4 m-0">
+
+                   <!-- 
+                         <div class="form-group col-12 col-md-3">
+                        <label for="language"> {{ __('translate.Language') }}  </label>
+                    </div>
+
+                    <div class="form-group col-12 col-md-3">
+                       <select class="form-control" value="" name="language" id="language">
+                            <option selected disabled value="">Select Language </option>
+
+
+
+                            @if ($settings->language == 'bn')
+                            <option value="en"> English</option>
+                            <option selected value="bn"> বাংলা</option>
+                            @else
+
+                            <option selected value="en"> English</option>
+                            <option value="bn"> বাংলা</option>
+
+                            @endif
+                        </select> 
+
+                    </div>-->
+
+                    <div class="form-group col-12 col-md-3">
+                        <label for="tax"> {{ __('translate.tax') }} </label>
+                    </div>
+                    <div class="form-group col-12 col-md-3">
+                        <select class="form-control" value="" name="tax" id="tax">
+                            <option selected disabled value="">Select</option>
+                          @if($settings->tax == 'yes')
+                            <option selected value="yes"> Yes</option>
+                            <option value="no"> No</option>
+                        @else
+                        <option  value="yes"> Yes</option>
+                        <option selected value="no"> No</option>
+                         @endif  
+                    </select>
+                    </div>
+                </div>
+
+
+
+
+
                 <div class="row m-md-4 m-0">
 
 

@@ -761,7 +761,11 @@ class PermissionSeeder extends Seeder
             ],
 
 
-
+            [
+                'name' => 'Pos Setting Page',
+                'page_name' => 'Pos Setting',
+                'guard_name' => 'web',
+            ],
 
         ]);
 
