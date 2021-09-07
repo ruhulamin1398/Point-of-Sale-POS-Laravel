@@ -226,7 +226,7 @@
                         </div>
                     </div>
 
-
+    @can('tax')
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
                             <div class="text-left  "> {{ __("translate.Tax") }}</div>
@@ -235,7 +235,7 @@
                             <div class="text-right " id="taxValue">0</div>
                         </div>
                     </div>
-
+   @endcan
                     <div class="row border-bottom border-dark bg-dark mb-2">
                         <div class="col-6 ">
                             <div class="text-left  ">  {{ __("translate.Sub Total") }}</div>

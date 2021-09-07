@@ -125,7 +125,7 @@ class PosSettingController extends Controller
            
 
         }
-
+///  updating premission  
 
         $posSetting->save();
         $roles = Role::all();
@@ -133,6 +133,8 @@ class PosSettingController extends Controller
             
         $customerDuePermission = Permission::where('name','Allow Customer Due')->first();
         $supplierDuePermission = Permission::where('name','Allow Supplier Due')->first();
+        $taxPermission = Permission::where('name','tax')->first();
+    
 
         foreach($roles as $role){
             if($posSetting->customer_due == 'yes'){
@@ -143,6 +145,8 @@ class PosSettingController extends Controller
                 $role->revokePermissionTo($customerDuePermission);
                 $this->onlinePermissionSync('RolePermission','remove',$role->id,$customerDuePermission->id);
             }
+
+
             if($posSetting->supplier_due == 'yes'){
                 $role->givePermissionTo($supplierDuePermission);
                 $this->onlinePermissionSync('RolePermission','assign',$role->id,$supplierDuePermission->id);
@@ -152,8 +156,21 @@ class PosSettingController extends Controller
                 $this->onlinePermissionSync('RolePermission','remove',$role->id,$supplierDuePermission->id);
             }
 
+            if($posSetting->tax == 'yes'){
+                $role->givePermissionTo($taxPermission);
+                $this->onlinePermissionSync('RolePermission','assign',$role->id,$taxPermission->id);
+            }
+            else{
+                $role->revokePermissionTo($taxPermission);
+                $this->onlinePermissionSync('RolePermission','remove',$role->id,$taxPermission->id);
+            }
+
         }
         
+    //    return  $taxPermission->syncRoles($roles);
+
+
+
         $this->onlineSync('posSetting','update',$posSetting->id);
         return Redirect::back()->withSuccess(["Setting Updated Successful"]);
     }

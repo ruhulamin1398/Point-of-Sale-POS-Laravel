@@ -276,7 +276,7 @@ $create_setting = $settings->setting;
 
                             </select>
                         </div>
-
+      @can('tax')
                         <div class="form-group col-12  ">
                             <label for="tax_type_id"> {{ __('translate.Tax Type') }}</label>
                             <select class="form-control" name="tax_type_id" id="tax_type_id" required>
@@ -298,7 +298,10 @@ $create_setting = $settings->setting;
                             <input type="number" step="any" name="tax" id="tax" class="form-control" min=0 value="0">
                         </div>
 
+                 
 
+                    
+@endcan
                         <div class="form-group col-12  ">
                             <label for="stock_controll"> {{ __('translate.Stock Control') }}</label>
                             <select class="form-control" name="stock_controll" id="stock_controll">

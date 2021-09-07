@@ -527,8 +527,7 @@
                                              <td class="iteration">{{ __('translate.Read Access') }} </td>
 
 
-                                             @for ($i=1 ; $i<5 ; $i++) <td
-                                                 class="word-break name justify-content-center">
+                                             @for ($i=1 ; $i<5 ; $i++) <td class="word-break name justify-content-center">
                                                  <label class="checkbox-inline"><input type="checkbox"
                                                          name="read{{ $i }}"
                                                          @if($roles[$i]->hasPermissionTo($permision_name)) checked
