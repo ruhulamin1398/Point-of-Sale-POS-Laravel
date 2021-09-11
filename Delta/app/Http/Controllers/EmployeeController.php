@@ -78,7 +78,8 @@ class EmployeeController extends Controller
         $employee->reference= $request->reference; 
         $employee->term_of_contract= $request->term_of_contract; 
         $employee->fixed_duty_hour= $request->fixed_duty_hour; 
-        $employee->salary= $request->salary; 
+        $employee->daily_salary= $request->daily_salary; 
+        $employee->monthly_salary= $request->monthly_salary; 
         if(!is_null($request->userName)){  
             $user= new User;
             $user->name= $request->userName;
@@ -95,7 +96,7 @@ class EmployeeController extends Controller
        
         $employee->save();
         $this->onlineSync('employee','create',$employee->id);
-
+// return  $employee;
 
         return redirect::back()->withSuccess(['Successfully Created']);
 

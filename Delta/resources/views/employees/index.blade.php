@@ -52,13 +52,13 @@
 
                     <div class="col-md-4 col-sm-12  p-0 p-md-4">
                         <label for="salary ">{{ __("translate.Salary Month") }}<span style="color: red"> *</span> </label>
-                        <input type="number" step="any" name="monthly_salary" class="form-control mb-2"placeholder="Salary" required>
+                        <input type="number" step="any" name="monthly_salary" class="form-control mb-2"placeholder="monthly salary" required>
                     </div>
 
                     
                     <div class="col-md-4 col-sm-12  p-0 p-md-4">
-                        <label for="salary ">{{ __("translate.Salary Daily") }}<span style="color: red"> *</span> </label>
-                        <input type="number" step="any" name="salary" class="form-control mb-2"placeholder="Salary" required>
+                        <label for="salary ">{{ __("translate.Salary Daily") }}<span class="text-secondary"> (Optional) </span> </label>
+                        <input type="number" step="any" name="daily_salary" class="form-control mb-2"placeholder="Daily salary" >
                     </div>
 
 

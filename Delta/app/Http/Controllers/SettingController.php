@@ -17,67 +17,143 @@ class SettingController extends Controller
     {
 
 
-        $a = '[{
-            "componentDetails":{
-                "title":"Monthly",
-                "editTitle":"change status "
-            },
-            "routes":{
-                "create":{
-                    "name":"duties.store",
-                    "link":"duties"
+        $a = '[
+
+            {
+                "componentDetails": {
+                    "title": "Employee List",
+                    "editTitle": "Edit Employee"
                 },
-                "update":{
-                    "name":"duties.update",
-                    "link":"duties"
+                "routes": {
+                    "create": {
+                        "name": "employees.store",
+                        "link": "employees"
+                    },
+                    "update": {
+                        "name": "employees.update",
+                        "link": "employees"
+                    },
+                    "delete": {
+                        "name": "employees.destroy",
+                        "link": "employees"
+                    }
                 },
-                "delete":{
-                    "name":"duties.destroy",
-                    "link":"duties"
-                }
-            },
-            "fieldList":[{
-                    
-                "position":111,
-    
-                "create":"0",
-                "read":"1",
-                "update":"0",
-                "require":"0",
-    
-               "input_type":"date",
-               "name":"day",
-               "title":"day",
-               "database_name":"day"
-            },{
-                    
-                "position":111,
-    
-                "create":"0",
-                "read":"1",
-                "update":"0",
-                "require":"0",
-    
-               "input_type":"select",
-               "name":"status",
-               "title":"Status",
-               "database_name":"status_id"
-            },{
-                    
-                "position":111,
-    
-                "create":"0",
-                "read":"1",
-                "update":"0",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"comment",
-               "title":"comment",
-               "database_name":"comment"
+                "fieldList": [
+                    {
+                        "position": "2",
+                        "create": "2",
+                        "read": "1",
+                        "update": "1",
+                        "require": "1",
+                        "input_type": "text",
+                        "name": "name",
+                        "title": "Name",
+                        "database_name": "name"
+                    },
+                    {
+                        "position": "3",
+                        "create": "2",
+                        "read": "1",
+                        "update": "1",
+                        "require": "1",
+                        "input_type": "dropDown",
+                        "name": "designation",
+                        "database_name": "designation_id",
+                        "title": "Designation",
+                        "data": "designations"
+                    },
+                    {
+                        "position": "4",
+                        "create": "2",
+                        "read": "1",
+                        "update": "1",
+                        "require": "1",
+                        "input_type": "tel",
+                        "name": "phone",
+                        "database_name": "phone",
+                        "title": "Phone"
+                    },
+                    {
+                        "position": "5",
+                        "create": "2",
+                        "read": "1",
+                        "update": "1",
+                        "require": "1",
+                        "input_type": "text",
+                        "name": "address",
+                        "database_name": "address",
+                        "title": "Address"
+                    },
+                    {
+                        "position": "6",
+                        "create": "1",
+                        "read": "1",
+                        "update": "1",
+                        "require": "0",
+                        "input_type": "date",
+                        "name": "joining_date",
+                        "database_name": "joining_date",
+                        "title": "Joining Date"
+                    },
+                    {
+                        "position": "7",
+                        "create": "1",
+                        "read": "1",
+                        "update": "1",
+                        "require": "0",
+                        "input_type": "text",
+                        "name": "reference",
+                        "database_name": "reference",
+                        "title": "Reference"
+                    },
+                    {
+                        "position": "8",
+                        "create": "1",
+                        "read": "1",
+                        "update": "1",
+                        "require": "0",
+                        "input_type": "date",
+                        "name": "term_of_contract",
+                        "database_name": "term_of_contract",
+                        "title": "Term of Contract"
+                    },
+                    {
+                        "position": "9",
+                        "create": "2",
+                        "read": "1",
+                        "update": "1",
+                        "require": "1",
+                        "input_type": "number",
+                        "name": "fixed_duty_hour",
+                        "database_name": "fixed_duty_hour",
+                        "title": "Duty (Hour)"
+                    },
+                    {
+                        "position": "10",
+                        "create": "2",
+                        "read": "1",
+                        "update": "1",
+                        "require": "1",
+                        "input_type": "number",
+                        "name": "monthly_salary",
+                        "database_name": "monthly_salary",
+                        "title": "Monthly Salary"
+                    },
+                    {
+                        "position": "10",
+                        "create": "2",
+                        "read": "1",
+                        "update": "1",
+                        "require": "1",
+                        "input_type": "number",
+                        "name": "daily_salary",
+                        "database_name": "daily_salary",
+                        "title": "Daily Salary"
+                    }
+                ]
             }
-            ]
-        }]' ;
+        
+        ]';
 
         // $a= [
         //     "1" =>[ 
@@ -105,6 +181,7 @@ class SettingController extends Controller
         $setting->table_name = 'duties';
         $setting->model = 'App\Models\duty';
         $setting->save();
+        // return  $setting;
         return  "Success";
     }
 
@@ -147,7 +224,9 @@ class SettingController extends Controller
      */
     public function edit(setting $setting)
     {
-        //
+      
+          return  json_decode("[{\"componentDetails\":{\"title\":\"Employee List\",\"editTitle\":\"Edit Employee\"},\"routes\":{\"create\":{\"name\":\"employees.store\",\"link\":\"employees\"},\"update\":{\"name\":\"employees.update\",\"link\":\"employees\"},\"delete\":{\"name\":\"employees.destroy\",\"link\":\"employees\"}},\"fieldList\":[{\"position\":\"2\",\"create\":\"2\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"text\",\"name\":\"name\",\"title\":\"Name\",\"database_name\":\"name\"},{\"position\":\"3\",\"create\":\"2\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"dropDown\",\"name\":\"designation\",\"database_name\":\"designation_id\",\"title\":\"Designation\",\"data\":\"designations\"},{\"position\":\"4\",\"create\":\"2\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"tel\",\"name\":\"phone\",\"database_name\":\"phone\",\"title\":\"Phone\"},{\"position\":\"5\",\"create\":\"2\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"text\",\"name\":\"address\",\"database_name\":\"address\",\"title\":\"Address\"},{\"position\":\"6\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"0\",\"input_type\":\"date\",\"name\":\"joining_date\",\"database_name\":\"joining_date\",\"title\":\"Joining Date\"},{\"position\":\"7\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"0\",\"input_type\":\"text\",\"name\":\"reference\",\"database_name\":\"reference\",\"title\":\"Reference\"},{\"position\":\"8\",\"create\":\"1\",\"read\":\"1\",\"update\":\"1\",\"require\":\"0\",\"input_type\":\"date\",\"name\":\"term_of_contract\",\"database_name\":\"term_of_contract\",\"title\":\"Term of Contract\"},{\"position\":\"9\",\"create\":\"2\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"number\",\"name\":\"fixed_duty_hour\",\"database_name\":\"fixed_duty_hour\",\"title\":\"Duty (Hour)\"},{\"position\":\"10\",\"create\":\"2\",\"read\":\"1\",\"update\":\"1\",\"require\":\"1\",\"input_type\":\"number\",\"name\":\"salary\",\"database_name\":\"salary\",\"title\":\"Salary\"}]}]");
+      
     }
 
     /**

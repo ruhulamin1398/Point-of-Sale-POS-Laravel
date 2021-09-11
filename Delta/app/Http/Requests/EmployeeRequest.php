@@ -30,7 +30,6 @@ class EmployeeRequest extends FormRequest
             "name"=>"required",
             "phone"=>["required","unique:employees"],
             "address"=>"required",
-            "salary"=>"required",
             "designation_id"=>"required",
            
         ];
