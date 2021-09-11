@@ -12,6 +12,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerDueReceiveController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DropProductController;
+use App\Http\Controllers\DutyController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PaymentSystemController;
 use App\Http\Controllers\EmployeeController;
@@ -131,6 +132,7 @@ Route::resource('employee_payments', EmployeePaymentController::class);
 Route::resource('employee_salaries', EmployeeSalaryController::class);
 
 // Duties  
+Route::resource('duties', DutyController::class);
 Route::resource('duty-statuses', DutyStatusController::class);
 Route::resource('employee_duties', EmployeeDutyController::class);
 Route::get('employee_duties_monthly', [EmployeeDutyController::class, 'dutyMonthly'])->name('employee_duties_monthly');

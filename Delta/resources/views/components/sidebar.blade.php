@@ -214,6 +214,9 @@
         <div id="collapseStaff" class="collapse" aria-labelledby="headingStaff" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @can('Employee Page')
+                <a class="collapse-item" href="{{ route('duties.index') }}"> {{__('translate.Duties')}}</a>
+                @endcan 
+                @can('Employee Page')
                 <a class="collapse-item" href="{{ route('employees.index') }}"> {{__('translate.All Employee')}}</a>
                 @endcan
                 @can('Designation Page')

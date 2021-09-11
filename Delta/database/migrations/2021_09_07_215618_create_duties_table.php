@@ -15,8 +15,11 @@ class CreateDutiesTable extends Migration
     {
         Schema::create('duties', function (Blueprint $table) {
             $table->id();
-            $table->date('day');
-            $table->unsignedBigInteger('status_id');
+            $table->date('day')->unique();
+            $table->unsignedBigInteger('status_id')->default(3);
+            $table->json('data')->default(json_encode(['']));
+            $table->text('comment')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

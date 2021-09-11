@@ -49,10 +49,19 @@
                         <label for="fixed_duty_hour">{{ __("translate.Fixed Duty") }} ({{ __("translate.Hour") }})<span style="color: red"> *</span></label>
                         <input type="number" name="fixed_duty_hour" class="form-control mb-2"  placeholder="Fixed Duty(Hour)" required>
                     </div>
+
                     <div class="col-md-4 col-sm-12  p-0 p-md-4">
-                        <label for="salary ">{{ __("translate.Salary") }}<span style="color: red"> *</span> </label>
+                        <label for="salary ">{{ __("translate.Salary Month") }}<span style="color: red"> *</span> </label>
+                        <input type="number" step="any" name="monthly_salary" class="form-control mb-2"placeholder="Salary" required>
+                    </div>
+
+                    
+                    <div class="col-md-4 col-sm-12  p-0 p-md-4">
+                        <label for="salary ">{{ __("translate.Salary Daily") }}<span style="color: red"> *</span> </label>
                         <input type="number" step="any" name="salary" class="form-control mb-2"placeholder="Salary" required>
                     </div>
+
+
                     <div class="col-md-4 col-sm-12 p-0 p-md-4">
                         <label for="joining_date">{{ __("translate.Joining Date") }}</label>
                         <input type="date" name="joining_date" class="form-control mb-2">

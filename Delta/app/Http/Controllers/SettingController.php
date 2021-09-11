@@ -19,21 +19,21 @@ class SettingController extends Controller
 
         $a = '[{
             "componentDetails":{
-                "title":"Purchase List",
-                "editTitle":"Edit Purchase"
+                "title":"Monthly",
+                "editTitle":"change status "
             },
             "routes":{
                 "create":{
-                    "name":"purchases.store",
-                    "link":"purchases"
+                    "name":"duties.store",
+                    "link":"duties"
                 },
                 "update":{
-                    "name":"purchases.update",
-                    "link":"purchases"
+                    "name":"duties.update",
+                    "link":"duties"
                 },
                 "delete":{
-                    "name":"purchases.destroy",
-                    "link":"purchases"
+                    "name":"duties.destroy",
+                    "link":"duties"
                 }
             },
             "fieldList":[{
@@ -45,12 +45,23 @@ class SettingController extends Controller
                 "update":"0",
                 "require":"0",
     
-               "input_type":"text",
-               "name":"id",
-               "title":"Purchase No",
+               "input_type":"date",
+               "name":"day",
+               "title":"day",
+               "database_name":"day"
+            },{
+                    
+                "position":111,
     
+                "create":"0",
+                "read":"1",
+                "update":"0",
+                "require":"0",
     
-               "database_name":"id"
+               "input_type":"select",
+               "name":"status",
+               "title":"Status",
+               "database_name":"status_id"
             },{
                     
                 "position":111,
@@ -61,35 +72,9 @@ class SettingController extends Controller
                 "require":"0",
     
                "input_type":"text",
-               "name":"supplier",
-               "title":"Supplier",
-               "database_name":"supplier_id"
-            },{
-                    
-                "position":111,
-    
-                "create":"0",
-                "read":"1",
-                "update":"0",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"total",
-               "title":"Total",
-               "database_name":"total"
-            },{
-                    
-                "position":111,
-    
-                "create":"0",
-                "read":"1",
-                "update":"0",
-                "require":"0",
-    
-               "input_type":"text",
-               "name":"time",
-               "title":"Time",
-               "database_name":"created_at"
+               "name":"comment",
+               "title":"comment",
+               "database_name":"comment"
             }
             ]
         }]' ;
@@ -115,12 +100,12 @@ class SettingController extends Controller
             //     "tax" => 0,
             //     "stock_controll" =>"yes"
             // ];
-        // $setting = new setting;
-        // $setting->setting = json_encode( $a);
-        // $setting->table_name = 'purchases';
-        // $setting->model = 'App\Models\purchase';
-        // $setting->save();
-        // return  "Success";
+        $setting = new setting;
+        $setting->setting = json_encode( $a);
+        $setting->table_name = 'duties';
+        $setting->model = 'App\Models\duty';
+        $setting->save();
+        return  "Success";
     }
 
     /**

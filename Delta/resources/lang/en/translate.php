@@ -11,6 +11,8 @@ return[
     'Id' => 'Id',
     'Submit' => 'Submit',
 
+    'Status' => 'Status',
+
 
     
 //    Sidebar start
@@ -29,6 +31,9 @@ return[
  'Perchase List'=> 'Perchase List',
  'Customer'=> 'Customer',
  'Supplier'=> 'Supplier',
+
+ 
+ 'Duties'=> 'Duties',
  'Employee'=> 'Employee',
  'Employees List'=> 'Employees List', 
  'Employee List'=> 'Employee List',
