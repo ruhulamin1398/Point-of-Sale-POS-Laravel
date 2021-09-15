@@ -18,22 +18,22 @@ class RoleTableSeeder extends Seeder
         DB::table('users')->insert([
 
             [
-                'name' => 'Super Admin',
+                'name' => 'Super Admin 1',
                 'email' => 'superadmin@abasas.tech',
                 'password' => Hash::make(1234),
             ],
             [
-                'name' => 'SuperAdmin',
+                'name' => 'SuperAdmin 2',
                 'email' => 'superadmin@gmail.com',
                 'password' => Hash::make(1234),
             ],
             [
-                'name' => 'Admin',
+                'name' => 'Admin 1 ',
                 'email' => 'admin@abasas.tech',
                 'password' => Hash::make(1234),
             ],
             [
-                'name' => 'Staff',
+                'name' => 'Staff 1',
                 'email' => 'staff@abasas.tech',
                 'password' => Hash::make(1234),
             ]
@@ -323,7 +323,7 @@ class RoleTableSeeder extends Seeder
         DB::table('employees')->insert([
             [   
                 'user_id' => 1,
-                'name' => 'Super Admin',
+                'name' => 'Super Admin 1',
                 'phone' => '01111111111',
                 'address' => 'address 1',
                 'joining_date' => '2020-09-16',
@@ -334,7 +334,7 @@ class RoleTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'name' => 'Super Admin',
+                'name' => 'Super Admin 2',
                 'phone' => '01777777777',
                 'address' => 'address 2',
                 'joining_date' => '2020-09-16',
@@ -345,7 +345,7 @@ class RoleTableSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'name' => 'Admin',
+                'name' => 'Admin 22',
                 'phone' => '01788888888',
                 'address' => 'address 3',
                 'joining_date' => '2020-09-16',
@@ -357,7 +357,7 @@ class RoleTableSeeder extends Seeder
             
             [
                 'user_id' => 4,
-                'name' => 'Staff',
+                'name' => 'Staff 12',
                 'phone' => '01999999999',
                 'address' => 'address 3',
                 'joining_date' => '2020-09-16',
@@ -459,7 +459,7 @@ class RoleTableSeeder extends Seeder
             ],
             [
                 'name' => 'cleaner',
-                'description' => 'nargis is cleaner',
+                'description' => ' cleaner',
             ],
         ]);
 
