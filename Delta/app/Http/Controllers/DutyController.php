@@ -23,14 +23,13 @@ class DutyController extends Controller
     public function index(Request $request)
     {
 
-if($request->month){
-    $month = Carbon::createFromFormat('Y-m',$request->month  );
-}
-else{ 
-    $month= Carbon::now();
-}
+        if ($request->month) {
+            $month = Carbon::createFromFormat('Y-m', $request->month);
+        } else {
+            $month = Carbon::now();
+        }
 
-// return  $month ;
+        // return  $month ;
 
 
         if (!auth()->user()->hasPermissionTo('Employee Page')) {
@@ -74,6 +73,8 @@ else{
                 duty::create([
                     'day' => $dt->format("Y-m-d"),
                 ]);
+
+                $this->updateEmployeesAttendens($dt,3);
             }
 
             $today = duty::where('day', Carbon::now()->format("Y-m-d"))->first();
@@ -98,7 +99,7 @@ else{
         $statues = dutyStatus::all();
 
 
-        return view('shop.duty', compact('dataArray', 'designations', 'users', 'employees', 'roles', 'statues', 'today','month'));
+        return view('shop.duty', compact('dataArray', 'designations', 'users', 'employees', 'roles', 'statues', 'today', 'month'));
 
 
 
@@ -160,9 +161,16 @@ else{
      */
     public function update(Request $request, duty $duty)
     {
-        // return  $request;
+
+        // return $request;
         $duty->status_id = $request->status_id;
         $duty->save();
+
+
+        $date = Carbon::createFromFormat('Y-m-d', $duty->day);
+        $this->updateEmployeesAttendens($date,$request->status_id);
+
+
         return back();
     }
 
