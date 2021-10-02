@@ -151,6 +151,7 @@
                        {{--    <th> {{ __('translate.Enter Time') }}</th> --}} 
                        {{--    <th> {{ __('translate.Exit Time') }}</th> --}} 
                             <th> {{ __('translate.Duty Status') }}</th>
+                            <th> {{ __('translate.Daily Salary') }}</th>
                             <th> {{ __('translate.Extra') }}( TK )</th>
                             <th> {{ __('translate.Action') }}</th>
                         </tr>
@@ -162,6 +163,7 @@
                        {{--    <th> {{ __('translate.Enter Time') }}</th> --}} 
                        {{--    <th> {{ __('translate.Exit Time') }}</th> --}} 
                             <th> {{ __('translate.Duty Status') }}</th>
+                            <th> {{ __('translate.Daily Salary') }}</th>
                             <th> {{ __('translate.Extra') }}( TK )</th>
                             <th> {{ __('translate.Action') }}</th>
 
@@ -183,9 +185,9 @@
                                 <td scope="col">
                                     <div class="form-group col-md-12 col-sm-12  p-2">
 
-                                        <select class="form-control form-control" name="duty_status_id" id="dutyStatusId" required>
+                                        <select class="form-control form-control" value="{{$todayEmployeeDuty->duty_status_id}}" name="duty_status_id" id="dutyStatusId{{$todayEmployeeDuty->id}}" required>
                                             @foreach ($dutyStatuses as $dutyStatus)
-                                            @if($loop->first)
+                                            @if($todayEmployeeDuty->duty_status_id == $dutyStatus->id)
                                             <option value="{{$dutyStatus->id}}" selected="selected"> {{$dutyStatus->name}}</option>
                                             @else
                                             <option value="{{$dutyStatus->id}}"> {{$dutyStatus->name}}</option>
@@ -194,8 +196,16 @@
                                         </select>
                                     </div>
                                 </td>
+                                <td>
+                                {{ $todayEmployeeDuty->daily_salary }}
+                                </td>
+                                <td> 
+                                        
+                                     <input type="text"   class="form-control" id="daily_salary_extra{{$todayEmployeeDuty->id}}"    value="{{ $todayEmployeeDuty->daily_salary_extra }}" >
+                                     
+                                </td>
 
-                                <td scope="col"><button type="button" editId={{$todayEmployeeDuty->id }} id="dutyEdit" class="btn btn-success"> {{ __('translate.Update') }} </button></td>
+                                <td scope="col"><button type="button" onclick="updateDutyData({{$todayEmployeeDuty->id}},'{{$todayEmployeeDuty->date}}','{{$todayEmployeeDuty->employee->id}}')" class="btn btn-success"> {{ __('translate.Update') }} </button></td>
 
 
 
@@ -302,14 +312,7 @@
 <script>
     $(document).ready(function() {
 
-        $('body').on('click', '#dutyEdit', function() {
-            var id = $('#dutyEdit').attr('editId');
-            $tr = $(this).closest('tr');
-            var data = $tr.children('td').map(function() {
-                return $(this).text();
-            });
-            console.log(data);
-        });
+      
         $('#dataTableDuty').DataTable({
             dom: 'lBfrtip',
             buttons: [
@@ -327,6 +330,53 @@
         });
 
     });
+
+
+   function updateDutyData(id,date,employee_id){
+//  alert(date);
+    var duty_status_id = $('#dutyStatusId'+id).val().trim();
+    var daily_salary_extra = $('#daily_salary_extra'+id).val().trim();
+ 
+   
+    var action="{{route('employee_duties.index')}}"+"/"+id;
+    var token= "{{csrf_token()}}";
+    // alert(action);
+ 
+$.ajax({
+            type: 'post',
+            url: action,
+            data:{
+                "_token":token,
+                "_method":"PUT",
+                "duty_status_id":duty_status_id,
+                "daily_salary_extra":daily_salary_extra,
+                "date" :date,
+                "employee_id" : employee_id
+                
+                
+            },
+            success: function (data) {
+                
+                $('#pageloader').hide();
+                 location.reload(true);
+                // console.log('data');
+                console.log(data);
+
+                // viewSupplierData(supplier);
+            },
+            error: function (data) {
+                
+                $('#pageloader').hide();
+                alert("Failed order ..... Try Again !!!!!!!!!!!")
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+
+
+}
+ 
+
 </script>
 
 

@@ -228,6 +228,16 @@ class EmployeeDutyController extends Controller
      */
     public function update(EmployeeDutyRequest $request, employeeDuty $employeeDuty)
     {
+        $employeeDuty->daily_salary_extra = $request->daily_salary_extra;
+        
+        if($request->duty_status_id !=1 and $request->duty_status_id !=  $employeeDuty->duty_status_id  ){
+            $employeeDuty->daily_salary_extra = ($employeeDuty->daily_salary*-1);
+        }
+        $employeeDuty->duty_status_id = $request->duty_status_id;
+        
+        $employeeDuty->save();
+
+        return $employeeDuty;
         //
     }
 

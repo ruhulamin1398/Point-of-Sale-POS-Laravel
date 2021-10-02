@@ -303,7 +303,7 @@ class RoleTableSeeder extends Seeder
     
         DB::table('duty_statuses')->insert([
                 [
-                    'name' => 'Present',
+                    'name' => 'Active',
                     'description' => 'Employee is present',
                 ],
                 [
