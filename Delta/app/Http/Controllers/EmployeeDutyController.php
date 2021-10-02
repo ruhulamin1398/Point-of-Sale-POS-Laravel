@@ -81,14 +81,22 @@ class EmployeeDutyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+
+        if(! $request->date){
+            $date= now();
+        }
+        else{
+
+            $date=  Carbon::createFromDate($request->date);
+        }
         
         if(! auth()->user()->hasPermissionTo('Duty Create Page')){
             return abort(401);
         }
 
-        $todayEmployeeDuties = employeeDuty::whereDate('date', Carbon::today())->get();
+        $todayEmployeeDuties = employeeDuty::whereDate('date', $date)->get();
         foreach ($todayEmployeeDuties as $duty) {
             if (!is_null($duty->enter_time)) {
                 $duty->enter_time =  Carbon::parse($duty->enter_time)->format('h : i A');
@@ -102,7 +110,7 @@ class EmployeeDutyController extends Controller
         $employees = employee::where('id','!=',1)->get();
         $dutyStatuses = dutyStatus::all();
 
-        return view('employees.duty.create', compact('employees', 'dutyStatuses', 'todayEmployeeDuties','roles'));
+        return view('employees.duty.create', compact('employees', 'dutyStatuses', 'todayEmployeeDuties','roles','date'));
     }
 
     /**
