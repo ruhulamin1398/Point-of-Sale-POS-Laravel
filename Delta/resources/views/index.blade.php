@@ -328,7 +328,7 @@
               </div>
               <div class="card-body text-center">
                 <img src="{{asset('image/abasas-logo.png')}}" height="50px" alt="Abasas Logo">
-                <div class="text-dark font-weight-bold "> <i class="fas fa-phone fa-sm fa-fw mr-2 text-success-400  "></i> 01798142111</div>
+                <div class="text-dark font-weight-bold "> <i class="fas fa-phone fa-sm fa-fw mr-2 text-success-400  "></i> 01840000408</div>
                <a href="http://abasas.tech" target="_blank"> <div class="text-dark font-weight-bold ">http://abasas.tech</div> </a>
               </div>
             </div>
