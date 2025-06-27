@@ -13,18 +13,26 @@
                 {{ __('Please confirm access to your account by entering one of your emergency recovery codes.') }}
             </div>
 
-            <x-jet-validation-errors class="mb-4" />
+@if ($errors->any())
+    <div class="mb-4">
+        <ul class="list-disc list-inside text-sm text-red-600">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
             <form method="POST" action="/two-factor-challenge">
                 @csrf
 
                 <div class="mt-4" x-show="! recovery">
-                    <x-jet-label value="{{ __('Code') }}" />
+                    <x-label value="{{ __('Code') }}" />
                     <x-jet-input class="block mt-1 w-full" type="text" name="code" autofocus x-ref="code" autocomplete="one-time-code" />
                 </div>
 
                 <div class="mt-4" x-show="recovery">
-                    <x-jet-label value="{{ __('Recovery Code') }}" />
+                    <x-label value="{{ __('Recovery Code') }}" />
                     <x-jet-input class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
                 </div>
 
