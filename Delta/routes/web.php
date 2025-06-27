@@ -79,13 +79,9 @@ Route::post('test-submit', function (Request $request) {
 Route::view('/test-form', 'testForm');
 
 
-
-
 Route::middleware(['auth'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-
-
 
 
 

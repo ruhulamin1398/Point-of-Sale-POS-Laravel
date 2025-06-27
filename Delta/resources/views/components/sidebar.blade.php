@@ -14,6 +14,7 @@
     </li>
 
 
+    <a class="collapse-item" href="{{ route('products.index') }}">{{__('translate.All Products')}}</a>
     
     @if( $GLOBALS['CurrentUser']->can('Product Page') || $GLOBALS['CurrentUser']->can('Product Create') ||  $GLOBALS['CurrentUser']->can('Category Page') || $GLOBALS['CurrentUser']->can('Brand Page') ||  $GLOBALS['CurrentUser']->can('Warrenty Page') || $GLOBALS['CurrentUser']->can('Unit Page') || $GLOBALS['CurrentUser']->can('Stock Alert Page') ||  $GLOBALS['CurrentUser']->can('Drop Product Create Page') ||   $GLOBALS['CurrentUser']->can('Drop Product Page')  ||  $GLOBALS['CurrentUser']->can('Product Print') )
     <hr class="sidebar-divider m-1 p-0 ">
